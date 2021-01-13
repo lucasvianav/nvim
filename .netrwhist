@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/v0004/.config/nvim/general'
+let g:netrw_dirhist_5='/home/v0004/.config/nvim'
+let g:netrw_dirhist_4='/home/v0004/.config/nvim/general'
+let g:netrw_dirhist_3='/home/v0004/.config/nvim'
+let g:netrw_dirhist_2='/home/v0004/.config/nvim/plug-config'
+let g:netrw_dirhist_1='/home/v0004/.config/nvim'
