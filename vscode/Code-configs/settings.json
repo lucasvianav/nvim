@@ -1,0 +1,364 @@
+{
+    "C_Cpp.updateChannel": "Insiders",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "cSpell.userWords": [
+        "Auxiliar",
+        "Avi",
+        "Avião",
+        "Compara",
+        "Comparação",
+        "Felps",
+        "Moura",
+        "Sant'Anna",
+        "Troca",
+        "Viana",
+        "Vilela",
+        "bolha",
+        "isalpha",
+        "isnumeric",
+        "o",
+        "selecao",
+        "swap'em"
+    ],
+    "git.autofetch": true,
+    "workbench.statusBar.visible": true,
+    "window.menuBarVisibility": "default",
+    "workbench.list.automaticKeyboardNavigation": false,
+    "workbench.activityBar.visible": true,
+    "editor.minimap.enabled": false,
+    "python.languageServer": "Pylance",
+    "git.confirmSync": false,
+    "editor.renameOnType": true,
+    "liveServer.settings.donotVerifyTags": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "update.mode": "start",
+    "atomKeymap.promptV3Features": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.renderControlCharacters": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "explorer.confirmDragAndDrop": false,
+    "window.zoomLevel": 0,
+    "git.suggestSmartCommit": false,
+    "files.autoSave": "off",
+    "workbench.colorTheme": "One Dark Pro",
+    "editor.cursorStyle": "block",
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.lineNumbers": "relative",
+    "vscode-neovim.neovimInitVimPaths.linux": "$HOME/.config/nvim/init.vim",
+    "whichkey.bindings": [
+        {
+            "key": " ",
+            "name": "VSCode Commands",
+            "type": "command",
+            "command": "workbench.action.showCommands"
+        },
+        {
+            "key": "e",
+            "name": "Toggle explorer visibility",
+            "type": "command",
+            "command": "workbench.action.toggleSidebarVisibility"
+        },
+        {
+            "key": "v",
+            "name": "Split editor below",
+            "type": "command",
+            "command": "workbench.action.splitEditorDown"
+        },
+        {
+            "key": "h",
+            "name": "Split editor right",
+            "type": "command",
+            "command": "workbench.action.splitEditor"
+        },
+        {
+            "key": "i",
+            "name": "Organize Imports",
+            "type": "command",
+            "command": "editor.action.organizeImports"
+        },
+        {
+            "key": "m",
+            "name": "+Merge conflict",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "b",
+                    "name": "Accept both",
+                    "type": "command",
+                    "command": "merge-conflict.accept.both"
+                },
+                {
+                    "key": "c",
+                    "name": "Accept current",
+                    "type": "command",
+                    "command": "merge-conflict.accept.current"
+                },
+                {
+                    "key": "i",
+                    "name": "Accept incoming",
+                    "type": "command",
+                    "command": "merge-conflict.accept.incoming"
+                },
+                {
+                    "key": "B",
+                    "name": "Accept all both",
+                    "type": "command",
+                    "command": "merge-conflict.accept.all-both"
+                },
+                {
+                    "key": "C",
+                    "name": "Accept all current",
+                    "type": "command",
+                    "command": "merge-conflict.accept.all-current"
+                },
+                {
+                    "key": "I",
+                    "name": "Accept all incoming",
+                    "type": "command",
+                    "command": "merge-conflict.accept.all-incoming"
+                },
+                {
+                    "key": "n",
+                    "name": "Next Conflict",
+                    "type": "command",
+                    "command": "merge-conflict.next"
+                },
+                {
+                    "key": "N",
+                    "name": "Previous Conflict",
+                    "type": "command",
+                    "command": "merge-conflict.previous"
+                }
+            ]
+        },
+        {
+            "key": "-",
+            "name": "Fold all",
+            "type": "command",
+            "command": "merge-conflict.next"
+        },
+        {
+            "key": "t",
+            "name": "Toggle Terminal",
+            "type": "command",
+            "command": "workbench.action.togglePanel",
+            "when": "terminalFocus"
+        },
+//        {
+//            "key": "t",
+//            "name": "+Terminal",
+//            "type": "bindings",
+//            "bindings":[
+//                {
+//                    "key": "t",
+//                    "name": "Toggle Terminal",
+//                    "type": "command",
+//                    "command": "workbench.action.togglePanel",
+//                    //"when": "terminalFocus"
+//                },
+//                {
+//                    "key": "t",
+//                    "name": "Focus Terminal",
+//                    "type": "command",
+//                    //"command": "workbench.action.terminal.toggleTerminal",
+//                    //"when": "!terminalFocus"
+//                }
+//            ]
+//        },
+        {
+            "key": "/",
+            "name": "Search in a project",
+            "type": "command",
+            "command": "workbench.action.findInFiles"
+        },
+        {
+            "key": "g",
+            "name": "+Git",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "c",
+                    "name": "Commit",
+                    "type": "command",
+                    "command": "git.commit"
+                },
+                {
+                    "key": "f",
+                    "name": "Fetch",
+                    "type": "command",
+                    "command": "git.fetch"
+                },
+                {
+                    "key": "p",
+                    "name": "Publish",
+                    "type": "command",
+                    "command": "git.publish"
+                },
+                {
+                    "key": "S",
+                    "name": "Stage",
+                    "type": "command",
+                    "command": "git.stage"
+                },
+                {
+                    "key": "U",
+                    "name": "Unstage",
+                    "type": "command",
+                    "command": "git.unstage"
+                },
+                {
+                    "key": "B",
+                    "name": "Browse",
+                    "type": "command",
+                    "command": "gitlens.openFileInRemote"
+                },
+                {
+                    "key": "P",
+                    "name": "Pull",
+                    "type": "command",
+                    "command": "git.pull"
+                }
+            ]
+        },
+        {
+            "key": "f",
+            "name": "Find & Replace...",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "f",
+                    "name": "File",
+                    "type": "command",
+                    "command": "editor.action.startFindReplaceAction"
+                },
+                {
+                    "key": "s",
+                    "name": "Symbol",
+                    "type": "command",
+                    "command": "editor.action.rename",
+                    "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+                },
+                {
+                    "key": "p",
+                    "name": "Project",
+                    "type": "command",
+                    "command": "workbench.action.replaceInFiles"
+                }
+            ]
+        },
+        {
+            "key": "d",
+            "name": "Definition",
+            "type": "command",
+            "command": "editor.action.revealDefinition",
+            "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+        },
+        {
+            "key": "D",
+            "name": "Declaration",
+            "type": "command",
+            "command": "editor.action.revealDeclaration"
+        },
+        {
+            "key": "E",
+            "name": "Errors",
+            "type": "command",
+            "command": "workbench.actions.view.problems"
+        },
+        {
+            "key": "n",
+            "name": "No Highlight",
+            "type": "command",
+            "command": "vscode-neovim.send",
+            "args": ":noh<CR>"
+        },
+        {
+            "key": "S",
+            "name": "Show...",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "e",
+                    "name": "Toggle explorer",
+                    "type": "command",
+                    "command": "workbench.view.explorer",
+                    "when": "!explorerViewletVisible"
+                },
+                {
+                    "key": "e",
+                    "name": "Toggle explorer",
+                    "type": "command",
+                    "command": "workbench.action.toggleSidebarVisibility",
+                    "when": "explorerViewletVisible"
+                },
+                {
+                    "key": "s",
+                    "name": "Show search",
+                    "type": "command",
+                    "command": "workbench.view.search"
+                },
+                {
+                    "key": "g",
+                    "name": "Show source control",
+                    "type": "command",
+                    "command": "workbench.view.scm"
+                },
+                {
+                    "key": "t",
+                    "name": "Show test",
+                    "type": "command",
+                    "command": "workbench.view.extension.test"
+                },
+                {
+                    "key": "r",
+                    "name": "Show remote explorer",
+                    "type": "command",
+                    "command": "workbench.view.remote"
+                },
+                {
+                    "key": "x",
+                    "name": "Show extensions",
+                    "type": "command",
+                    "command": "workbench.view.extensions"
+                },
+                {
+                    "key": "p",
+                    "name": "Show problem",
+                    "type": "command",
+                    "command": "workbench.actions.view.problems"
+                },
+                {
+                    "key": "o",
+                    "name": "Show output",
+                    "type": "command",
+                    "command": "workbench.action.output.toggleOutput"
+                },
+                {
+                    "key": "d",
+                    "name": "Show debug console",
+                    "type": "command",
+                    "command": "workbench.debug.action.toggleRepl"
+                }
+            ]
+        },
+        {
+            "key": "?",
+            "name": "View All References",
+            "type": "command",
+            "command": "references-view.find",
+            "when": "editorHasReferenceProvider"
+        }
+    ],
+    "whichkey.bindingOverrides": [
+    
+    ],
+    "whichkey.sortOrder": "nonNumberFirst",
+    "whichkey.delay": 0,
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+    "breadcrumbs.enabled": true,
+    "editor.renderWhitespace": "none",
+    "editor.emptySelectionClipboard": false
+}
