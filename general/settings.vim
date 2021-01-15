@@ -36,6 +36,7 @@ set clipboard=unnamedplus               " Copy paste between vim and everything 
 "set autochdir                           " Your working directory will always be the same as your working directory
 
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+au BufNewFile,BufRead,BufReadPost *.json set syntax=jsonc
 
 " You can't stop me
 " cmap w!! w !sudo tee %

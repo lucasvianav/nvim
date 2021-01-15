@@ -16,7 +16,7 @@ if exists('g:vscode') " if it's on vscode
     
     " Plugins
     source $HOME/.config/nvim/plug-config/easymotion.vim
-    source $HOME/.config/nvim/plug-config/highlightyank.vim
+    source $HOME/.config/nvim/plug-config/highlightedyank.vim
 
 else " if it's not on vscode
     
@@ -34,6 +34,9 @@ else " if it's not on vscode
     source $HOME/.config/nvim/plug-config/quickscope.vim
     source $HOME/.config/nvim/plug-config/sneak.vim
     source $HOME/.config/nvim/plug-config/codi.vim
+    source $HOME/.config/nvim/plug-config/easymotion.vim
+    source $HOME/.config/nvim/plug-config/closetag.vim
+    source $HOME/.config/nvim/plug-config/illuminate.vim
 
     " LUA Plugins
     lua require 'plug-colorizer'
