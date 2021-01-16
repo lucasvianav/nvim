@@ -13,10 +13,18 @@ if exists('g:vscode') " if it's on vscode
     
     " vscode settings
     source $HOME/.config/nvim/vscode/settings.vim
+    source $HOME/.config/nvim/vscode/ui-modifier.vim
     
     " Plugins
     source $HOME/.config/nvim/plug-config/easymotion.vim
     source $HOME/.config/nvim/plug-config/highlightedyank.vim
+    source $HOME/.config/nvim/plug-config/quickscope.vim
+    source $HOME/.config/nvim/plug-config/sneak.vim
+    source $HOME/.config/nvim/plug-config/vim-commentary.vim
+
+    " Make quickscope work in vscode
+    highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+    highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 
 else " if it's not on vscode
     

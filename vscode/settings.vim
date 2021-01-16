@@ -96,7 +96,7 @@ xnoremap <silent> <Space> :<C-u>call <SID>openWhichKeyInVisualMode()<CR>
 
 xnoremap <silent> <C-P> :<C-u>call <SID>openVSCodeCommandsInVisualMode()<CR>
 
-xmap gc  <Plug>VSCodeCommentary
-nmap gc  <Plug>VSCodeCommentary
-omap gc  <Plug>VSCodeCommentary
-nmap gcc <Plug>VSCodeCommentaryLine
+xmap <C-/>  <Plug>VSCodeCommentary
+nmap <C-/>  <Plug>VSCodeCommentary
+omap <C-/>  <Plug>VSCodeCommentary
+nmap <C-/> <Plug>VSCodeCommentaryLine

@@ -17,7 +17,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'tpope/vim-commentary'
         " Easy motion for VSCode
         Plug 'ChristianChiarulli/vscode-easymotion'
-        Plug 'machakann/vim-highlightedyank'
+        " Sneak
+        Plug 'justinmk/vim-sneak'
 
     else
         " Better Syntax Support
