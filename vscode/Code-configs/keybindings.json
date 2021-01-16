@@ -261,5 +261,47 @@
         "key": "ctrl+alt+shift+f",
         "command": "editor.foldAll",
         "when": "editorFocus && neovim.mode != 'insert' && !inputFocus"
+    },
+    {
+        "key": "j",
+        "command": "vscode-neovim.compositeEscape1",
+        "when": "neovim.mode == insert && editorTextFocus",
+        "args": "j"
+    },
+    {
+        "key": "k",
+        "command": "vscode-neovim.compositeEscape2",
+        "when": "neovim.mode == insert && editorTextFocus",
+        "args": "k"
+    },
+    // {
+    //     "key": "ctrl+/",
+    //     "command": "editor.action.commentLine",
+    //     "when": "editorTextFocus && neovim.mode != 'insert'"
+    // },
+    {
+        "key": "ctrl+/",
+        "command": "-editor.action.commentLine",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "tab",
+        "command": "tab",
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && neovim.mode != 'normal'"
+    },
+    {
+        "key": "tab",
+        "command": "-tab",
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
+    },
+    {
+        "key": "shift+tab",
+        "command": "outdent",
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && neovim.mode != 'normal'"
+    },
+    {
+        "key": "shift+tab",
+        "command": "-outdent",
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
     }
 ]

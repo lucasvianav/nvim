@@ -137,7 +137,7 @@
             "key": "-",
             "name": "Fold all",
             "type": "command",
-            "command": "merge-conflict.next"
+            "command": "editor.foldAll"
         },
         {
             "key": "t",
@@ -360,5 +360,26 @@
     "editor.scrollbar.vertical": "hidden",
     "breadcrumbs.enabled": true,
     "editor.renderWhitespace": "none",
-    "editor.emptySelectionClipboard": false
+    "editor.emptySelectionClipboard": false,
+    "liveshare.showInStatusBar": "whileCollaborating",
+    "workbench.nvimColorNormal": "#98C379",
+    "workbench.nvimColorInsert": "#61AFEF",
+    "workbench.nvimColorVisual": "#C678DD",
+    "workbench.nvimColorForeground": "#202020",
+    "workbench.colorCustomizations": {
+        "activityBarBadge.background": "#98C379",
+        "editorCursor.foreground": "#98C379",
+        "inputValidation.errorBorder": "#98C379",
+        "panel.border": "#98C379",
+        "panelTitle.activeBorder": "#98C379",
+        "panelTitle.activeForeground": "#98C379",
+        "peekView.border": "#98C379",
+        "peekViewTitleLabel.foreground": "#98C379",
+        "tab.activeBorder": "#98C379",
+        "statusBar.border": "#98C379",
+        "statusBar.background": "#98C379",
+        "statusbar.foreground": "#202020",
+        "statusBar.foreground": "#202020",
+        "activityBarBadge.foreground": "#202020"
+    }
 }
