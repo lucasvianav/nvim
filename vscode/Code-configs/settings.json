@@ -381,5 +381,6 @@
         "statusbar.foreground": "#202020",
         "statusBar.foreground": "#202020",
         "activityBarBadge.foreground": "#202020"
-    }
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always"
 }

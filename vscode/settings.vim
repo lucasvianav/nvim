@@ -84,6 +84,7 @@ nnoremap <silent> <C-l> :call VSCodeNotify('workbench.action.navigateRight')<CR>
 xnoremap <silent> <C-l> :call VSCodeNotify('workbench.action.navigateRight')<CR>
 
 nnoremap gr <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
+" map gf :let mycurf=expand("<cfile>")<cr> :execute("e ".mycurf)<cr> <S-Tab>
 
 " Bind C-/ to vscode commentary since calling from vscode produces double comments due to multiple cursors
 xnoremap <expr> <C-/> <SID>vscodeCommentary()
@@ -93,8 +94,13 @@ nnoremap <silent> <C-w>_ :<C-u>call VSCodeNotify('workbench.action.toggleEditorW
 
 nnoremap <silent> <Space> :call VSCodeNotify('whichkey.show')<CR>
 xnoremap <silent> <Space> :<C-u>call <SID>openWhichKeyInVisualMode()<CR>
-
 xnoremap <silent> <C-P> :<C-u>call <SID>openVSCodeCommandsInVisualMode()<CR>
+
+" makes vscode actions work in visual mode
+xnoremap <silent> <C-d> :<S-Home><BS> call VSCodeNotifyRange("editor.action.copyLinesDownAction", getpos("'<")[1], getpos("'>")[1], 0)<CR>
+xnoremap <silent> <C-S-BS> :<S-Home><BS> call VSCodeNotifyRange("editor.action.deleteLines", getpos("'<")[1], getpos("'>")[1], 0)<CR>
+xnoremap <silent> <M-k> :<S-Home><BS> call VSCodeNotifyRange("editor.action.moveLinesUpAction", getpos("'<")[1], getpos("'>")[1], 0)<CR>
+xnoremap <silent> <M-j> :<S-Home><BS> call VSCodeNotifyRange("editor.action.moveLinesDownAction", getpos("'<")[1], getpos("'>")[1], 0)<CR>
 
 xmap <C-/>  <Plug>VSCodeCommentary
 nmap <C-/>  <Plug>VSCodeCommentary

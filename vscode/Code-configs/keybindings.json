@@ -7,8 +7,29 @@
     },
     {
         "key": "ctrl+d",
+        "command": "-editor.action.outdentLines",
+        "when": "editorTextFocus && neovim.ctrlKeysInsert && !neovim.recording && neovim.mode == 'insert'"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "-vscode-neovim.ctrl-d",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "-vscode-neovim.send",
+        "when": "editorTextFocus && neovim.ctrlKeysInsert && neovim.recording && neovim.mode == 'insert'"
+    },
+    {
+        "key": "ctrl+d",
         "command": "editor.action.copyLinesDownAction",
-        "when": "editorTextFocus && neovim.mode != 'insert'"
+        "when": "editorTextFocus && neovim.mode == 'normal'"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode == 'visual'",
+        "args": "<C-d>"
     },
     {
         "key": "ctrl+shift+d",
@@ -21,7 +42,8 @@
     },
     {
         "key": "tab",
-        "command": "workbench.action.nextEditorInGroup"
+        "command": "workbench.action.nextEditorInGroup",
+        "when": "neovim.mode != 'insert' && !inSnippetMode"
     },
     {
         "key": "ctrl+k ctrl+pagedown",
@@ -33,7 +55,8 @@
     },
     {
         "key": "shift+tab",
-        "command": "workbench.action.previousEditorInGroup"
+        "command": "workbench.action.previousEditorInGroup",
+        "when": "neovim.mode != 'insert' && !inSnippetMode"
     },
     {
         "key": "ctrl+k ctrl+pageup",
@@ -47,17 +70,18 @@
     {
         "key": "ctrl+shift+backspace",
         "command": "editor.action.deleteLines",
-        "when": "textInputFocus && !editorReadonly && neovim.mode != 'insert'"
+        "when": "textInputFocus && !editorReadonly && neovim.mode == 'normal'"
+    },
+    {
+        "key": "ctrl+shift+backspace",
+        "command": "vscode-neovim.send",
+        "when": "textInputFocus && !editorReadonly && neovim.mode == 'visual'",
+        "args": "<C-S-BS>"
     },
     {
         "key": "ctrl+shift+k",
         "command": "-editor.action.deleteLines",
         "when": "textInputFocus && !editorReadonly"
-    },
-    {
-        "key": "ctrl+shift+backspace",
-        "command": "editor.action.deleteLines",
-        "when": "editorTextFocus && neovim.mode != 'insert'"
     },
     {
         "key": "ctrl+shift+k",
@@ -228,16 +252,16 @@
         "command": "workbench.action.focusActiveEditorGroup",
         "when": "terminalFocus"
     },
-    {
-        "key": "alt+j",
-        "command": "workbench.action.closePanel",
-        "when": "terminalFocus"
-    },
-    {
-        "key": "alt+j",
-        "command": "workbench.action.terminal.focus",
-        "when": "!terminalFocus"
-    },
+    // {
+    //     "key": "alt+j",
+    //     "command": "workbench.action.closePanel",
+    //     "when": "terminalFocus"
+    // },
+    // {
+    //     "key": "alt+j",
+    //     "command": "workbench.action.terminal.focus",
+    //     "when": "!terminalFocus"
+    // },
     {
         "key": "ctrl+shift+l",
         "command": "editor.action.selectHighlights",
@@ -287,7 +311,7 @@
     {
         "key": "tab",
         "command": "tab",
-        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && neovim.mode != 'normal'"
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && neovim.mode == 'insert' && !inSnippetMode"
     },
     {
         "key": "tab",
@@ -297,11 +321,98 @@
     {
         "key": "shift+tab",
         "command": "outdent",
-        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && neovim.mode != 'normal'"
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus && neovim.mode == 'insert' && !inSnippetMode"
     },
     {
         "key": "shift+tab",
         "command": "-outdent",
         "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
+    },
+    // {
+    //     "key": "shift+k",
+    //     "command": "editor.action.showHover",
+    //     "when": "editorTextFocus && neovim.mode == 'normal'"
+    // },
+    {
+        "key": "alt+k",
+        "command": "editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && neovim.mode == 'normal'"
+    },
+    {
+        "key": "alt+j",
+        "command": "editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && neovim.mode == 'normal'"
+    },
+    {
+        "key": "alt+k",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode == 'visual'",
+        "args": "<M-k>"
+    },
+    {
+        "key": "alt+j",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode == 'visual'",
+        "args": "<M-j>"
+    },
+    {
+        "key": "alt+up",
+        "command": "editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+down",
+        "command": "editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+h",
+        "command": "-gitlens.showQuickFileHistory",
+        "when": "!gitlens:disabled && config.gitlens.keymap == 'alternate'"
+    },
+    {
+        "key": "alt+h",
+        "command": "workbench.action.decreaseViewSize",
+        "when": "editorTextFocus && neovim.mode == 'normal'"
+    },
+    {
+        "key": "alt+l",
+        "command": "workbench.action.increaseViewSize",
+        "when": "editorTextFocus && neovim.mode == 'normal'"
+    },
+    // {
+    //     "key": "ctrl+k",
+    //     "command": "jumpToNextSnippetPlaceholder",
+    //     "when": "editorTextFocus && hasNextTabstop && inSnippetMode"
+    // },
+    // {
+    //     "key": "tab",
+    //     "command": "-jumpToNextSnippetPlaceholder",
+    //     "when": "editorTextFocus && hasNextTabstop && inSnippetMode"
+    // },
+    // {
+    //     "key": "ctrl+j",
+    //     "command": "jumpToPrevSnippetPlaceholder",
+    //     "when": "editorTextFocus && hasPrevTabstop && inSnippetMode"
+    // },
+    // {
+    //     "key": "shift+tab",
+    //     "command": "-jumpToPrevSnippetPlaceholder",
+    //     "when": "editorTextFocus && hasPrevTabstop && inSnippetMode"
+    // },
+    {
+        "key": "ctrl+j",
+        "command": "-editor.action.insertLineAfter",
+        "when": "editorTextFocus && neovim.ctrlKeysInsert && !neovim.recording && neovim.mode == 'insert'"
+    },
+    {
+        "key": "alt+o",
+        "command": "editor.action.insertLineAfter",
+        "when": "editorTextFocus && neovim.mode == 'normal'"
+    },
+    {
+        "key": "alt+shift+o",
+        "command": "lineBreakInsert",
+        "when": "editorTextFocus && neovim.mode == 'normal'"
     }
 ]
