@@ -9,16 +9,8 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
 
     if exists('g:vscode')  " if it's on vscode
-        " Which Key
-        Plug 'liuchengxu/vim-which-key'
-        " Quickscope
-        Plug 'unblevable/quick-scope'
-        " Press CTRL + / to comment
-        Plug 'tpope/vim-commentary'
         " Easy motion for VSCode
         Plug 'ChristianChiarulli/vscode-easymotion'
-        " Sneak
-        Plug 'justinmk/vim-sneak'
 
     else
         " Better Syntax Support
@@ -34,8 +26,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'vim-airline/vim-airline-themes'
         " Ranger File-Explorer
         Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
-        " Press CTRL + / to comment
-        Plug 'tpope/vim-commentary'
         " FZF
         Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
         Plug 'junegunn/fzf.vim'
@@ -46,12 +36,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'junegunn/rainbow_parentheses.vim'
         " Startify (project manager)
         Plug 'mhinz/vim-startify'
-        " Which Key
-        Plug 'liuchengxu/vim-which-key'
-        " Quickscope
-        Plug 'unblevable/quick-scope'
-        " Sneak
-        Plug 'justinmk/vim-sneak'
         " coc Snippers
         Plug 'honza/vim-snippets'
         " Codi
@@ -65,8 +49,38 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'kyazdani42/nvim-web-devicons'
         " Highlight other occurrences from under the cursor
         Plug 'RRethy/vim-illuminate'
-
     endif
+
+    " Sneak
+    Plug 'justinmk/vim-sneak'
+    " Which Key
+    Plug 'liuchengxu/vim-which-key'
+    " Quickscope
+    Plug 'unblevable/quick-scope'
+    " Press CTRL + / to comment
+    Plug 'tpope/vim-commentary'
+    " Surround
+    Plug 'tpope/vim-surround'
+    " Perl Regex
+    Plug 'othree/eregex.vim'
+    " Better Unicode Compatibility?
+    Plug 'chrisbra/unicode.vim'
+    Plug 'tpope/vim-characterize'
+    " Enables . repeat for Plug-In maps
+    Plug 'tpope/vim-repeat'
+    " Fixes <C-A> and <C-X> for dates
+    Plug 'tpope/vim-speeddating'
+    " Better clipboard
+    Plug 'svermeulen/vim-easyclip'
+    " Allows number base conversion
+    Plug 'glts/vim-radical'
+    Plug 'glts/vim-magnum'
+    " Crazy stuff (words manipulation)
+    Plug 'tpope/vim-abolish'
+    " Fix CAPS LOCK
+    Plug 'tpope/vim-capslock'
+    " Increment sequences
+    Plug 'triglav/vim-visual-increment'
 
 call plug#end()
 

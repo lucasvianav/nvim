@@ -11,6 +11,12 @@ nnoremap <M-l>    :vertical resize +2<CR>
 " I hate escape more than anything else
 inoremap jk <Esc>
 inoremap kj <Esc>
+" Unbind escape key if not on VSCode
+if exists('g:vscode')
+    " nothing
+else
+    :inoremap <Esc> <Nop>
+endif
 
 " Easy CAPS
 inoremap <c-u> <ESC>viwUi
@@ -21,12 +27,8 @@ nnoremap <TAB> :bnext<CR>
 " SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
 
-" Alternate way to save
-nnoremap <C-s> :w<CR>
-" Alternate way to quit
-nnoremap <C-Q> :wq!<CR>
 " Use control-c instead of escape
-" nnoremap <C-c> <Esc>
+nnoremap <C-c> <Esc>
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -42,3 +44,4 @@ nnoremap <C-l> <C-w>l
 
 " nnoremap <Leader>o o<Esc>^Da
 " nnoremap <Leader>O O<Esc>^Da
+

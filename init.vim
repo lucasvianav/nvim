@@ -16,11 +16,7 @@ if exists('g:vscode') " if it's on vscode
     source $HOME/.config/nvim/vscode/ui-modifier.vim
     
     " Plugins
-    source $HOME/.config/nvim/plug-config/easymotion.vim
     source $HOME/.config/nvim/plug-config/highlightedyank.vim
-    source $HOME/.config/nvim/plug-config/quickscope.vim
-    source $HOME/.config/nvim/plug-config/sneak.vim
-    source $HOME/.config/nvim/plug-config/vim-commentary.vim
 
     " Make quickscope work in vscode
     highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
@@ -35,12 +31,9 @@ else " if it's not on vscode
     " VIM Plugins
     source $HOME/.config/nvim/plug-config/coc.vim
     source $HOME/.config/nvim/plug-config/rnvimr.vim
-    source $HOME/.config/nvim/plug-config/vim-commentary.vim
     source $HOME/.config/nvim/plug-config/fzf.vim
     source $HOME/.config/nvim/plug-config/rainbow_parentheses.vim
     source $HOME/.config/nvim/plug-config/start-screen.vim
-    source $HOME/.config/nvim/plug-config/quickscope.vim
-    source $HOME/.config/nvim/plug-config/sneak.vim
     source $HOME/.config/nvim/plug-config/codi.vim
     source $HOME/.config/nvim/plug-config/easymotion.vim
     source $HOME/.config/nvim/plug-config/closetag.vim
@@ -50,3 +43,7 @@ else " if it's not on vscode
     lua require 'plug-colorizer'
 
 endif
+
+source $HOME/.config/nvim/plug-config/quickscope.vim
+source $HOME/.config/nvim/plug-config/sneak.vim
+source $HOME/.config/nvim/plug-config/vim-commentary.vim
