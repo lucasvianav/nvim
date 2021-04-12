@@ -38,7 +38,6 @@
     "editor.renderControlCharacters": false,
     "workbench.iconTheme": "material-icon-theme",
     "explorer.confirmDragAndDrop": false,
-    "window.zoomLevel": 0,
     "git.suggestSmartCommit": false,
     "files.autoSave": "off",
     "workbench.colorTheme": "One Dark Pro",
@@ -48,6 +47,7 @@
     "editor.lineNumbers": "relative",
     "vscode-neovim.neovimInitVimPaths.linux": "$HOME/.config/nvim/init.vim",
     "whichkey.bindings": [
+
         {
             "key": " ",
             "name": "VSCode Commands",
@@ -62,15 +62,15 @@
         },
         {
             "key": "v",
-            "name": "Split editor below",
-            "type": "command",
-            "command": "workbench.action.splitEditorDown"
-        },
-        {
-            "key": "h",
             "name": "Split editor right",
             "type": "command",
             "command": "workbench.action.splitEditor"
+        },
+        {
+            "key": "h",
+            "name": "Split editor below",
+            "type": "command",
+            "command": "workbench.action.splitEditorDown"
         },
         {
             "key": "i",
@@ -140,33 +140,67 @@
             "command": "editor.foldAll"
         },
         {
+            "key": "[",
+            "name": "+Fold by level",
+            "type": "bindings",
+            "bindings": [ 
+                {
+                    "key": "1",
+                    "name": "Fold level 1",
+                    "type": "command",
+                    "command": "editor.foldLevel1"
+                },
+                {
+                    "key": "2",
+                    "name": "Fold level 2",
+                    "type": "command",
+                    "command": "editor.foldLevel2"
+                },
+                {
+                    "key": "3",
+                    "name": "Fold level 3",
+                    "type": "command",
+                    "command": "editor.foldLevel3"
+                },
+                {
+                    "key": "4",
+                    "name": "Fold level 4",
+                    "type": "command",
+                    "command": "editor.foldLevel4"
+                },
+                {
+                    "key": "5",
+                    "name": "Fold level 5",
+                    "type": "command",
+                    "command": "editor.foldLevel5"
+                },
+                {
+                    "key": "6",
+                    "name": "Fold level 6",
+                    "type": "command",
+                    "command": "editor.foldLevel6"
+                },
+                {
+                    "key": "7",
+                    "name": "Fold level 7",
+                    "type": "command",
+                    "command": "editor.foldLevel7"
+                }
+            ]
+        },
+        {
+            "key": "=",
+            "name": "Unfold All",
+            "type": "command",
+            "command": "editor.unfoldAll"
+        },
+        {
             "key": "t",
             "name": "Toggle Terminal",
             "type": "command",
             "command": "workbench.action.togglePanel",
             "when": "terminalFocus"
         },
-//        {
-//            "key": "t",
-//            "name": "+Terminal",
-//            "type": "bindings",
-//            "bindings":[
-//                {
-//                    "key": "t",
-//                    "name": "Toggle Terminal",
-//                    "type": "command",
-//                    "command": "workbench.action.togglePanel",
-//                    //"when": "terminalFocus"
-//                },
-//                {
-//                    "key": "t",
-//                    "name": "Focus Terminal",
-//                    "type": "command",
-//                    //"command": "workbench.action.terminal.toggleTerminal",
-//                    //"when": "!terminalFocus"
-//                }
-//            ]
-//        },
         {
             "key": "/",
             "name": "Search in a project",
@@ -197,22 +231,28 @@
                     "command": "git.publish"
                 },
                 {
-                    "key": "S",
+                    "key": "s",
                     "name": "Stage",
                     "type": "command",
                     "command": "git.stage"
                 },
                 {
-                    "key": "U",
+                    "key": "u",
                     "name": "Unstage",
                     "type": "command",
                     "command": "git.unstage"
                 },
                 {
-                    "key": "B",
-                    "name": "Browse",
+                    "key": "h",
+                    "name": "Open in GitHub",
                     "type": "command",
                     "command": "gitlens.openFileInRemote"
+                },
+                {
+                    "key": "g",
+                    "name": "Display Source Control",
+                    "type": "command",
+                    "command": "workbench.view.scm"
                 },
                 {
                     "key": "P",
@@ -250,17 +290,24 @@
         },
         {
             "key": "d",
-            "name": "Definition",
+            "name": "Discard Changes",
             "type": "command",
-            "command": "editor.action.revealDefinition",
-            "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+            "command": "workbench.action.files.revert",
+            "when": "editorTextFocus"
         },
-        {
-            "key": "D",
-            "name": "Declaration",
-            "type": "command",
-            "command": "editor.action.revealDeclaration"
-        },
+        // {
+        //     "key": "d",
+        //     "name": "Definition",
+        //     "type": "command",
+        //     "command": "editor.action.revealDefinition",
+        //     "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+        // },
+        // {
+        //     "key": "D",
+        //     "name": "Declaration",
+        //     "type": "command",
+        //     "command": "editor.action.revealDeclaration"
+        // },
         {
             "key": "E",
             "name": "Errors",
@@ -275,8 +322,8 @@
             "args": ":noh<CR>"
         },
         {
-            "key": "S",
-            "name": "Show...",
+            "key": "?",
+            "name": "+Show more...",
             "type": "bindings",
             "bindings": [
                 {
@@ -294,12 +341,6 @@
                     "when": "explorerViewletVisible"
                 },
                 {
-                    "key": "s",
-                    "name": "Show search",
-                    "type": "command",
-                    "command": "workbench.view.search"
-                },
-                {
                     "key": "g",
                     "name": "Show source control",
                     "type": "command",
@@ -307,15 +348,10 @@
                 },
                 {
                     "key": "t",
-                    "name": "Show test",
+                    "name": "Show Terminal",
                     "type": "command",
-                    "command": "workbench.view.extension.test"
-                },
-                {
-                    "key": "r",
-                    "name": "Show remote explorer",
-                    "type": "command",
-                    "command": "workbench.view.remote"
+                    "command": "workbench.action.terminal.toggleTerminal",
+                    "when": "!terminalFocus"
                 },
                 {
                     "key": "x",
@@ -324,63 +360,50 @@
                     "command": "workbench.view.extensions"
                 },
                 {
-                    "key": "p",
-                    "name": "Show problem",
-                    "type": "command",
-                    "command": "workbench.actions.view.problems"
-                },
-                {
                     "key": "o",
                     "name": "Show output",
                     "type": "command",
                     "command": "workbench.action.output.toggleOutput"
                 },
-                {
-                    "key": "d",
-                    "name": "Show debug console",
-                    "type": "command",
-                    "command": "workbench.debug.action.toggleRepl"
-                }
             ]
         },
-        {
-            "key": "?",
-            "name": "View All References",
-            "type": "command",
-            "command": "references-view.find",
-            "when": "editorHasReferenceProvider"
-        }
     ],
     "whichkey.bindingOverrides": [
     
     ],
     "whichkey.sortOrder": "nonNumberFirst",
     "whichkey.delay": 0,
-    "editor.scrollbar.horizontal": "hidden",
-    "editor.scrollbar.vertical": "hidden",
+    // "editor.scrollbar.horizontal": "hidden",
+    // "editor.scrollbar.vertical": "hidden",
+    "editor.hideCursorInOverviewRuler": true,
     "breadcrumbs.enabled": true,
     "editor.renderWhitespace": "none",
     "editor.emptySelectionClipboard": false,
     "liveshare.showInStatusBar": "whileCollaborating",
-    "workbench.nvimColorNormal": "#98C379",
-    "workbench.nvimColorInsert": "#61AFEF",
-    "workbench.nvimColorVisual": "#C678DD",
-    "workbench.nvimColorForeground": "#202020",
+    // "workbench.nvimColorNormal": "#98C379",
+    // "workbench.nvimColorInsert": "#61AFEF",
+    // "workbench.nvimColorVisual": "#C678DD",
+    // "workbench.nvimColorForeground": "#202020",
     "workbench.colorCustomizations": {
-        "activityBarBadge.background": "#98C379",
-        "editorCursor.foreground": "#98C379",
-        "inputValidation.errorBorder": "#98C379",
-        "panel.border": "#98C379",
-        "panelTitle.activeBorder": "#98C379",
-        "panelTitle.activeForeground": "#98C379",
-        "peekView.border": "#98C379",
-        "peekViewTitleLabel.foreground": "#98C379",
-        "tab.activeBorder": "#98C379",
-        "statusBar.border": "#98C379",
-        "statusBar.background": "#98C379",
-        "statusbar.foreground": "#202020",
-        "statusBar.foreground": "#202020",
-        "activityBarBadge.foreground": "#202020"
+        // "activityBarBadge.background": "#98C379",
+        // "editorCursor.foreground": "#98C379",
+        // "inputValidation.errorBorder": "#98C379",
+        // "panel.border": "#98C379",
+        // "panelTitle.activeBorder": "#98C379",
+        // "panelTitle.activeForeground": "#98C379",
+        // "peekView.border": "#98C379",
+        // "peekViewTitleLabel.foreground": "#98C379",
+        // "tab.activeBorder": "#98C379",
+        "statusBar.border": "#f7f7f7",
+        // "statusBar.background": "#98C379",
+        // "statusBar.foreground": "#202020",
+        // "activityBarBadge.foreground": "#202020"
     },
-    "javascript.updateImportsOnFileMove.enabled": "always"
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ]
 }
