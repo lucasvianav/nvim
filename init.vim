@@ -5,15 +5,21 @@ source $HOME/.config/nvim/vim-plug/plugins.vim
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/general/providers.vim
 
-" Keymaps
+" Keybind maps
 source $HOME/.config/nvim/keys/mappings.vim
+source $HOME/.config/nvim/keys/unimpaired.vim
+" source $HOME/.config/nvim/keys/move.vim
 source $HOME/.config/nvim/keys/which-key.vim
+
+"Command maps
+source $HOME/.config/nvim/commands/mappings.vim
 
 if exists('g:vscode') " if it's on vscode
     
     " vscode settings
     source $HOME/.config/nvim/vscode/settings.vim
-    source $HOME/.config/nvim/vscode/ui-modifier.vim
+    source $HOME/.config/nvim/keys/vscode.vim
+    " source $HOME/.config/nvim/vscode/ui-modifier.vim
     
     " Plugins
     source $HOME/.config/nvim/plug-config/highlightedyank.vim
@@ -38,6 +44,7 @@ else " if it's not on vscode
     source $HOME/.config/nvim/plug-config/easymotion.vim
     source $HOME/.config/nvim/plug-config/closetag.vim
     source $HOME/.config/nvim/plug-config/illuminate.vim
+    " source $HOME/.config/nvim/plug-config/sneak.vim
 
     " LUA Plugins
     lua require 'plug-colorizer'
@@ -45,5 +52,5 @@ else " if it's not on vscode
 endif
 
 source $HOME/.config/nvim/plug-config/quickscope.vim
-source $HOME/.config/nvim/plug-config/sneak.vim
 source $HOME/.config/nvim/plug-config/vim-commentary.vim
+source $HOME/.config/nvim/plug-config/vim-easyclip.vim

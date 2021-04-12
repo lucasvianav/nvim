@@ -1,6 +1,3 @@
-" set leader key
-let g:mapleader = "\<Space>"
-
 syntax enable                           " Enables syntax highlighing
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set nowrap                              " Display long lines as just one line
@@ -23,6 +20,7 @@ set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
 set laststatus=0                        " Always display the status line
 set number                              " Line numbers
+set relativenumber
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
 set showtabline=4                       " Always show tabs
@@ -34,11 +32,17 @@ set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set formatoptions-=cro                  " Stop newline continution of comments
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set scrolloff=1                         " Copy paste between vim and everything else
-set nrformats=alpha, octal, hex          " Allow letter, cotal and hex sequences
-"set autochdir                           " Your working directory will always be the same as your working directory
+set nrformats=alpha                     " Allow letter sequences
+"set autochdir                          " Your working directory will always be the same as your working directory
+
+" Enable folding
+if has('folding')
+    if has('windows')
+        set fillchars=vert:┃            " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
+    endif
+    set foldmethod=indent               " not as cool as syntax, but faster
+    set foldlevelstart=1                " start unfolded
+endif
 
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 au BufNewFile,BufRead,BufReadPost *.json set syntax=jsonc
-
-" You can't stop me
-" cmap w!! w !sudo tee %

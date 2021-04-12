@@ -22,7 +22,7 @@ nnoremap <silent> <script> V V<SID>SetCursorLineNrColorVisual
 nnoremap <silent> <script> <C-v> <C-v><SID>SetCursorLineNrColorVisual
 
 function! SetCursorLineNrColorVisual()
-    set updatetime=0
+    " set updatetime=0
     call VSCodeNotify('nvim-theme.visual')
 endfunction
 

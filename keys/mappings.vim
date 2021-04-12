@@ -2,11 +2,11 @@
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
 
-" Use alt + hjkl to resize windows
-nnoremap <M-j>    :resize -2<CR>
-nnoremap <M-k>    :resize +2<CR>
-nnoremap <M-h>    :vertical resize -2<CR>
-nnoremap <M-l>    :vertical resize +2<CR>
+" Use alt + shift + hjkl to resize windows
+nnoremap <M-J>    :resize -2<CR>
+nnoremap <M-K>    :resize +2<CR>
+nnoremap <M-H>    :vertical resize -2<CR>
+nnoremap <M-L>    :vertical resize +2<CR>
 
 " I hate escape more than anything else
 inoremap jk <Esc>
@@ -42,6 +42,30 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" nnoremap <Leader>o o<Esc>^Da
-" nnoremap <Leader>O O<Esc>^Da
+" Break line after current position
+nnoremap [b a<CR><Esc>k$
 
+" Break line before current position
+nnoremap ]b i<CR><Esc>k$
+
+" Select last pasted text
+nnoremap gp `[v`]
+nnoremap gP `[V`]
+
+" Duplicate line below
+nmap [d yyp[p
+xmap [d yP[pgv=gv
+
+" Duplicate line above
+nmap ]d yyP[p
+" xnoremap ]d ypgv=gv
+xmap ]d yP[p`[V`]$
+
+nmap <Leader>o o<Esc>^Da
+nmap <Leader>O O<Esc>^Da
+
+" Maps m to delete 1 char
+nmap m dl
+
+" <Leader>h will hide highlights
+nnoremap <Leader>h :noh<CR>

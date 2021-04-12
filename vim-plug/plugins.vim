@@ -49,10 +49,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'kyazdani42/nvim-web-devicons'
         " Highlight other occurrences from under the cursor
         Plug 'RRethy/vim-illuminate'
+        " " Sneak
+        " Plug 'justinmk/vim-sneak'
     endif
 
-    " Sneak
-    Plug 'justinmk/vim-sneak'
     " Which Key
     Plug 'liuchengxu/vim-which-key'
     " Quickscope

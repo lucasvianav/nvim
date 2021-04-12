@@ -25,19 +25,6 @@ function! s:manageEditorSize(...)
     endfor
 endfunction
 
-" function! s:vscodeCommentary(...) abort
-"     if !a:0
-"         let &operatorfunc = matchstr(expand('<sfile>'), '[^. ]*$')
-"         return 'g@'
-"     elseif a:0 > 1
-"         let [line1, line2] = [a:1, a:2]
-"     else
-"         let [line1, line2] = [line("'["), line("']")]
-"     endif
-
-"     call VSCodeCallRange("editor.action.commentLine", line1, line2, 0)
-" endfunction
-
 function! s:openVSCodeCommandsInVisualMode()
     normal! gv
     let visualmode = visualmode()
@@ -50,6 +37,8 @@ function! s:openVSCodeCommandsInVisualMode()
         let endPos = getpos(".")
         call VSCodeNotifyRangePos("workbench.action.showCommands", startPos[1], endPos[1], startPos[2], endPos[2], 1)
     endif
+    call feedkeys('gv=', 'n')
+    call feedkeys('gv', 'n')
 endfunction
 
 function! s:openWhichKeyInVisualMode()
@@ -66,6 +55,23 @@ function! s:openWhichKeyInVisualMode()
     endif
 endfunction
 
+" Try and move lines in visual mode
+function! s:MoveLine(direction)
+    if visualmode() == 'V' && (a:direction == "Up" || a:direction == "Down")
+        let startLine = line("v")
+        let endLine = line(".")
+        normal <C-C>
+
+        call VSCodeNotifyRange("editor.action.moveLines" . a:direction . "Action", startLine, endLine, 0)
+
+        sleep 200m
+        call feedkeys('gv=', 'n')
+    endif
+
+    call feedkeys('gv', 'n')
+    
+    return ''
+endfunction
 
 command! -complete=file -nargs=? Split call <SID>split('h', <q-args>)
 command! -complete=file -nargs=? Vsplit call <SID>split('v', <q-args>)
@@ -73,36 +79,16 @@ command! -complete=file -nargs=? New call <SID>split('h', '__vscode_new__')
 command! -complete=file -nargs=? Vnew call <SID>split('v', '__vscode_new__')
 command! -bang Only if <q-bang> == '!' | call <SID>closeOtherEditors() | else | call VSCodeNotify('workbench.action.joinAllGroups') | endif
 
-" Better Navigation
-nnoremap <silent> <C-j> :call VSCodeNotify('workbench.action.navigateDown')<CR>
-xnoremap <silent> <C-j> :call VSCodeNotify('workbench.action.navigateDown')<CR>
-nnoremap <silent> <C-k> :call VSCodeNotify('workbench.action.navigateUp')<CR>
-xnoremap <silent> <C-k> :call VSCodeNotify('workbench.action.navigateUp')<CR>
-nnoremap <silent> <C-h> :call VSCodeNotify('workbench.action.navigateLeft')<CR>
-xnoremap <silent> <C-h> :call VSCodeNotify('workbench.action.navigateLeft')<CR>
-nnoremap <silent> <C-l> :call VSCodeNotify('workbench.action.navigateRight')<CR>
-xnoremap <silent> <C-l> :call VSCodeNotify('workbench.action.navigateRight')<CR>
-
 nnoremap gr <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
 " map gf :let mycurf=expand("<cfile>")<cr> :execute("e ".mycurf)<cr> <S-Tab>
 
-" Bind C-/ to vscode commentary since calling from vscode produces double comments due to multiple cursors
-xnoremap <expr> <C-/> <SID>vscodeCommentary()
-nnoremap <expr> <C-/> <SID>vscodeCommentary() . '_'
-
 nnoremap <silent> <C-w>_ :<C-u>call VSCodeNotify('workbench.action.toggleEditorWidths')<CR>
-
-nnoremap <silent> <Space> :call VSCodeNotify('whichkey.show')<CR>
-xnoremap <silent> <Space> :<C-u>call <SID>openWhichKeyInVisualMode()<CR>
 xnoremap <silent> <C-P> :<C-u>call <SID>openVSCodeCommandsInVisualMode()<CR>
 
-" makes vscode actions work in visual mode
-xnoremap <silent> <C-d> :<S-Home><BS> call VSCodeNotifyRange("editor.action.copyLinesDownAction", getpos("'<")[1], getpos("'>")[1], 0)<CR>
-xnoremap <silent> <C-S-BS> :<S-Home><BS> call VSCodeNotifyRange("editor.action.deleteLines", getpos("'<")[1], getpos("'>")[1], 0)<CR>
-xnoremap <silent> <M-k> :<S-Home><BS> call VSCodeNotifyRange("editor.action.moveLinesUpAction", getpos("'<")[1], getpos("'>")[1], 0)<CR>
-xnoremap <silent> <M-j> :<S-Home><BS> call VSCodeNotifyRange("editor.action.moveLinesDownAction", getpos("'<")[1], getpos("'>")[1], 0)<CR>
+nnoremap <silent> <Space> :call VSCodeNotify('whichkey.show')<CR>
 
-xmap <C-/>  <Plug>VSCodeCommentary
-nmap <C-/>  <Plug>VSCodeCommentary
-omap <C-/>  <Plug>VSCodeCommentary
-nmap <C-/> <Plug>VSCodeCommentaryLine
+" makes vscode actions work in visual mode
+" xnoremap <silent> <M-k> :call <SID>MoveLine("Up")<CR>
+" xnoremap <silent> <M-j> :call <SID>MoveLine("Down")<CR>
+" xnoremap <silent> <M-k> :<S-Home><BS> call VSCodeNotifyRange("editor.action.moveLinesUpAction", getpos("'<")[1], getpos("'>")[1], 0)<CR>gv
+" xnoremap <silent> <M-j> :<S-Home><BS> call VSCodeNotifyRange("editor.action.moveLinesDownAction", getpos("'<")[1], getpos("'>")[1], 0)<CR>gv
