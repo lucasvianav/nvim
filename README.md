@@ -1,5 +1,7 @@
 # My Neovim (and vscode-neovim) config file
 #### Located in: $HOME/.config/nvim
+![](https://i.imgur.com/raPX5yF.png)
+
 <br>
 
 # Plugin keybinds:
