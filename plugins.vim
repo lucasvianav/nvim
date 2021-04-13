@@ -59,8 +59,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'unblevable/quick-scope'
     " Press CTRL + / to comment
     Plug 'tpope/vim-commentary'
-    " Surround
-    Plug 'tpope/vim-surround'
     " Perl Regex
     Plug 'othree/eregex.vim'
     " Better Unicode Compatibility?
@@ -81,6 +79,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-capslock'
     " Increment sequences
     Plug 'triglav/vim-visual-increment'
+    " Surround
+    Plug 'tpope/vim-surround'
 
 call plug#end()
 

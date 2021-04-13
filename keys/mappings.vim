@@ -32,7 +32,7 @@ nnoremap <C-c> <Esc>
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
-" Better tabbing
+" Better tabbing in visual mode
 vnoremap < <gv
 vnoremap > >gv
 
@@ -43,23 +43,23 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Break line after current position
-nnoremap [b a<CR><Esc>k$
+nnoremap ]b a<CR><Esc>k$
 
 " Break line before current position
-nnoremap ]b i<CR><Esc>k$
+nnoremap [b i<CR><Esc>k$
 
 " Select last pasted text
 nnoremap gp `[v`]
 nnoremap gP `[V`]
 
 " Duplicate line below
-nmap [d yyp[p
-xmap [d yP[pgv=gv
+nmap ]d yyp[p
+xmap ]d yP[pgv=gv
 
 " Duplicate line above
-nmap ]d yyP[p
+nmap [d yyP[p
 " xnoremap ]d ypgv=gv
-xmap ]d yP[p`[V`]$
+xmap [d yP[p`[V`]$
 
 nmap <Leader>o o<Esc>^Da
 nmap <Leader>O O<Esc>^Da

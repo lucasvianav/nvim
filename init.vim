@@ -50,6 +50,7 @@ else " if it's not on vscode
     source $HOME/.config/nvim/plug-config/closetag.vim
     source $HOME/.config/nvim/plug-config/illuminate.vim
     " source $HOME/.config/nvim/plug-config/sneak.vim
+    source $HOME/.config/nvim/plug-config/vim-surround.vim
 
     " LUA Plugins
     lua require 'plug-colorizer'

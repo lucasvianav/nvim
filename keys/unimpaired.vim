@@ -334,8 +334,8 @@ function! UnimpairedMapTransform(algorithm, key) abort
     call s:map('n', a:key.a:key[strlen(a:key)-1], '<Plug>unimpaired_line_'.a:algorithm)
 endfunction
 
-call UnimpairedMapTransform('string_encode','[y')
-call UnimpairedMapTransform('string_decode',']y')
+call UnimpairedMapTransform('string_encode','[s')
+call UnimpairedMapTransform('string_decode',']s')
 call UnimpairedMapTransform('url_encode','[u')
 call UnimpairedMapTransform('url_decode',']u')
 call UnimpairedMapTransform('xml_encode','[x')
