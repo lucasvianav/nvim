@@ -1,1 +1,30 @@
 #!/bin/sh
+
+# install neovim
+sudo apt install neovim
+
+# install Vim-Plug
+curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# copy/paste enable
+sudo apt install xsel
+
+# install python support
+pip install pynvim
+
+# install node support
+npm i -g neovim
+
+# install ranger
+sudo apt install ranger
+pip install ueberzug
+mkdir -p ~/.config/ranger/plugins/ranger_devicons
+git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+
+echo 
+echo 
+echo 
+echo 
+echo 
+echo 
+echo "Point your init.vim path to \$HOME/.config/nvim/"
