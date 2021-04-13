@@ -89,36 +89,54 @@ function! s:MoveSelectionDown(count) abort
     call feedkeys('gv', 'n')
 endfunction
 
+" Try and move lines in visual mode
+function! s:VSCodeMoveLine(direction)
+    if visualmode() == 'V' && (a:direction == "Up" || a:direction == "Down")
+        let startline = line("'<")
+        let endline = line("'>")
+
+        " use blocking request here since we need to wait
+        call VSCodeCallRange("editor.action.moveLines" . a:direction . "Action", startline, endline, 0)
+
+        " actually awaiting result of command doesn't mean that it was applied, so need a slight delay here
+        call wait(40, 0)
+
+        " Reselect lines
+        call feedkeys('gv=', 'n')
+    endif
+
+    call feedkeys('gv', 'n')
+endfunction
+
 nnoremap <silent> <Plug>unimpairedMoveUp            :<C-U>call <SID>Move('--',v:count1,'Up')<CR>
 nnoremap <silent> <Plug>unimpairedMoveDown          :<C-U>call <SID>Move('+',v:count1,'Down')<CR>
 noremap  <silent> <Plug>unimpairedMoveSelectionUp   :<C-U>call <SID>MoveSelectionUp(v:count1)<CR>
 noremap  <silent> <Plug>unimpairedMoveSelectionDown :<C-U>call <SID>MoveSelectionDown(v:count1)<CR>
 
+call s:map('x', '[e', '<Plug>unimpairedMoveSelectionUp')
+call s:map('x', ']e', '<Plug>unimpairedMoveSelectionDown')
+
+" On VSCode, use alt + j, k as native VSCode "Move Lines"
 if exists('g:vscode')
     nnoremap [e :call VSCodeNotify('editor.action.moveLinesUpAction')<CR>
     nnoremap ]e :call VSCodeNotify('editor.action.moveLinesDownAction')<CR>
+
+    " makes vscode actions "work" in visual mode (deactivated beacause of bugs)
+    " xnoremap <M-k> :<C-u>call <SID>VSCodeMoveLine("Up")<CR>
+    " xnoremap <M-j> :<C-u>call <SID>VSCodeMoveLine("Down")<CR>
+
 else
     call s:map('n', '[e', '<Plug>unimpairedMoveUp')
     call s:map('n', ']e', '<Plug>unimpairedMoveDown')
 endif
 
-call s:map('x', '[e', '<Plug>unimpairedMoveSelectionUp')
-call s:map('x', ']e', '<Plug>unimpairedMoveSelectionDown')
-
 " Move lines with alt + jk
 nmap <M-k> [e
 nmap <M-j> ]e
-" nnoremap <silent> <script> <M-k> :<C-U>call <SID>Move('--',v:count1,'Up')<CR>
-" nnoremap <silent> <script> <M-j> :<C-U>call <SID>Move('+',v:count1,'Down')<CR>
 
-" Visual mode alt + jk deactivated for VSCode
-" because of bugs
-if exists('g:vscode')
-    " nothing
-else
-    xnoremap <silent> <M-k> :<C-U>call <SID>MoveSelectionUp(v:count1)<CR>
-    xnoremap <silent> <M-j> :<C-U>call <SID>MoveSelectionDown(v:count1)<CR>
-endif
+" Visual mode alt + j, k
+xmap <M-k> [e
+xmap <M-j> ]e
 
 " Section: Option toggling
 
