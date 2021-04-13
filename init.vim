@@ -16,11 +16,16 @@ source $HOME/.config/nvim/commands/mappings.vim
 
 if exists('g:vscode') " if it's on vscode
     
-    " vscode settings
+    " VSCode settings
     source $HOME/.config/nvim/vscode/settings.vim
-    source $HOME/.config/nvim/keys/vscode.vim
     " source $HOME/.config/nvim/vscode/ui-modifier.vim
     
+    " VSCode Keybinds
+    source $HOME/.config/nvim/keys/vscode.vim
+
+    " VSCode Commands
+    source $HOME/.config/nvim/commands/vscode.vim
+
     " Plugins
     source $HOME/.config/nvim/plug-config/highlightedyank.vim
 

@@ -1,0 +1,1 @@
+cmap exvs call VSCodeNotify("workbench.action.closeWindow")
