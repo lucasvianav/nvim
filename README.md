@@ -1,6 +1,6 @@
 # My Neovim (and vscode-neovim) config file
 #### Located in: $HOME/.config/nvim
-
+<br>
 
 # Plugin keybinds:
 Every relevant keybing mapped by a plugin.
