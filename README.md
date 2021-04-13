@@ -1,12 +1,10 @@
 # My Neovim (and vscode-neovim) config file
 #### Located in: $HOME/.config/nvim
-<br>
-<br>
+
 
 # Plugin keybinds:
 Every relevant keybing mapped by a plugin.
 
-<br>
 
 ## <a id="surround"></a>Surround ([tpope/vim-surround](https://github.com/tpope/vim-surround))
 ### Normal mode
