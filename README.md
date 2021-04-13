@@ -7,6 +7,8 @@
 # Plugin keybinds:
 Every relevant keybing mapped by a plugin.
 
+  1. [Surround](#surround)
+
 
 ## <a id="surround"></a>Surround ([tpope/vim-surround](https://github.com/tpope/vim-surround))
 ### Normal mode
