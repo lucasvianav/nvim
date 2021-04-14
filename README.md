@@ -8,8 +8,9 @@ Located in: $HOME/.config/nvim
 
   1.  [Plugin mappings](#plugin-mappings)
   2.  [Custom mappings](#custom-mappings)
-  3.  [Additional tips](#additional-tip)
-  4.  [Acknowledgement](#acknowledgement)
+  3.  [Vanilla mappings that I always forget and need to consult](#vanilla)
+  4.  [Additional tips](#additional-tip)
+  5.  [Acknowledgement](#acknowledgement)
 
 # <a id="plugin-mappings"></a>Plugin mappings:
 Every relevant keybind/command mapped by a plugin.
@@ -238,6 +239,13 @@ This is one of the plugins I like the most, but I cannot make it work on VSCode 
   * `:qvs`: **q**uit **vs**code (closes VSCode window)
     * This is not mapped to terminal Neovim.
   * `:exvs`: **ex**it **vs**code (same as `qvs`)
+
+# <a id="vanilla"></a>Vanilla mappings that I always forget and need to consult
+  * `:e!:`: Discard/revert unsaved changes
+    * Works in VSCode.
+
+## Fold keybinds
+  * `
 
 # <a id="additional-tips"></a>Additional tips
 I'm putting this here because I haven't memorized it yet and neet to consult it.
