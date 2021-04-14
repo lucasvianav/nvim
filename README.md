@@ -3,9 +3,11 @@
 ![](https://i.imgur.com/raPX5yF.png)
 
 <br>
+
   1.  [Plugin mappings](#plugin-mappings)
   2.  [Custom mappings](#custom-mappings)
   3.  [Acknowledgement](#acknowledgement)
+
 <br>
 
 # <a id="plugin-mappings"></a>Plugin mappings:
