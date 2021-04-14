@@ -216,7 +216,7 @@ This is one of the plugins I like the most, but I cannot make it work on VSCode 
   * `<C-G>c`: insert mode command — toggles caps lock temporarily (when exits insert mode, caps lock is turned off)
   * `gC`: normal mode command — toggles caps lock permanently (can enter and exit every mode and it won't turn off automatically)
 
-# <a id="custom-mappings"></a>Custom mappings
+# <a id="custom-mappings"></a>Custom mappings/abbreviation
 ## Keybinds
   * `<C-J>`, `<C-K>`: navigation in lists (like autocompletion) up and down, respectively
   * `<M-H>`, `<M-S-J>`, `<M-S-K>`, `<M-H>`: resizes windows (left, bottom, top, right respectively)
@@ -229,7 +229,11 @@ This is one of the plugins I like the most, but I cannot make it work on VSCode 
   * `\h`: hide highligts (same as `:noh`)
 
 ## Commands
-  * \[...]
+  * `:Q`: same as `:q`
+  * `:q1`: same as `:q!`
+  * `:wq`: remapped to `:x`
+  * `:exvs`: closes VSCode window
+    * Is not mapped to terminal Neovim.
 
 # <a id="acknowledgement"></a>Acknowledgement
 Just wanna thank:
