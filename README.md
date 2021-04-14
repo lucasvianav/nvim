@@ -11,6 +11,11 @@ Every relevant keybind/command mapped by a plugin.
   2. [Surround](#surround)
   3. [Unimpaired](#unimpaired)
   4. [EasyClip](#easyclip)
+  5. [Abolish](#abolish)
+  6. [Eregex](#eregex)
+  7. [Speed-Dating](#speeddating)
+  8. [Radical](#radical)
+  9. [Visual Increment](#visual-increment)
 
 
 ## <a id="commentary"></a>Commentary ([tpope/vim-commentary](https://github.com/tpope/vim-commentary))
@@ -147,7 +152,9 @@ As tpope himself stated, this plugin e kinda hard to explain, so I won't even tr
     * e.g.: `:Subvert/address{,es}/reference{,s}/g`
     * e.g.: `:Subvert/child{,ren}/adult{,s}/g`
 
-### Keybinds — Coercion
+Note: some examples of variations of a word are lowercase/uppercase, masc/fem, singular/plural, etc.
+
+### <a id="coercion"></a>Keybinds — Coercion
 For me, it's better to remember it as **Conversion**, as it'll _convert_ the word under the cursor to another "case-format".
 The command is `cr` and it takes an argument to represent the new "case-format".
 
@@ -163,4 +170,41 @@ The supported "case-formats" are:
 
 e.g.: `crs` will turn `fooBar` into `foo_bar` and so on.
 
-Note: some examples of variations of a word are lowercase/uppercase, masc/fem, singular/plural, etc.
+## <a id="eregex"></a>Eregex ([othree/eregex.vim](https://github.com/othree/eregex.vim))
+I hate VIM regex, so this enables me to use Perl regex, with which I'm more familiar.
+
+### Commands
+  * `:M/`: search with Perl regex
+  * `:S`, `:%S`: search-replace with Perl regex
+    * `:s`, `%s` stays the same as vanilla
+
+### Keybinds
+  * `/`: same as vanilla, but with Perl regex
+  * `?`: same as vanilla, but with Perl regex
+
+## <a id="speeddating"></a>Speed-Dating ([tpope/vim-speeddating](https://github.com/tpope/vim-speeddating))
+Situationally useful. Don't really use it much, but I like the concept of having it.
+
+  * `<C-X>`, `<C-A>`: same as vanilla, but also work on dates, roman numerals and ordinals (1st, 2nd, 3rd, ...)
+    * In visual mode, supports letters of the alphabet.
+  * `d<C-X>`, `d<C-A>`: sets the timestamp under the cursor to the current time and current UTC time respectively (does not create a timestamp)
+
+## Radical ([glts/vim-radical](https://github.com/glts/vim-radical))
+Situationally useful. Don't really use it much, but I like the concept of having it.
+
+The command for **c**onve**r**ting a number to another representation is `cr` (the same as [Coercion](#coercion), but doesn't conflict). It takes the representation's initial as argument.
+
+  * `gA`: shows the four representations of the number under the cursor (or selected in Visual Mode)
+  * `crd`: converts the number to decimal
+  * `crx`: converts the number to hex
+  * `cro`: converts the number to octal
+  * `crb`: coverts the number to binary
+
+## <a id="visual-increment"></a>Visual-Increment ([triglav/vim-visual-increment](https://github.com/triglav/vim-visual-increment))
+Makes `<C-A>` and `<C-X>` work in blockwise visual mode (`^V`) to create sequences of numbers (decimal, hex, octal) and letters. For examples, read the plugin's README.
+
+## <a id="capslock"></a>CapsLock ([tpope/vim-capslock](https://github.com/tpope/vim-capslock))
+This is one of the plugins I like the most, but I cannot make it work on VSCode and that makes me sad. If you did it, hit me up.
+
+  * `<C-G>c`: insert mode command — toggles caps lock temporarily (when exits insert mode, caps lock is turned off)
+  * `gC`: normal mode command — toggles caps lock permanently (can enter and exit every mode and it won't turn off automatically)
