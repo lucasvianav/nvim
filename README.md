@@ -8,7 +8,8 @@ Located in: $HOME/.config/nvim
 
   1.  [Plugin mappings](#plugin-mappings)
   2.  [Custom mappings](#custom-mappings)
-  3.  [Acknowledgement](#acknowledgement)
+  3.  [Additional tips](#additional-tip)
+  4.  [Acknowledgement](#acknowledgement)
 
 # <a id="plugin-mappings"></a>Plugin mappings:
 Every relevant keybind/command mapped by a plugin.
@@ -232,8 +233,16 @@ This is one of the plugins I like the most, but I cannot make it work on VSCode 
   * `:Q`: same as `:q`
   * `:q1`: same as `:q!`
   * `:wq`: remapped to `:x`
-  * `:exvs`: closes VSCode window
-    * Is not mapped to terminal Neovim.
+    * I prefer the `x` command's functionality, but prefer to type `:wq`
+    * If you're wondering what the differences are and why I prefer `:x`, read [this comment](https://www.quora.com/Why-do-some-people-close-Vim-with-wq-instead-of-x/answer/Ye-Caiting) by [Ye Caiting](https://www.quora.com/profile/Ye-Caiting).
+  * `:qvs`: **q**uit **vs**code (closes VSCode window)
+    * This is not mapped to terminal Neovim.
+  * `:exvs`: **ex**it **vs**code (same as `qvs`)
+
+# <a id="additional-tips"></a>Additional tips
+I'm putting this here because I haven't memorized it yet and neet to consult it.
+
+In bash, you can use `Ctrl+Z` to suspend Neovim (or any app I guess) and then `fg` to go back to it (put it in the **f**fore**g**round). You can also use bg to leave it running in the **b**ack**g**round.
 
 # <a id="acknowledgement"></a>Acknowledgement
 Just wanna thank:
