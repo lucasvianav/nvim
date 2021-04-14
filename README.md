@@ -26,7 +26,7 @@ Every relevant keybind mapped by a plugin.
     * e.g.: `:7,17Commentary` will toggle comment for lines 7 through 17
     * e.g.: `g/TODO/Commentary` witll toggle comment for all lines contaning the word "TODO"
 
-To add support to a filetype, you have yo adjust `commentstring`. For example, the command below will set the `commentstring` to `.apache` files to `#`.
+To add support to a filetype, you have yo adjust `commentstring`. For example, the command below will set the `commentstring` for `.apache` files to `#`.
 ```
 autocmd FileType apache setlocal commentstring=#\ %s
 ```
