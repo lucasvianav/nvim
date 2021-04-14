@@ -3,19 +3,23 @@
 ![](https://i.imgur.com/raPX5yF.png)
 
 <br>
+  1.  [Plugin mappings](#plugin-mappings)
+  2.  [Custom mappings](#custom-mappings)
+  3.  [Acknowledgement](#acknowledgement)
+<br>
 
-# Plugin mappings:
+# <a id="plugin-mappings"></a>Plugin mappings:
 Every relevant keybind/command mapped by a plugin.
 
-  1. [Commentary](#commentary)
-  2. [Surround](#surround)
-  3. [Unimpaired](#unimpaired)
-  4. [EasyClip](#easyclip)
-  5. [Abolish](#abolish)
-  6. [Eregex](#eregex)
-  7. [Speed-Dating](#speeddating)
-  8. [Radical](#radical)
-  9. [Visual Increment](#visual-increment)
+  1.  [Commentary](#commentary)
+  2.  [Surround](#surround)
+  3.  [Unimpaired](#unimpaired)
+  4.  [EasyClip](#easyclip)
+  5.  [Abolish](#abolish)
+  6.  [Eregex](#eregex)
+  7.  [Speed-Dating](#speeddating)
+  8.  [Radical](#radical)
+  9.  [Visual Increment](#visual-increment)
   10. [CapsLock](#capslock)
 
 
@@ -209,3 +213,25 @@ This is one of the plugins I like the most, but I cannot make it work on VSCode 
 
   * `<C-G>c`: insert mode command — toggles caps lock temporarily (when exits insert mode, caps lock is turned off)
   * `gC`: normal mode command — toggles caps lock permanently (can enter and exit every mode and it won't turn off automatically)
+
+# <a id="custom-mappings"></a>Custom mappings
+## Keybinds
+  * `<C-J>`, `<C-K>`: navigation in lists (like autocompletion) up and down, respectively
+  * `<M-H>`, `<M-S-J>`, `<M-S-K>`, `<M-H>`: resizes windows (left, bottom, top, right respectively)
+    * In VSCode, there's only `<M-L>` and `<M-H>` to increase and decrease window size, respectively
+  * `jk`, `<C-C>`: substitutes <Esc>, which is unmapped
+  * `<TAB>`, `<S-TAB>`, <C-TAB>`, `<C-S-TAB>`: navigation between buffers
+  * `<C-H>`, `<C-J>`, `<C-K>`, `<C-H>`: navigation between windows (left, bottom, top, right respectively)
+  * `gp`, `gP`: select last pasted text in character (`v`) and linewise (`V`) mode respectively
+  * `\o`, `\O`: same as vanilla `o`and `O`, but the new line will be blank
+  * `\h`: hide highligts (same as `:noh`)
+
+## Commands
+  * \[...]
+
+# <a id="acknowledgement"></a>Acknowledgement
+Just wanna thank:
+  * [Christian Chiarulli](https://github.com/ChristianChiarulli), for making an excelent Neovim-introduction [video series](https://www.youtube.com/playlist?list=PLhoH5vyxr6QqPtKMp03pcJd_Vg8FZ0rtg) and [blog posts](https://www.chrisatmachine.com/neovim). When I started using/learning about VIM, I really just copying his config.
+  * [Greg Hurrell](https://github.com/wincent), for the great [screencasts and stream](https://www.youtube.com/channel/UCXPHFM88IlFn68OmLwtPmZA).
+  * [Alexey Svetliakov](https://github.com/asvetliakov/), for making and maintaining the absolutely unbeliavable [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension.
+  * All of the awesome people who made the plugins I listed/installed.
