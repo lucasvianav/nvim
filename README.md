@@ -1,8 +1,10 @@
 # My Neovim (and vscode-neovim) config file
 ![Simple banner](https://i.imgur.com/raPX5yF.png)
 
-## Simple description
-Located in: $HOME/.config/nvim
+## Description
+This is simply my Neovim config, which I use mainly with the [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension. I'm still a beginner in VIM, so any feedback is welcome :)
+
+In Ubuntu, clone it to: ~/.config/nvim
 
 ## Summary
 
