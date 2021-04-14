@@ -7,10 +7,29 @@
 # Plugin keybinds:
 Every relevant keybind mapped by a plugin.
 
-  1. [Surround](#surround)
-  2. [Unimpaired](#unimpaired)
-  3. [EasyClip](#easyclip)
+  1. [Commentary](#commentary)
+  2. [Surround](#surround)
+  3. [Unimpaired](#unimpaired)
+  4. [EasyClip](#easyclip)
 
+
+## <a id="commentary"></a>Commentary ([tpope/vim-commentary](https://github.com/tpope/vim-commentary))
+### Keybinds
+  * `gcc`: toggles comment of a line (takes a count)
+  * `gc`: toggles comment of a motion or selection
+    * e.g.: `gcap` will toggle comment of a paragraph
+  * `<C-/>`: toggles comment of a line (takes a count) or selection
+    * Does not support motion.
+
+### Commands
+  * `:Commentary`: can be used with a range or as part of a `:global` invocation
+    * e.g.: `:7,17Commentary` will toggle comment for lines 7 through 17
+    * e.g.: `g/TODO/Commentary` witll toggle comment for all lines contaning the word "TODO"
+
+To add support to a filetype, you have yo adjust `commentstring`. For example, the command below will set the `commentstring` to `.apache` files to `#`.
+```
+autocmd FileType apache setlocal commentstring=#\ %s
+```
 
 ## <a id="surround"></a>Surround ([tpope/vim-surround](https://github.com/tpope/vim-surround))
 ### Normal mode
