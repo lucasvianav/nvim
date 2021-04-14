@@ -1,14 +1,14 @@
 # My Neovim (and vscode-neovim) config file
-#### Located in: $HOME/.config/nvim
-![](https://i.imgur.com/raPX5yF.png)
+![Simple banner](https://i.imgur.com/raPX5yF.png)
 
-<br>
+## Simple description
+Located in: $HOME/.config/nvim
+
+## Summary
 
   1.  [Plugin mappings](#plugin-mappings)
   2.  [Custom mappings](#custom-mappings)
   3.  [Acknowledgement](#acknowledgement)
-
-<br>
 
 # <a id="plugin-mappings"></a>Plugin mappings:
 Every relevant keybind/command mapped by a plugin.
