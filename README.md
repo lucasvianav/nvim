@@ -4,8 +4,8 @@
 
 <br>
 
-# Plugin keybinds:
-Every relevant keybind mapped by a plugin.
+# Plugin mappings:
+Every relevant keybind/command mapped by a plugin.
 
   1. [Commentary](#commentary)
   2. [Surround](#surround)
@@ -40,7 +40,7 @@ autocmd FileType apache setlocal commentstring=#\ %s
         * e.g.: `cst"` will turn `<q>Hello world!</q>` into `"Hello world!"`
   * `ds`: **d**elete **s**urrounding — analogue to `cs`
   * `ss`: **s**et **s**urrounding — inserts a surrounding (2nd argument) to the motion received (1st argument)
-    * Originally this keybind is `ys`, but I've remapped it to make it compatible with [EasyClip](#easyclip)
+    * Originally this keybind is `ys`, but I remapped it to make it compatible with [EasyClip](#easyclip)
     * e.g.: with the cursor on "Hello", `ssiw]` will `Hello world!` into `[Hello world!]`
   * `sss`: **s**et **s**uper (welp) **s**urrounding — inserts a surrounding (only argument) to the current line (ignoring leading whitespace)
 
@@ -66,7 +66,7 @@ Passing `S` instead of `s` for the above keybinds (`cs`, `ss`, `sSs`, `sSS`) wil
 <br>
 
 ## <a id="unimpaired"></a>Unimpaired ([tpope/vim-unimpaired](https://github.com/tpope/vim-unimpaired))
-Instead of installing the plugin, I've copied the source and edited the code to better fit what I wanted, so it's slightly different from tpope's original.
+Instead of installing the plugin, I copied and edited the source the code to better fit what I wanted, so it's slightly different from tpope's original.
 
 Since all keybinds consist in bracket mappings, it's nice to establish a logic to it. In the a keyboard layout (at least in mine), `[` (the **open**ing bracket) comes above `]` (the **clos**ing bracket) (and slightly to the left), so think of `[` as _up_, _top_, _left_, _start_, _before_, _open_, _on_ and `]` as _down_, _bottom_, _right_, _after_, _close_, _off_. All the command follow that logic.
 
@@ -78,7 +78,7 @@ Since all keybinds consist in bracket mappings, it's nice to establish a logic t
   * `]e` (same as `<M-j>`): moves the current line (or selection) down
     * In VSCode, the visual mode version is buggy. If you don't hold/mash the buttons, everything should be ok.
   * `[d`: duplicates the current line (or selection), leaving the cursor (and selection) on the upper duplicate
-  * `]d`: duplicates the current line (or selection), leaving the cursor (and selection) on the bottom duplicate
+  * `]d`: duplicates the current line (or selection), leaving the cursor (and selection) on the lower duplicate
   * `[b`: breaks the current line before the cursor
   * `]d`: breaks the current line after the cursor
 
@@ -132,3 +132,35 @@ The plugin documentation references the opposite direction reference for the com
   * `:Paste`: same as above but does not display yank list
 
 If the commands above described doesn't make a lot os sense to you, I highly recommend you read the plugin's documentation/README.md, it'll certainly help you better understand the plugin's funcionality.
+
+## <a id="abolish"></a>Abolish ([tpope/vim-abolish](https://github.com/tpope/vim-abolish))
+As tpope himself stated, this plugin e kinda hard to explain, so I won't even try. I recommend you read the plugins documentation/README.md for a better explanation and examples.
+
+### Commands
+  * `:Abolish`: sets **ab**breviations for the many defined variations of a word to the many variations of another
+    * It's better used in a script.
+    * Saves you the effort of having to write many lines of `:iabbrev`
+    * e.g.: `:Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}`
+  * `:Subvert`: **sub**stitutes the many defined variations of a word by the many variations of another
+    * Saves you the effort of having to execute many `:%s`
+    * e.g.: `:%Subvert/facilit{y,ies}/building{,s}/g`
+    * e.g.: `:Subvert/address{,es}/reference{,s}/g`
+    * e.g.: `:Subvert/child{,ren}/adult{,s}/g`
+
+### Keybinds — Coercion
+For me, it's better to remember it as **Conversion**, as it'll _convert_ the word under the cursor to another "case-format".
+The command is `cr` and it takes an argument to represent the new "case-format".
+
+The supported "case-formats" are:
+  * `s`: snake_case
+  * `m`: MiexdCase
+  * `c`: camelCase
+  * `u`: UPPER_CASE
+  * `-`: dash-case
+  * `.`: dot-case
+  * `<space>`: space case
+  * `t`: Title Case
+
+e.g.: `crs` will turn `fooBar` into `foo_bar` and so on.
+
+Note: some examples of variations of a word are lowercase/uppercase, masc/fem, singular/plural, etc.
