@@ -64,7 +64,7 @@ Since all keybinds consist in bracket mappings, it's nice to establish a logic t
 
 ### Option toggling
 All of the options are changed using `setlocal`, not `set`.
-I like these keybinds a lot, unfortunaly I wasn't able to make it work in VSCode, so they work only in terminal Neovim..
+I like these keybinds a lot, unfortunaly I wasn't able to make it work in VSCode, so they work only in terminal Neovim.
 
 The supported options are:
   * `c`: cursorline
@@ -82,3 +82,33 @@ The supported encodings are:
   * `s`: C-style **s**trings
   * `u`: **U**RL
   * `x`: **X**ML
+
+## <a id="easyclip"></a>EasyClip ([svermeulen/vim-easyclip](https://github.com/svermeulen/vim-easyclip))
+
+### Main keybinds
+  * `y`, `Y`: same as you'd expect from vanilla, but keeps a yank history (each yank is stored in a register)
+  * `d`, `D`, `c`, `C`: same as you'd expect from vanilla, but the deleted/changed text is not yanked, but completely erased/lost (black hole)
+    * `dD`: makes the current line blank
+  * `p`, `P`: same as you'd expect from vanilla, but auto-formats the pasted text
+  * `\p`, `\P`: same as above, but does not auto-format text
+  * `\cf`: in theory, this would toggle the auto-format if used immediately after pasting, but I can't get it to work
+  * `s`, `S`: substitutes the passed motion by the current yank, similar to visually selecting it and pasting (the substituted text is also not yanked)
+  * `x`, `X`: cuts — yanks and deletes — the passed motion (vanilla `d`)
+  * `m`: deletes the character under the cursor (vanilla `x`)
+
+### Yank history navigation
+  * `[p`: navigates the yank history forwards permanently
+  * `]p`: navigates the yank history backwards permanently
+  * `<C-N>`: navigates the yank history forwards temporarily immediately after a paste
+  * `<C-P>`: navigates the yank history backwards temporarily immediately after a paste
+
+The plugin documentation references the opposite direction reference for the command — `]p` and `<C-P>` being forwards, as well as `[p` and `<C-N>` being backwards —, but the way I described above makes more sense to me.
+
+### Commands
+  * `:Yanks`: displays the full list of yanks
+    * Displaying the yank list doesn't quite work in VSCode
+  * `:IPaste`: allows you to choose a yank from the list to paste (**I**nterative Paste)
+    * Displaying the yank list doesn't quite work in VSCode
+  * `:Paste`: same as above but does not display yank list
+
+If the commands above described doesn't make a lot os sense to you, I highly recommend you read the plugin's documentation/README.md, it'll certainly help you better understand the plugin's funcionality.
