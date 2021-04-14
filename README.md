@@ -9,6 +9,7 @@ Every relevant keybind mapped by a plugin.
 
   1. [Surround](#surround)
   2. [Unimpaired](#unimpaired)
+  3. [EasyClip](#easyclip)
 
 
 ## <a id="surround"></a>Surround ([tpope/vim-surround](https://github.com/tpope/vim-surround))
