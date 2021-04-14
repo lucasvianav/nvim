@@ -242,7 +242,7 @@ This is one of the plugins I like the most, but I cannot make it work on VSCode 
 # <a id="additional-tips"></a>Additional tips
 I'm putting this here because I haven't memorized it yet and neet to consult it.
 
-In bash, you can use `Ctrl+Z` to suspend Neovim (or any app I guess) and then `fg` to go back to it (put it in the **f**fore**g**round). You can also use bg to leave it running in the **b**ack**g**round.
+In bash, you can use `Ctrl+Z` to suspend Neovim (or any app I guess) and then `fg` to go back to it (put it in the **f**ore**g**round). You can also use bg to leave it running in the **b**ack**g**round.
 
 # <a id="acknowledgement"></a>Acknowledgement
 Just wanna thank:
