@@ -16,6 +16,7 @@ Every relevant keybind/command mapped by a plugin.
   7. [Speed-Dating](#speeddating)
   8. [Radical](#radical)
   9. [Visual Increment](#visual-increment)
+  10. [CapsLock](#capslock)
 
 
 ## <a id="commentary"></a>Commentary ([tpope/vim-commentary](https://github.com/tpope/vim-commentary))
