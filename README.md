@@ -55,12 +55,12 @@ autocmd FileType apache setlocal commentstring=#\ %s
     * When substituting a tag for another surrounding, the tag is represented by `t`
         * e.g.: `cst"` will turn `<q>Hello world!</q>` into `"Hello world!"`
   * `ds`: **d**elete **s**urrounding — analogue to `cs`
-  * `ps`: **p**ut **s**urrounding — inserts a surrounding (2nd argument) to the motion received (1st argument)
+  * `çs`: **ç**et (set) **s**urrounding — inserts a surrounding (2nd argument) to the motion received (1st argument)
     * Originally this keybind is `ys`, but I remapped it to make it compatible with [EasyClip](#easyclip)
-    * e.g.: with the cursor on "Hello", `psiw]` will `Hello world!` into `[Hello world!]`
-  * `pss`: **p**et **s**uper (welp) **s**urrounding — inserts a surrounding (only argument) to the current line (ignoring leading whitespace)
+    * e.g.: with the cursor on "Hello", `çsiw]` will `Hello world!` into `[Hello world!]`
+  * `pss`: **ç**et **s**uper (welp) **s**urrounding — inserts a surrounding (only argument) to the current line (ignoring leading whitespace)
 
-Passing `S` instead of `s` for the above keybinds (`cs`, `ss`, `pSs`, `pSS`) will indent the surrounded text and place it on a line of its own.
+Passing `S` instead of `s` for the above keybinds (`cs`, `ss`, `çSs`, `çSS`) will indent the surrounded text and place it on a line of its own.
 
 ### Visual mode
   * `vS`: set **S**urrounding — inserts a surrounding to the selection
@@ -258,7 +258,7 @@ These keybindings are better detailed [here](#folding).
   * `:qvs`: **q**uit **vs**code (closes VSCode window)
     * This is not mapped to terminal Neovim.
   * `:exvs`: **ex**it **vs**code (same as `qvs`)
-  * `:r`: **r**eloads VSCode window
+  * `:rvs`, `Rvs`, `rVS`, `RVS`: **r**eloads **VS**Code window
   * `:settings`: opens VSCode's settings.json
 
 # <a id="vanilla"></a>Vanilla mappings that I always forget and need to consult
