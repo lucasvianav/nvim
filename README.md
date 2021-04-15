@@ -220,7 +220,7 @@ This is one of the plugins I like the most, but I cannot make it work on VSCode 
   * `<C-G>c`: insert mode command — toggles caps lock temporarily (when exits insert mode, caps lock is turned off)
   * `gC`: normal mode command — toggles caps lock permanently (can enter and exit every mode and it won't turn off automatically)
 
-# <a id="custom-mappings"></a>Custom mappings/abbreviation
+# <a id="custom-mappings"></a>Custom mappings/abbreviations
 ## Keybinds
   * `<C-J>`, `<C-K>`: navigation in lists (like autocompletion) up and down, respectively
   * `<M-H>`, `<M-S-J>`, `<M-S-K>`, `<M-H>`: resizes windows (left, bottom, top, right respectively)
@@ -229,8 +229,33 @@ This is one of the plugins I like the most, but I cannot make it work on VSCode 
   * `<TAB>`, `<S-TAB>`, <C-TAB>`, `<C-S-TAB>`: navigation between buffers
   * `<C-H>`, `<C-J>`, `<C-K>`, `<C-H>`: navigation between windows (left, bottom, top, right respectively)
   * `gp`, `gP`: select last pasted text in character (`v`) and linewise (`V`) mode respectively
-  * `\o`, `\O`: same as vanilla `o`and `O`, but the new line will be blank
-  * `\h`: hide highligts (same as `:noh`)
+
+### WhichKey
+The WhichKey menu will be shown if you press <Leader> — in this case <Space> — in normal mode, so every keybind below is preceded by <Space>.
+
+#### Terminal Neovim
+I need to organize it.
+
+#### VSCode
+Most of the keybindings do not require you to wait for the WhichKey menu to appear.
+
+  * `<Space>`: opens VSCode Command Palette
+  * `/`: searches in the whole project (workspace?)
+  * `s`: "find & replace" in project
+  * `d`: goes to definition
+  * `D`: goes to declaration
+  * `e`: toggles explorer visibility
+    * If you press `<Space>e` without waiting for the WhichKey menu to appear, it'll toggle sidebar visibility
+    * If you press `<Space>`, wait for the WhichKey menu to appear and then press `e`, you'll open the explorer
+  * `E`: displays errors
+  * `g`: displays git options
+  * `v`: splits editor to the right
+  * `h`: splits editor below
+  * `i`: organizes imports (Python-only?)
+  * `m`: displays merge conflict options
+  * `n`: hides highligts (same as `:noh`)
+  * `o`, `O`: same as vanilla `o`and `O`, but the new line will be blank
+  * `t`: toggles integrated terminal
 
 ### Folding
 These keybindings are better detailed [here](#folding).
