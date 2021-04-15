@@ -1,0 +1,8 @@
+#!/bin/sh
+
+rm -f ../vscode/Code-configs/* ../vscode/extensions/*nvim-ui-modifier*/*
+
+cp ~/.config/Code/User/settings.json ~/.config/Code/User/keybindings.json ../vscode/Code-configs
+cp ~/.vscode/extensions/*nvim-ui-modifier*/extension.js ../vscode/extensions/*nvim-ui-modifier*/
+
+echo "Updated successfully!"

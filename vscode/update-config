@@ -1,8 +1,0 @@
-#!/bin/sh
-
-rm -f Code-configs/* extensions/*nvim-ui-modifier*/*
-
-cp ~/.config/Code/User/settings.json ~/.config/Code/User/keybindings.json Code-configs
-cp ~/.vscode/extensions/*nvim-ui-modifier*/extension.js extensions/*nvim-ui-modifier*/
-
-echo "Updated successfully!"

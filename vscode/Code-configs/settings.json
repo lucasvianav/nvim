@@ -57,8 +57,7 @@
             "key": "e",
             "name": "Toggle explorer visibility",
             "type": "command",
-            "command": "workbench.view.explorer",
-            // "command": "workbench.action.toggleSidebarVisibility",
+            "command": "workbench.view.explorer"
         },
         {
             "key": "v",
@@ -133,67 +132,6 @@
                 }
             ]
         },
-        // {
-        //     "key": "-",
-        //     "name": "Fold all",
-        //     "type": "command",
-        //     "command": "editor.foldAll"
-        // },
-        // {
-        //     "key": "[",
-        //     "name": "+Fold by level",
-        //     "type": "bindings",
-        //     "bindings": [ 
-        //         {
-        //             "key": "1",
-        //             "name": "Fold level 1",
-        //             "type": "command",
-        //             "command": "editor.foldLevel1"
-        //         },
-        //         {
-        //             "key": "2",
-        //             "name": "Fold level 2",
-        //             "type": "command",
-        //             "command": "editor.foldLevel2"
-        //         },
-        //         {
-        //             "key": "3",
-        //             "name": "Fold level 3",
-        //             "type": "command",
-        //             "command": "editor.foldLevel3"
-        //         },
-        //         {
-        //             "key": "4",
-        //             "name": "Fold level 4",
-        //             "type": "command",
-        //             "command": "editor.foldLevel4"
-        //         },
-        //         {
-        //             "key": "5",
-        //             "name": "Fold level 5",
-        //             "type": "command",
-        //             "command": "editor.foldLevel5"
-        //         },
-        //         {
-        //             "key": "6",
-        //             "name": "Fold level 6",
-        //             "type": "command",
-        //             "command": "editor.foldLevel6"
-        //         },
-        //         {
-        //             "key": "7",
-        //             "name": "Fold level 7",
-        //             "type": "command",
-        //             "command": "editor.foldLevel7"
-        //         }
-        //     ]
-        // },
-        // {
-        //     "key": "=",
-        //     "name": "Unfold All",
-        //     "type": "command",
-        //     "command": "editor.unfoldAll"
-        // },
         {
             "key": "t",
             "name": "Toggle Terminal",
@@ -337,7 +275,7 @@
                     "name": "Show output",
                     "type": "command",
                     "command": "workbench.action.output.toggleOutput"
-                },
+                }
             ]
         },
         {
@@ -353,36 +291,17 @@
             "type": "command",
             "command": "vscode-neovim.send",
             "args": "<Leader>O"
-        },
+        }
     ],
-    "whichkey.bindingOverrides": [
-    
-    ],
+    "whichkey.bindingOverrides": [],
     "whichkey.sortOrder": "nonNumberFirst",
     "whichkey.delay": 0,
     "editor.hideCursorInOverviewRuler": true,
-    "breadcrumbs.enabled": true,
     "editor.renderWhitespace": "none",
     "editor.emptySelectionClipboard": false,
     "liveshare.showInStatusBar": "whileCollaborating",
-    // "workbench.nvimColorNormal": "#98C379",
-    // "workbench.nvimColorInsert": "#61AFEF",
-    // "workbench.nvimColorVisual": "#C678DD",
-    // "workbench.nvimColorForeground": "#202020",
     "workbench.colorCustomizations": {
-        // "activityBarBadge.background": "#98C379",
-        // "editorCursor.foreground": "#98C379",
-        // "inputValidation.errorBorder": "#98C379",
-        // "panel.border": "#98C379",
-        // "panelTitle.activeBorder": "#98C379",
-        // "panelTitle.activeForeground": "#98C379",
-        // "peekView.border": "#98C379",
-        // "peekViewTitleLabel.foreground": "#98C379",
-        // "tab.activeBorder": "#98C379",
-        "statusBar.border": "#f7f7f7",
-        // "statusBar.background": "#98C379",
-        // "statusBar.foreground": "#202020",
-        // "activityBarBadge.foreground": "#202020"
+        "statusBar.border": "#f7f7f7"
     },
     "javascript.updateImportsOnFileMove.enabled": "always",
     "workbench.editorAssociations": [
@@ -392,6 +311,47 @@
         }
     ],
     "fold.level": 1,
-    "editor.rulers": [140],
-    "editor.showFoldingControls": "mouseover"
+    "editor.rulers": [
+        130
+    ],
+    "editor.showFoldingControls": "mouseover",
+    "cSpell.enabledLanguageIds": [
+        "asciidoc",
+        "c",
+        "cpp",
+        "csharp",
+        "css",
+        "git-commit",
+        "go",
+        "graphql",
+        "handlebars",
+        "haskell",
+        "html",
+        "jade",
+        "java",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "jsonc",
+        "latex",
+        "less",
+        "markdown",
+        "php",
+        "plaintext",
+        "python",
+        "pug",
+        "restructuredtext",
+        "rust",
+        "scala",
+        "scss",
+        "text",
+        "typescript",
+        "typescriptreact",
+        "yaml",
+        "yml",
+        "vim"
+    ],
+    "cSpell.enabled": false,
+    "editor.wordWrap": "off",
+    "workbench.preferredLightColorTheme": "Default Dark+"
 }

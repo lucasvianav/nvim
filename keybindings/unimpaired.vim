@@ -160,18 +160,31 @@ function! s:option_map(letter, option, mode) abort
     call s:map('n', 'yo'.a:letter, ':'.a:mode.' <C-R>=<SID>toggle("'.a:option.'")<CR><CR>')
 endfunction
 
-call s:option_map('c', 'cursorline', 'setlocal')
-call s:option_map('u', 'cursorcolumn', 'setlocal')
-" call s:option_map('h', 'hlsearch', 'set')
-" call s:option_map('i', 'ignorecase', 'set')
-" call s:option_map('l', 'list', 'setlocal')
-" call s:option_map('n', 'number', 'setlocal')
-call s:option_map('r', 'relativenumber', 'setlocal')
-call s:option_map('s', 'spell', 'setlocal')
-call s:option_map('w', 'wrap', 'setlocal')
+if !exists('g:vscode')
+    call s:option_map('c', 'cursorline', 'setlocal')
+    call s:option_map('u', 'cursorcolumn', 'setlocal')
+    " call s:option_map('h', 'hlsearch', 'set')
+    " call s:option_map('i', 'ignorecase', 'set')
+    " call s:option_map('l', 'list', 'setlocal')
+    " call s:option_map('n', 'number', 'setlocal')
+    call s:option_map('r', 'relativenumber', 'setlocal')
+    call s:option_map('s', 'spell', 'setlocal')
+    call s:option_map('w', 'wrap', 'setlocal')
+else
+    nnoremap <silent> [or :!node $HOME/.config/nvim/scripts/vim-unimpaired/relativenumber-[.js<CR>
+    nnoremap <silent> ]or :!node $HOME/.config/nvim/scripts/vim-unimpaired/relativenumber-].js<CR>
+    nnoremap <silent> yor :!node $HOME/.config/nvim/scripts/vim-unimpaired/relativenumber-y.js<CR>
+    nnoremap <silent> [os :!node $HOME/.config/nvim/scripts/vim-unimpaired/spelling-[.js<CR>
+    nnoremap <silent> ]os :!node $HOME/.config/nvim/scripts/vim-unimpaired/spelling-].js<CR>
+    nnoremap <silent> yos :!node $HOME/.config/nvim/scripts/vim-unimpaired/spelling-y.js<CR>
+    nnoremap <silent> [ow :!node $HOME/.config/nvim/scripts/vim-unimpaired/wrap-[.js<CR>
+    nnoremap <silent> ]ow :!node $HOME/.config/nvim/scripts/vim-unimpaired/wrap-].js<CR>
+    nnoremap <silent> yow :!node $HOME/.config/nvim/scripts/vim-unimpaired/wrap-y.js<CR>
+endif
 
 " Section: Encoding and decoding
 
+graegfahtgad
 function! s:string_encode(str) abort
     let map = {"\n": 'n', "\r": 'r', "\t": 't', "\b": 'b', "\f": '\f', '"': '"', '\': '\'}
     return substitute(a:str,"[\001-\033\\\\\"]",'\="\\".get(map,submatch(0),printf("%03o",char2nr(submatch(0))))','g')
