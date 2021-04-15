@@ -225,13 +225,13 @@ This is one of the plugins I like the most, but I cannot make it work on VSCode 
   * `<C-J>`, `<C-K>`: navigation in lists (like autocompletion) up and down, respectively
   * `<M-H>`, `<M-S-J>`, `<M-S-K>`, `<M-H>`: resizes windows (left, bottom, top, right respectively)
     * In VSCode, there's only `<M-L>` and `<M-H>` to increase and decrease window size, respectively
-  * `jk`, `<C-C>`: substitutes <Esc>, which is unmapped
-  * `<TAB>`, `<S-TAB>`, <C-TAB>`, `<C-S-TAB>`: navigation between buffers
+  * `jk`, `<C-C>`: substitutes `<Esc>`, which is unmapped
+  * `<TAB>`, `<S-TAB>`, `<C-TAB>`, `<C-S-TAB>`: navigation between buffers
   * `<C-H>`, `<C-J>`, `<C-K>`, `<C-H>`: navigation between windows (left, bottom, top, right respectively)
   * `gp`, `gP`: select last pasted text in character (`v`) and linewise (`V`) mode respectively
 
 ### WhichKey
-The WhichKey menu will be shown if you press <Leader> — in this case <Space> — in normal mode, so every keybind below is preceded by <Space>.
+The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space>` — in normal mode, so every keybind below is preceded by `<Space>`.
 
 #### Terminal Neovim
 I need to organize it.
