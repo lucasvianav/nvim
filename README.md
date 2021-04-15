@@ -55,12 +55,12 @@ autocmd FileType apache setlocal commentstring=#\ %s
     * When substituting a tag for another surrounding, the tag is represented by `t`
         * e.g.: `cst"` will turn `<q>Hello world!</q>` into `"Hello world!"`
   * `ds`: **d**elete **s**urrounding — analogue to `cs`
-  * `ss`: **s**et **s**urrounding — inserts a surrounding (2nd argument) to the motion received (1st argument)
+  * `ps`: **p**ut **s**urrounding — inserts a surrounding (2nd argument) to the motion received (1st argument)
     * Originally this keybind is `ys`, but I remapped it to make it compatible with [EasyClip](#easyclip)
-    * e.g.: with the cursor on "Hello", `ssiw]` will `Hello world!` into `[Hello world!]`
-  * `sss`: **s**et **s**uper (welp) **s**urrounding — inserts a surrounding (only argument) to the current line (ignoring leading whitespace)
+    * e.g.: with the cursor on "Hello", `psiw]` will `Hello world!` into `[Hello world!]`
+  * `pss`: **p**et **s**uper (welp) **s**urrounding — inserts a surrounding (only argument) to the current line (ignoring leading whitespace)
 
-Passing `S` instead of `s` for the above keybinds (`cs`, `ss`, `sSs`, `sSS`) will indent the surrounded text and place it on a line of its own.
+Passing `S` instead of `s` for the above keybinds (`cs`, `ss`, `pSs`, `pSS`) will indent the surrounded text and place it on a line of its own.
 
 ### Visual mode
   * `vS`: set **S**urrounding — inserts a surrounding to the selection
