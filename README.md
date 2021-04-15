@@ -232,22 +232,71 @@ This is one of the plugins I like the most, but I cannot make it work on VSCode 
   * `\o`, `\O`: same as vanilla `o`and `O`, but the new line will be blank
   * `\h`: hide highligts (same as `:noh`)
 
+### Folding
+These keybindings are better detailed [here](#folding).
+
+#### Terminal Neovim
+  * `´`, `<F9>`: toggles the topmost level of folding under the cursor
+  * `<S-´>`, `<F10>`: toggles all levels of folding under the cursor
+
+#### VSCode
+  * `´`, `<F9>`, `<F10>`: toggles the topmost level of folding under the cursor
+  * `zA`: folds recursively under the cursor
+  * `zAA`, `zAa`: unfolds recursively under the cursor
+  * `zR`: opens all folds (mnemonic is **R**educe)
+  * `zm`: takes a count and folds the level passed (**m** folding)
+
 ## Commands
+### Abbreviation-like
   * `:Q`: same as `:q`
   * `:q1`: same as `:q!`
   * `:wq`: remapped to `:x`
     * I prefer the `x` command's functionality, but prefer to type `:wq`
     * If you're wondering what the differences are and why I prefer `:x`, read [this comment](https://www.quora.com/Why-do-some-people-close-Vim-with-wq-instead-of-x/answer/Ye-Caiting) by [Ye Caiting](https://www.quora.com/profile/Ye-Caiting).
+
+### Interacting with VSCode
   * `:qvs`: **q**uit **vs**code (closes VSCode window)
     * This is not mapped to terminal Neovim.
   * `:exvs`: **ex**it **vs**code (same as `qvs`)
+  * `:r`: **r**eloads VSCode window
+  * `:settings`: opens VSCode's settings.json
 
 # <a id="vanilla"></a>Vanilla mappings that I always forget and need to consult
   * `:e!:`: Discard/revert unsaved changes
     * Works in VSCode.
 
-## Fold keybinds
-  * `
+## Vertical movement keybinds
+  * `M`: moves the cursor to the middle of the screen
+  * `H`: moves the cursor to the top of the screen
+  * `L`: moves the cursor to the bottom of the screen
+  * `^E`: scrolls down
+  * `^Y`: scrolls up
+
+## <a id="folding"></a>Folding keybinds
+I've also left some custom keybinds in here so all the folding keybinds stay together.
+
+### Terminal Neovim
+  * `za`, `´`, `<F9>`: toggles the topmost level of folding under the cursor
+    * `<F9>` works in insert mode
+  * `zA`, `<S-´>`, `<F10>`: toggles all levels of folding under the cursor
+    * `<F10>` works in insert mode
+  * `zr`: **r**educes folding in the whole buffer
+  * `zR`: opens all folds
+  * `zm`: increses folding in the whole buffer (**m** folding)
+  * `zM`: closes all folds
+
+### VSCode
+  * `za`, `´`, `<F9>`, `<F10>`: toggles the topmost level of folding under the cursor
+    * `<F9>`, `<F10>` works in insert mode
+  * `zA`: folds recursively under the cursor
+  * `zAA`, `zAa`: unfolds recursively under the cursor
+  * `zR`: opens all folds (mnemonic is **R**educe)
+  * `zm`: takes a count and folds the level passed (**m** folding)
+    * If no count is given, folds level 1 by default
+    * There's also `zm1`, `zm2`, ..., `zm7`
+    * e.g.: `zm`, `1zm`, `zm1` will fold level 1
+    * e.g.: `2zm`, `zm2` will fold level 2
+  * `zM`: closes all folds
 
 # <a id="additional-tips"></a>Additional tips
 I'm putting this here because I haven't memorized it yet and neet to consult it.
