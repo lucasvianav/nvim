@@ -5,16 +5,15 @@ inoremap <expr> <c-k> ("\<C-p>")
 " Use alt + shift + hjkl to resize windows
 nnoremap <M-J>    :resize -2<CR>
 nnoremap <M-K>    :resize +2<CR>
-nnoremap <M-H>    :vertical resize -2<CR>
-nnoremap <M-L>    :vertical resize +2<CR>
+nnoremap <S-A-H>    :vertical resize -2<CR>
+nnoremap <S-A-L>    :vertical resize +2<CR>
 
 " I hate escape more than anything else
 inoremap jk <Esc>
 inoremap kj <Esc>
+
 " Unbind escape key if not on VSCode
-if exists('g:vscode')
-    " nothing
-else
+if !exists('g:vscode')
     :inoremap <Esc> <Nop>
 endif
 
@@ -53,13 +52,12 @@ nnoremap gp `[v`]
 nnoremap gP `[V`]
 
 " Duplicate line below
-nmap ]d yyp[p
-xmap ]d yP[pgv=gv
+nmap <expr> ]d 'yy' . v:count1 . 'p' . ']p'
+xmap <expr> ]d 'y' . v:count1 . 'P' . ']pgv=gv'
 
 " Duplicate line above
-nmap [d yyP[p
-" xnoremap ]d ypgv=gv
-xmap [d yP[p`[V`]$
+nmap <expr> [d 'yy' . v:count1 . 'P' . ']p'
+xmap <expr> [d 'y' . v:count1 . 'P' . ']pgP'
 
 nmap <Leader>o o<Esc>^Da
 nmap <Leader>O O<Esc>^Da
@@ -67,5 +65,17 @@ nmap <Leader>O O<Esc>^Da
 " Maps m to delete 1 char
 nmap m dl
 
-" <Leader>h will hide highlights
-nnoremap <Leader>h :noh<CR>
+" Hide highlights
+nnoremap <silent> <Leader>n :noh<CR>
+
+" Folding toggle
+nnoremap <silent> ´ za
+nnoremap <silent> ` zA
+xnoremap <silent> ´ za
+xnoremap <silent> ` zA
+nnoremap <silent> <F9> za
+nnoremap <silent> <F10> zA
+xnoremap <silent> <F9> za
+xnoremap <silent> <F10> zA
+inoremap <silent> <F9> <Esc>za a
+inoremap <silent> <F10> <Esc>zA a

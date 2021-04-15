@@ -14,5 +14,5 @@ nmap <leader>cf <plug>EasyClipToggleFormattedPaste
 " Paste in insert mode
 imap <c-v> <plug>EasyClipInsertModePaste
 
-nmap [p <Plug>EasyClipRotateYanksForward
-nmap ]p <Plug>EasyClipRotateYanksBackward
+nmap ]p <Plug>EasyClipRotateYanksForward
+nmap [p <Plug>EasyClipRotateYanksBackward

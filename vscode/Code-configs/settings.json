@@ -23,13 +23,13 @@
     ],
     "git.autofetch": true,
     "workbench.statusBar.visible": true,
-    "window.menuBarVisibility": "default",
+    "window.menuBarVisibility": "classic",
     "workbench.list.automaticKeyboardNavigation": false,
     "workbench.activityBar.visible": true,
     "editor.minimap.enabled": false,
     "python.languageServer": "Pylance",
     "git.confirmSync": false,
-    "editor.renameOnType": true,
+    "editor.linkedEditing": true,
     "liveServer.settings.donotVerifyTags": true,
     "liveServer.settings.donotShowInfoMsg": true,
     "update.mode": "start",
@@ -47,7 +47,6 @@
     "editor.lineNumbers": "relative",
     "vscode-neovim.neovimInitVimPaths.linux": "$HOME/.config/nvim/init.vim",
     "whichkey.bindings": [
-
         {
             "key": " ",
             "name": "VSCode Commands",
@@ -58,7 +57,8 @@
             "key": "e",
             "name": "Toggle explorer visibility",
             "type": "command",
-            "command": "workbench.action.toggleSidebarVisibility"
+            "command": "workbench.view.explorer",
+            // "command": "workbench.action.toggleSidebarVisibility",
         },
         {
             "key": "v",
@@ -133,67 +133,67 @@
                 }
             ]
         },
-        {
-            "key": "-",
-            "name": "Fold all",
-            "type": "command",
-            "command": "editor.foldAll"
-        },
-        {
-            "key": "[",
-            "name": "+Fold by level",
-            "type": "bindings",
-            "bindings": [ 
-                {
-                    "key": "1",
-                    "name": "Fold level 1",
-                    "type": "command",
-                    "command": "editor.foldLevel1"
-                },
-                {
-                    "key": "2",
-                    "name": "Fold level 2",
-                    "type": "command",
-                    "command": "editor.foldLevel2"
-                },
-                {
-                    "key": "3",
-                    "name": "Fold level 3",
-                    "type": "command",
-                    "command": "editor.foldLevel3"
-                },
-                {
-                    "key": "4",
-                    "name": "Fold level 4",
-                    "type": "command",
-                    "command": "editor.foldLevel4"
-                },
-                {
-                    "key": "5",
-                    "name": "Fold level 5",
-                    "type": "command",
-                    "command": "editor.foldLevel5"
-                },
-                {
-                    "key": "6",
-                    "name": "Fold level 6",
-                    "type": "command",
-                    "command": "editor.foldLevel6"
-                },
-                {
-                    "key": "7",
-                    "name": "Fold level 7",
-                    "type": "command",
-                    "command": "editor.foldLevel7"
-                }
-            ]
-        },
-        {
-            "key": "=",
-            "name": "Unfold All",
-            "type": "command",
-            "command": "editor.unfoldAll"
-        },
+        // {
+        //     "key": "-",
+        //     "name": "Fold all",
+        //     "type": "command",
+        //     "command": "editor.foldAll"
+        // },
+        // {
+        //     "key": "[",
+        //     "name": "+Fold by level",
+        //     "type": "bindings",
+        //     "bindings": [ 
+        //         {
+        //             "key": "1",
+        //             "name": "Fold level 1",
+        //             "type": "command",
+        //             "command": "editor.foldLevel1"
+        //         },
+        //         {
+        //             "key": "2",
+        //             "name": "Fold level 2",
+        //             "type": "command",
+        //             "command": "editor.foldLevel2"
+        //         },
+        //         {
+        //             "key": "3",
+        //             "name": "Fold level 3",
+        //             "type": "command",
+        //             "command": "editor.foldLevel3"
+        //         },
+        //         {
+        //             "key": "4",
+        //             "name": "Fold level 4",
+        //             "type": "command",
+        //             "command": "editor.foldLevel4"
+        //         },
+        //         {
+        //             "key": "5",
+        //             "name": "Fold level 5",
+        //             "type": "command",
+        //             "command": "editor.foldLevel5"
+        //         },
+        //         {
+        //             "key": "6",
+        //             "name": "Fold level 6",
+        //             "type": "command",
+        //             "command": "editor.foldLevel6"
+        //         },
+        //         {
+        //             "key": "7",
+        //             "name": "Fold level 7",
+        //             "type": "command",
+        //             "command": "editor.foldLevel7"
+        //         }
+        //     ]
+        // },
+        // {
+        //     "key": "=",
+        //     "name": "Unfold All",
+        //     "type": "command",
+        //     "command": "editor.unfoldAll"
+        // },
         {
             "key": "t",
             "name": "Toggle Terminal",
@@ -263,51 +263,24 @@
             ]
         },
         {
-            "key": "f",
-            "name": "Find & Replace...",
-            "type": "bindings",
-            "bindings": [
-                {
-                    "key": "f",
-                    "name": "File",
-                    "type": "command",
-                    "command": "editor.action.startFindReplaceAction"
-                },
-                {
-                    "key": "s",
-                    "name": "Symbol",
-                    "type": "command",
-                    "command": "editor.action.rename",
-                    "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
-                },
-                {
-                    "key": "p",
-                    "name": "Project",
-                    "type": "command",
-                    "command": "workbench.action.replaceInFiles"
-                }
-            ]
+            "key": "s",
+            "name": "Find & Replace in Project",
+            "type": "command",
+            "command": "workbench.action.replaceInFiles"
         },
         {
             "key": "d",
-            "name": "Discard Changes",
+            "name": "Definition",
             "type": "command",
-            "command": "workbench.action.files.revert",
-            "when": "editorTextFocus"
+            "command": "editor.action.revealDefinition",
+            "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
         },
-        // {
-        //     "key": "d",
-        //     "name": "Definition",
-        //     "type": "command",
-        //     "command": "editor.action.revealDefinition",
-        //     "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
-        // },
-        // {
-        //     "key": "D",
-        //     "name": "Declaration",
-        //     "type": "command",
-        //     "command": "editor.action.revealDeclaration"
-        // },
+        {
+            "key": "D",
+            "name": "Declaration",
+            "type": "command",
+            "command": "editor.action.revealDeclaration"
+        },
         {
             "key": "E",
             "name": "Errors",
@@ -367,14 +340,26 @@
                 },
             ]
         },
+        {
+            "key": "o",
+            "name": "Enter insert mode in new blank line below",
+            "type": "command",
+            "command": "vscode-neovim.send",
+            "args": "<Leader>o"
+        },
+        {
+            "key": "O",
+            "name": "Enter insert mode in new blank line above",
+            "type": "command",
+            "command": "vscode-neovim.send",
+            "args": "<Leader>O"
+        },
     ],
     "whichkey.bindingOverrides": [
     
     ],
     "whichkey.sortOrder": "nonNumberFirst",
     "whichkey.delay": 0,
-    // "editor.scrollbar.horizontal": "hidden",
-    // "editor.scrollbar.vertical": "hidden",
     "editor.hideCursorInOverviewRuler": true,
     "breadcrumbs.enabled": true,
     "editor.renderWhitespace": "none",
@@ -405,5 +390,8 @@
             "viewType": "jupyter.notebook.ipynb",
             "filenamePattern": "*.ipynb"
         }
-    ]
+    ],
+    "fold.level": 1,
+    "editor.rulers": [140],
+    "editor.showFoldingControls": "mouseover"
 }

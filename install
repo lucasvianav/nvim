@@ -26,5 +26,5 @@ echo
 echo 
 echo 
 echo 
-echo 
-echo "Point your init.vim path to \"\$HOME/.config/nvim/\""
+echo "Successfully installed!"
+echo "In VSCode, point your init.vim path to \"\$HOME/.config/nvim/\""

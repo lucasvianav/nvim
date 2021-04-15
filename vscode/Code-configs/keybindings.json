@@ -47,12 +47,6 @@
         "when": "textInputFocus && !editorReadonly && neovim.mode == 'normal'"
     },
     {
-        "key": "ctrl+shift+backspace",
-        "command": "vscode-neovim.send",
-        "when": "textInputFocus && !editorReadonly && neovim.mode == 'visual'",
-        "args": "<C-S-BS>"
-    },
-    {
         "key": "ctrl+shift+k",
         "command": "-editor.action.deleteLines",
         "when": "textInputFocus && !editorReadonly"
@@ -98,11 +92,6 @@
         "key": "ctrl+w",
         "command": "-workbench.action.closeWindow",
         "when": "!editorIsOpen && !multipleEditorGroups && neovim.mode == 'normal'"
-    },
-    {
-        "key": "[BracketLeft]",
-        "command": "editor.toggleFold",
-        "when": "editorTextFocus && foldingEnabled && neovim.mode == 'normal'"
     },
     {
         "key": "ctrl+k ctrl+l",
@@ -942,5 +931,17 @@
         "key": "ctrl+shift+t",
         "command": "workbench.action.togglePanel",
         "when": "neovim.mode == 'normal' && activePanel == 'terminal'"
+    },
+    {
+        "key": "f9",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init",
+        "args": "<F9>"
+    },
+    {
+        "key": "f10",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init",
+        "args": "<F10>"
     },
 ]

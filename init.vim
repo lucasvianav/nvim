@@ -6,10 +6,8 @@ source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/general/providers.vim
 
 " Keybind maps
-source $HOME/.config/nvim/keys/mappings.vim
-source $HOME/.config/nvim/keys/unimpaired.vim
-" source $HOME/.config/nvim/keys/move.vim
-source $HOME/.config/nvim/keys/which-key.vim
+source $HOME/.config/nvim/keybindings/mappings.vim
+source $HOME/.config/nvim/keybindings/unimpaired.vim
 
 "Command maps
 source $HOME/.config/nvim/commands/mappings.vim
@@ -21,7 +19,7 @@ if exists('g:vscode') " if it's on vscode
     " source $HOME/.config/nvim/vscode/ui-modifier.vim
     
     " VSCode Keybinds
-    source $HOME/.config/nvim/keys/vscode.vim
+    source $HOME/.config/nvim/keybindings/vscode.vim
 
     " VSCode Commands
     source $HOME/.config/nvim/commands/vscode.vim
@@ -50,13 +48,15 @@ else " if it's not on vscode
     source $HOME/.config/nvim/plug-config/closetag.vim
     source $HOME/.config/nvim/plug-config/illuminate.vim
     " source $HOME/.config/nvim/plug-config/sneak.vim
-    source $HOME/.config/nvim/plug-config/vim-surround.vim
 
     " LUA Plugins
     lua require 'plug-colorizer'
 
 endif
 
+" Plugis used in both terminal Neovim and VSCode
 source $HOME/.config/nvim/plug-config/quickscope.vim
 source $HOME/.config/nvim/plug-config/vim-commentary.vim
 source $HOME/.config/nvim/plug-config/vim-easyclip.vim
+source $HOME/.config/nvim/plug-config/which-key.vim
+source $HOME/.config/nvim/plug-config/vim-surround.vim
