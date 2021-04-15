@@ -99,17 +99,18 @@ Since all keybinds consist in bracket mappings, it's nice to establish a logic t
   * `]d`: breaks the current line after the cursor
 
 ### Option toggling
-All of the options are changed using `setlocal`, not `set`.
-I like these keybinds a lot, unfortunaly I wasn't able to make it work in VSCode, so they work only in terminal Neovim.
+In terminal Neovim, all of the options are changed using `setlocal`, not `set`. In VSCode, it uses JavaScript to update the settings.json.
 
 The supported options are:
   * `c`: cursorline
+    * Does not exist in VSCode.
   * `u`: cursorcolumn
+    * Does not exist in VSCode.
   * `r`: relativenumber
   * `s`: spell
   * `w`: wrap
 
-You use `[` to activate the option and `]` deactivate it, as well as a leading `o` (stands for **o**ption) before the option letter, so `[oc` activates cursorline, `]oc` deactivates it and so on.
+You use `[` to activate the option, `]` deactivate it and `y` to toggle it, as well as a leading `o` (stands for **o**ption) before the option letter, so `[oc` activates cursorline, `]oc` deactivates it, `yoc` toggles it and so on.
 
 ### Encoding/Decoding
 `[` is used to encode and `]` is used to decode. As tpope's states in the plugin's documentation, think encoding comes before decoding.
