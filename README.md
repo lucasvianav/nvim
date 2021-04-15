@@ -99,7 +99,8 @@ Since all keybinds consist in bracket mappings, it's nice to establish a logic t
   * `]d`: breaks the current line after the cursor
 
 ### Option toggling
-In terminal Neovim, all of the options are changed using `setlocal`, not `set`. In VSCode, it uses JavaScript to update the settings.json.
+In terminal Neovim, all of the options are changed using `setlocal`, not `set`.
+I was able to make it work in VSCode (using JavaScript to update the settings.json file), but couldn't supress the Output panel.
 
 The supported options are:
   * `c`: cursorline
