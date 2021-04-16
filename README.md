@@ -230,6 +230,9 @@ Makes `<C-A>` and `<C-X>` work in blockwise visual mode (`^V`) to create sequenc
   * `<TAB>`, `<S-TAB>`, `<C-TAB>`, `<C-S-TAB>`: navigation between buffers
   * `<C-H>`, `<C-J>`, `<C-K>`, `<C-H>`: navigation between windows (left, bottom, top, right respectively)
   * `gp`, `gP`: select last pasted text in character (`v`) and linewise (`V`) mode respectively
+  * `''` and ` `` `: I've inverted them both
+    * `''`: takes the cursor position before the latest jump (undoes the jump)
+    * ` `` `: takes the cursor to the line where the cursor was before the latest jump
 
 ### <a id="whichkey"></a>WhichKey ([liuchengxu/vim-which-key](https://github.com/liuchengxu/vim-which-key))
 The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space>` — in normal mode, so every keybind below is preceded by `<Space>`.
@@ -292,20 +295,32 @@ These keybindings are better detailed [here](#folding).
   * `:e!:`: Discard/revert unsaved changes
     * Works in VSCode.
 
-## Vertical movement keybinds
-  * `M`: moves the cursor to the middle of the screen
-  * `H`: moves the cursor to the top of the screen
-  * `L`: moves the cursor to the bottom of the screen
+## Movement keybinds
+### Vertical
   * `^E`: scrolls down
   * `^Y`: scrolls up
+  * `M`: jumps to the middle of the screen
+  * `H`: jumps to the top of the screen
+  * `L`: jumps to the bottom of the screen
+  * `G`: obviously jumps to the end of file, but if given a count jumps to that line
+    * e.g.: `50G` jumps to the 50th line
+  * `'.`, `g;`: jumpts to last edit
+  * `''` and ` `` `: I've inverted them both
+    * `''`: takes the cursor position before the latest jump (undoes the jump)
+    * ` `` `: takes the cursor to the line where the cursor was before the latest jump
+
+### Horizontal
+  * `|`: jumps to the 1st column of current line
+    * If given a count, jumsp to that column
+    * e.g.: `17|` jumps to the 17th column of current line
 
 ## <a id="folding"></a>Folding keybinds
 I've also left some custom keybinds in here so all the folding keybinds stay together.
 
 ### Terminal Neovim
-  * `za`, `´`, `<F9>`: toggles the topmost level of folding under the cursor
+  * `za`, `<F9>`: toggles the topmost level of folding under the cursor
     * `<F9>` works in insert mode
-  * `zA`, `<S-´>`, `<F10>`: toggles all levels of folding under the cursor
+  * `zA`, `<F10>`: toggles all levels of folding under the cursor
     * `<F10>` works in insert mode
   * `zr`: **r**educes folding in the whole buffer
   * `zR`: opens all folds
@@ -313,7 +328,7 @@ I've also left some custom keybinds in here so all the folding keybinds stay tog
   * `zM`: closes all folds
 
 ### VSCode
-  * `za`, `´`, `<F9>`, `<F10>`: toggles the topmost level of folding under the cursor
+  * `za`, `<F9>`, `<F10>`: toggles the topmost level of folding under the cursor
     * `<F9>`, `<F10>` works in insert mode
   * `zA`: folds recursively under the cursor
   * `zAA`, `zAa`: unfolds recursively under the cursor
