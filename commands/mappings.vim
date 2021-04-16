@@ -1,4 +1,4 @@
 " Commands I always get wrong
-cmap Q q
-cmap q1 q!
-cmap wq x
+cabbrev Q q
+cabbrev q1 q!
+cabbrev wq x

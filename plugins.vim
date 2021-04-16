@@ -11,6 +11,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     if exists('g:vscode')  " if it's on vscode
         " Easy motion for VSCode
         Plug 'ChristianChiarulli/vscode-easymotion'
+        " Edit built-in command
+        Plug 'kana/vim-altercmd'
 
     else
         " Better Syntax Support

@@ -30,8 +30,9 @@ nnoremap zm5 :call VSCodeNotify("editor.foldLevel5")<CR>'
 nnoremap zm6 :call VSCodeNotify("editor.foldLevel6")<CR>'
 nnoremap zm7 :call VSCodeNotify("editor.foldLevel7")<CR>'
 nnoremap zM :call VSCodeNotify("editor.foldAll")<CR>
+nnoremap zr :call VSCodeNotify("editor.unfoldAll")<CR>
 nnoremap zR :call VSCodeNotify("editor.unfoldAll")<CR>
-nnoremap <silent> ´ :call VSCodeNotify("editor.toggleFold")<CR>
+" nnoremap <silent> ´ :call VSCodeNotify("editor.toggleFold")<CR>
 nnoremap <silent> <F9> :call VSCodeNotify("editor.toggleFold")<CR>
 nnoremap <silent> <F10> :call VSCodeNotify("editor.toggleFold")<CR>
 inoremap <silent> <F9> <Esc> :call VSCodeNotify("editor.toggleFold")<CR> a

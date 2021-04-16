@@ -1,20 +1,27 @@
 " Exit/Quit VSCode
-cnoremap exvs call VSCodeNotify("workbench.action.closeWindow")
-cnoremap qvs call VSCodeNotify("workbench.action.closeWindow")
-cnoremap qv call VSCodeNotify("workbench.action.closeWindow")
+command Exvs call VSCodeNotify("workbench.action.closeWindow")
+command Qvs call VSCodeNotify("workbench.action.closeWindow")
 
 " Discard unsaved changes
 cnoremap e! call VSCodeNotify("workbench.action.files.revert")
 
 " Reload VSCode window
-cnoremap rvs call VSCodeNotify("workbench.action.reloadWindow")
-cnoremap rv call VSCodeNotify("workbench.action.reloadWindow")
-cnoremap Rvs call VSCodeNotify("workbench.action.reloadWindow")
-cnoremap Rv call VSCodeNotify("workbench.action.reloadWindow")
+command Rvs call VSCodeNotify("workbench.action.reloadWindow")
 
 " Open VSCode's settings.json
-cnoremap settings call VSCodeNotify("workbench.action.openSettingsJson")
+command Settings call VSCodeNotify("workbench.action.openSettingsJson")
 
 "Open VSCode's keybindings.json
-cnoremap keybindings call VSCodeNotify("workbench.action.openGlobalKeybindingsFile")
-cnoremap keyboard call VSCodeNotify("workbench.action.openGlobalKeybindingsFile")
+command Keybindings call VSCodeNotify("workbench.action.openGlobalKeybindingsFile")
+command Keyboard call VSCodeNotify("workbench.action.openGlobalKeybindingsFile")
+
+" Commands I always get wrong
+cabbrev Q Quit
+cabbrev q1 Quit!
+cabbrev wq Xit
+
+AlterCommand qv[s] Qvs
+AlterCommand r[vs] Rvs
+AlterCommand settings Settings
+AlterCommand keybindings Keybindings
+AlterCommand keyboard Keyboard
