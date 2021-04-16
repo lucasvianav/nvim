@@ -8,11 +8,13 @@ In Ubuntu, clone it to: ~/.config/nvim
 
 ## Summary
 
-  1.  [Plugin mappings](#plugin-mappings)
-  2.  [Custom mappings](#custom-mappings)
-  3.  [Vanilla mappings that I always forget and need to consult](#vanilla)
-  4.  [Additional tips](#additional-tip)
-  5.  [Acknowledgement](#acknowledgement)
+  1.  [Installation](#installation)
+  2.  [Plugin mappings](#plugin-mappings)
+  3.  [Custom mappings](#custom-mappings)
+  4.  [Vanilla mappings that I always forget and need to consult](#vanilla)
+  5.  [Additional tips/Observations](#additional-tip)
+  6.  [Acknowledgements](#acknowledgements)
+  7.  [TODO](#todo)
 
 # <a id="plugin-mappings"></a>Plugin mappings:
 Every relevant keybind/command mapped by a plugin.
@@ -26,7 +28,10 @@ Every relevant keybind/command mapped by a plugin.
   7.  [Speed-Dating](#speeddating)
   8.  [Radical](#radical)
   9.  [Visual Increment](#visual-increment)
-  10. [CapsLock](#capslock)
+
+Plugins in other sections:
+  1. [WhichKey](#whichkey)
+  2. [CapsLock](#capslock)
 
 
 ## <a id="commentary"></a>Commentary ([tpope/vim-commentary](https://github.com/tpope/vim-commentary))
@@ -216,12 +221,6 @@ The command for **c**onve**r**ting a number to another representation is `cr` (t
 ## <a id="visual-increment"></a>Visual-Increment ([triglav/vim-visual-increment](https://github.com/triglav/vim-visual-increment))
 Makes `<C-A>` and `<C-X>` work in blockwise visual mode (`^V`) to create sequences of numbers (decimal, hex, octal) and letters. For examples, read the plugin's README.
 
-## <a id="capslock"></a>CapsLock ([tpope/vim-capslock](https://github.com/tpope/vim-capslock))
-This is one of the plugins I like the most, but I cannot make it work on VSCode and that makes me sad. If you did it, hit me up.
-
-  * `<C-G>c`: insert mode command — toggles caps lock temporarily (when exits insert mode, caps lock is turned off)
-  * `gC`: normal mode command — toggles caps lock permanently (can enter and exit every mode and it won't turn off automatically)
-
 # <a id="custom-mappings"></a>Custom mappings/abbreviations
 ## Keybinds
   * `<C-J>`, `<C-K>`: navigation in lists (like autocompletion) up and down, respectively
@@ -232,13 +231,13 @@ This is one of the plugins I like the most, but I cannot make it work on VSCode 
   * `<C-H>`, `<C-J>`, `<C-K>`, `<C-H>`: navigation between windows (left, bottom, top, right respectively)
   * `gp`, `gP`: select last pasted text in character (`v`) and linewise (`V`) mode respectively
 
-### WhichKey
+### <a id="whichkey"></a>WhichKey ([liuchengxu/vim-which-key](https://github.com/liuchengxu/vim-which-key))
 The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space>` — in normal mode, so every keybind below is preceded by `<Space>`.
 
 #### Terminal Neovim
 I need to organize it.
 
-#### VSCode
+#### VSCode ([VSpaceCode/vscode-which-key](https://github.com/VSpaceCode/vscode-which-key))
 Most of the keybindings do not require you to wait for the WhichKey menu to appear.
 
   * `<Space>`: opens VSCode Command Palette
@@ -249,6 +248,7 @@ Most of the keybindings do not require you to wait for the WhichKey menu to appe
   * `e`: toggles explorer visibility
     * If you press `<Space>e` without waiting for the WhichKey menu to appear, it'll toggle sidebar visibility
     * If you press `<Space>`, wait for the WhichKey menu to appear and then press `e`, you'll open the explorer
+    * `<C-S-\>` is an alternative (not part of WhichKey), it'll always toggle explorer.
   * `E`: displays errors
   * `g`: displays git options
   * `v`: splits editor to the right
@@ -325,14 +325,26 @@ I've also left some custom keybinds in here so all the folding keybinds stay tog
     * e.g.: `2zm`, `zm2` will fold level 2
   * `zM`: closes all folds
 
-# <a id="additional-tips"></a>Additional tips
-I'm putting this here because I haven't memorized it yet and neet to consult it.
+# <a id="additional-tips"></a>Additional tips/Observations
+I'm putting this here because I haven't memorized it yet and neet to consult it. In bash, you can use `Ctrl+Z` to suspend Neovim (or any app I guess) and then `fg` to go back to it (put it in the **f**ore**g**round). You can also use bg to leave it running in the **b**ack**g**round.
 
-In bash, you can use `Ctrl+Z` to suspend Neovim (or any app I guess) and then `fg` to go back to it (put it in the **f**ore**g**round). You can also use bg to leave it running in the **b**ack**g**round.
+## <a id="capslock"></a>CapsLock ([suxpert/vimcaps](https://github.com/suxpert/vimcaps))
+This plugin is pretty simples and I like it a lot: it basically deactivates CapsLock once you exit insert mode. 
+An alternative would be ([tpope's vim-capslock](https://github.com/tpope/vim-capslock)), but I couldn't make it work on VSCode (vimcaps does).
 
-# <a id="acknowledgement"></a>Acknowledgement
+# <a id="acknowledgements"></a>Acknowledgements
 Just wanna thank:
   * [Christian Chiarulli](https://github.com/ChristianChiarulli), for making an excelent Neovim-introduction [video series](https://www.youtube.com/playlist?list=PLhoH5vyxr6QqPtKMp03pcJd_Vg8FZ0rtg) and [blog posts](https://www.chrisatmachine.com/neovim). When I started using/learning about VIM, I really just copying his config.
   * [Greg Hurrell](https://github.com/wincent), for the great [screencasts and stream](https://www.youtube.com/channel/UCXPHFM88IlFn68OmLwtPmZA).
   * [Alexey Svetliakov](https://github.com/asvetliakov/), for making and maintaining the absolutely unbeliavable [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension.
   * All of the awesome people who made the plugins I listed/installed.
+
+# <a id="todo"></a>TODO
+  * Update README.md
+    * Write installation guide
+    * Write about other plugins/features
+  * Test [wincent/scalpel](https://github.com/wincent/scalpel)
+  * Test [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)
+  * Learn more about VSCode's output tab
+    * Is it possible to use it for commands like :Yanks and :IPaste?
+    * Is it possible to supress it when running terminal commands (e.g.: `:! ls`)?
