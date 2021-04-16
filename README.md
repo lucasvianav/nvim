@@ -348,3 +348,4 @@ Just wanna thank:
   * Learn more about VSCode's output tab
     * Is it possible to use it for commands like :Yanks and :IPaste?
     * Is it possible to supress it when running terminal commands (e.g.: `:! ls`)?
+  * Figure out why isn't EasyClip's toggle format (<Leader>cf?) working
