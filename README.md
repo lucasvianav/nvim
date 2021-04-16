@@ -277,7 +277,7 @@ These keybindings are better detailed [here](#folding).
   * `zm`: takes a count and folds the level passed (**m** folding)
 
 ## Commands
-### Abbreviation-like
+### Abbreviations
   * `:Q`: same as `:q`
   * `:q1`: same as `:q!`
   * `:wq`: remapped to `:x`
@@ -285,15 +285,15 @@ These keybindings are better detailed [here](#folding).
     * If you're wondering what the differences are and why I prefer `:x`, read [this comment](https://www.quora.com/Why-do-some-people-close-Vim-with-wq-instead-of-x/answer/Ye-Caiting) by [Ye Caiting](https://www.quora.com/profile/Ye-Caiting).
 
 ### Interacting with VSCode
-  * `:qvs`: **q**uit **vs**code (closes VSCode window)
-    * This is not mapped to terminal Neovim.
-  * `:exvs`: **ex**it **vs**code (same as `qvs`)
-  * `:rvs`, `Rvs`, `rVS`, `RVS`: **r**eloads **VS**Code window
+These commands are not mapped in terminal Neovim
+  * `:qv[scode]`: **q**uit **vs**code (closes VSCode window)
+  * `:r[vscode]`, `:R[vscode]`: **r**eloads **VS**Code window
   * `:settings`: opens VSCode's settings.json
+  * `:keybindings`, `:keybinds`, `:keyboard`: opens VSCode's keybindings.json
 
 # <a id="vanilla"></a>Vanilla mappings that I always forget and need to consult
   * `:e!:`: Discard/revert unsaved changes
-    * Works in VSCode.
+    * Remapped in VSCode so it does the same as vanilla.
 
 ## Movement keybinds
 ### Vertical
