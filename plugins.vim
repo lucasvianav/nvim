@@ -76,7 +76,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Crazy stuff (words manipulation)
     Plug 'tpope/vim-abolish'
     " Fix CAPS LOCK
-    Plug 'tpope/vim-capslock'
+    Plug 'suxpert/vimcaps'
     " Increment sequences
     Plug 'triglav/vim-visual-increment'
     " Surround

@@ -184,7 +184,6 @@ endif
 
 " Section: Encoding and decoding
 
-graegfahtgad
 function! s:string_encode(str) abort
     let map = {"\n": 'n', "\r": 'r', "\t": 't', "\b": 'b', "\f": '\f', '"': '"', '\': '\'}
     return substitute(a:str,"[\001-\033\\\\\"]",'\="\\".get(map,submatch(0),printf("%03o",char2nr(submatch(0))))','g')

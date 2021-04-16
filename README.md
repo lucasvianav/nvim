@@ -330,7 +330,7 @@ I'm putting this here because I haven't memorized it yet and neet to consult it.
 
 ## <a id="capslock"></a>CapsLock ([suxpert/vimcaps](https://github.com/suxpert/vimcaps))
 This plugin is pretty simples and I like it a lot: it basically deactivates CapsLock once you exit insert mode. 
-An alternative would be ([tpope's vim-capslock](https://github.com/tpope/vim-capslock)), but I couldn't make it work on VSCode (vimcaps does).
+An alternative would be [tpope's vim-capslock](https://github.com/tpope/vim-capslock), but I couldn't make it work on VSCode (vimcaps does).
 
 # <a id="acknowledgements"></a>Acknowledgements
 Just wanna thank:
