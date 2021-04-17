@@ -280,6 +280,7 @@ These keybindings are better detailed [here](#folding).
 ## Commands
 ### Abbreviations
   * `:Q`: same as `:q`
+  * `:Q!`: same as `:q!`
   * `:q1`: same as `:q!`
   * `:wq`: remapped to `:x`
     * I prefer the `x` command's functionality, but prefer to type `:wq`
