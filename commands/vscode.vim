@@ -20,6 +20,7 @@ command Keyboard call VSCodeNotify("workbench.action.openGlobalKeybindingsFile")
 
 " Commands I always get wrong
 cabbrev Q Quit
+cabbrev Q! Quit!
 cabbrev q1 Quit!
 cabbrev wq Xit
 
