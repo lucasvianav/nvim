@@ -1,3 +1,50 @@
+function s:DuplicateLine(...)
+    if a:0
+        let s:direction = a:1
+    endif
+    let s:cursorCol = getpos('.')[2]
+
+    let command = "normal yy" . v:count1 . (s:direction == "down" ? "p" : "P") . "]p"
+    execute command
+
+    let cursorPos = getcurpos()
+    let s:cursorPos = [ cursorPos[0], a:0 ? cursorPos[1] : ( (s:direction == "down") ? s:cursorPos[1] + v:count1 : s:cursorPos[1] ), s:cursorCol, cursorPos[3], s:cursorCol ]
+
+    call setpos('.', s:cursorPos)
+
+    silent! call repeat#set("\<Plug>DuplicateLineRepeat", v:count1)   
+endfunction
+
+function s:DuplicateSelection(...)
+    if mode() != "V"
+        return
+    endif
+
+    if a:0
+        let s:direction = a:1
+    endif
+    let s:cursorCol = getpos('.')[2]
+    let s:diff = getpos(".")[1] - getpos("v")[1]
+
+    let command = "normal y" . ((s:direction == "down") ? s:diff . "j" : "") . v:count1 . ((s:direction == "down") ? "p" : "P") . "]p`[V`]"
+    execute command
+
+    let cursorPos = getcurpos()
+    let s:cursorPos = [ cursorPos[0], a:0 ? cursorPos[1] : ( (s:direction == "down") ? s:cursorPos[1] + v:count1 : s:cursorPos[1] ), s:cursorCol, cursorPos[3], s:cursorCol ]
+
+    call setpos('.', s:cursorPos)
+
+    silent! call repeat#set("\<Plug>DuplicateSelectionRepeat", v:count1)   
+endfunction
+
+nnoremap <silent> <script> <Plug>DuplicateLineAbove :<C-u>call <SID>DuplicateLine("up")<CR>
+nnoremap <silent> <script> <Plug>DuplicateLineBelow :<C-u>call <SID>DuplicateLine("down")<CR>
+nnoremap <silent> <script> <Plug>DuplicateLineRepeat :<C-u>call <SID>DuplicateLine()<CR>
+
+xnoremap <script> <Plug>DuplicateSelectionAbove <Cmd>call <SID>DuplicateSelection("up")<CR>
+xnoremap <script> <Plug>DuplicateSelectionBelow <Cmd>call <SID>DuplicateSelection("down")<CR>
+xnoremap <script> <Plug>DuplicateSelectionRepeat <Cmd>call <SID>DuplicateSelection()<CR>
+
 " Better nav for omnicomplete
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
@@ -12,6 +59,8 @@ nnoremap <S-A-L>    :vertical resize +2<CR>
 inoremap jk <Esc>
 inoremap kj <Esc>
 
+" Use control-c instead of escape
+nnoremap <C-c> <Esc>
 " Unbind escape key if not on VSCode
 if !exists('g:vscode')
     :inoremap <Esc> <Nop>
@@ -21,13 +70,10 @@ endif
 inoremap <c-u> <ESC>viwUi
 nnoremap <c-u> viwU<Esc>
 
-" TAB in general mode will move to text buffer
+" Buffer movement with <Tab> and <S-Tab>
 nnoremap <TAB> :bnext<CR>
-" SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
 
-" Use control-c instead of escape
-nnoremap <C-c> <Esc>
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -51,13 +97,13 @@ nnoremap [b i<CR><Esc>k$
 nnoremap gp `[v`]
 nnoremap gP `[V`]
 
-" Duplicate line below
-nmap <expr> ]d 'yy' . v:count1 . 'p' . ']p'
-xmap <expr> ]d 'y' . v:count1 . 'P' . ']pgv=gv'
-
 " Duplicate line above
-nmap <expr> [d 'yy' . v:count1 . 'P' . ']p'
-xmap <expr> [d 'y' . v:count1 . 'P' . ']pgP'
+nmap <silent> [d <Plug>DuplicateLineAbove
+xmap <silent> [d <Plug>DuplicateSelectionAbove
+
+" Duplicate line below
+nmap <silent> ]d <Plug>DuplicateLineBelow
+xmap <silent> ]d <Plug>DuplicateSelectionBelow
 
 nmap <Leader>o o<Esc>^Da
 nmap <Leader>O O<Esc>^Da
@@ -69,10 +115,6 @@ nmap m dl
 nnoremap <silent> <Leader>n :noh<CR>
 
 " Folding toggle
-" nnoremap <silent> ´ za
-" nnoremap <silent> ` zA
-" xnoremap <silent> ´ za
-" xnoremap <silent> ` zA
 nnoremap <silent> <F9> za
 nnoremap <silent> <F10> zA
 xnoremap <silent> <F9> za

@@ -1,9 +1,12 @@
-" Plugin Manager
-source $HOME/.config/nvim/plugins.vim
+" Plugins
+source $HOME/.config/nvim/general/plugins.vim
 
 " Settings
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/general/providers.vim
+
+" Abbreviations
+source $HOME/.config/nvim/general/typo-abbreviations.vim
 
 " Keybind maps
 source $HOME/.config/nvim/keybindings/mappings.vim

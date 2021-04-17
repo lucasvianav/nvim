@@ -1,5 +1,4 @@
-" Exit/Quit VSCode
-command Exvs call VSCodeNotify("workbench.action.closeWindow")
+" Quit VSCode
 command Qvs call VSCodeNotify("workbench.action.closeWindow")
 
 " Discard unsaved changes
@@ -7,6 +6,10 @@ cnoremap e! call VSCodeNotify("workbench.action.files.revert")
 
 " Reload VSCode window
 command Rvs call VSCodeNotify("workbench.action.reloadWindow")
+
+" Saves file and reloads VSCode
+command -bar WRITEBAR Write
+command Wrvs WRITEBAR|call VSCodeNotify("workbench.action.reloadWindow")
 
 " Open VSCode's settings.json
 command Settings call VSCodeNotify("workbench.action.openSettingsJson")
@@ -20,8 +23,10 @@ cabbrev Q Quit
 cabbrev q1 Quit!
 cabbrev wq Xit
 
-AlterCommand qv[s] Qvs
-AlterCommand r[vs] Rvs
+AlterCommand qv[scode] Qvs
+AlterCommand r[vscode] Rvs
+AlterCommand wrv[scode] Wrvs
 AlterCommand settings Settings
 AlterCommand keybindings Keybindings
+AlterCommand keybinds Keybindings
 AlterCommand keyboard Keyboard
