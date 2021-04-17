@@ -100,6 +100,7 @@ Since all keybinds consist in bracket mappings, it's nice to establish a logic t
     * In VSCode, the visual mode version is buggy. If you don't hold/mash the buttons, everything should be ok.
   * `[d`: duplicates the current line (or selection), leaving the cursor (and selection) on the upper duplicate
   * `]d`: duplicates the current line (or selection), leaving the cursor (and selection) on the lower duplicate
+    * It glitches the first time you use it in visual mode :c
   * `[b`: breaks the current line before the cursor
   * `]d`: breaks the current line after the cursor
 
@@ -288,6 +289,7 @@ These keybindings are better detailed [here](#folding).
 These commands are not mapped in terminal Neovim
   * `:qv[scode]`: **q**uit **vs**code (closes VSCode window)
   * `:r[vscode]`, `:R[vscode]`: **r**eloads **VS**Code window
+  * `:wrv[scode]`: saves the file (**w**rite) and **r**eloads **VS**Code window
   * `:settings`: opens VSCode's settings.json
   * `:keybindings`, `:keybinds`, `:keyboard`: opens VSCode's keybindings.json
 
