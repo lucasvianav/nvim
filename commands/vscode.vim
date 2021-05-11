@@ -18,6 +18,9 @@ command Settings call VSCodeNotify("workbench.action.openSettingsJson")
 command Keybindings call VSCodeNotify("workbench.action.openGlobalKeybindingsFile")
 command Keyboard call VSCodeNotify("workbench.action.openGlobalKeybindingsFile")
 
+" Reopen last closed tab
+command UndoQuit call VSCodeNotify("workbench.action.reopenClosedEditor")
+
 " Commands I always get wrong
 cabbrev Q Quit
 cabbrev Q! Quit!
@@ -31,3 +34,4 @@ AlterCommand settings Settings
 AlterCommand keybindings Keybindings
 AlterCommand keybinds Keybindings
 AlterCommand keyboard Keyboard
+AlterCommand uq[uit] UndoQuit
