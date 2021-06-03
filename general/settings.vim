@@ -1,11 +1,12 @@
 let g:mapleader = "\<Space>"
 
 syntax enable                           " Enables syntax highlighing
+syntax on
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set nowrap                              " Display long lines as just one line
-set encoding=utf-8                      " The encoding displayed
+set encoding=UTF-8                      " The encoding displayed
 set pumheight=10                        " Makes popup menu smaller
-set fileencoding=utf-8                  " The encoding written to file
+set fileencoding=UTF-8                  " The encoding written to file
 set ruler              			        " Show the cursor position all the time
 set cmdheight=2                         " More space for displaying messages
 set iskeyword+=-                      	" treat dash separated words as a word text object"
@@ -35,6 +36,8 @@ set formatoptions-=cro                  " Stop newline continution of comments
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set scrolloff=1                         " Copy paste between vim and everything else
 set nrformats=alpha,octal,hex           " Allow letter sequences
+set guifont=DroidSansMono\ Nerd\ Font\ 10
+colorscheme onedark                     " Color Theme
 "set autochdir                          " Your working directory will always be the same as your working directory
 
 " Enable folding

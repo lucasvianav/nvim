@@ -8,53 +8,6 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
-    if exists('g:vscode')  " if it's on vscode
-        " Easy motion for VSCode
-        Plug 'ChristianChiarulli/vscode-easymotion'
-        " Edit built-in command
-        Plug 'kana/vim-altercmd'
-
-    else
-        " Better Syntax Support
-        Plug 'sheerun/vim-polyglot'
-        " Auto pairs for '(' '[' '{'
-        Plug 'jiangmiao/auto-pairs'
-        " One Dark Color Theme
-        Plug 'joshdick/onedark.vim'
-        " coc
-        Plug 'neoclide/coc.nvim', {'branch': 'release'}
-        " Airline Status Bar
-        Plug 'vim-airline/vim-airline'
-        Plug 'vim-airline/vim-airline-themes'
-        " Ranger File-Explorer
-        Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
-        " FZF
-        Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-        Plug 'junegunn/fzf.vim'
-        Plug 'airblade/vim-rooter'
-        " Colorizer
-        Plug 'norcalli/nvim-colorizer.lua'
-        " Rainbow Parenthesis
-        Plug 'junegunn/rainbow_parentheses.vim'
-        " Startify (project manager)
-        Plug 'mhinz/vim-startify'
-        " coc Snippers
-        Plug 'honza/vim-snippets'
-        " Codi
-        Plug 'metakirby5/codi.vim'
-        " Easymotion
-        Plug 'easymotion/vim-easymotion'
-        " Close HTML tags
-        Plug 'alvan/vim-closetag'
-        " Icons
-        " Plug 'ryanoasis/vim-devicons'
-        " Plug 'kyazdani42/nvim-web-devicons'
-        " Highlight other occurrences from under the cursor
-        Plug 'RRethy/vim-illuminate'
-        " " Sneak
-        " Plug 'justinmk/vim-sneak'
-    endif
-
     " Which Key
     Plug 'liuchengxu/vim-which-key'
     " Quickscope
@@ -83,6 +36,56 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'triglav/vim-visual-increment'
     " Surround
     Plug 'tpope/vim-surround'
+
+    if exists('g:vscode')  " if it's on vscode
+        " Easy motion for VSCode
+        Plug 'ChristianChiarulli/vscode-easymotion'
+        " Edit built-in command
+        Plug 'kana/vim-altercmd'
+
+    else
+        " Better Syntax Support
+        Plug 'sheerun/vim-polyglot'
+        " Auto pairs for '(' '[' '{'
+        Plug 'jiangmiao/auto-pairs'
+        " One Dark Color Theme
+        Plug 'joshdick/onedark.vim'
+        " coc
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        " Airline Status Bar
+        Plug 'vim-airline/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
+        " Theme
+        Plug 'wadackel/vim-dogrun'
+        " Ranger File-Explorer
+        Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+        " FZF
+        Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+        Plug 'junegunn/fzf.vim'
+        " Updates working directory to the project opened
+        Plug 'airblade/vim-rooter'
+        " Colorizer
+        Plug 'norcalli/nvim-colorizer.lua'
+        " Rainbow Parenthesis
+        Plug 'junegunn/rainbow_parentheses.vim'
+        " Startify (project manager)
+        Plug 'mhinz/vim-startify'
+        " coc Snippers
+        Plug 'honza/vim-snippets'
+        " Codi
+        Plug 'metakirby5/codi.vim'
+        " Easymotion
+        Plug 'easymotion/vim-easymotion'
+        " Close HTML tags
+        Plug 'alvan/vim-closetag'
+        " Highlight other occurrences from under the cursor
+        Plug 'RRethy/vim-illuminate'
+        " Git integration
+        Plug 'tpope/vim-fugitive'
+
+        " Icons (must me the last plugin loaded)
+        Plug 'ryanoasis/vim-devicons'
+    endif
 
 call plug#end()
 

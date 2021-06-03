@@ -13,3 +13,4 @@ const next = {
 settings["editor.lineNumbers"] = next[settings["editor.lineNumbers"]]
 
 fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 4), 'utf8')
+

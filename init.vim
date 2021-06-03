@@ -37,6 +37,7 @@ if exists('g:vscode') " if it's on vscode
 else " if it's not on vscode
     
     " Themes
+    source $HOME/.config/nvim/themes/appearence.vim
     source $HOME/.config/nvim/themes/onedark.vim
     source $HOME/.config/nvim/themes/airline.vim
 
@@ -50,7 +51,6 @@ else " if it's not on vscode
     source $HOME/.config/nvim/plug-config/easymotion.vim
     source $HOME/.config/nvim/plug-config/closetag.vim
     source $HOME/.config/nvim/plug-config/illuminate.vim
-    " source $HOME/.config/nvim/plug-config/sneak.vim
 
     " LUA Plugins
     lua require 'plug-colorizer'

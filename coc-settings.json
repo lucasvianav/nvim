@@ -80,8 +80,74 @@
     "explorer.icon.enableNerdfont": true,
     "explorer.previewAction.onHover": false,
     "explorer.keyMappings.global": {
-      "<cr>": ["expandable?", "expand", "open"],
-      "v": "open:vsplit"
+        "<cr>": ["expandable?", "expand", "open"],
+        "i": false, // cancel default mapkey
+        "v": "open:vsplit",
+        "h": "open:split",
+
+        "*": "toggleSelection",
+        "<tab>": "actionMenu",
+
+        "l": ["wait", "expandable?", "expand", "open"],
+        "J": ["wait", "toggleSelection", "normal:j"],
+        "K": ["wait", "toggleSelection", "normal:k"],
+        "<2-LeftMouse>": [
+            "expandable?",
+            ["expanded?", "collapse", "expand"],
+            "open"
+        ],
+        "o": ["wait", "expanded?", "collapse", "expand"],
+        "e": "open",
+        "s": "open:split",
+        "t": "open:tab",
+        "<bs>": ["wait", "gotoParent"],
+
+        "yp": "copyFilepath",
+        "yn": "copyFilename",
+        "yy": "copyFile",
+        "xx": "cutFile",
+        "p": "pasteFile",
+        "dd": "delete",
+        "dF": "deleteForever",
+
+        "a": "addFile",
+        "A": "addDirectory",
+        "r": "rename",
+
+        "zh": "toggleHidden",
+        "g<dot>": "toggleHidden",
+        "R": "refresh",
+
+        "?": "help",
+        "q": "quit",
+        "<esc>": "esc",
+        "X": "systemExecute",
+        "gd": "listDrive",
+
+        "f": "search",
+        "F": "searchRecursive",
+
+        "gf": "gotoSource:file",
+        "gb": "gotoSource:buffer",
+
+        "[[": ["wait", "sourcePrev"],
+        "]]": ["wait", "sourceNext"],
+
+        "[i": ["wait", "indentPrev"],
+        "]i": ["wait", "indentNext"],
+
+        "[m": ["wait", "markPrev:modified"],
+        "]m": ["wait", "markNext:modified"],
+
+        "[d": ["wait", "markPrev:diagnosticError:diagnosticWarning"],
+        "]d": ["wait", "markNext:diagnosticError:diagnosticWarning"],
+        "[D": ["wait", "markPrev:diagnosticError"],
+        "]D": ["wait", "markNext:diagnosticError"],
+
+        "[c": ["wait", "markPrev:git"],
+        "]c": ["wait", "markNext:git"],
+        "<<": "gitStage",
+        ">>": "gitUnstage"
     },
 
     // snippets
