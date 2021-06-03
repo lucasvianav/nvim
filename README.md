@@ -282,7 +282,7 @@ These keybindings are better detailed [here](#folding).
 
 ## Commands
 ### Custom
-  * `:Count`: count number of ocurrences of a pattern in the current buffer
+  * `:count`: count number of ocurrences of a pattern in the current buffer
 
 ### Abbreviations
   * `:Q`: same as `:q`
