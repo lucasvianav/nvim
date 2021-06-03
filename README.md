@@ -225,8 +225,7 @@ Makes `<C-A>` and `<C-X>` work in blockwise visual mode (`^V`) to create sequenc
 # <a id="custom-mappings"></a>Custom mappings/abbreviations
 ## Keybinds
   * `<C-J>`, `<C-K>`: navigation in lists (like autocompletion) up and down, respectively
-  * `<M-H>`, `<M-S-J>`, `<M-S-K>`, `<M-H>`: resizes windows (left, bottom, top, right respectively)
-    * In VSCode, there's only `<M-L>` and `<M-H>` to increase and decrease window size, respectively
+  * `<M-S-H>`, `<M-S-J>`, `<M-S-K>`, `<M-S-H>`: resizes windows (left, bottom, top, right respectively)
   * `jk`, `<C-C>`: substitutes `<Esc>`, which is unmapped
   * `<TAB>`, `<S-TAB>`, `<C-TAB>`, `<C-S-TAB>`: navigation between buffers
   * `<C-H>`, `<C-J>`, `<C-K>`, `<C-H>`: navigation between windows (left, bottom, top, right respectively)
@@ -278,6 +277,9 @@ These keybindings are better detailed [here](#folding).
   * `zm`: takes a count and folds the level passed (**m** folding)
 
 ## Commands
+### Custom
+  * `:Count`: count number of ocurrences of a pattern in the current buffer
+
 ### Abbreviations
   * `:Q`: same as `:q`
   * `:Q!`: same as `:q!`
