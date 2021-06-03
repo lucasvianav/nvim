@@ -34,7 +34,7 @@ set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set formatoptions-=cro                  " Stop newline continution of comments
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set scrolloff=1                         " Copy paste between vim and everything else
-set nrformats=alpha,octal,hex          " Allow letter sequences
+set nrformats=alpha,octal,hex           " Allow letter sequences
 "set autochdir                          " Your working directory will always be the same as your working directory
 
 " Enable folding
