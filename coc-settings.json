@@ -83,11 +83,11 @@
         "<cr>": ["expandable?", "expand", "open"],
         "i": false, // cancel default mapkey
         "v": "open:vsplit",
-        "h": "open:split",
 
         "*": "toggleSelection",
         "<tab>": "actionMenu",
 
+        "h": ["wait", "collapse"],
         "l": ["wait", "expandable?", "expand", "open"],
         "J": ["wait", "toggleSelection", "normal:j"],
         "K": ["wait", "toggleSelection", "normal:k"],

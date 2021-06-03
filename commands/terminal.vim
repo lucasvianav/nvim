@@ -1,0 +1,1 @@
+cabbrev git Git

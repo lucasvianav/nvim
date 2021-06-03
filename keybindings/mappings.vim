@@ -57,7 +57,7 @@ nnoremap <S-A-L>    :vertical resize +2<CR>
 
 " I hate escape more than anything else
 inoremap jk <Esc>
-inoremap kj <Esc>
+" inoremap kj <Esc>
 
 " Use control-c instead of escape
 nnoremap <C-c> <Esc>
