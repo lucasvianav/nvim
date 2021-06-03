@@ -6,6 +6,12 @@ nmap <C-/>  <Plug>VSCodeCommentary
 omap <C-/>  <Plug>VSCodeCommentary
 nmap <C-/> <Plug>VSCodeCommentaryLine
 
+" Use alt + shift + hjkl to resize windows
+nnoremap <S-M-H> :call VSCodeNotify('workbench.action.decreaseViewWidth')<CR>
+nnoremap <S-M-L> :call VSCodeNotify('workbench.action.increaseViewWidth')<CR>
+nnoremap <S-A-J> :call VSCodeNotify('workbench.action.decreaseViewHeight')<CR>
+nnoremap <S-A-K> :call VSCodeNotify('workbench.action.increaseViewHeight')<CR>
+
 " Better Navigation
 nnoremap <silent> <C-j> :call VSCodeNotify('workbench.action.navigateDown')<CR>
 xnoremap <silent> <C-j> :call VSCodeNotify('workbench.action.navigateDown')<CR>
@@ -49,3 +55,19 @@ nnoremap <Leader>s :call VSCodeNotify('workbench.action.replaceInFiles')<CR>
 nnoremap <Leader>d :call VSCodeNotify('editor.action.revealDefinition')<CR>
 nnoremap <Leader>D :call VSCodeNotify('editor.action.revealDeclaration')<CR>
 nnoremap <Leader>E :call VSCodeNotify('workbench.actions.view.problems')<CR>
+
+" Scrolling
+nnoremap <silent> <expr> <C-d> VSCodeExtensionCall('scroll', 'halfPage', 'down')
+xnoremap <silent> <expr> <C-d> VSCodeExtensionCall('scroll', 'halfPage', 'down')
+nnoremap <silent> <expr> <C-u> VSCodeExtensionCall('scroll', 'halfPage', 'up')
+xnoremap <silent> <expr> <C-u> VSCodeExtensionCall('scroll', 'halfPage', 'up')
+
+nnoremap <silent> <expr> <C-f> VSCodeExtensionCall('scroll', 'page', 'down')
+xnoremap <silent> <expr> <C-f> VSCodeExtensionCall('scroll', 'page', 'down')
+nnoremap <silent> <expr> <C-b> VSCodeExtensionCall('scroll', 'page', 'up')
+xnoremap <silent> <expr> <C-b> VSCodeExtensionCall('scroll', 'page', 'up')
+
+nnoremap <silent> <expr> <C-e> VSCodeExtensionNotify('scroll-line', 'down')
+xnoremap <silent> <expr> <C-e> VSCodeExtensionNotify('scroll-line', 'down')
+nnoremap <silent> <expr> <C-y> VSCodeExtensionNotify('scroll-line', 'up')
+xnoremap <silent> <expr> <C-y> VSCodeExtensionNotify('scroll-line', 'up')

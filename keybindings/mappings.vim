@@ -50,8 +50,8 @@ inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
 
 " Use alt + shift + hjkl to resize windows
-nnoremap <M-J>    :resize -2<CR>
-nnoremap <M-K>    :resize +2<CR>
+nnoremap <S-M-J>    :resize -2<CR>
+nnoremap <S-M-K>    :resize +2<CR>
 nnoremap <S-A-H>    :vertical resize -2<CR>
 nnoremap <S-A-L>    :vertical resize +2<CR>
 
