@@ -40,7 +40,6 @@
     "explorer.confirmDragAndDrop": false,
     "git.suggestSmartCommit": false,
     "files.autoSave": "off",
-    "workbench.colorTheme": "One Dark Pro",
     "editor.cursorStyle": "block",
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
     "workbench.startupEditor": "newUntitledFile",
@@ -351,7 +350,22 @@
         "yml",
         "vim"
     ],
-    "cSpell.enabled": false,
-    "editor.wordWrap": "off",
-    "workbench.preferredLightColorTheme": "Default Dark+"
+    "cSpell.enabled": true,
+    "editor.wordWrap": "on",
+    "workbench.preferredLightColorTheme": "One Dark Pro",
+    "explorer.compactFolders": false,
+    "[python]": {
+        "gitlens.codeLens.symbolScopes": [
+            "!Module"
+        ],
+        "editor.wordBasedSuggestions": false
+    },
+    "python.analysis.completeFunctionParens": true,
+    "workbench.colorTheme": "One Dark Pro",
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true,
+        "[One Dark Pro]": {
+            "enabled": true
+        }
+    }
 }

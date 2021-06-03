@@ -17,7 +17,7 @@
     {
         "key": "tab",
         "command": "workbench.action.nextEditorInGroup",
-        "when": "neovim.mode != 'insert' && !inSnippetMode"
+        "when": "neovim.mode != 'insert' && !inSnippetMode && !terminalFocus"
     },
     {
         "key": "ctrl+k ctrl+pagedown",
@@ -30,7 +30,7 @@
     {
         "key": "shift+tab",
         "command": "workbench.action.previousEditorInGroup",
-        "when": "neovim.mode != 'insert' && !inSnippetMode"
+        "when": "neovim.mode != 'insert' && !inSnippetMode && !terminalFocus"
     },
     {
         "key": "ctrl+k ctrl+pageup",
@@ -272,14 +272,28 @@
         "when": "!gitlens:disabled && config.gitlens.keymap == 'alternate'"
     },
     {
-        "key": "alt+h",
-        "command": "workbench.action.decreaseViewSize",
-        "when": "editorTextFocus && neovim.mode == 'normal'"
+        "key": "shift+alt+h",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'",
+        "args": "<S-M-h>"
     },
     {
-        "key": "alt+l",
-        "command": "workbench.action.increaseViewSize",
-        "when": "editorTextFocus && neovim.mode == 'normal'"
+        "key": "shift+alt+l",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'",
+        "args": "<S-M-l>"
+    },
+    {
+        "key": "shift+alt+j",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'",
+        "args": "<S-M-j>"
+    },
+    {
+        "key": "shift+alt+k",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'",
+        "args": "<S-M-k>"
     },
     {
         "key": "ctrl+j",
@@ -925,7 +939,7 @@
     {
         "key": "ctrl+shift+t",
         "command": "workbench.action.terminal.focus",
-        "when": "neovim.mode == 'normal' && activeViewlet != 'workbench.view.explorer'"
+        "when": "neovim.mode == 'normal' && activePanel != 'terminal'"
     },
     {
         "key": "ctrl+shift+t",
@@ -944,4 +958,35 @@
         "when": "editorTextFocus && neovim.init",
         "args": "<F10>"
     },
+    {
+        "key": "ctrl+shift+e",
+        "command": "-workbench.action.quickOpenNavigatePreviousInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
+    },
+    {
+        "key": "ctrl+shift+e",
+        "command": "-workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    {
+        "key": "ctrl+alt+e",
+        "command": "workbench.view.explorer",
+        "when": "neovim.init && neovim.mode == 'normal' && activeViewlet != 'workbench.view.explorer'"
+    },
+    {
+        "key": "ctrl+alt+e",
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "neovim.init && neovim.mode == 'normal' && activeViewlet == 'workbench.view.explorer'"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-actions.find",
+        "when": "editorFocus || editorIsOpen"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'",
+        "args": "<C-f>"
+    }
 ]
