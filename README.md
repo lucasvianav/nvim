@@ -28,6 +28,7 @@ Every relevant keybind/command mapped by a plugin.
   7.  [Speed-Dating](#speeddating)
   8.  [Radical](#radical)
   9.  [Visual Increment](#visual-increment)
+  10. [Fugitive](#fugitive)
 
 Plugins in other sections:
   1. [WhichKey](#whichkey)
@@ -221,6 +222,9 @@ The command for **c**onve**r**ting a number to another representation is `cr` (t
 
 ## <a id="visual-increment"></a>Visual-Increment ([triglav/vim-visual-increment](https://github.com/triglav/vim-visual-increment))
 Makes `<C-A>` and `<C-X>` work in blockwise visual mode (`^V`) to create sequences of numbers (decimal, hex, octal) and letters. For examples, read the plugin's README.
+
+## <a id="fugitive"></a>Fugitive ([tpope/vim-fugitive](https://github.com/tpope/vim-fugitive))
+Makes possible to use `:Git` (that I abbreviated to `:git`) as you would in the command line.c
 
 # <a id="custom-mappings"></a>Custom mappings/abbreviations
 ## Keybinds
