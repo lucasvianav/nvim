@@ -239,14 +239,25 @@ Makes possible to use `:Git` (that I abbreviated to `:git`) as you would in the 
     * ` `` `: takes the cursor to the line where the cursor was before the latest jump
 
 ### <a id="whichkey"></a>WhichKey ([liuchengxu/vim-which-key](https://github.com/liuchengxu/vim-which-key))
-The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space>` — in normal mode, so every keybind below is preceded by `<Space>`.
+The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space>` — in normal mode, so every keybind below is preceded by `<Space>`. Most of the keybindings do not require you to wait for the WhichKey menu to appear.
 
 #### Terminal Neovim
-I need to organize it.
+  * `/`: search text (`:Rg`)
+  * `e`: toggles **e**xplorer
+  * `g`: displays **g**it options
+  * `v`: splits editor to the right (**v**ertically)
+  * `h`: splits editor below (**h**orizontally)
+  * `n`: hides highligts (same as `:noh`)
+  * `f`: serches **f**iles (same as `:FZF`)
+  * `F`: **f**ormat selected text
+  * `r`: opens **r**anger
+  * `S`: opens **S**tartify (start screen)
+  * `b`: list open **b**uffers
+  * `w`: go to **w**ord
+  * `c`: go to **c**har
+  * `ss`: go to **sy**llab
 
 #### VSCode ([VSpaceCode/vscode-which-key](https://github.com/VSpaceCode/vscode-which-key))
-Most of the keybindings do not require you to wait for the WhichKey menu to appear.
-
   * `<Space>`: opens VSCode Command Palette
   * `/`: searches in the whole project (workspace?)
   * `s`: "find & replace" in project
