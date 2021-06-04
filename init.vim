@@ -59,6 +59,9 @@ else " if it's not on vscode
     " Sessions config
     source $HOME/.config/nvim/general/sessions.vim
 
+    " Terminal config
+    source $HOME/.config/nvim/general/terminal.vim
+
 endif
 
 " Plugis used in both terminal Neovim and VSCode
@@ -67,3 +70,4 @@ source $HOME/.config/nvim/plug-config/vim-commentary.vim
 source $HOME/.config/nvim/plug-config/vim-easyclip.vim
 source $HOME/.config/nvim/plug-config/which-key.vim
 source $HOME/.config/nvim/plug-config/vim-surround.vim
+

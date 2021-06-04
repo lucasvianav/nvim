@@ -7,9 +7,9 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +59 ~/.config/nvim/init.vim
+badd +58 ~/.config/nvim/init.vim
 badd +1 ~/.config/nvim/plug-config/startify.vim
-badd +14 ~/.config/nvim/general/sessions.vim
+badd +11 ~/.config/nvim/general/sessions.vim
 argglobal
 %argdel
 edit ~/.config/nvim/general/sessions.vim
@@ -28,11 +28,11 @@ setlocal fdl=1
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 14 - ((13 * winheight(0) + 25) / 50)
+let s:l = 13 - ((12 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-14
+13
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

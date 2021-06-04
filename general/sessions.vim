@@ -11,4 +11,4 @@ function! OnExit()
     silent execute 'SSave! ' . GetUniqueSessionName()
 endfunction
 
-autocmd VimLeavePre * silent OnExit()
+autocmd VimLeavePre * execute OnExit()
