@@ -17,10 +17,10 @@ let g:which_key_use_floating_win = 0
 let g:which_key__centered = 1
 
 " Change the colors if you want
-highlight default link WhichKey          Operator
-highlight default link WhichKeySeperator DiffAdded
-highlight default link WhichKeyGroup     Identifier
-highlight default link WhichKeyDesc      Function
+highlight default link WhichKey             Operator
+highlight default link WhichKeySeperator    DiffAdded
+highlight default link WhichKeyGroup        Identifier
+highlight default link WhichKeyDesc         Function
 
 " Hide status line
 autocmd! FileType which_key
@@ -28,17 +28,31 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 " Single mappings
-let g:which_key_map['e'] = [ ':CocCommand explorer'       , 'explorer' ]
-let g:which_key_map['f'] = [ ':Files'                     , 'search files' ]
-let g:which_key_map['h'] = [ '<C-W>s'                     , 'split below']
-let g:which_key_map['r'] = [ ':Ranger'                    , 'ranger' ]
-let g:which_key_map['S'] = [ ':Startify'                  , 'start screen' ]
-let g:which_key_map['T'] = [ ':Rg'                        , 'search text' ]
-let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
+let g:which_key_map.e = [ ':CocCommand explorer'       , 'explorer' ]
+let g:which_key_map.f = [ ':Files'                     , 'search files' ]
+let g:which_key_map.F = [ '<Plug>(coc-format-selected)'                     , 'format selection' ]
+let g:which_key_map.h = [ '<C-W>s'                     , 'split below']
+let g:which_key_map.r = [ ':Ranger'                    , 'ranger' ]
+let g:which_key_map.S = [ ':Startify'                  , 'start screen' ]
+let g:which_key_map['/'] = [ ':Rg'                        , 'search text' ]
+let g:which_key_map.b = [ ':Buffers'                        , 'list buffers' ]
+let g:which_key_map.v = [ '<C-W>v'                     , 'split right']
+let g:which_key_map.w = [ '<Plug>(easymotion-overwin-w)'                     , 'go to word']
+let g:which_key_map.c = [ '<Plug>(easymotion-overwin-f)'                     , 'go to char']
+let g:which_key_map['ss'] = [ '<Plug>(easymotion-overwin-f2)'                     , 'go to syllab']
+
+
+" Unlisted keymaps
+let g:which_key_map.O = 'which_key_ignore'
+let g:which_key_map.o = 'which_key_ignore'
+let g:which_key_map.n = 'which_key_ignore'
+let g:which_key_map.p = 'which_key_ignore'
+let g:which_key_map.P = 'which_key_ignore'
+let g:which_key_map['cf'] = 'which_key_ignore'
 
 " s is for search
 let g:which_key_map.s = {
-      \ 'name' : '+search' ,
+      \ 'name' : '+ search' ,
       \ '/' : [':History/'     , 'history'],
       \ ';' : [':Commands'     , 'commands'],
       \ 'a' : [':Ag'           , 'text Ag'],

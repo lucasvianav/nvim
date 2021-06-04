@@ -57,6 +57,7 @@ nnoremap <S-A-L>    :vertical resize +2<CR>
 
 " I hate escape more than anything else
 inoremap jk <Esc>
+inoremap JK <Esc>
 " inoremap kj <Esc>
 
 " Use control-c instead of escape
@@ -108,8 +109,10 @@ xmap <silent> [d <Plug>DuplicateSelectionAbove
 nmap <silent> ]d <Plug>DuplicateLineBelow
 xmap <silent> ]d <Plug>DuplicateSelectionBelow
 
-nmap <Leader>o o<Esc>^Da
-nmap <Leader>O O<Esc>^Da
+nmap <Leader>o o<C-c>^Da
+nmap <Leader>O O<C-c>^Da
+
+inoremap <C-BS> <C-W>
 
 " Maps m to delete 1 char
 nmap m dl

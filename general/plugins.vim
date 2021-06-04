@@ -17,7 +17,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Perl Regex
     Plug 'othree/eregex.vim'
     " Better Unicode Compatibility?
-    Plug 'chrisbra/unicode.vim'
     Plug 'tpope/vim-characterize'
     " Enables . repeat for Plug-In maps
     Plug 'tpope/vim-repeat'

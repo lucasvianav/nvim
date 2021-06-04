@@ -251,7 +251,7 @@ Most of the keybindings do not require you to wait for the WhichKey menu to appe
   * `e`: toggles explorer visibility
     * If you press `<Space>e` without waiting for the WhichKey menu to appear, it'll toggle sidebar visibility
     * If you press `<Space>`, wait for the WhichKey menu to appear and then press `e`, you'll open the explorer
-    * `<C-S-\>` is an alternative (not part of WhichKey), it'll always toggle explorer.
+    * `<C-S-\>` and `<C-M-E>` are alternatives (not part of WhichKey), they'll always toggle explorer.
   * `E`: displays errors
   * `g`: displays git options
   * `v`: splits editor to the right
@@ -261,6 +261,7 @@ Most of the keybindings do not require you to wait for the WhichKey menu to appe
   * `n`: hides highligts (same as `:noh`)
   * `o`, `O`: same as vanilla `o`and `O`, but the new line will be blank
   * `t`: toggles integrated terminal
+    * `<C-S-t>` is an alternative (not part of WhichKey), it'll always toggle the terminal.
 
 ### Folding
 These keybindings are better detailed [here](#folding).
