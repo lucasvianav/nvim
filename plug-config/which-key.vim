@@ -39,18 +39,18 @@ let g:which_key_map.b = [ ':Buffers'                        , 'list buffers' ]
 let g:which_key_map.v = [ '<C-W>v'                     , 'split right']
 let g:which_key_map.w = [ '<Plug>(easymotion-overwin-w)'                     , 'go to word']
 let g:which_key_map.c = [ '<Plug>(easymotion-overwin-f)'                     , 'go to char']
-let g:which_key_map['ss'] = [ '<Plug>(easymotion-overwin-f2)'                     , 'go to syllab']
+let g:which_key_map.n = [ ':noh'                     , 'hide highlights']
+let g:which_key_map['sy'] = [ '<Plug>(easymotion-overwin-f2)'                     , 'go to syllab']
 
 
 " Unlisted keymaps
 let g:which_key_map.O = 'which_key_ignore'
 let g:which_key_map.o = 'which_key_ignore'
-let g:which_key_map.n = 'which_key_ignore'
 let g:which_key_map.p = 'which_key_ignore'
 let g:which_key_map.P = 'which_key_ignore'
 let g:which_key_map['cf'] = 'which_key_ignore'
 
-let g:which_key_map.s = {
+let g:which_key_map['?'] = {
     \ 'name' : '+ search' ,
     \ 'c' : [':Commands'     , 'commands'],
     \ '/' : [':BLines'       , 'current buffer'],
@@ -59,7 +59,7 @@ let g:which_key_map.s = {
     \ 'w' : [':Windows'      , 'search windows'],
     \ }
 
-let g:which_key_map['?'] = {
+let g:which_key_map['!'] = {
     \ 'name' : '+ settings' ,
     \ 'c' : [':Colors'       , 'color schemes'],
     \ 't' : [':Filetypes'    , 'file types'],

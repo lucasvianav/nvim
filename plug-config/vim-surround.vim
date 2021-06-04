@@ -4,10 +4,10 @@ let g:surround_no_insert_mappings = 1
 nmap ds  <Plug>Dsurround
 nmap cs  <Plug>Csurround
 nmap cS  <Plug>CSurround
-nmap ss  <Plug>Ysurround
-nmap sS  <Plug>YSurround
-nmap sss <Plug>Yssurround
-nmap sSs <Plug>YSsurround
-nmap sSS <Plug>YSsurround
-xmap S   <Plug>VSurround
+nmap <Leader>ss  <Plug>Ysurround
+nmap <Leader>sS  <Plug>YSurround
+nmap <Leader>sss <Plug>Yssurround
+nmap <Leader>sSs <Plug>YSsurround
+nmap <Leader>sSS <Plug>YSsurround
+xmap <Leader>S   <Plug>VSurround
 xmap gS  <Plug>VgSurround
