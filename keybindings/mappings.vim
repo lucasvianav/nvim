@@ -112,7 +112,8 @@ xmap <silent> ]d <Plug>DuplicateSelectionBelow
 nmap <Leader>o o<C-c>^Da
 nmap <Leader>O O<C-c>^Da
 
-inoremap <C-BS> <C-W>
+" Hopefully <C-BS> deletes word in insert mode
+imap <C-h> <Space><C-c>dbi
 
 " Maps m to delete 1 char
 nmap m dl

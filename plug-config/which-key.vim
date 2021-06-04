@@ -29,7 +29,7 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 
 " Single mappings
 let g:which_key_map.e = [ ':CocCommand explorer'       , 'explorer' ]
-let g:which_key_map.f = [ ':Files'                     , 'search files' ]
+let g:which_key_map.f = [ ':FZF'                     , 'search files' ]
 let g:which_key_map.F = [ '<Plug>(coc-format-selected)'                     , 'format selection' ]
 let g:which_key_map.h = [ '<C-W>s'                     , 'split below']
 let g:which_key_map.r = [ ':Ranger'                    , 'ranger' ]
@@ -50,34 +50,28 @@ let g:which_key_map.p = 'which_key_ignore'
 let g:which_key_map.P = 'which_key_ignore'
 let g:which_key_map['cf'] = 'which_key_ignore'
 
-" s is for search
 let g:which_key_map.s = {
-      \ 'name' : '+ search' ,
-      \ '/' : [':History/'     , 'history'],
-      \ ';' : [':Commands'     , 'commands'],
-      \ 'a' : [':Ag'           , 'text Ag'],
-      \ 'b' : [':BLines'       , 'current buffer'],
-      \ 'B' : [':Buffers'      , 'open buffers'],
-      \ 'c' : [':Commits'      , 'commits'],
-      \ 'C' : [':BCommits'     , 'buffer commits'],
-      \ 'f' : [':Files'        , 'files'],
-      \ 'g' : [':GFiles'       , 'git files'],
-      \ 'G' : [':GFiles?'      , 'modified git files'],
-      \ 'h' : [':History'      , 'file history'],
-      \ 'H' : [':History:'     , 'command history'],
-      \ 'l' : [':Lines'        , 'lines'] ,
-      \ 'm' : [':Marks'        , 'marks'] ,
-      \ 'M' : [':Maps'         , 'normal maps'] ,
-      \ 'p' : [':Helptags'     , 'help tags'] ,
-      \ 'P' : [':Tags'         , 'project tags'],
-      \ 's' : [':Snippets'     , 'snippets'],
-      \ 'S' : [':Colors'       , 'color schemes'],
-      \ 't' : [':Rg'           , 'text Rg'],
-      \ 'T' : [':BTags'        , 'buffer tags'],
-      \ 'w' : [':Windows'      , 'search windows'],
-      \ 'y' : [':Filetypes'    , 'file types'],
-      \ 'z' : [':FZF'          , 'FZF'],
-      \ }
+    \ 'name' : '+ search' ,
+    \ 'c' : [':Commands'     , 'commands'],
+    \ '/' : [':BLines'       , 'current buffer'],
+    \ 'h' : [':History'      , 'file history'],
+    \ 's' : [':Snippets'     , 'snippets'],
+    \ 'w' : [':Windows'      , 'search windows'],
+    \ }
+
+let g:which_key_map['?'] = {
+    \ 'name' : '+ settings' ,
+    \ 'c' : [':Colors'       , 'color schemes'],
+    \ 't' : [':Filetypes'    , 'file types'],
+    \ }
+
+let g:which_key_map.g = {
+    \ 'name' : '+ git' ,
+    \ 'c' : [':Commits'      , 'commits'],
+    \ 'bc' : [':BCommits'     , 'buffer commits'],
+    \ 'f' : [':GFiles'       , 'git files'],
+    \ 'mf' : [':GFiles?'      , 'modified git files'],
+    \ }
 
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")
