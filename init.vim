@@ -32,10 +32,6 @@ if exists('g:vscode') " if it's on vscode
     " Plugins
     source $HOME/.config/nvim/plug-config/highlightedyank.vim
 
-    " Make quickscope work in vscode
-    highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-    highlight QuickScopeSecondary guifg='#5f5fff' gui=underline ctermfg=81 cterm=underline
-
 else " if it's not on vscode
     
     " Themes
@@ -51,7 +47,7 @@ else " if it's not on vscode
     source $HOME/.config/nvim/plug-config/rnvimr.vim
     source $HOME/.config/nvim/plug-config/fzf.vim
     source $HOME/.config/nvim/plug-config/rainbow_parentheses.vim
-    source $HOME/.config/nvim/plug-config/start-screen.vim
+    source $HOME/.config/nvim/plug-config/startify.vim
     source $HOME/.config/nvim/plug-config/codi.vim
     source $HOME/.config/nvim/plug-config/easymotion.vim
     source $HOME/.config/nvim/plug-config/closetag.vim
@@ -59,6 +55,9 @@ else " if it's not on vscode
 
     " LUA Plugins
     lua require 'plug-colorizer'
+
+    " Sessions config
+    source $HOME/.config/nvim/general/sessions.vim
 
 endif
 

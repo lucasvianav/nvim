@@ -8,8 +8,9 @@ let g:startify_lists = [
           \ ]
 
 let g:startify_bookmarks = [
-            \ { 'd': '~/github' },
-            \ '~/Documents',
+            \ { 'v': '~/.config/nvim/init.vim' },
+            \ { 'd': '~/github/discord-bot/main.py' },
+            \ { 'g': '~/github' },
             \ ]
 
 let g:startify_session_autoload = 1

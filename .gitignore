@@ -3,3 +3,8 @@ __pycache__/*
 autoload/*
 yarn lock
 'yarn lock'
+.netrwhist
+session/
+session/*
+.vscode/
+.vscode/*

@@ -81,6 +81,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'RRethy/vim-illuminate'
         " Git integration
         Plug 'tpope/vim-fugitive'
+        " Function to get current Git branch
+        Plug 'itchyny/vim-gitbranch'
 
         " Icons (must me the last plugin loaded)
         Plug 'ryanoasis/vim-devicons'
