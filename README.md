@@ -256,6 +256,8 @@ The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space
   * `w`: go to **w**ord
   * `c`: go to **c**har
   * `ss`: go to **sy**llab
+  * `t`: open terminal below
+  * `tr`: open terminal in the right
 
 #### VSCode ([VSpaceCode/vscode-which-key](https://github.com/VSpaceCode/vscode-which-key))
   * `<Space>`: opens VSCode Command Palette
