@@ -284,6 +284,9 @@ These keybindings are better detailed [here](#folding).
 ## Commands
 ### Custom
   * `:count`: count number of ocurrences of a pattern in the current buffer
+  * `:uq`: **u**ndoes last **q**uit - reopens last closed tag
+    * In Terminal Neovim, is the same as `:e #`;
+    * In VSCode, calls VSCode's "reopen closed editor" action.
 
 ### Abbreviations
   * `:Q`: same as `:q`
@@ -293,8 +296,13 @@ These keybindings are better detailed [here](#folding).
     * I prefer the `x` command's functionality, but prefer to type `:wq`
     * If you're wondering what the differences are and why I prefer `:x`, read [this comment](https://www.quora.com/Why-do-some-people-close-Vim-with-wq-instead-of-x/answer/Ye-Caiting) by [Ye Caiting](https://www.quora.com/profile/Ye-Caiting).
 
+### Interacting with Terminal Neovim
+  * `:r`, `:Rvimrc`: **r**eloads the init.vim (same as `:source $MYVIMRC`)
+  * `:wrv`: saves the file (**w**rite) and **r**eloads **V**IMRC
+  * `:settings`: opens init.vim (same as `:e $MYVIMRC`)
+  * `:keybindings`: opens the main keybindings file
+
 ### Interacting with VSCode
-These commands are not mapped in terminal Neovim
   * `:qv[scode]`: **q**uit **vs**code (closes VSCode window)
   * `:r[vscode]`, `:R[vscode]`: **r**eloads **VS**Code window
   * `:wrv[scode]`: saves the file (**w**rite) and **r**eloads **VS**Code window
