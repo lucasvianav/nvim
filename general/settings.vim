@@ -69,4 +69,4 @@ function! <SID>StripTrailingWhitespaces()
         call winrestview(l:save)
     endif
 endfun
-autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript,vim,sh autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript,vim,sh,markdown autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()

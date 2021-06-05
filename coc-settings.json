@@ -76,5 +76,13 @@
 
     // snippets
     "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
-    "snippets.textmateSnippetsRoots": [ "~/.config/nvim/snippets" ]
+    "snippets.textmateSnippetsRoots": [ "~/.config/nvim/snippets" ],
+
+    // linting
+    "markdownlint.config": {
+        "line_length": false,
+        "no-inline-html": false,
+        "no-trailing-punctuation": false,
+        "no-duplicate-header": false
+    }
 }
