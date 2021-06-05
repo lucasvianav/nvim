@@ -41,6 +41,7 @@ else " if it's not on vscode
 
     " Non-VSCode Commands
     source $HOME/.config/nvim/commands/BufOnly.vim
+    source $HOME/.config/nvim/commands/BufClose.vim
     source $HOME/.config/nvim/commands/neovim.vim
 
     " VIM Plugins

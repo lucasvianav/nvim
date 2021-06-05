@@ -6,3 +6,4 @@ cabbrev count Count
 cabbrev Q q
 cabbrev q1 q!
 cabbrev wq x
+cabbrev man help

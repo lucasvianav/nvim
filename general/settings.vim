@@ -44,7 +44,7 @@ if has('folding')
         set fillchars=vert:┃            " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
     endif
     set foldmethod=indent               " not as cool as syntax, but faster
-    set foldlevelstart=99                " start folded
+    set foldlevelstart=0                " start folded
 endif
 
 " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
