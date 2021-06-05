@@ -40,8 +40,8 @@ else " if it's not on vscode
     source $HOME/.config/nvim/themes/airline.vim
 
     " Non-VSCode Commands
-    source $HOME/.config/nvim/commands/neovim.vim
     source $HOME/.config/nvim/commands/BufOnly.vim
+    source $HOME/.config/nvim/commands/neovim.vim
 
     " VIM Plugins
     source $HOME/.config/nvim/plug-config/coc.vim

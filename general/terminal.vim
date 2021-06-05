@@ -59,3 +59,6 @@ nnoremap <silent> <Leader>t :ToggleTermBottom<CR>
 command ToggleTermRight :call <SID>ToggleTerminal('L', 60)
 nnoremap <silent> <Leader>tr :ToggleTermRight<CR>
 
+" exit terminal mode with jk
+tnoremap jk <C-\><C-n>
+tnoremap JK <C-\><C-n>
