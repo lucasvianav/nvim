@@ -3,7 +3,7 @@
 nmap <Leader>c <Plug>(easymotion-overwin-f)
 
 " s{char}{char} to move to {char}{char}
-nmap <Leader>ss <Plug>(easymotion-overwin-f2)
+nmap <Leader>sy <Plug>(easymotion-overwin-f2)
 
 " Move to word
 " nmap  <Leader>w <Plug>(easymotion-bd-w)

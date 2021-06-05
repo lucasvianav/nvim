@@ -83,6 +83,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'tpope/vim-fugitive'
         " Function to get current Git branch
         Plug 'itchyny/vim-gitbranch'
+        " Search and replace word under cursor
+        Plug 'wincent/scalpel'
 
         " Icons (must me the last plugin loaded)
         Plug 'ryanoasis/vim-devicons'

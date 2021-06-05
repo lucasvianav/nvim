@@ -41,6 +41,7 @@ let g:which_key_map.c = [ '<Plug>(easymotion-overwin-f)'          ,   'go to cha
 let g:which_key_map.n = [ ':noh'                                  ,   'hide highlights']
 let g:which_key_map.t = [ ':ToggleTermBottom'                     ,   'open terminal below']
 let g:which_key_map.q = [ ':BufClose'                             ,   'close buffer']
+let g:which_key_map.s = [ '<Plug>(Scalpel)'                       ,   'close buffer']
 let g:which_key_map['/'] = [ ':Rg'                                ,   'search text' ]
 let g:which_key_map['tr'] = [ ':ToggleTermRight'                  ,   'open terminal right']
 let g:which_key_map['sy'] = [ '<Plug>(easymotion-overwin-f2)'     ,   'go to syllab']
