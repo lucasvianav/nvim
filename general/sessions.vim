@@ -8,7 +8,7 @@ endfunction
 
 function! OnExit()
     " closes all terminals on exit
-    silent bufdo if split(bufname(), ":")[0] == "term" | bd! | endif
+    silent bufdo if split(bufname(), ":")[0] ==# "term" | bd! | endif
 
     " create session
     silent mksession!

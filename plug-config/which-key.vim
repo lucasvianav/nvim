@@ -28,21 +28,21 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 " Single mappings
-let g:which_key_map.e = [ ':CocCommand explorer'                ,   'explorer' ]
-let g:which_key_map.f = [ ':FZF'                                ,   'search files' ]
-let g:which_key_map.F = [ '<Plug>(coc-format-selected)'         ,   'format selection' ]
-let g:which_key_map.h = [ '<C-W>s'                              ,   'split below']
-let g:which_key_map.r = [ ':Ranger'                             ,   'ranger' ]
-let g:which_key_map.S = [ ':Startify'                           ,   'start screen' ]
-let g:which_key_map['/'] = [ ':Rg'                              ,   'search text' ]
-let g:which_key_map.b = [ ':Buffers'                            ,   'list buffers' ]
-let g:which_key_map.v = [ '<C-W>v'                              ,   'split right']
-let g:which_key_map.w = [ '<Plug>(easymotion-overwin-w)'        ,   'go to word']
-let g:which_key_map.c = [ '<Plug>(easymotion-overwin-f)'        ,   'go to char']
-let g:which_key_map.n = [ ':noh'                                ,   'hide highlights']
-let g:which_key_map.t = [ '<SID>ToggleTerminal("J", 6)'         ,   'open terminal below']
-let g:which_key_map['tr'] = [ '<SID>ToggleTerminal("L", 60)'    ,   'open terminal right']
-let g:which_key_map['sy'] = [ '<Plug>(easymotion-overwin-f2)'   ,   'go to syllab']
+let g:which_key_map.e = [ ':CocCommand explorer'                        ,   'explorer' ]
+let g:which_key_map.f = [ ':FZF'                                        ,   'search files' ]
+let g:which_key_map.F = [ '<Plug>(coc-format-selected)'                 ,   'format selection' ]
+let g:which_key_map.h = [ '<C-W>s'                                      ,   'split below']
+let g:which_key_map.r = [ ':Ranger'                                     ,   'ranger' ]
+let g:which_key_map.S = [ ':Startify'                                   ,   'start screen' ]
+let g:which_key_map['/'] = [ ':Rg'                                      ,   'search text' ]
+let g:which_key_map.b = [ ':Buffers'                                    ,   'list buffers' ]
+let g:which_key_map.v = [ '<C-W>v'                                      ,   'split right']
+let g:which_key_map.w = [ '<Plug>(easymotion-overwin-w)'                ,   'go to word']
+let g:which_key_map.c = [ '<Plug>(easymotion-overwin-f)'                ,   'go to char']
+let g:which_key_map.n = [ ':noh'                                        ,   'hide highlights']
+let g:which_key_map.t = [ ':ToggleTermBottom'                           ,   'open terminal below']
+let g:which_key_map['tr'] = [ ':ToggleTermRight'                        ,   'open terminal right']
+let g:which_key_map['sy'] = [ '<Plug>(easymotion-overwin-f2)'           ,   'go to syllab']
 
 
 " Unlisted keymaps
