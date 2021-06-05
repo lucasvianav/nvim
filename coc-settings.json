@@ -75,5 +75,6 @@
     },
 
     // snippets
-    "snippets.userSnippetsDirectory": "~/.config/nvim/snippets"
+    "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
+    "snippets.textmateSnippetsRoots": [ "~/.config/nvim/snippets" ]
 }

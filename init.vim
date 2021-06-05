@@ -16,13 +16,13 @@ source $HOME/.config/nvim/keybindings/unimpaired.vim
 source $HOME/.config/nvim/commands/mappings.vim
 
 if exists('g:vscode') " if it's on vscode
-    
+
     " VSCode settings
     source $HOME/.config/nvim/vscode/settings.vim
 
     " " glitch moves cursor to start of line when entering visual mode
-    " source $HOME/.config/nvim/vscode/ui-modifier.vim 
-    
+    " source $HOME/.config/nvim/vscode/ui-modifier.vim
+
     " VSCode Keybinds
     source $HOME/.config/nvim/keybindings/vscode.vim
 
@@ -33,7 +33,7 @@ if exists('g:vscode') " if it's on vscode
     source $HOME/.config/nvim/plug-config/highlightedyank.vim
 
 else " if it's not on vscode
-    
+
     " Themes
     source $HOME/.config/nvim/themes/appearence.vim
     source $HOME/.config/nvim/themes/onedark.vim
@@ -41,6 +41,7 @@ else " if it's not on vscode
 
     " Non-VSCode Commands
     source $HOME/.config/nvim/commands/terminal.vim
+    source $HOME/.config/nvim/commands/BufOnly.vim
 
     " VIM Plugins
     source $HOME/.config/nvim/plug-config/coc.vim

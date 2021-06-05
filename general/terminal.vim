@@ -60,3 +60,4 @@ nnoremap <silent> <Leader>t :call <SID>ToggleTerminal('J', 6)<CR>
 
 " Toggle terminal - right
 nnoremap <silent> <Leader>tr :call <SID>ToggleTerminal('L', 60)<CR>
+

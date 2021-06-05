@@ -1,0 +1,147 @@
+{
+    // Place your snippets for javascript here. Each snippet is defined under a snippet name and has a prefix, body and 
+    // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+    // same ids are connected.
+    // Example:
+    // "Print to console": {
+    // 	"prefix": "log",
+    // 	"body": [
+    // 		"console.log('$1');",
+    // 		"$2"
+    // 	],
+    // 	"description": "Log output to console"
+    // }
+
+    "Mongoose Schema": {
+        "prefix": "schema",
+        "body": [
+            "const ${1:name}Schema = mongoose.Schema({",
+            "    ${2:propertyName}: {",
+            "        type: ${3:propertyType},",
+            "        required: ${4:bool}",
+            "    }",
+            "})"
+        ],
+        "description": "Mongoose Schema template"
+    },
+
+    "Require Module": {
+        "prefix": "require",
+        "body": ["const ${1:module} = require('$1')"],
+        "description": "Require module statement"
+    },
+
+    "Export module": {
+        "prefix": "export",
+        "body": ["module.exports = ${1:export}"],
+        "description": "Export module statement"
+    },
+
+    "Mongoose Model": {
+        "prefix": "model",
+        "body": [
+            "const mongoose = require('mongoose')",
+            "const ${TM_FILENAME_BASE/s$//}Schema = require('schemas/$TM_FILENAME_BASE')",
+            "",
+            "const ${TM_FILENAME_BASE/^(.)/${1:/upcase}/} = mongoose.model('${TM_FILENAME_BASE/^(.)/${1:/upcase}/}', ${TM_FILENAME_BASE/s$//}Schema)",
+            "",
+            "module.exports = ${TM_FILENAME_BASE/^(.)/${1:/upcase}/}"
+        ],
+        "description": "Mongoose Model"
+    },
+
+    "Express Controller": {
+        "prefix": "controller",
+        "body": [
+            "const ${TM_FILENAME_BASE}Service = require('../services/${TM_FILENAME_BASE}')",
+            "",
+            "const ${TM_FILENAME_BASE}Controller = {",
+            "    ${1:functionName}: async (req, res) => ${2:functionBody}",
+            "}",
+            "",
+            "module.exports = ${TM_FILENAME_BASE}Controller"
+        ],
+        "description": "Express Controller"
+    },
+
+    "Express Service": {
+        "prefix": "service",
+        "body": [
+            "const ${TM_FILENAME_BASE/^(.)/${1:/upcase}/} = require('../models/${TM_FILENAME_BASE}')",
+            "",
+            "const ${TM_FILENAME_BASE}Service = {",
+            "    ${1:functionName}: async (${2:arguments}) => ${3:functionBody}",
+            "}",
+            "",
+            "module.exports = ${TM_FILENAME_BASE}Service"
+        ],
+        "description": "Express Service"
+    },
+
+    "Express Router": {
+        "prefix": "router",
+        "body": [
+            "const router = require('express').Router()",
+            "const ${TM_FILENAME_BASE}Controller = require('../${1:path}/controllers/${TM_FILENAME_BASE}')",
+            "",
+            "router.${2:requestType}('/${3:route}', ${TM_FILENAME_BASE}Controller.${4:function})",
+            "",
+            "module.exports = router"
+        ],
+        "description": "Express Router"
+    },
+
+    "Express Route": {
+        "prefix": "route",
+        "body": ["router.${1:requestType}('/${2:route}', ${TM_FILENAME_BASE}Controller.${3:function})"],
+        "description": "Express Route"
+    },
+
+    "React Class": {
+        "prefix": "reactclass",
+        "body": [
+            "import React from 'react'",
+            "${1:import './${TM_FILENAME_BASE}.css'}",
+            "",
+            "class ${2:${TM_FILENAME_BASE/^(.)/${1:/upcase}/}} extends React.Component {",
+            "    render = () => ${3:body}",
+            "}",
+            "",
+            "export default ${2}"
+        ],
+        "description": "React Class"
+    },
+
+    "React Context Provider": {
+        "prefix": "reactcontextprovider",
+        "body": [
+            "import React from 'react'",
+            "export const ${1:Data}Context = React.createContext()",
+            "",
+            "export class ${1}Provider extends React.Component {",
+            "    constructor(props){",
+            "        super(props)",
+            "",
+            "        this.state = {}",
+            "    }",
+            "",
+            "    render = () => {",
+            "        return(",
+            "            <${1}Context.Provider value={{}}>",
+            "                {this.props.children}",
+            "            </${1}Context.Provider>",
+            "        )",
+            "    }",
+            "}",
+            "",
+        ],
+        "description": "React Context Provider"
+    },
+
+    "React Bind Method": {
+        "prefix": "reactbindmethod",
+        "body": ["this.${1:methodName} = this.$1.bind(this)"],
+        "description": "React Bind Method"
+    }
+}

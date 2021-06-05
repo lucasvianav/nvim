@@ -28,13 +28,13 @@ pip install -U ueberzug
 mkdir -p ~/.config/ranger/plugins/ranger_devicons
 git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
 
-mkdir autoload session
+mkdir -p ../autoload ../session
 
-echo 
-echo 
-echo 
-echo 
-echo 
+echo
+echo
+echo
+echo
+echo
 echo "Successfully installed!"
 echo "In VSCode, point your init.vim path to \"\$HOME/.config/nvim/\""
 
