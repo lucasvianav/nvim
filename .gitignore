@@ -9,3 +9,8 @@ session/*
 .vscode/
 .vscode/*
 Session.vim
+yarn.lock
+node__modules/
+node__modules/*
+node_modules/
+node_modules/*

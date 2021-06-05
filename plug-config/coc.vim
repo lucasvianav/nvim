@@ -1,3 +1,14 @@
+" Node.js path
+let g:coc_node_path = '/usr/bin/node'
+
+" Extensions
+let g:coc_global_extensions = [
+\    'coc-json', 'coc-pyright', 'coc-html', 'coc-html', 'coc-angular',
+\    'coc-cssmodules', 'coc-discord', 'coc-dash-complete', 'coc-dot-complete', 'coc-eslint',
+\    'coc-explorer', 'coc-fzf-preview', 'coc-git', 'coc-html-css-support',
+\    'coc-sh', 'coc-snippets', 'coc-sql', 'coc-tailwindcss'
+\]
+
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
