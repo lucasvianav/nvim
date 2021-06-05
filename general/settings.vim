@@ -27,7 +27,6 @@ set relativenumber
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
 set showtabline=4                       " Always show tabs
-set noshowmode                          " We don't need to see things like -- INSERT -- anymore
 set nobackup                            " This is recommended by coc
 set nowritebackup                       " This is recommended by coc
 set updatetime=300                      " Faster completion
@@ -38,7 +37,6 @@ set scrolloff=1                         " Copy paste between vim and everything 
 set nrformats=alpha,octal,hex           " Allow letter sequences
 set guifont=DroidSansMono\ Nerd\ Font\ 10
 colorscheme onedark                     " Color Theme
-"set autochdir                          " Your working directory will always be the same as your working directory
 
 " Enable folding
 if has('folding')
@@ -46,10 +44,13 @@ if has('folding')
         set fillchars=vert:┃            " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
     endif
     set foldmethod=indent               " not as cool as syntax, but faster
-    set foldlevelstart=1                " start unfolded
+    set foldlevelstart=99                " start folded
 endif
 
-au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+" auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+au! BufWritePost $MYVIMRC source %
+
+" enable commentaries in json
 au BufNewFile,BufRead,BufReadPost *.json set syntax=jsonc
 
 " Make macros work better in visual mode
@@ -58,3 +59,14 @@ function! ExecuteMacroOverVisualRange()
     echo "@".getcmdline()
     execute ":'<,'>normal @".nr2char(getchar())
 endfunction
+
+" Handle trailling whitespaces
+set list listchars=trail:.,extends:>
+function! <SID>StripTrailingWhitespaces()
+    if !&binary && &filetype != 'diff'
+        let l:save = winsaveview()
+        keeppatterns %s/\s\+$//e
+        call winrestview(l:save)
+    endif
+endfun
+autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript,vim,sh autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
