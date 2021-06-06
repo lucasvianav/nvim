@@ -17,9 +17,9 @@ In the `scripts/` there are bash scripts to install and setup everything that's 
  3. [Plugin mappings](#plugin-mappings)
  4. [Custom mappings](#custom-mappings)
  5. [Vanilla mappings that I always forget and need to consult](#vanilla)
+ 6. [Acknowledgements](#acknowledgements)
+ 7. [TODO](#todo)
 <!--  6. [Additional tips/Observations](#additional-tips) -->
- 7. [Acknowledgements](#acknowledgements)
- 8. [TODO](#todo)
 
 ## <a id="settings"></a>Settings:
 
