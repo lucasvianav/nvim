@@ -17,7 +17,7 @@ In the `scripts/` there are bash scripts to install and setup everything that's 
  3. [Plugin mappings](#plugin-mappings)
  4. [Custom mappings](#custom-mappings)
  5. [Vanilla mappings that I always forget and need to consult](#vanilla)
- 6. [Additional tips/Observations](#additional-tip)
+<!--  6. [Additional tips/Observations](#additional-tips) -->
  7. [Acknowledgements](#acknowledgements)
  8. [TODO](#todo)
 
@@ -32,6 +32,11 @@ Note that most of these settings apply only to the Terminal Neovim.
 * Files are set to be opened completely folded.
 * By default, all `.json` files are interpreted as `.jsonc` (permitting commentaries).
 * Whenever you save a file, all trailing whitespaces are deleted.
+
+### <a id="capslock"></a>CapsLock ([suxpert/vimcaps](https://github.com/suxpert/vimcaps))
+
+This plugin is pretty simples and I like it a lot: it basically deactivates CapsLock once you exit insert mode.
+An alternative would be [tpope's vim-capslock](https://github.com/tpope/vim-capslock), but I couldn't make it work on VSCode (vimcaps does).
 
 ### Sessions (Terminal Neovim):
 
@@ -58,6 +63,8 @@ Plugins in other sections:
 
  1. [WhichKey](#whichkey)
  2. [CapsLock](#capslock)
+ 3. [Scalpel](#scalpel)
+ 4. [BufOnly](#bufonly)
 
 ### <a id="commentary"></a>Commentary ([tpope/vim-commentary](https://github.com/tpope/vim-commentary))
 
@@ -312,7 +319,7 @@ The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space
 * `r`: opens **r**anger
 * `s`: search and replace word under cursor
   * Confirmation will be asked for each substitution.
-  * Plugin: [wincent/scalpel](https://github.com/wincent/scalpel)
+  * Plugin: <a id="scalpel"/>[wincent/Scalpel](https://github.com/wincent/scalpel)
 * `sy`: go to **sy**llab
 * `S`: opens **S**tartify (start screen)
 * `t`: open terminal in the bottom
@@ -388,7 +395,7 @@ These keybindings are better detailed [here](#folding).
 * `:settings`: opens init.vim (same as `:e $MYVIMRC`)
 * `:keybindings`: opens the main keybindings file
 * `:bufo`, `BufOnly`: same as `:tabo` but for buffers
-  * Plugin: [BufOnly](https://www.vim.org/scripts/script.php?script_id=1071).
+  * Plugin: <a id="bufonly"/>[BufOnly](https://www.vim.org/scripts/script.php?script_id=1071).
 * `:qb`, `BufClose`: **q**uits **b**uffer (without closing windows)
 * `:wqb`, `BqWrite`: saves (**w**rites) and **q**uits **b**uffer (without closing windows)
 * `:ToggleTermBottom`: open terminal in the bottom
@@ -460,14 +467,9 @@ I've also left some custom keybinds in here so all the folding keybinds stay tog
   * e.g.: `2zm`, `zm2` will fold level 2
 * `zM`: closes all folds
 
-## <a id="additional-tips"></a>Additional tips/Observations
+<!-- ## <a id="additional-tips"></a>Additional tips/Observations
 
-I'm putting this here because I haven't memorized it yet and neet to consult it. In bash, you can use `Ctrl+Z` to suspend Neovim (or any app I guess) and then `fg` to go back to it (put it in the **f**ore**g**round). You can also use bg to leave it running in the **b**ack**g**round.
-
-### <a id="capslock"></a>CapsLock ([suxpert/vimcaps](https://github.com/suxpert/vimcaps))
-
-This plugin is pretty simples and I like it a lot: it basically deactivates CapsLock once you exit insert mode.
-An alternative would be [tpope's vim-capslock](https://github.com/tpope/vim-capslock), but I couldn't make it work on VSCode (vimcaps does).
+I'm putting this here because I haven't memorized it yet and neet to consult it. In bash, you can use `Ctrl+Z` to suspend Neovim (or any app I guess) and then `fg` to go back to it (put it in the **f**ore**g**round). You can also use bg to leave it running in the **b**ack**g**round. -->
 
 ## <a id="acknowledgements"></a>Acknowledgements
 
