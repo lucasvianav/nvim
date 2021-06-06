@@ -21,9 +21,7 @@ In the `scripts/` there are bash scripts to install and setup everything that's 
  7. [Acknowledgements](#acknowledgements)
  8. [TODO](#todo)
 
-## <a id="settings"></a>Settings (Terminal Neovim):
-
-Note that most of these settings apply only to the Terminal Neovim.
+## <a id="settings"></a>Settings:
 
 * By default, long lines are displayed as one line (no wrap).
 * Tabs are converted to 4 spaces.
