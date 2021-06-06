@@ -6,17 +6,38 @@
 
 This is simply my Neovim config, which I use mainly with the [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension. I'm still a beginner in VIM, so any feedback is welcome :)
 
-In Ubuntu, clone it to: ~/.config/nvim
+In Ubuntu/Debian, clone it to `~/.config/nvim`.
+
+In the `scripts/` there are bash scripts to install and setup everything that's required, as well as import/export snippets from/to VSCode and import/export VSCode's config (settings.json and keybindings.json).
 
 ## Summary
 
  1. [Installation](#installation)
- 2. [Plugin mappings](#plugin-mappings)
- 3. [Custom mappings](#custom-mappings)
- 4. [Vanilla mappings that I always forget and need to consult](#vanilla)
- 5. [Additional tips/Observations](#additional-tip)
- 6. [Acknowledgements](#acknowledgements)
- 7. [TODO](#todo)
+ 2. [Settings](#settings)
+ 3. [Plugin mappings](#plugin-mappings)
+ 4. [Custom mappings](#custom-mappings)
+ 5. [Vanilla mappings that I always forget and need to consult](#vanilla)
+ 6. [Additional tips/Observations](#additional-tip)
+ 7. [Acknowledgements](#acknowledgements)
+ 8. [TODO](#todo)
+
+## <a id="settings"></a>Settings (Terminal Neovim):
+
+Note that most of these settings apply only to the Terminal Neovim.
+
+* By default, long lines are displayed as one line (no wrap).
+* Tabs are converted to 4 spaces.
+* Mouse is enabled.
+* Line numbers are relative to the cursorline.
+* Files are set to be opened completely folded.
+* By default, all `.json` files are interpreted as `.jsonc` (permitting commentaries).
+* Whenever you save a file, all trailing whitespaces are deleted.
+
+### Sessions (Terminal Neovim):
+
+I'm using [Startify](https://github.com/mhinz/vim-startify) as a session manager. I've set it to save a Session.vim inside the project root whenever you quit vim and also save sessions for your projects at `//nvim/session/`. When you open a starred project (directory) that contains a Session.vim, that session will be automatically restored and otherwise, you'll be able to select a session to restore (as well as files or directories) on the start screen (screenshot below).
+
+![Start Screen](https://i.imgur.com/GkZNjTH.png)
 
 ## <a id="plugin-mappings"></a>Plugin mappings:
 
@@ -70,12 +91,12 @@ autocmd FileType apache setlocal commentstring=#\ %s
   * When substituting a tag for another surrounding, the tag is represented by `t`
         * e.g.: `cst"` will turn `<q>Hello world!</q>` into `"Hello world!"`
 * `ds`: **d**elete **s**urrounding — analogue to `cs`
-* `çs`: **ç**et (set) **s**urrounding — inserts a surrounding (2nd argument) to the motion received (1st argument)
+* `xs`: e**x**ecute (set) **s**urrounding — inserts a surrounding (2nd argument) to the motion received (1st argument)
   * Originally this keybind is `ys`, but I remapped it to make it compatible with [EasyClip](#easyclip)
-  * e.g.: with the cursor on "Hello", `çsiw]` will `Hello world!` into `[Hello world!]`
-* `pss`: **ç**et **s**uper (welp) **s**urrounding — inserts a surrounding (only argument) to the current line (ignoring leading whitespace)
+  * e.g.: with the cursor on "Hello", `xsiw]` will `Hello world!` into `[Hello world!]`
+* `pss`: e**x**ecute **s**uper (welp) **s**urrounding — inserts a surrounding (only argument) to the current line (ignoring leading whitespace)
 
-Passing `S` instead of `s` for the above keybinds (`cs`, `ss`, `çSs`, `çSS`) will indent the surrounded text and place it on a line of its own.
+Passing `S` instead of `s` for the above keybinds (`cs`, `ss`, `xSs`, `xSS`) will indent the surrounded text and place it on a line of its own.
 
 #### Visual mode
 
@@ -278,27 +299,34 @@ The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space
 ##### Terminal Neovim
 
 * `/`: search text (`:Rg`)
+* `b`: list open **b**uffers
+* `c`: go to **c**har
 * `e`: toggles **e**xplorer
-* `g`: displays **g**it options
-* `v`: splits editor to the right (**v**ertically)
-* `h`: splits editor below (**h**orizontally)
-* `n`: hides highligts (same as `:noh`)
 * `f`: serches **f**iles (same as `:FZF`)
 * `F`: **f**ormat selected text
+* `g`: displays **g**it options
+* `h`: splits editor below (**h**orizontally)
+* `n`: hides highligts (same as `:noh`)
+* `q`: **q**uits buffer (without closing windows)
+  * The code was adapted from [this](https://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window/44950143#44950143).
 * `r`: opens **r**anger
+* `s`: search and replace word under cursor
+  * Confirmation will be asked for each substitution.
+  * Plugin: [wincent/scalpel](https://github.com/wincent/scalpel)
+* `sy`: go to **sy**llab
 * `S`: opens **S**tartify (start screen)
-* `b`: list open **b**uffers
-* `w`: go to **w**ord
-* `c`: go to **c**har
-* `ss`: go to **sy**llab
-* `t`: open terminal below
+* `t`: open terminal in the bottom
+  * You can exit terminal mode with `jk` and `<C-\><C-N>`.
 * `tr`: open terminal in the right
+  * You can exit terminal mode with `jk` and `<C-\><C-N>`.
+* `v`: splits editor to the right (**v**ertically)
+* `w`: go to **w**ord
+* `wq`: saves (**w**rites) and **q**uits buffer (without closing windows)
 
 ##### VSCode ([VSpaceCode/vscode-which-key](https://github.com/VSpaceCode/vscode-which-key))
 
-* `<Space>`: opens VSCode Command Palette
 * `/`: searches in the whole project (workspace?)
-* `s`: "find & replace" in project
+* `<Space>`: opens VSCode Command Palette
 * `d`: goes to definition
 * `D`: goes to declaration
 * `e`: toggles explorer visibility
@@ -307,13 +335,14 @@ The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space
   * `<C-S-\>` and `<C-M-E>` are alternatives (not part of WhichKey), they'll always toggle explorer.
 * `E`: displays errors
 * `g`: displays git options
-* `v`: splits editor to the right
 * `h`: splits editor below
 * `i`: organizes imports (Python-only?)
 * `m`: displays merge conflict options
 * `n`: hides highligts (same as `:noh`)
 * `o`, `O`: same as vanilla `o`and `O`, but the new line will be blank
+* `s`: "find & replace" in project
 * `t`: toggles integrated terminal
+* `v`: splits editor to the right
   * `<C-S-t>` is an alternative (not part of WhichKey), it'll always toggle the terminal.
 
 #### Folding
@@ -347,6 +376,7 @@ These keybindings are better detailed [here](#folding).
 * `:Q`: same as `:q`
 * `:Q!`: same as `:q!`
 * `:q1`: same as `:q!`
+* `:man`: same as `:help` (welp...)
 * `:wq`: remapped to `:x`
   * I prefer the `x` command's functionality, but prefer to type `:wq`
   * If you're wondering what the differences are and why I prefer `:x`, read [this comment](https://www.quora.com/Why-do-some-people-close-Vim-with-wq-instead-of-x/answer/Ye-Caiting) by [Ye Caiting](https://www.quora.com/profile/Ye-Caiting).
@@ -357,6 +387,14 @@ These keybindings are better detailed [here](#folding).
 * `:wrv`: saves the file (**w**rite) and **r**eloads **V**IMRC
 * `:settings`: opens init.vim (same as `:e $MYVIMRC`)
 * `:keybindings`: opens the main keybindings file
+* `:bufo`, `BufOnly`: same as `:tabo` but for buffers
+  * Plugin: [BufOnly](https://www.vim.org/scripts/script.php?script_id=1071).
+* `:qb`, `BufClose`: **q**uits **b**uffer (without closing windows)
+* `:wqb`, `BqWrite`: saves (**w**rites) and **q**uits **b**uffer (without closing windows)
+* `:ToggleTermBottom`: open terminal in the bottom
+  * You can exit terminal mode with `jk` and `<C-\><C-N>`.
+* `:ToggleTermRight`: open terminal in the right
+  * You can exit terminal mode with `jk` and `<C-\><C-N>`.
 
 #### Interacting with VSCode
 
@@ -405,7 +443,7 @@ I've also left some custom keybinds in here so all the folding keybinds stay tog
   * `<F10>` works in insert mode
 * `zr`: **r**educes folding in the whole buffer
 * `zR`: opens all folds
-* `zm`: increses folding in the whole buffer (**m** folding)
+* `zm`: increses folding in the whole buffer (**m**ake folding)
 * `zM`: closes all folds
 
 #### VSCode
@@ -436,7 +474,7 @@ An alternative would be [tpope's vim-capslock](https://github.com/tpope/vim-caps
 Just wanna thank:
 
 * [Christian Chiarulli](https://github.com/ChristianChiarulli), for making an excelent Neovim-introduction [video series](https://www.youtube.com/playlist?list=PLhoH5vyxr6QqPtKMp03pcJd_Vg8FZ0rtg) and [blog posts](https://www.chrisatmachine.com/neovim). When I started using/learning about VIM, I really just copying his config.
-* [Greg Hurrell](https://github.com/wincent), for the great [screencasts and stream](https://www.youtube.com/channel/UCXPHFM88IlFn68OmLwtPmZA).
+* [Greg Hurrell](https://github.com/wincent), for the great [screencasts and streams](https://www.youtube.com/channel/UCXPHFM88IlFn68OmLwtPmZA), as well as [wincent/scalpel](https://github.com/wincent/scalpel).
 * [Alexey Svetliakov](https://github.com/asvetliakov/), for making and maintaining the absolutely unbeliavable [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension.
 * All of the awesome people who made the plugins I listed/installed.
 
@@ -445,9 +483,8 @@ Just wanna thank:
 * Update README.md
   * Write installation guide
   * Write about other plugins/features
-* Test [wincent/scalpel](https://github.com/wincent/scalpel)
 * Test [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)
 * Learn more about VSCode's output tab
   * Is it possible to use it for commands like :Yanks and :IPaste?
-  * Is it possible to supress it when running terminal commands (e.g.: `:! ls`)?
+  * Is it possible to supress it when running terminal commands (e.g.: `:!ls`)?
 * Figure out why isn't EasyClip's toggle format (<Leader>cf?) working

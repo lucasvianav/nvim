@@ -17,7 +17,7 @@ command! UndoQuit e #
 command! BdWrite w | bd
 
 " saves buffer and then closes it
-command! BcWrite w | BufClose
+command! BqWrite w | BufClose
 
 cabbrev git Git
 cabbrev r Rvimrc
@@ -27,5 +27,5 @@ cabbrev keybindings Keybindings
 cabbrev uq UndoQuit
 cabbrev wbd BdWrite
 cabbrev bufo BufOnly
-cabbrev bc BufClose
-cabbrev wbc BcWrite
+cabbrev qb BufClose
+cabbrev wqb BqWrite
