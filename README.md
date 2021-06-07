@@ -145,10 +145,11 @@ Since all keybinds consist in bracket mappings, it's nice to establish a logic t
 * `]d`: breaks the current line after the cursor
 
 ### Moving around
+
 Not really from unimpaired, but from [neoclide/coc.nvim](https://github.com/neoclide/coc.nvim).
 
-* `[g, ]g`: goes to next/previous diagnostic (error, warning)
-* `[e, ]e`: goes to next/previous error
+* `[g, ]g`: goes to next/previous dia**g**nostic (error, warning)
+* `[e, ]e`: goes to next/previous **e**rror
 
 #### Option toggling
 
@@ -437,8 +438,8 @@ These keybindings are better detailed [here](#folding).
 * `''` and ` `` `: I've inverted them both
   * `''`: takes the cursor position before the latest jump (undoes the jump)
   * ` `` `: takes the cursor to the line where the cursor was before the latest jump
-* `[g, ]g`: goes to next/previous diagnostic (error, warning)
-* `[e, ]e`: goes to next/previous error
+* `[g, ]g`: goes to next/previous dia**g**nostic (error, warning)
+* `[e, ]e`: goes to next/previous **e**rror
 
 #### Horizontal
 

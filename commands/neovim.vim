@@ -19,6 +19,9 @@ command! BdWrite w | bd
 " saves buffer and then closes it
 command! BqWrite w | BufClose
 
+" get pdf text to a new buffer (works better for text-only)
+:command! -complete=file -nargs=1 Rpdf :enew | :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+
 cabbrev git Git
 cabbrev r Rvimrc
 cabbrev wrv Wrvimrc
