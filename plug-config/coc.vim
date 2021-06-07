@@ -33,11 +33,6 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -66,6 +61,12 @@ endfunction
 xmap <leader>F  <Plug>(coc-format-selected)
 nmap <leader>F  <Plug>(coc-format-selected)
 
+" Shows all diagnostics
+nnoremap <silent><nowait> <Leader>d  :<C-u>CocList diagnostics<cr>
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -86,9 +87,6 @@ endif
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
@@ -129,3 +127,6 @@ let g:coc_explorer_global_presets = {
 \ }
 
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+
+" sort python imports on save
+autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')

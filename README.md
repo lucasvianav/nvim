@@ -301,6 +301,7 @@ The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space
 * `/`: search text (`:Rg`)
 * `b`: list open **b**uffers
 * `c`: go to **c**har
+* `d`: shows all **d**iagnostics (errors, warnings)
 * `e`: toggles **e**xplorer
 * `f`: serches **f**iles (same as `:FZF`)
 * `F`: **f**ormat selected text
@@ -310,6 +311,7 @@ The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space
 * `q`: **q**uits buffer (without closing windows)
   * The code was adapted from [this](https://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window/44950143#44950143).
 * `r`: opens **r**anger
+* `rn`: **r**e**n**ame symbol
 * `s`: search and replace word under cursor
   * Confirmation will be asked for each substitution.
   * Plugin: [wincent/scalpel](https://github.com/wincent/scalpel)
