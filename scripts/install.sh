@@ -30,6 +30,9 @@ git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger
 
 mkdir -p ../autoload ../session
 
+# copies the pdftotext binary to a dir in $PATH
+cp ./pdftotext_BINARY /usr/bin/pdftotext
+
 echo
 echo
 echo

@@ -409,6 +409,7 @@ These keybindings are better detailed [here](#folding).
   * You can exit terminal mode with `jk` and `<C-\><C-N>`.
 * `:ToggleTermRight`: open terminal in the right
   * You can exit terminal mode with `jk` and `<C-\><C-N>`.
+* `:Rpdf`: helps **r**eading a **pdf** inside neovim (writes the pdf text to a new buffer)
 
 #### Interacting with VSCode
 
