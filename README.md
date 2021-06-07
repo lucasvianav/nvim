@@ -134,15 +134,21 @@ Since all keybinds consist in bracket mappings, it's nice to establish a logic t
 
 * `[<Space>`: adds a blank line above
 * `]<Space>`: adds a blank line below
-* `[e` (same as `<M-k>`): moves the curent line (or selection) up
+* `[a` (same as `<M-k>`): moves the curent line (or selection) up
   * In VSCode, the visual mode version is buggy. If you don't hold/mash the buttons, everything should be ok.
-* `]e` (same as `<M-j>`): moves the current line (or selection) down
+* `]a` (same as `<M-j>`): moves the current line (or selection) down
   * In VSCode, the visual mode version is buggy. If you don't hold/mash the buttons, everything should be ok.
 * `[d`: duplicates the current line (or selection), leaving the cursor (and selection) on the upper duplicate
 * `]d`: duplicates the current line (or selection), leaving the cursor (and selection) on the lower duplicate
   * It glitches the first time you use it in visual mode :c
 * `[b`: breaks the current line before the cursor
 * `]d`: breaks the current line after the cursor
+
+### Moving around
+Not really from unimpaired, but from [neoclide/coc.nvim](https://github.com/neoclide/coc.nvim).
+
+* `[g, ]g`: goes to next/previous diagnostic (error, warning)
+* `[e, ]e`: goes to next/previous error
 
 #### Option toggling
 
@@ -431,6 +437,8 @@ These keybindings are better detailed [here](#folding).
 * `''` and ` `` `: I've inverted them both
   * `''`: takes the cursor position before the latest jump (undoes the jump)
   * ` `` `: takes the cursor to the line where the cursor was before the latest jump
+* `[g, ]g`: goes to next/previous diagnostic (error, warning)
+* `[e, ]e`: goes to next/previous error
 
 #### Horizontal
 

@@ -113,30 +113,30 @@ nnoremap <silent> <Plug>unimpairedMoveDown          :<C-U>call <SID>Move('+',v:c
 noremap  <silent> <Plug>unimpairedMoveSelectionUp   :<C-U>call <SID>MoveSelectionUp(v:count1)<CR>
 noremap  <silent> <Plug>unimpairedMoveSelectionDown :<C-U>call <SID>MoveSelectionDown(v:count1)<CR>
 
-call s:map('x', '[e', '<Plug>unimpairedMoveSelectionUp')
-call s:map('x', ']e', '<Plug>unimpairedMoveSelectionDown')
+call s:map('x', '[a', '<Plug>unimpairedMoveSelectionUp')
+call s:map('x', ']a', '<Plug>unimpairedMoveSelectionDown')
 
 " On VSCode, use alt + j, k as native VSCode "Move Lines"
 if exists('g:vscode')
-    nnoremap [e :call VSCodeNotify('editor.action.moveLinesUpAction')<CR>
-    nnoremap ]e :call VSCodeNotify('editor.action.moveLinesDownAction')<CR>
+    nnoremap [a :call VSCodeNotify('editor.action.moveLinesUpAction')<CR>
+    nnoremap ]a :call VSCodeNotify('editor.action.moveLinesDownAction')<CR>
 
     " makes vscode actions "work" in visual mode (deactivated beacause of bugs)
     " xnoremap <M-k> :<C-u>call <SID>VSCodeMoveLine("Up")<CR>
     " xnoremap <M-j> :<C-u>call <SID>VSCodeMoveLine("Down")<CR>
 
 else
-    call s:map('n', '[e', '<Plug>unimpairedMoveUp')
-    call s:map('n', ']e', '<Plug>unimpairedMoveDown')
+    call s:map('n', '[a', '<Plug>unimpairedMoveUp')
+    call s:map('n', ']a', '<Plug>unimpairedMoveDown')
 endif
 
 " Move lines with alt + jk
-nmap <M-k> [e
-nmap <M-j> ]e
+nmap <M-k> [a
+nmap <M-j> ]a
 
 " Visual mode alt + j, k
-xmap <M-k> [e
-xmap <M-j> ]e
+xmap <M-k> [a
+xmap <M-j> ]a
 
 " Section: Option toggling
 
