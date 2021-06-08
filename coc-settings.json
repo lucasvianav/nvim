@@ -1,4 +1,9 @@
 {
+    // autocompletion
+    "suggest.enablePreselect": false,
+    "suggest.autoTrigger": "trigger",
+    "suggest.noselect": true,
+
     // explorer
     "explorer.width": 30,
     "explorer.icon.enableNerdfont": true,

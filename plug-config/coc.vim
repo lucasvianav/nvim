@@ -33,6 +33,28 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
+" confirms selection if any or just break line if none
+function! EnterSelect()
+    " if the popup is visible and an option is not selected
+    if pumvisible() && complete_info()["selected"] == -1
+        return "\<C-y>\<CR>"
+
+    " if the pum is visible and an option is selected
+    elseif pumvisible()
+        return coc#_select_confirm()
+
+    " if the pum is not visible
+    else
+        return "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+    endif
+endfunction
+
+" makes <CR> confirm selection if any or just break line if none
+inoremap <silent><expr> <cr> EnterSelect()
+
+" close all floating windows an popups when pressing <Esc>
+inoremap <silent> <Esc> <Esc>:call coc#float#close_all()<CR>a
+
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-next)
 nmap <silent> ]g <Plug>(coc-diagnostic-prev)
