@@ -1,7 +1,7 @@
 {
     // autocompletion
     "suggest.enablePreselect": false,
-    "suggest.autoTrigger": "trigger",
+    "suggest.autoTrigger": "always",
     "suggest.noselect": true,
 
     // explorer
@@ -88,6 +88,7 @@
         "line_length": false,
         "no-inline-html": false,
         "no-trailing-punctuation": false,
-        "no-duplicate-header": false
+        "no-duplicate-header": false,
+        "fenced-code-language": false
     }
 }

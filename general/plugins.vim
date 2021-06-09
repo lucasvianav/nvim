@@ -85,6 +85,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'itchyny/vim-gitbranch'
         " Search and replace word under cursor
         Plug 'wincent/scalpel'
+        " Pulse cursorline after search (makes easier to find the cursor)
+        Plug 'inside/vim-search-pulse'
+        " Switch between single-line and multiline statement
+        Plug 'AndrewRadev/splitjoin.vim'
 
         " Icons (must me the last plugin loaded)
         Plug 'ryanoasis/vim-devicons'

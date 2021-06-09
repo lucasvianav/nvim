@@ -36,9 +36,11 @@ In the `scripts/` there are bash scripts to install and setup everything that's 
 This plugin is pretty simples and I like it a lot: it basically deactivates CapsLock once you exit insert mode.
 An alternative would be [tpope's vim-capslock](https://github.com/tpope/vim-capslock), but I couldn't make it work on VSCode (vimcaps does).
 
-### Sessions (Terminal Neovim):
+### <a id="sessions"/> Sessions (Terminal Neovim):
 
 I'm using [Startify](https://github.com/mhinz/vim-startify) as a session manager. I've set it to save a Session.vim inside the project root whenever you quit vim and also save sessions for your projects at `//nvim/session/`. When you open a starred project (directory) that contains a Session.vim, that session will be automatically restored and otherwise, you'll be able to select a session to restore (as well as files or directories) on the start screen (screenshot below).
+
+Sessions won't be created on system directories (such as home, Desktop, Documents, etc).
 
 ![Start Screen](https://i.imgur.com/GkZNjTH.png)
 
@@ -56,6 +58,7 @@ Every relevant keybind/command mapped by a plugin.
  8. [Radical](#radical)
  9. [Visual Increment](#visual-increment)
  10. [Fugitive](#fugitive)
+ 11. [SplitJoin](#splitjoin)
 
 Plugins in other sections:
 
@@ -290,6 +293,13 @@ Makes `<C-A>` and `<C-X>` work in blockwise visual mode (`^V`) to create sequenc
 
 Makes possible to use `:Git` (that I abbreviated to `:git`) as you would in the command line.c
 
+### <a id="splitjoin"></a>Fugitive ([AndrewRadev/splitjoin.vim](https://github.com/AndrewRadev/splitjoin.vim))
+
+Makes it possible to convert single-line statements into multiline statements and the other way around.
+
+* `gS`: **s**plit into multiline statement
+* `gJ`: **j**oin into single-line statement
+
 ## <a id="custom-mappings"></a>Custom mappings/abbreviations
 
 ### Keybinds
@@ -381,9 +391,6 @@ These keybindings are better detailed [here](#folding).
 #### Custom
 
 * `:count`: count number of ocurrences of a pattern in the current buffer
-* `:uq`: **u**ndoes last **q**uit - reopens last closed tag
-  * In Terminal Neovim, is the same as `:e #`;
-  * In VSCode, calls VSCode's "reopen closed editor" action.
 
 #### Abbreviations
 
@@ -410,6 +417,9 @@ These keybindings are better detailed [here](#folding).
 * `:ToggleTermRight`: open terminal in the right
   * You can exit terminal mode with `jk` and `<C-\><C-N>`.
 * `:Rpdf`: helps **r**eading a **pdf** inside neovim (writes the pdf text to a new buffer)
+* `:DelSessions`: deletes current session
+  * This'll delete both the Session.vim in the current working directory, as well as this session's Startify entry at ~/.config/nvim/session.
+  * For more info about sessions, read [this](#sessions).
 
 #### Interacting with VSCode
 
@@ -418,6 +428,7 @@ These keybindings are better detailed [here](#folding).
 * `:wrv[scode]`: saves the file (**w**rite) and **r**eloads **VS**Code window
 * `:settings`: opens VSCode's settings.json
 * `:keybindings`, `:keybinds`, `:keyboard`: opens VSCode's keybindings.json
+* `:uq`: **u**ndoes last **q**uit - reopens last closed tab
 
 ## <a id="vanilla"></a>Vanilla mappings that I always forget and need to consult
 
