@@ -2,8 +2,6 @@
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  "autocmd VimEnter * PlugInstall
-  "autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
@@ -16,17 +14,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-commentary'
     " Perl Regex
     Plug 'othree/eregex.vim'
-    " Better Unicode Compatibility?
-    Plug 'tpope/vim-characterize'
     " Enables . repeat for Plug-In maps
     Plug 'tpope/vim-repeat'
     " Fixes <C-A> and <C-X> for dates
     Plug 'tpope/vim-speeddating'
     " Better clipboard
     Plug 'svermeulen/vim-easyclip'
-    " Allows number base conversion
-    Plug 'glts/vim-radical'
-    Plug 'glts/vim-magnum'
     " Crazy stuff (words manipulation)
     Plug 'tpope/vim-abolish'
     " Fix CAPS LOCK
@@ -43,19 +36,20 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'kana/vim-altercmd'
 
     else
+        " Themes
+        Plug 'joshdick/onedark.vim'
+        " Plug 'tyrannicaltoucan/vim-deep-space'
+        " Plug 'wadackel/vim-dogrun'
+
         " Better Syntax Support
         Plug 'sheerun/vim-polyglot'
         " Auto pairs for '(' '[' '{'
         Plug 'jiangmiao/auto-pairs'
-        " One Dark Color Theme
-        Plug 'joshdick/onedark.vim'
         " coc
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
         " Airline Status Bar
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
-        " Theme
-        Plug 'wadackel/vim-dogrun'
         " Ranger File-Explorer
         Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
         " FZF
@@ -90,7 +84,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         " Switch between single-line and multiline statement
         Plug 'AndrewRadev/splitjoin.vim'
 
-        " Icons (must me the last plugin loaded)
+        " Icons (must be the last plugin loaded)
         Plug 'ryanoasis/vim-devicons'
     endif
 

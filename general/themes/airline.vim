@@ -24,7 +24,7 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.maxlinenr = ' ㏑'
 
-" Switch to your current theme
+" matching with current theme
 let g:airline_theme = 'onedark'
 
 " Always show tabs

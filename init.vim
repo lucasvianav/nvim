@@ -1,76 +1,76 @@
-" Plugins
-source $HOME/.config/nvim/general/plugins.vim
+" plugins
+source $HOME/.config/nvim/general/plugins/index.vim
 
-" Settings
+" general settings
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/general/providers.vim
 
-" Abbreviations
-source $HOME/.config/nvim/general/typo-abbreviations.vim
+" abbreviations
+source $HOME/.config/nvim/mappings/typos.vim
 
-" Keybind maps
-source $HOME/.config/nvim/keybindings/mappings.vim
-source $HOME/.config/nvim/keybindings/unimpaired.vim
+" custom keybindings
+source $HOME/.config/nvim/mappings/keybindings/mappings.vim
+source $HOME/.config/nvim/mappings/keybindings/unimpaired.vim
 
-"Command maps
-source $HOME/.config/nvim/commands/mappings.vim
+" custom commands
+source $HOME/.config/nvim/mappings/commands/mappings.vim
 
 if exists('g:vscode') " if it's on vscode
 
-    " VSCode settings
+    " vscode settings
     source $HOME/.config/nvim/vscode/settings.vim
 
     " " glitch moves cursor to start of line when entering visual mode
     " source $HOME/.config/nvim/vscode/ui-modifier.vim
 
-    " VSCode Keybinds
-    source $HOME/.config/nvim/keybindings/vscode.vim
+    " vscode keybinds
+    source $HOME/.config/nvim/mappings/keybindings/vscode.vim
 
-    " VSCode Commands
-    source $HOME/.config/nvim/commands/vscode.vim
+    " vscode commands
+    source $HOME/.config/nvim/mappings/commands/vscode.vim
 
-    " Plugins
-    source $HOME/.config/nvim/plug-config/highlightedyank.vim
+    " plugins
+    source $HOME/.config/nvim/general/plugins/config/highlightedyank.vim
 
 else " if it's not on vscode
 
-    " Themes
-    source $HOME/.config/nvim/themes/appearence.vim
-    source $HOME/.config/nvim/themes/onedark.vim
-    source $HOME/.config/nvim/themes/airline.vim
+    " themes
+    source $HOME/.config/nvim/general/themes/appearence.vim
+    source $HOME/.config/nvim/general/themes/onedark.vim
+    source $HOME/.config/nvim/general/themes/airline.vim
 
-    " Non-VSCode Commands
-    source $HOME/.config/nvim/commands/BufOnly.vim
-    source $HOME/.config/nvim/commands/BufClose.vim
-    source $HOME/.config/nvim/commands/neovim.vim
+    " non-vscode commands
+    source $HOME/.config/nvim/mappings/commands/BufOnly.vim
+    source $HOME/.config/nvim/mappings/commands/BufClose.vim
+    source $HOME/.config/nvim/mappings/commands/neovim.vim
 
-    " VIM Plugins
-    source $HOME/.config/nvim/plug-config/coc.vim
-    source $HOME/.config/nvim/plug-config/rnvimr.vim
-    source $HOME/.config/nvim/plug-config/fzf.vim
-    source $HOME/.config/nvim/plug-config/rainbow_parentheses.vim
-    source $HOME/.config/nvim/plug-config/startify.vim
-    source $HOME/.config/nvim/plug-config/codi.vim
-    source $HOME/.config/nvim/plug-config/easymotion.vim
-    source $HOME/.config/nvim/plug-config/closetag.vim
-    source $HOME/.config/nvim/plug-config/illuminate.vim
-    source $HOME/.config/nvim/plug-config/scalpel.vim
+    " vim plugins
+    source $HOME/.config/nvim/general/plugins/config/coc.vim
+    source $HOME/.config/nvim/general/plugins/config/rnvimr.vim
+    source $HOME/.config/nvim/general/plugins/config/fzf.vim
+    source $HOME/.config/nvim/general/plugins/config/rainbow_parentheses.vim
+    source $HOME/.config/nvim/general/plugins/config/startify.vim
+    source $HOME/.config/nvim/general/plugins/config/codi.vim
+    source $HOME/.config/nvim/general/plugins/config/easymotion.vim
+    source $HOME/.config/nvim/general/plugins/config/closetag.vim
+    source $HOME/.config/nvim/general/plugins/config/illuminate.vim
+    source $HOME/.config/nvim/general/plugins/config/scalpel.vim
 
-    " LUA Plugins
+    " lua plugins
     lua require 'plug-colorizer'
 
-    " Sessions config
+    " sessions config
     source $HOME/.config/nvim/general/sessions.vim
 
-    " Terminal config
+    " terminal config
     source $HOME/.config/nvim/general/terminal.vim
 
 endif
 
-" Plugis used in both terminal Neovim and VSCode
-source $HOME/.config/nvim/plug-config/quickscope.vim
-source $HOME/.config/nvim/plug-config/vim-commentary.vim
-source $HOME/.config/nvim/plug-config/vim-easyclip.vim
-source $HOME/.config/nvim/plug-config/which-key.vim
-source $HOME/.config/nvim/plug-config/vim-surround.vim
+" plugis used in both terminal neovim and vscode
+source $HOME/.config/nvim/general/plugins/config/quickscope.vim
+source $HOME/.config/nvim/general/plugins/config/vim-commentary.vim
+source $HOME/.config/nvim/general/plugins/config/vim-easyclip.vim
+source $HOME/.config/nvim/general/plugins/config/which-key.vim
+source $HOME/.config/nvim/general/plugins/config/vim-surround.vim
 

@@ -36,7 +36,6 @@ set clipboard=unnamedplus                       " Copy paste between vim and eve
 set scrolloff=1                                 " Minimal number of screen lines to keep above and below the cursor.
 set nrformats=alpha,octal,hex                   " Allow letter sequences
 set guifont=DroidSansMono\ Nerd\ Font\ 10       " Symbol font
-colorscheme onedark                             " Color Theme
 
 " Enable folding
 if has('folding')

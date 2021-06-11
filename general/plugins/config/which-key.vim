@@ -76,10 +76,13 @@ let g:which_key_map['!'] = {
 
 let g:which_key_map.g = {
     \ 'name' : '+ git' ,
-    \ 'c' : [':Commits'      , 'commits'],
+    \ 'c' : [':C mmits'      , 'commits'],
     \ 'bc' : [':BCommits'     , 'buffer commits'],
     \ 'f' : [':GFiles'       , 'git files'],
     \ 'mf' : [':GFiles?'      , 'modified git files'],
+    \ 'd' : [':Gdiff'      , 'merge conflict comparison'],
+    \ 'h' : [':diffget //2'      , 'merge from target branch (left)'],
+    \ 'l' : [':diffget //3'      , 'merge from merge branch (right)'],
     \ }
 
 " Register which key map

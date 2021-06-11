@@ -58,7 +58,6 @@ nnoremap <silent> <S-A-L> :vertical resize +2<CR>
 " I hate escape more than anything else
 inoremap jk <Esc>
 inoremap JK <Esc>
-" inoremap kj <Esc>
 
 " Use control-c instead of escape
 nnoremap <C-c> <Esc>
@@ -72,8 +71,8 @@ inoremap <c-u> <ESC>viwUi
 nnoremap <c-u> viwU<Esc>
 
 " Buffer movement with <Tab> and <S-Tab>
-nnoremap <TAB> :bnext<CR>
-nnoremap <S-TAB> :bprevious<CR>
+nnoremap <silent> <TAB> :bnext<CR>
+nnoremap <silent> <S-TAB> :bprevious<CR>
 
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
