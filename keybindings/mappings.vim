@@ -12,7 +12,7 @@ function s:DuplicateLine(...)
 
     call setpos('.', s:cursorPos)
 
-    silent! call repeat#set("\<Plug>DuplicateLineRepeat", v:count1)   
+    silent! call repeat#set("\<Plug>DuplicateLineRepeat", v:count1)
 endfunction
 
 function s:DuplicateSelection(...)
@@ -34,7 +34,7 @@ function s:DuplicateSelection(...)
 
     call setpos('.', s:cursorPos)
 
-    silent! call repeat#set("\<Plug>DuplicateSelectionRepeat", v:count1)   
+    silent! call repeat#set("\<Plug>DuplicateSelectionRepeat", v:count1)
 endfunction
 
 nnoremap <silent> <script> <Plug>DuplicateLineAbove :<C-u>call <SID>DuplicateLine("up")<CR>
@@ -50,10 +50,10 @@ inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
 
 " Use alt + shift + hjkl to resize windows
-nnoremap <S-M-J>    :resize -2<CR>
-nnoremap <S-M-K>    :resize +2<CR>
-nnoremap <S-A-H>    :vertical resize -2<CR>
-nnoremap <S-A-L>    :vertical resize +2<CR>
+nnoremap <silent> <S-M-J> :resize -2<CR>
+nnoremap <silent> <S-M-K> :resize +2<CR>
+nnoremap <silent> <S-A-H> :vertical resize -2<CR>
+nnoremap <silent> <S-A-L> :vertical resize +2<CR>
 
 " I hate escape more than anything else
 inoremap jk <Esc>
