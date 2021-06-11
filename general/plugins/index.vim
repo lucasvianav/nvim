@@ -38,6 +38,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     else
         " Themes
         Plug 'joshdick/onedark.vim'
+        " Plug 'shaunsingh/nord.nvim'
         " Plug 'tyrannicaltoucan/vim-deep-space'
         " Plug 'wadackel/vim-dogrun'
 
@@ -83,9 +84,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'inside/vim-search-pulse'
         " Switch between single-line and multiline statement
         Plug 'AndrewRadev/splitjoin.vim'
+        Plug 'akinsho/nvim-bufferline.lua'
 
         " Icons (must be the last plugin loaded)
-        Plug 'ryanoasis/vim-devicons'
+        Plug 'kyazdani42/nvim-web-devicons'
+        " Plug 'ryanoasis/vim-devicons'
     endif
 
 call plug#end()

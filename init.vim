@@ -58,6 +58,7 @@ else " if it's not on vscode
 
     " lua plugins
     lua require 'plug-colorizer'
+    lua require 'plug-bufferline'
 
     " sessions config
     source $HOME/.config/nvim/general/sessions.vim

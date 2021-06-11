@@ -1,5 +1,5 @@
 " tabline config
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#formatter = 'default'
 
 " config
@@ -8,10 +8,9 @@ let g:airline_detect_modified=1
 let g:airline_detect_paste=1
 let g:airline_detect_crypt=1
 let g:airline_stl_path_style = 'short'
-let g:airline#extensions#capslock#enabled = 1
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_inactive_collapse=1
+let g:airline#extensions#capslock#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
 
 " extension integration
 let g:airline#extensions#coc#enabled = 1
