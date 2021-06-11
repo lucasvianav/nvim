@@ -308,6 +308,7 @@ Makes it possible to convert single-line statements into multiline statements an
 * `<M-S-H>`, `<M-S-J>`, `<M-S-K>`, `<M-S-H>`: resizes windows (left, bottom, top, right respectively)
 * `jk`, `<C-C>`: substitutes `<Esc>`, which is unmapped
 * `<TAB>`, `<S-TAB>`, `<C-TAB>`, `<C-S-TAB>`: navigation between buffers
+* `<BS>`: toggle between buffers (last 2 visited)
 * `<C-H>`, `<C-J>`, `<C-K>`, `<C-H>`: navigation between windows (left, bottom, top, right respectively)
 * `gp`, `gP`: select last pasted text in character (`v`) and linewise (`V`) mode respectively
 * `''` and ` `` `: I've inverted them both
@@ -346,6 +347,7 @@ The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space
 * `v`: splits editor to the right (**v**ertically)
 * `w`: go to **w**ord
 * `wq`: saves (**w**rites) and **q**uits buffer (without closing windows)
+* `<Tab>`: toggle between buffers (last 2 visited)
 
 ##### VSCode ([VSpaceCode/vscode-which-key](https://github.com/VSpaceCode/vscode-which-key))
 

@@ -74,6 +74,10 @@ nnoremap <c-u> viwU<Esc>
 nnoremap <silent> <TAB> :bnext<CR>
 nnoremap <silent> <S-TAB> :bprevious<CR>
 
+" toggle buffer
+nnoremap <silent> <Leader><Tab> <C-^>
+nnoremap <silent> <BS> <C-^>
+
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 

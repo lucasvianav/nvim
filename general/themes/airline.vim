@@ -22,7 +22,12 @@ let g:airline#extensions#fzf#enabled = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
+
+" overriding symbols
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 let g:airline_symbols.maxlinenr = ' ㏑'
+let g:airline_symbols.spell = 'Ꞩ'
 
 " matching with current theme
 let g:airline_theme = 'onedark'

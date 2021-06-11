@@ -13,7 +13,7 @@ endfunction
 
 function! OnExit()
     " directories in which sessions won't be saved
-    let blocklist = [ 'Desktop', 'Documents', 'Downloads', '', 'Pictures' ]
+    let blocklist = [ 'Desktop', 'Documents', 'Downloads', '', 'Pictures', 'session' ]
 
     " if the current directory is blocked, end function
     let currentDir = fnamemodify(getcwd(), ':~:t')
