@@ -422,6 +422,7 @@ These keybindings are better detailed [here](#folding).
 * `:DelSessions`: deletes current session
   * This'll delete both the Session.vim in the current working directory, as well as this session's Startify entry at ~/.config/nvim/session.
   * For more info about sessions, read [this](#sessions).
+* `:Format`: format current buffer
 
 #### Interacting with VSCode
 

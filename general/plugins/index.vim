@@ -86,6 +86,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'AndrewRadev/splitjoin.vim'
         Plug 'akinsho/nvim-bufferline.lua'
 
+        " " Telescope
+        " Plug 'nvim-lua/popup.nvim'
+        " Plug 'nvim-lua/plenary.nvim'
+        " Plug 'nvim-telescope/telescope.nvim'
+
         " Icons (must be the last plugin loaded)
         Plug 'kyazdani42/nvim-web-devicons'
         " Plug 'ryanoasis/vim-devicons'

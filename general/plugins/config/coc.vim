@@ -3,10 +3,10 @@ let g:coc_node_path = '/usr/bin/node'
 
 " Extensions
 let g:coc_global_extensions = [
-\    'coc-json', 'coc-pyright', 'coc-html', 'coc-html', 'coc-angular',
-\    'coc-cssmodules', 'coc-discord', 'coc-dash-complete', 'coc-dot-complete', 'coc-eslint',
+\    'coc-json', 'coc-pyright', 'coc-html', 'coc-angular', 'coc-tsserver',
+\    'coc-cssmodules', 'coc-discord', 'coc-dash-complete', 'coc-dot-complete',
 \    'coc-explorer', 'coc-fzf-preview', 'coc-git', 'coc-html-css-support',
-\    'coc-sh', 'coc-snippets', 'coc-sql', 'coc-tailwindcss'
+\    'coc-sh', 'coc-snippets', 'coc-sql', 'coc-tailwindcss', 'coc-eslint'
 \]
 
 " Don't pass messages to |ins-completion-menu|.
@@ -95,7 +95,7 @@ nmap <leader>rn <Plug>(coc-rename)
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType typescript,json,python,c,javascript,vim setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end

@@ -139,3 +139,4 @@ require('bufferline').setup{
         },
     };
 }
+

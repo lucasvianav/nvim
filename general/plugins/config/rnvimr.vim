@@ -35,7 +35,6 @@ let g:rnvimr_action = {
             \ }
 
 nmap <silent> <space>r :RnvimrToggle<CR>
-tnoremap <silent> <space>r <C-\><C-n>:RnvimrToggle<CR>
 
 autocmd Filetype rnvimr tnoremap <buffer><nowait> j j
 autocmd Filetype rnvimr tnoremap <buffer><nowait> k k

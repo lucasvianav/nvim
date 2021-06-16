@@ -90,5 +90,10 @@
         "no-trailing-punctuation": false,
         "no-duplicate-header": false,
         "fenced-code-language": false
-    }
+    },
+
+    // css extra style sheets
+    "html-css-support.styleSheets": [
+        "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" // bootstrap
+    ]
 }
