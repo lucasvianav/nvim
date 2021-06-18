@@ -4,10 +4,13 @@ let g:coc_node_path = '/usr/bin/node'
 " Extensions
 let g:coc_global_extensions = [
 \    'coc-json', 'coc-pyright', 'coc-html', 'coc-angular', 'coc-tsserver',
-\    'coc-cssmodules', 'coc-discord', 'coc-dash-complete', 'coc-dot-complete',
-\    'coc-explorer', 'coc-fzf-preview', 'coc-git', 'coc-html-css-support',
-\    'coc-sh', 'coc-snippets', 'coc-sql', 'coc-tailwindcss', 'coc-eslint'
+\    'coc-discord', 'coc-dash-complete', 'coc-dot-complete', 'coc-css',
+\    'coc-explorer', 'coc-fzf-preview', 'coc-git', 'coc-tailwindcss',
+\    'coc-sh', 'coc-snippets', 'coc-sql', 'coc-eslint'
 \]
+
+" enable coc-css to word in .scss files
+autocmd FileType scss setl iskeyword+=@-@
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
