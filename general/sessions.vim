@@ -23,7 +23,7 @@ function! OnExit()
     silent bufdo if split(bufname(), ":")[0] ==# "term" | bd! | endif
 
     " create session
-    silent mksession!
+    silent mksession! "winsize,resize,buffers,curdir,help,tabpages"
     silent execute 'SSave! ' . GetSessionName()
 endfunction
 
