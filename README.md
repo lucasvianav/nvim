@@ -59,6 +59,7 @@ Every relevant keybind/command mapped by a plugin.
  9. [Visual Increment](#visual-increment)
  10. [Fugitive](#fugitive)
  11. [SplitJoin](#splitjoin)
+ 12. [Easy Align](#easyalign)
 
 Plugins in other sections:
 
@@ -293,12 +294,39 @@ Makes `<C-A>` and `<C-X>` work in blockwise visual mode (`^V`) to create sequenc
 
 Makes possible to use `:Git` (that I abbreviated to `:git`) as you would in the command line.c
 
-### <a id="splitjoin"></a>Fugitive ([AndrewRadev/splitjoin.vim](https://github.com/AndrewRadev/splitjoin.vim))
+### <a id="splitjoin"></a>SplitJoin ([AndrewRadev/splitjoin.vim](https://github.com/AndrewRadev/splitjoin.vim))
 
 Makes it possible to convert single-line statements into multiline statements and the other way around.
 
 * `gS`: **s**plit into multiline statement
 * `gJ`: **j**oin into single-line statement
+
+### <a id="easyalign"></a>EasyAlign ([junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align))
+
+Makes it easy to align blocks of code. This is kinda complex so I recommend reading the plugin's own README.
+
+* `<Leader>a`: **a**lign
+  * Works both in visual and normal mode (needs a motion).
+  * Accepts any arguments to describe what it should align around.
+* `:EasyAlign`
+  * Takes a range.
+
+Accepted characters do align around: `=`, `<Space>`, `,`, `:`, `.`, `|`, `&` and `#`.
+There are also the following modifiers that should be added before the target-character:
+
+* `2`, `3`, ..., `n`: align around the `nth` occurence of the provided character.
+* `-1`, `-2`, ..., `-n`: around align the `nth` to last occurrence.
+  * `-` and `-1` both refer to the last occurrence.
+* `*`: align arround all occurrences.
+* `**`: alternate alignment (left/right) around all occurrences.
+* `<Enter>`: switch between left/right/center alignment modes.
+* `<Right>`: change alignment behavior for characters like `,` and `:`.
+  * By default those characters are placed next to the preceding token without margin.
+
+It's also possible to align around a regex:
+
+* On interactive mode (normal/visual), prets <C-X> to trigger the regex prompt.
+* On command mode: `:EasyAlign /REGEX/`.
 
 ## <a id="custom-mappings"></a>Custom mappings/abbreviations
 

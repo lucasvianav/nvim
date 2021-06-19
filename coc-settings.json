@@ -92,7 +92,13 @@
         "fenced-code-language": false
     },
 
-    // css extra style sheets
+    // html config
+    "html.enable": true,
+    "html.filetypes": [ "html", "handlebars", "htmldjango", "blade" ],
+    "html.format.indentInnerHtml": true,
+
+    // css config
+    "css.enable": true,
     "html-css-support.styleSheets": [
         "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" // bootstrap
     ]
