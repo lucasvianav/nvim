@@ -38,11 +38,12 @@ if exists('g:vscode')  " if it's on vscode
 else
     " Themes
     Plug 'joshdick/onedark.vim'
-    " Plug 'shaunsingh/nord.nvim'
-    " Plug 'tyrannicaltoucan/vim-deep-space'
-    " Plug 'wadackel/vim-dogrun'
-    " Plug 'dracula/vim'
-    " Plug 'iCyMind/NeoSolarized'
+    Plug 'shaunsingh/nord.nvim'
+    Plug 'tyrannicaltoucan/vim-deep-space'
+    Plug 'wadackel/vim-dogrun'
+    Plug 'dracula/vim'
+    Plug 'iCyMind/NeoSolarized'
+    Plug 'folke/tokyonight.nvim'
 
     " Better Syntax Support
     Plug 'sheerun/vim-polyglot'
