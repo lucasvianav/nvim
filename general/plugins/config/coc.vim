@@ -156,5 +156,6 @@ let g:coc_explorer_global_presets = {
 
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
-" sort python imports on save
-autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')
+" organize python and javascript imports on save
+autocmd BufWritePre * silent! :call CocAction('runCommand', 'editor.action.organizeImport')
+" autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')
