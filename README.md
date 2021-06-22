@@ -4,7 +4,9 @@
 
 ## Description
 
-This is simply my Neovim config, which I use mainly with the [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension. I'm still a beginner in VIM, so any feedback is welcome :)
+This is my Neovim config, which currently I use with the Terminal Neovim. For a while I used it with the [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension, but have migrated for TUI and since then haven't updated the VSCode config - maybe some of the plugins that are currently only setted for TUI would be compatible with VSCode, but I haven't tested it.
+
+I'm still a beginner in VIM, so any feedback is welcome :)
 
 In Ubuntu/Debian, clone it to `~/.config/nvim`.
 
