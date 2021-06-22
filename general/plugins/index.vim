@@ -36,6 +36,7 @@ if exists('g:vscode')  " if it's on vscode
     Plug 'kana/vim-altercmd'
 
 else
+
     " Themes
     Plug 'joshdick/onedark.vim'
     Plug 'shaunsingh/nord.nvim'
@@ -95,6 +96,8 @@ else
     Plug 'valloric/MatchTagAlways'
     " Align blocks of code
     Plug 'junegunn/vim-easy-align'
+    " Work with LaTeX
+    Plug 'lervag/vimtex'
 
     " " Telescope
     " Plug 'nvim-lua/popup.nvim'
@@ -104,6 +107,7 @@ else
     " Icons (must be the last plugin loaded)
     Plug 'kyazdani42/nvim-web-devicons'
     " Plug 'ryanoasis/vim-devicons'
+
 endif
 
 call plug#end()

@@ -3,7 +3,7 @@
 # install neovim, node.js and other dependencies
 sudo snap install nvim --beta --classic
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-sudo apt-get install -y nodejs
+sudo apt-get install -y nodejs node-typescript
 sudo apt install python3 python-neovim python3-neovim npm yarn -y
 
 # install fonts
@@ -17,16 +17,19 @@ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubuserc
 sudo apt install xclip
 
 # install python support
-pip install -U pynvim doq
+pip3 install -U pynvim neovim-remote
 
 # install node support
 npm i -g neovim
 
 # install ranger
-sudo apt install ranger
+sudo apt install ranger -y
 pip install -U ueberzug
 mkdir -p ~/.config/ranger/plugins/ranger_devicons
 git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+
+# install vimtex dependencies
+sudo apt install latexmk xdotool -y
 
 mkdir -p ../autoload ../session
 
