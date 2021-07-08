@@ -1,2 +1,4 @@
-nnoremap <C-_> :Commentary<CR>
-vnoremap <C-_> :Commentary<CR>
+nnoremap <silent> <C-_> :Commentary<CR>
+vnoremap <silent> <C-_> :Commentary<CR>
+autocmd BufEnter *.c,*.h,*cpp silent! :setlocal commentstring=//\ %s
+
