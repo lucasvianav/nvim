@@ -7,7 +7,7 @@ let g:coc_global_extensions = [
 \    'coc-discord', 'coc-dash-complete', 'coc-dot-complete', 'coc-css',
 \    'coc-explorer', 'coc-fzf-preview', 'coc-git', 'coc-tailwindcss',
 \    'coc-sh', 'coc-snippets', 'coc-sql', 'coc-eslint', 'coc-html-css-support',
-\    'coc-vimtex'
+\    'coc-vimtex', 'coc-vimlsp', 'coc-clangd'
 \]
 
 " enable coc-css to word in .scss files
@@ -141,13 +141,13 @@ let g:coc_explorer_global_presets = {
 \   'floatingLeftside': {
 \     'position': 'floating',
 \     'floating-position': 'left-center',
-\     'floating-width': 50,
+\     'floating-width': 70,
 \     'open-action-strategy': 'sourceWindow',
 \   },
 \   'floatingRightside': {
 \     'position': 'floating',
 \     'floating-position': 'right-center',
-\     'floating-width': 50,
+\     'floating-width': 70,
 \     'open-action-strategy': 'sourceWindow',
 \   },
 \   'simplify': {
@@ -155,8 +155,12 @@ let g:coc_explorer_global_presets = {
 \   }
 \ }
 
+" coc-clangd --> switch between header an implementation file in C, C++
+nnoremap <silent> gs :CocCommand clangd.switchSourceHeader<CR>
+
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 " organize python and javascript imports on save
-autocmd BufWritePre * silent! :call CocAction('runCommand', 'editor.action.organizeImport')
-" autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')
+" autocmd BufWritePre * silent! :call CocAction('runCommand', 'editor.action.organizeImport')
+autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')
+autocmd BufWritePre *.js,*.ts silent! :call CocAction('runCommand', 'tsserver.organizeImports')
