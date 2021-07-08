@@ -39,7 +39,7 @@ let g:which_key_map.h        = [ '<C-W>s'                        , 'split below'
 let g:which_key_map.n        = [ ':noh'                          , 'hide highlights'         ]
 let g:which_key_map.q        = [ ':BufClose'                     , 'close buffer'            ]
 let g:which_key_map.r        = [ ':RnvimrToggle'                 , 'ranger'                  ]
-let g:which_key_map.s        = [ '<Plug>(Scalpel)'               , 'close buffer'            ]
+let g:which_key_map.s        = [ '<Plug>(Scalpel)'               , 'scalpel'                 ]
 let g:which_key_map.S        = [ ':Startify'                     , 'start screen'            ]
 let g:which_key_map.t        = [ ':ToggleTermBottom'             , 'open terminal below'     ]
 let g:which_key_map.v        = [ '<C-W>v'                        , 'split right'             ]
@@ -83,7 +83,7 @@ let g:which_key_map.g = {
     \ 'bc'   : [':BCommits'    , 'buffer commits'],
     \ 'f'    : [':GFiles'      , 'git files'],
     \ 'mf'   : [':GFiles?'     , 'modified git files'],
-    \ 'd'    : [':Gdiff'       , 'merge conflict comparison'],
+    \ 'd'    : [':Gvdiff!'     , 'merge conflict comparison'],
     \ 'h'    : [':diffget //2' , 'merge from target branch (left)'],
     \ 'l'    : [':diffget //3' , 'merge from merge branch (right)'],
     \ }

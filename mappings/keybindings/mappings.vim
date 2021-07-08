@@ -23,10 +23,10 @@ function s:DuplicateSelection(...)
     if a:0
         let s:direction = a:1
     endif
-    let s:cursorCol = getpos('.')[2]
-    let s:diff = getpos(".")[1] - getpos("v")[1]
+    let s:cursorCol = col(".")
+    let s:lower_line = max([line("."), line("v")])
 
-    let command = "normal y" . ((s:direction == "down") ? s:diff . "j" : "") . v:count1 . ((s:direction == "down") ? "p" : "P") . "]p`[V`]"
+    let command = "normal y" . ((s:direction == "down") ? s:lower_line . "Gj" : "") . v:count1 . "P]p`[V`]"
     execute command
 
     let cursorPos = getcurpos()
