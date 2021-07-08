@@ -1,8 +1,10 @@
 {
-    // autocompletion
+    // autocompletion general settings
     "suggest.enablePreselect": false,
     "suggest.autoTrigger": "always",
     "suggest.noselect": true,
+    "suggest.removeDuplicateItems": true,
+    "suggest.minTriggerInputLength": 3,
 
     // explorer
     "explorer.width": 30,
