@@ -32,10 +32,12 @@ set    nowritebackup                         " This is recommended by coc
 set    updatetime=300                        " Faster completion
 set    timeoutlen=500                        " By default timeoutlen is 1000 ms
 set    formatoptions-=cro                    " Stop newline continution of comments
-set    clipboard=unnamedplus                 " Copy paste between vim and everything else
+set    clipboard+=unnamedplus                " Copy paste between vim and everything else
 set    scrolloff=1                           " Minimal number of screen lines to keep above and below the cursor.
 set    nrformats=alpha,octal,hex             " Allow letter sequences
 set    guifont=DroidSansMono\ Nerd\ Font\ 10 " Symbol font
+set    inccommand=nosplit                    " Preview substitutions (:s) in real time
+set    cmdheight=1                           " Makes command line shorter
 
 " if folding is enabled
 if has('folding')
