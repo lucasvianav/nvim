@@ -118,9 +118,6 @@ nmap <Leader>O O<C-c>^Da
 " Hopefully <C-BS> deletes word in insert mode
 imap <C-h> <Space><C-c>dbi
 
-" Maps m to delete 1 char
-nmap m dl
-
 " Hide highlights
 nnoremap <silent> <Leader>n :noh<CR>
 

@@ -8,7 +8,6 @@ set    encoding=UTF-8                        " The encoding displayed
 set    pumheight=10                          " Makes popup menu smaller
 set    fileencoding=UTF-8                    " The encoding written to file
 set    ruler                                 " Show the cursor position all the time
-set    cmdheight=2                           " More space for displaying messages
 set    iskeyword+=-                          " treat dash separated words as a word text object"
 set    mouse=a                               " Enable your mouse
 set    splitbelow                            " Horizontal splits will automatically be below
@@ -31,13 +30,12 @@ set    nobackup                              " This is recommended by coc
 set    nowritebackup                         " This is recommended by coc
 set    updatetime=300                        " Faster completion
 set    timeoutlen=500                        " By default timeoutlen is 1000 ms
-set    formatoptions-=cro                    " Stop newline continution of comments
+set    formatoptions-=cro                    " Stop newline continuation of comments
 set    clipboard+=unnamedplus                " Copy paste between vim and everything else
 set    scrolloff=1                           " Minimal number of screen lines to keep above and below the cursor.
 set    nrformats=alpha,octal,hex             " Allow letter sequences
 set    guifont=DroidSansMono\ Nerd\ Font\ 10 " Symbol font
 set    inccommand=nosplit                    " Preview substitutions (:s) in real time
-set    cmdheight=1                           " Makes command line shorter
 
 " if folding is enabled
 if has('folding')

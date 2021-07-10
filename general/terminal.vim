@@ -53,11 +53,11 @@ endfunction
 
 " Toggle terminal - bottom
 command ToggleTermBottom :call <SID>ToggleTerminal('J', 6)
-nnoremap <silent> <Leader>t :ToggleTermBottom<CR>
+" nnoremap <silent> <Leader>t :ToggleTermBottom<CR>
 
 " Toggle terminal - right
 command ToggleTermRight :call <SID>ToggleTerminal('L', 60)
-nnoremap <silent> <Leader>tr :ToggleTermRight<CR>
+" nnoremap <silent> <Leader>tr :ToggleTermRight<CR>
 
 " exit terminal mode with jk
 tnoremap jk <C-\><C-n>

@@ -57,6 +57,8 @@ else " if it's not on vscode
     source $HOME/.config/nvim/general/plugins/config/scalpel.vim
     source $HOME/.config/nvim/general/plugins/config/vim-easy-align.vim
     source $HOME/.config/nvim/general/plugins/config/vimtex.vim
+    source $HOME/.config/nvim/general/plugins/config/tmux-navigator.vim
+    source $HOME/.config/nvim/general/plugins/config/vimux.vim
     " source $HOME/.config/nvim/general/plugins/config/nvim-telescope.vim
 
     " lua plugins

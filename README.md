@@ -340,6 +340,7 @@ It's also possible to align around a regex:
 * `<TAB>`, `<S-TAB>`, `<C-TAB>`, `<C-S-TAB>`: navigation between buffers
 * `<BS>`: toggle between buffers (last 2 visited)
 * `<C-H>`, `<C-J>`, `<C-K>`, `<C-H>`: navigation between windows (left, bottom, top, right respectively)
+  * Also works seamlessly with TMUX panes (thanks to [christoomey/vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)).
 * `gp`, `gP`: select last pasted text in character (`v`) and linewise (`V`) mode respectively
 * `''` and ` `` `: I've inverted them both
   * `''`: takes the cursor position before the latest jump (undoes the jump)
@@ -370,10 +371,8 @@ The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space
   * Plugin: <a id="scalpel"/>[wincent/Scalpel](https://github.com/wincent/scalpel)
 * `sy`: go to **sy**llab
 * `S`: opens **S**tartify (start screen)
-* `t`: open terminal in the bottom
-  * You can exit terminal mode with `jk` and `<C-\><C-N>`.
-* `tr`: open terminal in the right
-  * You can exit terminal mode with `jk` and `<C-\><C-N>`.
+* `t`: displays **t**mux options
+  * Use of [preservim/vimux](https://github.com/preservim/vimux).
 * `v`: splits editor to the right (**v**ertically)
 * `w`: go to **w**ord
 * `wq`: saves (**w**rites) and **q**uits buffer (without closing windows)

@@ -98,6 +98,10 @@ else
     Plug 'junegunn/vim-easy-align'
     " Work with LaTeX
     Plug 'lervag/vimtex'
+    " Navigate seamlessly between vim widows and TMUX panes
+    Plug 'christoomey/vim-tmux-navigator'
+    " Perform bash commands (in TMUX pane) from Neovim
+    Plug 'https://github.com/preservim/vimux'
 
     " " Telescope
     " Plug 'nvim-lua/popup.nvim'

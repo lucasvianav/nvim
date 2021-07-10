@@ -41,13 +41,13 @@ let g:which_key_map.q        = [ ':BufClose'                     , 'close buffer
 let g:which_key_map.r        = [ ':RnvimrToggle'                 , 'ranger'                  ]
 let g:which_key_map.s        = [ '<Plug>(Scalpel)'               , 'scalpel'                 ]
 let g:which_key_map.S        = [ ':Startify'                     , 'start screen'            ]
-let g:which_key_map.t        = [ ':ToggleTermBottom'             , 'open terminal below'     ]
+" let g:which_key_map.t        = [ ':ToggleTermBottom'             , 'open terminal below'     ]
 let g:which_key_map.v        = [ '<C-W>v'                        , 'split right'             ]
 let g:which_key_map.w        = [ '<Plug>(easymotion-overwin-w)'  , 'go to word'              ]
 let g:which_key_map['/']     = [ ':Rg'                           , 'search text'             ]
 let g:which_key_map['rn']    = [ '<Plug>(coc-rename)'            , 'rename symbol'           ]
 let g:which_key_map['sy']    = [ '<Plug>(easymotion-overwin-f2)' , 'go to syllab'            ]
-let g:which_key_map['tr']    = [ ':ToggleTermRight'              , 'open terminal right'     ]
+" let g:which_key_map['tr']    = [ ':ToggleTermRight'              , 'open terminal right'     ]
 let g:which_key_map['wq']    = [ ':BcWrite'                      , 'saves and closes buffer' ]
 let g:which_key_map['<Tab>'] = [ '<C-^>'                         , 'toggle buffer'           ]
 
@@ -87,6 +87,17 @@ let g:which_key_map.g = {
     \ 'h'    : [':diffget //2' , 'merge from target branch (left)'],
     \ 'l'    : [':diffget //3' , 'merge from merge branch (right)'],
     \ }
+
+let g:which_key_map.t = {
+            \ 'name' : '+ tmux',
+            \ 'p':  [  ':VimuxPromptCommand'       , 'prompt for command'   ] ,
+            \ 'r':  [  ':VimuxRunLastCommand'      , 'repeats last command' ] ,
+            \ 'i':  [  ':VimuxInspectRunner'       , 'inspect runner page'  ] ,
+            \ 'z':  [  ':VimuxZoomRunner'          , 'zooom tmux pane'      ] ,
+            \ 'c':  [  ':VimuxClearScreenHistory'  , 'clear tmux pane'      ] ,
+            \ 't':  [  ':VimuxTogglePane'          , 'toggle tmux pane'     ] ,
+            \ }
+
 
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")
