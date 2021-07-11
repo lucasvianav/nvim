@@ -5,13 +5,14 @@
 ## Description
 
 This is my Neovim config, which currently I use with the Terminal Neovim.
-For a while I used it with the [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension, but have migrated for TUI and since then haven't updated the VSCode config - maybe some of the plugins that are currently only setted for TUI would be compatible with VSCode, but I haven't tested it. I've removed the VSCode-specific config from the main branch, but you may head to `[vscode-compatible](https://github.com/lucasvianav/nvim/tree/vscode-compatible)` if you wish.
+
+For a while I used it with the [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension, but have migrated for TUI and since then haven't updated the VSCode config - maybe some of the plugins that are currently only setted for TUI would be compatible with VSCode, but I haven't tested it. I've removed the VSCode-specific config from the main branch, but you may head to [vscode-compatible](https://github.com/lucasvianav/nvim/tree/vscode-compatible) if you wish.
 
 I'm still a beginner in VIM, so any feedback is welcome :)
 
 In Ubuntu/Debian, clone it to `~/.config/nvim`.
 
-In the `scripts/` there are bash scripts to install and setup everything that's required, as well as import/export snippets from/to VSCode and import/export VSCode's config (settings.json and keybindings.json).
+In the `scripts/` there are bash scripts to install and setup everything that's required.
 
 ## Summary
 
