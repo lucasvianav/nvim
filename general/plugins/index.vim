@@ -93,6 +93,9 @@ Plug 'lervag/vimtex'
 Plug 'christoomey/vim-tmux-navigator'
 " Perform bash commands (in TMUX pane) from Neovim
 Plug 'https://github.com/preservim/vimux'
+" Custom indent block text object
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
 
 " " Telescope
 " Plug 'nvim-lua/popup.nvim'

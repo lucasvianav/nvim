@@ -34,6 +34,8 @@ In the `scripts/` there are bash scripts to install and setup everything that's 
 * Files are set to be opened completely folded.
 * By default, all `.json` files are interpreted as `.jsonc` (permitting commentaries).
 * Whenever you save a file, all trailing whitespaces are deleted.
+* A custom motion/text object was defined for **i**ndented blocks: `ai`, `ii`, `aI`, `iI`.
+  * See [/kana/vim-textobj-user](https://github.com/kana/vim-textobj-user/wiki)
 
 ### <a id="capslock"></a>CapsLock ([suxpert/vimcaps](https://github.com/suxpert/vimcaps))
 
