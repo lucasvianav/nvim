@@ -61,10 +61,8 @@ inoremap JK <Esc>
 
 " Use control-c instead of escape
 nnoremap <C-c> <Esc>
-" Unbind escape key if not on VSCode
-if !exists('g:vscode')
-    :inoremap <Esc> <Nop>
-endif
+" Unbind escape key
+inoremap <Esc> <Nop>
 
 " Easy CAPS
 inoremap <c-u> <ESC>viwUi

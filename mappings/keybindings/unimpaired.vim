@@ -116,19 +116,8 @@ noremap  <silent> <Plug>unimpairedMoveSelectionDown :<C-U>call <SID>MoveSelectio
 call s:map('x', '[a', '<Plug>unimpairedMoveSelectionUp')
 call s:map('x', ']a', '<Plug>unimpairedMoveSelectionDown')
 
-" On VSCode, use alt + j, k as native VSCode "Move Lines"
-if exists('g:vscode')
-    nnoremap [a :call VSCodeNotify('editor.action.moveLinesUpAction')<CR>
-    nnoremap ]a :call VSCodeNotify('editor.action.moveLinesDownAction')<CR>
-
-    " makes vscode actions "work" in visual mode (deactivated beacause of bugs)
-    " xnoremap <M-k> :<C-u>call <SID>VSCodeMoveLine("Up")<CR>
-    " xnoremap <M-j> :<C-u>call <SID>VSCodeMoveLine("Down")<CR>
-
-else
-    call s:map('n', '[a', '<Plug>unimpairedMoveUp')
-    call s:map('n', ']a', '<Plug>unimpairedMoveDown')
-endif
+call s:map('n', '[a', '<Plug>unimpairedMoveUp')
+call s:map('n', ']a', '<Plug>unimpairedMoveDown')
 
 " Move lines with alt + jk
 nmap <M-k> [a
@@ -160,27 +149,15 @@ function! s:option_map(letter, option, mode) abort
     call s:map('n', 'yo'.a:letter, ':'.a:mode.' <C-R>=<SID>toggle("'.a:option.'")<CR><CR>')
 endfunction
 
-if !exists('g:vscode')
-    call s:option_map('c', 'cursorline', 'setlocal')
-    call s:option_map('u', 'cursorcolumn', 'setlocal')
-    " call s:option_map('h', 'hlsearch', 'set')
-    " call s:option_map('i', 'ignorecase', 'set')
-    call s:option_map('l', 'list', 'setlocal')
-    " call s:option_map('n', 'number', 'setlocal')
-    call s:option_map('r', 'relativenumber', 'setlocal')
-    call s:option_map('s', 'spell', 'setlocal')
-    call s:option_map('w', 'wrap', 'setlocal')
-else
-    nnoremap <silent> [or :!node $HOME/.config/nvim/scripts/vim-unimpaired/relativenumber-[.js<CR>
-    nnoremap <silent> ]or :!node $HOME/.config/nvim/scripts/vim-unimpaired/relativenumber-].js<CR>
-    nnoremap <silent> yor :!node $HOME/.config/nvim/scripts/vim-unimpaired/relativenumber-y.js<CR>
-    nnoremap <silent> [os :!node $HOME/.config/nvim/scripts/vim-unimpaired/spelling-[.js<CR>
-    nnoremap <silent> ]os :!node $HOME/.config/nvim/scripts/vim-unimpaired/spelling-].js<CR>
-    nnoremap <silent> yos :!node $HOME/.config/nvim/scripts/vim-unimpaired/spelling-y.js<CR>
-    nnoremap <silent> [ow :!node $HOME/.config/nvim/scripts/vim-unimpaired/wrap-[.js<CR>
-    nnoremap <silent> ]ow :!node $HOME/.config/nvim/scripts/vim-unimpaired/wrap-].js<CR>
-    nnoremap <silent> yow :!node $HOME/.config/nvim/scripts/vim-unimpaired/wrap-y.js<CR>
-endif
+call s:option_map('c', 'cursorline', 'setlocal')
+call s:option_map('u', 'cursorcolumn', 'setlocal')
+" call s:option_map('h', 'hlsearch', 'set')
+" call s:option_map('i', 'ignorecase', 'set')
+call s:option_map('l', 'list', 'setlocal')
+" call s:option_map('n', 'number', 'setlocal')
+call s:option_map('r', 'relativenumber', 'setlocal')
+call s:option_map('s', 'spell', 'setlocal')
+call s:option_map('w', 'wrap', 'setlocal')
 
 " Section: Encoding and decoding
 

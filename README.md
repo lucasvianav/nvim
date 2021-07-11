@@ -1,10 +1,11 @@
-# My Neovim (and vscode-neovim) config file
+# My Neovim config file
 
 ![Simple banner](https://i.imgur.com/raPX5yF.png)
 
 ## Description
 
-This is my Neovim config, which currently I use with the Terminal Neovim. For a while I used it with the [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension, but have migrated for TUI and since then haven't updated the VSCode config - maybe some of the plugins that are currently only setted for TUI would be compatible with VSCode, but I haven't tested it.
+This is my Neovim config, which currently I use with the Terminal Neovim.
+For a while I used it with the [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension, but have migrated for TUI and since then haven't updated the VSCode config - maybe some of the plugins that are currently only setted for TUI would be compatible with VSCode, but I haven't tested it. I've removed the VSCode-specific config from the main branch, but you may head to `[vscode-compatible](https://github.com/lucasvianav/nvim/tree/vscode-compatible)` if you wish.
 
 I'm still a beginner in VIM, so any feedback is welcome :)
 
@@ -350,8 +351,6 @@ It's also possible to align around a regex:
 
 The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space>` — in normal mode, so every keybind below is preceded by `<Space>`. Most of the keybindings do not require you to wait for the WhichKey menu to appear.
 
-##### Terminal Neovim
-
 * `/`: search text (`:Rg`)
 * `b`: list open **b**uffers
 * `c`: go to **c**har
@@ -377,28 +376,6 @@ The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space
 * `w`: go to **w**ord
 * `wq`: saves (**w**rites) and **q**uits buffer (without closing windows)
 * `<Tab>`: toggle between buffers (last 2 visited)
-
-##### VSCode ([VSpaceCode/vscode-which-key](https://github.com/VSpaceCode/vscode-which-key))
-
-* `/`: searches in the whole project (workspace?)
-* `<Space>`: opens VSCode Command Palette
-* `d`: goes to definition
-* `D`: goes to declaration
-* `e`: toggles explorer visibility
-  * If you press `<Space>e` without waiting for the WhichKey menu to appear, it'll toggle sidebar visibility
-  * If you press `<Space>`, wait for the WhichKey menu to appear and then press `e`, you'll open the explorer
-  * `<C-S-\>` and `<C-M-E>` are alternatives (not part of WhichKey), they'll always toggle explorer.
-* `E`: displays errors
-* `g`: displays git options
-* `h`: splits editor below
-* `i`: organizes imports (Python-only?)
-* `m`: displays merge conflict options
-* `n`: hides highligts (same as `:noh`)
-* `o`, `O`: same as vanilla `o`and `O`, but the new line will be blank
-* `s`: "find & replace" in project
-* `t`: toggles integrated terminal
-* `v`: splits editor to the right
-  * `<C-S-t>` is an alternative (not part of WhichKey), it'll always toggle the terminal.
 
 #### Folding
 
@@ -433,8 +410,6 @@ These keybindings are better detailed [here](#folding).
   * I prefer the `x` command's functionality, but prefer to type `:wq`
   * If you're wondering what the differences are and why I prefer `:x`, read [this comment](https://www.quora.com/Why-do-some-people-close-Vim-with-wq-instead-of-x/answer/Ye-Caiting) by [Ye Caiting](https://www.quora.com/profile/Ye-Caiting).
 
-#### Interacting with Terminal Neovim
-
 * `:r`, `:Rvimrc`: **r**eloads the init.vim (same as `:source $MYVIMRC`)
 * `:wrv`: saves the file (**w**rite) and **r**eloads **V**IMRC
 * `:settings`: opens init.vim (same as `:e $MYVIMRC`)
@@ -452,15 +427,6 @@ These keybindings are better detailed [here](#folding).
   * This'll delete both the Session.vim in the current working directory, as well as this session's Startify entry at ~/.config/nvim/session.
   * For more info about sessions, read [this](#sessions).
 * `:Format`: format current buffer
-
-#### Interacting with VSCode
-
-* `:qv[scode]`: **q**uit **vs**code (closes VSCode window)
-* `:r[vscode]`, `:R[vscode]`: **r**eloads **VS**Code window
-* `:wrv[scode]`: saves the file (**w**rite) and **r**eloads **VS**Code window
-* `:settings`: opens VSCode's settings.json
-* `:keybindings`, `:keybinds`, `:keyboard`: opens VSCode's keybindings.json
-* `:uq`: **u**ndoes last **q**uit - reopens last closed tab
 
 ## <a id="vanilla"></a>Vanilla mappings that I always forget and need to consult
 
@@ -530,7 +496,7 @@ Just wanna thank:
 
 * [Christian Chiarulli](https://github.com/ChristianChiarulli), for making an excelent Neovim-introduction [video series](https://www.youtube.com/playlist?list=PLhoH5vyxr6QqPtKMp03pcJd_Vg8FZ0rtg) and [blog posts](https://www.chrisatmachine.com/neovim). When I started using/learning about VIM, I really just copying his config.
 * [Greg Hurrell](https://github.com/wincent), for the great [screencasts and streams](https://www.youtube.com/channel/UCXPHFM88IlFn68OmLwtPmZA), as well as [wincent/scalpel](https://github.com/wincent/scalpel).
-* [Alexey Svetliakov](https://github.com/asvetliakov/), for making and maintaining the absolutely unbeliavable [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension.
+* [Alexey Svetliakov](https://github.com/asvetliakov/), for making and maintaining the absolutely unbeliavable [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension, although I don't use it anymore.
 * All of the awesome people who made the plugins I listed/installed.
 
 ## <a id="todo"></a>TODO
@@ -539,7 +505,3 @@ Just wanna thank:
   * Write installation guide
   * Write about other plugins/features
 * Test [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)
-* Learn more about VSCode's output tab
-  * Is it possible to use it for commands like :Yanks and :IPaste?
-  * Is it possible to supress it when running terminal commands (e.g.: `:!ls`)?
-* Figure out why isn't EasyClip's toggle format (<Leader>cf?) working
