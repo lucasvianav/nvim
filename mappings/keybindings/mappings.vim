@@ -119,13 +119,5 @@ imap <C-h> <Space><C-c>dbi
 " Hide highlights
 nnoremap <silent> <Leader>n :noh<CR>
 
-" Folding toggle
-nnoremap <silent> <F9> za
-nnoremap <silent> <F10> zA
-xnoremap <silent> <F9> za
-xnoremap <silent> <F10> zA
-inoremap <silent> <F9> <Esc>za a
-inoremap <silent> <F10> <Esc>zA a
-
 nnoremap '' ``
 

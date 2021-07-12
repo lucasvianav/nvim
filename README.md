@@ -39,7 +39,7 @@ In the `scripts/` there are bash scripts to install and setup everything that's 
 
 ### <a id="capslock"></a>CapsLock ([suxpert/vimcaps](https://github.com/suxpert/vimcaps))
 
-This plugin is pretty simples and I like it a lot: it basically deactivates CapsLock once you exit insert mode.
+This plugin is pretty simples and I like it a lot: it deactivates CapsLock once you exit insert mode.
 An alternative would be [tpope's vim-capslock](https://github.com/tpope/vim-capslock), but I couldn't make it work on VSCode (vimcaps does).
 
 ### <a id="sessions"/> Sessions (Terminal Neovim):
@@ -146,9 +146,7 @@ Since all keybinds consist in bracket mappings, it's nice to establish a logic t
 * `[<Space>`: adds a blank line above
 * `]<Space>`: adds a blank line below
 * `[a` (same as `<M-k>`): moves the curent line (or selection) up
-  * In VSCode, the visual mode version is buggy. If you don't hold/mash the buttons, everything should be ok.
 * `]a` (same as `<M-j>`): moves the current line (or selection) down
-  * In VSCode, the visual mode version is buggy. If you don't hold/mash the buttons, everything should be ok.
 * `[d`: duplicates the current line (or selection), leaving the cursor (and selection) on the upper duplicate
 * `]d`: duplicates the current line (or selection), leaving the cursor (and selection) on the lower duplicate
   * It glitches the first time you use it in visual mode :c
@@ -164,15 +162,10 @@ Not really from unimpaired, but from [neoclide/coc.nvim](https://github.com/neoc
 
 #### Option toggling
 
-In terminal Neovim, all of the options are changed using `setlocal`, not `set`.
-I was able to make it work in VSCode (using JavaScript to update the settings.json file), but couldn't supress the Output panel.
-
-The supported options are:
+All of the options are changed using `setlocal`, not `set`.
 
 * `c`: cursorline
-  * Does not exist in VSCode.
 * `u`: cursorcolumn
-  * Does not exist in VSCode.
 * `r`: relativenumber
 * `s`: spell
 * `w`: wrap
@@ -215,9 +208,7 @@ The plugin documentation references the opposite direction reference for the com
 #### Commands
 
 * `:Yanks`: displays the full list of yanks
-  * Displaying the yank list doesn't quite work in VSCode
 * `:IPaste`: allows you to choose a yank from the list to paste (**I**nterative Paste)
-  * Displaying the yank list doesn't quite work in VSCode
 * `:Paste`: same as above but does not display yank list
 
 If the commands above described doesn't make a lot os sense to you, I highly recommend you read the plugin's documentation/README.md, it'll certainly help you better understand the plugin's funcionality.
@@ -391,23 +382,6 @@ The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space
 * `wq`: saves (**w**rites) and **q**uits buffer (without closing windows)
 * `<Tab>`: toggle between buffers (last 2 visited)
 
-#### Folding
-
-These keybindings are better detailed [here](#folding).
-
-##### Terminal Neovim
-
-* `´`, `<F9>`: toggles the topmost level of folding under the cursor
-* `<S-´>`, `<F10>`: toggles all levels of folding under the cursor
-
-##### VSCode
-
-* `´`, `<F9>`, `<F10>`: toggles the topmost level of folding under the cursor
-* `zA`: folds recursively under the cursor
-* `zAA`, `zAa`: unfolds recursively under the cursor
-* `zR`: opens all folds (mnemonic is **R**educe)
-* `zm`: takes a count and folds the level passed (**m** folding)
-
 ### Commands
 
 #### Custom
@@ -444,19 +418,16 @@ These keybindings are better detailed [here](#folding).
 
 ## <a id="vanilla"></a>Vanilla mappings that I always forget and need to consult
 
-* `:e!:`: Discard/revert unsaved changes
-  * Remapped in VSCode so it does the same as vanilla.
-
 ### Movement keybinds
 
 #### Vertical
 
 * `^E`: scrolls down
 * `^Y`: scrolls up
-* `M`: jumps to the middle of the screen
-* `H`: jumps to the top of the screen
-* `L`: jumps to the bottom of the screen
-* `G`: obviously jumps to the end of file, but if given a count jumps to that line
+* `H`: jumps to the top of the screen (**h**igh)
+* `M`: jumps to the middle of the screen (**m**edium)
+* `L`: jumps to the bottom of the screen (**l**ow)
+* `G`: obviously **g**oes to the end of file, but if given a count **g** to that line
   * e.g.: `50G` jumps to the 50th line
 * `'.`, `g;`: jumpts to last edit
 * `''` and ` `` `: I've inverted them both
@@ -475,29 +446,11 @@ These keybindings are better detailed [here](#folding).
 
 I've also left some custom keybinds in here so all the folding keybinds stay together.
 
-#### Terminal Neovim
-
-* `za`, `<F9>`: toggles the topmost level of folding under the cursor
-  * `<F9>` works in insert mode
-* `zA`, `<F10>`: toggles all levels of folding under the cursor
-  * `<F10>` works in insert mode
+* `za`: toggles the topmost level of folding under the cursor
+* `zA`: toggles all levels of folding under the cursor
 * `zr`: **r**educes folding in the whole buffer
 * `zR`: opens all folds
 * `zm`: increses folding in the whole buffer (**m**ake folding)
-* `zM`: closes all folds
-
-#### VSCode
-
-* `za`, `<F9>`, `<F10>`: toggles the topmost level of folding under the cursor
-  * `<F9>`, `<F10>` works in insert mode
-* `zA`: folds recursively under the cursor
-* `zAA`, `zAa`: unfolds recursively under the cursor
-* `zR`: opens all folds (mnemonic is **R**educe)
-* `zm`: takes a count and folds the level passed (**m** folding)
-  * If no count is given, folds level 1 by default
-  * There's also `zm1`, `zm2`, ..., `zm7`
-  * e.g.: `zm`, `1zm`, `zm1` will fold level 1
-  * e.g.: `2zm`, `zm2` will fold level 2
 * `zM`: closes all folds
 
 <!-- ## <a id="additional-tips"></a>Additional tips/Observations
