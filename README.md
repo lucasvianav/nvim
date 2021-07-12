@@ -22,7 +22,7 @@ In the `scripts/` there are bash scripts to install and setup everything that's 
  4. [Custom mappings](#custom-mappings)
  5. [Vanilla mappings that I always forget and need to consult](#vanilla)
  6. [Acknowledgements](#acknowledgements)
- 7. [TODO](#todo)
+<!-- 7. [TODO](#todo) -->
 <!--  6. [Additional tips/Observations](#additional-tips) -->
 
 ## <a id="settings"></a>Settings:
@@ -513,8 +513,8 @@ Just wanna thank:
 * [Alexey Svetliakov](https://github.com/asvetliakov/), for making and maintaining the absolutely unbeliavable [vscode-neovim](https://github.com/asvetliakov/vscode-neovim) extension, although I don't use it anymore.
 * All of the awesome people who made the plugins I listed/installed.
 
-## <a id="todo"></a>TODO
+<!-- ## <a id="todo"></a>TODO -->
 
-* Update README.md
-  * Write installation guide
-  * Write about other plugins/features
+<!-- * Update README.md -->
+<!--   * Write installation guide -->
+<!--   * Write about other plugins/features -->
