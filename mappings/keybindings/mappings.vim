@@ -121,3 +121,13 @@ nnoremap <silent> <Leader>n :noh<CR>
 
 nnoremap '' ``
 
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Right> <nop>
+noremap <Left> <nop>
+
+inoremap <Up> <nop>
+inoremap <Down> <nop>
+inoremap <Right> <nop>
+inoremap <Left> <nop>
+

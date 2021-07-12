@@ -36,6 +36,7 @@ In the `scripts/` there are bash scripts to install and setup everything that's 
 * Whenever you save a file, all trailing whitespaces are deleted.
 * A custom motion/text object was defined for **i**ndented blocks: `ai`, `ii`, `aI`, `iI`.
   * See [/kana/vim-textobj-user](https://github.com/kana/vim-textobj-user/wiki)
+* I've disabled the arrows keys (in normal, visual and insert modes).
 
 ### <a id="capslock"></a>CapsLock ([suxpert/vimcaps](https://github.com/suxpert/vimcaps))
 
