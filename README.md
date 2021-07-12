@@ -66,6 +66,7 @@ Every relevant keybind/command mapped by a plugin.
  10. [Fugitive](#fugitive)
  11. [SplitJoin](#splitjoin)
  12. [Easy Align](#easyalign)
+ 13. [Vim Visual Multi](#visualmulti)
 
 Plugins in other sections:
 
@@ -334,6 +335,16 @@ It's also possible to align around a regex:
 * On interactive mode (normal/visual), prets <C-X> to trigger the regex prompt.
 * On command mode: `:EasyAlign /REGEX/`.
 
+### <a id="visualmulti"></a>Vim Visual Multi ([mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi))
+
+Adds support to multiple cursors (similar to VSCode's). I've disabled all the
+default mappings but the ones below to prevent me from abusing this plugin.
+
+* `<C-n>`: finds **n**ext word.
+* `gl`: finds al**l** words.
+  * I know, this is not a good mnemonic.
+* `<C-c>`: exits Visual Multi.
+
 ## <a id="custom-mappings"></a>Custom mappings/abbreviations
 
 ### Keybinds
@@ -507,4 +518,3 @@ Just wanna thank:
 * Update README.md
   * Write installation guide
   * Write about other plugins/features
-* Test [mg979/vim-visual-multi](https://github.com/mg979/vim-visual-multi)

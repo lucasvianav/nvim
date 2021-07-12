@@ -96,6 +96,8 @@ Plug 'https://github.com/preservim/vimux'
 " Custom indent block text object
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
+" Multiple cursors
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " " Telescope
 " Plug 'nvim-lua/popup.nvim'

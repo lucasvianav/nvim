@@ -42,6 +42,7 @@ source $HOME/.config/nvim/general/plugins/config/vim-commentary.vim
 source $HOME/.config/nvim/general/plugins/config/vim-easy-align.vim
 source $HOME/.config/nvim/general/plugins/config/vim-easyclip.vim
 source $HOME/.config/nvim/general/plugins/config/vim-surround.vim
+source $HOME/.config/nvim/general/plugins/config/vim-visual-multi.vim
 source $HOME/.config/nvim/general/plugins/config/vimtex.vim
 source $HOME/.config/nvim/general/plugins/config/vimux.vim
 source $HOME/.config/nvim/general/plugins/config/which-key.vim
