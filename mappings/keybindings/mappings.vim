@@ -64,10 +64,6 @@ nnoremap <C-c> <Esc>
 " Unbind escape key
 inoremap <Esc> <Nop>
 
-" Easy CAPS
-inoremap <c-u> <ESC>viwUi
-nnoremap <c-u> viwU<Esc>
-
 " Buffer movement with <Tab> and <S-Tab>
 nnoremap <silent> <TAB> :bnext<CR>
 nnoremap <silent> <S-TAB> :bprevious<CR>
