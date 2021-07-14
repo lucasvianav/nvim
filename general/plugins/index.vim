@@ -98,6 +98,8 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 " Multiple cursors
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" HTML Super Snippets
+Plug 'mattn/emmet-vim'
 
 " " Telescope
 " Plug 'nvim-lua/popup.nvim'

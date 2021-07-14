@@ -30,6 +30,7 @@ source $HOME/.config/nvim/general/plugins/config/closetag.vim
 source $HOME/.config/nvim/general/plugins/config/coc.vim
 source $HOME/.config/nvim/general/plugins/config/codi.vim
 source $HOME/.config/nvim/general/plugins/config/easymotion.vim
+source $HOME/.config/nvim/general/plugins/config/emmet.vim
 source $HOME/.config/nvim/general/plugins/config/fzf.vim
 source $HOME/.config/nvim/general/plugins/config/illuminate.vim
 source $HOME/.config/nvim/general/plugins/config/quickscope.vim
