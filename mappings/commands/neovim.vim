@@ -16,9 +16,6 @@ command! BdWrite w | bd
 " saves buffer and then closes it
 command! BqWrite w | BufClose
 
-" writes pdf text to a new buffer (works better for text-only)
-command! -complete=file -nargs=1 Rpdf :enew | :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
-
 command DelSession normal <Plug>DeleteCurrentSession
 
 cabbrev git Git

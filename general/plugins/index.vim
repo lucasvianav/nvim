@@ -88,7 +88,7 @@ Plug 'valloric/MatchTagAlways'
 " Align blocks of code
 Plug 'junegunn/vim-easy-align'
 " Work with LaTeX
-Plug 'lervag/vimtex'
+" Plug 'lervag/vimtex'
 " Navigate seamlessly between vim widows and TMUX panes
 Plug 'christoomey/vim-tmux-navigator'
 " Perform bash commands (in TMUX pane) from Neovim

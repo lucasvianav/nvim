@@ -4,7 +4,7 @@
 sudo snap install nvim --beta --classic
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs node-typescript
-sudo apt install python3 python-neovim python3-neovim npm yarn -y
+sudo apt install python3 python3-pip python-neovim python3-neovim npm yarn -y
 
 # install C language server (clangd)
 sudo apt install clangd-9 -y
@@ -24,7 +24,7 @@ sudo apt install xclip
 pip3 install -U pynvim neovim-remote
 
 # install node support
-npm i -g neovim
+sudo npm i -g neovim
 
 # install ranger
 sudo apt install ranger -y
@@ -34,18 +34,18 @@ git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger
 
 # install vimtex dependencies and other latex tools
 sudo apt install latexmk xdotool -y
-sudo apt install -y texlive texlive-font-utils texlive-pstricks-doc texlive-base texlive-formats-extra texlive-lang-portuguese texlive-metapost texlive-publishers texlive-bibtex-extra texlive-latex-base texlive-metapost-doc texlive-publishers-doc texlive-binaries texlive-latex-base-doc texlive-science texlive-extra-utils texlive-latex-extra texlive-science-doc texlive-fonts-extra texlive-latex-extra-doc texlive-pictures texlive-xetex texlive-fonts-extra-doc texlive-latex-recommended texlive-pictures-doc texlive-fonts-recommended texlive-humanities texlive-lang-english texlive-latex-recommended-doc texlive-fonts-recommended-doc texlive-humanities-doc texlive-luatex texlive-pstricks perl-tk
+sudo apt install -y texlive texlive-font-utils texlive-pstricks-doc
+sudo apt install -y texlive-base texlive-formats-extra texlive-lang-portuguese
+sudo apt install -y texlive-publishers texlive-bibtex-extra texlive-latex-base
+sudo apt install -y texlive-publishers-doc texlive-binaries texlive-latex-base-doc texlive-science
+sudo apt install -y texlive-extra-utils texlive-latex-extra texlive-science-doc texlive-fonts-extra
+sudo apt install -y texlive-latex-extra-doc texlive-pictures texlive-xetex texlive-fonts-extra-doc
+sudo apt install -y texlive-latex-recommended texlive-pictures-doc texlive-fonts-recommended
+sudo apt install -y texlive-humanities texlive-lang-english texlive-latex-recommended-doc
+sudo apt install -y texlive-fonts-recommended-doc texlive-humanities-doc texlive-luatex
+sudo apt install -y texlive-pstricks perl-tk texlive-metapost texlive-metapost-doc
 
 mkdir -p ../autoload ../session
 
-# copies the pdftotext binary to a dir in $PATH
-cp ./pdftotext_BINARY /usr/bin/pdftotext
-
-echo
-echo
-echo
-echo
-echo
-echo "Successfully installed!"
-echo "In VSCode, point your init.vim path to \"\$HOME/.config/nvim/\""
+printf "\n\n\n\nSuccessfully installed!"
 

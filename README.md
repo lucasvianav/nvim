@@ -411,7 +411,6 @@ The WhichKey menu will be shown if you press `<Leader>` — in this case `<Space
   * You can exit terminal mode with `jk` and `<C-\><C-N>`.
 * `:ToggleTermRight`: open terminal in the right
   * You can exit terminal mode with `jk` and `<C-\><C-N>`.
-* `:Rpdf`: helps **r**eading a **pdf** inside neovim (writes the pdf text to a new buffer)
 * `:DelSessions`: deletes current session
   * This'll delete both the Session.vim in the current working directory, as well as this session's Startify entry at ~/.config/nvim/session.
   * For more info about sessions, read [this](#sessions).
