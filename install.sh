@@ -45,7 +45,10 @@ sudo apt install -y texlive-humanities texlive-lang-english texlive-latex-recomm
 sudo apt install -y texlive-fonts-recommended-doc texlive-humanities-doc texlive-luatex
 sudo apt install -y texlive-pstricks perl-tk texlive-metapost texlive-metapost-doc
 
-mkdir -p ../autoload ../session
+mkdir -p ../session
+
+# sets plugins up
+nvim --headless +PlugUpgrade +PlugInstall +PlugUpdate +CocStart +CocUpdate +q
 
 printf "\n\n\n\nSuccessfully installed!"
 
