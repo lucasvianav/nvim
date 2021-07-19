@@ -6,16 +6,19 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs node-typescript
 sudo apt install python3 python3-pip python-neovim python3-neovim npm yarn -y
 
+# install fonts
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts && sudo curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+
 # install C language server (clangd)
 sudo apt install clangd-9 -y
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-9 100
 
-# install fonts
-mkdir -p ~/.local/share/fonts
-cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
-
 # install Vim-Plug
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# vimcaps support
+sudo apt install -y libx11-dev
 
 # copy/paste enable
 sudo apt install xclip
