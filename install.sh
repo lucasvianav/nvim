@@ -6,9 +6,7 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs node-typescript
 sudo apt install python3 python3-pip python-neovim python3-neovim npm yarn -y
 
-# install fonts
-mkdir -p ~/.local/share/fonts
-cd ~/.local/share/fonts && sudo curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+mkdir session
 
 # install C language server (clangd)
 sudo apt install clangd-9 -y
@@ -18,7 +16,7 @@ sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-9 100
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # vimcaps support
-sudo apt install -y libx11-dev
+sudo apt install -y libx11-dev libx11-data
 
 # copy/paste enable
 sudo apt install xclip
@@ -48,10 +46,13 @@ sudo apt install -y texlive-humanities texlive-lang-english texlive-latex-recomm
 sudo apt install -y texlive-fonts-recommended-doc texlive-humanities-doc texlive-luatex
 sudo apt install -y texlive-pstricks perl-tk texlive-metapost texlive-metapost-doc
 
-mkdir -p ../session
-
 # sets plugins up
-nvim --headless +PlugUpgrade +PlugInstall +PlugUpdate +CocStart +CocUpdate +q
+# nvim --headless +PlugUpgrade +PlugInstall +PlugUpdate +q
+# nvim --headless +CocStart +CocUpdate +q
+
+# install fonts
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts && sudo curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
 
 printf "\n\n\n\nSuccessfully installed!"
 
