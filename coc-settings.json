@@ -85,7 +85,7 @@
     "snippets.userSnippetsDirectory": "~/.config/nvim/snippets",
     "snippets.textmateSnippetsRoots": [ "~/.config/nvim/snippets" ],
 
-    // linting
+    // markdown linting
     "markdownlint.config": {
         "line_length": false,
         "no-inline-html": false,
@@ -93,6 +93,37 @@
         "no-duplicate-header": false,
         "fenced-code-language": false
     },
+
+    // typescript config
+    "typescript.autoClosingTags": true,
+    "typescript.suggest.completeFunctionCalls": false,
+    "typescript.format.insertSpaceBeforeFunctionParenthesis": false,
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+
+    // javascript config
+    "javascript.autoClosingTags": true,
+    "javascript.suggest.completeFunctionCalls": false,
+    "javascript.format.insertSpaceBeforeFunctionParenthesis": false,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+
+    // eslint config
+    "eslint.autoFixOnSave": true,
+    "eslint.run": "onType",
+
+    // prettier config
+    "prettier.eslintIntegration": true,
+    "prettier.printWidth": 80,
+    "prettier.tabWidth": 4,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "es5",
+    "prettier.bracketSpacing": true,
+    "prettier.semi": false,
+    "prettier.useTabs": false,
+    "prettier.arrowParens": "preserve",
 
     // html config
     "html.enable": true,

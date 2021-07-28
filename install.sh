@@ -26,8 +26,8 @@ sudo apt install xclip
 # install python support
 pip3 install -U pynvim neovim-remote
 
-# install node support
-sudo npm i -g neovim
+# install node support + eslint
+sudo npm i -g neovim eslint
 
 # install ranger
 sudo apt install ranger -y
