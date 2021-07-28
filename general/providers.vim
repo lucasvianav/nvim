@@ -1,5 +1,5 @@
 " Setup executables for faster startup
-let g:python3_host_prog = '/usr/bin/python3.8'
+let g:python3_host_prog = '/usr/bin/python3'
 " let g:node_host_prog = '/usr/bin/node'
 
 " Disable non-used languages
