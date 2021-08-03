@@ -101,6 +101,8 @@
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+    "typescript.preferences.quoteStyle": "single",
+    "typescript.updateImportsOnFileMove.enable": true,
 
     // javascript config
     "javascript.autoClosingTags": true,
@@ -109,6 +111,8 @@
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+    "javascript.preferences.quoteStyle": "single",
+    "javascript.updateImportsOnFileMove.enable": true,
 
     // eslint config
     "eslint.autoFixOnSave": true,
