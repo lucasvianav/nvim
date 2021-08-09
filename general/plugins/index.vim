@@ -31,8 +31,8 @@ Plug 'tpope/vim-speeddating'
 Plug 'svermeulen/vim-easyclip'
 " Crazy stuff (words manipulation)
 Plug 'tpope/vim-abolish'
-" Fix CAPS LOCK
-Plug 'suxpert/vimcaps'
+" Virtual caps lock
+Plug 'tpope/vim-capslock'
 " Increment sequences
 Plug 'triglav/vim-visual-increment'
 " Surround
