@@ -28,7 +28,6 @@ set    showtabline=2                            " Always show tab line (top bar)
 set    nobackup                                 " This is recommended by coc
 set    nowritebackup                            " This is recommended by coc
 set    updatetime=300                           " Faster completion
-set    timeoutlen=500                           " By default timeoutlen is 1000 ms
 set    formatoptions-=cro                       " No newline continuation of comments
 set    clipboard+=unnamedplus                   " System-wide copy-paste
 set    scrolloff=1                              " Number of screen lines around cursor
