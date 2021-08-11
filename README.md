@@ -38,11 +38,6 @@ In the `scripts/` there are bash scripts to install and setup everything that's 
   * See [/kana/vim-textobj-user](https://github.com/kana/vim-textobj-user/wiki)
 * I've disabled the arrows keys (in normal, visual and insert modes).
 
-### <a id="capslock"></a>CapsLock ([suxpert/vimcaps](https://github.com/suxpert/vimcaps))
-
-This plugin is pretty simples and I like it a lot: it deactivates CapsLock once you exit insert mode.
-An alternative would be [tpope's vim-capslock](https://github.com/tpope/vim-capslock), but I couldn't make it work on VSCode (vimcaps does).
-
 ### <a id="sessions"/> Sessions (Terminal Neovim):
 
 I'm using [Startify](https://github.com/mhinz/vim-startify) as a session manager. I've set it to save a Session.vim inside the project root whenever you quit vim and also save sessions for your projects at `//nvim/session/`. When you open a starred project (directory) that contains a Session.vim, that session will be automatically restored and otherwise, you'll be able to select a session to restore (as well as files or directories) on the start screen (screenshot below).
@@ -55,26 +50,26 @@ Sessions won't be created on system directories (such as home, Desktop, Document
 
 Every relevant keybind/command mapped by a plugin.
 
- 1. [Commentary](#commentary)
- 2. [Surround](#surround)
- 3. [Unimpaired](#unimpaired)
- 4. [EasyClip](#easyclip)
- 5. [Abolish](#abolish)
- 6. [Eregex](#eregex)
- 7. [Speed-Dating](#speeddating)
- 8. [Radical](#radical)
- 9. [Visual Increment](#visual-increment)
- 10. [Fugitive](#fugitive)
- 11. [SplitJoin](#splitjoin)
- 12. [Easy Align](#easyalign)
- 13. [Vim Visual Multi](#visualmulti)
+ 1.  [Commentary](#commentary)
+ 2.  [CapsLock](#capslock)
+ 3.  [Surround](#surround)
+ 4.  [Unimpaired](#unimpaired)
+ 5.  [EasyClip](#easyclip)
+ 6.  [Abolish](#abolish)
+ 7.  [Eregex](#eregex)
+ 8.  [Speed-Dating](#speeddating)
+ 9.  [Radical](#radical)
+ 10. [Visual Increment](#visual-increment)
+ 11. [Fugitive](#fugitive)
+ 12. [SplitJoin](#splitjoin)
+ 13. [Easy Align](#easyalign)
+ 14. [Vim Visual Multi](#visualmulti)
 
 Plugins in other sections:
 
  1. [WhichKey](#whichkey)
- 2. [CapsLock](#capslock)
- 3. [Scalpel](#scalpel)
- 4. [BufOnly](#bufonly)
+ 2. [Scalpel](#scalpel)
+ 3. [BufOnly](#bufonly)
 
 ### <a id="commentary"></a>Commentary ([tpope/vim-commentary](https://github.com/tpope/vim-commentary))
 
@@ -97,6 +92,16 @@ To add support to a filetype, you have yo adjust `commentstring`. For example, t
 ```
 autocmd FileType apache setlocal commentstring=#\ %s
 ```
+
+### <a id="capslock"></a>CapsLock ([tpope/vim-capslock](https://github.com/tpope/vim-capslock))
+
+This plugin adds a virtual caps lock that won't mess normal mode up.
+
+* `gC`: normal mode - toggle permanent caps-lock
+* `<C-g>c`: inser mode - toggle temporary caps-lock
+  * Is decativated once you leave insert mode.
+
+I liked [suxpert/vimcaps](https://github.com/suxpert/vimcaps) better - it deactivates normal caps-lock once you exit insert mode and also works in VSCode -, but I don't remember how to make it work.
 
 ### <a id="surround"></a>Surround ([tpope/vim-surround](https://github.com/tpope/vim-surround))
 

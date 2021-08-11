@@ -3,23 +3,17 @@
 # install neovim, node.js and other dependencies
 sudo snap install nvim --beta --classic
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-sudo apt-get install -y nodejs node-typescript
-sudo apt install python3 python3-pip python-neovim python3-neovim npm yarn -y
+sudo apt install -y nodejs node-typescript python3 python3-pip python-neovim
+sudo apt install -y python3-neovim npm yarn fzf ripgrep silversearcher-ag
+sudo apt install -y xclip clangd-9 ranger
 
 mkdir session
 
 # install C language server (clangd)
-sudo apt install clangd-9 -y
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-9 100
 
 # install Vim-Plug
 curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# vimcaps support
-sudo apt install -y libx11-dev libx11-data
-
-# copy/paste enable
-sudo apt install xclip
 
 # install python support
 pip3 install -U pynvim neovim-remote
@@ -28,7 +22,6 @@ pip3 install -U pynvim neovim-remote
 sudo npm i -g neovim eslint
 
 # install ranger
-sudo apt install ranger -y
 pip install -U ueberzug
 mkdir -p ~/.config/ranger/plugins/ranger_devicons
 git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
@@ -47,7 +40,9 @@ sudo apt install -y texlive-fonts-recommended-doc texlive-humanities-doc texlive
 sudo apt install -y texlive-pstricks perl-tk texlive-metapost texlive-metapost-doc
 
 # sets plugins up
-# nvim --headless +PlugUpgrade +PlugInstall +PlugUpdate +q
+# nvim --headless +PlugUpgrade +q
+# nvim --headless +PlugInstall +q
+# nvim --headless +PlugUpdate +q
 # nvim --headless +CocStart +CocUpdate +q
 
 # install fonts
