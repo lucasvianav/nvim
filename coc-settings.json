@@ -1,4 +1,6 @@
 {
+    "diagnostic.enableMessage": "jump",
+
     // autocompletion general settings
     "suggest.enablePreselect": false,
     "suggest.autoTrigger": "always",
