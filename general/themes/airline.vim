@@ -1,13 +1,18 @@
 " tabline config
 let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+" sections
+let g:airline_section_a = ' ' " mode
+let g:airline_section_c = ''  " filepath
+let g:airline_section_y = ''  " encoding
 
 " config
 let g:airline_powerline_fonts = 1
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
 let g:airline_detect_crypt=1
-let g:airline_stl_path_style = 'short'
+" let g:airline_stl_path_style = 0
 let g:airline_inactive_collapse=1
 let g:airline#extensions#capslock#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
@@ -30,14 +35,16 @@ endif
 " overriding symbols
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_symbols.maxlinenr = ' ㏑'
+let g:airline_symbols.linenr = ' ☰ ㏑'
+let g:airline_symbols.maxlinenr = ' '
+let g:airline_symbols.colnr = '㏇'
 let g:airline_symbols.spell = 'Ꞩ'
 
 " matching with current theme
-let g:airline_theme = 'onedark'
+let g:airline_theme = 'deep_space'
 
 " Always show tabs
 set showtabline=4
 
-" We don't need to see things like -- INSERT -- anymore
+" hide -- INSERT --
 set noshowmode
