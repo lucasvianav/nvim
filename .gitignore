@@ -1,10 +1,10 @@
 __pycache__/
 __pycache__/*
+autoload/
 autoload/*
 yarn lock
 'yarn lock'
 .netrwhist
-session/*
 .vscode/
 .vscode/*
 Session.vim
