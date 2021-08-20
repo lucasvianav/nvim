@@ -22,7 +22,7 @@ Plug 'unblevable/quick-scope'
 " Press CTRL + / to comment
 Plug 'tpope/vim-commentary'
 " Perl Regex
-Plug 'othree/eregex.vim'
+" Plug 'othree/eregex.vim'
 " Enables . repeat for Plug-In maps
 Plug 'tpope/vim-repeat'
 " Fixes <C-A> and <C-X> for dates
