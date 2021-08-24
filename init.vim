@@ -10,7 +10,6 @@ source $HOME/.config/nvim/mappings/typos.vim
 
 " custom keybindings
 source $HOME/.config/nvim/mappings/keybindings/mappings.vim
-source $HOME/.config/nvim/mappings/keybindings/unimpaired.vim
 
 " custom commands
 source $HOME/.config/nvim/mappings/commands/mappings.vim
@@ -43,6 +42,7 @@ source $HOME/.config/nvim/general/plugins/config/vim-commentary.vim
 source $HOME/.config/nvim/general/plugins/config/vim-easy-align.vim
 source $HOME/.config/nvim/general/plugins/config/vim-easyclip.vim
 source $HOME/.config/nvim/general/plugins/config/vim-surround.vim
+source $HOME/.config/nvim/general/plugins/config/vim-unimpaired.vim
 source $HOME/.config/nvim/general/plugins/config/vim-visual-multi.vim
 source $HOME/.config/nvim/general/plugins/config/vimtex.vim
 source $HOME/.config/nvim/general/plugins/config/vimux.vim
