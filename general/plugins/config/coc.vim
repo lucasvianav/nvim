@@ -4,8 +4,8 @@ let g:coc_node_path = '/usr/bin/node'
 " Extensions
 let g:coc_global_extensions = [
 \    'coc-json', 'coc-pyright', 'coc-html', 'coc-angular', 'coc-tsserver',
-\    'coc-discord', 'coc-dash-complete', 'coc-dot-complete', 'coc-css',
-\    'coc-explorer', 'coc-fzf-preview', 'coc-git', 'coc-tailwindcss',
+\    'coc-discord', 'coc-dash-complete', 'coc-dot-complete', 'coc-markdownlint',
+\    'coc-explorer', 'coc-fzf-preview', 'coc-git', 'coc-tailwindcss', 'coc-css',
 \    'coc-sh', 'coc-snippets', 'coc-sql', 'coc-eslint', 'coc-html-css-support',
 \    'coc-vimtex', 'coc-vimlsp', 'coc-clangd', 'coc-prettier', 'coc-docker'
 \]
