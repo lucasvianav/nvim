@@ -1,4 +1,16 @@
 {
+    "languageserver": {
+        "graphql": {
+            "command": "graphql-lsp",
+            "args": ["server", "-m", "stream"],
+            "filetypes": [
+                "typescript", "typescriptreact", 
+                "javascript", "javascriptreact",
+                "graphql"
+            ]
+        }
+    },
+
     "diagnostic.enableMessage": "jump",
 
     // autocompletion general settings

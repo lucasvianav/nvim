@@ -100,6 +100,10 @@ Plug 'kana/vim-textobj-indent'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " HTML Super Snippets
 Plug 'mattn/emmet-vim'
+" Unimpaired
+Plug 'lucasvianav/vim-unimpaired'
+" GraphQL
+Plug 'jparise/vim-graphql'
 
 " " Telescope
 " Plug 'nvim-lua/popup.nvim'
