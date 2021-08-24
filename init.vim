@@ -14,18 +14,16 @@ source $HOME/.config/nvim/mappings/keybindings/shortcuts.vim
 source $HOME/.config/nvim/mappings/keybindings/navigation.vim
 source $HOME/.config/nvim/mappings/keybindings/unmappings.vim
 
-" custom commands
-source $HOME/.config/nvim/mappings/commands/mappings.vim
+" commands
+source $HOME/.config/nvim/mappings/commands/general.vim
+source $HOME/.config/nvim/mappings/commands/abbreviations.vim
+source $HOME/.config/nvim/mappings/commands/BufOnly.vim
+source $HOME/.config/nvim/mappings/commands/BufClose.vim
 
 " themes
 source $HOME/.config/nvim/general/themes/appearence.vim
 source $HOME/.config/nvim/general/themes/onedark.vim
 source $HOME/.config/nvim/general/themes/airline.vim
-
-" commands
-source $HOME/.config/nvim/mappings/commands/BufClose.vim
-source $HOME/.config/nvim/mappings/commands/BufOnly.vim
-source $HOME/.config/nvim/mappings/commands/neovim.vim
 
 " vim plugins
 source $HOME/.config/nvim/general/plugins/config/closetag.vim
