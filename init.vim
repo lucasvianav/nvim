@@ -9,7 +9,10 @@ source $HOME/.config/nvim/general/providers.vim
 source $HOME/.config/nvim/mappings/typos.vim
 
 " custom keybindings
-source $HOME/.config/nvim/mappings/keybindings/mappings.vim
+source $HOME/.config/nvim/mappings/keybindings/general.vim
+source $HOME/.config/nvim/mappings/keybindings/shortcuts.vim
+source $HOME/.config/nvim/mappings/keybindings/navigation.vim
+source $HOME/.config/nvim/mappings/keybindings/unmappings.vim
 
 " custom commands
 source $HOME/.config/nvim/mappings/commands/mappings.vim
