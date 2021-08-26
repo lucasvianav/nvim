@@ -33,6 +33,7 @@ let g:which_key_map.d        = [ ':<C-u>CocList diagnostics<cr>' , 'show all dia
 let g:which_key_map.e        = [ ':CocCommand explorer'          , 'explorer'                ]
 let g:which_key_map.f        = [ ':FZF'                          , 'search files'            ]
 let g:which_key_map.h        = [ '<C-W>s'                        , 'split below'             ]
+let g:which_key_map.j        = [ '<Plug>(jsdoc)'                 , 'TSDoc'                   ]
 let g:which_key_map.n        = [ ':noh'                          , 'hide highlights'         ]
 let g:which_key_map.q        = [ ':BufClose'                     , 'close buffer'            ]
 let g:which_key_map.r        = [ ':RnvimrToggle'                 , 'ranger'                  ]

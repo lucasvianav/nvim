@@ -104,6 +104,11 @@ Plug 'mattn/emmet-vim'
 Plug 'lucasvianav/vim-unimpaired'
 " GraphQL
 Plug 'jparise/vim-graphql'
+" TSDoc
+Plug 'heavenshell/vim-jsdoc', {
+  \ 'for': ['javascript', 'javascript.jsx','typescript'],
+  \ 'do': 'make install'
+\}
 
 " " Telescope
 " Plug 'nvim-lua/popup.nvim'
