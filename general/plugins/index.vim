@@ -6,15 +6,16 @@ endif
 
 call plug#begin('~/.config/nvim/autoload/plugged')
 
-" Themes
+" themes
 Plug 'joshdick/onedark.vim'
-Plug 'shaunsingh/nord.nvim'
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'wadackel/vim-dogrun'
-Plug 'dracula/vim'
-Plug 'iCyMind/NeoSolarized'
-Plug 'folke/tokyonight.nvim'
+" Plug 'shaunsingh/nord.nvim'
+" Plug 'tyrannicaltoucan/vim-deep-space'
+" Plug 'wadackel/vim-dogrun'
+" Plug 'dracula/vim'
+" Plug 'iCyMind/NeoSolarized'
+" Plug 'folke/tokyonight.nvim'
 
+" plugins
 Plug 'AndrewRadev/splitjoin.vim'                               " switch between single-line and multiline statement
 Plug 'AndrewRadev/tagalong.vim'                                " autoedit enclosing html tag
 Plug 'RRethy/vim-illuminate'                                   " highlight other occurrences from under the cursor
