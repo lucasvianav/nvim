@@ -39,16 +39,15 @@ source $HOME/.config/nvim/general/plugins/config/rnvimr.vim
 source $HOME/.config/nvim/general/plugins/config/scalpel.vim
 source $HOME/.config/nvim/general/plugins/config/startify.vim
 source $HOME/.config/nvim/general/plugins/config/tmux-navigator.vim
-source $HOME/.config/nvim/general/plugins/config/vim-commentary.vim
-source $HOME/.config/nvim/general/plugins/config/vim-easy-align.vim
-source $HOME/.config/nvim/general/plugins/config/vim-easyclip.vim
-source $HOME/.config/nvim/general/plugins/config/vim-surround.vim
-source $HOME/.config/nvim/general/plugins/config/vim-unimpaired.vim
-source $HOME/.config/nvim/general/plugins/config/vim-visual-multi.vim
+source $HOME/.config/nvim/general/plugins/config/commentary.vim
+source $HOME/.config/nvim/general/plugins/config/easy-align.vim
+source $HOME/.config/nvim/general/plugins/config/easyclip.vim
+source $HOME/.config/nvim/general/plugins/config/surround.vim
+source $HOME/.config/nvim/general/plugins/config/unimpaired.vim
+source $HOME/.config/nvim/general/plugins/config/visual-multi.vim
 source $HOME/.config/nvim/general/plugins/config/vimtex.vim
 source $HOME/.config/nvim/general/plugins/config/vimux.vim
 source $HOME/.config/nvim/general/plugins/config/which-key.vim
-" source $HOME/.config/nvim/general/plugins/config/nvim-telescope.vim
 
 " lua plugins
 lua require 'plug-colorizer'
@@ -56,7 +55,4 @@ lua require 'plug-bufferline'
 
 " sessions config
 source $HOME/.config/nvim/general/sessions.vim
-
-" terminal config
-source $HOME/.config/nvim/general/terminal.vim
 
