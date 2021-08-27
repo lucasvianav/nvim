@@ -15,113 +15,63 @@ Plug 'dracula/vim'
 Plug 'iCyMind/NeoSolarized'
 Plug 'folke/tokyonight.nvim'
 
-" Which Key
-Plug 'liuchengxu/vim-which-key'
-" Quickscope
-Plug 'unblevable/quick-scope'
-" Press CTRL + / to comment
-Plug 'tpope/vim-commentary'
-" Perl Regex
-" Plug 'othree/eregex.vim'
-" Enables . repeat for Plug-In maps
-Plug 'tpope/vim-repeat'
-" Fixes <C-A> and <C-X> for dates
-Plug 'tpope/vim-speeddating'
-" Better clipboard
-Plug 'svermeulen/vim-easyclip'
-" Crazy stuff (words manipulation)
-Plug 'tpope/vim-abolish'
-" Virtual caps lock
-Plug 'tpope/vim-capslock'
-" Increment sequences
-Plug 'triglav/vim-visual-increment'
-" Surround
-Plug 'tpope/vim-surround'
-" Better Syntax Support
-Plug 'sheerun/vim-polyglot'
-" Auto pairs for '(' '[' '{'
-Plug 'jiangmiao/auto-pairs'
-" coc
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Airline Status Bar
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" Ranger File-Explorer
-Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
-" FZF
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-" Updates working directory to the project opened
-Plug 'airblade/vim-rooter'
-" Colorizer
-Plug 'norcalli/nvim-colorizer.lua'
-" Rainbow Parenthesis
-Plug 'junegunn/rainbow_parentheses.vim'
-" Startify (project manager)
-Plug 'mhinz/vim-startify'
-" coc Snippers
-Plug 'honza/vim-snippets'
-" Codi
-Plug 'metakirby5/codi.vim'
-" Easymotion
-Plug 'easymotion/vim-easymotion'
-" Close HTML tags
-Plug 'alvan/vim-closetag'
-" Highlight other occurrences from under the cursor
-Plug 'RRethy/vim-illuminate'
-" Git integration
-Plug 'tpope/vim-fugitive'
-" Function to get current Git branch
-Plug 'itchyny/vim-gitbranch'
-" Search and replace word under cursor
-Plug 'wincent/scalpel'
-" Pulse cursorline after search (makes easier to find the cursor)
-Plug 'inside/vim-search-pulse'
-" Switch between single-line and multiline statement
-Plug 'AndrewRadev/splitjoin.vim'
-" Fancy buffer line
-Plug 'akinsho/nvim-bufferline.lua'
-" Autoedit enclosing HTML tag
-Plug 'AndrewRadev/tagalong.vim'
-" Highlight encolsing HTML tag
-Plug 'valloric/MatchTagAlways'
-" Align blocks of code
-Plug 'junegunn/vim-easy-align'
-" Work with LaTeX
-" Plug 'lervag/vimtex'
-" Navigate seamlessly between vim widows and TMUX panes
-Plug 'christoomey/vim-tmux-navigator'
-" Perform bash commands (in TMUX pane) from Neovim
-Plug 'https://github.com/preservim/vimux'
-" Custom indent block text object
-Plug 'kana/vim-textobj-user'
+Plug 'AndrewRadev/splitjoin.vim'                               " switch between single-line and multiline statement
+Plug 'AndrewRadev/tagalong.vim'                                " autoedit enclosing html tag
+Plug 'RRethy/vim-illuminate'                                   " highlight other occurrences from under the cursor
+Plug 'airblade/vim-rooter'                                     " updates working directory to the project opened
+Plug 'akinsho/nvim-bufferline.lua'                             " fancy buffer line
+Plug 'alvan/vim-closetag'                                      " autoclose html tags
+Plug 'christoomey/vim-tmux-navigator'                          " navigate seamlessly between vim widows and tmux panes
+Plug 'easymotion/vim-easymotion'                               " get around very quickly
+Plug 'honza/vim-snippets'                                      " snippets!!
+Plug 'inside/vim-search-pulse'                                 " pulse cursorline after search (makes easier to find the cursor)
+Plug 'itchyny/vim-gitbranch'                                   " provides function to get current git branch
+Plug 'jiangmiao/auto-pairs'                                    " auto pairs for '(' '[' '{'
+Plug 'jparise/vim-graphql'                                     " graphql support
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }            " fuzzy finder terminal commands
+Plug 'junegunn/fzf.vim'                                        " fuzzy finder vim commands
+Plug 'junegunn/rainbow_parentheses.vim'                        " color-highlight parenthesis/brackets pairs
+Plug 'junegunn/vim-easy-align'                                 " align blocks of code
+Plug 'kana/vim-textobj-user'                                   " custom indent block text object
 Plug 'kana/vim-textobj-indent'
-" Multiple cursors
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-" HTML Super Snippets
-Plug 'mattn/emmet-vim'
-" Unimpaired
-Plug 'lucasvianav/vim-unimpaired'
-" GraphQL
-Plug 'jparise/vim-graphql'
-" TSDoc
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}                " ranger file explorer
+" Plug 'lervag/vimtex'                                           " work with latex
+Plug 'liuchengxu/vim-which-key'                                " menu for <Leader> maps
+Plug 'lucasvianav/vim-unimpaired'                              " pairs of handy bracket maps
+Plug 'mattn/emmet-vim'                                         " html super snippets
+Plug 'metakirby5/codi.vim'                                     " interactive scratchpad for js/ts
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}            " multiple cursors
+Plug 'mhinz/vim-startify'                                      " start screen
+Plug 'neoclide/coc.nvim', {'branch': 'release'}                " code completion
+Plug 'norcalli/nvim-colorizer.lua'                             " highlight color codes
+Plug 'preservim/vimux'                                         " run terminal commands in tmux pane from vim
+Plug 'sheerun/vim-polyglot'                                    " better syntax support
+Plug 'svermeulen/vim-easyclip'                                 " better clipboard
+Plug 'tpope/vim-abolish'                                       " word manipulation maps/commands
+Plug 'tpope/vim-capslock'                                      " virtual caps lock maps
+Plug 'tpope/vim-commentary'                                    " maps for toggling comments
+Plug 'tpope/vim-fugitive'                                      " git CLI for command mode
+Plug 'tpope/vim-repeat'                                        " enables . repeat for plugin maps
+Plug 'tpope/vim-speeddating'                                   " fixes <c-a> and <c-x> for dates
+Plug 'tpope/vim-surround'                                      " surrounding manipulatiuon maps
+Plug 'triglav/vim-visual-increment'                            " increment sequences with visual block
+Plug 'unblevable/quick-scope'                                  " better t/T, s/S (underline)
+Plug 'valloric/MatchTagAlways'                                 " highlight enclosing html tag
+Plug 'vim-airline/vim-airline'                                 " airline status bar
+Plug 'vim-airline/vim-airline-themes'                          " airline status bar themes
+
+" TSDoc documentation comments generation
 Plug 'heavenshell/vim-jsdoc', {
   \ 'for': ['javascript', 'javascript.jsx','typescript'],
   \ 'do': 'make install'
 \}
 
-" " Telescope
-" Plug 'nvim-lua/popup.nvim'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
-
-" Icons (must be the last plugin loaded)
+" icons (must be the last plugin loaded)
 Plug 'kyazdani42/nvim-web-devicons'
-" Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
-" Automatically install missing plugins on startup
+" automatically install missing plugins on startup
 autocmd VimEnter *
   \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \|   PlugInstall --sync | q
