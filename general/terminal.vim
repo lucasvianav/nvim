@@ -1,6 +1,14 @@
+" i'm not currently using this because of TMUX (<3).
+" i haven't used it, but akinsho/toggleterm.nvim is
+" probably better and would be my choice if i'd go
+" back to using nvim's terminal
+
+" i havn't tested, but it's probably
+" better to replace g: by s:
 let g:terminal_buffer_n = 0
 let g:is_terminal_open = 0
 
+" s:
 function! PutTermPanel(buf, side, size) abort
     " new term if no buffer
     if !a:buf || !bufexists(g:terminal_buffer_n)
@@ -40,6 +48,7 @@ function! PutTermPanel(buf, side, size) abort
     endif
 endfunction
 
+" s:
 function! s:ToggleTerminal(side, size) abort
     " if the terminal is open, hide it
     if g:is_terminal_open && bufexists(g:terminal_buffer_n)
@@ -51,14 +60,15 @@ function! s:ToggleTerminal(side, size) abort
     endif
 endfunction
 
-" Toggle terminal - bottom
+" toggles terminal - bottom
 command ToggleTermBottom :call <SID>ToggleTerminal('J', 6)
-" nnoremap <silent> <Leader>t :ToggleTermBottom<CR>
+nnoremap <silent> <Leader>t :ToggleTermBottom<CR>
 
-" Toggle terminal - right
+" toggles terminal - right
 command ToggleTermRight :call <SID>ToggleTerminal('L', 60)
-" nnoremap <silent> <Leader>tr :ToggleTermRight<CR>
+nnoremap <silent> <Leader>tr :ToggleTermRight<CR>
 
 " exit terminal mode with jk
 tnoremap jk <C-\><C-n>
 tnoremap JK <C-\><C-n>
+
