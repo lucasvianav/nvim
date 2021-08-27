@@ -38,7 +38,7 @@ set wildignore=*/node_modules/*,*/autoload/* " exclude directories from path
 set inccommand=nosplit                       " preview :s in real time
 set textwidth=79                             " break lines after 79 characters (pip8)
 set colorcolumn=+1                           " show mark at column 80
-set synmaxcol=500                            " stop syntax highlighting after 500 chars
+set synmaxcol=240                            " stop syntax highlighting after 500 chars
 
 " if folding is enabled
 if has('folding')
