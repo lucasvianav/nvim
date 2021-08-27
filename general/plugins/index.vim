@@ -16,6 +16,7 @@ Plug 'joshdick/onedark.vim'
 " Plug 'folke/tokyonight.nvim'
 
 " plugins
+" Plug 'lervag/vimtex'                                           " work with latex
 Plug 'AndrewRadev/splitjoin.vim'                               " switch between single-line and multiline statement
 Plug 'AndrewRadev/tagalong.vim'                                " autoedit enclosing html tag
 Plug 'RRethy/vim-illuminate'                                   " highlight other occurrences from under the cursor
@@ -33,10 +34,9 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }            " fuzzy finder te
 Plug 'junegunn/fzf.vim'                                        " fuzzy finder vim commands
 Plug 'junegunn/rainbow_parentheses.vim'                        " color-highlight parenthesis/brackets pairs
 Plug 'junegunn/vim-easy-align'                                 " align blocks of code
-Plug 'kana/vim-textobj-user'                                   " custom indent block text object
 Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-user'                                   " custom indent block text object
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}                " ranger file explorer
-" Plug 'lervag/vimtex'                                           " work with latex
 Plug 'liuchengxu/vim-which-key'                                " menu for <Leader> maps
 Plug 'lucasvianav/vim-unimpaired'                              " pairs of handy bracket maps
 Plug 'mattn/emmet-vim'                                         " html super snippets
@@ -60,6 +60,7 @@ Plug 'unblevable/quick-scope'                                  " better t/T, s/S
 Plug 'valloric/MatchTagAlways'                                 " highlight enclosing html tag
 Plug 'vim-airline/vim-airline'                                 " airline status bar
 Plug 'vim-airline/vim-airline-themes'                          " airline status bar themes
+Plug 'wellle/targets.vim'                                      " provides great new text objects
 
 " TSDoc documentation comments generation
 Plug 'heavenshell/vim-jsdoc', {
