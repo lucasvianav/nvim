@@ -1,43 +1,44 @@
 let g:mapleader = "\<Space>"
 
-syntax enable                                   " Enables syntax highlighing
-syntax on                                       " Enables syntax highlighing
-set    hidden                                   " Enable multiple buffers
-set    nowrap                                   " Don't wrap lines
-set    encoding=UTF-8                           " The encoding displayed
-set    fileencoding=UTF-8                       " The encoding written to file
-set    pumheight=10                             " Makes popup menu smaller
-set    ruler                                    " Show cursor position
-set    iskeyword+=-                             " Dash maintains word text object
-set    mouse=a                                  " Enables mouse
-set    splitbelow                               " Horizontal splits below
-set    splitright                               " Vertical splits to the right
-set    t_Co=256                                 " Support 256 colors
-set    tabstop=4                                " 4 spaces for a tab
-set    shiftwidth=4                             " 4 spaces for indentation
-set    smarttab                                 " Makes tabbing smarter
-set    expandtab                                " Converts tabs to spaces
-set    smartindent                              " Makes indenting smart
-set    autoindent                               " Auto indent
-set    laststatus=0                             " Always display the status line
-set    number                                   " Line numbers
-set    relativenumber                           " Relative line numbers
-set    cursorline                               " Highlights current line
-set    background=dark                          " Background color is dark
-set    showtabline=2                            " Always show tab line (top bar)
-set    nobackup                                 " This is recommended by coc
-set    nowritebackup                            " This is recommended by coc
-set    updatetime=300                           " Faster completion
-set    formatoptions-=cro                       " No newline continuation of comments
-set    clipboard+=unnamedplus                   " System-wide copy-paste
-set    scrolloff=1                              " Number of screen lines around cursor
-set    nrformats=alpha,octal,hex                " Allows letter sequences
-set    path+=**                                 " Enables recursive use of :find
-set    wildignore=*/node_modules/*,*/autoload/* " Exclude directories from path
-set    inccommand=nosplit                       " Preview :s in real time
-set    textwidth=79                             " Break lines after 79 characters (PIP8)
-set    colorcolumn=+1                           " Show mark at column 80
-set    guifont=DroidSansMono\ Nerd\ Font\ 10    " Symbol font
+syntax enable " enables syntax highlighing
+syntax on     " enables syntax highlighing
+
+set hidden                                   " enable multiple buffers
+set nowrap                                   " don't wrap lines
+set encoding=UTF-8                           " the encoding displayed
+set fileencoding=UTF-8                       " the encoding written to file
+set pumheight=10                             " makes popup menu smaller
+set ruler                                    " show cursor position
+set mouse=a                                  " enables mouse
+set splitbelow                               " horizontal splits below
+set splitright                               " vertical splits to the right
+set tabstop=4                                " 4 spaces for a tab
+set shiftwidth=4                             " 4 spaces for indentation
+set smarttab                                 " makes tabbing smarter
+set expandtab                                " converts tabs to spaces
+set smartindent                              " makes indenting smart
+set autoindent                               " auto indent
+set laststatus=0                             " always display the status line
+set number                                   " line numbers
+set relativenumber                           " relative line numbers
+set cursorline                               " highlights current line
+set background=dark                          " background color is dark
+set showtabline=2                            " always show tab line (top bar)
+set nobackup                                 " don't backup files before overwriting them
+set nowritebackup                            " don't backup files before overwriting them
+set updatetime=300                           " faster completion
+set formatoptions-=ro                        " no newline continuation of comments
+set formatoptions+=tcjnl                     " better formatting options (:help it)
+set clipboard+=unnamedplus                   " system-wide copy-paste
+set scrolloff=1                              " number of screen lines around cursor
+set sidescrolloff=5                          " number of screen columns around cursor
+set nrformats=alpha                          " allows letter sequences
+set path+=**                                 " enables recursive use of :find
+set wildignore=*/node_modules/*,*/autoload/* " exclude directories from path
+set inccommand=nosplit                       " preview :s in real time
+set textwidth=79                             " break lines after 79 characters (pip8)
+set colorcolumn=+1                           " show mark at column 80
+set synmaxcol=500                            " stop syntax highlighting after 500 chars
 
 " if folding is enabled
 if has('folding')
