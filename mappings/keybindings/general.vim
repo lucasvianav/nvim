@@ -12,12 +12,11 @@ nnoremap <silent> <S-A-L> :vertical resize +2<CR>
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
-" Break line after current position
+" break line after/before current position
 nnoremap ]b a<CR><Esc>k$
-
-" Break line before current position
 nnoremap [b i<CR><Esc>k$
 
+" get blank new line
 nmap <Leader>o o<C-c>^Da
 nmap <Leader>O O<C-c>^Da
 
