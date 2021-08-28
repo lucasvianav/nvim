@@ -1,10 +1,9 @@
-" <Leader>f{char} to move to {char}
-" nmap  <Leader>c <Plug>(easymotion-bd-f)
+" move to char
 nmap <Leader>c <Plug>(easymotion-overwin-f)
 
-" s{char}{char} to move to {char}{char}
+" move to syllab
 nmap <Leader>sy <Plug>(easymotion-overwin-f2)
 
-" Move to word
+" move to word
 " nmap  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)

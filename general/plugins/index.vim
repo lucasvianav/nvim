@@ -61,6 +61,8 @@ Plug 'valloric/MatchTagAlways'                          " highlight enclosing ht
 Plug 'vim-airline/vim-airline'                          " airline status bar
 Plug 'vim-airline/vim-airline-themes'                   " airline status bar themes
 Plug 'wellle/targets.vim'                               " provides great new text objects
+Plug 'conornewton/vim-pandoc-markdown-preview'          " a
+Plug 'skywind3000/asyncrun.vim'                         " a
 
 " TSDoc documentation comments generation
 Plug 'heavenshell/vim-jsdoc', {

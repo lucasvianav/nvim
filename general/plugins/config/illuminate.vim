@@ -3,8 +3,8 @@ let g:Illuminate_highlightUnderCursor = 0
 
 augroup illuminate_augroup
     autocmd!
-    " autocmd VimEnter * hi illuminatedWordk ctermbg=15 guibg=#FFFFFF ctermfg=4 guifg=#8b0000
-    autocmd VimEnter * hi illuminatedWord ctermbg=LightGrey guibg=LightGrey ctermfg=Black guifg=Black
+    " autocmd VimEnter * hi illuminatedWord ctermbg=LightGray guibg=LightGray " ctermfg=Black guifg=Black
+    autocmd VimEnter * hi illuminatedWord guibg=#595959 " ctermfg=Black guifg=Black
 augroup END
 
 let g:Illuminate_ftHighlightGroups = {
@@ -12,8 +12,16 @@ let g:Illuminate_ftHighlightGroups = {
       \         'vimFuncName', 'vimFunction', 'vimUserFunc', 'vimFunc']
       \ }
 
-let g:Illuminate_ftwhitelist = ['vim', 'sh', 'python', 'node', 'javascript', 'py', 'js', 'c', 'c++', 'cpp', 'h']
-let g:Illuminate_ftblacklist = ['nerdtree', 'coc', 'cocexplorer', 'coc-explorer']
+let g:Illuminate_ftwhitelist = [
+    \ 'vim', 'sh', 'python', 'node',
+    \ 'javascript', 'py', 'js', 'c',
+    \ 'cpp', 'h'
+\ ]
 
-nnoremap <a-n> :lua require"illuminate".next_reference{wrap=true}<cr>
-nnoremap <a-p> :lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>
+let g:Illuminate_ftblacklist = [
+    \ 'nerdtree', 'coc',
+    \ 'cocexplorer', 'coc-explorer'
+\ ]
+
+" nnoremap <a-n> :lua require"illuminate".next_reference{wrap=true}<cr>
+" nnoremap <a-p> :lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>

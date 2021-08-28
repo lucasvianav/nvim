@@ -29,24 +29,25 @@ source $HOME/.config/nvim/general/themes/airline.vim
 source $HOME/.config/nvim/general/plugins/config/closetag.vim
 source $HOME/.config/nvim/general/plugins/config/coc.vim
 source $HOME/.config/nvim/general/plugins/config/codi.vim
+source $HOME/.config/nvim/general/plugins/config/commentary.vim
+source $HOME/.config/nvim/general/plugins/config/easy-align.vim
+source $HOME/.config/nvim/general/plugins/config/easyclip.vim
 source $HOME/.config/nvim/general/plugins/config/easymotion.vim
 source $HOME/.config/nvim/general/plugins/config/emmet.vim
 source $HOME/.config/nvim/general/plugins/config/fzf.vim
 source $HOME/.config/nvim/general/plugins/config/illuminate.vim
+source $HOME/.config/nvim/general/plugins/config/pandoc-mardown-previewer.vim
 source $HOME/.config/nvim/general/plugins/config/quickscope.vim
 source $HOME/.config/nvim/general/plugins/config/rainbow_parentheses.vim
 source $HOME/.config/nvim/general/plugins/config/rnvimr.vim
 source $HOME/.config/nvim/general/plugins/config/scalpel.vim
 source $HOME/.config/nvim/general/plugins/config/startify.vim
-source $HOME/.config/nvim/general/plugins/config/tmux-navigator.vim
-source $HOME/.config/nvim/general/plugins/config/commentary.vim
-source $HOME/.config/nvim/general/plugins/config/easy-align.vim
-source $HOME/.config/nvim/general/plugins/config/easyclip.vim
 source $HOME/.config/nvim/general/plugins/config/surround.vim
+source $HOME/.config/nvim/general/plugins/config/tmux-navigator.vim
 source $HOME/.config/nvim/general/plugins/config/unimpaired.vim
-source $HOME/.config/nvim/general/plugins/config/visual-multi.vim
 source $HOME/.config/nvim/general/plugins/config/vimtex.vim
 source $HOME/.config/nvim/general/plugins/config/vimux.vim
+source $HOME/.config/nvim/general/plugins/config/visual-multi.vim
 source $HOME/.config/nvim/general/plugins/config/which-key.vim
 
 " lua plugins
