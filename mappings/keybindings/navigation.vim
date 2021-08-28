@@ -1,6 +1,6 @@
 " buffer movement with <Tab> and <S-Tab>
-nnoremap <silent> <TAB> :bnext<CR>
-nnoremap <silent> <S-TAB> :bprevious<CR>
+nnoremap <silent> \<TAB> :bnext<CR>
+nnoremap <silent> \<S-TAB> :bprevious<CR>
 
 " toggle buffer last visited buffer
 nnoremap <silent> <Leader><Tab> <C-^>
