@@ -40,10 +40,8 @@ sudo apt install -y texlive-fonts-recommended-doc texlive-humanities-doc texlive
 sudo apt install -y texlive-pstricks perl-tk texlive-metapost texlive-metapost-doc
 
 # sets plugins up
-# nvim --headless +PlugUpgrade +q
-# nvim --headless +PlugInstall +q
-# nvim --headless +PlugUpdate +q
-# nvim --headless +CocStart +CocUpdate +q
+nvim --headless +PlugUpgrade +PlugInstall +PlugUpdate +qall
+nvim --headless +CocStart +CocInstall +CocUpdate +qall
 
 # install fonts
 mkdir -p ~/.local/share/fonts
