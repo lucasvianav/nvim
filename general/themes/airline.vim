@@ -22,11 +22,11 @@ let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#csv#enabled = 1
 let g:airline#extensions#csv#column_display = 'Name'
 let g:airline#extensions#fzf#enabled = 1
-let g:airline#extensions#vimtex#enabled = 1
+let g:airline#extensions#vimtex#enabled = 0
 
 " vimtex config
-let g:airline#extensions#vimtex#left = "{"
-let g:airline#extensions#vimtex#right = "}"
+" let g:airline#extensions#vimtex#left = \"{\"\n
+" let g:airline#extensions#vimtex#right = \"}\"\n
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
