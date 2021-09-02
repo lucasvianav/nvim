@@ -33,6 +33,7 @@ source $HOME/.config/nvim/general/plugins/config/commentary.vim
 source $HOME/.config/nvim/general/plugins/config/easy-align.vim
 source $HOME/.config/nvim/general/plugins/config/easyclip.vim
 source $HOME/.config/nvim/general/plugins/config/easymotion.vim
+source $HOME/.config/nvim/general/plugins/config/editorconfig.vim
 source $HOME/.config/nvim/general/plugins/config/emmet.vim
 source $HOME/.config/nvim/general/plugins/config/fzf.vim
 source $HOME/.config/nvim/general/plugins/config/illuminate.vim
@@ -53,6 +54,7 @@ source $HOME/.config/nvim/general/plugins/config/which-key.vim
 " lua plugins
 lua require 'plug-colorizer'
 lua require 'plug-bufferline'
+lua require 'plug-web-devicons'
 
 " sessions config
 source $HOME/.config/nvim/general/sessions.vim
