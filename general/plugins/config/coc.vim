@@ -162,7 +162,20 @@ nnoremap <silent> gs :CocCommand clangd.switchSourceHeader<CR>
 
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
+function! s:SortImports() abort
+    if !empty($WORK_DIR) && expand('%:p') =~# '^' . escape($WORK_DIR, '.') | return | endif
+
+    let l:ext = expand('%:e')
+
+    if l:ext ==# 'py'
+        call CocAction('runCommand', 'python.sortImports')
+    elseif l:ext =~# '^[t,j]s$'
+        call CocAction('runCommand', 'tsserver.organizeImports')
+    endif
+endfunction
+
 " organize python and javascript imports on save
 " autocmd BufWritePre * silent! :call CocAction('runCommand', 'editor.action.organizeImport')
-autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')
-autocmd BufWritePre *.js,*.ts silent! :call CocAction('runCommand', 'tsserver.organizeImports')
+" autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')
+" autocmd BufWritePre *.js,*.ts silent! :call CocAction('runCommand', 'tsserver.organizeImports')
+autocmd BufWritePre *.py,*.js,*.ts silent! :call <SID>SortImports()
