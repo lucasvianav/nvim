@@ -16,7 +16,6 @@ Plug 'joshdick/onedark.vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 
 " plugins
-" Plug 'lervag/vimtex'                                           " work with latex
 Plug 'AndrewRadev/splitjoin.vim'                        " switch between single-line and multiline statement
 Plug 'AndrewRadev/tagalong.vim'                         " autoedit enclosing html tag
 Plug 'RRethy/vim-illuminate'                            " highlight other occurrences from under the cursor
@@ -24,7 +23,9 @@ Plug 'airblade/vim-rooter'                              " updates working direct
 Plug 'akinsho/nvim-bufferline.lua'                      " fancy buffer line
 Plug 'alvan/vim-closetag'                               " autoclose html tags
 Plug 'christoomey/vim-tmux-navigator'                   " navigate seamlessly between vim widows and tmux panes
+Plug 'conornewton/vim-pandoc-markdown-preview'          " live-preview markdown in pdf with pandoc
 Plug 'easymotion/vim-easymotion'                        " get around very quickly
+Plug 'editorconfig/editorconfig-vim'                    " follow .editorconfig files
 Plug 'honza/vim-snippets'                               " snippets!!
 Plug 'inside/vim-search-pulse'                          " pulse cursorline after search (makes easier to find the cursor)
 Plug 'itchyny/vim-gitbranch'                            " provides function to get current git branch
@@ -34,9 +35,10 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }     " fuzzy finder terminal 
 Plug 'junegunn/fzf.vim'                                 " fuzzy finder vim commands
 Plug 'junegunn/rainbow_parentheses.vim'                 " color-highlight parenthesis/brackets pairs
 Plug 'junegunn/vim-easy-align'                          " align blocks of code
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-user'                            " custom indent block text object
+Plug 'kana/vim-textobj-indent'                          " custom indent block text object
+Plug 'kana/vim-textobj-user'
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}         " ranger file explorer
+Plug 'lervag/vimtex'                                    " work with latex
 Plug 'liuchengxu/vim-which-key'                         " menu for <Leader> maps
 Plug 'lucasvianav/vim-unimpaired'                       " pairs of handy bracket maps
 Plug 'mattn/emmet-vim'                                  " html super snippets
@@ -47,6 +49,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}         " code completion
 Plug 'norcalli/nvim-colorizer.lua'                      " highlight color codes
 Plug 'preservim/vimux'                                  " run terminal commands in tmux pane from vim
 Plug 'sheerun/vim-polyglot'                             " better syntax support
+Plug 'skywind3000/asyncrun.vim'                         " live-preview markdown asynchronously
 Plug 'svermeulen/vim-easyclip'                          " better clipboard
 Plug 'tpope/vim-abolish'                                " word manipulation maps/commands
 Plug 'tpope/vim-capslock'                               " virtual caps lock maps
@@ -61,8 +64,6 @@ Plug 'valloric/MatchTagAlways'                          " highlight enclosing ht
 Plug 'vim-airline/vim-airline'                          " airline status bar
 Plug 'vim-airline/vim-airline-themes'                   " airline status bar themes
 Plug 'wellle/targets.vim'                               " provides great new text objects
-Plug 'conornewton/vim-pandoc-markdown-preview'          " a
-Plug 'skywind3000/asyncrun.vim'                         " a
 
 " TSDoc documentation comments generation
 Plug 'heavenshell/vim-jsdoc', {
