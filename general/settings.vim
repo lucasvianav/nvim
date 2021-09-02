@@ -56,7 +56,7 @@ endif
 au! BufWritePost $MYVIMRC source %
 
 " enable commentaries in json
-au BufNewFile,BufRead,BufReadPost *.json set syntax=jsonc
+autocmd BufEnter *.json setlocal filetype=jsonc
 
 " Make macros work better in visual mode
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
@@ -75,3 +75,14 @@ function! <SID>StripTrailingWhitespaces()
     endif
 endfun
 autocmd FileType c,cpp,java,php,ruby,python,javascript,typescript,vim,sh,markdown autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
+function! s:SourceLocalConfig() abort
+    let l:cwd = getcwd()
+
+    if !empty($WORK_DIR) && cwd =~# '^' . escape($WORK_DIR, '.')
+        source l:cwd . '/.nvimrc'
+    endif
+endfunction
+
+autocmd BufEnter <buffer> silent! :call <SID>SourceLocalConfig()
+
