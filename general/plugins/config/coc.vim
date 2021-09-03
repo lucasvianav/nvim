@@ -7,7 +7,8 @@ let g:coc_global_extensions = [
 \    'coc-discord', 'coc-dash-complete', 'coc-dot-complete', 'coc-markdownlint',
 \    'coc-explorer', 'coc-fzf-preview', 'coc-git', 'coc-tailwindcss', 'coc-css',
 \    'coc-sh', 'coc-snippets', 'coc-sql', 'coc-eslint', 'coc-html-css-support',
-\    'coc-vimtex', 'coc-vimlsp', 'coc-clangd', 'coc-prettier', 'coc-docker'
+\    'coc-vimtex', 'coc-vimlsp', 'coc-clangd', 'coc-prettier', 'coc-docker',
+\    'coc-sumneko-lua'
 \]
 
 " enable coc-css to word in .scss files
