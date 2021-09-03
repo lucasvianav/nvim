@@ -7,7 +7,6 @@ cabbrev wq x
 " other commands
 cabbrev wrv Wrvimrc
 cabbrev wbd BdWrite
-cabbrev settings Settings
 cabbrev bufo BufOnly
 cabbrev qb BufClose
 cabbrev wqb BqWrite
