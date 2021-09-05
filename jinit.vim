@@ -1,3 +1,5 @@
+" lua require('plugins.bootstrap')
+
 " plugins
 source $HOME/.config/nvim/general/plugins/index.vim
 
