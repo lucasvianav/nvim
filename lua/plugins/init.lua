@@ -19,6 +19,9 @@ if not present then
     present, packer = pcall(require, "packer")
 end
 
-local plugins = require('plugins.plugins')
+local function getAll()
+    require('plugins.plugins').getAll()
+    require('plugins.themes').getAll()
+end
 
-return present and packer.startup(plugins.getAll) or nil
+return present and packer.startup(getAll) or nil
