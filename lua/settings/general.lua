@@ -1,4 +1,5 @@
-local o = vim.o
+local g = vim.g
+local o = vim.opt
 local cmd = vim.cmd
 
 -- enable syntax highlighting, filetype
@@ -12,7 +13,6 @@ local path_ignore = '*/node_modules/*,*/autoload/*'
 
 -- general settings
 o.autoindent     = true            -- auto indent
-o.background     = 'dark'          -- background color is dark
 o.colorcolumn    = '+1'            -- show mark at column 80
 o.cursorline     = true            -- highlights current line
 o.expandtab      = true            -- converts tabs to spaces
@@ -21,8 +21,8 @@ o.hidden         = true            -- enable multiple buffers
 o.inccommand     = 'nosplit'       -- preview :s in real time
 o.laststatus     = 0               -- always display the status line
 o.mouse          = 'a'             -- enables mouse
-o.nobackup       = true            -- don't backup files before overwriting them
-o.nowritebackup  = true            -- don't backup files before overwriting them
+o.backup       = false            -- don't backup files before overwriting them
+o.writebackup  = false            -- don't backup files before overwriting them
 o.nrformats      = 'alpha'         -- allows letter sequences
 o.number         = true            -- line numbers
 o.pumheight      = 10              -- makes popup menu smaller
@@ -50,10 +50,7 @@ o.clipboard:append({'unnamedplus'})     -- system-wide copy-paste
 o.formatoptions:append({'tcjnl'})       -- better formatting options (:help it)
 o.formatoptions:remove({'ro'})          -- no newline continuation of comments
 
--- setup treesitter for better syntax
--- configs (highlighting, indentation, etc)
-require('nvim-treesitter.configs').setup({
-    ensure_installed = 'maintained',
-    highlight = { enable = true },
-})
+-- LaTeX settings
+g.tex_conceal = ''
+g.tex_flavor  = 'latex'
 
