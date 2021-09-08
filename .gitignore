@@ -1,18 +1,26 @@
-*.pdf
 __pycache__/
 __pycache__/*
+
 autoload/
 autoload/*
-yarn lock
-'yarn lock'
+
 .netrwhist
+
 .vscode/
 .vscode/*
+
 Session.vim
+
+yarn lock
+'yarn lock'
 yarn.lock
 node__modules/
 node__modules/*
 node_modules/
 node_modules/*
+
 .vim/
 .vim/*
+
+plugin/
+plugin/*
