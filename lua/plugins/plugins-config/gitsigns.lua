@@ -1,4 +1,4 @@
-require('gitsigns').setup {
+require('gitsigns').setup({
     signs = {
         add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
         change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
@@ -6,10 +6,12 @@ require('gitsigns').setup {
         topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
         changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
     },
-    signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-    numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
-    linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
-    word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+
+    signcolumn = true, 
+    numhl      = false,
+    linehl     = false,
+    word_diff  = false,
+
     keymaps = {
         -- Default keymap options
         noremap = true,
@@ -62,5 +64,5 @@ require('gitsigns').setup {
     yadm = {
         enable = false
     },
-}
+})
 

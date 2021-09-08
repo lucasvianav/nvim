@@ -1,21 +1,27 @@
+local o = vim.opt
 local cmd = vim.cmd
+local fn = vim.fn
 
 -- list of desired treesitter parsers
 local parsers = {
     'bash', 'bibtex', 'c', 'comment', 'css', 'dockerfile',
     'graphql', 'html', 'javascript', 'jsdoc', 'tsx', 'vim',
-    'JSON with comments', 'json', 'lua', 'python', 'scss',
-    'typescript', 'yaml',
+    'jsonc', 'json', 'lua', 'python', 'scss', 'typescript', 
+    'yaml',
 }
 
 -- install all desired parsrs
-for parser in pairs(parsers) do cmd(':TSInstall ' .. parser) end
+-- for _, parser in pairs(parsers) do cmd(':TSInstall ' .. parser) end
 
 -- setup treesitter for better syntax
 -- configs (highlighting, indentation, etc)
 require('nvim-treesitter.configs').setup({
-    ensure_installed = 'maintained',
+    ensure_installed = parsers,
     highlight = { enable = true },
-    autopairs = { enable = true },
+    rainbow = { enable = true, extended_mode = true },
 })
+
+-- use for folding
+-- o.foldmethod = 'expr'
+-- o.foldexpr   = fn['nvim_treesitter#foldexpr']()
 

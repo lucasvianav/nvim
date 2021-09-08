@@ -3,11 +3,8 @@ require('indent_blankline').setup({
 
     buftype_exclude  = { 'terminal' },
     filetype_exclude = {
-        'help',
-        'terminal',
-        'dashboard',
-        'packer',
-        'startify',
+        'help', 'terminal', 'dashboard',
+        'packer', 'startify',
     },
 
     show_trailing_blankline_indent = false,
