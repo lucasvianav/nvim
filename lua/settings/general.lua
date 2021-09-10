@@ -45,6 +45,8 @@ o.updatetime     = 300             -- faster completion
 o.wildignore     = path_ignore     -- exclude directories from path
 o.wrap           = false           -- don't wrap lines
 
+o.sessionoptions = 'winsize,resize,buffers,curdir,help,tabpages,winpos,folds'
+
 o.path:append({'**'})                   -- enables recursive use of :find
 o.clipboard:append({'unnamedplus'})     -- system-wide copy-paste
 o.formatoptions:append({'tcjnl'})       -- better formatting options (:help it)
