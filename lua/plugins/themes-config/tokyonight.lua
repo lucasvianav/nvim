@@ -13,9 +13,11 @@ set('transparent_sidebar', true)
 set('dark_sidebar',        false)
 set('dark_float',          true) -- darker bg for floating windows
 
+test = 'funcionou'
+
 -- activates the colorscheme
 if colorscheme == 'tokyonight' then 
     vim.cmd('colorscheme tokyonight') 
-    vim.cmd(appearance_cmds)
+    vim.cmd(appearanceCommands)
 end
 
