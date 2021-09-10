@@ -1,5 +1,3 @@
-local unmap = require('utils').functions.unmap
-
 -- unbinds escape key
 unmap('i', '<Esc>')
 unmap('v', '<Esc>')

@@ -1,5 +1,3 @@
-local map = require('utils').functions.map
-
 -- buffer movement with \<Tab> and <S-Tab>
 -- nnoremap <silent> \<TAB> :bnext<CR>
 -- nnoremap <silent> <S-TAB> :bprevious<CR>

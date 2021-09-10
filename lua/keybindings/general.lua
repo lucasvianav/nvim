@@ -1,10 +1,10 @@
-local map = require('utils').functions.map
-
 -- sets <Leader> to <Space>
 vim.g.mapleader = ' '
 
--- substitutes Esc by Ctrl+C in normal mode
+-- substitutes Esc by Ctrl+C in normal 
+-- mode and jk in insert mode
 map('n', '<C-c>', '<Esc>')
+-- map('i', 'jk', '<Esc>')
 
 -- use alt + shift + hjkl to resize windows
 map('n', '<S-M-J>', ':<C-U>resize -2<CR>')

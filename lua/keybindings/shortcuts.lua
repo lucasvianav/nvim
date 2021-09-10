@@ -1,5 +1,3 @@
-local map = require('utils').functions.map
-
 -- indenting in visual mode
 -- maintains selection
 map('v', '<', '<gv')
