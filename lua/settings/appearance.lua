@@ -9,7 +9,7 @@ vim.o.background = 'dark'
 colorscheme = 'tokyonight'
 
 -- common config to be run for each plugin
-appearance_cmds = [[
+appearanceCommands = [[
     hi Folded ctermbg=NONE guibg=NONE
 ]]
 
