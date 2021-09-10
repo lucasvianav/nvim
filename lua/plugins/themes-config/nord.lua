@@ -10,9 +10,3 @@ set('cursorline_transparent',    false)
 set('enable_sidebar_background', false)    -- if background was disabled
 set('italic',                    true)     -- if background was disabled
 
--- activates the colorscheme
-if colorscheme == 'nord' then 
-    vim.cmd('colorscheme nord') 
-    vim.cmd(appearance_cmds)
-end
-

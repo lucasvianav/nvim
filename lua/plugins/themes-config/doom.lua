@@ -7,9 +7,3 @@ set('terminal_colors',        true)
 set('italic_comments',        true)
 set('transparent_background', true)
 
--- activates the colorscheme
-if colorscheme == 'doom-one' then 
-    vim.cmd('colorscheme doom-one') 
-    vim.cmd(appearance_cmds)
-end
-

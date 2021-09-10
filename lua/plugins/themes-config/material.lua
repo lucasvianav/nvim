@@ -1,9 +1,8 @@
 -- settings
 vim.g.material_style = 'deep ocean'
 require('material').setup({
-
-    contrast = true, -- Enable contrast for sidebars, floating windows and popup menus like Nvim-Tree
-    borders = true, -- Enable borders between verticaly split windows
+    contrast = true, -- contrast for sidebars, floating windows and popup menus like nvim-tree
+    borders = true, -- borders between verticaly split windows
 
     italics = {
         comments = true,
@@ -28,10 +27,4 @@ require('material').setup({
         -- CursorLine = '',
     }
 })
-
--- activates the colorscheme
-if colorscheme == 'material' then 
-    vim.cmd('colorscheme material') 
-    vim.cmd(appearance_cmds)
-end
 
