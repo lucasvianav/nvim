@@ -1,8 +1,6 @@
 local fn = vim.fn
 local cmd = vim.cmd
 
-cmd('packadd packer.nvim')
-
 local present, packer = pcall(require, "packer")
 
 if not present then
@@ -15,13 +13,12 @@ if not present then
         packer_path,
     })
 
-    cmd('packadd packer.nvim')
     present, packer = pcall(require, "packer")
 end
 
-local function getAll()
-    require('plugins.plugins').getAll()
-    require('plugins.themes').getAll()
+local function getAll(use)
+    require('plugins.plugins').getAll(use)
+    require('plugins.themes').getAll(use)
 end
 
 return present and packer.startup(getAll) or nil
