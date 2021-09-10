@@ -16,7 +16,7 @@ require('bufferline').setup({
         left_mouse_command = "buffer %d",
         right_mouse_command = "",
         middle_mouse_command = "bdelete! %d",
-        offsets = {{filetype = "coc-explorer", text = "File Explorer", text_align = "center"}},
+        offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "center"}},
         show_buffer_close_icons = false,
         show_close_icon = false,
         show_tab_indicators = true,
@@ -63,8 +63,6 @@ require('bufferline').setup({
         info_diagnostic_selected = {
             guibg = selected.bg
         },
-
-
 
         -- idle buffers
         fill = {
@@ -140,4 +138,6 @@ require('bufferline').setup({
         }
     }
 })
+
+vim.cmd([[hi BufferLineFill ctermbg=none guibg=none]])
 
