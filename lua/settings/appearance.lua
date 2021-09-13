@@ -1,8 +1,11 @@
 local colors = require('utils').colors
 local cmd = vim.cmd
+local o = vim.opt
+
+o.pumblend = 10
 
 -- the background color is dark
-vim.o.background = 'dark'
+o.background = 'dark'
 
 -- only the chosen colorscheme 
 -- will be loaded by packer :)

@@ -13,8 +13,8 @@ map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
 
 -- better nav for omnicomplete
--- inoremap { '<c-j>', "\<C-n>", { expr = true }
--- inoremap { '<c-k>', "\<C-p>", { expr = true }
+map('i', '<C-j>', '<C-n>')
+map('i', '<C-k>', '<C-p>')
 
 -- nnoremap '' ``
 

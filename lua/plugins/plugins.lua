@@ -26,9 +26,10 @@ function M.getAll(use)
     _use({ 'lucasvianav/vim-unimpaired',   event   = 'BufRead'      })      -- pairs of handy bracket maps
     _use({ 'xiyaowong/nvim-transparent',   disable = true,          })      -- transparent background
     _use({ 'kyazdani42/nvim-web-devicons', as      = 'devicons'     })      -- colored icons
-    _use({ 'tpope/vim-fugitive',           cmd     = { 'Git' }      })      -- git CLI for command mode
-    _use({ 'lervag/vimtex',     ft      = { 'plaintex', 'tex'       } })    -- work well with LaTeX
-    _use({ 'mizlan/iswap.nvim', cmd     = { 'ISwap',    'ISwapWith' } })    -- easily swap function arguments
+    _use({ 'tpope/vim-fugitive',           cmd     = { 'Git'  }     })      -- git CLI for command mode
+
+    _use({ 'lervag/vimtex',     ft  = { 'plaintex', 'tex'       } })    -- work well with LaTeX
+    _use({ 'mizlan/iswap.nvim', cmd = { 'ISwap',    'ISwapWith' } })    -- easily swap function arguments
 
     _use({ 'tpope/vim-repeat', keys = '.',    fn = 'repeat#set' }) -- enables . repeat for plugins
     _use({ 'wsdjeg/luarefvim', cmd  = 'help', ft = 'lua'        }) -- lua documentation
@@ -256,6 +257,22 @@ function M.getAll(use)
         "glepnir/dashboard-nvim",
         cmd = { "Dashboard", "DashboardNewFile", },
     })
+
+    _use({ 'neovim/nvim-lspconfig' })
+    _use({
+        'kabouzeid/nvim-lspinstall',
+        after = 'nvim-lspconfig',
+        event = 'BufRead',
+        cmd = { 'LspInstall', 'LspUninstall' },
+    })
+    _use({ 'kosayoda/nvim-lightbulb' })
+    -- _use({ 'onsails/lspkind-nvim' })
+
+    -- code completion
+    -- @ALTERNATIVE: hrsh7th/nvim-cmp
+    -- @DEPENDENCY: python3-venv
+    _use({ 'ms-jpq/coq_nvim', branch = 'coq' })
+    _use({ 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' })
 end
 
 return M

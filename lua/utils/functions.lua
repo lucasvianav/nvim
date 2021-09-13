@@ -62,10 +62,11 @@ function _G.getLoadFunction(type, use)
 
         if not pluginName then
             local re = {
-                leadingPath = [[^.\+\/]],           -- matches leading path
-                extension   = [[\.[^.]\+$]],        -- matches trailing extension
-                vim         = [[-n\?vim\|n\?vim-]], -- matches "-vim" or "vim-" (also nvim)
-                lua         = [[-n\?lua\|n\?lua-]], -- matches "-lua" or "lua-"
+                leadingPath = [[^.\+\/]],    -- matches leading path
+                extension   = [[\.[^.]\+$]], -- matches trailing extension
+
+                vim         = [[[-_]n\?vim\|n\?vim]] .. '[-_]', -- matches "-vim" or "vim-" (also nvim and _)
+                lua         = [[[-_]n\?lua\|n\?lua]] .. '[-_]', -- matches "-lua" or "lua-" (also _)
             }
 
             local function subs(regex) 
@@ -94,12 +95,41 @@ function _G.getLoadFunction(type, use)
             args.cond = [[colorscheme == ']] .. pluginName .. [[']]
         end
 
-        -- print(pluginName, type, plugin, theme)
-        -- print(vim.inspect(args))
-
         return use(args)
     end
 
     return _use
 end
 
+function _G.containsBin(x, list)
+    local middle
+    local start = 1
+    local size = #list
+
+    while(start <= size) do
+        middle = math.floor((start + size)/2)
+
+        if x == list[middle] then
+            return true
+        elseif x < list[middle] then
+            size = middle - 1
+        else
+            start = middle + 1
+        end
+    end
+
+    return false
+end
+
+function _G.contains(x, list)
+    for _, y in pairs(list) do
+        if x == y then return true end
+    end
+
+    return false
+end
+
+-- 't' for 'termcodes'
+function _G.t(key)
+    return vim.api.nvim_replace_termcodes(key, true, true, true)
+end

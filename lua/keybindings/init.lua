@@ -1,10 +1,11 @@
 local function keybindings(file) require('keybindings.' .. file) end
 
 local M = {
-    general = keybindings('general'),
+    general    = keybindings('general'),
     navigation = keybindings('navigation'),
-    shortcuts = keybindings('shortcuts'),
+    shortcuts  = keybindings('shortcuts'),
     unmappings = keybindings('unmappings'),
+    lsp        = keybindings('lsp'),
 }
 
 return M

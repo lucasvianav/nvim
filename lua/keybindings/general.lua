@@ -1,10 +1,14 @@
 -- sets <Leader> to <Space>
 vim.g.mapleader = ' '
 
--- substitutes Esc by Ctrl+C in normal 
--- mode and jk in insert mode
+-- substitutes Esc by Ctrl+C in normal mode
 map('n', '<C-c>', '<Esc>')
--- map('i', 'jk', '<Esc>')
+
+-- if the better-scape isn't installed,
+-- substitutes Esc by jk in insert mode
+-- if not packer_plugins or not packer_plugins['better-escape.vim'] then
+--     map('i', 'jk', '<Esc>')
+-- end
 
 -- use alt + shift + hjkl to resize windows
 map('n', '<S-M-J>', ':<C-U>resize -2<CR>')
