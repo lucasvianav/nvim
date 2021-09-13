@@ -17,8 +17,9 @@ if not present then
 end
 
 local function getAll(use)
-    require('plugins.plugins').getAll(use)
-    require('plugins.themes').getAll(use)
+    require('_packer.plugins').getAll(use)
+    require('_packer.themes').getAll(use)
 end
 
 return present and packer.startup(getAll) or nil
+

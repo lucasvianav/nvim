@@ -1,4 +1,4 @@
 require('utils')
 require('keybindings')
 require('settings')
-require('plugins')
+require('_packer')
