@@ -12,7 +12,7 @@ local M = {}
 -- Plug 'liuchengxu/vim-which-key'                         " menu for <Leader> maps
 
 function M.getAll(use)
-    local _use = getLoadFunction('plugin', use)
+    local _use = get_packer_use_wrapper(use, 'plugins.plugins-config')
 
     _use({ 'wbthomason/packer.nvim' })   -- packer can manage itself
     _use({ 'rmagatti/auto-session' })    -- session manager

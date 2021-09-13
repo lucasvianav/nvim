@@ -32,11 +32,14 @@ function _G.loadSessionOrDashboard()
     end
 end
 
-function _G.getLoadFunction(type, use)
-    local plugin = type == 'plugin'
-    local theme  = type == 'theme'
-    if (not plugin and not theme) or not use then return end
+--[[
+@param `use`   (function) -- `packer.use`
+@param `dir`   (string)   -- directory in which to search for config files
+@param `theme` (boolean)  -- is it a theme?
 
+@return wrapper for `use`
+]]--
+function _G.get_packer_use_wrapper(use, dir, theme)
     local function getRequireString(module, pluginName)
         local requireString = [[    pcall(require, ']] .. module .. [[')]]
 
@@ -81,8 +84,8 @@ function _G.getLoadFunction(type, use)
         end
 
         if not args.config or (setup and not args.setup) then
-            local module = 'plugins.' .. type .. 's-config.' .. pluginName
-            local requireString = getRequireString(module, pluginName)
+            local config_filepath = dir .. '.' .. pluginName
+            local requireString = getRequireString(config_filepath, pluginName)
 
             if setup then
                 args.setup = requireString
@@ -101,6 +104,9 @@ function _G.getLoadFunction(type, use)
     return _use
 end
 
+--[[
+Checks if `list` contains the element `x` using binary search. Only useful if `list` is sorted.
+]]--
 function _G.containsBin(x, list)
     local middle
     local start = 1
@@ -121,6 +127,9 @@ function _G.containsBin(x, list)
     return false
 end
 
+--[[
+Checks if `list` contains the element `x`.
+]]--
 function _G.contains(x, list)
     for _, y in pairs(list) do
         if x == y then return true end
@@ -129,7 +138,11 @@ function _G.contains(x, list)
     return false
 end
 
--- 't' for 'termcodes'
+--[[
+Same as escaping a key code in VimL ('t' for 'termcodes').
+
+e.g.: t'<Esc>' in lua is the same as "\<Esc>" in VimL.
+]]--
 function _G.t(key)
     return vim.api.nvim_replace_termcodes(key, true, true, true)
 end
