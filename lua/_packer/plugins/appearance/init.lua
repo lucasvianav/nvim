@@ -3,16 +3,19 @@ local M = {}
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.appearance')
 
+    _use({ 'rcarriga/nvim-notify' }) -- better notifications
+
     _use({ 'kyazdani42/nvim-web-devicons', as      = 'devicons' }) -- colored icons
     _use({ 'norcalli/nvim-colorizer.lua',  event   = 'BufRead'  }) -- highlight color codes
-    _use({ 'p00f/nvim-ts-rainbow',         event   = 'BufRead'  }) -- color matching surroundings
     _use({ 'xiyaowong/nvim-transparent',   disable = true,      }) -- transparent background
+    _use({ 'folke/twilight.nvim',          cmd     = 'Twilight' }) -- dims inactive portions of the code
 
-    -- treesitter
+    -- color matching surroundings using treesitter
     _use({
-        'nvim-treesitter/nvim-treesitter',
-        event = 'BufRead', run = ':TSUpdate',
-    })
+        'p00f/nvim-ts-rainbow',
+        event   = 'BufRead',
+        after = 'nvim-treesitter',
+    }) 
 
     -- fancy bufferline
     _use({

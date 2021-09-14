@@ -8,7 +8,7 @@ function M.getAll(use)
     plugins('general')
     plugins('appearance')
     plugins('git')
-    plugins('languages')
+    plugins('syntax')
     plugins('lsp')
     plugins('navigation')
 end

@@ -3,8 +3,10 @@ local M = {}
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.general')
 
-    _use({ 'wbthomason/packer.nvim' }) -- packer can manage itself
-    _use({ 'jiangmiao/auto-pairs'   }) -- auto pairs for {[()]}
+    _use({ 'wbthomason/packer.nvim'          }) -- packer can manage itself
+    _use({ 'lewis6991/impatient.nvim'        }) -- improve startup time
+    _use({ 'jiangmiao/auto-pairs'            }) -- auto pairs for {[()]}
+    _use({ 'antoinemadec/FixCursorHold.nvim' }) -- fixes CursorHold and CursorHoldl
 
     -- _use({ 'jiangmiao/auto-pairs',       event = 'InsertEnter' }) -- auto pairs for {[()]}
     _use({ 'lucasvianav/vim-unimpaired', event = 'BufRead'     }) -- pairs of handy bracket maps
@@ -12,6 +14,7 @@ function M.getAll(use)
     _use({ 'andymass/vim-matchup',       event = 'CursorMoved' }) -- make % smarter
     _use({ 'wellle/targets.vim',         event = 'BufRead'     }) -- provides great new text objects
 
+    _use({ 'chrisbra/NrrwRgn', cmd = { 'NR', 'NUD' } }) -- focus narrow code section
     _use({ 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } }) -- easily swap function arguments
 
     _use({ 'wsdjeg/luarefvim', cmd  = 'help', ft = 'lua'        }) -- lua documentation
@@ -142,6 +145,38 @@ function M.getAll(use)
         'kana/vim-textobj-indent',
         requires = { 'kana/vim-textobj-user' },
         event = 'BufRead',
+    })
+
+    -- awesme ascii box drawer
+    --[[
+        _use({
+            'gyim/vim-boxdraw',
+            keys = {
+                { 'v', '+o' }, { 'v', '+O' }, { 'v', '+c' },
+                { 'v', '+-' }, { 'v', '+_' }, { 'v', '+>' },
+                { 'v', '+<' }, { 'v', '++>' }, { 'v', '++<' },
+                { 'v', '+|' }, { 'v', '+^' }, { 'v', '+v' },
+                { 'v', '+V' }, { 'v', '++^' }, { 'v', '++v' },
+                { 'v', '++V' }, { 'v', '+io' }, { 'v', '+ao' },
+            }
+        })
+    --]]
+
+    -- markdown previewer in browser
+    -- DEPENDENCY: npm (yarn?)
+    _use({
+        'iamcco/markdown-preview.nvim', 
+        cmd = 'MarkdownPreview',
+        keys = '<Plug>MarkdownPreviewToggle',
+        run = 'cd app && npm install' -- TODO: must be yarn?
+    })
+
+    -- project search and replace
+    -- DEPENDANCY: RG, sed
+    _use({
+        'windwp/nvim-spectre',
+        requires = 'nvim-lua/plenary.nvim',
+        keys = { '<Leader>S', { 'v', '<Leader>S' } }
     })
 end
 
