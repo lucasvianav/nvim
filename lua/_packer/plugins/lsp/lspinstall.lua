@@ -1,6 +1,7 @@
 local desired_lsp_servers = {
     'angular',
     'bash',
+    'cpp',
     'css',
     'dockerfile',
     'graphql',
@@ -12,14 +13,24 @@ local desired_lsp_servers = {
     'vim',
 }
 
---------------------------------
+
+
+
+
+
+--------------------------------------------------------------------------------
+
+
+
+
+
 
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
     -- enable completion triggered by <c-x><c-o>
-    -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     local opts = { noremap = true, silent = true }
 
@@ -37,15 +48,15 @@ local on_attach = function(client, bufnr)
     -- buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.formatting()<CR>',                                 opts)
 
     -- set autocommands conditional on server_capabilities
-    -- if client.resolved_capabilities.document_highlight then
-    --     vim.api.nvim_exec([[
-    --     augroup lsp_document_highlight
-    --     autocmd! * <buffer>
-    --     autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-    --     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    --     augroup END
-    --     ]], false)
-    -- end
+    if client.resolved_capabilities.document_highlight then
+        vim.api.nvim_exec([[
+        augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        augroup END
+        ]], false)
+    end
 end
 
 -- config that activates keymaps and enables snippet support
@@ -72,7 +83,7 @@ local function setup_servers()
             config.settings = require('_packer.plugins.lsp.servers').lua
         end
 
-        require('lspconfig')[server].setup() 
+        require('lspconfig')[server].setup(config) 
     end
 end
 
@@ -88,6 +99,7 @@ for _, server in pairs(desired_lsp_servers) do
 end
 
 setup_servers()
+vim.cmd('windo e')
 
 -- setup the new server and restart
 -- on all buffers after install

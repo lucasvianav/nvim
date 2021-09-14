@@ -49,8 +49,8 @@ function M.getAll(use)
     -- ALTERNATIVE: terrortylor/nvim-comment
     _use({
         'tpope/vim-commentary',
-        cmd = 'CommentToggle',
-        keys = 'gc',
+        cmd = { 'Comment', 'Commentary' },
+        keys = { 'gc', { 'v', 'gc' } },
     })
 
 

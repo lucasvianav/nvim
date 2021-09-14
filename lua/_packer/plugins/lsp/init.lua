@@ -11,18 +11,16 @@ function M.getAll(use)
     -- ALTERNATIVE: hrsh7th/nvim-cmp
     -- ALTERNATIVE: onsails/lspkind-nvim
     -- DEPENDENCY: python3-venv
-    _use({ 'ms-jpq/coq_nvim', branch = 'coq' })
+    -- _use({ 'ms-jpq/coq_nvim', branch = 'coq' })
 
     -- snippets for coq
     -- ALTERNATIVE: hrsh7th/nvim-vsnip
-    _use({ 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' })
+    -- _use({ 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' })
 
     -- easier way to install language servers
     _use({
         'kabouzeid/nvim-lspinstall',
         after = 'nvim-lspconfig',
-        -- event = 'BufRead',
-        -- cmd = { 'LspInstall', 'LspUninstall' },
     })
 
     -- general utilities for lsp

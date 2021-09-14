@@ -6,10 +6,10 @@ function M.getAll(use)
     end
 
     plugins('general')
-    plugins('appearance')
-    plugins('git')
     plugins('syntax')
     plugins('lsp')
+    plugins('appearance')
+    plugins('git')
     plugins('navigation')
 end
 
