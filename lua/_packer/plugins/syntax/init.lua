@@ -1,7 +1,7 @@
 local M = {}
 
 function M.getAll(use)
-    local _use = get_packer_use_wrapper(use, '_packer.plugins.languages')
+    local _use = get_packer_use_wrapper(use, '_packer.plugins.syntax')
 
     _use({ 'lervag/vimtex', ft = { 'tex',  'plaintex'       } }) -- LaTeX
     _use({ 'elzr/vim-json', ft = { 'json', 'jsonc', 'jsonp' } }) -- JSON
@@ -17,7 +17,6 @@ function M.getAll(use)
         'JoosepAlviste/nvim-ts-context-commentstring',
         as = 'context-commentstring',
         after = { 'vim-commentary', 'nvim-treesitter' },
-        cmd = 'CommentToggle', keys = 'gc',
     })
 
     -- prettier
