@@ -95,3 +95,11 @@ end
 function _G._loadfile(module)
     return function() return require(module) end
 end
+
+--[[
+Wrapper for `print(vim.inspect(args))`.
+]]--
+function _G.inspect(args)
+    print(vim.inspect(args))
+end
+
