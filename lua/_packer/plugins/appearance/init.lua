@@ -41,6 +41,7 @@ function M.getAll(use)
     -- smooth scrolling
     _use({
         'karb94/neoscroll.nvim',
+        disable = true,
         keys = {
             '<C-u>', '<C-d>', '<C-b>', '<C-f>',
             '<C-y>', '<C-e>', 'zt', 'zz', 'zb',
