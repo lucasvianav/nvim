@@ -1,4 +1,4 @@
 local notify = require('notify')
+notify.setup({ stages = 'slide' })
 
-notify.setup({})
 vim.notify = notify
