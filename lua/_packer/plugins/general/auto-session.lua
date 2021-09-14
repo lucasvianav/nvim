@@ -14,9 +14,3 @@ require('auto-session').setup({
     auto_session_allowed_dirs = nil,
 })
 
--- setup custo auto restore
-vim.api.nvim_command([[augroup LoadSessionOrDashboard]])
-vim.api.nvim_command([[au!]])
-vim.api.nvim_command([[au VimEnter * lua loadSessionOrDashboard()]])
-vim.api.nvim_command([[augroup END]])
-

@@ -19,7 +19,7 @@ function _G._loadfile(module)
     return function() return require(module) end
 end
 
-function _G.loadSessionOrDashboard()
+function _G.load_session_or_dashboard()
     local sessionsDir = fn.expand('~/.local/share/nvim/sessions/')
     local cwd = fn.expand(fn.getcwd())
     local session = sessionsDir .. fn.substitute(cwd, '/', '\\%', 'g') .. '.vim'
@@ -27,6 +27,7 @@ function _G.loadSessionOrDashboard()
 
     if fn.filereadable(session) == 1 then
         cmd('silent! RestoreSession')
+        cmd('silent! windo e')
     elseif noArguments == 0 then
         cmd('silent! Dashboard')
     end
@@ -58,6 +59,12 @@ function _G.get_packer_use_wrapper(use, dir, theme)
         return requireString
     end
 
+    --[[
+    Wrapper for `packer.use`.
+
+    @param args  (table)   -- same as for `packer.use`
+    @param setup (boolean) -- default to setup instead of config
+    ]]--
     local function _use(args, setup)
         if not args or #args == 0 or not args[1] then return end
 

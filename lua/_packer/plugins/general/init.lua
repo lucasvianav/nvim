@@ -4,7 +4,6 @@ function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.general')
 
     _use({ 'wbthomason/packer.nvim' }) -- packer can manage itself
-    _use({ 'rmagatti/auto-session'  }) -- session manager
     _use({ 'jiangmiao/auto-pairs'   }) -- auto pairs for {[()]}
 
     -- _use({ 'jiangmiao/auto-pairs',       event = 'InsertEnter' }) -- auto pairs for {[()]}
@@ -18,6 +17,16 @@ function M.getAll(use)
     _use({ 'wsdjeg/luarefvim', cmd  = 'help', ft = 'lua'        }) -- lua documentation
     _use({ 'tpope/vim-repeat', keys = '.',    fn = 'repeat#set' }) -- enables . repeat for plugins
 
+    -- session manager
+    _use({
+        'rmagatti/auto-session',
+        event = 'VimLeavePre',
+        cmd = {
+            'SaveSession',
+            'RestoreSession',
+            'DeleteSession',
+        },
+    }) 
 
     -- surrounding manipulatiuon maps
     _use({

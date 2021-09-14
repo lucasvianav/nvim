@@ -8,6 +8,7 @@ local M = {
     folding    = settings('folding'),
     macros     = settings('macros'),
     providers  = settings('providers'),
+    sessions   = settings('sessions'),
 }
 
 return M
