@@ -12,7 +12,7 @@ function _G.load_session_or_dashboard()
 
     if fn.filereadable(session) == 1 then
         cmd('silent! RestoreSession')
-        cmd('silent! windo e')
+        -- cmd('silent! windo e')
     elseif noArguments == 0 then
         cmd('silent! Dashboard')
     end

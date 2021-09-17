@@ -4,7 +4,7 @@ vim.g.mapleader = ' '
 -- substitutes Esc by Ctrl+C in normal mode
 map('n', '<C-c>', '<Esc>')
 
--- if the better-scape isn't installed,
+-- if the better-escape isn't installed,
 -- substitutes Esc by jk in insert mode
 -- if not packer_plugins or not packer_plugins['better-escape.vim'] then
 --     map('i', 'jk', '<Esc>')
