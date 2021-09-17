@@ -54,7 +54,6 @@ function M.getAll(use)
         keys = { 'gc', { 'v', 'gc' } },
     })
 
-
     -- interactive scratchpad for js/ts and python
     -- DEPENDENCY: tsun
     _use({
@@ -69,7 +68,6 @@ function M.getAll(use)
     -- ALTERNATIVE: triglav/vim-visual-increment
     _use({
         'monaqa/dial.nvim',
-        disable = true,
         keys = {
             '<C-a>', '<C-x>',
             { 'v', '<C-a>' },
