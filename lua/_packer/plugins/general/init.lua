@@ -147,9 +147,8 @@ function M.getAll(use)
     -- custom "indent block" text object
     _use({
         'kana/vim-textobj-indent',
-        disable = true,
         requires = { 'kana/vim-textobj-user' },
-        event = 'BufRead',
+        event = 'CursorMoved',
     })
 
     -- awesme ascii box drawer
