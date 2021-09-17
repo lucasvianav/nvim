@@ -23,14 +23,6 @@ function M.getAll(use)
         after = 'nvim-lspconfig',
     })
 
-    -- general utilities for lsp
-    _use({
-        'RishabhRD/nvim-lsputils',
-        requires = { 'RishabhRD/popfix' },
-        event = 'BufRead',
-        disable = true,
-    })
-
     -- pretty windows for lsp lists
     -- ALTERNATIVE: RishabhRD/nvim-lsputils
     _use({
