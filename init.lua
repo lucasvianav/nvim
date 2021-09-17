@@ -1,4 +1,5 @@
 require('functions')
 require('keybindings')
 require('settings')
+require('autocmds')
 require('_packer')

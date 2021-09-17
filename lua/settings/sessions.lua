@@ -1,7 +1,5 @@
-vim.opt.sessionoptions = 'winsize,resize,buffers,curdir,tabpages,winpos,folds,options'
+sessions_dir             = '~/.cache/vim/session/'
+session_autoload_enabled = true
 
-vim.api.nvim_command([[augroup LoadSessionOrDashboard]])
-vim.api.nvim_command([[au!]])
-vim.api.nvim_command([[au VimEnter * lua load_session_or_dashboard()]])
-vim.api.nvim_command([[augroup END]])
+vim.opt.sessionoptions = 'curdir,blank,help,winsize,buffers,tabpages,winpos,folds'
 

@@ -7,7 +7,7 @@ function M.getAll(use)
     -- @ALTERNATIVE: mhinz/vim-startify
     _use({
         "glepnir/dashboard-nvim",
-        cmd = { "Dashboard", "DashboardNewFile", },
+        cmd = { 'Dashboard', 'DashboardNewFile' },
     })
 
     -- navigate seamlessly between vim widows and tmux panes
