@@ -3,11 +3,11 @@ local M = {}
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.general')
 
-    _use({ 'wbthomason/packer.nvim'          }) -- packer can manage itself
-    _use({ 'lewis6991/impatient.nvim'        }) -- improve startup time
-    _use({ 'jiangmiao/auto-pairs'            }) -- auto pairs for {[()]}
-    _use({ 'antoinemadec/FixCursorHold.nvim' }) -- fixes CursorHold and CursorHoldl
-    _use({  'nvim-lua/plenary.nvim'  }) -- great utility lua functions
+    _use({ 'wbthomason/packer.nvim'          })   -- packer can manage itself
+    _use({ 'lewis6991/impatient.nvim'        })   -- improve startup time
+    _use({ 'jiangmiao/auto-pairs'            })   -- auto pairs for {[()]}
+    _use({ 'antoinemadec/FixCursorHold.nvim' })   -- fixes CursorHold and CursorHoldl
+    _use({  'nvim-lua/plenary.nvim'          })   -- great utility lua functions
 
     _use({ 'lucasvianav/vim-unimpaired', event = 'BufRead'     }) -- pairs of handy bracket maps
     _use({ 'jdhao/better-escape.vim',    event = 'InsertEnter' }) -- better <Esc> with jk
@@ -81,7 +81,6 @@ function M.getAll(use)
     -- align blocks of code
     _use({
         'junegunn/vim-easy-align',
-        disable = true,
         cmd = 'EasyAlign',
         keys = '<Leader>a',
     })
