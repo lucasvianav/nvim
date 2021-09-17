@@ -15,7 +15,6 @@ function M.getAll(use)
     -- betters commentstrings based in treesitter
     _use({
         'JoosepAlviste/nvim-ts-context-commentstring',
-        disable = true,
         as = 'context-commentstring',
         after = { 'vim-commentary', 'nvim-treesitter' },
     })
