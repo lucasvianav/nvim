@@ -113,7 +113,6 @@ function M.getAll(use)
     -- multiple cursors
     _use({
         'mg979/vim-visual-multi', as = 'multi',
-        disable = true,
         keys = { '<C-n>', 'gl', { 'x', '<C-n>' } },
     })
 
