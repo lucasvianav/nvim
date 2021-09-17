@@ -141,7 +141,6 @@ function M.getAll(use)
     -- pulse cursorline after search (makes it easier to find the cursor)
     _use({
         'inside/vim-search-pulse',
-        disable = true,
         keys = { '/', '?', 'n', 'N', '*', '#' },
     })
 
