@@ -135,7 +135,6 @@ function M.getAll(use)
     -- ALTERNATIVE: easymotion/vim-easymotion
     _use({
         'ggandor/lightspeed.nvim',
-        disable = true,
         keys = { '<C-s>', '<C-M-s>' },
     })
 
