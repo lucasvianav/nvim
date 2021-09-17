@@ -42,7 +42,6 @@ function M.getAll(use)
     -- word manipulation
     _use({
         'tpope/vim-abolish',
-        disable = true,
         cmd = { 'Abolish', 'Subvert' },
         keys = 'cr', after = 'vim-repeat',
     })
