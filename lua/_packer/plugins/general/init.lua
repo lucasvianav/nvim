@@ -105,7 +105,6 @@ function M.getAll(use)
     -- TSDoc docstrings generation
     _use({
         'heavenshell/vim-jsdoc',
-        disable = true,
         cmd = { 'JsDoc', 'JsDocFormat' },
         keys = '<Leader>j',
         run = 'make install',
