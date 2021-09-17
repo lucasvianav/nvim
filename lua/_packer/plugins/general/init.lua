@@ -119,7 +119,6 @@ function M.getAll(use)
     -- zen mode + focusing windows 
     _use({
         'Pocco81/TrueZen.nvim',
-        disable = true,
         cmd = { 'TZFocus', 'TZAtaraxis' },
         keys = { '<F10>' },
     })
