@@ -13,6 +13,7 @@ local path_ignore = '*/node_modules/*,*/autoload/*'
 
 -- general settings
 o.autoindent     = true            -- auto indent
+o.backup         = false           -- don't backup files before overwriting them
 o.colorcolumn    = '+1'            -- show mark at column 80
 o.cursorline     = true            -- highlights current line
 o.expandtab      = true            -- converts tabs to spaces
@@ -21,8 +22,6 @@ o.hidden         = true            -- enable multiple buffers
 o.inccommand     = 'nosplit'       -- preview :s in real time
 o.laststatus     = 0               -- always display the status line
 o.mouse          = 'a'             -- enables mouse
-o.backup       = false            -- don't backup files before overwriting them
-o.writebackup  = false            -- don't backup files before overwriting them
 o.nrformats      = 'alpha'         -- allows letter sequences
 o.number         = true            -- line numbers
 o.pumheight      = 10              -- makes popup menu smaller
@@ -33,6 +32,7 @@ o.shiftround     = true            -- round indent
 o.shiftwidth     = 4               -- 4 spaces for indentation
 o.showtabline    = 2               -- always show tab line (top bar)
 o.sidescrolloff  = 5               -- number of screen columns around cursor
+o.signcolumn     = 'yes'           -- always display the signcolumn
 o.smartindent    = true            -- makes indenting smart
 o.smarttab       = true            -- makes tabbing smarter
 o.splitbelow     = true            -- horizontal splits below
@@ -44,8 +44,7 @@ o.textwidth      = 79              -- break lines after 79 characters (pip8)
 o.updatetime     = 300             -- faster completion
 o.wildignore     = path_ignore     -- exclude directories from path
 o.wrap           = false           -- don't wrap lines
-
-o.sessionoptions = 'winsize,resize,buffers,curdir,help,tabpages,winpos,folds'
+o.writebackup    = false           -- don't backup files before overwriting them
 
 o.path:append({'**'})                   -- enables recursive use of :find
 o.clipboard:append({'unnamedplus'})     -- system-wide copy-paste
