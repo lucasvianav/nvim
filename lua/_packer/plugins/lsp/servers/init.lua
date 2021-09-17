@@ -3,7 +3,8 @@ local function server(name)
 end
 
 local M = {
-    lua = server('lua'),
+    lua     = server('lua'),
+    angular = server('angular'),
 }
 
 return M
