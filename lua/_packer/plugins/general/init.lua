@@ -95,9 +95,11 @@ function M.getAll(use)
     -- html super snippets
     _use({
         'mattn/emmet-vim',
-        disable = true,
-        -- event = 'InsertEnter *.html,*.tsx,*.jsx',
-        keys = { '<C-/>,' },
+        ft = {
+            'html', 'vue',
+            'javascript.jsx',
+            'typescript.tsx',
+        },
     })
 
     -- TSDoc docstrings generation
