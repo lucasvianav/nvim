@@ -11,16 +11,15 @@ function M.getAll(use)
     _use({ 'folke/twilight.nvim',          cmd     = 'Twilight' }) -- dims inactive portions of the code
 
     -- color matching surroundings using treesitter
-    _use({
-        'p00f/nvim-ts-rainbow',
-        event   = 'BufRead',
-        after = 'nvim-treesitter',
-    }) 
+    -- _use({
+    --     'p00f/nvim-ts-rainbow',
+    --     -- event   = 'BufRead',
+    --     after = 'nvim-treesitter',
+    -- }) 
 
     -- fancy bufferline
     _use({
         'akinsho/nvim-bufferline.lua',
-        requires = 'kyazdani42/nvim-web-devicons',
         after = 'devicons',
     })
 
@@ -28,15 +27,15 @@ function M.getAll(use)
     _use({
         'glepnir/galaxyline.nvim',
         branch = 'main',
-        requires = {'kyazdani42/nvim-web-devicons'},
         after = 'devicons',
     })
 
     -- indentation rulers
-    _use({
-        'lukas-reineke/indent-blankline.nvim',
-        event = 'BufRead',
-    })
+    -- _use({
+    --     'lukas-reineke/indent-blankline.nvim',
+    --     -- event = 'BufRead', 
+    --     after = 'nvim-treesitter',
+    -- })
 
     -- smooth scrolling
     _use({

@@ -15,6 +15,7 @@ function M.getAll(use)
     -- betters commentstrings based in treesitter
     _use({
         'JoosepAlviste/nvim-ts-context-commentstring',
+        disable = true,
         as = 'context-commentstring',
         after = { 'vim-commentary', 'nvim-treesitter' },
     })
@@ -23,6 +24,7 @@ function M.getAll(use)
     -- DEPENDENCY: npm (yarn?)
     _use({
         'prettier/vim-prettier',
+        disable = true,
         ft = {
             'javascript', 'typescript',
             'javascript.jsx', 'typescript.tsx',

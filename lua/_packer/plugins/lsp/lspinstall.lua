@@ -77,10 +77,21 @@ local function setup_servers()
 
     local servers = lspinstall.installed_servers()
     for _, server in pairs(servers) do
-        local config = make_config()
+        local config        = make_config()
+        local custom_config = require('_packer.plugins.lsp.servers')
 
         if server == 'lua' then
-            config.settings = require('_packer.plugins.lsp.servers').lua
+            config.settings = custom_config.lua
+        elseif server == 'angular' then
+            local angular = custom_config.angular
+
+            config.cmd            = angular.cmd
+            config.install_script = angular.install_script
+
+            config.on_new_config = function(new_config)
+                new_config.cmd            = angular.cmd
+                new_config.install_script = angular.install_script
+            end
         end
 
         require('lspconfig')[server].setup(config) 

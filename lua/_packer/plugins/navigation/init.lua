@@ -56,7 +56,7 @@ function M.getAll(use)
     _use({
         "nvim-telescope/telescope.nvim",
         requires = { 
-            'nvim-lua/plenary.nvim', 
+            { 'nvim-lua/plenary.nvim' }, 
 
             -- emoji picker
             {
@@ -66,13 +66,14 @@ function M.getAll(use)
                 end
             }, 
 
-            'crispgm/telescope-heading.nvim', -- markdown header picker
+            {  'crispgm/telescope-heading.nvim' }, -- markdown header picker
         } 
     })
 
     -- auto-session picker for telescope
     _use({
         'rmagatti/session-lens',
+        disable = true,
         after = {
             'telescope.nvim',
             'auto-session',

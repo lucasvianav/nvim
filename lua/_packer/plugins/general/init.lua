@@ -7,8 +7,8 @@ function M.getAll(use)
     _use({ 'lewis6991/impatient.nvim'        }) -- improve startup time
     _use({ 'jiangmiao/auto-pairs'            }) -- auto pairs for {[()]}
     _use({ 'antoinemadec/FixCursorHold.nvim' }) -- fixes CursorHold and CursorHoldl
+    _use({  'nvim-lua/plenary.nvim'  })
 
-    -- _use({ 'jiangmiao/auto-pairs',       event = 'InsertEnter' }) -- auto pairs for {[()]}
     _use({ 'lucasvianav/vim-unimpaired', event = 'BufRead'     }) -- pairs of handy bracket maps
     _use({ 'jdhao/better-escape.vim',    event = 'InsertEnter' }) -- better <Esc> with jk
     _use({ 'andymass/vim-matchup',       event = 'CursorMoved' }) -- make % smarter
@@ -23,6 +23,7 @@ function M.getAll(use)
     -- session manager
     _use({
         'rmagatti/auto-session',
+        disable = true,
         event = 'VimLeavePre',
         cmd = {
             'SaveSession',
@@ -41,6 +42,7 @@ function M.getAll(use)
     -- word manipulation
     _use({
         'tpope/vim-abolish',
+        disable = true,
         cmd = { 'Abolish', 'Subvert' },
         keys = 'cr', after = 'vim-repeat',
     })
@@ -58,6 +60,7 @@ function M.getAll(use)
     -- DEPENDENCY: tsun
     _use({
         'metakirby5/codi.vim',
+        disable = true,
         cmd = { 'Codi', 'Codi!', 'Codi!!' },
     })
 
@@ -67,6 +70,7 @@ function M.getAll(use)
     -- ALTERNATIVE: triglav/vim-visual-increment
     _use({
         'monaqa/dial.nvim',
+        disable = true,
         keys = {
             '<C-a>', '<C-x>',
             { 'v', '<C-a>' },
@@ -80,6 +84,7 @@ function M.getAll(use)
     -- align blocks of code
     _use({
         'junegunn/vim-easy-align',
+        disable = true,
         cmd = 'EasyAlign',
         keys = '<Leader>a',
     })
@@ -94,6 +99,7 @@ function M.getAll(use)
     -- html super snippets
     _use({
         'mattn/emmet-vim',
+        disable = true,
         -- event = 'InsertEnter *.html,*.tsx,*.jsx',
         keys = { '<C-/>,' },
     })
@@ -101,6 +107,7 @@ function M.getAll(use)
     -- TSDoc docstrings generation
     _use({
         'heavenshell/vim-jsdoc',
+        disable = true,
         cmd = { 'JsDoc', 'JsDocFormat' },
         keys = '<Leader>j',
         run = 'make install',
@@ -109,12 +116,14 @@ function M.getAll(use)
     -- multiple cursors
     _use({
         'mg979/vim-visual-multi', as = 'multi',
+        disable = true,
         keys = { '<C-n>', 'gl', { 'x', '<C-n>' } },
     })
 
     -- zen mode + focusing windows 
     _use({
         'Pocco81/TrueZen.nvim',
+        disable = true,
         cmd = { 'TZFocus', 'TZAtaraxis' },
         keys = { '<F10>' },
     })
@@ -131,41 +140,44 @@ function M.getAll(use)
     -- ALTERNATIVE: easymotion/vim-easymotion
     _use({
         'ggandor/lightspeed.nvim',
+        disable = true,
         keys = { '<C-s>', '<C-M-s>' },
     })
 
     -- pulse cursorline after search (makes it easier to find the cursor)
     _use({
         'inside/vim-search-pulse',
+        disable = true,
         keys = { '/', '?', 'n', 'N', '*', '#' },
     })
 
     -- custom "indent block" text object
     _use({
         'kana/vim-textobj-indent',
+        disable = true,
         requires = { 'kana/vim-textobj-user' },
         event = 'BufRead',
     })
 
     -- awesme ascii box drawer
-    --[[
-        _use({
-            'gyim/vim-boxdraw',
-            keys = {
-                { 'v', '+o' }, { 'v', '+O' }, { 'v', '+c' },
-                { 'v', '+-' }, { 'v', '+_' }, { 'v', '+>' },
-                { 'v', '+<' }, { 'v', '++>' }, { 'v', '++<' },
-                { 'v', '+|' }, { 'v', '+^' }, { 'v', '+v' },
-                { 'v', '+V' }, { 'v', '++^' }, { 'v', '++v' },
-                { 'v', '++V' }, { 'v', '+io' }, { 'v', '+ao' },
-            }
-        })
-    --]]
+    _use({
+        'gyim/vim-boxdraw',
+        disable = true,
+        keys = {
+            { 'v', '+o' }, { 'v', '+O' }, { 'v', '+c' },
+            { 'v', '+-' }, { 'v', '+_' }, { 'v', '+>' },
+            { 'v', '+<' }, { 'v', '++>' }, { 'v', '++<' },
+            { 'v', '+|' }, { 'v', '+^' }, { 'v', '+v' },
+            { 'v', '+V' }, { 'v', '++^' }, { 'v', '++v' },
+            { 'v', '++V' }, { 'v', '+io' }, { 'v', '+ao' },
+        }
+    })
 
     -- markdown previewer in browser
     -- DEPENDENCY: npm (yarn?)
     _use({
         'iamcco/markdown-preview.nvim', 
+        disable = true,
         cmd = 'MarkdownPreview',
         keys = '<Plug>MarkdownPreviewToggle',
         run = 'cd app && npm install' -- TODO: must be yarn?
@@ -175,6 +187,7 @@ function M.getAll(use)
     -- DEPENDANCY: RG, sed
     _use({
         'windwp/nvim-spectre',
+        disable = true,
         requires = 'nvim-lua/plenary.nvim',
         keys = { '<Leader>S', { 'v', '<Leader>S' } }
     })
