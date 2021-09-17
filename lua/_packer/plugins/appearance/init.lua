@@ -11,11 +11,10 @@ function M.getAll(use)
     _use({ 'folke/twilight.nvim',          cmd     = 'Twilight' }) -- dims inactive portions of the code
 
     -- color matching surroundings using treesitter
-    -- _use({
-    --     'p00f/nvim-ts-rainbow',
-    --     -- event   = 'BufRead',
-    --     after = 'nvim-treesitter',
-    -- }) 
+    _use({
+        'p00f/nvim-ts-rainbow',
+        after = 'nvim-treesitter',
+    }) 
 
     -- fancy bufferline
     _use({
@@ -33,7 +32,6 @@ function M.getAll(use)
     -- indentation rulers
     _use({
         'lukas-reineke/indent-blankline.nvim',
-        event = 'BufRead', 
         after = 'nvim-treesitter',
     })
 
