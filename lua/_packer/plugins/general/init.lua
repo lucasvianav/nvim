@@ -177,9 +177,11 @@ function M.getAll(use)
     -- DEPENDANCY: RG, sed
     _use({
         'windwp/nvim-spectre',
-        disable = true,
         after = 'plenary.nvim',
-        keys = { '<Leader>S', { 'v', '<Leader>S' } }
+        keys = { 
+            '<Leader>S', 
+            { 'v', '<Leader>S' } 
+        }
     })
 end
 
