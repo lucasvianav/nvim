@@ -9,5 +9,5 @@ set('open_to_the_world', false)
 set('browser',           'firefox')
 set('browser',           'firefox')
 
-vim.cmd([[command! MarkdownPreview normal <Plug>MarkdownPreviewToggle]]) 
+vim.cmd([[cabbrev MDPrev MarkdownPreviewToggle]]) 
 

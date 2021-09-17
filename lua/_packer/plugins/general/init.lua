@@ -166,13 +166,11 @@ function M.getAll(use)
     })
 
     -- markdown previewer in browser
-    -- DEPENDENCY: npm (yarn?)
+    -- DEPENDENCY: npm
     _use({
         'iamcco/markdown-preview.nvim', 
-        disable = true,
-        cmd = 'MarkdownPreview',
-        keys = '<Plug>MarkdownPreviewToggle',
-        run = 'cd app && npm install' -- TODO: must be yarn?
+        ft='markdown',
+        run = 'cd app && npm install'
     })
 
     -- project search and replace
