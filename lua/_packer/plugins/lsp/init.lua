@@ -17,6 +17,9 @@ function M.getAll(use)
     -- ALTERNATIVE: hrsh7th/nvim-vsnip
     _use({ 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' })
 
+    -- additional completion sources for coq
+    _use({ 'ms-jpq/coq.thirdparty', branch = '3p', after = 'coq_nvim' })
+
     -- easier way to install language servers
     _use({
         'kabouzeid/nvim-lspinstall',
