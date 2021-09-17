@@ -21,6 +21,7 @@ function M.getAll(use)
     _use({ 'tpope/vim-repeat', keys = '.',    fn = 'repeat#set' }) -- enables . repeat for plugins
 
     -- session manager
+    -- TODO: why is this broke????
     _use({
         'rmagatti/auto-session',
         disable = true,
