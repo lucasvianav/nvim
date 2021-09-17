@@ -55,9 +55,8 @@ function M.getAll(use)
     -- @ALTERNATIVE: junegunn/fzf.vim
     _use({
         "nvim-telescope/telescope.nvim",
+        after = 'plenary.nvim',
         requires = { 
-            { 'nvim-lua/plenary.nvim' }, 
-
             -- emoji picker
             {
                 'xiyaowong/telescope-emoji.nvim',
@@ -66,7 +65,8 @@ function M.getAll(use)
                 end
             }, 
 
-            {  'crispgm/telescope-heading.nvim' }, -- markdown header picker
+            -- markdown header picker
+            {  'crispgm/telescope-heading.nvim' }, 
         } 
     })
 

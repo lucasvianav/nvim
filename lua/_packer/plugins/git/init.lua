@@ -8,7 +8,7 @@ function M.getAll(use)
      -- git decorations
      _use({
          'lewis6991/gitsigns.nvim',
-         requires = { 'nvim-lua/plenary.nvim' },
+         after = 'plenary.nvim',
          event = 'BufRead',
      })
 end
