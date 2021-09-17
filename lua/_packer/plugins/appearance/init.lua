@@ -31,11 +31,11 @@ function M.getAll(use)
     })
 
     -- indentation rulers
-    -- _use({
-    --     'lukas-reineke/indent-blankline.nvim',
-    --     -- event = 'BufRead', 
-    --     after = 'nvim-treesitter',
-    -- })
+    _use({
+        'lukas-reineke/indent-blankline.nvim',
+        event = 'BufRead', 
+        after = 'nvim-treesitter',
+    })
 
     -- smooth scrolling
     _use({
