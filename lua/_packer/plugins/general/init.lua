@@ -88,11 +88,6 @@ function M.getAll(use)
     _use({
         'svermeulen/vim-easyclip',
         event = { 'CursorMoved', 'InsertEnter' },
-        keys = {
-            'y', 's', 'p', 'x', 'd',
-            'Y', 'S', 'P', 'X', 'D',
-            '[p', ']p'
-        },
         after = 'vim-repeat',
     })
 

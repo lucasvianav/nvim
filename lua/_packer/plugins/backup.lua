@@ -17,16 +17,17 @@ function M.getAll(use)
     _use({ 'wbthomason/packer.nvim' })   -- packer can manage itself
     _use({ 'rmagatti/auto-session' })    -- session manager
 
-    _use({ 'jdhao/better-escape.vim',      event   = 'InsertEnter'  })      -- better <Esc> with jk
-    _use({ 'andymass/vim-matchup',         event   = 'CursorMoved'  })      -- make % smarter
-    _use({ 'jiangmiao/auto-pairs',         event   = 'InsertEnter'  })      -- auto pairs for ( [ {
-    _use({ 'p00f/nvim-ts-rainbow',         event   = 'BufRead'      })      -- color matching surroundings
-    _use({ 'wellle/targets.vim',           event   = 'BufRead'      })      -- provides great new text objects
-    _use({ 'norcalli/nvim-colorizer.lua',  event   = 'BufRead'      })      -- highlight color codes
-    _use({ 'lucasvianav/vim-unimpaired',   event   = 'BufRead'      })      -- pairs of handy bracket maps
-    _use({ 'xiyaowong/nvim-transparent',   disable = true,          })      -- transparent background
-    _use({ 'kyazdani42/nvim-web-devicons', as      = 'devicons'     })      -- colored icons
-    _use({ 'tpope/vim-fugitive',           cmd     = { 'Git'  }     })      -- git CLI for command mode
+    _use({ 'jdhao/better-escape.vim',      event   = 'InsertEnter' })      -- better <Esc> with jk
+    _use({ 'jiangmiao/auto-pairs',         event   = 'InsertEnter' })      -- auto pairs for ( [ {
+    _use({ 'andymass/vim-matchup',         event   = 'CursorMoved' })      -- make % smarter
+    _use({ 'wellle/targets.vim',           event   = 'CursorMoved' })      -- provides great new text objects
+    _use({ 'lucasvianav/vim-unimpaired',   event   = 'CursorMoved' })      -- pairs of handy bracket maps
+    _use({ 'p00f/nvim-ts-rainbow',         event   = 'BufNew'      })      -- color matching surroundings
+    _use({ 'norcalli/nvim-colorizer.lua',  event   = 'VimEnter'    })      -- highlight color codes
+    _use({ 'kyazdani42/nvim-web-devicons', as      = 'devicons'    })      -- colored icons
+    _use({ 'xiyaowong/nvim-transparent',   disable = true,         })      -- transparent background
+
+    _use({ 'tpope/vim-fugitive', cmd = { 'Git' } })     -- git CLI for command mode
 
     _use({ 'lervag/vimtex',     ft  = { 'plaintex', 'tex'       } })    -- work well with LaTeX
     _use({ 'mizlan/iswap.nvim', cmd = { 'ISwap',    'ISwapWith' } })    -- easily swap function arguments
