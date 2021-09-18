@@ -6,11 +6,8 @@ function M.getAll(use)
     _use({ 'lervag/vimtex', ft = { 'tex',  'plaintex'       } }) -- LaTeX
     _use({ 'elzr/vim-json', ft = { 'json', 'jsonc', 'jsonp' } }) -- JSON
 
-    -- treesitter (code parsing for syntax highlighting, etc)
-    _use({
-        'nvim-treesitter/nvim-treesitter',
-        event = 'BufRead', run = ':TSUpdate',
-    })
+    -- code parsing for syntax highlighting, etc
+    _use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
 
     -- betters commentstrings based in treesitter
     _use({

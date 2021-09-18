@@ -9,7 +9,7 @@ function M.getAll(use)
      _use({
          'lewis6991/gitsigns.nvim',
          after = 'plenary.nvim',
-         event = 'BufRead',
+         event = 'BufNew',
      })
 end
 

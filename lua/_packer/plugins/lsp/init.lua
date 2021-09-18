@@ -5,7 +5,7 @@ function M.getAll(use)
 
     _use({ 'neovim/nvim-lspconfig'   }) -- easier way to config language servers
 
-    _use({ 'kosayoda/nvim-lightbulb', event = 'BufRead' }) -- indicates code actions with a lightbulb
+    _use({ 'kosayoda/nvim-lightbulb', event = 'CursorMoved' }) -- indicates code actions with a lightbulb
 
     -- code completion with many features
     -- ALTERNATIVE: hrsh7th/nvim-cmp

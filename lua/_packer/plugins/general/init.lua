@@ -9,10 +9,10 @@ function M.getAll(use)
     _use({ 'antoinemadec/FixCursorHold.nvim' })   -- fixes CursorHold and CursorHoldl
     _use({  'nvim-lua/plenary.nvim'          })   -- great utility lua functions
 
-    _use({ 'lucasvianav/vim-unimpaired', event = 'BufRead'     }) -- pairs of handy bracket maps
     _use({ 'jdhao/better-escape.vim',    event = 'InsertEnter' }) -- better <Esc> with jk
+    _use({ 'lucasvianav/vim-unimpaired', event = 'CursorMoved' }) -- pairs of handy bracket maps
     _use({ 'andymass/vim-matchup',       event = 'CursorMoved' }) -- make % smarter
-    _use({ 'wellle/targets.vim',         event = 'BufRead'     }) -- provides great new text objects
+    _use({ 'wellle/targets.vim',         event = 'CursorMoved' }) -- provides great new text objects
 
     _use({ 'chrisbra/NrrwRgn', cmd = { 'NR', 'NUD' } }) -- focus narrow code section
     _use({ 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } }) -- easily swap function arguments
@@ -21,10 +21,8 @@ function M.getAll(use)
     _use({ 'tpope/vim-repeat', keys = '.',    fn = 'repeat#set' }) -- enables . repeat for plugins
 
     -- session manager
-    -- TODO: why is this broke????
     _use({
         'rmagatti/auto-session',
-        disable = true,
         event = 'VimLeavePre',
         cmd = {
             'SaveSession',
@@ -89,7 +87,12 @@ function M.getAll(use)
     -- better clipboard
     _use({
         'svermeulen/vim-easyclip',
-        event = 'BufRead',
+        event = { 'CursorMoved', 'InsertEnter' },
+        keys = {
+            'y', 's', 'p', 'x', 'd',
+            'Y', 'S', 'P', 'X', 'D',
+            '[p', ']p'
+        },
         after = 'vim-repeat',
     })
 

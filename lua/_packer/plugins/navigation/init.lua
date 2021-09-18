@@ -73,7 +73,6 @@ function M.getAll(use)
     -- auto-session picker for telescope
     _use({
         'rmagatti/session-lens',
-        disable = true,
         after = {
             'telescope.nvim',
             'auto-session',

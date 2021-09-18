@@ -5,29 +5,12 @@ function M.getAll(use)
 
     _use({ 'rcarriga/nvim-notify' }) -- better notifications
 
-    _use({ 'kyazdani42/nvim-web-devicons', as      = 'devicons' }) -- colored icons
-    _use({ 'norcalli/nvim-colorizer.lua',  event   = 'BufRead'  }) -- highlight color codes
-    _use({ 'xiyaowong/nvim-transparent',   disable = true,      }) -- transparent background
-    _use({ 'folke/twilight.nvim',          cmd     = 'Twilight' }) -- dims inactive portions of the code
-
-    -- color matching surroundings using treesitter
-    _use({
-        'p00f/nvim-ts-rainbow',
-        after = 'nvim-treesitter',
-    }) 
-
-    -- fancy bufferline
-    _use({
-        'akinsho/nvim-bufferline.lua',
-        after = 'devicons',
-    })
-
-    -- fancy statusline
-    _use({
-        'glepnir/galaxyline.nvim',
-        branch = 'main',
-        after = 'devicons',
-    })
+    _use({ 'akinsho/nvim-bufferline.lua',  after   = 'devicons'        })  -- fancy bufferline
+    _use({ 'kyazdani42/nvim-web-devicons', as      = 'devicons'        })  -- colored icons
+    _use({ 'norcalli/nvim-colorizer.lua',  event   = 'BufNew'          })  -- highlight color codes
+    _use({ 'p00f/nvim-ts-rainbow',         after   = 'nvim-treesitter' })  -- color matching surroundings using treesitter
+    _use({ 'xiyaowong/nvim-transparent',   disable = true,             })  -- transparent background
+    _use({ 'NTBBloodbath/galaxyline.nvim', after   = 'devicons'        })  -- fancy statusline
 
     -- indentation rulers
     _use({

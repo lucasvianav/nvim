@@ -11,6 +11,7 @@ require('auto-session').setup({
         expand('~/Pictures'), expand('/home'),
         expand('~'),
     },
+    pre_save_cmds = { 'silent! tabdo NvimTreeClose' },
     auto_session_allowed_dirs = nil,
 })
 
