@@ -45,6 +45,7 @@ o.updatetime     = 300             -- faster completion
 o.wildignore     = path_ignore     -- exclude directories from path
 o.wrap           = false           -- don't wrap lines
 o.writebackup    = false           -- don't backup files before overwriting them
+o.showmode       = false           -- hide --INSERT--, --VISUAL--, etc
 
 o.path:append({'**'})                   -- enables recursive use of :find
 o.clipboard:append({'unnamedplus'})     -- system-wide copy-paste
