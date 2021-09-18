@@ -22,5 +22,4 @@ node_modules/*
 .vim/
 .vim/*
 
-plugin/
-plugin/*
+plugin/packer_compiled.lua

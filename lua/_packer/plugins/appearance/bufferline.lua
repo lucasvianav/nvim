@@ -1,13 +1,13 @@
 local colors = require('utils').colors
 
 local selected = {
-    bg = colors.black,
+    bg = colors.blacker,
     fg = colors.off_white,
 }
 
 local idle = {
     bg = colors.transparent,
-    fg = colors.grey
+    fg = colors.grey,
 }
 
 require('bufferline').setup({

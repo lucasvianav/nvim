@@ -1,14 +1,19 @@
-local M = {
+local M         = {
     transparent = '',
     white       = '#FFFFFF',
     off_white   = '#F7F7F7',
-    grey        = '#5a5c68',
-    light_blue  = '#2496ed',
+    blue_light  = '#2496ed',
+    cyan_grey   = '#4a5274',
     cyan        = '#519aba',
-    light_pink  = '#e535ab',
+    pink_light  = '#e535ab',
     yellow      = '#cbcb41',
-    off_black   = '#202020',
-    black       = '#0a0a0a',
+    grey_light  = '#5a5c68',
+    grey        = '#353b45',
+    grey_dark   = '#292a35',
+    grey_darker = '#242530',
+    off_black   = '#1e1e1e',
+    black       = '#151515',
+    blacker     = '#000000',
 }
 
 return M
