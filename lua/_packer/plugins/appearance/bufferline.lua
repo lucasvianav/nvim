@@ -2,7 +2,7 @@ local colors = require('utils').colors
 
 local selected = {
     bg = colors.black,
-    fg = colors.offWhite,
+    fg = colors.off_white,
 }
 
 local idle = {
