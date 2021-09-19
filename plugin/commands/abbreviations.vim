@@ -10,3 +10,5 @@ cabbrev bufo BufOnly
 cabbrev qb BufClose
 cabbrev wqb BqWrite
 
+cabbrev PS PackerSync
+
