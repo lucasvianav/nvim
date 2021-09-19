@@ -3,7 +3,26 @@ local M = {}
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.git')
 
-    _use({ 'tpope/vim-fugitive', cmd = { 'Git' } }) -- git CLI for command mode
+    -- git CLI for command mode
+    _use({
+        'tpope/vim-fugitive',
+        requires = {
+            'tpope/vim-rhubarb',    -- integration with GitHub
+            'tommcdo/vim-fubitive', -- integration with BitBucket
+        },
+        cmd = {
+            'Git',
+            'GBrowse',
+            'Gdiff',
+            'Gdiffsplit',
+            'Gvdiffsplit',
+        },
+        keys = {
+            '<leader>gd',
+            '<leader>gh',
+            '<leader>gl',
+        },
+    })
 
      -- git decorations
      _use({
