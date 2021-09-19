@@ -4,11 +4,7 @@ local M = {}
 -- Plug 'AndrewRadev/tagalong.vim'                         " autoedit enclosing html tag
 -- Plug 'RRethy/vim-illuminate'                            " highlight other occurrences from under the cursor
 -- Plug 'airblade/vim-rooter'                              " updates working directory to the project opened
--- Plug 'alvan/vim-closetag'                               " autoclose html tags
--- Plug 'conornewton/vim-pandoc-markdown-preview'          " live-preview markdown in pdf with pandoc
 -- Plug 'editorconfig/editorconfig-vim'                    " follow .editorconfig files
--- Plug 'honza/vim-snippets'                               " snippets!!
--- Plug 'itchyny/vim-gitbranch'                            " provides function to get current git branch
 -- Plug 'liuchengxu/vim-which-key'                         " menu for <Leader> maps
 
 function M.getAll(use)
