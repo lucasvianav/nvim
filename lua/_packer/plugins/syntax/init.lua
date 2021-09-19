@@ -37,8 +37,20 @@ function M.getAll(use)
     }) 
 
     -- autoclose html tags
+    -- ALTERNATIVE: windwp/nvim-ts-autotag
     _use({
         'alvan/vim-closetag',
+        ft = {
+            'html', 'vue',
+            'javascript.jsx',
+            'typescript.tsx',
+        },
+    })
+
+    -- autoedit matching html tags
+    -- ALTERNATIVE: windwp/nvim-ts-autotag
+    _use({
+        'valloric/MatchTagAlways',
         ft = {
             'html', 'vue',
             'javascript.jsx',

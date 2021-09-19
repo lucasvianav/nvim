@@ -17,8 +17,10 @@ local parsers = {
 -- configs (highlighting, indentation, etc)
 require('nvim-treesitter.configs').setup({
     ensure_installed = parsers,
+
     highlight = { enable = true },
-    rainbow = { enable = true, extended_mode = true },
+    rainbow   = { enable = true, extended_mode = true },
+    -- autotag   = { enable = true },
 })
 
 -- use for folding
