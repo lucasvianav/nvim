@@ -14,12 +14,14 @@ function M.getAll(use)
     _use({ 'lucasvianav/vim-unimpaired', event = 'CursorMoved' }) -- pairs of handy bracket maps
     _use({ 'andymass/vim-matchup',       event = 'CursorMoved' }) -- make % smarter
     _use({ 'wellle/targets.vim',         event = 'CursorMoved' }) -- provides great new text objects
+    _use({ 'folke/which-key.nvim',       keys  = '<Leader>'    }) -- displays a popup with keybindings
 
     _use({ 'chrisbra/NrrwRgn', cmd = { 'NR', 'NUD' } }) -- focus narrow code section
     _use({ 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } }) -- easily swap function arguments
 
     _use({ 'wsdjeg/luarefvim', cmd  = 'help', ft = 'lua'        }) -- lua documentation
     _use({ 'tpope/vim-repeat', keys = '.',    fn = 'repeat#set' }) -- enables . repeat for plugins
+
 
     -- session manager
     _use({
@@ -30,7 +32,7 @@ function M.getAll(use)
             'RestoreSession',
             'DeleteSession',
         },
-    }) 
+    })
 
     -- surrounding manipulatiuon maps
     _use({
@@ -74,7 +76,7 @@ function M.getAll(use)
             { 'v', '<C-x>' },
             { 'v', 'g<C-a>' },
             { 'v', 'g<C-x>' },
-        }, 
+        },
         after = 'vim-repeat',
     })
 
@@ -116,7 +118,7 @@ function M.getAll(use)
         keys = { '<C-n>', 'gl', { 'x', '<C-n>' } },
     })
 
-    -- zen mode + focusing windows 
+    -- zen mode + focusing windows
     _use({
         'Pocco81/TrueZen.nvim',
         cmd = { 'TZFocus', 'TZAtaraxis' },
@@ -168,7 +170,7 @@ function M.getAll(use)
     -- markdown previewer in browser
     -- DEPENDENCY: npm
     _use({
-        'iamcco/markdown-preview.nvim', 
+        'iamcco/markdown-preview.nvim',
         ft='markdown',
         run = 'cd app && npm install'
     })
@@ -178,9 +180,9 @@ function M.getAll(use)
     _use({
         'windwp/nvim-spectre',
         after = 'plenary.nvim',
-        keys = { 
-            '<Leader>S', 
-            { 'v', '<Leader>S' } 
+        keys = {
+            '<Leader>S',
+            { 'v', '<Leader>S' }
         }
     })
 end

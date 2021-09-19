@@ -39,7 +39,7 @@ telescope.setup({
             },
         },
 
-        
+
     }
 })
 
@@ -49,7 +49,7 @@ telescope.load_extension('emoji')
 -- general
 map('n', '<Leader>ff',  [[:<C-U>lua require('telescope.builtin').find_files()<cr>]])
 map('n', '<Leader>fr',  [[:<C-U>lua require('telescope.builtin').oldfiles()<cr>]])
-map('n', '<Leader>fg',  [[:<C-U>lua require('telescope.builtin').live_grep()<cr>]])
+map('n', '<Leader>fp',  [[:<C-U>lua require('telescope.builtin').live_grep()<cr>]])
 map('n', '<Leader>fb',  [[:<C-U>lua require('telescope.builtin').buffers()<cr>]])
 map('n', '<Leader>fc',  [[:<C-U>lua require('telescope.builtin').commands()<cr>]])
 map('n', '<Leader>fch', [[:<C-U>lua require('telescope.builtin').command_history()<cr>]])
@@ -62,8 +62,8 @@ map('n', 'gr',         [[:<C-U>lua require('telescope.builtin').lsp_references()
 map('n', 'gi',         [[:<C-U>lua require('telescope.builtin').lsp_implementations()<cr>]])
 map('n', '<Leader>ca', [[:<C-U>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_dropdown({}))<cr>]])
 map('v', '<Leader>ca', [[:<C-U>lua require('telescope.builtin').lsp_range_code_actions()<cr>]])
-map('n', '<Leader>dg', [[:<C-U>lua require('telescope.builtin').lsp_document_diagnostics()<cr>]])
-map('n', '<Leader>wg', [[:<C-U>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>]])
+map('n', '<Leader>fg', [[:<C-U>lua require('telescope.builtin').lsp_document_diagnostics()<cr>]])
+map('n', '<Leader>fgw', [[:<C-U>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>]])
 
 -- git
 map('n', '<Leader>gc', [[:<C-U>lua require('telescope.builtin').git_commits()<cr>]])
