@@ -7,7 +7,8 @@ function M.getAll(use)
     _use({ 'lewis6991/impatient.nvim'        })   -- improve startup time
     _use({ 'jiangmiao/auto-pairs'            })   -- auto pairs for {[()]}
     _use({ 'antoinemadec/FixCursorHold.nvim' })   -- fixes CursorHold and CursorHoldl
-    _use({  'nvim-lua/plenary.nvim'          })   -- great utility lua functions
+    _use({ 'nvim-lua/plenary.nvim'           })   -- great utility lua functions
+    _use({ 'editorconfig/editorconfig-vim'   })   -- follow .editorconfig files
 
     _use({ 'jdhao/better-escape.vim',    event = 'InsertEnter' }) -- better <Esc> with jk
     _use({ 'lucasvianav/vim-unimpaired', event = 'CursorMoved' }) -- pairs of handy bracket maps

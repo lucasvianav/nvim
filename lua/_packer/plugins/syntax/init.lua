@@ -36,9 +36,19 @@ function M.getAll(use)
         run = 'npm install', -- TODO: must be yarn?
     }) 
 
-    -- autoclose HTML tags
+    -- autoclose html tags
     _use({
         'alvan/vim-closetag',
+        ft = {
+            'html', 'vue',
+            'javascript.jsx',
+            'typescript.tsx',
+        },
+    })
+
+    -- autoedit enclosing html tags
+    _use({
+        'AndrewRadev/tagalong.vim',
         ft = {
             'html', 'vue',
             'javascript.jsx',

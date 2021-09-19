@@ -1,10 +1,6 @@
 local M = {}
 
 -- Plug 'valloric/MatchTagAlways'                          " highlight enclosing html tag
--- Plug 'AndrewRadev/tagalong.vim'                         " autoedit enclosing html tag
--- Plug 'RRethy/vim-illuminate'                            " highlight other occurrences from under the cursor
--- Plug 'airblade/vim-rooter'                              " updates working directory to the project opened
--- Plug 'editorconfig/editorconfig-vim'                    " follow .editorconfig files
 -- Plug 'liuchengxu/vim-which-key'                         " menu for <Leader> maps
 
 function M.getAll(use)
