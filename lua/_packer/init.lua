@@ -21,5 +21,18 @@ local function getAll(use)
     require('_packer.themes').getAll(use)
 end
 
-return present and packer.startup(getAll) or nil
+if present then
+    packer.init({
+        display = {
+            open_fn = function()
+                return require('packer.util').float({ border = 'single' })
+            end,
+            prompt_border = 'single',
+        },
+    })
+
+    getAll(packer.use)
+end
+
+-- return present and packer.startup(getAll) or nil
 
