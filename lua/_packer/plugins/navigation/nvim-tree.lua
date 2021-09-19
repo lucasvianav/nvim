@@ -10,7 +10,7 @@ set('hijack_netrw',  true) -- ranger will be used for it instead
 
 -- cosmetic
 set('hijack_cursor',   false)     -- don't keep cursor at filename's start
-set('indent_markers',  true)      -- show indentation rulers
+set('indent_markers',  false)     -- show indentation rulers
 set('hide_dotfiles',   true)      -- hide dirs/files starting with '.'
 set('git_hl',          false)     -- highlight files with git attributtes
 set('add_trailing',    true)      -- append trailing / to dir names
