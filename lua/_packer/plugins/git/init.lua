@@ -11,16 +11,13 @@ function M.getAll(use)
             'tommcdo/vim-fubitive', -- integration with BitBucket
         },
         cmd = {
-            'Git',
-            'GBrowse',
-            'Gdiff',
-            'Gdiffsplit',
-            'Gvdiffsplit',
+            'Git', 'GBrowse', 'Gdiff',
+            'Gdiffsplit', 'Gvdiffsplit',
         },
         keys = {
-            '<leader>gd',
-            '<leader>gh',
-            '<leader>gl',
+            '<leader>gd', '<leader>gh',
+            '<leader>gl', '<leader>gb',
+            { 'v', '<leader>gb' }
         },
     })
 

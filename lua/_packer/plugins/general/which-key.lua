@@ -97,12 +97,12 @@ local mappings = {
 
     g = {
         name = 'git',
+        b    = 'open in browser (github, bitbucket)',
         c    = 'commits',
         s    = 'status',
-
-        d = { '<cmd>Gvdiffsplit!<cr>', 'merge diff'                      },
-        h = { '<cmd>diffget //2<cr>',  'merge from left (target branch)' },
-        h = { '<cmd>diffget //3<cr>',  'merge from right (merge branch)' },
+        d    = 'merge diff',
+        h    = 'merge from left (target branch)',
+        l    = 'merge from right (merge branch)',
     },
 
     c = {
