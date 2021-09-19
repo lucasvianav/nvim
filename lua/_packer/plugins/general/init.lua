@@ -10,11 +10,13 @@ function M.getAll(use)
     _use({ 'nvim-lua/plenary.nvim'           })   -- great utility lua functions
     _use({ 'editorconfig/editorconfig-vim'   })   -- follow .editorconfig files
 
+    -- TODO: define mappings for other prefixes
+    _use({ 'folke/which-key.nvim'            })   -- displays a popup with keybindings
+
     _use({ 'jdhao/better-escape.vim',    event = 'InsertEnter' }) -- better <Esc> with jk
     _use({ 'lucasvianav/vim-unimpaired', event = 'CursorMoved' }) -- pairs of handy bracket maps
     _use({ 'andymass/vim-matchup',       event = 'CursorMoved' }) -- make % smarter
     _use({ 'wellle/targets.vim',         event = 'CursorMoved' }) -- provides great new text objects
-    _use({ 'folke/which-key.nvim',       keys  = '<Leader>'    }) -- displays a popup with keybindings
 
     _use({ 'chrisbra/NrrwRgn', cmd = { 'NR', 'NUD' } }) -- focus narrow code section
     _use({ 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } }) -- easily swap function arguments
