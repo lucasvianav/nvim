@@ -6,7 +6,6 @@ local M = {
     general    = settings('general'),
     appearance = settings('appearance'),
     folding    = settings('folding'),
-    macros     = settings('macros'),
     providers  = settings('providers'),
     sessions   = settings('sessions'),
 }
