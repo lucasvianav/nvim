@@ -5,7 +5,7 @@ vim.g.coq_settings = {
         recommended     = false,
         manual_complete = '<c-space>',
         bigger_preview  = '<c-l>',
-        jump_to_mark    = '<c-h>'
+        jump_to_mark    = '<c-w>'
     },
 
     clients = {
@@ -70,5 +70,17 @@ map('i', '<BS>',  [[pumvisible() ? "\<C-e><BS>" : "\<BS>"]],  { expr = true })
 -- map('i', 'jk',   [[pumvisible() ? "\<C-e>jk" : "jk"]], { expr = true, noremap = false })
 
 -- confirm on Enter
-map('i', '<CR>',    [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"]], { expr = true })
+map('i', '<CR>', [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"]], { expr = true })
+
+require("coq_3p")({
+    {
+        src = "nvimlua",
+        short_name = "nLUA",
+        conf_only = true,
+    },
+    {
+        src = "vimtex",
+        short_name = "vTEX",
+    },
+})
 
