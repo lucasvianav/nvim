@@ -94,7 +94,6 @@ local cmd = vim.cmd
     end
 
     local functions             = require('functions').statusline
-    local check_width           = functions.check_width
     local get_current_files_dir = functions.get_current_files_dir
 -- @UTILS]]
 
@@ -176,7 +175,6 @@ gls.left[6] = {
     gls.left[7] = {
         DiffAdd = {
             provider = 'DiffAdd',
-            condition = check_width,
             icon = icons.addition,
             highlight = { colors.off_white, colors.bg_dark },
         },
@@ -185,7 +183,6 @@ gls.left[6] = {
     gls.left[8] = {
         DiffModified = {
             provider = 'DiffModified',
-            condition = check_width,
             icon = icons.diff,
             highlight = { colors.fg, colors.bg_dark },
         },
@@ -194,7 +191,6 @@ gls.left[6] = {
     gls.left[9] = {
         DiffRemove = {
             provider = 'DiffRemove',
-            condition = check_width,
             icon = icons.remotion,
             highlight = { colors.fg, colors.bg_dark },
         },
@@ -220,7 +216,7 @@ gls.left[11] = {
 gls.left[12] = {
     TreeSitterContext = {
         provider = gps.get_location,
-        condition = function() return check_width() and gps.is_available() end,
+        condition = function() return condition.hide_in_width() and gps.is_available() end,
         highlight = { colors.fg_dark, colors.bg_dark },
     },
 }
@@ -256,7 +252,12 @@ gls.right[3] = {
 gls.right[6] = {
     LeftArrow = {
         provider = str('  '),
-        highlight = { colors.fg, colors.bg_light },
+        highlight = {
+            colors.fg,
+            condition.check_git_workspace()
+            and colors.bg_light
+            or colors.bg_dark,
+        },
     },
 }
 
@@ -266,7 +267,12 @@ gls.right[7] = {
             cmd("hi GalaxyLeftRound guifg=" .. mode('color'))
             return icons.left
         end,
-        highlight = { "GalaxyViMode", colors.bg_light },
+        highlight = {
+            "GalaxyViMode",
+            condition.check_git_workspace()
+                and colors.bg_light
+                or colors.bg_dark,
+        },
     },
 }
 
