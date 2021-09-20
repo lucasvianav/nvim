@@ -139,5 +139,3 @@ require('bufferline').setup({
     }
 })
 
-vim.cmd([[hi BufferLineFill ctermbg=none guibg=none]])
-

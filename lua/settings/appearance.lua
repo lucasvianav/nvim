@@ -13,7 +13,9 @@ colorscheme = 'tokyonight'
 
 -- common config to be run for each plugin
 appearanceCommands = [[
-    hi Folded ctermbg=NONE guibg=NONE
+    hi! Folded ctermbg=NONE guibg=NONE
+    hi! BufferLineFill ctermbg=none guibg=none
+    hi! NormalFloat ctermbg=NONE guibg=NONE
 ]]
 
 o.colorcolumn    = '+1'          -- show mark at column 80
