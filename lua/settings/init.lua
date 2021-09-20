@@ -8,6 +8,7 @@ local M = {
     folding    = settings('folding'),
     providers  = settings('providers'),
     sessions   = settings('sessions'),
+    builtin    = settings('builtin'),
 }
 
 return M
