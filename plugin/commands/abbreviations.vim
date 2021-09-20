@@ -11,6 +11,7 @@ cabbrev qb BufClose
 cabbrev wqb BqWrite
 
 " Packer
-cabbrev PS PackerSync
-cabbrev PC PackerCompile
+cabbrev PS  PackerSync
+cabbrev PC  PackerCompile
+cabbrev PSt PackerStatus
 
