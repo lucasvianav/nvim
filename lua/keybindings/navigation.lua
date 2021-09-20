@@ -1,9 +1,8 @@
 -- buffer movement with \<Tab> and <S-Tab>
--- nnoremap <silent> \<TAB> :bnext<CR>
--- nnoremap <silent> <S-TAB> :bprevious<CR>
+map('n', '',   '<cmd>bnext<CR>')
+map('n', '<S-TAB>', '<cmd>bprevious<CR>')
 
 -- toggle buffer last visited buffer
--- nnoremap { <Leader><Tab>, <C-^>, { silent = true } }
 map('n', '<BS>', '<C-^>')
 
 -- better window navigation
