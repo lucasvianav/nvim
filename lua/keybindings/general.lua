@@ -22,3 +22,6 @@ map('n', '[b', 'i<CR><Esc>k$')
 map('n', '<Leader>o', 'o<Esc>^Da')
 map('n', '<Leader>O', 'O<Esc>^Da')
 
+-- delete word with alt + backspace
+map('i', '<M-BS>', '<C-w>')
+
