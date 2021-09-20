@@ -95,7 +95,7 @@ local function setup_servers()
             end
         end
 
-        require('lspconfig')[server].setup(config) 
+        require('lspconfig')[server].setup(config)
     end
 end
 
