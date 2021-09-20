@@ -28,6 +28,7 @@ o.splitbelow   = true        -- horizontal splits below
 o.splitright   = true        -- vertical splits to the right
 o.synmaxcol    = 240         -- stop syntax highlighting after 500 chars
 o.tabstop      = 4           -- 4 spaces for a tab
+o.softtabstop  = 0           -- don't worry about it
 o.textwidth    = 79          -- break lines after 79 characters (pip8)
 o.updatetime   = 300         -- faster completion
 o.wildignore   = path_ignore -- exclude directories from path
