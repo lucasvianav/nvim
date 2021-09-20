@@ -9,12 +9,12 @@ local cmd = vim.cmd
 
 
 -- [[@VARIABLES
-local gl  = require('galaxyline') -- galaxyline
-local gls = gl.section            -- galaxyline.section
+    local gl  = require('galaxyline') -- galaxyline
+    local gls = gl.section            -- galaxyline.section
 
-local condition = require('galaxyline.condition')
-local get_color = require('galaxyline.themes.colors').get_color
-local _colors   = require('utils').colors
+    local condition = require('galaxyline.condition')
+    local get_color = require('galaxyline.themes.colors').get_color
+    local _colors   = require('utils').colors
 -- @VARIABLES]]
 
 
@@ -23,24 +23,24 @@ local _colors   = require('utils').colors
 
 
 -- [[@COLORS
-local colors = {
-    bg       = _colors.black,
-    bg_dark  = _colors.blacker,
-    bg_light = _colors.off_black,
-    black    = _colors.blacker,
-    blue     = get_color('blue')(),
-    cyan     = get_color('cyan')(),
-    fg       = get_color('fg_alt')(),
-    fg_dark  = _colors.cyan_grey,
-    fg_light = _colors.off_white,
-    green    = get_color('green')(),
-    magenta  = get_color('magenta')(),
-    orange   = get_color('orange')(),
-    red      = get_color('red')(),
-    yellow   = get_color('yellow')(),
-}
+    local colors = {
+        bg       = _colors.black,
+        bg_dark  = _colors.blacker,
+        bg_light = _colors.off_black,
+        black    = _colors.blacker,
+        blue     = get_color('blue')(),
+        cyan     = get_color('cyan')(),
+        fg       = get_color('fg_alt')(),
+        fg_dark  = _colors.cyan_grey,
+        fg_light = _colors.off_white,
+        green    = get_color('green')(),
+        magenta  = get_color('magenta')(),
+        orange   = get_color('orange')(),
+        red      = get_color('red')(),
+        yellow   = get_color('yellow')(),
+    }
 
-colors = vim.tbl_extend('keep', colors, _colors)
+    colors = vim.tbl_extend('keep', colors, _colors)
 -- @COLORS]]
 
 
@@ -49,53 +49,53 @@ colors = vim.tbl_extend('keep', colors, _colors)
 
 
 -- [[@UTILS
-local mode_colors = {
-    [110] = { name = 'NORMAL',   color = colors.red     },
-    [105] = { name = 'INSERT',   color = colors.magenta },
-    [99]  = { name = 'COMMAND',  color = colors.yellow  },
-    [116] = { name = 'TERMINAL', color = colors.green   },
-    [118] = { name = 'VISUAL',   color = colors.cyan    },
-    [22]  = { name = 'V-BLOCK',  color = colors.cyan    },
-    [86]  = { name = 'V_LINE',   color = colors.cyan    },
-    [82]  = { name = 'REPLACE',  color = colors.orange  },
-    [115] = { name = 'SELECT',   color = colors.blue    },
-    [83]  = { name = 'S-LINE',   color = colors.blue    },
-}
+    local mode_colors = {
+        [110] = { name = 'NORMAL',   color = colors.red     },
+        [105] = { name = 'INSERT',   color = colors.magenta },
+        [99]  = { name = 'COMMAND',  color = colors.yellow  },
+        [116] = { name = 'TERMINAL', color = colors.green   },
+        [118] = { name = 'VISUAL',   color = colors.cyan    },
+        [22]  = { name = 'V-BLOCK',  color = colors.cyan    },
+        [86]  = { name = 'V_LINE',   color = colors.cyan    },
+        [82]  = { name = 'REPLACE',  color = colors.orange  },
+        [115] = { name = 'SELECT',   color = colors.blue    },
+        [83]  = { name = 'S-LINE',   color = colors.blue    },
+    }
 
-local icons = {
-    bar      = '▋'    ,
-    left     = ''    ,
-    right    = ' '   , -- 
-    main     = ' '   , 
-    vi_mode  = ' '   ,
-    position = ' '   ,
-    empty    = '  '  ,
-    dir      = '  '  ,
-    error    = '  '  ,
-    warning  = '  '  ,
-    addition = '  '  ,
-    diff     = '   ' ,
-    remotion = '  '  ,
-    engine   = '   ' ,
-    git      = '  '  ,
-}
+    local icons = {
+        bar      = '▋'    ,
+        left     = ''    ,
+        right    = ' '   , -- 
+        main     = ' '   ,
+        vi_mode  = ' '   ,
+        position = ' '   ,
+        empty    = '  '  ,
+        dir      = '  '  ,
+        error    = '  '  ,
+        warning  = '  '  ,
+        addition = '  '  ,
+        diff     = '   ' ,
+        remotion = '  '  ,
+        engine   = '   ' ,
+        git      = '  '  ,
+    }
 
-local function provider(name)
-    return require('galaxyline.providers.' .. name)
-end
+    local function provider(name)
+        return require('galaxyline.providers.' .. name)
+    end
 
-local function str(args)
-    return function() return args end
-end
+    local function str(args)
+        return function() return args end
+    end
 
-local function mode(field)
-	local current_mode = fn.mode()
-	return mode_colors[current_mode:byte()][field]
-end
+    local function mode(field)
+        local current_mode = fn.mode()
+        return mode_colors[current_mode:byte()][field]
+    end
 
-local functions             = require('functions').statusline
-local check_width           = functions.check_width
-local get_current_files_dir = functions.get_current_files_dir
+    local functions             = require('functions').statusline
+    local check_width           = functions.check_width
+    local get_current_files_dir = functions.get_current_files_dir
 -- @UTILS]]
 
 
@@ -104,14 +104,15 @@ local get_current_files_dir = functions.get_current_files_dir
 
 
 -- [[@PROVIDERS
-local buffer     = provider('buffer')
-local diagnostic = provider('diagnostic')
-local extension  = provider('extensions') -- plugins
-local fileinfo   = provider('fileinfo') 
-local lspclient  = provider('lsp')
-local search     = provider('search')
-local vcs        = provider('vcs')        -- version control
-local whitespace = provider('whitespace')
+    local buffer     = provider('buffer')
+    local diagnostic = provider('diagnostic')
+    local extension  = provider('extensions') -- plugins
+    local fileinfo   = provider('fileinfo')
+    local lspclient  = provider('lsp')
+    local search     = provider('search')
+    local vcs        = provider('vcs')        -- version control
+    local whitespace = provider('whitespace')
+    local gps        = require('nvim-gps')    -- treesitter context
 -- @PROVIDERS]]
 
 
@@ -149,8 +150,8 @@ gls.left[3] = {
 gls.left[4] = {
     FileName = {
         provider = function()
-            return (api.nvim_buf_get_name(0):len() == 0) 
-            and icons.empty 
+            return (api.nvim_buf_get_name(0):len() == 0)
+            and icons.empty
             or fileinfo.get_current_file_name("", "")
         end,
         highlight = { colors.fg, colors.bg_light },
@@ -213,6 +214,14 @@ gls.left[11] = {
         provider = 'DiagnosticWarn',
         icon = icons.warning,
         highlight = { colors.yellow, colors.bg_dark },
+    },
+}
+
+gls.left[12] = {
+    TreeSitterContext = {
+        provider = gps.get_location,
+        condition = function() return check_width() and gps.is_available() end,
+        highlight = { colors.fg_dark, colors.bg_dark },
     },
 }
 
@@ -326,8 +335,8 @@ gls.short_line_left[1] = {
 gls.short_line_left[2] = {
     FileName = {
         provider = function()
-            return (api.nvim_buf_get_name(0):len() == 0) 
-                and icons.empty 
+            return (api.nvim_buf_get_name(0):len() == 0)
+                and icons.empty
                 or fileinfo.get_current_file_name()
         end,
         highlight = { colors.fg_dark, colors.bg },
