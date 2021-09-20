@@ -24,6 +24,11 @@ function M.getAll(use)
     _use({ 'wsdjeg/luarefvim', cmd  = 'help', ft = 'lua'        }) -- lua documentation
     _use({ 'tpope/vim-repeat', keys = '.',    fn = 'repeat#set' }) -- enables . repeat for plugins
 
+    -- use nvim in the browser
+    use {
+        'glacambre/firenvim',
+        run = function() vim.fn['firenvim#install'](0) end
+    }
 
     -- session manager
     _use({
