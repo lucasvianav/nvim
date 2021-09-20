@@ -46,3 +46,17 @@ function _G.trim_trailing_whitespaces()
         fn.winrestview(current_view)
     end
 end
+
+--[[
+Sources the `.nvimrc` file at the `cwd` if it's under `$WORK_DIR`.
+]]--
+function _G.source_local_config()
+    local cwd      = fn.getcwd()
+    local work_dir = os.getenv('WORK_DIR')
+    local regexp   = vim.regex('^' .. fn.escape(work_dir, '.'))
+
+    if not fn.empty(work_dir) and regexp:match_str(cwd) then
+        cmd('silent! source ' .. cwd .. '/.nvimrc')
+    end
+end
+
