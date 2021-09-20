@@ -64,9 +64,9 @@ vim.g.coq_settings = {
 
 require('coq')
 
-map('i', '<Esc>', [[pumvisible() ? "\<C-e>"     : "\<nop>"]], { expr = true })
-map('i', '<C-c>', [[pumvisible() ? "\<C-e>"     : "\<C-c>"]], { expr = true })
-map('i', '<BS>',  [[pumvisible() ? "\<C-e><BS>" : "\<BS>"]],  { expr = true })
+map('i', '<Esc>', [[pumvisible() ? "\<C-e>"     : "\<Esc>"]], { expr = true, nnoremap = false })
+map('i', '<C-c>', [[pumvisible() ? "\<C-e>"     : "\<C-c>"]], { expr = true                   })
+map('i', '<BS>',  [[pumvisible() ? "\<C-e><BS>" : "\<BS>"]],  { expr = true                   })
 -- map('i', 'jk',   [[pumvisible() ? "\<C-e>jk" : "jk"]], { expr = true, noremap = false })
 
 -- confirm on Enter
