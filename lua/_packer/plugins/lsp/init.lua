@@ -30,10 +30,10 @@ function M.getAll(use)
     -- ALTERNATIVE: RishabhRD/nvim-lsputils
     _use({
         'folke/trouble.nvim',
-        after = { 
-            'devicons', 
-            'nvim-lspconfig', 
-            'nvim-lspinstall' 
+        after = {
+            'devicons',
+            'nvim-lspconfig',
+            'nvim-lspinstall'
         },
         cmd = 'Trouble',
     })

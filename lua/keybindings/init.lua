@@ -5,7 +5,6 @@ local M = {
     navigation = keybindings('navigation'),
     shortcuts  = keybindings('shortcuts'),
     unmappings = keybindings('unmappings'),
-    lsp        = keybindings('lsp'),
 }
 
 return M

@@ -8,7 +8,7 @@ g.dashboard_disable_statusline  = 1
 g.dashboard_default_executive   = "telescope"
 
 
-g.dashboard_custom_header = ascii.hydra
+g.dashboard_custom_header = ascii.beholder
 
 g.dashboard_custom_section = {
     a = { description = { "  Find File                 SPC f f" }, command = "Telescope find_files" },
@@ -24,5 +24,8 @@ g.dashboard_custom_footer = {
 }
 
 -- disables tabline for dashboard
-cmd('autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2')
+cmd([[
+autocmd FileType dashboard set showtabline=0 laststatus=0
+\| autocmd WinLeave <buffer> set showtabline=2 laststatus=2
+]])
 
