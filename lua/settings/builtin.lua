@@ -19,7 +19,8 @@ set('matchparen')
 set('logiPat')
 set('rrhelper')
 
-set('netrw')
-set('netrwPlugin')
+-- set('netrw')
+-- set('netrwPlugin')
 set('netrwSettings')
 set('netrwFileHandlers')
+
