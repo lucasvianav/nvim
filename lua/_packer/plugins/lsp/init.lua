@@ -5,7 +5,7 @@ function M.getAll(use)
 
     _use({ 'neovim/nvim-lspconfig'   }) -- easier way to config language servers
 
-    _use({ 'kosayoda/nvim-lightbulb',  event = 'CursorMoved' }) -- indicates code actions with a lightbulb
+    _use({ 'kosayoda/nvim-lightbulb',  event = 'CursorHold' }) -- indicates code actions with a lightbulb
     _use({ 'ray-x/lsp_signature.nvim', after = 'coq_nvim'    }) -- show function signature
 
     -- code completion with many features

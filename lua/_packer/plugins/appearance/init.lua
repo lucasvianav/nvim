@@ -7,7 +7,7 @@ function M.getAll(use)
 
     _use({ 'akinsho/nvim-bufferline.lua',  after   = 'devicons'        }) -- fancy bufferline
     _use({ 'kyazdani42/nvim-web-devicons', as      = 'devicons'        }) -- colored icons
-    _use({ 'norcalli/nvim-colorizer.lua',  event   = 'BufNew'          }) -- highlight color codes
+    _use({ 'norcalli/nvim-colorizer.lua',  event   = 'CursorHold'      }) -- highlight color codes
     _use({ 'p00f/nvim-ts-rainbow',         after   = 'nvim-treesitter' }) -- color matching surroundings using treesitter
     _use({ 'xiyaowong/nvim-transparent',   disable = true,             }) -- transparent background
     _use({ 'SmiteshP/nvim-gps',            after   = 'nvim-treesitter' }) -- show treesitter context
