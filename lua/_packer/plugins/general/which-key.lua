@@ -103,6 +103,8 @@ local mappings = {
         d    = 'merge diff',
         h    = 'merge from left (target branch)',
         l    = 'merge from right (merge branch)',
+        i   = 'git blame (info)',
+        m    = 'git messenger',
     },
 
     c = {

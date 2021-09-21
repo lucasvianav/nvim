@@ -3,6 +3,16 @@ local M = {}
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.git')
 
+    _use({ 'f-person/git-blame.nvim', event = 'CursorHold' }) -- show git blame info on lines
+
+    -- show commit in floating window
+    _use({
+        'rhysd/git-messenger.vim',
+        event = 'CursorHold',
+        keys = '<leader>gm',
+        cmd = 'GitMessenger',
+    })
+
     -- git CLI for command mode
     _use({
         'tpope/vim-fugitive',
@@ -25,7 +35,7 @@ function M.getAll(use)
      _use({
          'lewis6991/gitsigns.nvim',
          after = 'plenary.nvim',
-         event = 'BufNew',
+         event = 'CursorHold',
      })
 end
 
