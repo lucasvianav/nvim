@@ -1,23 +1,13 @@
 local o  = vim.opt
+local v  = vim.v
 local fn = vim.fn
-
--- local treesitterEnabled, ts = pcall(require,'nvim-treesitter.configs')
--- 
--- -- use treesitter for folding
--- -- if available, else indent
--- if treesitterEnabled then
---     o.foldmethod = 'expr'
---     o.foldexpr   = fn['nvim_treesitter#foldexpr']()
--- else
---     o.foldmethod = 'indent'
--- end
 
 o.foldmethod = 'indent'
 
---[[
-    autocmd VimEnter,VimLeave * bufdo set foldlevel=0
-    autocmd BufAdd,Bufnew <afile> set foldlevel=0
-    " set foldlevelstart=0                " start folded
-endif
-]]--
+o.fillchars    = [[fold: ]]
+o.foldnestmax  = 4 -- fold 4 nested indent levels at most
+o.foldminlines = 0 -- enable folding 1+ lines
+
+o.foldtext = [[substitute(getline(v:foldstart),'\S.\+$','','').'+-- ... (' . (v:foldend - v:foldstart + 1) . ' lines folded) --+']]
+-- o.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').' ... '.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines folded)']]
 

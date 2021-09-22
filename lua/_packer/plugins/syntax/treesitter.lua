@@ -1,6 +1,6 @@
-local o = vim.opt
+local o   = vim.opt
 local cmd = vim.cmd
-local fn = vim.fn
+local fn  = vim.fn
 
 -- list of desired treesitter parsers
 local parsers = {
@@ -24,7 +24,9 @@ require('nvim-treesitter.configs').setup({
     -- autotag   = { enable = true },
 })
 
--- use for folding
--- o.foldmethod = 'expr'
--- o.foldexpr   = fn['nvim_treesitter#foldexpr']()
+--[[
+    -- use for folding
+    o.foldmethod = 'expr'
+    o.foldexpr   = 'nvim_treesitter#foldexpr()'
+]]--
 
