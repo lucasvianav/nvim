@@ -1,5 +1,8 @@
 local M = {}
 
+--[[ TODO:
+    kdheepak/lazygit.nvim
+]]--
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.git')
 

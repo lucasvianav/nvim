@@ -16,6 +16,7 @@ end
 
 @return function -- wrapper for `use`
 ]]--
+-- TODO: finish implementing local _use
 function _G.get_packer_use_wrapper(use, dir, theme)
     local function getRequireString(module, pluginName)
         local requireString = [[    pcall(require, ']] .. module .. [[')]]
@@ -26,7 +27,7 @@ function _G.get_packer_use_wrapper(use, dir, theme)
             requireString = requireString .. [[
 
             if colorscheme == ']] .. pluginName .. [[' then
-                vim.cmd('colorscheme ]] .. pluginName .. [[') 
+                vim.cmd('colorscheme ]] .. pluginName .. [[')
                 vim.cmd(]] .. comm .. [[)
             end
             ]]
@@ -38,9 +39,12 @@ function _G.get_packer_use_wrapper(use, dir, theme)
     --[[
     Wrapper for `packer.use`.
 
-    @param args  (table)   -- same as for `packer.use`
-    @param setup (boolean) -- default to setup instead of config
+    @param args (table) -- same as for `packer.use`
+    @param opt  (table)
+        @param opt.setup   (boolean) -- default to setup instead of config
+        @param opt.boolean (boolean) -- is it a local plugin
     ]]--
+    -- local function _use(args, opt)
     local function _use(args, setup)
         if not args or #args == 0 or not args[1] then return end
 
@@ -55,7 +59,7 @@ function _G.get_packer_use_wrapper(use, dir, theme)
                 lua         = [[[-_]n\?lua\|n\?lua]] .. '[-_]', -- matches "-lua" or "lua-" (also _)
             }
 
-            local function subs(regex) 
+            local function subs(regex)
                 return fn.substitute(pluginName, re[regex], '', 'g')
             end
 
@@ -65,6 +69,17 @@ function _G.get_packer_use_wrapper(use, dir, theme)
             pluginName = subs('vim')
             pluginName = subs('lua')
         end
+
+        -- if not args.config or (opt.setup and not args.setup) then
+        --     local config_filepath = dir .. '.' .. pluginName
+        --     local requireString = getRequireString(config_filepath, pluginName)
+
+        --     if opt.setup then
+        --         args.setup = requireString
+        --     else
+        --         args.config = requireString
+        --     end
+        -- end
 
         if not args.config or (setup and not args.setup) then
             local config_filepath = dir .. '.' .. pluginName
@@ -80,6 +95,12 @@ function _G.get_packer_use_wrapper(use, dir, theme)
         if theme and pluginName and not args.cond then
             args.cond = [[colorscheme == ']] .. pluginName .. [[']]
         end
+
+        -- if opt.local then
+        --     if vim.regex([[^\[^/]*$\|^\[^~/]*]]):match_str(args[0]) then
+        --     else
+        --     end
+        -- end
 
         return use(args)
     end
