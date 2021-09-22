@@ -16,6 +16,8 @@ appearanceCommands = [[
     hi! Folded ctermbg=NONE guibg=NONE
     hi! BufferLineFill ctermbg=none guibg=none
     hi! NormalFloat ctermbg=NONE guibg=NONE
+    hi! CursorLine guibg=]] .. colors.grey .. '\n' .. [[
+    hi! ColorColumn guibg=]] .. colors.black .. '\n' .. [[
 ]]
 
 o.colorcolumn    = '+1'          -- show mark at column 80
