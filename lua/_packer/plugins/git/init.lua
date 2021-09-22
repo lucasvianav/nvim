@@ -3,12 +3,16 @@ local M = {}
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.git')
 
-    _use({ 'f-person/git-blame.nvim', event = 'CursorHold' }) -- show git blame info on lines
+    -- show git blame info on lines
+    _use({
+        'f-person/git-blame.nvim',
+        keys = '<leader>gi',
+        cmd = 'GitBameToggle',
+    })
 
     -- show commit in floating window
     _use({
         'rhysd/git-messenger.vim',
-        event = 'CursorHold',
         keys = '<leader>gm',
         cmd = 'GitMessenger',
     })
