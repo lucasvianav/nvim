@@ -11,3 +11,5 @@ set('line_spacing',                1)
 set('pad_right',                   false)
 set('renumber_on_change',          true)
 
+map('i', '<S-TAB>', '<C-D>', { noremap = false })
+
