@@ -1,3 +1,4 @@
+local fn = vim.fn
 local desired_lsp_servers = {
     'angular',
     'bash',
@@ -35,18 +36,19 @@ local on_attach = function(client, bufnr)
     local opts = { noremap = true, silent = true }
 
     -- mappings
-    buf_set_keymap('n', 'gD',        '<cmd>lua vim.lsp.buf.declaration()<CR>',                                opts)
-    buf_set_keymap('n', 'gd',        '<cmd>lua vim.lsp.buf.definition()<CR>',                                 opts)
-    buf_set_keymap('n', 'gh',         '<cmd>lua vim.lsp.buf.hover()<CR>',                                      opts)
-    buf_set_keymap('n', 'K',         '<cmd>lua vim.lsp.buf.hover()<CR>',                                      opts)
-    -- buf_set_keymap('n', '<C-k>',     '<cmd>lua vim.lsp.buf.signature_help()<CR>',                             opts)
-    buf_set_keymap('n', '<space>D',  '<cmd>lua vim.lsp.buf.type_definition()<CR>',                            opts)
-    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>',                                     opts)
-    -- buf_set_keymap('n', '<space>e',  '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>',               opts)
-    -- buf_set_keymap('n', '[d',        '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',                           opts)
-    -- buf_set_keymap('n', ']d',        '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',                           opts)
-    -- buf_set_keymap('n', '<space>q',  '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',                         opts)
-    -- buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.formatting()<CR>',                                 opts)
+    buf_set_keymap('n', 'gD',        '<cmd>lua vim.lsp.buf.declaration()<CR>',     opts)
+    buf_set_keymap('n', 'gd',        '<cmd>lua vim.lsp.buf.definition()<CR>',      opts)
+    buf_set_keymap('n', 'gh',        '<cmd>lua vim.lsp.buf.hover()<CR>',           opts)
+    buf_set_keymap('n', 'K',         '<cmd>lua vim.lsp.buf.hover()<CR>',           opts)
+    buf_set_keymap('n', '<space>D',  '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>',          opts)
+
+    -- buf_set_keymap('n', '<C-k>',     '<cmd>lua vim.lsp.buf.signature_help()<CR>',               opts)
+    -- buf_set_keymap('n', '<space>e',  '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    -- buf_set_keymap('n', '[d',        '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',             opts)
+    -- buf_set_keymap('n', ']d',        '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',             opts)
+    -- buf_set_keymap('n', '<space>q',  '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',           opts)
+    -- buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.formatting()<CR>',                   opts)
 
     -- set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
@@ -93,6 +95,12 @@ local function setup_servers()
                 new_config.cmd            = angular.cmd
                 new_config.install_script = angular.install_script
             end
+        end
+
+
+        local has_coq, coq = pcall(require, 'coq')
+        if has_coq then
+            config = coq.lsp_ensure_capabilities(config)
         end
 
         require('lspconfig')[server].setup(config)

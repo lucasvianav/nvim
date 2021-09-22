@@ -6,7 +6,7 @@ local fn = vim.fn
 local parsers = {
     'bash', 'bibtex', 'c', 'comment', 'css', 'dockerfile',
     'graphql', 'html', 'javascript', 'jsdoc', 'tsx', 'vim',
-    'jsonc', 'json', 'lua', 'python', 'scss', 'typescript', 
+    'jsonc', 'json', 'lua', 'python', 'scss', 'typescript',
     'yaml',
 }
 
@@ -20,6 +20,7 @@ require('nvim-treesitter.configs').setup({
 
     highlight = { enable = true },
     rainbow   = { enable = true, extended_mode = true },
+    autopairs = { enable = true }
     -- autotag   = { enable = true },
 })
 

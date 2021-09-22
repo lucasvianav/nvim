@@ -5,7 +5,6 @@ function M.getAll(use)
 
     _use({ 'wbthomason/packer.nvim'          })   -- packer can manage itself
     _use({ 'lewis6991/impatient.nvim'        })   -- improve startup time
-    _use({ 'jiangmiao/auto-pairs'            })   -- auto pairs for {[()]}
     _use({ 'antoinemadec/FixCursorHold.nvim' })   -- fixes CursorHold and CursorHoldl
     _use({ 'nvim-lua/plenary.nvim'           })   -- great utility lua functions
     _use({ 'editorconfig/editorconfig-vim'   })   -- follow .editorconfig files
@@ -23,6 +22,14 @@ function M.getAll(use)
 
     _use({ 'wsdjeg/luarefvim', cmd  = 'help', ft = 'lua'        }) -- lua documentation
     _use({ 'tpope/vim-repeat', keys = '.',    fn = 'repeat#set' }) -- enables . repeat for plugins
+
+    -- auto pairs for {[()]}
+    -- ALTERNATIVE: jiangmiao/auto-pairs
+    -- ALTERNATIVE: steelsojka/pears.nvim
+    _use({
+        'windwp/nvim-autopairs',
+        event = 'InsertEnter',
+    })
 
     -- use nvim in the browser
     use {
@@ -133,6 +140,7 @@ function M.getAll(use)
     })
 
     -- switch between single-line and multiline statement
+    -- TODO: lua version?
     _use({
         'AndrewRadev/splitjoin.vim',
         keys = { 'gS', 'gJ' },

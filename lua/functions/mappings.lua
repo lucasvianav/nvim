@@ -1,4 +1,5 @@
 local set_keymap = vim.api.nvim_set_keymap
+local fn         = vim.fn
 
 --[[
 Wrapper for vim.api.nvim_set_keymap(), but defaulting `noremap` and 'silent' options.
@@ -19,4 +20,30 @@ Wrapper for vim.api.nvim_set_keymap(), mapping the `lhs` to `<nop>`.
 function _G.unmap(mode, lhs)
     set_keymap(mode, lhs, t'<nop>', {})
 end
+
+function _G.CR()
+    local has_npairs, npairs = pcall(require, 'nvim-autopairs')
+
+    if fn.pumvisible() ~= 0 then
+        if fn.complete_info({ 'selected' }).selected == -1 then
+            return has_npairs and ( npairs.esc('<c-e>') .. npairs.autopairs_cr() ) or t'<C-e><CR>'
+        else
+            return has_npairs and npairs.esc('<c-y>') or t'<C-y>'
+        end
+    else
+        return has_npairs and npairs.autopairs_cr() or t'<CR>'
+    end
+end
+
+function _G.BS()
+    local has_npairs, npairs = pcall(require, 'nvim-autopairs')
+
+    if fn.pumvisible() ~= 0 and fn.complete_info({ 'mode' }).mode == 'eval' then
+        return has_npairs and ( npairs.esc('<c-e>') .. npairs.autopairs_bs() ) or t'<C-e><BS>'
+    else
+        return has_npairs and npairs.autopairs_bs() or t'<BS>'
+    end
+end
+
+
 
