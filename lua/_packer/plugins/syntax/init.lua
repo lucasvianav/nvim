@@ -3,6 +3,7 @@ local M = {}
 --[[ TODO:
     Darazaki/indent-o-matic
     tpope/vim-sleuth
+    editorconfig/editorconfig-vim
 ]]--
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.syntax')

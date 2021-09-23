@@ -3,28 +3,31 @@ local M = {}
 --[[ TODO:
     { PLUGINS:
         https://github.com/jose-elias-alvarez/null-ls.nvim
-        https://github.com/sbdchd/neoformat
         https://github.com/mattn/efm-langserver
-        https://github.com/mhartington/formatter.nvim
-        https://github.com/lukas-reineke/format.nvim
+        https://github.com/mattn/efm-langserver#configuration-for-neovim-buildin-lsp-with-nvim-lspconfig
+        https://github.com/mattn/efm-langserver#example-for-configyaml
     }
 
-    { REDDIT:
-        https://www.reddit.com/r/neovim/comments/l6bbrd/can_anyone_give_a_simple_step_by_step_guide_to/
-        https://www.reddit.com/user/Maskdask/comments/ocj6y9/do_you_use_builtin_lsp_for_autoformatting/
-        https://www.reddit.com/r/neovim/comments/oxl9pz/whats_the_recommended_way_to_handle_formatting/
-        https://www.reddit.com/r/neovim/comments/oc8riy/out_of_the_box_lint_and_format_settings/
-        https://www.reddit.com/r/neovim/comments/o1d88e/which_autoformatting_plugin_do_you_recommend/
-        https://www.reddit.com/r/neovim/comments/mmkzck/losing_my_mind_with_formatting/
-        https://www.reddit.com/r/neovim/comments/le1duu/nvim_lsp_and_typescript_eslint_and_prettier/
-        https://www.reddit.com/r/neovim/comments/oe7nm1/how_to_add_linting_into_lua_based_config_with/
-        https://www.reddit.com/user/Maskdask/comments/ocj6y9/do_you_use_builtin_lsp_for_autoformatting/
-        https://www.reddit.com/r/neovim/comments/oc8riy/out_of_the_box_lint_and_format_settings/
-    }
-
-    { LSPCONFIG:
-        https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#diagnosticls
+    { LINKS:
         https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#efm
+
+        https://www.reddit.com/r/neovim/comments/jvisg5/lets_talk_formatting_again/
+
+        https://www.reddit.com/r/neovim/comments/jvisg5/comment/gjgd6si/?utm_source=reddit&utm_medium=web2x&context=3
+        https://www.reddit.com/r/neovim/comments/oxl9pz/comment/h7ndya2/?utm_source=reddit&utm_medium=web2x&context=3
+        https://www.reddit.com/r/neovim/comments/mmkzck/comment/gtscils/?utm_source=reddit&utm_medium=web2x&context=3
+        https://www.reddit.com/r/neovim/comments/oe7nm1/comment/h44wggh/?utm_source=reddit&utm_medium=web2x&context=3
+    }
+
+    { DOTFILES:
+        https://github.com/lukas-reineke/dotfiles/tree/master/vim/lua
+        https://github.com/lucax88x/configs
+        https://github.com/numToStr/dotfiles/tree/master/neovim/.config/nvim
+        https://github.com/rockerBOO/dotfiles/blob/current/config/efm-langserver/config.yaml#L197
+        https://github.com/rockerBOO/dotfiles/blob/current/config/efm-langserver/config.yaml#L285
+        https://github.com/LunarVim/LunarVim/blob/686e54ab0dfa5ffcac37599e5de7984f1d9e738f/lua/lsp/init.lua#L75
+        https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/plugins/nvim-lspconfig.lua#L122
+        https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/efm/prettier.lua
     }
 ]]--
 function M.getAll(use)

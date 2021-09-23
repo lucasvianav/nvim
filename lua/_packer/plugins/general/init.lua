@@ -12,7 +12,10 @@ function M.getAll(use)
     -- TODO: define mappings for other prefixes
     _use({ 'folke/which-key.nvim'            })   -- displays a popup with keybindings
 
+    -- ALTERNATIVE: max397574/better-escape.nvim
+    -- TODO: https://www.reddit.com/r/neovim/comments/ptrio7/escape_insert_mode_with_no_delay_when_typing/
     _use({ 'jdhao/better-escape.vim',    event = 'InsertEnter' }) -- better <Esc> with jk
+
     _use({ 'lucasvianav/vim-unimpaired', event = 'CursorMoved' }) -- pairs of handy bracket maps
     _use({ 'wellle/targets.vim',         event = 'CursorMoved' }) -- provides great new text objects
     _use({ 'andymass/vim-matchup',       event = 'CursorHold'  }) -- make % smarter
@@ -39,6 +42,8 @@ function M.getAll(use)
     }
 
     -- session manager
+    -- TODO: work on #69 (https://github.com/rmagatti/auto-session/issues/69)
+    -- https://github.com/lucasvianav/auto-session
     _use({
         'rmagatti/auto-session',
         event = 'VimLeavePre',
