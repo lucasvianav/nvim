@@ -34,6 +34,7 @@ o.updatetime   = 300         -- faster completion
 o.wildignore   = path_ignore -- exclude directories from path
 o.writebackup  = false       -- don't backup files before overwriting them
 o.timeoutlen   = 500         -- wait-time for mapped sequence to complete (which-key)
+o.undofile     = true        -- have persistent undo-tree for buffers
 
 o.path:append({'**'})                   -- enables recursive use of :find
 o.clipboard:append({'unnamedplus'})     -- system-wide copy-paste
