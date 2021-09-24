@@ -10,14 +10,15 @@ local M = {}
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.appearance')
 
-    _use({ 'rcarriga/nvim-notify' }) -- better notifications
+    _use({ 'rcarriga/nvim-notify'      }) -- better notifications
+    _use({ 'kwkarlwang/bufresize.nvim' }) -- preserve window sizes on terminal resize
 
-    _use({ 'akinsho/nvim-bufferline.lua',  after   = 'devicons'        }) -- fancy bufferline
     _use({ 'kyazdani42/nvim-web-devicons', as      = 'devicons'        }) -- colored icons
-    _use({ 'norcalli/nvim-colorizer.lua',  event   = 'CursorHold'      }) -- highlight color codes
-    _use({ 'p00f/nvim-ts-rainbow',         after   = 'nvim-treesitter' }) -- color matching surroundings using treesitter
-    _use({ 'xiyaowong/nvim-transparent',   disable = true,             }) -- transparent background
     _use({ 'SmiteshP/nvim-gps',            after   = 'nvim-treesitter' }) -- show treesitter context
+    _use({ 'akinsho/nvim-bufferline.lua',  after   = 'devicons'        }) -- fancy bufferline
+    _use({ 'p00f/nvim-ts-rainbow',         after   = 'nvim-treesitter' }) -- color matching surroundings using treesitter
+    _use({ 'norcalli/nvim-colorizer.lua',  event   = 'CursorHold'      }) -- highlight color codes
+    _use({ 'xiyaowong/nvim-transparent',   disable = true,             }) -- transparent background
 
     -- fancy statusline
     _use({

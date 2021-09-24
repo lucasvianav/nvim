@@ -3,16 +3,30 @@ local M = {}
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.general')
 
-    _use({ 'lewis6991/impatient.nvim'        })   -- improve startup time
-    _use({ 'antoinemadec/FixCursorHold.nvim' })   -- fixes CursorHold and CursorHoldl
-    _use({ 'nvim-lua/plenary.nvim'           })   -- great utility lua functions
-    _use({ 'editorconfig/editorconfig-vim'   })   -- follow .editorconfig files
+    -- packer can manage itself as an optional plugin
+    _use({
+        'wbthomason/packer.nvim',
+        cmd = {
+            'PackerClean',
+            'PackerCompile',
+            'PackerInstall',
+            'PackerLoad',
+            'PackerProfile',
+            'PackerStatus',
+            'PackerSync',
+            'PackerUpdate',
+        },
+    })
+
+    _use({ 'lewis6991/impatient.nvim'        }) -- improve startup time
+    _use({ 'antoinemadec/FixCursorHold.nvim' }) -- fixes CursorHold and CursorHoldl
+    _use({ 'nvim-lua/plenary.nvim'           }) -- great utility lua functions
+    _use({ 'editorconfig/editorconfig-vim'   }) -- follow .editorconfig files
 
     -- TODO: define mappings for other prefixes
     _use({ 'folke/which-key.nvim'            })   -- displays a popup with keybindings
 
     _use({ 'max397574/better-escape.nvim', event = 'InsertEnter' }) -- better <Esc> with jk
-    _use({ 'wbthomason/packer.nvim',       opt   = true          }) -- packer can manage itself as an optional plugin
     _use({ 'lucasvianav/vim-unimpaired',   event = 'CursorMoved' }) -- pairs of handy bracket maps
     _use({ 'wellle/targets.vim',           event = 'CursorMoved' }) -- provides great new text objects
     _use({ 'andymass/vim-matchup',         event = 'CursorHold'  }) -- make % smarter
@@ -140,7 +154,7 @@ function M.getAll(use)
     _use({
         'Pocco81/TrueZen.nvim',
         cmd = { 'TZFocus', 'TZAtaraxis' },
-        keys = { '<F10>' },
+        keys = { '<F12>', '<C-w>z' },
     })
 
     -- switch between single-line and multiline statement

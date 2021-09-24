@@ -9,10 +9,10 @@ map('n', '<C-c>', '<Esc>')
 -- map('t', 'jk', [[<C-\><C-n>]])  -- disabled because of ranger
 
 -- use alt + shift + hjkl to resize windows
-map('n', '<S-M-J>', ':<C-U>resize -2<CR>')
-map('n', '<S-M-K>', ':<C-U>resize +2<CR>')
-map('n', '<S-A-H>', ':<C-U>vertical resize -2<CR>')
-map('n', '<S-A-L>', ':<C-U>vertical resize +2<CR>')
+map('n', '<S-M-J>', '2<C-w>-')
+map('n', '<S-M-K>', '2<C-w>+')
+map('n', '<S-A-H>', '2<C-w><')
+map('n', '<S-A-L>', '2<C-w>>')
 
 -- break line after/before current position
 map('n', ']b', 'a<CR><Esc>k$')

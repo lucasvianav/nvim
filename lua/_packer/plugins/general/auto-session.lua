@@ -11,7 +11,9 @@ require('auto-session').setup({
         expand('~/Pictures'), expand('/home'),
         expand('~'),
     },
-    pre_save_cmds = { 'silent! tabdo NvimTreeClose' },
+    pre_save_cmds    = { 'silent! tabdo NvimTreeClose' },
+    -- TODO: create function to do this when restoring multiple windows
+    -- pre_restore_cmds = { 'silent! windo e'             },
     auto_session_allowed_dirs = nil,
 })
 

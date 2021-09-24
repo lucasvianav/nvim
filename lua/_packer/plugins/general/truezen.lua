@@ -49,6 +49,6 @@ require("true-zen").setup({
     }
 })
 
--- enter zen mode with F12
-map('n', '<F10>', ':<C-U>TZAtaraxis<CR>')
+map('n', '<C-w>z', ':<C-U>TZFocus<CR>')    -- focus with <C-w>z
+map('n', '<F12>',  ':<C-U>TZAtaraxis<CR>') -- enter zen mode with F12
 
