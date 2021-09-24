@@ -125,6 +125,7 @@ function M.getAll(use)
     })
 
     -- TSDoc docstrings generation
+    -- ALTERNATIVE: TODO: kkoomen/vim-doge
     _use({
         'heavenshell/vim-jsdoc',
         cmd = { 'JsDoc', 'JsDocFormat' },

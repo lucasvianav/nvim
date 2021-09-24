@@ -46,6 +46,6 @@ o.listchars = {
     precedes = '<',
     space    = ' ', -- ␣
     tab      = '» ',
-    trail    = '·',
+    trail    = '•', -- ·
 }
 

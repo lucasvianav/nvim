@@ -2,6 +2,9 @@ local o   = vim.o
 local fn  = vim.fn
 local cmd = vim.cmd
 
+-- TODO: function to convert table to vim's string-list
+-- https://github.com/sindrets/dotfiles/blob/b18533d6f082618233d5178d0e2864987e240a33/.config/nvim/lua/nvim-config/settings.lua#L22-L27
+
 --[[
 Checks if `list` contains the element `x` using binary search. Only useful if `list` is sorted.
 ]]--
