@@ -118,10 +118,13 @@ function _G._loadfile(module)
 end
 
 --[[
-Wrapper for `print(vim.inspect(args))`.
+Wrapper for `print(vim.inspect(args))` for each argument.
 ]]--
--- TODO: accept multiple arguments
-function _G.inspect(args)
-    print(vim.inspect(args))
+function _G.inspect(...)
+    local args = { ... }
+
+    for _, arg in pairs(args) do
+        print(vim.inspect(arg))
+    end
 end
 
