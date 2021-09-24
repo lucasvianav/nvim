@@ -11,14 +11,11 @@ function M.getAll(use)
     -- TODO: define mappings for other prefixes
     _use({ 'folke/which-key.nvim'            })   -- displays a popup with keybindings
 
-    -- ALTERNATIVE: max397574/better-escape.nvim
-    -- TODO: reply: https://www.reddit.com/r/neovim/comments/ptrio7/escape_insert_mode_with_no_delay_when_typing/
-    _use({ 'jdhao/better-escape.vim',    event = 'InsertEnter' }) -- better <Esc> with jk
-
-    _use({ 'wbthomason/packer.nvim',     opt   = true          }) -- packer can manage itself as an optional plugin
-    _use({ 'lucasvianav/vim-unimpaired', event = 'CursorMoved' }) -- pairs of handy bracket maps
-    _use({ 'wellle/targets.vim',         event = 'CursorMoved' }) -- provides great new text objects
-    _use({ 'andymass/vim-matchup',       event = 'CursorHold'  }) -- make % smarter
+    _use({ 'max397574/better-escape.nvim', event = 'InsertEnter' }) -- better <Esc> with jk
+    _use({ 'wbthomason/packer.nvim',       opt   = true          }) -- packer can manage itself as an optional plugin
+    _use({ 'lucasvianav/vim-unimpaired',   event = 'CursorMoved' }) -- pairs of handy bracket maps
+    _use({ 'wellle/targets.vim',           event = 'CursorMoved' }) -- provides great new text objects
+    _use({ 'andymass/vim-matchup',         event = 'CursorHold'  }) -- make % smarter
 
     _use({ 'chrisbra/NrrwRgn', cmd = { 'NR', 'NUD' } }) -- focus narrow code section
     _use({ 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } }) -- easily swap function arguments

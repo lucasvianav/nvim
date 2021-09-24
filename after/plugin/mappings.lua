@@ -1,3 +1,3 @@
-if not packer_plugins or not packer_plugins['better-escape.vim'] then
+if not packer_plugins or not (packer_plugins['better-escape.vim'] or packer_plugins['better-escape.nvim']) then
     map('i', 'jk', '<Esc>')
 end
