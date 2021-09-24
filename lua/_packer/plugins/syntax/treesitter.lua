@@ -18,10 +18,10 @@ local parsers = {
 require('nvim-treesitter.configs').setup({
     ensure_installed = parsers,
 
+    autopairs = { enable = true },
+    autotag   = { enable = true },
     highlight = { enable = true },
     rainbow   = { enable = true, extended_mode = true },
-    autopairs = { enable = true }
-    -- autotag   = { enable = true },
 })
 
 --[[

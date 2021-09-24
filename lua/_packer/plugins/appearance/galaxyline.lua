@@ -66,7 +66,7 @@ local cmd = vim.cmd
         bar      = '▋'    ,
         left     = ''    ,
         right    = ' '   , -- 
-        main     = ' '   ,
+        main     = 'ಠ_ಠ '   , -- 🌜
         vi_mode  = ' '   ,
         position = ' '   ,
         empty    = '  '  ,
@@ -213,13 +213,15 @@ gls.left[11] = {
     },
 }
 
--- gls.left[12] = {
---     TreeSitterContext = {
---         provider = gps.get_location,
---         condition = function() return condition.hide_in_width() and gps.is_available() end,
---         highlight = { colors.fg_dark, colors.bg_dark },
---     },
--- }
+gls.left[12] = {
+    TreeSitterContext = {
+        provider = gps.get_location,
+        condition = function()
+            return vim.bo.filetype ~= 'html' and condition.hide_in_width() and gps.is_available()
+        end,
+        highlight = { colors.fg_dark, colors.bg_dark },
+    },
+}
 
 gls.right[1] = {
     LspStatus = {

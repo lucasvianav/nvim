@@ -43,35 +43,15 @@ function M.getAll(use)
         run = 'npm install', -- TODO: must be yarn?
     })
 
-    -- autoclose html tags
-    -- ALTERNATIVE: windwp/nvim-ts-autotag
+    -- autoclose and autoedit html tags
     _use({
-        'alvan/vim-closetag',
+        'windwp/nvim-ts-autotag',
         ft = {
             'html', 'vue',
             'javascript.jsx',
+            'javascriptreact',
             'typescript.tsx',
-        },
-    })
-
-    -- autoedit matching html tags
-    -- ALTERNATIVE: windwp/nvim-ts-autotag
-    _use({
-        'valloric/MatchTagAlways',
-        ft = {
-            'html', 'vue',
-            'javascript.jsx',
-            'typescript.tsx',
-        },
-    })
-
-    -- autoedit enclosing html tags
-    _use({
-        'AndrewRadev/tagalong.vim',
-        ft = {
-            'html', 'vue',
-            'javascript.jsx',
-            'typescript.tsx',
+            'typescriptreact',
         },
     })
 end
