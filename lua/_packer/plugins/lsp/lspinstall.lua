@@ -28,31 +28,18 @@ local desired_lsp_servers = {
 
 local lsp = vim.lsp
 
-vim.cmd([[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
-
-local borders = {
-    {"🭽", "FloatBorder"},
-    {"▔", "FloatBorder"},
-    {"🭾", "FloatBorder"},
-    {"▕", "FloatBorder"},
-    {"🭿", "FloatBorder"},
-    {"▁", "FloatBorder"},
-    {"🭼", "FloatBorder"},
-    {"▏", "FloatBorder"},
-}
-
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
     lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
-        border = border,
+        border = 'single',
     })
     lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
-        border = border,
+        border = 'single',
     })
     lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
-        border       = border,
+        border       = 'single',
         virtual_text = { source = "always" } -- or "if_many"
     })
 
@@ -106,23 +93,14 @@ local function setup_servers()
 
     local servers = lspinstall.installed_servers()
     for _, server in pairs(servers) do
-        local config        = make_config()
-        local custom_config = require('_packer.plugins.lsp.servers')
+        local config                           = make_config()
 
-        if server == 'lua' then
-            config.settings = custom_config.lua
-        elseif server == 'angular' then
-            local angular = custom_config.angular
+        local custom_config_path               = '_packer.plugins.lsp.servers.' .. server
+        local has_custom_config, custom_config = pcall(require, custom_config_path)
 
-            config.cmd            = angular.cmd
-            config.install_script = angular.install_script
-
-            config.on_new_config = function(new_config)
-                new_config.cmd            = angular.cmd
-                new_config.install_script = angular.install_script
-            end
+        if has_custom_config then
+            config = vim.tbl_extend('force', config, custom_config)
         end
-
 
         local has_coq, coq = pcall(require, 'coq')
         if has_coq then
@@ -150,7 +128,7 @@ setup_servers()
 -- on all buffers after install
 lspinstall.post_install_hook = function()
     setup_servers()
-    vim.cmd('bufdo e')
+    vim.cmd('windo e')
 end
 
 vim.lsp.diagnostic.set_signs = set_signs_limited

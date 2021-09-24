@@ -120,6 +120,7 @@ end
 --[[
 Wrapper for `print(vim.inspect(args))`.
 ]]--
+-- TODO: accept multiple arguments
 function _G.inspect(args)
     print(vim.inspect(args))
 end

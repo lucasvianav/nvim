@@ -12,7 +12,7 @@ function M.getAll(use)
     _use({ 'folke/which-key.nvim'            })   -- displays a popup with keybindings
 
     -- ALTERNATIVE: max397574/better-escape.nvim
-    -- TODO: https://www.reddit.com/r/neovim/comments/ptrio7/escape_insert_mode_with_no_delay_when_typing/
+    -- TODO: reply: https://www.reddit.com/r/neovim/comments/ptrio7/escape_insert_mode_with_no_delay_when_typing/
     _use({ 'jdhao/better-escape.vim',    event = 'InsertEnter' }) -- better <Esc> with jk
 
     _use({ 'wbthomason/packer.nvim',     opt   = true          }) -- packer can manage itself as an optional plugin
