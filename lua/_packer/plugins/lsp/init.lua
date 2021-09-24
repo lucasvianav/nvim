@@ -35,30 +35,24 @@ function M.getAll(use)
 
     _use({ 'neovim/nvim-lspconfig'   }) -- easier way to config language servers
 
-    _use({ 'kosayoda/nvim-lightbulb',  event = 'CursorHold' }) -- indicates code actions with a lightbulb
+    _use({ 'kosayoda/nvim-lightbulb', event = 'CursorHold'          }) -- indicates code actions with a lightbulb
+    _use({ 'folke/lua-dev.nvim',      ft    = 'lua', as = 'lua-dev' }) -- setup LSP for lua-nvim dev
 
     -- TODO: get this to work
-    _use({ 'ray-x/lsp_signature.nvim', after = 'coq_nvim'    }) -- show function signature
+    _use({ 'ray-x/lsp_signature.nvim', after = 'coq_nvim' }) -- show function signature
+
+    -- easier way to install language servers
+    -- TODO: make it work for lua and angular
+    _use({ 'kabouzeid/nvim-lspinstall', after = 'nvim-lspconfig' })
 
     -- code completion with many features
     -- ALTERNATIVE: hrsh7th/nvim-cmp
     -- ALTERNATIVE: onsails/lspkind-nvim
-    -- DEPENDENCY: python3-venv
-    _use({ 'ms-jpq/coq_nvim', branch = 'coq' })
-
-    -- snippets for coq
     -- ALTERNATIVE: hrsh7th/nvim-vsnip
-    _use({ 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' })
-
-    -- additional completion sources for coq
-    _use({ 'ms-jpq/coq.thirdparty', branch = '3p', after = 'coq_nvim' })
-
-    -- easier way to install language servers
-    -- TODO: make it work for lua and angular
-    _use({
-        'kabouzeid/nvim-lspinstall',
-        after = 'nvim-lspconfig',
-    })
+    -- DEPENDENCY: python3-venv
+    _use({ 'ms-jpq/coq_nvim',       branch = 'coq' })
+    _use({ 'ms-jpq/coq.artifacts',  branch = 'artifacts', after = 'coq_nvim' }) -- snippets for coq
+    _use({ 'ms-jpq/coq.thirdparty', branch = '3p',        after = 'coq_nvim' }) -- additional completion sources for coq
 
     -- pretty windows for lsp lists
     -- ALTERNATIVE: RishabhRD/nvim-lsputils

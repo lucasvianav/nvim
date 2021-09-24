@@ -7,7 +7,7 @@ local util = lsp.util
 --[[
 Built-in LSP's GoToDefinition handler that supports splitting.
 ]]--
-function _G.goto_definition(split_cmd)
+function _G.lsp_goto_definition(split_cmd)
     local log = require("vim.lsp.log")
 
     -- (_, result, {method=method})
@@ -56,7 +56,7 @@ end
 --[[
 Analogue to VSCode's PeekDefiniton.
 ]]--
-function _G.peek_definition()
+function _G.lsp_peek_definition()
     return vim.lsp.buf_request(
         0,
         'textDocument/definition',
@@ -74,7 +74,7 @@ local orig_set_signs = vim.lsp.diagnostic.set_signs
 --[[
 Get most severe diagnostic sign per line.
 ]]--
-function _G.set_signs_limited(diagnostics, bufnr, client_id, sign_ns, opts)
+function _G.lsp_set_signs_limited(diagnostics, bufnr, client_id, sign_ns, opts)
     -- original func runs some checks, which I
     -- think is worth doing but maybe overkill
     if not diagnostics then
@@ -108,5 +108,84 @@ function _G.set_signs_limited(diagnostics, bufnr, client_id, sign_ns, opts)
 
     -- call original func
     orig_set_signs(filtered_diagnostics, bufnr, client_id, sign_ns, opts)
+end
+
+
+
+
+
+
+local function on_attach(client, bufnr)
+    local function buf_set_keymap(...)
+        local args = { ... }
+        api.nvim_buf_set_keymap(bufnr, args[1], args[2], args[3], {
+            noremap = true,
+            silent = true,
+        })
+    end
+
+    --{{ @HANDLERS
+        lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
+            border = 'single',
+        })
+        lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
+            border = 'single',
+        })
+        lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
+            border       = 'single',
+            virtual_text = { source = "always" } -- or "if_many"
+        })
+    --}}
+
+    -- enable completion triggered by <c-x><c-o>
+    api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    -- mappings
+    buf_set_keymap('n', 'gD',        '<cmd>lua vim.lsp.buf.declaration()<CR>')
+    -- buf_set_keymap('n', 'gd',        '<cmd>lua vim.lsp.buf.definition()<CR>')
+    buf_set_keymap('n', 'gh',        '<cmd>lua vim.lsp.buf.hover()<CR>')
+    buf_set_keymap('n', 'K',         '<cmd>lua vim.lsp.buf.hover()<CR>')
+    -- buf_set_keymap('n', '<space>D',  '<cmd>lua vim.lsp.buf.type_definition()<CR>')
+    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+    buf_set_keymap('n', '[g',        '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
+    buf_set_keymap('n', ']g',        '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+
+    -- buf_set_keymap('n', '<C-k>',     '<cmd>lua vim.lsp.buf.signature_help()<CR>',               opts)
+    -- buf_set_keymap('n', '<space>e',  '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    -- buf_set_keymap('n', '<space>q',  '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',           opts)
+    -- buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.formatting()<CR>',                   opts)
+
+    -- set autocommands conditional on server_capabilities
+    if client.resolved_capabilities.document_highlight then
+        vim.api.nvim_exec([[
+        augroup lsp_document_highlight
+        autocmd! * <buffer>
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        augroup END
+        ]], false)
+    end
+end
+
+--[[
+Returns a config for a LSP client to activate keybindings and enables snippet support, as well as include autocompletion plugin stuff.
+]]--
+function _G.lsp_make_config(config)
+    local capabilities = lsp.protocol.make_client_capabilities()
+
+    -- enable snippets
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+    config = vim.tbl_deep_extend('keep', config or {}, {
+        capabilities = capabilities,
+        on_attach = on_attach,
+    })
+
+    local has_coq, coq = pcall(require, 'coq')
+    if has_coq then
+        config = coq.lsp_ensure_capabilities(config)
+    end
+
+    return config
 end
 

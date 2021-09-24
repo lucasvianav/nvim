@@ -111,7 +111,7 @@ local cmd = vim.cmd
     local search     = provider('search')
     local vcs        = provider('vcs')        -- version control
     local whitespace = provider('whitespace')
-    local gps        = require('nvim-gps')    -- treesitter context
+    -- local gps        = require('nvim-gps')    -- treesitter context
 -- @PROVIDERS]]
 
 
@@ -213,13 +213,13 @@ gls.left[11] = {
     },
 }
 
-gls.left[12] = {
-    TreeSitterContext = {
-        provider = gps.get_location,
-        condition = function() return condition.hide_in_width() and gps.is_available() end,
-        highlight = { colors.fg_dark, colors.bg_dark },
-    },
-}
+-- gls.left[12] = {
+--     TreeSitterContext = {
+--         provider = gps.get_location,
+--         condition = function() return condition.hide_in_width() and gps.is_available() end,
+--         highlight = { colors.fg_dark, colors.bg_dark },
+--     },
+-- }
 
 gls.right[1] = {
     LspStatus = {

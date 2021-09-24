@@ -66,7 +66,6 @@ require('coq')
 
 map('i', '<Esc>', [[pumvisible() ? "\<C-e>"     : "\<Esc>"]], { expr = true, nnoremap = false })
 map('i', '<C-c>', [[pumvisible() ? "\<C-e>"     : "\<C-c>"]], { expr = true                   })
--- map('i', 'jk',   [[pumvisible() ? "\<C-e>jk" : "jk"]], { expr = true, noremap = false })
 
 map('i', '<CR>', 'v:lua.CR()', { expr = true })
 map('i', '<BS>', 'v:lua.BS()', { expr = true })
