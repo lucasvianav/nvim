@@ -1,6 +1,10 @@
--- buffer movement with \<Tab> and <S-Tab>
-map('n', '',   '<cmd>bnext<CR>')
-map('n', '<S-TAB>', '<cmd>bprevious<CR>')
+-- buffer movement with horizontal arrows
+map('n', '<Right>', '<cmd>bn<CR>')
+map('n', '<Left>',  '<cmd>bp<CR>')
+
+-- tab movement with vertical arrows
+map('n', '<Up>',   '<cmd>tabn<CR>')
+map('n', '<Down>', '<cmd>tabp<CR>')
 
 -- toggle buffer last visited buffer
 map('n', '<BS>', '<C-^>')
