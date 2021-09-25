@@ -38,7 +38,6 @@ function M.getAll(use)
     _use({ 'tpope/vim-repeat', keys = '.',    fn = 'repeat#set' }) -- enables . repeat for plugins
 
     -- auto pairs for {[()]}
-    -- TODO: issue for surrounding spaces ( {|} --> <space> --> { | } )
     -- ALTERNATIVE: jiangmiao/auto-pairs
     -- ALTERNATIVE: steelsojka/pears.nvim
     _use({
