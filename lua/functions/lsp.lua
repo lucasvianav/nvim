@@ -8,12 +8,12 @@ local util = lsp.util
 Built-in LSP's GoToDefinition handler that supports splitting.
 ]]--
 function _G.lsp_goto_definition(split_cmd)
-    local log = require("vim.lsp.log")
+    local log = require('vim.lsp.log')
 
     -- (_, result, {method=method})
     local handler = function(_, method, result )
         if result == nil or vim.tbl_isempty(result) then
-            local _ = log.info() and log.info(method, "No location found")
+            local _ = log.info() and log.info(method, 'No location found')
             return nil
         end
 
@@ -30,8 +30,8 @@ function _G.lsp_goto_definition(split_cmd)
 
             if #result > 1 then
                 util.set_qflist(util.locations_to_items(result))
-                api.nvim_command("copen")
-                api.nvim_command("wincmd p")
+                api.nvim_command('copen')
+                api.nvim_command('wincmd p')
             end
         else
             util.jump_to_location(result)
@@ -114,6 +114,28 @@ end
 
 
 
+--[[
+LSP's 'textDocument/formatting' handler.
+]]--
+function _G.lsp_formatting_handler(err, _, result, _, bufnr)
+    if err ~= nil or result == nil then return end
+
+    if not api.nvim_buf_get_option(bufnr, 'modified') then
+        local view = fn.winsaveview()
+
+        lsp.util.apply_text_edits(result, bufnr)
+        fn.winrestview(view)
+
+        if bufnr == api.nvim_get_current_buf() then
+            api.nvim_command('noautocmd :update')
+        end
+    end
+end
+
+
+
+
+
 
 local function on_attach(client, bufnr)
     local function buf_set_keymap(...)
@@ -124,47 +146,44 @@ local function on_attach(client, bufnr)
         })
     end
 
-    --{{ @HANDLERS
-        lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
-            border = 'single',
-        })
-        lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
-            border = 'single',
-        })
-        lsp.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
-            border       = 'single',
-            virtual_text = { source = "always" } -- or "if_many"
-        })
-    --}}
-
     -- enable completion triggered by <c-x><c-o>
     api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- mappings
     buf_set_keymap('n', 'gD',        '<cmd>lua vim.lsp.buf.declaration()<CR>')
-    -- buf_set_keymap('n', 'gd',        '<cmd>lua vim.lsp.buf.definition()<CR>')
     buf_set_keymap('n', 'gh',        '<cmd>lua vim.lsp.buf.hover()<CR>')
     buf_set_keymap('n', 'K',         '<cmd>lua vim.lsp.buf.hover()<CR>')
-    -- buf_set_keymap('n', '<space>D',  '<cmd>lua vim.lsp.buf.type_definition()<CR>')
     buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
     buf_set_keymap('n', '[g',        '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
     buf_set_keymap('n', ']g',        '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
 
+    -- buf_set_keymap('n', 'gd',        '<cmd>lua vim.lsp.buf.definition()<CR>')
+    -- buf_set_keymap('n', '<space>D',  '<cmd>lua vim.lsp.buf.type_definition()<CR>')
     -- buf_set_keymap('n', '<C-k>',     '<cmd>lua vim.lsp.buf.signature_help()<CR>',               opts)
     -- buf_set_keymap('n', '<space>e',  '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
     -- buf_set_keymap('n', '<space>q',  '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',           opts)
     -- buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.formatting()<CR>',                   opts)
 
-    -- set autocommands conditional on server_capabilities
-    if client.resolved_capabilities.document_highlight then
-        vim.api.nvim_exec([[
-        augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        augroup END
-        ]], false)
-    end
+    --{{ @CONDITIONAL_CAPABILITIES:
+        if client.resolved_capabilities.document_highlight then
+            api.nvim_exec([[
+            augroup lsp_document_highlight
+            au! * <buffer>
+            au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
+            au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+            augroup END
+            ]], false)
+        end
+
+        if client.resolved_capabilities.document_formatting then
+            api.nvim_exec([[
+            augroup AutoFormat
+            au! * <buffer>
+            au BufWritePre <buffer> lua vim.lsp.buf.formatting()
+            augroup END
+            ]], false)
+        end
+    -- @CONDITIONAL_CAPABILITIES:}}
 end
 
 --[[

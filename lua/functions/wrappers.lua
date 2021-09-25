@@ -128,3 +128,11 @@ function _G.inspect(...)
     end
 end
 
+--[[
+Reload a lua module using Plenary.
+]]--
+function _G.R(module)
+    require('plenary.reload').reload(module)
+    return require(module)
+end
+

@@ -1,9 +1,10 @@
 local desired_lsp_servers = {
-    'angular',
+    -- 'angular',
     'bash',
     'cpp',
     'css',
     'dockerfile',
+    'efm',
     'graphql',
     'html',
     'json',
@@ -43,6 +44,10 @@ local function setup_servers()
 
             if has_custom_config then
                 config = vim.tbl_deep_extend('force', config, custom_config)
+            end
+
+            if server == 'typescript' then
+                config.capabilities.textDcument.formatting = false
             end
 
             require('lspconfig')[server].setup(config)

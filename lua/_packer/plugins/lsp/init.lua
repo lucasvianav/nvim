@@ -1,16 +1,7 @@
 local M = {}
 
 --[[ TODO:
-    { PLUGINS:
-        https://github.com/jose-elias-alvarez/null-ls.nvim
-        https://github.com/mattn/efm-langserver
-        https://github.com/mattn/efm-langserver#configuration-for-neovim-buildin-lsp-with-nvim-lspconfig
-        https://github.com/mattn/efm-langserver#example-for-configyaml
-    }
-
     { LINKS:
-        https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#efm
-
         https://www.reddit.com/r/neovim/comments/jvisg5/lets_talk_formatting_again/
 
         https://www.reddit.com/r/neovim/comments/jvisg5/comment/gjgd6si/?utm_source=reddit&utm_medium=web2x&context=3
@@ -47,8 +38,6 @@ function M.getAll(use)
 
     -- code completion with many features
     -- ALTERNATIVE: hrsh7th/nvim-cmp
-    -- ALTERNATIVE: onsails/lspkind-nvim
-    -- ALTERNATIVE: hrsh7th/nvim-vsnip
     -- DEPENDENCY: python3-venv
     _use({ 'ms-jpq/coq_nvim',       branch = 'coq' })
     _use({ 'ms-jpq/coq.artifacts',  branch = 'artifacts', after = 'coq_nvim' }) -- snippets for coq
