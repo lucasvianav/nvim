@@ -1,5 +1,5 @@
-local g = vim.g
-local o = vim.opt
+local g   = vim.g
+local o   = vim.opt
 local cmd = vim.cmd
 
 -- enable syntax highlighting, filetype
@@ -9,7 +9,7 @@ cmd('syntax on')
 cmd('filetype plugin indent on')
 
 -- globs to be ignored from vim's path
-local path_ignore = '*/node_modules/*,*/autoload/*'
+local path_ignore = '*/node_modules/*,*/autoload/*,*/__pycache__/*,'
 
 -- general settings
 o.autoindent   = true          -- auto indent
@@ -36,10 +36,9 @@ o.writebackup  = false         -- don't backup files before overwriting them
 o.timeoutlen   = 500           -- wait-time for mapped sequence to complete (which-key)
 o.undofile     = true          -- have persistent undo-tree for buffers
 o.clipboard    = 'unnamedplus' -- system-wide copy-paste
+o.breakindent  = true          -- keep wrapped lines indented
 
 o.path:append({'**'})                   -- enables recursive use of :find
-o.formatoptions:append({'tcjnl'})       -- better formatting options (:help it)
-o.formatoptions:remove({'ro'})          -- no newline continuation of comments
 
 -- LaTeX settings
 g.tex_conceal = ''
