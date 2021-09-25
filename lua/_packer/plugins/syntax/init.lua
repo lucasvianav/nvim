@@ -8,13 +8,12 @@ local M = {}
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.syntax')
 
-    _use({ 'dkarter/bullets.vim', ft = 'markdown' }) -- Markdown
-
     _use({ 'lervag/vimtex', ft = { 'tex',  'plaintex'       } }) -- LaTeX
     _use({ 'elzr/vim-json', ft = { 'json', 'jsonc', 'jsonp' } }) -- JSON
 
-    -- code parsing for syntax highlighting, etc
-    _use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+    _use({ 'dkarter/bullets.vim',                  ft = 'markdown'    }) -- Markdown
+    _use({ 'jose-elias-alvarez/nvim-lsp-ts-utils', ft  = 'typescript' }) -- TypeScript
+    _use({ 'nvim-treesitter/nvim-treesitter',      run = ':TSUpdate'  }) -- code parsing for syntax highlighting, etc
 
     -- betters commentstrings based in treesitter
     _use({

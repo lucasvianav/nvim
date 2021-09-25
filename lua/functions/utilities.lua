@@ -58,7 +58,7 @@ function _G.source_local_config()
     local work_dir = os.getenv('WORK_DIR')
     local regexp   = vim.regex('^' .. fn.escape(work_dir, '.'))
 
-    if not fn.empty(work_dir) and regexp:match_str(cwd) then
+    if fn.empty(work_dir) == 0 and regexp:match_str(cwd) then
         cmd('silent! source ' .. cwd .. '/.nvimrc')
     end
 end

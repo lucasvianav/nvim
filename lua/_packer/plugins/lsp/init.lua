@@ -1,7 +1,7 @@
 local M = {}
 
 --[[ TODO:
-    { LINKS:
+    { setup Prettier:
         https://www.reddit.com/r/neovim/comments/jvisg5/lets_talk_formatting_again/
 
         https://www.reddit.com/r/neovim/comments/jvisg5/comment/gjgd6si/?utm_source=reddit&utm_medium=web2x&context=3
@@ -34,9 +34,14 @@ function M.getAll(use)
 
     -- easier way to install language servers
     -- TODO: make it work for lua and angular
+    -- lua works for files outside of my config (????). worked when editing
+    -- remote file from github (rockerBOO's config)
+    -- TODO: make an issue to lua-dev. maybe folke can helpe me?
     _use({ 'kabouzeid/nvim-lspinstall', after = 'nvim-lspconfig' })
 
     -- code completion with many features
+    -- TODO: try cmp?????
+    -- TODO: make issue about completion quality?
     -- ALTERNATIVE: hrsh7th/nvim-cmp
     -- DEPENDENCY: python3-venv
     _use({ 'ms-jpq/coq_nvim',       branch = 'coq' })
@@ -57,5 +62,4 @@ function M.getAll(use)
 end
 
 return M
-
 

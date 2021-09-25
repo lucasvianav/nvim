@@ -68,6 +68,11 @@ local mappings = {
     q = {  '<cmd>BufClose<cr>', 'close buffer' },
     v = {  '<C-w>v',            'split right'  },
 
+    s = {
+        name = '???',
+        i = 'Sort imports',
+    },
+
     w = {
         name = '???',
         q = 'buffer :wq',

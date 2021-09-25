@@ -137,6 +137,62 @@ end
 
 
 
+local specific_on_attach = {
+    typescript = function(client, bufnr)
+        local function buf_set_keymap(...)
+            local args = { ... }
+            api.nvim_buf_set_keymap(bufnr, args[1], args[2], args[3], {
+                noremap = true,
+                silent = true,
+            })
+        end
+
+        client.resolved_capabilities.document_formatting       = false
+        client.resolved_capabilities.document_range_formatting = false
+
+        local has_ts_utils, ts_utils = pcall(require, 'nvim-lsp-ts-utils')
+
+        if has_ts_utils then
+            ts_utils.setup({
+                enable_import_on_completion = true,
+
+                -- eslint
+                eslint_enable_code_actions     = true,
+                eslint_enable_disable_comments = true,
+                eslint_bin                     = "eslint_d",
+                eslint_enable_diagnostics      = true,
+
+                -- formatting
+                enable_formatting = false,
+                formatter         = "prettier",
+                formatter_opts    = {},
+
+                -- update imports on file move
+                update_imports_on_move = false,
+            })
+
+            ts_utils.setup_client(client)
+
+            local work_dir = os.getenv('WORK_DIR')
+            local regexp   = vim.regex('^' .. fn.escape(work_dir, '.'))
+            local cwd      = fn.getcwd()
+
+            -- sets up auto-sorting of imports if not on $WORK_DIR
+            if fn.empty(work_dir) == 1 or not regexp:match_str(cwd) then
+                api.nvim_exec([[
+                augroup SortImports
+                au! * <buffer>
+                au BufWritePre <buffer> TSLspOrganizeSync
+                au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+                augroup END
+                ]], false)
+            end
+
+            buf_set_keymap('n', '<leader>si', '<cmd>TSLspOrganize<CR>')
+        end
+    end
+}
+
 local function on_attach(client, bufnr)
     local function buf_set_keymap(...)
         local args = { ... }
@@ -164,6 +220,13 @@ local function on_attach(client, bufnr)
     -- buf_set_keymap('n', '<space>q',  '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',           opts)
     -- buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.formatting()<CR>',                   opts)
 
+    if specific_on_attach[client.name] then
+        specific_on_attach[client.name](client, bufnr)
+    end
+    -- if client.name == 'typescript' then
+    --     on_attach_ts(client, bufnr)
+    -- end
+
     --{{ @CONDITIONAL_CAPABILITIES:
         if client.resolved_capabilities.document_highlight then
             api.nvim_exec([[
@@ -179,7 +242,7 @@ local function on_attach(client, bufnr)
             api.nvim_exec([[
             augroup AutoFormat
             au! * <buffer>
-            au BufWritePre <buffer> lua vim.lsp.buf.formatting()
+            au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
             augroup END
             ]], false)
         end

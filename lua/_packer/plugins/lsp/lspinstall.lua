@@ -46,10 +46,6 @@ local function setup_servers()
                 config = vim.tbl_deep_extend('force', config, custom_config)
             end
 
-            if server == 'typescript' then
-                config.capabilities.textDcument.formatting = false
-            end
-
             require('lspconfig')[server].setup(config)
         end
     end
