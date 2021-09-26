@@ -95,7 +95,6 @@ local cmd = vim.cmd
     end
 
     local functions             = require('functions').statusline
-    local get_current_files_dir = functions.get_current_files_dir
 -- @UTILS]]
 
 
@@ -163,7 +162,7 @@ gls.left[4] = {
 gls.left[6] = {
     CurrentDir = {
         provider = function()
-            local dir_name = get_current_files_dir()
+            local dir_name = functions.get_current_files_dir()
             return icons.dir .. dir_name .. ' '
         end,
         highlight = { colors.fg_dark, colors.bg },
