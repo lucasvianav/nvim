@@ -193,6 +193,27 @@ local specific_on_attach = {
     end
 }
 
+local function conditional_autocmds(client)
+    if client.resolved_capabilities.document_highlight then
+        api.nvim_exec([[
+        augroup lsp_document_highlight
+        au! * <buffer>
+        au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
+        au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        augroup END
+        ]], false)
+    end
+
+    if client.resolved_capabilities.document_formatting then
+        api.nvim_exec([[
+        augroup AutoFormat
+        au! * <buffer>
+        au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+        augroup END
+        ]], false)
+    end
+end
+
 local function on_attach(client, bufnr)
     local function buf_set_keymap(...)
         local args = { ... }
@@ -223,30 +244,8 @@ local function on_attach(client, bufnr)
     if specific_on_attach[client.name] then
         specific_on_attach[client.name](client, bufnr)
     end
-    -- if client.name == 'typescript' then
-    --     on_attach_ts(client, bufnr)
-    -- end
 
-    --{{ @CONDITIONAL_CAPABILITIES:
-        if client.resolved_capabilities.document_highlight then
-            api.nvim_exec([[
-            augroup lsp_document_highlight
-            au! * <buffer>
-            au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
-            au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-            augroup END
-            ]], false)
-        end
-
-        if client.resolved_capabilities.document_formatting then
-            api.nvim_exec([[
-            augroup AutoFormat
-            au! * <buffer>
-            au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-            augroup END
-            ]], false)
-        end
-    -- @CONDITIONAL_CAPABILITIES:}}
+    conditional_autocmds(client)
 end
 
 --[[
