@@ -5,7 +5,9 @@ local M = {}
     lucasvianav/twilight.nvim (locally)
     + fix it --> issue #15 (https://github.com/folke/twilight.nvim/issues/15)
 
-    kwkarlwang/bufresize.nvim
+    look into this
+    https://github.com/edluffy/hologram.nvim
+    https://www.reddit.com/r/neovim/comments/pv4ujz/is_there_a_way_to_see_images_in_neovim/
 ]]--
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.appearance')

@@ -37,6 +37,9 @@ o.timeoutlen   = 500           -- wait-time for mapped sequence to complete (whi
 o.undofile     = true          -- have persistent undo-tree for buffers
 o.clipboard    = 'unnamedplus' -- system-wide copy-paste
 o.breakindent  = true          -- keep wrapped lines indented
+o.spell        = false         -- no spelling by default
+o.spelllang    = 'en_us,pt_br' -- spelling languages
+o.spelloptions = 'camel'       -- detect different words in camelCase
 
 o.path:append({'**'})                   -- enables recursive use of :find
 
