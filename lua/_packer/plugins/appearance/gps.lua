@@ -5,5 +5,8 @@ require('nvim-gps').setup({
         ['method-name']    = ' ',
         ['container-name'] = '⛶ '
     },
+    languages = {
+        html = false,
+    },
     separator = ' > ',
 })

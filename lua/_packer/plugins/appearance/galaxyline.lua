@@ -66,9 +66,10 @@ local cmd = vim.cmd
         bar      = '▋'    ,
         left     = ''    ,
         right    = ' '   , -- 
-        main     = 'ಠ_ಠ '   , -- 🌜
+        main     = 'ಠ_ಠ ' , -- 🌜
         vi_mode  = ' '   ,
         position = ' '   ,
+        pos_col  = '㏇'   ,
         empty    = '  '  ,
         dir      = '  '  ,
         error    = '  '  ,
@@ -111,7 +112,7 @@ local cmd = vim.cmd
     local search     = provider('search')
     local vcs        = provider('vcs')        -- version control
     local whitespace = provider('whitespace')
-    -- local gps        = require('nvim-gps')    -- treesitter context
+    local gps        = require('nvim-gps')    -- treesitter context
 -- @PROVIDERS]]
 
 
@@ -217,7 +218,7 @@ gls.left[12] = {
     TreeSitterContext = {
         provider = gps.get_location,
         condition = function()
-            return vim.bo.filetype ~= 'html' and condition.hide_in_width() and gps.is_available()
+            return condition.hide_in_width() and gps.is_available()
         end,
         highlight = { colors.fg_dark, colors.bg_dark },
     },
@@ -309,20 +310,27 @@ gls.right[10] = {
 
 gls.right[11] = {
     LinePercentage = {
-        provider = function()
-            local current = fn.line('.')
-            local last    = fn.line('$')
-
-            if current == 1 then
-                return '  Top '
-            elseif current == last then
-                return '  Bot '
-            end
-
-            local percentage = math.modf((current / last) * 100)
-            return '  ' .. (percentage > 0 and percentage .. '% ' or 'Top ')
-        end,
+        provider = functions.get_line_percentage,
         highlight = { colors.green, colors.bg_light },
+    },
+}
+
+gls.right[12] = {
+    ColRoundicon = {
+        provider = str(icons.pos_col),
+        separator = icons.left,
+        separator_highlight = { colors.yellow, colors.bg_light },
+        highlight = { colors.blacker, colors.yellow },
+    },
+}
+
+gls.right[13] = {
+    Column = {
+        provider = function()
+            local tbl = vim.api.nvim_win_get_cursor(0)
+            return '  ' .. (tbl[2] + 1) .. ' '
+        end,
+        highlight = { colors.yellow, colors.bg_light },
     },
 }
 
@@ -344,8 +352,8 @@ gls.short_line_left[2] = {
     FileName = {
         provider = function()
             return (api.nvim_buf_get_name(0):len() == 0)
-                and icons.empty
-                or fileinfo.get_current_file_name()
+            and icons.empty
+            or fileinfo.get_current_file_name()
         end,
         highlight = { colors.fg_dark, colors.bg },
     },

@@ -27,6 +27,6 @@ local function disable(pattern)
 end
 
 
-disable('https?://twitter.com/')
-disable('https?://twitch.tv/')
-disable('https?://web.whatsapp.com/')
+disable('https?://w{0,3}twitter.com/')
+disable('https?://w{0,3}twitch.tv/')
+disable('https?://w{0,3}web.whatsapp.com/')
