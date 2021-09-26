@@ -4,3 +4,5 @@ o.colorcolumn = ''
 o.synmaxcol   = 3000
 o.textwidth   = 0
 o.wrap        = true
+o.spell       = true
+
