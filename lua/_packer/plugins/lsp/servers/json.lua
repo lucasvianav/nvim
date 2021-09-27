@@ -1,5 +1,7 @@
 local M = {}
 
+M.filetypes = { 'json', 'jsonc' }
+
 M.settings = {
     json = {
         -- https://www.schemastore.org
