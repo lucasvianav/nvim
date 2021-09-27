@@ -2,17 +2,19 @@
     @PACKAGE_MANAGERS:
         npm
         pip
-        luarocks (packer deals with this)
+        cargo
 
     @SOFTWARES:
-        eslint_d     (npm)
-        prettier     (npm)
-        black        (pip)
-        isort        (pip)
-        mypy         (pip)
-        flake8       (pip)
-        vim-vint     (pip)
-        luaformatter (luarocks) (packer deals with this)
+        markdownlint-cli (npm)
+        eslint_d         (npm)
+        prettier         (npm)
+        fsouza/prettierd (npm)
+        black            (pip)
+        isort            (pip)
+        mypy             (pip)
+        flake8           (pip)
+        vim-vint         (pip)
+        stylua           (cargo)
 
     @OTHERS:
         cmake
@@ -20,7 +22,7 @@
 
 -- linting and simple formatting for js/ts
 local eslint_d = {
-    lintCommand = 'eslint_d -f unix --stdin --stdin-filename ${INPUT}',
+    lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
     lintStdin = true,
     lintFormats = {'%f:%l:%c: %m'},
     lintIgnoreExitCode = true,
@@ -30,19 +32,34 @@ local eslint_d = {
 
 -- formatting for js/ts/json/yaml/html/css, etc
 local prettier = {
+    -- PRETTIER:
+    --formatCommand = ([[
+    --$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier")
+    ----find-config-path
+    ----stdin-filepath
+    --${INPUT}
+    --]]):gsub("\n", " "),
+
     formatCommand = ([[
-    $([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier")
-    --find-config-path
-    --stdin-filepath
-    ${INPUT}
+    $([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettierd")
+    "${INPUT}"
     ]]):gsub("\n", " "),
     formatStdin = true,
+
+    -- PRETTIERD:
+    env = {
+        string.format(
+            'PRETTIERD_DEFAULT_CONFIG=%s',
+            vim.fn.expand('~/.prettierrc.json')
+        ),
+    },
 }
 
 -- formatting for lua
-local lua_format = {
-    formatCommand = 'lua-format -i',
-    formatStdin = true,
+local stylua = {
+    formatCommand = "stylua -s --stdin-filepath ${INPUT} -",
+    formatStdin   = true,
+    rootMarkers = { '.stylua.toml' },
 }
 
 -- formatting for python
@@ -86,6 +103,17 @@ local vint = {
     lintSource = "vint",
 }
 
+-- linting for markdown
+local markdownlint = {
+    lintCommand = 'markdownlint -s',
+    lintStdin = true,
+    lintFormats = {
+        '%f:%l %m',
+        '%f:%l:%c %m',
+        '%f: %l: %m',
+    },
+}
+
 --[[ @BASH LINTING/FORMATTING
     local shfmt = {
         formatCommand = "shfmt ${-i:tabWidth}",
@@ -108,40 +136,40 @@ local root = require('lspconfig').util.root_pattern
 local M = {
     init_options = { documentFormatting = true },
     filetypes = {
-        'javascript',
-        'typescript',
-        'javascriptreact',
-        'typescriptreact',
-        'javascript.jsx',
-        'typescript.tsx',
-        'lua',
-        'python',
-        'vim',
-        'markdown',
-        'yaml',
-        'html',
-        'json',
         'css',
+        'html',
+        'javascript',
+        'javascript.jsx',
+        'javascriptreact',
+        'json',
+        'lua',
+        'markdown',
+        'python',
         'scss',
+        'typescript',
+        'typescript.tsx',
+        'typescriptreact',
+        'vim',
+        'yaml',
     },
     root_dir = vim.loop.cwd,
     settings = {
-        rootMarkers = { '.git/' },
+        rootMarkers = { ".git/" },
         languages = {
-            javascript      = { eslint_d },
-            javascriptreact = { eslint_d },
-            typescript      = { eslint_d },
-            typescriptreact = { eslint_d },
+            javascript      = { eslint_d, prettier     },
+            javascriptreact = { eslint_d, prettier     },
+            typescript      = { eslint_d, prettier     },
+            typescriptreact = { eslint_d, prettier     },
+            markdown        = { prettier, markdownlint },
 
-            css      = { prettier   },
-            graphql  = { prettier   },
-            html     = { prettier   },
-            json     = { prettier   },
-            markdown = { prettier   },
-            scss     = { prettier   },
-            yaml     = { prettier   },
-            vim      = { vint       },
-            lua      = { lua_format },
+            css      = { prettier },
+            graphql  = { prettier },
+            html     = { prettier },
+            json     = { prettier },
+            scss     = { prettier },
+            yaml     = { prettier },
+            vim      = { vint     },
+            lua      = { stylua   },
 
             python = {
                 black,

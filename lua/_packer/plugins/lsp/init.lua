@@ -1,17 +1,5 @@
 local M = {}
 
---[[ TODO:
-    { DOTFILES:
-        https://github.com/lukas-reineke/dotfiles/tree/master/vim/lua
-        https://github.com/lucax88x/configs
-        https://github.com/numToStr/dotfiles/tree/master/neovim/.config/nvim
-        https://github.com/rockerBOO/dotfiles/blob/current/config/efm-langserver/config.yaml#L197
-        https://github.com/rockerBOO/dotfiles/blob/current/config/efm-langserver/config.yaml#L285
-        https://github.com/LunarVim/LunarVim/blob/686e54ab0dfa5ffcac37599e5de7984f1d9e738f/lua/lsp/init.lua#L75
-        https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/plugins/nvim-lspconfig.lua#L122
-        https://github.com/tomaskallup/dotfiles/blob/master/nvim/lua/efm/prettier.lua
-    }
-]]--
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.lsp')
 
