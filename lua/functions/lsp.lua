@@ -116,6 +116,7 @@ end
 
 --[[
 LSP's 'textDocument/formatting' handler.
+https://github.com/lukas-reineke/dotfiles/issues/3
 ]]--
 function _G.lsp_formatting_handler(err, _, result, _, bufnr)
     if err ~= nil or result == nil then return end
@@ -137,6 +138,11 @@ end
 
 
 
+local function disable_formatting(client)
+    client.resolved_capabilities.document_formatting       = false
+    client.resolved_capabilities.document_range_formatting = false
+end
+
 local specific_on_attach = {
     typescript = function(client, bufnr)
         local function buf_set_keymap(...)
@@ -147,8 +153,7 @@ local specific_on_attach = {
             })
         end
 
-        client.resolved_capabilities.document_formatting       = false
-        client.resolved_capabilities.document_range_formatting = false
+        disable_formatting(client)
 
         local has_ts_utils, ts_utils = pcall(require, 'nvim-lsp-ts-utils')
 
@@ -190,7 +195,16 @@ local specific_on_attach = {
 
             buf_set_keymap('n', '<leader>si', '<cmd>TSLspOrganize<CR>')
         end
-    end
+    end,
+
+    angular = disable_formatting,
+    css     = disable_formatting,
+    graphql = disable_formatting,
+    json    = disable_formatting,
+    html    = disable_formatting,
+    lua     = disable_formatting,
+    python  = disable_formatting,
+    vim     = disable_formatting,
 }
 
 local function conditional_autocmds(client)

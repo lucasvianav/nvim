@@ -1,15 +1,6 @@
 local M = {}
 
 --[[ TODO:
-    { setup Prettier:
-        https://www.reddit.com/r/neovim/comments/jvisg5/lets_talk_formatting_again/
-
-        https://www.reddit.com/r/neovim/comments/jvisg5/comment/gjgd6si/?utm_source=reddit&utm_medium=web2x&context=3
-        https://www.reddit.com/r/neovim/comments/oxl9pz/comment/h7ndya2/?utm_source=reddit&utm_medium=web2x&context=3
-        https://www.reddit.com/r/neovim/comments/mmkzck/comment/gtscils/?utm_source=reddit&utm_medium=web2x&context=3
-        https://www.reddit.com/r/neovim/comments/oe7nm1/comment/h44wggh/?utm_source=reddit&utm_medium=web2x&context=3
-    }
-
     { DOTFILES:
         https://github.com/lukas-reineke/dotfiles/tree/master/vim/lua
         https://github.com/lucax88x/configs

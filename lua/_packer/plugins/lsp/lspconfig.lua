@@ -15,6 +15,6 @@
         update_in_insert = false,
     })
 
-    lsp.handlers['textDocument/formatting'] = lsp_formatting_handler,
+    -- lsp.handlers['textDocument/formatting'] = lsp_formatting_handler,
 -- @HANDLERS}}
 
