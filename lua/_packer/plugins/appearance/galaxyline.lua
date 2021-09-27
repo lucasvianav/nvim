@@ -1,3 +1,5 @@
+-- TODO: refactor this whole file
+
 local api = vim.api
 local fn  = vim.fn
 local lsp = vim.lsp

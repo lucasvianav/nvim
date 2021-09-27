@@ -4,6 +4,7 @@ local fn         = vim.fn
 --[[
 Wrapper for vim.api.nvim_set_keymap(), but defaulting `noremap` and 'silent' options.
 ]]--
+-- TODO: support buf --- https://github.com/lukas-reineke/dotfiles/blob/5b84e9264d3ca9e40fd773642e5a1d335224733e/vim/lua/utils.lua#L32-L37
 function _G.map(mode, lhs, rhs, opt)
     local available_modes = 'nvsxo!ilct'
     if #mode ~= 1 or not string.find(available_modes, mode) then return end

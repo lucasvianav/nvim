@@ -155,6 +155,8 @@ local specific_on_attach = {
 
         disable_formatting(client)
 
+        -- TODO: can I organize imports without ts-utils?
+        -- https://github.com/mrjones2014/dotfiles/blob/6159bc2ddfae95af8eed57109b416c37868199a7/.config/nvim/lua/modules/lsp-utils.lua#L57-L73
         local has_ts_utils, ts_utils = pcall(require, 'nvim-lsp-ts-utils')
 
         if has_ts_utils then

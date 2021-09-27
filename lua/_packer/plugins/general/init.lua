@@ -27,6 +27,8 @@ function M.getAll(use)
     _use({ 'folke/which-key.nvim'            })   -- displays a popup with keybindings
 
     _use({ 'max397574/better-escape.nvim', event = 'InsertEnter' }) -- better <Esc> with jk
+
+    -- TODO: use matze/vim-move??
     _use({ 'lucasvianav/vim-unimpaired',   event = 'CursorMoved' }) -- pairs of handy bracket maps
     _use({ 'wellle/targets.vim',           event = 'CursorMoved' }) -- provides great new text objects
     _use({ 'andymass/vim-matchup',         event = 'CursorHold'  }) -- make % smarter
