@@ -56,6 +56,9 @@ local prettier = {
 }
 
 -- formatting for lua
+-- TODO: why in the fuck doesn't this work
+-- TODO: setup luacheck? https://github.com/mpeterv/luacheck
+-- TODO: setup github workflow when working
 local stylua = {
     formatCommand = "stylua -s --stdin-filepath ${INPUT} -",
     formatStdin   = true,
@@ -130,8 +133,6 @@ local markdownlint = {
 
 
 
-
-local root = require('lspconfig').util.root_pattern
 
 local M = {
     init_options = { documentFormatting = true },
