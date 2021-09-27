@@ -9,7 +9,17 @@ function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.syntax')
 
     _use({ 'lervag/vimtex', ft = { 'tex',  'plaintex'       } }) -- LaTeX
-    _use({ 'elzr/vim-json', ft = { 'json', 'jsonc', 'jsonp' } }) -- JSON
+
+    -- JSON
+    _use({
+        'elzr/vim-json',
+        disable = true, -- I guess it doesn't work with LSP
+        ft = {
+            'json',
+            'jsonc',
+            'jsonp',
+        },
+    })
 
     _use({ 'dkarter/bullets.vim',                  ft = 'markdown'    }) -- Markdown
     _use({ 'jose-elias-alvarez/nvim-lsp-ts-utils', ft  = 'typescript' }) -- TypeScript

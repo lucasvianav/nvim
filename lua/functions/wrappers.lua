@@ -124,7 +124,7 @@ function _G.inspect(...)
     local args = { ... }
 
     for _, arg in pairs(args) do
-        print(vim.inspect(arg, { indent = 4, depth = 4 }))
+        print(vim.inspect(arg, { indent = '    ', depth = 4 }))
     end
 end
 

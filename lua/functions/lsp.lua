@@ -245,10 +245,13 @@ local function on_attach(client, bufnr)
     -- mappings
     buf_set_keymap('n', 'gD',        '<cmd>lua vim.lsp.buf.declaration()<CR>')
     buf_set_keymap('n', 'gh',        '<cmd>lua vim.lsp.buf.hover()<CR>')
-    buf_set_keymap('n', 'K',         '<cmd>lua vim.lsp.buf.hover()<CR>')
     buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
     buf_set_keymap('n', '[g',        '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
     buf_set_keymap('n', ']g',        '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+
+    -- TODO: also show help
+    -- https://github.com/lucasvianav/nvim/blob/21062452bc1f7db702cc9a0d537cbad4b2aa683b/general/plugins/config/coc.vim#L79-L87
+    buf_set_keymap('n', 'K',         '<cmd>lua vim.lsp.buf.hover()<CR>')
 
     -- buf_set_keymap('n', 'gd',        '<cmd>lua vim.lsp.buf.definition()<CR>')
     -- buf_set_keymap('n', '<space>D',  '<cmd>lua vim.lsp.buf.type_definition()<CR>')

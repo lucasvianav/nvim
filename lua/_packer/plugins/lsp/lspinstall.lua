@@ -1,5 +1,5 @@
 local desired_lsp_servers = {
-    -- 'angular',
+    'angular',
     'bash',
     'cpp',
     'css',
