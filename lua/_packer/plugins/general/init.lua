@@ -57,6 +57,8 @@ function M.getAll(use)
     -- session manager
     -- TODO: work on #69 (https://github.com/rmagatti/auto-session/issues/69)
     -- https://github.com/lucasvianav/auto-session
+    -- TODO:
+    -- https://github.com/JoosepAlviste/dotfiles/blob/b09a4eed7bf4c7862a02aa8b14ffe29896a0bfa5/config/nvim/lua/j/plugins.lua#L33-L37
     _use({
         'rmagatti/auto-session',
         event = 'VimLeavePre',

@@ -9,7 +9,9 @@ cmd('syntax on')
 cmd('filetype plugin indent on')
 
 -- globs to be ignored from vim's path
-local path_ignore = '*/node_modules/*,*/autoload/*,*/__pycache__/*,'
+local path_ignore = '*/node_modules/*,*/__pycache__/*,'
+
+-- TODO: https://github.com/JoosepAlviste/dotfiles/blob/b09a4eed7bf4c7862a02aa8b14ffe29896a0bfa5/config/nvim/lua/j/settings.lua#L103
 
 -- general settings
 o.autoindent   = true          -- auto indent
