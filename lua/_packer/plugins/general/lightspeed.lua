@@ -1,4 +1,4 @@
-require'lightspeed'.setup({
+require('lightspeed').setup({
     jump_to_first_match = true,
     jump_on_partial_input_safety_timeout = 400,
     highlight_unique_chars = true, -- gets slow if lots of content
@@ -14,6 +14,8 @@ require'lightspeed'.setup({
     cycle_group_bwd_key = nil,
 })
 
-map('n', '<C-s>',   '<Plug>Lightspeed_s', { noremap = false })
-map('n', '<C-M-s>', '<Plug>Lightspeed_S', { noremap = false })
+map('n', '<C-s>', '<Plug>Lightspeed_s', { noremap = false })
 
+-- I used to use <C-M-S>, but then I learned to config
+-- Kitty do correctly expose ctrl + shift + s as <C-S-S>
+map('n', '<C-S-s>', '<Plug>Lightspeed_S', { noremap = false })

@@ -25,3 +25,7 @@ map('n', '<Leader>O', 'O<Esc>^Da')
 -- delete word with alt + backspace
 map('i', '<M-BS>', '<C-w>')
 
+-- delete word with ctrl + backspace (it's actually
+-- ctrl + shift + alt + backspace, but I've remapped
+-- that to ctrl + backspace in Kitty, so yeah)
+map('i', '<M-C-S-H>', '<C-w>')
