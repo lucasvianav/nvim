@@ -18,16 +18,22 @@
 
     @OTHERS:
         cmake
-]]--
+]]
 
 -- linting and simple formatting for js/ts
 local eslint_d = {
-    lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+    lintCommand = 'eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}',
     lintStdin = true,
-    lintFormats = {'%f:%l:%c: %m'},
+    -- lintFormats = { '%f:%l:%c: %m' },
+    -- lintFormats = {'%f:%l:%c:%t: %m'},
+    lintFormats = {
+        '%f(%l,%c): %tarning %m',
+        '%f(%l,%c): %rror %m',
+    },
     lintIgnoreExitCode = true,
-    formatCommand = 'eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}',
+    formatCommand = 'eslint_d -f visualstudio --fix-to-stdout --stdin --stdin-filename=${INPUT}',
     formatStdin = true,
+    lintSource = 'eslint',
 }
 
 -- formatting for js/ts/json/yaml/html/css, etc
@@ -43,15 +49,12 @@ local prettier = {
     formatCommand = ([[
     $([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettierd")
     "${INPUT}"
-    ]]):gsub("\n", " "),
+    ]]):gsub('\n', ' '),
     formatStdin = true,
 
     -- PRETTIERD:
     env = {
-        string.format(
-            'PRETTIERD_DEFAULT_CONFIG=%s',
-            vim.fn.expand('~/.prettierrc.json')
-        ),
+        string.format('PRETTIERD_DEFAULT_CONFIG=%s', vim.fn.expand('~/.prettierrc.json')),
     },
 }
 
@@ -60,32 +63,32 @@ local prettier = {
 -- TODO: setup luacheck? https://github.com/mpeterv/luacheck
 -- TODO: setup github workflow when working
 local stylua = {
-    formatCommand = "stylua -s --stdin-filepath ${INPUT} -",
-    formatStdin   = true,
+    formatCommand = 'stylua -s --stdin-filepath ${INPUT} -',
+    formatStdin = true,
     rootMarkers = { '.stylua.toml' },
 }
 
 -- formatting for python
 local black = {
-    formatCommand = "black --fast -",
+    formatCommand = 'black --fast -',
     formatStdin = true,
 }
 
 -- sorting imports for python
 local isort = {
-    formatCommand = "isort --stdout --profile black -",
+    formatCommand = 'isort --stdout --profile black -',
     formatStdin = true,
 }
 
 -- type annotation checker for python
 local mypy = {
-    lintCommand = "mypy --show-column-numbers --ignore-missing-imports",
+    lintCommand = 'mypy --show-column-numbers --ignore-missing-imports',
     lintFormats = {
-        "%f:%l:%c: %trror: %m",
-        "%f:%l:%c: %tarning: %m",
-        "%f:%l:%c: %tote: %m",
+        '%f:%l:%c: %trror: %m',
+        '%f:%l:%c: %tarning: %m',
+        '%f:%l:%c: %tote: %m',
     },
-    lintSource = "mypy",
+    lintSource = 'mypy',
     lintStdin = true,
 }
 
@@ -94,16 +97,16 @@ local flake8 = {
     lintCommand = "flake8 --max-line-length 160 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
     lintStdin = true,
     lintIgnoreExitCode = true,
-    lintFormats = { "%f:%l:%c: %t%n%n%n %m" },
-    lintSource = "flake8",
+    lintFormats = { '%f:%l:%c: %t%n%n%n %m' },
+    lintSource = 'flake8',
 }
 
 -- linter for viml
 local vint = {
-    lintCommand = "vint -",
+    lintCommand = 'vint -',
     lintStdin = true,
-    lintFormats = { "%f:%l:%c: %m" },
-    lintSource = "vint",
+    lintFormats = { '%f:%l:%c: %m' },
+    lintSource = 'vint',
 }
 
 -- linting for markdown
@@ -128,11 +131,7 @@ local markdownlint = {
         lintFormats = { "%f:%l:%c: %trror: %m", "%f:%l:%c: %tarning: %m", "%f:%l:%c: %tote: %m" },
         lintSource = "shellcheck",
     }
-]]--
-
-
-
-
+]]
 
 local M = {
     init_options = { documentFormatting = true },
@@ -155,22 +154,24 @@ local M = {
     },
     root_dir = vim.loop.cwd,
     settings = {
-        rootMarkers = { ".git/" },
+        rootMarkers = { '.git/' },
         languages = {
-            javascript      = { eslint_d }, -- prettier?
+            -- TODO: setup estlint --> pretier
+            -- https://github.com/JoosepAlviste/dotfiles/blob/b09a4eed7bf4c7862a02aa8b14ffe29896a0bfa5/config/nvim/lua/j/plugins/lsp/efm_ls.lua#L26-L38
+            javascript = { eslint_d }, -- prettier?
             javascriptreact = { eslint_d }, -- prettier?
-            typescript      = { eslint_d }, -- prettier?
+            typescript = { eslint_d }, -- prettier?
             typescriptreact = { eslint_d }, -- prettier?
-            markdown        = { prettier, markdownlint },
+            markdown = { prettier, markdownlint },
 
-            css      = { prettier },
-            graphql  = { prettier },
-            html     = { prettier },
-            json     = { prettier },
-            scss     = { prettier },
-            yaml     = { prettier },
-            vim      = { vint     },
-            lua      = { stylua   },
+            css = { prettier },
+            graphql = { prettier },
+            html = { prettier },
+            json = { prettier },
+            scss = { prettier },
+            yaml = { prettier },
+            vim = { vint },
+            lua = { stylua },
 
             python = {
                 black,
@@ -178,9 +179,8 @@ local M = {
                 flake8,
                 mypy,
             },
-        }
-    }
+        },
+    },
 }
 
 return M
-
