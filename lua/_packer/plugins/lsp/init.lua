@@ -3,9 +3,20 @@ local M = {}
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.lsp')
 
-    _use({ 'neovim/nvim-lspconfig' }) -- easier way to config language servers
+    -- TODO: https://www.reddit.com/r/neovim/comments/px1hnf/popup_menu_for_code_actions_to_show/
+    -- https://github.com/weilbith/nvim-code-action-menu
 
+    _use({ 'neovim/nvim-lspconfig' }) -- easier way to config language servers
     _use({ 'kosayoda/nvim-lightbulb', event = 'CursorHold' }) -- indicates code actions with a lightbulb
+
+    -- not actually LSP-related but what the heck
+    -- DEPENDENCY: universal-ctags, ctags
+    _use({
+        'ludovicchabant/vim-gutentags',
+        requires = 'skywind3000/gutentags_plus',
+    })
+
+    -- TODO: go through issues and make this work!!!
     _use({ 'folke/lua-dev.nvim', ft = 'lua', as = 'lua-dev' }) -- setup LSP for lua-nvim dev
 
     -- TODO: get this to work
