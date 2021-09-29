@@ -16,6 +16,9 @@ map('n', '<C-S-Tab>', '<cmd>tabp<CR>')
 -- toggle buffer last visited buffer
 map('n', '<BS>', '<C-^>')
 
+-- toggle buffer last visited tab
+map('n', '<M-C-S-H>', 'g<Tab>')
+
 -- better window navigation
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
