@@ -1,5 +1,5 @@
 local desired_lsp_servers = {
-    'angular',
+    -- 'angular',
     'bash',
     'cpp',
     'css',
@@ -14,18 +14,7 @@ local desired_lsp_servers = {
     'vim',
 }
 
-
-
-
-
-
 --------------------------------------------------------------------------------
-
-
-
-
-
-
 
 local lsp = vim.lsp
 
@@ -75,4 +64,3 @@ vim.lsp.diagnostic.set_signs = set_signs_limited
 
 -- show line diagnostics automatically in hover window
 -- vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]])
-

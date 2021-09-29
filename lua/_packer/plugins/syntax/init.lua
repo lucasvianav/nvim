@@ -4,11 +4,12 @@ local M = {}
     Darazaki/indent-o-matic
     tpope/vim-sleuth
     editorconfig/editorconfig-vim
-]]--
+]]
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.syntax')
 
-    _use({ 'lervag/vimtex', ft = { 'tex',  'plaintex'       } }) -- LaTeX
+    _use({ 'lervag/vimtex', ft = { 'tex', 'plaintex' } }) -- LaTeX
+    _use({ 'fladson/vim-kitty', ft = { 'kitty' } }) -- Kitty config
 
     -- JSON
     _use({
@@ -21,9 +22,9 @@ function M.getAll(use)
         },
     })
 
-    _use({ 'dkarter/bullets.vim',                  ft = 'markdown'    }) -- Markdown
-    _use({ 'jose-elias-alvarez/nvim-lsp-ts-utils', ft  = 'typescript' }) -- TypeScript
-    _use({ 'nvim-treesitter/nvim-treesitter',      run = ':TSUpdate'  }) -- code parsing for syntax highlighting, etc
+    _use({ 'dkarter/bullets.vim', ft = 'markdown' }) -- Markdown
+    _use({ 'jose-elias-alvarez/nvim-lsp-ts-utils', ft = 'typescript' }) -- TypeScript
+    _use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }) -- code parsing for syntax highlighting, etc
 
     -- betters commentstrings based in treesitter
     _use({
@@ -38,10 +39,18 @@ function M.getAll(use)
         'prettier/vim-prettier',
         disable = true,
         ft = {
-            'javascript', 'typescript',
-            'javascript.jsx', 'typescript.tsx',
-            'vue', 'graphql', 'html', 'css',
-            'scss', 'json', 'markdown', 'yaml',
+            'javascript',
+            'typescript',
+            'javascript.jsx',
+            'typescript.tsx',
+            'vue',
+            'graphql',
+            'html',
+            'css',
+            'scss',
+            'json',
+            'markdown',
+            'yaml',
         },
         cmd = {
             'Prettier',
@@ -56,7 +65,8 @@ function M.getAll(use)
     _use({
         'windwp/nvim-ts-autotag',
         ft = {
-            'html', 'vue',
+            'html',
+            'vue',
             'javascript.jsx',
             'javascriptreact',
             'typescript.tsx',
@@ -66,4 +76,3 @@ function M.getAll(use)
 end
 
 return M
-

@@ -52,7 +52,6 @@ end
 
 @return function -- wrapper for `use`
 ]]
--- TODO: finish implementing local _use
 function _G.get_packer_use_wrapper(use, dir, theme)
     local function getRequireString(module, pluginName)
         local requireString = [[    pcall(require, ']] .. module .. [[')]]

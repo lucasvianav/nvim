@@ -6,7 +6,7 @@ function M.getAll(use)
     -- start screen
     -- @ALTERNATIVE: mhinz/vim-startify
     _use({
-        "glepnir/dashboard-nvim",
+        'glepnir/dashboard-nvim',
         cmd = { 'Dashboard', 'DashboardNewFile' },
     })
 
@@ -17,8 +17,9 @@ function M.getAll(use)
     })
 
     -- NERDTree-like file explorer
-    _use ({
-        'kyazdani42/nvim-tree.lua', as = 'nvim-tree',
+    _use({
+        'kyazdani42/nvim-tree.lua',
+        as = 'nvim-tree',
         requires = 'kyazdani42/nvim-web-devicons',
         after = 'devicons',
         cmd = 'NvimTreeToggle',
@@ -27,47 +28,59 @@ function M.getAll(use)
 
     -- ranger file explorer
     _use({
-        'kevinhwang91/rnvimr', as = 'ranger',
-        cmd = 'RnvimrToggle', keys = '<Leader>r',
-    }) 
+        'kevinhwang91/rnvimr',
+        as = 'ranger',
+        cmd = 'RnvimrToggle',
+        keys = '<Leader>r',
+    })
 
     -- highlight f/F and t/T targets
     _use({
-        'unblevable/quick-scope', as = 'quickscope',
-        keys = { 'f', 'F', 't', 'T' }, 
-    }, true)
+        'unblevable/quick-scope',
+        as = 'quickscope',
+        keys = { 'f', 'F', 't', 'T' },
+    }, {
+        setup = true,
+    })
 
     -- run commands in tmux pane from nvim
     _use({
         'preservim/vimux',
         cmd = {
-            'VimuxPromptCommand', 'VimuxRunLastCommand',
-            'VimuxInspectRunner', 'VimuxZoomRunner',
-            'VimuxClearScreenHistory', 'VimuxTogglePane',
+            'VimuxPromptCommand',
+            'VimuxRunLastCommand',
+            'VimuxInspectRunner',
+            'VimuxZoomRunner',
+            'VimuxClearScreenHistory',
+            'VimuxTogglePane',
         },
         keys = {
-            '<Leader>tp', '<Leader>tr', '<Leader>ti',
-            '<Leader>tz', '<Leader>tc', '<Leader>tt',
+            '<Leader>tp',
+            '<Leader>tr',
+            '<Leader>ti',
+            '<Leader>tz',
+            '<Leader>tc',
+            '<Leader>tt',
         },
     })
 
     -- fuzzy finder
     -- @ALTERNATIVE: junegunn/fzf.vim
     _use({
-        "nvim-telescope/telescope.nvim",
+        'nvim-telescope/telescope.nvim',
         after = 'plenary.nvim',
-        requires = { 
+        requires = {
             -- emoji picker
             {
                 'xiyaowong/telescope-emoji.nvim',
                 config = function()
                     require('_packer/plugins/navigation/emoji')
-                end
-            }, 
+                end,
+            },
 
             -- markdown header picker
-            {  'crispgm/telescope-heading.nvim' }, 
-        } 
+            { 'crispgm/telescope-heading.nvim' },
+        },
     })
 
     -- auto-session picker for telescope
@@ -81,5 +94,3 @@ function M.getAll(use)
 end
 
 return M
-
-

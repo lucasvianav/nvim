@@ -18,26 +18,25 @@ function M.getAll(use)
         },
     })
 
-    _use({ 'lewis6991/impatient.nvim'        }) -- improve startup time
+    _use({ 'lewis6991/impatient.nvim' }) -- improve startup time
     _use({ 'antoinemadec/FixCursorHold.nvim' }) -- fixes CursorHold and CursorHoldl
-    _use({ 'nvim-lua/plenary.nvim'           }) -- great utility lua functions
-    _use({ 'editorconfig/editorconfig-vim'   }) -- follow .editorconfig files
+    _use({ 'nvim-lua/plenary.nvim' }) -- great utility lua functions
+    _use({ 'editorconfig/editorconfig-vim' }) -- follow .editorconfig files
 
     -- TODO: define mappings for other prefixes
-    _use({ 'folke/which-key.nvim'            })   -- displays a popup with keybindings
+    _use({ 'folke/which-key.nvim' }) -- displays a popup with keybindings
 
     _use({ 'max397574/better-escape.nvim', event = 'InsertEnter' }) -- better <Esc> with jk
 
     -- TODO: use matze/vim-move??
-    _use({ 'lucasvianav/vim-unimpaired',   event = 'CursorMoved' }) -- pairs of handy bracket maps
-    _use({ 'wellle/targets.vim',           event = 'CursorMoved' }) -- provides great new text objects
-    _use({ 'andymass/vim-matchup',         event = 'CursorHold'  }) -- make % smarter
+    _use({ 'lucasvianav/vim-unimpaired', event = 'CursorMoved' }) -- pairs of handy bracket maps
+    _use({ 'wellle/targets.vim', event = 'CursorMoved' }) -- provides great new text objects
+    _use({ 'andymass/vim-matchup', event = 'CursorHold' }) -- make % smarter
 
     _use({ 'chrisbra/NrrwRgn', cmd = { 'NR', 'NUD' } }) -- focus narrow code section
     _use({ 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } }) -- easily swap function arguments
 
-    _use({ 'wsdjeg/luarefvim', cmd  = 'help', ft = 'lua'        }) -- lua documentation
-    _use({ 'tpope/vim-repeat', keys = '.',    fn = 'repeat#set' }) -- enables . repeat for plugins
+    _use({ 'tpope/vim-repeat', keys = '.', fn = 'repeat#set' }) -- enables . repeat for plugins
 
     -- auto pairs for {[()]}
     -- ALTERNATIVE: jiangmiao/auto-pairs
@@ -48,11 +47,12 @@ function M.getAll(use)
     })
 
     -- use nvim in the browser
-    use {
+    use({
         'glacambre/firenvim',
+        disable = true,
         run = [[call firenvim#install(0, 'export PATH=\"$PATH\"')]],
         -- run = function() vim.fn['firenvim#install'](7) end,
-    }
+    })
 
     -- session manager
     -- TODO: work on #69 (https://github.com/rmagatti/auto-session/issues/69)
@@ -78,7 +78,8 @@ function M.getAll(use)
     _use({
         'tpope/vim-abolish',
         cmd = { 'Abolish', 'Subvert' },
-        keys = 'cr', after = 'vim-repeat',
+        keys = 'cr',
+        after = 'vim-repeat',
     })
 
     -- maps for toggling comments
@@ -104,7 +105,8 @@ function M.getAll(use)
     _use({
         'monaqa/dial.nvim',
         keys = {
-            '<C-a>', '<C-x>',
+            '<C-a>',
+            '<C-x>',
             { 'v', '<C-a>' },
             { 'v', '<C-x>' },
             { 'v', 'g<C-a>' },
@@ -131,7 +133,8 @@ function M.getAll(use)
     _use({
         'mattn/emmet-vim',
         ft = {
-            'html', 'vue',
+            'html',
+            'vue',
             'javascript.jsx',
             'typescript.tsx',
         },
@@ -148,7 +151,8 @@ function M.getAll(use)
 
     -- multiple cursors
     _use({
-        'mg979/vim-visual-multi', as = 'multi',
+        'mg979/vim-visual-multi',
+        as = 'multi',
         keys = { '<C-n>', 'gl', { 'x', '<C-n>' } },
     })
 
@@ -172,7 +176,7 @@ function M.getAll(use)
     -- ALTERNATIVE: easymotion/vim-easymotion
     _use({
         'ggandor/lightspeed.nvim',
-        keys = { '<C-s>', '<C-M-s>' },
+        keys = { '<C-s>', '<C-S-s>' },
     })
 
     -- pulse cursorline after search (makes it easier to find the cursor)
@@ -193,21 +197,33 @@ function M.getAll(use)
         'gyim/vim-boxdraw',
         disable = true,
         keys = {
-            { 'v', '+o' }, { 'v', '+O' }, { 'v', '+c' },
-            { 'v', '+-' }, { 'v', '+_' }, { 'v', '+>' },
-            { 'v', '+<' }, { 'v', '++>' }, { 'v', '++<' },
-            { 'v', '+|' }, { 'v', '+^' }, { 'v', '+v' },
-            { 'v', '+V' }, { 'v', '++^' }, { 'v', '++v' },
-            { 'v', '++V' }, { 'v', '+io' }, { 'v', '+ao' },
-        }
+            { 'v', '+o' },
+            { 'v', '+O' },
+            { 'v', '+c' },
+            { 'v', '+-' },
+            { 'v', '+_' },
+            { 'v', '+>' },
+            { 'v', '+<' },
+            { 'v', '++>' },
+            { 'v', '++<' },
+            { 'v', '+|' },
+            { 'v', '+^' },
+            { 'v', '+v' },
+            { 'v', '+V' },
+            { 'v', '++^' },
+            { 'v', '++v' },
+            { 'v', '++V' },
+            { 'v', '+io' },
+            { 'v', '+ao' },
+        },
     })
 
     -- markdown previewer in browser
     -- DEPENDENCY: npm
     _use({
         'iamcco/markdown-preview.nvim',
-        ft='markdown',
-        run = 'cd app && npm install'
+        ft = 'markdown',
+        run = 'cd app && npm install',
     })
 
     -- project search and replace
@@ -217,11 +233,9 @@ function M.getAll(use)
         after = 'plenary.nvim',
         keys = {
             '<Leader>S',
-            { 'v', '<Leader>S' }
-        }
+            { 'v', '<Leader>S' },
+        },
     })
 end
 
 return M
-
-
