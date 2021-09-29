@@ -20,7 +20,14 @@ function M.getAll(use)
     -- TODO: https://github.com/akinsho/bufferline.nvim/issues/195
     -- TODO: make a PR to only show current buffer's full filepath + tabs
     -- _use({ 'akinsho/nvim-bufferline.lua', after = 'devicons' }) -- fancy bufferline
-    _use({ 'crispgm/nvim-tabline', event = 'TabNew' })
+    _use({
+        'crispgm/nvim-tabline',
+        -- event = {
+        --     'TabNew',
+        --     'TabEnter',
+        --     'SessionLoadPost',
+        -- },
+    })
 
     _use({ 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }) -- color matching surroundings using treesitter
     _use({ 'norcalli/nvim-colorizer.lua', event = 'CursorHold' }) -- highlight color codes
