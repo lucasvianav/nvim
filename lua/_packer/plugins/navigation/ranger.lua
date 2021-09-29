@@ -1,9 +1,16 @@
-map('n', '<Leader>r', ':<C-U>RnvimrToggle<CR>')
+map('n', '<Leader>r', '<CMD>RnvimrToggle<CR>')
 
-local function set (property, value)
+local function set(property, value)
     vim.g['rnvimr_' .. property] = value
 end
 
--- didn't work :c
--- set('enable_ex', true) -- replace netrw
-
+set('enable_ex', 1) -- replace netrw
+set('enable_picker', 1) -- hide after picking file
+set('action', {
+    ['<C-t>'] = 'NvimEdit tabedit',
+    ['<C-x>'] = 'NvimEdit split',
+    ['<C-h>'] = 'NvimEdit split',
+    ['<C-v>'] = 'NvimEdit vsplit',
+    gw = 'JumpNvimCwd',
+    yw = 'EmitRangerCwd',
+})

@@ -4,9 +4,8 @@ vim.g.mapleader = ' '
 -- substitutes Esc by Ctrl+C in normal mode
 map('n', '<C-c>', '<Esc>')
 
--- leave insert mode with jk (also in terminal)
--- map('i', 'jk', '<Esc>')         -- disabled because of better-insert.vim
--- map('t', 'jk', [[<C-\><C-n>]])  -- disabled because of ranger
+-- leave terminal mode with jk
+map('t', 'jk', [[<C-\><C-n>]])
 
 -- use alt + shift + hjkl to resize windows
 map('n', '<S-M-J>', '2<C-w>-')
