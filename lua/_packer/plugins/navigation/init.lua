@@ -22,7 +22,7 @@ function M.getAll(use)
         as = 'nvim-tree',
         requires = 'kyazdani42/nvim-web-devicons',
         after = 'devicons',
-        cmd = 'NvimTreeToggle',
+        cmd = { 'NvimTreeToggle', 'NvimTreeFindFile', 'NvimTreeClose' },
         keys = '<Leader>e',
     })
 

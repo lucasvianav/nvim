@@ -1,13 +1,15 @@
-local function fn(file) return require('functions.' .. file) end
+local function fn(file)
+    return require('functions.' .. file)
+end
 
 local M = {
-    utilities  = fn('utilities'),
-    wrappers   = fn('wrappers'),
-    sessions   = fn('sessions'),
-    mappings   = fn('mappings'),
+    lsp = fn('lsp'),
+    mappings = fn('mappings'),
+    plugins = fn('plugins'),
+    sessions = fn('sessions'),
     statusline = fn('statusline'),
-    lsp        = fn('lsp'),
+    utilities = fn('utilities'),
+    wrappers = fn('wrappers'),
 }
 
 return M
-
