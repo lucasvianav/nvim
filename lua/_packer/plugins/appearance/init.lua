@@ -15,7 +15,13 @@ function M.getAll(use)
     _use({ 'kwkarlwang/bufresize.nvim' }) -- preserve window sizes on terminal resize
 
     _use({ 'kyazdani42/nvim-web-devicons', as = 'devicons' }) -- colored icons
-    _use({ 'SmiteshP/nvim-gps', after = 'nvim-treesitter' }) -- show treesitter context
+
+    -- show treesitter context
+    _use({
+        'SmiteshP/nvim-gps',
+        after = 'nvim-treesitter',
+        disable = true,
+    })
 
     -- TODO: https://github.com/akinsho/bufferline.nvim/issues/195
     -- TODO: make a PR to only show current buffer's full filepath + tabs
@@ -38,7 +44,7 @@ function M.getAll(use)
         'NTBBloodbath/galaxyline.nvim',
         after = {
             'devicons',
-            'nvim-gps',
+            -- 'nvim-gps',
         },
     })
 
