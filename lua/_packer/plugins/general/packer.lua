@@ -1,3 +1,4 @@
+vim.cmd('packadd packer.nvim')
 local packer = require('packer')
 
 local function getAll(use, use_rocks)
