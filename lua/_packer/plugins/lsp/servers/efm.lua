@@ -143,7 +143,7 @@ local M = {
         'javascriptreact',
         'json',
         'lua',
-        'markdown',
+        -- 'markdown',
         'python',
         'scss',
         'typescript',
@@ -162,7 +162,7 @@ local M = {
             javascriptreact = { eslint_d }, -- prettier?
             typescript = { eslint_d }, -- prettier?
             typescriptreact = { eslint_d }, -- prettier?
-            markdown = { prettier, markdownlint },
+            -- markdown = { prettier, markdownlint },
 
             css = { prettier },
             graphql = { prettier },
