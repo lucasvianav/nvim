@@ -42,10 +42,8 @@ function M.getAll(use)
     -- fancy statusline
     _use({
         'NTBBloodbath/galaxyline.nvim',
-        after = {
-            'devicons',
-            -- 'nvim-gps',
-        },
+        after = { 'devicons' },
+        commit = 'f8c3653f34f8993a1aff1a7fad7052c11e75cfbe',
     })
 
     -- indentation rulers

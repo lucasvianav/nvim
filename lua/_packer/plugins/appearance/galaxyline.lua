@@ -1,20 +1,19 @@
--- TODO: refactor this whole file
-
 local api = vim.api
 local fn = vim.fn
 local lsp = vim.lsp
 local cmd = vim.cmd
 
--- [[@VARIABLES
+-- {{ @VARIABLES
 local gl = require('galaxyline') -- galaxyline
 local gls = gl.section -- galaxyline.section
 
 local condition = require('galaxyline.condition')
 local get_color = require('galaxyline.themes.colors').get_color
 local _colors = require('utils').colors
--- @VARIABLES]]
+-- @VARIABLES }}
 
--- [[@COLORS
+
+-- {{@COLORS
 local colors = {
     bg = _colors.black,
     bg_dark = _colors.blacker,
@@ -33,9 +32,9 @@ local colors = {
 }
 
 colors = vim.tbl_extend('keep', colors, _colors)
--- @COLORS]]
+-- @COLORS}}
 
--- [[@UTILS
+-- {{@UTILS
 local mode_colors = {
     [110] = { name = 'NORMAL', color = colors.red },
     [105] = { name = 'INSERT', color = colors.magenta },
@@ -84,9 +83,9 @@ local function mode(field)
 end
 
 local functions = require('functions').statusline
--- @UTILS]]
+-- @UTILS}}
 
--- [[@PROVIDERS
+-- {{@PROVIDERS
 local buffer = provider('buffer')
 local diagnostic = provider('diagnostic')
 local extension = provider('extensions') -- plugins
@@ -96,7 +95,7 @@ local search = provider('search')
 local vcs = provider('vcs') -- version control
 local whitespace = provider('whitespace')
 -- local gps        = require('nvim-gps')    -- treesitter context
--- @PROVIDERS]]
+-- @PROVIDERS}}
 
 gl.short_line_list = { 'NvimTree', 'packer' }
 
@@ -104,7 +103,7 @@ gls.left = {
     {
         LeftPadding = {
             provider = str(' '),
-            highlight = { colors.bg, colors.bg },
+            highlight = { colors.bg_light, colors.bg_light },
         },
     },
     {
