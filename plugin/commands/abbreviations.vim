@@ -1,7 +1,13 @@
 " commands i always get wrong
-cabbrev W w
+cabbrev E e
+cabbrev E! e!
+cabbrev e1 e!
+cabbrev E1 e!
 cabbrev Q q
 cabbrev q1 q!
+
+cabbrev W update
+cabbrev w update
 cabbrev Wq x
 cabbrev wq x
 
