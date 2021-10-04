@@ -12,9 +12,11 @@ function M.getAll(use)
     _use({ 'fladson/vim-kitty', ft = { 'kitty' } }) -- Kitty config
 
     -- JSON
+    -- TODO: can this work with treesitter and LSP?
+    -- TODO: also this https://github.com/akinsho/dotfiles/blob/main/.config/nvim/after/syntax/markdown.vim
     _use({
         'elzr/vim-json',
-        disable = true, -- I guess it doesn't work with LSP
+        disable = true,
         ft = {
             'json',
             'jsonc',

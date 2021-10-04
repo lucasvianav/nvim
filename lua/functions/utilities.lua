@@ -73,7 +73,7 @@ end
 --[[
 Return the path to the current lua file inside `nvim/lua/` in order to require it.
 ]]
-function _G.get_current_require_path()
+local function _get_current_require_path()
     local filepath = api.nvim_buf_get_name('.')
     local regexp = [[^.\+nvim/lua/\(.\+\)\.lua$]]
 
@@ -85,4 +85,24 @@ function _G.get_current_require_path()
         filepath = fn.substitute(filepath, '/', '.', 'g')
         return filepath
     end
+end
+
+--[[
+Sources the current file if it's VimL and reloads (w/ `require`) if it's Lua.
+]]
+function _G.reload_or_source_current()
+    local filetype = vim.opt_local.ft._value
+    local action
+
+    if filetype == 'lua' then
+        R(_get_current_require_path())
+        action = 'Reloaded '
+    elseif filetype == 'vim' then
+        cmd('source %')
+        action = 'Sourced '
+    else
+        return
+    end
+
+    vim.notify(action .. '"' .. vim.fn.expand('%') .. '".')
 end
