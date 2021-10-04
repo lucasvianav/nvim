@@ -28,12 +28,8 @@ function M.getAll(use)
     })
 
     -- easier way to install language servers
-    -- TODO: make it work for lua and angular
-    -- lua works for files outside of my config (????). worked when editing
-    -- remote file from github (rockerBOO's config), as well as TJs
-    -- https://github.com/JoosepAlviste/dotfiles/blob/b09a4eed7bf4c7862a02aa8b14ffe29896a0bfa5/config/nvim/lua/j/plugins/lsp/lua_ls.lua#L28-L41
-    -- TODO: make an issue to lua-dev. maybe folke can helpe me?
     -- TODO: actually setup angular https://github.com/kabouzeid/nvim-lspinstall/issues/72#issuecomment-927527670
+    -- TODO: migrate from pyright to jedi (python)
     _use({
         'nvim-lspinstall',
         after = 'nvim-lspconfig',

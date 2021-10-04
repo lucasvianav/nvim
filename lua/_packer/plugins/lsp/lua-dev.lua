@@ -11,6 +11,4 @@ local luadev = require('lua-dev').setup({
     }),
 })
 
--- luadev.settings.Lua.workspace.library["/usr/lib/pd/extra/pdlua"] = true
-
 require('lspconfig').lua.setup(luadev)
