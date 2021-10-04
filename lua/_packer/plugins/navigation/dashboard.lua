@@ -1,3 +1,5 @@
+-- TODO: https://github.com/danielnehrig/nvim/blob/master/lua/plugins/dashboard/init.lua
+
 local ascii = require('utils').ascii
 local g = vim.g
 local fn = vim.fn

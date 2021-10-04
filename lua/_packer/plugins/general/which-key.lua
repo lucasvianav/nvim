@@ -1,3 +1,6 @@
+-- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/whichkey.lua
+-- TODO: how to not group with multiple keys?
+
 local wk = require('which-key')
 
 wk.setup({

@@ -1,3 +1,5 @@
+-- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/statusline.lua
+
 local api = vim.api
 local fn = vim.fn
 local lsp = vim.lsp
@@ -11,7 +13,6 @@ local condition = require('galaxyline.condition')
 local get_color = require('galaxyline.themes.colors').get_color
 local _colors = require('utils').colors
 -- @VARIABLES }}
-
 
 -- {{@COLORS
 local colors = {

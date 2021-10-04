@@ -40,6 +40,8 @@ function M.getAll(use)
 
     -- code completion with many features
     -- TODO: try cmp?????
+    -- https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/cmp.lua
+    -- https://github.com/danielnehrig/nvim/blob/master/lua/plugins/cmp/init.lua
     -- TODO: make issue about completion quality?
     -- ALTERNATIVE: hrsh7th/nvim-cmp
     -- DEPENDENCY: python3-venv

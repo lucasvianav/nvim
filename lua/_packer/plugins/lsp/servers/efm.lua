@@ -60,6 +60,7 @@ local prettier = {
 
 -- formatting for lua
 -- TODO: setup luacheck? https://github.com/mpeterv/luacheck
+-- TODO: setup CI w/ github actions (+ unit tests --> lua busted)
 local stylua = {
     formatCommand = 'stylua -s --stdin-filepath ${INPUT} -',
     formatStdin = true,

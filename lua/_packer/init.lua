@@ -1,6 +1,8 @@
 local fn = vim.fn
 local cmd = vim.cmd
 
+-- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/utils/plugins.lua
+
 local loaded, packer = pcall(require, 'packer')
 local packer_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 local exists = (fn.isdirectory(packer_path) == 1)

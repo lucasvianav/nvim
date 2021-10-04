@@ -2,8 +2,7 @@ local colors = require('utils').colors
 local o = vim.opt
 
 --[[
-TODO: fix tmux undercurl and strikethrough
-https://www.reddit.com/r/neovim/comments/pt5tbo/tmux_neovim_and_strikethrough_text_how/
+TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/highlights.lua
 ]]
 --
 

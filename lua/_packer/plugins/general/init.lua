@@ -1,3 +1,6 @@
+-- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/init.lua
+-- TODO: https://github.com/danielnehrig/nvim/blob/master/lua/packer-config/init.lua
+
 local M = {}
 
 function M.getAll(use)
@@ -49,7 +52,9 @@ function M.getAll(use)
     -- use nvim in the browser
     use({
         'glacambre/firenvim',
-        run = function() vim.fn['firenvim#install'](7) end,
+        run = function()
+            vim.fn['firenvim#install'](7)
+        end,
     })
 
     -- session manager
