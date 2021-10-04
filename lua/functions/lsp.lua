@@ -143,11 +143,13 @@ local specific_on_attach = {
 
         -- TODO: can I organize imports without ts-utils?
         -- https://github.com/mrjones2014/dotfiles/blob/6159bc2ddfae95af8eed57109b416c37868199a7/.config/nvim/lua/modules/lsp-utils.lua#L57-L73
+        -- TODO: port this https://github.com/SoominHan/import-sorter
         local has_ts_utils, ts_utils = pcall(require, 'nvim-lsp-ts-utils')
 
         if has_ts_utils then
             ts_utils.setup({
                 enable_import_on_completion = true,
+                import_all_scan_buffers = 100,
 
                 -- eslint
                 eslint_enable_code_actions = true,
@@ -157,7 +159,7 @@ local specific_on_attach = {
 
                 -- formatting
                 formatter = 'eslint_d',
-                formatter = 'prettier',
+                -- formatter = 'prettier',
                 formatter_opts = {},
 
                 -- update imports on file move
@@ -174,12 +176,11 @@ local specific_on_attach = {
             if fn.empty(work_dir) == 1 or not regexp:match_str(cwd) then
                 api.nvim_exec(
                     [[
-                augroup SortImports
-                au! * <buffer>
-                au BufWritePre <buffer> TSLspOrganizeSync
-                au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-                augroup END
-                ]],
+                        augroup SortImports
+                        au! * <buffer>
+                        au BufWritePre <buffer> TSLspOrganizeSync
+                        augroup END
+                    ]],
                     false
                 )
             end
