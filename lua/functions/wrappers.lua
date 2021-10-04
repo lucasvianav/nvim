@@ -163,8 +163,13 @@ end
 --[[
 Reload a lua module using Plenary.
 ]]
--- TODO: checkout https://github.com/lukas-reineke/dotfiles/blob/5b84e9264d3ca9e40fd773642e5a1d335224733e/vim/lua/utils.lua#L62-L65
 function _G.R(module)
-    require('plenary.reload').reload(module)
-    return require(module)
+    local is_plenary_loaded, plenary = pcall(require, 'plenary.reload')
+
+    if is_plenary_loaded then
+        plenary.reload_module(module)
+        return require(module)
+    else
+        return nil
+    end
 end

@@ -11,7 +11,7 @@ vim.g.firenvim_config = {
             content  = 'text',
             priority = 0,
             selector = 'textarea:not([readonly]), div[role="textbox"]',
-            takeover = 'once',
+            takeover = 'always',
         },
     },
 }

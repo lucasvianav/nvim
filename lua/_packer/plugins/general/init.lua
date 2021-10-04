@@ -49,9 +49,7 @@ function M.getAll(use)
     -- use nvim in the browser
     use({
         'glacambre/firenvim',
-        disable = true,
-        run = [[call firenvim#install(0, 'export PATH=\"$PATH\"')]],
-        -- run = function() vim.fn['firenvim#install'](7) end,
+        run = function() vim.fn['firenvim#install'](7) end,
     })
 
     -- session manager
