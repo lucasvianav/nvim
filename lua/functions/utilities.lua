@@ -1,6 +1,7 @@
 local o = vim.o
 local fn = vim.fn
 local cmd = vim.cmd
+local api = vim.api
 
 -- TODO: function to convert table to vim's string-list
 -- https://github.com/sindrets/dotfiles/blob/b18533d6f082618233d5178d0e2864987e240a33/.config/nvim/lua/nvim-config/settings.lua#L22-L27
@@ -65,5 +66,22 @@ function _G.source_local_config()
 
     if fn.empty(work_dir) == 0 and regexp:match_str(cwd) then
         cmd('silent! source ' .. cwd .. '/.nvimrc')
+    end
+end
+
+--[[
+Return the path to the current lua file inside `nvim/lua/` in order to require it.
+]]
+function _G.get_current_require_path()
+    local filepath = api.nvim_buf_get_name('.')
+    local regexp = [[^.\+nvim/lua/\(.\+\)\.lua$]]
+
+    if not vim.regex(regexp):match_str(filepath) then
+        return nil
+    else
+        filepath = fn.substitute(filepath, regexp, [[\1]], '')
+        filepath = fn.substitute(filepath, [[\.lua$]], [[]], '')
+        filepath = fn.substitute(filepath, '/', '.', 'g')
+        return filepath
     end
 end
