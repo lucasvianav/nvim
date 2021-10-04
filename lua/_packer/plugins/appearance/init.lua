@@ -13,6 +13,7 @@ function M.getAll(use)
 
     _use({ 'rcarriga/nvim-notify' }) -- better notifications
     _use({ 'kwkarlwang/bufresize.nvim' }) -- preserve window sizes on terminal resize
+    _use({ 'crispgm/nvim-tabline' }) -- display onepened tabs (2+)
 
     _use({ 'kyazdani42/nvim-web-devicons', as = 'devicons' }) -- colored icons
 
@@ -21,18 +22,6 @@ function M.getAll(use)
         'SmiteshP/nvim-gps',
         after = 'nvim-treesitter',
         disable = true,
-    })
-
-    -- TODO: https://github.com/akinsho/bufferline.nvim/issues/195
-    -- TODO: make a PR to only show current buffer's full filepath + tabs
-    -- _use({ 'akinsho/nvim-bufferline.lua', after = 'devicons' }) -- fancy bufferline
-    _use({
-        'crispgm/nvim-tabline',
-        -- event = {
-        --     'TabNew',
-        --     'TabEnter',
-        --     'SessionLoadPost',
-        -- },
     })
 
     _use({ 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }) -- color matching surroundings using treesitter
