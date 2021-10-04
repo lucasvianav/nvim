@@ -1,4 +1,4 @@
-local function set (property)
+local function set(property)
     vim.g['loaded_' .. property] = 1
 end
 
@@ -21,6 +21,5 @@ set('rrhelper')
 
 -- set('netrw')
 -- set('netrwPlugin')
-set('netrwSettings')
-set('netrwFileHandlers')
-
+-- set('netrwSettings')
+-- set('netrwFileHandlers')
