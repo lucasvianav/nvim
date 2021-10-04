@@ -1,5 +1,4 @@
 local colors = require('utils').colors
-local cmd = vim.cmd
 local o = vim.opt
 
 --[[
@@ -35,10 +34,11 @@ appearanceCommands = [[
     hi! Folded ctermbg=NONE guibg=NONE
     hi! BufferLineFill ctermbg=none guibg=none
     hi! NormalFloat ctermbg=NONE guibg=NONE
+    hi! TabLineFill ctermbg=NONE guibg=NONE
     hi! CursorLine guibg=]] .. colors.grey .. '\n' .. [[
     hi! ColorColumn guibg=]] .. colors.black .. '\n' .. [[
     hi! TabLine    guibg=NONE guifg=]] .. colors.cyan_grey .. '\n' .. [[
-    hi! TabLineSel guibg=]] .. colors.grey_dark .. [[ guifg=]] .. colors.off_white .. [[
+    hi! TabLineSel guibg=]] .. colors.grey_dark .. [[ guifg=]] .. colors.off_white .. '\n' .. [[
 ]]
 
 o.listchars = {
