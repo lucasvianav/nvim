@@ -1,5 +1,5 @@
 map('n', '<Leader>gd', '<cmd>Gvdiffsplit!<CR>')
 map('n', '<Leader>gh', '<cmd>diffget //2<CR>')
 map('n', '<Leader>gl', '<cmd>diffget //3<CR>')
-map('n', '<Leader>gb', '<cmd>GBrowse<CR>')
-map('v', '<Leader>gb', '<cmd>GBrowse<CR>')
+map({ 'n', 'v' }, '<Leader>gb', ':GBrowse<CR>')
+map('n', '<Leader>ga', '<cmd>Git add %<CR>')

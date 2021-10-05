@@ -6,4 +6,5 @@ o.list = false
 o.colorcolumn = ''
 o.concealcursor = 'nc'
 
--- map buffer-local q --> :q
+-- quit help window with q
+map({ 'n', 'v' }, 'q', '<cmd>q<cr>', { buffer = true })
