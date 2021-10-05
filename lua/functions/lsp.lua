@@ -120,6 +120,8 @@ function _G.lsp_formatting_handler(err, _, result, _, bufnr)
 
         if bufnr == api.nvim_get_current_buf() then
             api.nvim_command('noautocmd :update')
+        else
+            vim.notify('Formatted: ' .. bufnr, 'info', { title = 'LSP' })
         end
     end
 end
