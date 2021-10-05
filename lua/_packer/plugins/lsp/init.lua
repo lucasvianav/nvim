@@ -28,14 +28,13 @@ function M.getAll(use)
     })
 
     -- easier way to install language servers
-    -- TODO: actually setup angular https://github.com/kabouzeid/nvim-lspinstall/issues/72#issuecomment-927527670
-    -- TODO: migrate from pyright to jedi (python)
+    -- (unsing my fork because of angular)
     _use({
         'nvim-lspinstall',
         after = 'nvim-lspconfig',
     }, {
         dev = true,
-        fallback = 'kabouzeid/nvim-lspinstall',
+        fallback = 'lucasvianav/nvim-lspinstall',
     })
 
     -- code completion with many features

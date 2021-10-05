@@ -104,5 +104,7 @@ function _G.reload_or_source_current()
         return
     end
 
-    vim.notify(action .. '"' .. vim.fn.expand('%') .. '".')
+    vim.notify(action .. '"' .. vim.fn.expand('%') .. '".', 'info', {
+        title = ':R',
+    })
 end
