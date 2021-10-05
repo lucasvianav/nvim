@@ -1,5 +1,7 @@
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/init.lua
 -- TODO: https://github.com/danielnehrig/nvim/blob/master/lua/packer-config/init.lua
+-- TODO: https://github.com/mfussenegger/nvim-dap
+-- TODO: https://github.com/puremourning/vimspector
 
 local M = {}
 
@@ -27,11 +29,11 @@ function M.getAll(use)
     _use({ 'editorconfig/editorconfig-vim' }) -- follow .editorconfig files
 
     -- TODO: define mappings for other prefixes
+    -- TODO: https://github.com/folke/which-key.nvim/issues/90
     _use({ 'folke/which-key.nvim' }) -- displays a popup with keybindings
 
     _use({ 'max397574/better-escape.nvim', event = 'InsertEnter' }) -- better <Esc> with jk
 
-    -- TODO: use matze/vim-move??
     _use({ 'lucasvianav/vim-unimpaired', event = 'CursorMoved' }) -- pairs of handy bracket maps
     _use({ 'wellle/targets.vim', event = 'CursorMoved' }) -- provides great new text objects
     _use({ 'andymass/vim-matchup', event = 'CursorHold' }) -- make % smarter

@@ -1,9 +1,6 @@
 local M = {}
 
 --[[ TODO:
-    lucasvianav/twilight.nvim (locally)
-    + fix it --> issue #15 (https://github.com/folke/twilight.nvim/issues/15)
-
     look into this
     https://github.com/edluffy/hologram.nvim
     https://www.reddit.com/r/neovim/comments/pv4ujz/is_there_a_way_to_see_images_in_neovim/
@@ -36,7 +33,6 @@ function M.getAll(use)
     })
 
     -- indentation rulers
-    -- TODO: test Kitty or Fira Code Mono
     _use({
         'lukas-reineke/indent-blankline.nvim',
         after = 'nvim-treesitter',

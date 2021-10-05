@@ -1,15 +1,11 @@
 local M = {}
 
---[[ TODO:
-    Darazaki/indent-o-matic
-    tpope/vim-sleuth
-    editorconfig/editorconfig-vim
-]]
 function M.getAll(use)
     local _use = get_packer_use_wrapper(use, '_packer.plugins.syntax')
 
     _use({ 'lervag/vimtex', ft = { 'tex', 'plaintex' } }) -- LaTeX
     _use({ 'fladson/vim-kitty', ft = { 'kitty' } }) -- Kitty config
+    _use({ 'tpope/vim-sleuth', event = 'CursorHold' })
 
     -- JSON
     -- TODO: can this work with treesitter and LSP?

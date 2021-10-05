@@ -20,10 +20,14 @@ function M.getAll(use)
     _use({
         'kyazdani42/nvim-tree.lua',
         as = 'nvim-tree',
-        requires = 'kyazdani42/nvim-web-devicons',
         after = 'devicons',
-        cmd = { 'NvimTreeToggle', 'NvimTreeFindFile', 'NvimTreeClose' },
+        cmd = {
+            'NvimTreeToggle',
+            'NvimTreeFindFile',
+            'NvimTreeClose',
+        },
         keys = '<Leader>e',
+        fn = { 'nvim_tree_toggle' },
     })
 
     -- ranger file explorer

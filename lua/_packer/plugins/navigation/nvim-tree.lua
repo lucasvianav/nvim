@@ -13,8 +13,8 @@ set('ignore', {
 -- dirs/files to be highlighted
 set('special_files', {
     ['README.md'] = 1,
-    Makefile = 1,
-    MAKEFILE = 1,
+    ['Makefile'] = 1,
+    ['MAKEFILE'] = 1,
 })
 
 -- cosmetic
