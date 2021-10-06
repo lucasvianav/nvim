@@ -1,7 +1,7 @@
 local M = {}
 
 function M.getAll(use)
-    local _use = get_packer_use_wrapper(use, '_packer.plugins.navigation')
+    local _use = get_packer_use_wrapper(use, 'navigation')
 
     -- start screen
     -- @ALTERNATIVE: mhinz/vim-startify
@@ -78,7 +78,7 @@ function M.getAll(use)
             {
                 'xiyaowong/telescope-emoji.nvim',
                 config = function()
-                    require('_packer/plugins/navigation/emoji')
+                    require('plugins/navigation/emoji')
                 end,
             },
 

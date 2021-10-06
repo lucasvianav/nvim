@@ -2,9 +2,10 @@ local M = {}
 
 --[[ TODO:
     kdheepak/lazygit.nvim
-]]--
+]]
+--
 function M.getAll(use)
-    local _use = get_packer_use_wrapper(use, '_packer.plugins.git')
+    local _use = get_packer_use_wrapper(use, 'git')
 
     -- show git blame info on lines
     _use({
@@ -24,28 +25,32 @@ function M.getAll(use)
     _use({
         'tpope/vim-fugitive',
         requires = {
-            'tpope/vim-rhubarb',    -- integration with GitHub
+            'tpope/vim-rhubarb', -- integration with GitHub
             'tommcdo/vim-fubitive', -- integration with BitBucket
         },
         cmd = {
-            'Git', 'GBrowse', 'Gdiff',
-            'Gdiffsplit', 'Gvdiffsplit',
+            'Git',
+            'GBrowse',
+            'Gdiff',
+            'Gdiffsplit',
+            'Gvdiffsplit',
         },
         keys = {
-            '<leader>gd', '<leader>gh',
-            '<leader>gl', '<leader>gb',
-            { 'v', '<leader>gb' }
+            '<leader>gd',
+            '<leader>gh',
+            '<leader>gl',
+            '<leader>gb',
+            '<Leader>ga',
+            { 'v', '<leader>gb' },
         },
     })
 
-     -- git decorations
-     _use({
-         'lewis6991/gitsigns.nvim',
-         after = 'plenary.nvim',
-         event = 'CursorHold',
-     })
+    -- git decorations
+    _use({
+        'lewis6991/gitsigns.nvim',
+        after = 'plenary.nvim',
+        event = 'CursorHold',
+    })
 end
 
 return M
-
-

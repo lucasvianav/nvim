@@ -1,7 +1,7 @@
 local M = {}
 
 function M.getAll(use)
-    local _use = get_packer_use_wrapper(use, '_packer.plugins.syntax')
+    local _use = get_packer_use_wrapper(use, 'syntax')
 
     _use({ 'lervag/vimtex', ft = { 'tex', 'plaintex' } }) -- LaTeX
     _use({ 'fladson/vim-kitty', ft = { 'kitty' } }) -- Kitty config

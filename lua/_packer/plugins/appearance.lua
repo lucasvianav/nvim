@@ -6,7 +6,7 @@ local M = {}
     https://www.reddit.com/r/neovim/comments/pv4ujz/is_there_a_way_to_see_images_in_neovim/
 ]]
 function M.getAll(use)
-    local _use = get_packer_use_wrapper(use, '_packer.plugins.appearance')
+    local _use = get_packer_use_wrapper(use, 'appearance')
 
     _use({ 'rcarriga/nvim-notify' }) -- better notifications
     _use({ 'kwkarlwang/bufresize.nvim' }) -- preserve window sizes on terminal resize

@@ -126,6 +126,24 @@ function _G.lsp_formatting_handler(err, _, result, _, bufnr)
     end
 end
 
+function _G.typescript_sort_imports(bufnr, post)
+    bufnr = bufnr or vim.api.nvim_get_current_buf()
+    local METHOD = 'workspace/executeCommand'
+    local params = {
+        command = '_typescript.organizeImports',
+        arguments = { vim.api.nvim_buf_get_name(bufnr) },
+        title = '',
+    }
+
+    local callback = function(err)
+        if not err and post then
+            post()
+        end
+    end
+
+    vim.lsp.buf_request(bufnr, METHOD, params, callback)
+end
+
 local function disable_formatting(client)
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
@@ -189,6 +207,7 @@ local specific_on_attach = {
 
             buf_set_keymap('n', '<leader>si', '<cmd>TSLspOrganize<CR>')
         end
+        -- buf_set_keymap('n', '<leader>si', '<cmd>lua typescript_sort_imports(' .. bufnr .. ')<CR>')
     end,
 
     angular = disable_formatting,

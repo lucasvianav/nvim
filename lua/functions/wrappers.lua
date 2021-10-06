@@ -48,11 +48,12 @@ end
 --[[
 @param `use`   (function) -- `packer.use`
 @param `dir`   (string)   -- directory in which to search for config files
-@param `theme` (boolean)  -- is it a theme?
 
 @return function -- wrapper for `use`
 ]]
-function _G.get_packer_use_wrapper(use, dir, theme)
+function _G.get_packer_use_wrapper(use, dir)
+    local theme = (dir == 'themes')
+
     local function getRequireString(module, pluginName)
         local requireString = [[    pcall(require, ']] .. module .. [[')]]
 
@@ -118,7 +119,9 @@ function _G.get_packer_use_wrapper(use, dir, theme)
         end
 
         if not args.config or (opts.setup and not args.setup) then
-            local config_filepath = dir .. '.' .. pluginName
+            local type = theme and '' or 'plugins.'
+            local config_filepath = type .. dir .. '.' .. pluginName
+            inspect(config_filepath)
             local requireString = getRequireString(config_filepath, pluginName)
 
             if opts.setup then
@@ -127,6 +130,8 @@ function _G.get_packer_use_wrapper(use, dir, theme)
                 args.config = requireString
             end
         end
+
+        inspect(requireString)
 
         if theme and pluginName and not args.cond then
             args.cond = [[colorscheme == ']] .. pluginName .. [[']]
@@ -173,4 +178,3 @@ function _G.R(module)
         return nil
     end
 end
-

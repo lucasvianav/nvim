@@ -6,7 +6,7 @@
 local M = {}
 
 function M.getAll(use)
-    local _use = get_packer_use_wrapper(use, '_packer.plugins.general')
+    local _use = get_packer_use_wrapper(use, 'general')
 
     -- packer can manage itself as an optional plugin
     _use({

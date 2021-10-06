@@ -1,7 +1,7 @@
 local M = {}
 
 function M.getAll(use)
-    local _use = get_packer_use_wrapper(use, '_packer.themes', true)
+    local _use = get_packer_use_wrapper(use, 'themes')
 
     _use({ 'NTBBloodbath/doom-one.nvim'   })     -- DoomEmacs' One
     _use({ 'navarasu/onedark.nvim'        })     -- Atom's OneDark

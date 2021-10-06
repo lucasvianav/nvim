@@ -1,7 +1,7 @@
 local M = {}
 
 function M.getAll(use)
-    local _use = get_packer_use_wrapper(use, '_packer.plugins.lsp')
+    local _use = get_packer_use_wrapper(use, 'lsp')
 
     -- TODO: https://www.reddit.com/r/neovim/comments/px1hnf/popup_menu_for_code_actions_to_show/
     -- https://github.com/weilbith/nvim-code-action-menu
