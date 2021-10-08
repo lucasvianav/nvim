@@ -30,6 +30,7 @@ local colors = {
     orange = get_color('orange')(),
     red = get_color('red')(),
     yellow = get_color('yellow')(),
+    transparent = 'NONE',
 }
 
 colors = vim.tbl_extend('keep', colors, _colors)
@@ -133,50 +134,50 @@ gls.left = {
             end,
             highlight = { colors.fg_dark, colors.bg },
             separator = icons.right,
-            separator_highlight = { colors.bg, colors.bg_dark },
+            separator_highlight = { colors.bg, colors.transparent },
         },
     },
     {
         DiagnosticError = {
             provider = 'DiagnosticError',
             icon = icons.error,
-            highlight = { colors.red, colors.bg_dark },
+            highlight = { colors.red, colors.transparent },
         },
     },
     {
         DiagnosticWarn = {
             provider = 'DiagnosticWarn',
             icon = icons.warning,
-            highlight = { colors.yellow, colors.bg_dark },
+            highlight = { colors.yellow, colors.transparent },
         },
     },
 }
 
 gls.right = {
-    {
-        LspStatus = {
-            provider = function()
-                local buf_clients = lsp.buf_get_clients()
-                return #buf_clients and (icons.engine .. 'LSP ') or ' '
-            end,
-            condition = condition.check_width,
-            highlight = { colors.fg, colors.bg_dark },
-        },
-    },
+    -- {
+    --     LspStatus = {
+    --         provider = function()
+    --             local buf_clients = lsp.buf_get_clients()
+    --             return #buf_clients and (icons.engine .. 'LSP ') or ' '
+    --         end,
+    --         condition = condition.check_width,
+    --         highlight = { colors.fg, colors.transparent },
+    --     },
+    -- },
     {
         GitIcon = {
             provider = str(icons.git),
             condition = condition.check_git_workspace,
-            highlight = { colors.fg, colors.bg_light },
+            highlight = { colors.fg, colors.bg },
             separator = icons.left,
-            separator_highlight = { colors.bg_light, colors.bg_dark },
+            separator_highlight = { colors.bg, colors.transparent },
         },
     },
     {
         GitBranch = {
             provider = 'GitBranch',
             condition = condition.check_git_workspace,
-            highlight = { colors.fg, colors.bg_light },
+            highlight = { colors.fg, colors.bg },
         },
     },
     {
@@ -184,7 +185,7 @@ gls.right = {
             provider = str('  '),
             highlight = {
                 colors.fg,
-                condition.check_git_workspace() and colors.bg_light or colors.bg_dark,
+                condition.check_git_workspace() and colors.bg or colors.bg,
             },
         },
     },
@@ -196,7 +197,7 @@ gls.right = {
             end,
             highlight = {
                 'GalaxyViMode',
-                condition.check_git_workspace() and colors.bg_light or colors.bg_dark,
+                condition.check_git_workspace() and colors.bg or colors.bg,
             },
         },
     },
@@ -215,28 +216,28 @@ gls.right = {
                 cmd('hi GalaxyViMode guifg=' .. mode('color'))
                 return '  ' .. mode('name') .. ' '
             end,
-            highlight = { 'GalaxyViMode', colors.bg_light },
+            highlight = { 'GalaxyViMode', colors.bg },
         },
     },
     {
         SomeRoundicon = {
             provider = str(icons.position),
             separator = icons.left,
-            separator_highlight = { colors.green, colors.bg_light },
+            separator_highlight = { colors.green, colors.bg },
             highlight = { colors.blacker, colors.green },
         },
     },
     {
         LinePercentage = {
             provider = functions.get_line_percentage,
-            highlight = { colors.green, colors.bg_light },
+            highlight = { colors.green, colors.bg },
         },
     },
     {
         ColRoundicon = {
             provider = str(icons.pos_col),
             separator = icons.left,
-            separator_highlight = { colors.yellow, colors.bg_light },
+            separator_highlight = { colors.yellow, colors.bg },
             highlight = { colors.blacker, colors.yellow },
         },
     },
@@ -246,7 +247,7 @@ gls.right = {
                 local tbl = vim.api.nvim_win_get_cursor(0)
                 return '  ' .. (tbl[2] + 1) .. ' '
             end,
-            highlight = { colors.yellow, colors.bg_light },
+            highlight = { colors.yellow, colors.bg },
         },
     },
 }
@@ -255,14 +256,14 @@ gls.short_line_left = {
     {
         LeftPadding = {
             provider = str(' '),
-            highlight = { colors.bg, colors.bg },
+            highlight = { colors.transparent, colors.transparent },
         },
     },
     {
         FileIcon = {
             provider = 'FileIcon',
             condition = condition.buffer_not_empty,
-            highlight = { colors.fg_dark, colors.bg },
+            highlight = { colors.fg_dark, colors.transparent },
         },
     },
     {
@@ -271,7 +272,7 @@ gls.short_line_left = {
                 return (api.nvim_buf_get_name(0):len() == 0) and icons.empty
                     or fileinfo.get_current_file_name()
             end,
-            highlight = { colors.fg_dark, colors.bg },
+            highlight = { colors.fg_dark, colors.transparent },
         },
     },
 }
