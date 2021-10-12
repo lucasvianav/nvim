@@ -1,9 +1,12 @@
 local fn = vim.fn
+-- local t  = require('functions').wrappers.termcode
+
+local M = {}
 
 --[[
 Wrapper for vim.api.nvim_set_keymap(), but defaulting `noremap` and 'silent' options.
 ]]
-function _G.map(modes, lhs, rhs, opts)
+function M.map(modes, lhs, rhs, opts)
     if type(modes) ~= 'table' then
         modes = { modes }
     end
@@ -33,11 +36,11 @@ end
 --[[
 Wrapper for vim.api.nvim_set_keymap(), mapping the `lhs` to `<nop>`.
 ]]
-function _G.unmap(mode, lhs)
+function M.unmap(mode, lhs)
     vim.api.nvim_set_keymap(mode, lhs, t('<nop>'), {})
 end
 
-function _G.CR()
+function M.CR()
     local has_npairs, npairs = pcall(require, 'nvim-autopairs')
 
     if fn.pumvisible() ~= 0 then
@@ -51,7 +54,7 @@ function _G.CR()
     end
 end
 
-function _G.BS()
+function M.BS()
     local has_npairs, npairs = pcall(require, 'nvim-autopairs')
 
     if fn.pumvisible() ~= 0 and fn.complete_info({ 'mode' }).mode == 'eval' then
@@ -60,3 +63,10 @@ function _G.BS()
         return has_npairs and npairs.autopairs_bs() or t('<BS>')
     end
 end
+
+_G.map   = M.map
+_G.unmap = M.unmap
+_G.CR    = M.CR
+_G.BS    = M.BS
+
+return M

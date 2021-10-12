@@ -160,6 +160,7 @@ local specific_on_attach = {
         end
 
         disable_formatting(client)
+        client.resolved_capabilities.rename = false
 
         -- TODO: can I organize imports without ts-utils?
         -- https://github.com/mrjones2014/dotfiles/blob/6159bc2ddfae95af8eed57109b416c37868199a7/.config/nvim/lua/modules/lsp-utils.lua#L57-L73

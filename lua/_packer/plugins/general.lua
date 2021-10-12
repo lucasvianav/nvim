@@ -6,7 +6,7 @@
 local M = {}
 
 function M.getAll(use)
-    local _use = get_packer_use_wrapper(use, 'general')
+    local _use = require('functions').wrappers.get_packer_use_wrapper(use, 'general')
 
     -- packer can manage itself as an optional plugin
     _use({
@@ -32,7 +32,14 @@ function M.getAll(use)
     -- TODO: https://github.com/folke/which-key.nvim/issues/90
     _use({ 'folke/which-key.nvim' }) -- displays a popup with keybindings
 
-    _use({ 'max397574/better-escape.nvim', event = 'InsertEnter' }) -- better <Esc> with jk
+    -- better <Esc> with jk
+    _use({
+        'max397574/better-escape.nvim',
+        event = 'InsertEnter',
+        branch = 'dev',
+    })
+
+    _use({ 'milisims/nvim-luaref', ft = 'lua' }) -- lua documentation in :help
 
     _use({ 'lucasvianav/vim-unimpaired', event = 'CursorMoved' }) -- pairs of handy bracket maps
     _use({ 'wellle/targets.vim', event = 'CursorMoved' }) -- provides great new text objects

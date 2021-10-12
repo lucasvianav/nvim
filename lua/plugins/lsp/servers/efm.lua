@@ -142,7 +142,6 @@ local M = {
         'javascriptreact',
         'json',
         'lua',
-        -- 'markdown',
         'python',
         'scss',
         'typescript',

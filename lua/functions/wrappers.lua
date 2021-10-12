@@ -1,3 +1,5 @@
+local M = {}
+
 local fn = vim.fn
 
 --[[
@@ -5,6 +7,10 @@ Wrapper for `vim.api.nvim_replace_termcodes`. Same as escaping a key code in Vim
 
 e.g.: t'<Esc>' in lua is the same as "\<Esc>" in VimL.
 ]]
+function M.termcode(key)
+    return vim.api.nvim_replace_termcodes(key, true, true, true)
+end
+
 function _G.t(key)
     return vim.api.nvim_replace_termcodes(key, true, true, true)
 end
@@ -51,7 +57,7 @@ end
 
 @return function -- wrapper for `use`
 ]]
-function _G.get_packer_use_wrapper(use, dir)
+function M.get_packer_use_wrapper(use, dir)
     local theme = (dir == 'themes')
 
     local function getRequireString(module, pluginName)
@@ -121,7 +127,6 @@ function _G.get_packer_use_wrapper(use, dir)
         if not args.config or (opts.setup and not args.setup) then
             local type = theme and '' or 'plugins.'
             local config_filepath = type .. dir .. '.' .. pluginName
-            inspect(config_filepath)
             local requireString = getRequireString(config_filepath, pluginName)
 
             if opts.setup then
@@ -130,8 +135,6 @@ function _G.get_packer_use_wrapper(use, dir)
                 args.config = requireString
             end
         end
-
-        inspect(requireString)
 
         if theme and pluginName and not args.cond then
             args.cond = [[colorscheme == ']] .. pluginName .. [[']]
@@ -148,7 +151,7 @@ end
 
 @return function -- function that'll require the module
 ]]
-function _G._loadfile(module)
+function M.loadfile(module)
     return function()
         return require(module)
     end
@@ -157,7 +160,7 @@ end
 --[[
 Wrapper for `print(vim.inspect(args))` for each argument.
 ]]
-function _G.inspect(...)
+function M.inspect(...)
     local args = { ... }
 
     for _, arg in pairs(args) do
@@ -168,7 +171,7 @@ end
 --[[
 Reload a lua module using Plenary.
 ]]
-function _G.R(module)
+function M.reload(module)
     local is_plenary_loaded, plenary = pcall(require, 'plenary.reload')
 
     if is_plenary_loaded then
@@ -178,3 +181,9 @@ function _G.R(module)
         return nil
     end
 end
+
+function R(module)
+    return require('functions').wrappers.reload(module)
+end
+
+return M

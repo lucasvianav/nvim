@@ -14,11 +14,12 @@ end
 
 
 
+local M = {}
 
 --[[
 Saves the current dir's session.
 ]]--
-function _G.save_cwd_session()
+function M.save_cwd_session()
     local session = get_cwd_session_path()
     cmd('silent! mksession! ' .. session)
 end
@@ -26,7 +27,7 @@ end
 --[[
 Deletes the current dir's session.
 ]]--
-function _G.delete_cwd_session()
+function M.delete_cwd_session()
     local session = get_cwd_session_path()
     cmd('silent! !rm -f' .. session)
 end
@@ -34,7 +35,7 @@ end
 --[[
 Loads the current dir's session if there is one.
 ]]--
-function _G.load_cwd_session(auto_session_plugin)
+function M.load_cwd_session(auto_session_plugin)
     local session = get_cwd_session_path()
     local cmd_custom = 'source ' .. session
     local cmd_plugin = 'RestoreSession'
@@ -50,14 +51,15 @@ end
 --[[
 Load the current dir's session if there is one, otherwise starts Dashboard.
 ]]--
-function _G.load_session_or_dashboard()
+function M.load_session_or_dashboard()
     local has_arguments = (fn.argc() ~= 0)
     local provider      = session_autoload_provider
     local plugin        = (provider == 'auto-session')
     local autoload      = (provider ~= nil)
 
-    if not has_arguments and (not autoload or not load_cwd_session(plugin)) then
+    if not has_arguments and (not autoload or not M.load_cwd_session(plugin)) then
         load_dashboard()
     end
 end
 
+return M

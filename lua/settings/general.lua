@@ -42,9 +42,10 @@ o.breakindent  = true          -- keep wrapped lines indented
 o.spell        = false         -- no spelling by default
 o.spelllang    = 'en_us,pt_br' -- spelling languages
 o.spelloptions = 'camel'       -- detect different words in camelCase
+o.shell        = '/bin/bash'   -- faster than Zsh (which I use)
 
-o.path:append({'**'})                   -- enables recursive use of :find
-o.clipboard:append({'unnamed', 'unnamedplus'}) -- system-wide copy-paste
+o.path:prepend({'**'})               -- enables recursive use of :find
+o.clipboard:prepend({'unnamedplus'}) -- system-wide copy-paste
 
 -- LaTeX settings
 g.tex_conceal = ''
