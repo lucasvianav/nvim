@@ -1,23 +1,27 @@
-local M = {}
-
-function M.getAll(use)
-    local _use = require('functions').wrappers.get_packer_use_wrapper(use, 'navigation')
-
+local M = {
     -- start screen
-    -- @ALTERNATIVE: mhinz/vim-startify
-    _use({
+    {
         'glepnir/dashboard-nvim',
-        cmd = { 'Dashboard', 'DashboardNewFile' },
-    })
+        cmd = {
+            'Dashboard',
+            'DashboardNewFile',
+        },
+    },
 
-    -- navigate seamlessly between vim widows and tmux panes
-    _use({
+    -- seamless navigation between
+    -- neovim widows and tmux panes
+    {
         'numToStr/Navigator.nvim',
-        keys = { '<C-h>', '<C-j>', '<C-k>', '<C-l>' },
-    })
+        keys = {
+            '<C-h>',
+            '<C-j>',
+            '<C-k>',
+            '<C-l>',
+        },
+    },
 
-    -- NERDTree-like file explorer
-    _use({
+    -- nerdtree-like file explorer
+    {
         'kyazdani42/nvim-tree.lua',
         as = 'nvim-tree',
         after = 'devicons',
@@ -28,27 +32,26 @@ function M.getAll(use)
         },
         keys = '<Leader>e',
         fn = { 'nvim_tree_toggle' },
-    })
+    },
 
     -- ranger file explorer
-    _use({
+    {
         'kevinhwang91/rnvimr',
         as = 'ranger',
         cmd = 'RnvimrToggle',
         keys = '<Leader>r',
-    })
+    },
 
     -- highlight f/F and t/T targets
-    _use({
+    {
         'unblevable/quick-scope',
-        as = 'quickscope',
-        keys = { 'f', 'F', 't', 'T' },
-    }, {
-        setup = true,
-    })
+        as     = 'quickscope',
+        keys   = { 'f', 'F', 't', 'T' },
+        __opts = { setup = true },
+    },
 
-    -- run commands in tmux pane from nvim
-    _use({
+    -- run commands in tmux pane from neovim
+    {
         'preservim/vimux',
         cmd = {
             'VimuxPromptCommand',
@@ -66,15 +69,15 @@ function M.getAll(use)
             '<Leader>tc',
             '<Leader>tt',
         },
-    })
+    },
 
-    -- fuzzy finder
-    -- @ALTERNATIVE: junegunn/fzf.vim
-    _use({
+    -- fuzzy finder for lots of stuff
+    {
         'nvim-telescope/telescope.nvim',
         after = 'plenary.nvim',
         requires = {
             -- emoji picker
+            -- TODO: maybe remove this because Kitty already has one
             {
                 'xiyaowong/telescope-emoji.nvim',
                 config = function()
@@ -88,6 +91,8 @@ function M.getAll(use)
             -- C implementation
             { 'nvim-telescope/telescope-fzy-native.nvim' },
 
+            -- TODO: activate below extensions
+
             -- better sorting (firefox-like)
             -- { 'nvim-telescope/telescope-frecency.nvim' },
 
@@ -96,17 +101,21 @@ function M.getAll(use)
 
             -- info about plugins, etc
             -- { 'sudormrfbin/cheatsheet.nvim' },
+
+            -- tldr pages
+            -- { 'mrjones2014/tldr.nvim' },
         },
-    })
+    },
 
     -- auto-session picker for telescope
-    _use({
+    -- TODO: move this inside telescope table?
+    {
         'rmagatti/session-lens',
         after = {
             'telescope.nvim',
             'auto-session',
         },
-    })
-end
+    },
+}
 
 return M

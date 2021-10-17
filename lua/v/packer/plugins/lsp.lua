@@ -1,56 +1,53 @@
-local M = {}
+-- TODO: https://www.reddit.com/r/neovim/comments/px1hnf/popup_menu_for_code_actions_to_show/
+-- https://github.com/weilbith/nvim-code-action-menu
+-- TODO: https://github.com/lspcontainers/lspcontainers.nvim
 
-function M.getAll(use)
-    local _use = require('functions').wrappers.get_packer_use_wrapper(use, 'lsp')
+local M = {
+    { 'neovim/nvim-lspconfig' }, -- config for language servers
 
-    -- TODO: https://www.reddit.com/r/neovim/comments/px1hnf/popup_menu_for_code_actions_to_show/
-    -- https://github.com/weilbith/nvim-code-action-menu
-
-    _use({ 'neovim/nvim-lspconfig' }) -- easier way to config language servers
-    _use({ 'kosayoda/nvim-lightbulb', event = 'CursorHold' }) -- indicates code actions with a lightbulb
+    { 'folke/lua-dev.nvim', ft = 'lua', as = 'lua-dev' }, -- setup LSP for lua-nvim dev
+    { 'kosayoda/nvim-lightbulb', event = 'CursorHold'  }, -- indicates code actions
 
     -- not actually LSP-related but what the heck
     -- DEPENDENCY: universal-ctags, ctags
-    _use({
+    -- TODO: solve VimLeave errors and setup keybindings
+    {
         'ludovicchabant/vim-gutentags',
         requires = 'skywind3000/gutentags_plus',
-    })
+    },
 
-    -- TODO: go through issues and make this work!!!
-    _use({ 'folke/lua-dev.nvim', ft = 'lua', as = 'lua-dev' }) -- setup LSP for lua-nvim dev
 
     -- TODO: get this to work
     -- show function signature
-    _use({
+    {
         'ray-x/lsp_signature.nvim',
         disable = true,
         after = 'coq_nvim',
-    })
+    },
 
     -- easier way to install language servers
     -- (unsing my fork because of angular)
-    _use({
-        'nvim-lspinstall',
+    -- TODO: switch to williamboman/nvim-lsp-installer
+    {
+        'nvim-lspinstall', -- @DEPRECATED
         after = 'nvim-lspconfig',
-    }, {
-        dev = true,
-        fallback = 'lucasvianav/nvim-lspinstall',
-    })
+        __opts = {
+            dev = true,
+            fallback = 'lucasvianav/nvim-lspinstall',
+        },
+    },
 
-    -- code completion with many features
-    -- TODO: try cmp?????
+    -- code completion and snippets
+    -- TODO: try hrsh7th/nvim-cmp (?????)
     -- https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/cmp.lua
     -- https://github.com/danielnehrig/nvim/blob/master/lua/plugins/cmp/init.lua
-    -- TODO: make issue about completion quality?
-    -- ALTERNATIVE: hrsh7th/nvim-cmp
     -- DEPENDENCY: python3-venv
-    _use({ 'ms-jpq/coq_nvim', branch = 'coq' })
-    _use({ 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' }) -- snippets for coq
-    _use({ 'ms-jpq/coq.thirdparty', branch = '3p', after = 'coq_nvim' }) -- additional completion sources for coq
+    { 'ms-jpq/coq_nvim', branch = 'coq' },
+    { 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' }, -- snippets
+    { 'ms-jpq/coq.thirdparty', branch = '3p', after = 'coq_nvim' }, -- completion sources
 
-    -- pretty windows for lsp lists
-    -- ALTERNATIVE: RishabhRD/nvim-lsputils
-    _use({
+    -- pretty list for lsp
+    {
         'folke/trouble.nvim',
         after = {
             'devicons',
@@ -59,7 +56,7 @@ function M.getAll(use)
         },
         cmd = 'Trouble',
         disable = true,
-    })
-end
+    },
+}
 
 return M

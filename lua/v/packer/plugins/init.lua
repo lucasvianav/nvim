@@ -1,17 +1,13 @@
-local M = {}
+local req_submodule = require('v.utils.wrappers').get_require_submodule('v.packer.plugins')
 
-function M.getAll(use)
-    local function plugins(module)
-        return require('_packer.plugins.' .. module).getAll(use)
-    end
-
-    plugins('general')
-    plugins('syntax')
-    plugins('lsp')
-    plugins('appearance')
-    plugins('git')
-    plugins('navigation')
-end
+local M = {
+    general    = req_submodule('general'),
+    syntax     = req_submodule('syntax'),
+    lsp        = req_submodule('lsp'),
+    appearance = req_submodule('appearance'),
+    git        = req_submodule('git'),
+    navigation = req_submodule('navigation'),
+}
 
 return M
 

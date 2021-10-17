@@ -1,3 +1,1 @@
-vim.cmd('packadd packer.nvim')
-local packer = require('packer')
-
+require('v.utils.packer').setup()
