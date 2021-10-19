@@ -23,13 +23,13 @@ require('bufresize').setup({
     },
 })
 
-local function add_map(mode, lhs, rhs)
-    local cmd = [[<cmd>lua require('bufresize').register()<cr>]]
-    map(mode, lhs, rhs .. cmd)
-end
+local set_keybindings = require('v.util.mappings').set_keybindings
+local cmd = [[<cmd>lua require('bufresize').register()<cr>]]
 
-add_map('n', '<S-M-J>', '2<C-w>-')
-add_map('n', '<S-M-K>', '2<C-w>+')
-add_map('n', '<S-A-H>', '2<C-w><')
-add_map('n', '<S-A-L>', '2<C-w>>')
+set_keybindings({
+    { 'n', '<S-M-J>', '2<C-w>-' .. cmd },
+    { 'n', '<S-M-K>', '2<C-w>+' .. cmd },
+    { 'n', '<S-A-H>', '2<C-w><' .. cmd },
+    { 'n', '<S-A-L>', '2<C-w>>' .. cmd },
+})
 

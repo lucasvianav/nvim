@@ -1,6 +1,11 @@
 --[[ TODO: look into this
     https://github.com/edluffy/hologram.nvim
     https://www.reddit.com/r/neovim/comments/pv4ujz/is_there_a_way_to_see_images_in_neovim/
+
+    global status bar:
+    https://github.com/windwp/floatline.nvim
+    https://github.com/windwp/windline.nvim
+    https://www.reddit.com/r/neovim/comments/pxkf16/windlinenvim_one_global_status_line_on_floating/
 ]]
 
 local M = {
@@ -10,6 +15,8 @@ local M = {
 
     { 'kyazdani42/nvim-web-devicons', as    = 'devicons'        }, -- colored icons
     { 'p00f/nvim-ts-rainbow',         after = 'nvim-treesitter' }, -- colored matching brackets
+
+    -- TODO: maybe swap for RRethy/vim-hexokinase
     { 'norcalli/nvim-colorizer.lua',  event = 'CursorHold'      }, -- colored color codes
 
     -- indent lines

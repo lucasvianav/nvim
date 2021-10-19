@@ -1,6 +1,8 @@
 -- TODO: https://www.reddit.com/r/neovim/comments/px1hnf/popup_menu_for_code_actions_to_show/
 -- https://github.com/weilbith/nvim-code-action-menu
 -- TODO: https://github.com/lspcontainers/lspcontainers.nvim
+-- TODO: https://www.reddit.com/r/neovim/comments/q9g6e7/which_one_do_you_like_better_for_completion/hgxp01w/
+-- TODO: https://elijahmanor.com/blog/neovim-tailwindcss
 
 local M = {
     { 'neovim/nvim-lspconfig' }, -- config for language servers

@@ -1,3 +1,5 @@
+-- TODO: mrjones2014/lighthaus.nvim
+
 local M = {
     { 'NTBBloodbath/doom-one.nvim'   }, -- DoomEmacs' One
     { 'navarasu/onedark.nvim'        }, -- Atom's OneDark

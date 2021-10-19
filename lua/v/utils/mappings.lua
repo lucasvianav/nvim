@@ -1,5 +1,5 @@
-local fn = vim.fn
 local t  = require('v.utils.wrappers').termcode
+local fn = vim.fn
 
 -- TODO: create functions for autocmds, augroups and commands
 -- https://github.com/akinsho/dotfiles/blob/148d1b720b296ad9ef6943da4e7b9d2c4f86c59b/.config/nvim/lua/as/globals.lua#L178-L206
@@ -66,6 +66,18 @@ function M.BS()
         return has_npairs and (npairs.esc('<c-e>') .. npairs.autopairs_bs()) or t'<C-e><BS>'
     else
         return has_npairs and npairs.autopairs_bs() or t'<BS>'
+    end
+end
+
+function M.set_keybindings(args)
+    for _, map_table in ipairs(args) do
+        M.map(map_table)
+    end
+end
+
+function M.unset_keybindings(args)
+    for _, map_table in ipairs(args) do
+        M.unmap(map_table)
     end
 end
 

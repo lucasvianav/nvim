@@ -9,6 +9,10 @@
     - https://github.com/danielnehrig/nvim
 
     - https://www.youtube.com/channel/UCXPHFM88IlFn68OmLwtPmZA
+
+    TODO: https://spacevim.org/SpaceVim-release-v1.8.0/#.YVsDlG_4ps8.reddit
+    https://github.com/crivotz/nv-ide
+    https://github.com/100lvlmaster/dots/tree/master
 ]]
 
 require('functions')

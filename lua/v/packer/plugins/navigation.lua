@@ -72,6 +72,9 @@ local M = {
     },
 
     -- fuzzy finder for lots of stuff
+    -- TODO: make issue about limiting scroll options?
+    -- TODO: https://www.reddit.com/r/neovim/comments/p8wtmn/telescopenvim_how_to_take_what_i_selected_in/
+    -- https://www.reddit.com/r/neovim/comments/phndpv/can_telescope_remember_my_last_search_result/
     {
         'nvim-telescope/telescope.nvim',
         after = 'plenary.nvim',
@@ -91,7 +94,7 @@ local M = {
             -- C implementation
             { 'nvim-telescope/telescope-fzy-native.nvim' },
 
-            -- TODO: activate below extensions
+            -- TODO: activate extensions below
 
             -- better sorting (firefox-like)
             -- { 'nvim-telescope/telescope-frecency.nvim' },
@@ -104,6 +107,8 @@ local M = {
 
             -- tldr pages
             -- { 'mrjones2014/tldr.nvim' },
+
+            -- https://github.com/AckslD/nvim-neoclip.lua
         },
     },
 
