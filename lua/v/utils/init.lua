@@ -4,10 +4,12 @@ local cmd = vim.api.nvim_command
 local M = {}
 
 M.colors = require('v.utils.colors')
+M.ascii = require('v.utils.ascii')
 
 -- TODO: great utilities https://github.com/JoosepAlviste/dotfiles/blob/master/config/nvim/lua/j/utils.lua
 -- TODO: https://github.com/jose-elias-alvarez/dotfiles/blob/main/.config/nvim/lua/utils.lua
 -- TODO: function to read last 500 lines from lsp log
+-- TODO: https://gitlab.com/yorickpeterse/dotfiles/-/blob/c2fd334e7690b1955a59b9f3f92149dbfb88f9f8/dotfiles/.config/nvim/lua/dotfiles/abbrev.lua
 
 --[[
 Deletes all trailing whitespaces in a file if it's not binary nor a diff.
@@ -59,7 +61,7 @@ function M.reload_or_source_current()
     local action
 
     if filetype == 'lua' then
-        require('utils.wrappers').reload(_get_current_require_path())
+        require('v.utils.wrappers').reload(_get_current_require_path())
         action = 'Reloaded '
     elseif filetype == 'vim' then
         cmd('source %')
@@ -79,7 +81,11 @@ Sets all VimL options for a plugin from a `opts` table.
 function M.set_viml_options(lead, opts, unique_value)
     lead = lead or ''
 
-    if vim.regex('[a-zA-Z0-9]$'):match_str(lead) then
+    local no_uppercase_initial = lead:match('^[^A-Z]')
+    local is_caps_lock         = lead:match('^[A-Z]+$')
+    local has_no_separator     = lead:match('[a-zA-Z0-9]$')
+
+    if (no_uppercase_initial or is_caps_lock) and has_no_separator then
         lead =  lead .. '_'
     end
 
@@ -93,16 +99,6 @@ function M.set_viml_options(lead, opts, unique_value)
     for option, value in pairs(opts) do
         vim.g[lead .. option] = value
     end
-end
-
-function M.is_plugin_loaded(plugin)
-    local plugin_list = packer_plugins or {}
-    return plugin_list[plugin] and plugin_list[plugin].loaded
-end
-
-function M.is_plugin_installed(plugin)
-    local plugin_list = packer_plugins or {}
-    return plugin_list[plugin]
 end
 
 return M

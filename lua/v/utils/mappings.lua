@@ -12,12 +12,16 @@ local M = {}
 Wrapper for vim.api.nvim_set_keymap(), but defaulting `noremap` and 'silent' options.
 ]]
 function M.map(modes, lhs, rhs, opts)
-    if type(modes) ~= 'table' then
+    if not lhs then
+        vim.api.nvim_notify("Didn't receive a LHS.", 4, { title = 'Unmapping' })
+        return
+    elseif type(modes) ~= 'table' then
         modes = { modes }
     end
 
     local options = vim.tbl_extend('force', {
-        noremap = true,
+        -- disable noremap for <Plug> mappings
+        noremap = rhs:lower():match('^<plug>.+') == nil,
         silent = true,
     }, opts or {})
     local buffer = options.buffer
@@ -41,8 +45,23 @@ end
 --[[
 Wrapper for vim.api.nvim_set_keymap(), mapping the `lhs` to `<nop>`.
 ]]
-function M.unmap(mode, lhs)
-    vim.api.nvim_set_keymap(mode, lhs, t'<nop>', {})
+function M.unmap(modes, lhs)
+    if not lhs then
+        vim.api.nvim_notify("Didn't receive a LHS.", 4, { title = 'Unmapping' })
+        return
+    elseif type(modes) ~= 'table' then
+        modes = { modes }
+    end
+
+    local available_modes = 'nvsxo!ilct'
+
+    for _, mode in ipairs(modes) do
+        local is_valid_mode = string.find(available_modes, mode)
+
+        if #mode == 1 and is_valid_mode then
+            vim.api.nvim_set_keymap(mode, lhs, t'<nop>', {})
+        end
+    end
 end
 
 function M.CR()
@@ -71,13 +90,13 @@ end
 
 function M.set_keybindings(args)
     for _, map_table in ipairs(args) do
-        M.map(map_table)
+        M.map(unpack(map_table))
     end
 end
 
 function M.unset_keybindings(args)
     for _, map_table in ipairs(args) do
-        M.unmap(map_table)
+        M.unmap(unpack(map_table))
     end
 end
 

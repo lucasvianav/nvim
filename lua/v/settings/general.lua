@@ -1,6 +1,8 @@
 local o   = vim.opt
 local cmd = vim.api.nvim_command
 
+local M = {}
+
 -- enable syntax highlighting, filetype
 -- detection and loading of filetype specific
 -- plugins and indentation config
@@ -28,7 +30,7 @@ o.mouse          = 'a'         -- enables mouse
 o.nrformats      = 'alpha'     -- allows letter sequences
 o.shell          = '/bin/bash' -- faster than Zsh (which I use)
 o.shiftround     = true        -- round indent
-o.shiftwidth     = 2           -- 4 spaces for indentation
+o.shiftwidth     = 4           -- 4 spaces for indentation
 o.showbreak      = '↳'         -- indicate wrapped lines
 o.smartcase      = true        -- case sensitive search if there's capital letters
 o.smartindent    = true        -- makes indenting smart
@@ -136,6 +138,7 @@ o.shortmess = {
 }
 
 -- formatting
+-- TODO: https://github.com/JoosepAlviste/dotfiles/blob/b09a4eed7bf4c7862a02aa8b14ffe29896a0bfa5/config/nvim/lua/j/settings.lua#L75-L87
 o.formatoptions = {
     ['1'] = true,  -- break lines *before* 1-letter words (not afer)
     ['2'] = true,  -- use indent from 2nd line of a paragraph
@@ -152,6 +155,7 @@ o.formatoptions = {
     v     = true,  -- break lines only on chars added in this insertion
     w     = false, -- fuck trailing whitespaces
 }
+M.formatoptions = o.formatoptions._value
 
 -- settings for diffs
 o.diffopt = {
@@ -164,4 +168,6 @@ o.diffopt = {
     'iwhite',    -- ignore trailing whitespaces
     'vertical',  -- use vertical split by default
 }
+
+return M
 

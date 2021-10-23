@@ -10,7 +10,7 @@ local cmd = vim.api.nvim_command
 
 local function __get_local_plugin_path(arg)
     local path = arg
-    local plugins_dir = fn.expand('$HOME/nvim-plugins/')
+    local plugins_dir = fn.expand('$HOME') .. '/nvim-plugins/'
     local implicit_path = [[^[^\~/.]\+\|^\[^\/]*$]*$\|^\[^\~/]*]]
 
     if vim.regex(implicit_path):match_str(path) then
@@ -21,6 +21,10 @@ local function __get_local_plugin_path(arg)
 end
 
 local function __get_plugin_name(arg)
+    if type(arg) ~= 'string' then
+        return
+    end
+
     local name = ''
 
     local re = {
@@ -45,32 +49,37 @@ local function __get_plugin_name(arg)
 end
 
 local function __get_config_setup_str(module, plugin_name, is_theme)
+    if type(module) ~= 'string' or type(plugin_name) ~= 'string' then
+        return
+    end
+
     local require_str = [[    pcall(require, ']] .. module .. [[')]]
 
     if is_theme and plugin_name then
-        local comm = fn.substitute(appearanceCommands, [[.\+]], '[[&]]', '')
+        local appearance_commands = require('v.settings').appearance.commands
+        local cmds = fn.substitute(appearance_commands, [[.\+]], '[[&]]', '')
+        cmds = cmds and 'vim.cmd(' .. cmds .. ')' or ''
 
-        require_str = require_str
-        .. [[
+        require_str = require_str .. [[
 
-        if colorscheme == ']]
-            .. plugin_name
-            .. [[' then
-            vim.cmd('colorscheme ]]
-            .. plugin_name
-            .. [[')
-            vim.cmd(]]
-            .. comm
-            .. [[)
-        end
+            local colorscheme = require('v.settings').appearance.colorscheme
+
+            if colorscheme == ']] .. plugin_name .. [[' then
+                vim.cmd('colorscheme ]] .. plugin_name .. [[')
+                ]] .. cmds .. [[
+            end
         ]]
     end
 
     return require_str
 end
 
-local function __get_config_filepath(plugin_name, type, category)
-    local path = 'v.' .. type .. 's.'
+local function __get_config_filepath(plugin_name, plugin_type, category)
+    if type(plugin_name) ~= 'string' or type(plugin_type) ~= 'string' then
+        return
+    end
+
+    local path = 'v.' .. plugin_type .. 's.'
 
     if category then
         path = path .. category .. '.'
@@ -98,12 +107,12 @@ local function __get_plugin_table(args, type, category)
                 name = args.as or __get_plugin_name(args[1])
             else
                 vim.notify(
-                'The plugin "'
-                .. name
-                .. '" was not found at: "'
-                .. args[1]
-                .. '". No fallback was provided.',
-                'error'
+                    'The plugin "'
+                    .. name
+                    .. '" was not found at: "'
+                    .. args[1]
+                    .. '". No fallback was provided.',
+                    'error'
                 )
 
                 return
@@ -122,14 +131,20 @@ local function __get_plugin_table(args, type, category)
         end
     end
 
+    if is_theme and not args.cond then
+        args.cond = "require('v.settings').appearance.colorscheme == '" .. name .. "'"
+    end
+
     return args
 end
 
 local function __load_plugins(table, use)
-    for category, args in pairs(table.plugins) do
-        local plugin = __get_plugin_table(args, 'plugin', category)
-        if args then
-            use(plugin)
+    for category, plugins in pairs(table.plugins) do
+        for _, args in ipairs(plugins) do
+            local plugin = __get_plugin_table(args, 'plugin', category)
+            if args then
+                use(plugin)
+            end
         end
     end
 
@@ -153,11 +168,12 @@ local M = {}
 
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/utils/plugins.lua
 
-M.path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+M.path         = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+M.compile_path = fn.stdpath('config') .. '/lua/packer_compiled.lua'
 
 --- Loads packer.nvim (since it's lazy-loaded) and pcall requires it.
 function M.get_packer()
-    cmd('packadd packer.nvim')
+    pcall(cmd, 'packadd packer.nvim')
     local is_loaded, packer = pcall(require, 'packer')
 
     return is_loaded, packer
@@ -168,10 +184,17 @@ function M.init(packer)
         packer.init({
             display = {
                 open_fn = function()
-                    return require('packer.util').float({ border = 'single' })
+                    return require('packer.util').float({
+                        border = 'single',
+                    })
                 end,
                 prompt_border = 'single',
             },
+            profile = {
+                enable = false,
+                treshold = 1,
+            },
+            compile_path = M.compile_path,
         })
     end
 end
@@ -206,6 +229,16 @@ function M.setup(packer)
 
     M.init(packer)
     M.setup_plugins(packer)
+end
+
+function M.is_plugin_loaded(plugin)
+    local plugin_list = packer_plugins or {}
+    return plugin_list[plugin] and plugin_list[plugin].loaded
+end
+
+function M.is_plugin_installed(plugin)
+    local plugin_list = packer_plugins or {}
+    return plugin_list[plugin]
 end
 
 return M

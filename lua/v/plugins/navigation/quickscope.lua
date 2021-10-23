@@ -1,15 +1,18 @@
-local function set (property, value)
-    vim.g['qs_' .. property] = value
-end
+require('v.utils').set_viml_options('qs', {
+    -- dont highlight anything beyond 240 chars
+    max_chars = 240,
 
-set('max_chars',          240) -- dont highlight anything beyond 240 chars
-set('highlight_on_keys',  {    -- trigger a highlight in the appropriate direction
-    'f', 'F',
-    't', 'T',
-})
-set('filetype_blacklist', {    -- don't use plugin in startify/dashboard
-    'startify',
-    'dashboard',
-    'NvimTree',
+    -- trigger a highlight in the appropriate direction
+    highlight_on_keys = {
+        'f', 'F',
+        't', 'T',
+    },
+
+    -- don't use plugin in startify/dashboard
+    filetype_blacklist = {
+        'startify',
+        'dashboard',
+        'NvimTree',
+    },
 })
 

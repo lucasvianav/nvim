@@ -1,6 +1,7 @@
--- local map = require('functions').mappings.map
+local map       = require('v.utils.mappings').map
+local installed = require('v.utils.packer').is_plugin_installed
 
-if not packer_plugins or not (packer_plugins['better-escape.vim'] or packer_plugins['better-escape.nvim']) then
+if not (installed('better-escape.vim') or installed('better-escape.nvim')) then
     map('i', 'jk', '<Esc>')
 end
 

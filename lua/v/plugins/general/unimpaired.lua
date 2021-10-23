@@ -1,12 +1,13 @@
--- <Space><Space> surrounds current line
--- or selection with [count] blank lines
-map('n', '<Space><Space>', '<Plug>unimpairedBlankAround', { noremap = false })
-map('x', '<Space><Space>', '<Plug>unimpairedBlankAround', { noremap = false })
+require('v.utils.mappings').set_keybindings({
+    -- <Space><Space> surrounds current line
+    -- or selection with [count] blank lines
+    { 'n', '<Space><Space>', '<Plug>unimpairedBlankAround' },
+    { 'x', '<Space><Space>', '<Plug>unimpairedBlankAround' },
 
--- alt + j/k moves current line or
--- selection [count] lines up/down
-map('n', '<M-k>', '<Plug>unimpairedMoveUp', { noremap = false })
-map('n', '<M-j>', '<Plug>unimpairedMoveDown', { noremap = false })
-map('x', '<M-k>', '<Plug>unimpairedMoveKeepSelectionUp', { noremap = false })
-map('x', '<M-j>', '<Plug>unimpairedMoveKeepSelectionDown', { noremap = false })
-
+    -- alt + j/k moves current line or
+    -- selection [count] lines up/down
+    { 'n', '<M-k>', '<Plug>unimpairedMoveUp'                },
+    { 'n', '<M-j>', '<Plug>unimpairedMoveDown'              },
+    { 'x', '<M-k>', '<Plug>unimpairedMoveKeepSelectionUp'   },
+    { 'x', '<M-j>', '<Plug>unimpairedMoveKeepSelectionDown' },
+})

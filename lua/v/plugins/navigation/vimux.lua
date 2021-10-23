@@ -1,15 +1,19 @@
-local g   = vim.g
-local cmd = vim.cmd
+local cmd = vim.api.nvim_command
 
-vim.g.VimuxOrientation = "h" -- open tmux panes as vertical splits
-vim.g.VimuxCloseOnExit = 1 -- close pane after exiting vim
+require('v.utils').set_viml_options('Vimux', {
+    Orientation = 'h', -- open tmux panes as vertical splits
+    CloseOnExit = 1,   -- close pane after exiting vim
+})
 
+-- TODO: ??
 cmd('command VimuxClearScreenHistory VimuxClearTerminalScreen | VimuxClearRunnerHistory')
 
-map('n', '<Leader>tp', ':<C-U>VimuxPromptCommand<CR>')
-map('n', '<Leader>tr', ':<C-U>VimuxRunLastCommand<CR>')
-map('n', '<Leader>ti', ':<C-U>VimuxInspectRunner<CR>')
-map('n', '<Leader>tz', ':<C-U>VimuxZoomRunner<CR>')
-map('n', '<Leader>tc', ':<C-U>VimuxClearScreenHistory<CR>')
-map('n', '<Leader>tt', ':<C-U>VimuxTogglePane<CR>')
+require('v.utils.mappings').set_keybindings({
+    { 'n', '<Leader>tp', ':<C-U>VimuxPromptCommand<CR>'      },
+    { 'n', '<Leader>tr', ':<C-U>VimuxRunLastCommand<CR>'     },
+    { 'n', '<Leader>ti', ':<C-U>VimuxInspectRunner<CR>'      },
+    { 'n', '<Leader>tz', ':<C-U>VimuxZoomRunner<CR>'         },
+    { 'n', '<Leader>tc', ':<C-U>VimuxClearScreenHistory<CR>' },
+    { 'n', '<Leader>tt', ':<C-U>VimuxTogglePane<CR>'         },
+})
 

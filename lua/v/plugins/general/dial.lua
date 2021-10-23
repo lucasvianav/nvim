@@ -1,9 +1,10 @@
-map('n', '<C-a>',  '<Plug>(dial-increment)', { noremap = false })
-map('n', '<C-x>',  '<Plug>(dial-decrement)', { noremap = false })
-map('v', 'g<C-a>',  '<Plug>(dial-increment)', { noremap = false })
-map('v', 'g<C-x>',  '<Plug>(dial-decrement)', { noremap = false })
+require('v.utils.mappings').set_keybindings({
+    { 'n', '<C-a>',  '<Plug>(dial-increment)', { noremap = false } },
+    { 'n', '<C-x>',  '<Plug>(dial-decrement)', { noremap = false } },
+    { 'v', 'g<C-a>', '<Plug>(dial-increment)', { noremap = false } },
+    { 'v', 'g<C-x>', '<Plug>(dial-decrement)', { noremap = false } },
 
--- create sequence
-map('v', '<C-a>', '<Plug>(dial-increment-additional)', { noremap = false })
-map('v', '<C-x>', '<Plug>(dial-decrement-additional)', { noremap = false })
-
+    -- create sequence
+    { 'v', '<C-a>', '<Plug>(dial-increment-additional)', { noremap = false } },
+    { 'v', '<C-x>', '<Plug>(dial-decrement-additional)', { noremap = false } },
+})

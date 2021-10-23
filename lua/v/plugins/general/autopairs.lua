@@ -41,6 +41,9 @@ npairs.add_rules({
     :use_key(']')
 })
 
-map('i', '<CR>', 'v:lua.CR()', { expr = true })
-map('i', '<BS>', 'v:lua.BS()', { expr = true })
+-- TODO: maybe expose a "cmd = " in the map table?
+require('v.utils.mappings').set_keybindings({
+    { 'i', '<CR>', [[v:lua.require('v.utils.mappings').CR()]], { expr = true } },
+    { 'i', '<BS>', [[v:lua.require('v.utils.mappings').BS()]], { expr = true } },
+})
 

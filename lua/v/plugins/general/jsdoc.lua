@@ -1,3 +1,3 @@
 vim.g.jsdoc_formatter = 'tsdoc'
-map('n', '<Leader>j', '<Plug>(jsdoc)', { noremap = false })
+require('v.utils.mappings').map('n', '<Leader>j', '<Plug>(jsdoc)')
 

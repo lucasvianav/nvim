@@ -1,3 +1,5 @@
+-- TODO: https://github.com/ms-jpq/coq_nvim/blob/coq/docs/SOURCES.md
+
 vim.g.coq_settings = {
     auto_start = 'shut-up',
 

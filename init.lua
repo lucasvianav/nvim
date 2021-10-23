@@ -13,9 +13,17 @@
     TODO: https://spacevim.org/SpaceVim-release-v1.8.0/#.YVsDlG_4ps8.reddit
     https://github.com/crivotz/nv-ide
     https://github.com/100lvlmaster/dots/tree/master
+    https://www.youtube.com/watch?v=brtIZxOwDXE
+    https://www.reddit.com/r/neovim/comments/qbmbj8/cosmicnvim_a_lightweight_and_opinionated_neovim/
+    https://github.com/mattleong/CosmicNvim
+    https://github.com/ecosse3/nvim
+    https://github.com/albingroen/nvim-lsp-typescript-config
 ]]
 
-require('functions')
-require('keybindings')
-require('settings')
-require('_packer')
+pcall(require, 'impatient')
+
+require('v.globals')
+require('v.settings')
+require('v.keybindings')
+require('v.packer')
+

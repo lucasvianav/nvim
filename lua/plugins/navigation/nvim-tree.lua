@@ -81,7 +81,17 @@ require('nvim-tree').setup({
     open_on_tab = false, -- opens nvimtree when on a new tab
     hijack_cursor = false, -- keep cursor at filename's start
     update_cwd = false, -- do not change cwd
-    lsp_diagnostics = true, -- show diagnostics in the signcol
+
+    -- show diagnostics in the signcol
+    diagnostics = {
+        enable = true,
+        icons = {
+            hint    = "",
+            info    = "",
+            warning = "",
+            error   = "",
+        }
+    },
 
     -- show focused file on the tree
     update_focused_file = {

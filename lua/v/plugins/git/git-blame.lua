@@ -1,3 +1,6 @@
-vim.g.gitblame_enabled = false
-vim.g.gitblame_message_template = '<summary> • <author>'
-map('n', '<leader>gi', '<cmd>GitBlameToggle<CR>')
+require('v.utils').set_viml_options('gitblame', {
+    enabled          = false,
+    message_template = '<summary> • <author>',
+})
+
+require('v.utils.mappings').map('n', '<leader>gi', '<cmd>GitBlameToggle<CR>')

@@ -65,7 +65,7 @@ local mappings = {
     j           = 'jsdoc',
     n           = 'hide highlights',
     r           = 'ranger',
-    s           = 'spectre',
+    S           = 'spectre',
 
     h = {  '<C-w>s',            'split below'  },
     q = {  '<cmd>BufClose<cr>', 'close buffer' },

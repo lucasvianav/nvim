@@ -79,15 +79,6 @@ local M = {
         'nvim-telescope/telescope.nvim',
         after = 'plenary.nvim',
         requires = {
-            -- emoji picker
-            -- TODO: maybe remove this because Kitty already has one
-            {
-                'xiyaowong/telescope-emoji.nvim',
-                config = function()
-                    require('plugins/navigation/emoji')
-                end,
-            },
-
             -- markdown header picker
             { 'crispgm/telescope-heading.nvim' },
 

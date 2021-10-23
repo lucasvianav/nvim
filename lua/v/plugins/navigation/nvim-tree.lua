@@ -1,35 +1,33 @@
-local function set(property, value)
-    vim.g['nvim_tree_' .. property] = value
-end
+require('v.utils').set_viml_options('nvim_tree', {
+    -- dirs/files to be ignored
+    ignore = {
+        '.git',
+        'node_modules',
+        '.cache',
+        '__pycache__',
+    },
 
--- dirs/files to be ignored
-set('ignore', {
-    '.git',
-    'node_modules',
-    '.cache',
-    '__pycache__',
-})
+    -- dirs/files to be highlighted
+    special_files = {
+        ['README.md'] = 1,
+        ['Makefile'] = 1,
+        ['MAKEFILE'] = 1,
+    },
 
--- dirs/files to be highlighted
-set('special_files', {
-    ['README.md'] = 1,
-    ['Makefile'] = 1,
-    ['MAKEFILE'] = 1,
-})
+    -- cosmetic
+    indent_markers          = false, -- show indentation rulers
+    hide_dotfiles           = true,  -- hide dirs/files starting with '.'
+    git_hl                  = false, -- highlight files with git attributtes
+    add_trailing            = true,  -- append trailing / to dir names
+    group_empty             = true,  -- compact nested directories with no other files
+    create_in_closed_folder = false, -- cursor is on a closed dir: create new file on the parent
 
--- cosmetic
-set('indent_markers', false) -- show indentation rulers
-set('hide_dotfiles', true) -- hide dirs/files starting with '.'
-set('git_hl', false) -- highlight files with git attributtes
-set('add_trailing', true) -- append trailing / to dir names
-set('group_empty', true) -- compact nested directories with no other files
-set('create_in_closed_folder', false) -- cursor is on a closed dir: create new file on the parent
-
-set('show_icons', {
-    git = 0,
-    folders = 1,
-    files = 1,
-    folder_arrows = 1,
+    show_icons = {
+        git           = 0,
+        folders       = 1,
+        files         = 1,
+        folder_arrows = 1,
+    },
 })
 
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
@@ -81,7 +79,17 @@ require('nvim-tree').setup({
     open_on_tab = false, -- opens nvimtree when on a new tab
     hijack_cursor = false, -- keep cursor at filename's start
     update_cwd = false, -- do not change cwd
-    lsp_diagnostics = true, -- show diagnostics in the signcol
+
+    -- show diagnostics in the signcol
+    diagnostics = {
+        enable = true,
+        icons = {
+            hint    = "",
+            info    = "",
+            warning = "",
+            error   = "",
+        }
+    },
 
     -- show focused file on the tree
     update_focused_file = {
@@ -91,7 +99,7 @@ require('nvim-tree').setup({
     },
 
     view = {
-        width = 30,
+        width = 35,
         side = 'left',
         auto_resize = false,
         mappings = {
@@ -101,4 +109,5 @@ require('nvim-tree').setup({
     },
 })
 
-map('n', '<Leader>e', '<cmd>lua require("functions").plugins.nvim_tree_toggle()<cr>')
+local toggle_cmd = '<cmd>lua require("v.utils.tree").nvim_tree_toggle()<cr>'
+require('v.utils.mappings').map('n', '<Leader>e', toggle_cmd)

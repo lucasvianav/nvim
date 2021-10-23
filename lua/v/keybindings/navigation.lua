@@ -1,4 +1,4 @@
-local set_keybindings = require('v.util.mappings').set_keybindings
+local set_keybindings = require('v.utils.mappings').set_keybindings
 
 set_keybindings({
     -- buffer movement with horizontal arrows

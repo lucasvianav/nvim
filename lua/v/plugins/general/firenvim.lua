@@ -21,8 +21,8 @@ cmd([[au BufEnter github.com_*.txt set filetype=markdown]])
 
 local function disable(pattern)
     vim.g.firenvim_config['localSettings'][pattern] = {
-        'takeover': 'never',
-        'priority': 1,
+        takeover = 'never',
+        priority = 1,
     }
 end
 

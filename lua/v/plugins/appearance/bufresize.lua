@@ -23,10 +23,8 @@ require('bufresize').setup({
     },
 })
 
-local set_keybindings = require('v.util.mappings').set_keybindings
 local cmd = [[<cmd>lua require('bufresize').register()<cr>]]
-
-set_keybindings({
+require('v.utils.mappings').set_keybindings({
     { 'n', '<S-M-J>', '2<C-w>-' .. cmd },
     { 'n', '<S-M-K>', '2<C-w>+' .. cmd },
     { 'n', '<S-A-H>', '2<C-w><' .. cmd },

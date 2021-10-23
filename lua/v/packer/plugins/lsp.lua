@@ -43,6 +43,7 @@ local M = {
     -- TODO: try hrsh7th/nvim-cmp (?????)
     -- https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/cmp.lua
     -- https://github.com/danielnehrig/nvim/blob/master/lua/plugins/cmp/init.lua
+    -- TODO: lukas-reineke/cmp-under-comparator
     -- DEPENDENCY: python3-venv
     { 'ms-jpq/coq_nvim', branch = 'coq' },
     { 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' }, -- snippets

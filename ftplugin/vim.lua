@@ -1,3 +1,1 @@
-local o = vim.opt_local
-
-o.iskeyword:append({ ':', '#' })
+vim.opt_local.iskeyword:append({ ':', '#' })

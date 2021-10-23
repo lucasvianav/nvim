@@ -51,48 +51,43 @@ telescope.setup({
 })
 
 telescope.load_extension('heading')
-telescope.load_extension('emoji')
 
-local map = require('functions').mappings.map
+require('v.utils.mappings').set_keybindings({
+    -- general
+    { 'n', '<Leader>ff', [[:<C-U>lua require('telescope.builtin').find_files()<cr>]] },
+    { 'n', '<Leader>fr', [[:<C-U>lua require('telescope.builtin').oldfiles()<cr>]] },
+    { 'n', '<Leader>fp', [[:<C-U>lua require('telescope.builtin').live_grep()<cr>]] },
+    { 'n', '<Leader>fb', [[:<C-U>lua require('telescope.builtin').buffers()<cr>]] },
+    { 'n', '<Leader>fc', [[:<C-U>lua require('telescope.builtin').commands()<cr>]] },
+    { 'n', '<Leader>fch', [[:<C-U>lua require('telescope.builtin').command_history()<cr>]] },
+    { 'n', '<Leader>fj', [[:<C-U>lua require('telescope.builtin').jumplist()<cr>]] },
+    { 'n', '<Leader>f/', [[:<C-U>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]] },
 
--- general
-map('n', '<Leader>ff', [[:<C-U>lua require('telescope.builtin').find_files()<cr>]])
-map('n', '<Leader>fr', [[:<C-U>lua require('telescope.builtin').oldfiles()<cr>]])
-map('n', '<Leader>fp', [[:<C-U>lua require('telescope.builtin').live_grep()<cr>]])
-map('n', '<Leader>fb', [[:<C-U>lua require('telescope.builtin').buffers()<cr>]])
-map('n', '<Leader>fc', [[:<C-U>lua require('telescope.builtin').commands()<cr>]])
-map('n', '<Leader>fch', [[:<C-U>lua require('telescope.builtin').command_history()<cr>]])
-map('n', '<Leader>fj', [[:<C-U>lua require('telescope.builtin').jumplist()<cr>]])
-map('n', '<Leader>f/', [[:<C-U>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]])
+    -- lsp
+    { 'n', 'gd', [[:<C-U>lua require('telescope.builtin').lsp_definitions()<cr>]] },
+    { 'n', 'gr', [[:<C-U>lua require('telescope.builtin').lsp_references()<cr>]] },
+    { 'n', 'gi', [[:<C-U>lua require('telescope.builtin').lsp_implementations()<cr>]] },
+    {
+        'n',
+        '<Leader>ca',
+        [[:<C-U>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_dropdown({}))<cr>]],
+    },
+    { 'v', '<Leader>ca', [[:<C-U>lua require('telescope.builtin').lsp_range_code_actions()<cr>]] },
+    { 'n', '<Leader>fg', [[:<C-U>lua require('telescope.builtin').lsp_document_diagnostics()<cr>]] },
+    { 'n', '<Leader>fgw', [[:<C-U>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>]] },
 
--- lsp
-map('n', 'gd', [[:<C-U>lua require('telescope.builtin').lsp_definitions()<cr>]])
-map('n', 'gr', [[:<C-U>lua require('telescope.builtin').lsp_references()<cr>]])
-map('n', 'gi', [[:<C-U>lua require('telescope.builtin').lsp_implementations()<cr>]])
-map(
-    'n',
-    '<Leader>ca',
-    [[:<C-U>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_dropdown({}))<cr>]]
-)
-map('v', '<Leader>ca', [[:<C-U>lua require('telescope.builtin').lsp_range_code_actions()<cr>]])
-map('n', '<Leader>fg', [[:<C-U>lua require('telescope.builtin').lsp_document_diagnostics()<cr>]])
-map('n', '<Leader>fgw', [[:<C-U>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>]])
+    -- git
+    { 'n', '<Leader>gc', [[:<C-U>lua require('telescope.builtin').git_commits()<cr>]] },
+    { 'n', '<Leader>gs', [[:<C-U>lua require('telescope.builtin').git_status()<cr>]] },
 
--- git
-map('n', '<Leader>gc', [[:<C-U>lua require('telescope.builtin').git_commits()<cr>]])
-map('n', '<Leader>gs', [[:<C-U>lua require('telescope.builtin').git_status()<cr>]])
+    -- extensions
+    { 'n', '<Leader>fh', [[:<C-U>lua require('telescope').extensions.heading.heading()<cr>]] },
+    { 'n', '<Leader>fs', [[:<C-U>lua require('telescope').extensions['session-lens'].search_session()<cr>]] },
+})
 
--- extensions
-map('n', '<Leader>fe', [[:<C-U>lua require('telescope').extensions.emoji.emoji()<cr>]])
-map('n', '<Leader>fh', [[:<C-U>lua require('telescope').extensions.heading.heading()<cr>]])
+local map = require('v.utils.mappings').map
 
-map(
-    'n',
-    '<Leader>fs',
-    [[:<C-U>lua require('telescope').extensions['session-lens'].search_session()<cr>]]
-)
-
--- TODO: organize this
+-- TODO: fix these functions and move them to utils
 function _G.find_unimed()
     require('telescope.builtin').find_files({
         shorten_path = false,

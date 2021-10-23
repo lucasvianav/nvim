@@ -23,23 +23,17 @@ local parsers = {
     'yaml',
 }
 
--- install all desired parsrs
--- for _, parser in pairs(parsers) do cmd(':TSInstall ' .. parser) end
-
--- setup treesitter for better syntax
--- configs (highlighting, indentation, etc)
 require('nvim-treesitter.configs').setup({
     ensure_installed = parsers,
 
-    autopairs = { enable = true },
-    autotag = { enable = true },
-    highlight = { enable = true },
-    rainbow = { enable = true, extended_mode = true },
+    autopairs             = { enable = true },
+    autotag               = { enable = true },
+    highlight             = { enable = true },
+    context_commentstring = { enable = true },
+
+    rainbow = {
+        enable = true,
+        extended_mode = true,
+    },
 })
 
---[[
-    -- use for folding
-    o.foldmethod = 'expr'
-    o.foldexpr   = 'nvim_treesitter#foldexpr()'
-
-]]

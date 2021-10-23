@@ -34,7 +34,7 @@ end
 function M.load_session_or_dashboard()
     local has_arguments = (fn.argc() ~= 0)
 
-    if not has_arguments and M.load_cwd_session() then
+    if not has_arguments and not M.load_cwd_session() then
         load_dashboard()
     end
 end

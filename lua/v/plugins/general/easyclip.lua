@@ -1,31 +1,35 @@
-local g = vim.g
+-- TODO: ??
+require('v.utils').set_viml_options('EasyClip', {
+    UseSubstituteDefaults = true,
+    UseCutDefaults        = false,
+    AutoFormat            = true,
+})
 
-g.EasyClipUseSubstituteDefaults = true -- doesn't work for some reason
-g.EasyClipUseCutDefaults        = false
-g.EasyClipAutoFormat            = true
 
--- use x  for substituting
-map('n', 's',  '<plug>SubstituteOverMotionMap', { noremap = false })
-map('n', 'ss', '<plug>SubstituteLine', { noremap = false })
-map('x', 's',  '<plug>XEasyClipPaste', { noremap = false })
-map('n', 'S',  '<plug>SubstituteToEndOfLine', { noremap = false })
-map('n', 'gs', '<plug>G_SubstituteOverMotionMap', { noremap = false })
-map('n', 'gS', '<plug>G_SubstituteToEndOfLine', { noremap = false })
+require('v.utils.mappings').set_keybindings({
+    -- use s for substituting
+    { 'n', 's',  '<plug>SubstituteOverMotionMap'   },
+    { 'n', 'ss', '<plug>SubstituteLine'            },
+    { 'x', 's',  '<plug>XEasyClipPaste'            },
+    { 'n', 'S',  '<plug>SubstituteToEndOfLine'     },
+    { 'n', 'gs', '<plug>G_SubstituteOverMotionMap' },
+    { 'n', 'gS', '<plug>G_SubstituteToEndOfLine'   },
 
--- use x for cutting
-map('n', 'x',  '<Plug>MoveMotionPlug', { noremap = false })
-map('x', 'x',  '<Plug>MoveMotionXPlug', { noremap = false })
-map('n', 'xx', '<Plug>MoveMotionLinePlug', { noremap = false })
-map('n', 'X',  '<Plug>MoveMotionEndOfLinePlug', { noremap = false })
+    -- use x for cutting
+    { 'n', 'x',  '<Plug>MoveMotionPlug'          },
+    { 'x', 'x',  '<Plug>MoveMotionXPlug'         },
+    { 'n', 'xx', '<Plug>MoveMotionLinePlug'      },
+    { 'n', 'X',  '<Plug>MoveMotionEndOfLinePlug' },
 
--- toggle paste autoformat
-map('n', '<leader>cf', '<plug>EasyClipToggleFormattedPaste', { noremap = false })
+    -- toggle paste autoformat
+    { 'n', '<leader>cf', '<plug>EasyClipToggleFormattedPaste' },
 
--- paste in insert mode
-map('i', '<c-v>', '<plug>EasyClipInsertModePaste', { noremap = false })
+    -- paste in insert mode
+    { 'i', '<c-v>', '<plug>EasyClipInsertModePaste' },
 
--- navigate through the yank ring
-map('n', ']p', '<Plug>EasyClipRotateYanksForward', { noremap = false })
-map('n', '[p', '<Plug>EasyClipRotateYanksBackward', { noremap = false })
-map('x', ']p', '<Plug>EasyClipRotateYanksForward', { noremap = false })
-map('x', '[p', '<Plug>EasyClipRotateYanksBackward', { noremap = false })
+    -- navigate through the yank ring
+    { 'n', ']p', '<Plug>EasyClipRotateYanksForward'  },
+    { 'n', '[p', '<Plug>EasyClipRotateYanksBackward' },
+    { 'x', ']p', '<Plug>EasyClipRotateYanksForward'  },
+    { 'x', '[p', '<Plug>EasyClipRotateYanksBackward' },
+})

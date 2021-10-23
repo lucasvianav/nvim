@@ -3,6 +3,7 @@
 -- TODO: https://github.com/mfussenegger/nvim-dap
 -- TODO: https://github.com/puremourning/vimspector
 -- TODO: better distribute this plugins
+-- TODO: https://github.com/dstein64/vim-startuptime
 
 local M = {
     -- packer can manage itself as an optional plugin
@@ -171,14 +172,6 @@ local M = {
         'mg979/vim-visual-multi',
         as = 'multi',
         keys = { '<C-n>', 'gl', { 'x', '<C-n>' } },
-    },
-
-    -- zen mode + focusing windows
-    -- write my own focus and ditch this
-    {
-        'Pocco81/TrueZen.nvim',
-        cmd = { 'TZFocus', 'TZAtaraxis' },
-        keys = { '<F12>', '<C-w>z' },
     },
 
     -- switch between single-line and multiline statement

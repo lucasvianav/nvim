@@ -1,5 +1,7 @@
-map('n', '<Leader>gd', '<cmd>Gvdiffsplit!<CR>')
-map('n', '<Leader>gh', '<cmd>diffget //2<CR>')
-map('n', '<Leader>gl', '<cmd>diffget //3<CR>')
-map({ 'n', 'v' }, '<Leader>gb', ':GBrowse<CR>')
-map('n', '<Leader>ga', '<cmd>Git add %<CR>')
+require('v.utils.mappings').set_keybindings({
+    { 'n', '<Leader>gd', '<cmd>Gvdiffsplit!<CR>' },
+    { 'n', '<Leader>gh', '<cmd>diffget //2<CR>'  },
+    { 'n', '<Leader>gl', '<cmd>diffget //3<CR>'  },
+    { 'n', '<Leader>ga', '<cmd>Git add %<CR>'    },
+    { { 'n', 'v' }, '<Leader>gb', ':GBrowse<CR>' },
+})

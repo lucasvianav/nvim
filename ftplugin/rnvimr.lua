@@ -3,5 +3,5 @@ local opts = {
     buffer = true,
 }
 
-map('t', 'j', 'j', opts)
-map('t', 'k', 'k', opts)
+require('v.utils.mappings').map('t', 'j', 'j', opts)
+require('v.utils.mappings').map('t', 'k', 'k', opts)

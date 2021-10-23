@@ -1,10 +1,8 @@
 require('indent_blankline').setup({
-    char = '▏',
-
     buftype_exclude  = { 'terminal', 'NvimTree' },
     filetype_exclude = {
         'help', 'terminal', 'dashboard',
-        'packer', 'startify',
+        'packer', 'startify', 'NvimTree',
     },
 
     show_trailing_blankline_indent = false,

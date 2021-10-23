@@ -1,4 +1,4 @@
-local req_submodule = require('v.utils.wrappers').get_require_submodule('keybindings')
+local req_submodule = require('v.utils.wrappers').get_require_submodule('v.keybindings')
 
 local M = {
     unmappings = req_submodule('unmappings'),

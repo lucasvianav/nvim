@@ -1,11 +1,9 @@
-local function set(property, value)
-    vim.g['mkdp_' .. property] = value
-end
-
-set('auto_start', false)
-set('auto_close', false)
-set('refresh_slow', true)
-set('open_to_the_world', false)
-set('browser', 'brave-browser')
+require('v.utils').set_viml_options('mkdp', {
+    auto_start        = false,
+    auto_close        = false,
+    refresh_slow      = true,
+    open_to_the_world = false,
+    browser           = 'brave-browser', -- khell command
+})
 
 vim.cmd([[cabbrev MDPrev MarkdownPreviewToggle]])

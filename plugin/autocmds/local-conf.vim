@@ -1,4 +1,4 @@
 augroup LocalConfig
     au!
-    au BufEnter <buffer> lua source_local_config()
+    au BufEnter <buffer> lua require('v.utils').source_local_config()
 augroup END

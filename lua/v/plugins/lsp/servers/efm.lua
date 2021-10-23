@@ -20,6 +20,8 @@
         cmake
 ]]
 
+-- TODO: https://www.reddit.com/r/neovim/comments/qdb50v/quick_tip_for_anyone_having_cpu_spikes_with_efm/
+
 -- linting and simple formatting for js/ts
 local eslint_d = {
     lintCommand = "eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}",

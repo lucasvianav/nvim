@@ -1,4 +1,4 @@
 augroup TrimTrailingWhitespaces
     au!
-    au BufWritePre * :lua trim_trailing_whitespaces()
+    au BufWritePre * :lua require('v.utils').trim_trailing_whitespaces()
 augroup END

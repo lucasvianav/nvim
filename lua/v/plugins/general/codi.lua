@@ -1,17 +1,15 @@
-local function set (property, value)
-    vim.g['codi#' .. property] = value
-end
+require('v.utils').set_viml_options('codi#', {
+    -- use virtual text instead of new window
+    virtual_text        = true,
+    virtual_text_prefix = " ",
+
+    autoclose = true,
+    aliases = {
+        ['javascript.jsx'] = 'javascript',
+        ['typescript.tsx'] = 'typescript',
+    },
+})
 
 -- change the color
 -- vim.cmd('highlight CodiVirtualText guifg=cyan')
-
--- use virtual text instead of new window
-set('virtual_text', true) 
-set('virtual_text_prefix', "❯ ")
-
-set('autoclose', true)
-set('aliases', {
-    ['javascript.jsx'] = 'javascript',
-    ['typescript.tsx'] = 'typescript',
-})
 
