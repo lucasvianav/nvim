@@ -28,3 +28,5 @@ spell/*.spl
 tags
 
 log.txt
+.ignore/
+.ignore/*
