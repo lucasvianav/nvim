@@ -28,4 +28,3 @@ require('v.globals')
 require('v.settings')
 require('v.keybindings')
 require('v.packer')
-

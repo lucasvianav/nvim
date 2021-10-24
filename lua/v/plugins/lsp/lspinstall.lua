@@ -16,8 +16,6 @@ local desired_lsp_servers = {
 
 --------------------------------------------------------------------------------
 
-local lsp = vim.lsp
-
 local function setup_jedi()
     local jedi_config = require('lspinstall.util').extract_config('jedi_language_server')
     jedi_config.default_config.cmd[1] = './venv/bin/jedi-language-server'
