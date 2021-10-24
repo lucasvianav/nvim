@@ -19,7 +19,9 @@
     https://github.com/ecosse3/nvim
     https://github.com/albingroen/nvim-lsp-typescript-config
 
-    TODO: setup cleaning of log.txt
+    TODO: setup cleaning for log.txt
+    TODO: check if there are any plugins missing
+    TODO: setup wrapper commands for :LspStuff
 ]]
 
 pcall(require, 'impatient')

@@ -23,8 +23,9 @@
 -- TODO: https://www.reddit.com/r/neovim/comments/qdb50v/quick_tip_for_anyone_having_cpu_spikes_with_efm/
 
 -- linting and simple formatting for js/ts
+-- TODO: change for language server
 local eslint_d = {
-    lintCommand = "eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}",
+    lintCommand = 'eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}',
     lintStdin = true,
     lintFormats = {
         '%f(%l,%c): %tarning %m',
@@ -46,6 +47,7 @@ local eslint_d = {
 }
 
 -- formatting for js/ts/json/yaml/html/css, etc
+-- TODO: change for prettier_d_slim
 local prettier = {
     -- PRETTIER:
     --formatCommand = ([[
@@ -151,11 +153,11 @@ local markdownlint = {
 
 local M = {
     init_options = {
-        codeAction         = false,
-        completion         = false,
+        codeAction = false,
+        completion = false,
         documentFormatting = true,
-        documentSymbol     = false,
-        hover              = false,
+        documentSymbol = false,
+        hover = false,
     },
     filetypes = {
         'css',
