@@ -26,3 +26,5 @@ spell/*.spl
 
 **/packer_compiled.lua
 tags
+
+log.txt

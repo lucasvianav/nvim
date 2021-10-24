@@ -41,9 +41,9 @@ local function setup_servers()
     local servers = lspinstall.installed_servers()
     for _, server in pairs(servers) do
         if server ~= 'lua' then
-            local config = lsp_make_config()
+            local config = require('v.utils.lsp').lsp_make_config()
 
-            local custom_config_path = '_packer.plugins.lsp.servers.' .. server
+            local custom_config_path = 'v.plugins.lsp.servers.' .. server
             local has_custom_config, custom_config = pcall(require, custom_config_path)
 
             if has_custom_config then

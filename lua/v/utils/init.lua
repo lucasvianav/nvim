@@ -3,8 +3,8 @@ local cmd = vim.api.nvim_command
 
 local M = {}
 
-M.colors = require('v.utils.colors')
-M.ascii = require('v.utils.ascii')
+M.colors   = require('v.utils.colors')
+M.ascii    = require('v.utils.ascii')
 
 -- TODO: great utilities https://github.com/JoosepAlviste/dotfiles/blob/master/config/nvim/lua/j/utils.lua
 -- TODO: https://github.com/jose-elias-alvarez/dotfiles/blob/main/.config/nvim/lua/utils.lua

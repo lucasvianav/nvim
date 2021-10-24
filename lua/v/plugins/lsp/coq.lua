@@ -66,11 +66,21 @@ vim.g.coq_settings = {
 
 require('coq')
 
-map('i', '<Esc>', [[pumvisible() ? "\<C-e>"     : "\<Esc>"]], { expr = true, nnoremap = false })
-map('i', '<C-c>', [[pumvisible() ? "\<C-e>"     : "\<C-c>"]], { expr = true                   })
+require('v.utils.mappings').set_keybindings({
+    {
+        'i',
+        '<Esc>',
+        [[pumvisible() ? "\<C-e>" : "\<Esc>"]],
+        { expr = true, noremap = false },
+    },
 
-map('i', '<CR>', 'v:lua.CR()', { expr = true })
-map('i', '<BS>', 'v:lua.BS()', { expr = true })
+    {
+        'i',
+        '<C-c>',
+        [[pumvisible() ? "\<C-e>" : "\<C-c>"]],
+        { expr = true },
+    },
+})
 
 require("coq_3p")({
     {

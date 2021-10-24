@@ -4,7 +4,6 @@
 -- |  __/|  _ < | |  \ V / ___ \| | | |___
 -- |_|   |_| \_\___|  \_/_/   \_\_| |_____|
 
-
 local fn = vim.fn
 local cmd = vim.api.nvim_command
 
@@ -53,20 +52,33 @@ local function __get_config_setup_str(module, plugin_name, is_theme)
         return
     end
 
-    local require_str = [[    pcall(require, ']] .. module .. [[')]]
+    local require_str = [[
+        local ok, module = pcall(require, ']] .. module .. [[')
+
+        if not ok then
+            require('v.utils.log').log(module)
+        end
+    ]]
 
     if is_theme and plugin_name then
         local appearance_commands = require('v.settings').appearance.commands
         local cmds = fn.substitute(appearance_commands, [[.\+]], '[[&]]', '')
         cmds = cmds and 'vim.cmd(' .. cmds .. ')' or ''
 
-        require_str = require_str .. [[
+        require_str = require_str
+            .. [[
 
             local colorscheme = require('v.settings').appearance.colorscheme
 
-            if colorscheme == ']] .. plugin_name .. [[' then
-                vim.cmd('colorscheme ]] .. plugin_name .. [[')
-                ]] .. cmds .. [[
+            if colorscheme == ']]
+            .. plugin_name
+            .. [[' then
+                vim.cmd('colorscheme ]]
+            .. plugin_name
+            .. [[')
+                ]]
+            .. cmds
+            .. [[
             end
         ]]
     end
@@ -93,10 +105,10 @@ local function __get_plugin_table(args, type, category)
         return
     end
 
-    local name     = args.as or __get_plugin_name(args[1])
+    local name = args.as or __get_plugin_name(args[1])
     local is_theme = type == 'theme'
-    local opts     = args.__opts or {}
-    args.__opts    = nil -- we don't wanna pass this do packer
+    local opts = args.__opts or {}
+    args.__opts = nil -- we don't wanna pass this do packer
 
     if opts.dev then
         args[1] = __get_local_plugin_path(args[1])
@@ -108,10 +120,10 @@ local function __get_plugin_table(args, type, category)
             else
                 vim.notify(
                     'The plugin "'
-                    .. name
-                    .. '" was not found at: "'
-                    .. args[1]
-                    .. '". No fallback was provided.',
+                        .. name
+                        .. '" was not found at: "'
+                        .. args[1]
+                        .. '". No fallback was provided.',
                     'error'
                 )
 
@@ -156,19 +168,17 @@ local function __load_plugins(table, use)
     end
 end
 
-
 --  ____  _   _ ____  _     ___ ____
 -- |  _ \| | | | __ )| |   |_ _/ ___|
 -- | |_) | | | |  _ \| |    | | |
 -- |  __/| |_| | |_) | |___ | | |___
 -- |_|    \___/|____/|_____|___\____|
 
-
 local M = {}
 
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/utils/plugins.lua
 
-M.path         = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+M.path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 M.compile_path = fn.stdpath('config') .. '/lua/packer_compiled.lua'
 
 --- Loads packer.nvim (since it's lazy-loaded) and pcall requires it.
@@ -184,9 +194,7 @@ function M.init(packer)
         packer.init({
             display = {
                 open_fn = function()
-                    return require('packer.util').float({
-                        border = 'single',
-                    })
+                    return require('packer.util').float({ border = 'single' })
                 end,
                 prompt_border = 'single',
             },

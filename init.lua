@@ -18,6 +18,8 @@
     https://github.com/mattleong/CosmicNvim
     https://github.com/ecosse3/nvim
     https://github.com/albingroen/nvim-lsp-typescript-config
+
+    TODO: setup cleaning of log.txt
 ]]
 
 pcall(require, 'impatient')

@@ -4,10 +4,12 @@ local api = vim.api
 local cmd = vim.cmd
 local util = lsp.util
 
+local M = {}
+
 --[[
 Built-in LSP's GoToDefinition handler that supports splitting.
 ]]
-function _G.lsp_goto_definition(split_cmd)
+function M.lsp_goto_definition(split_cmd)
     local log = require('vim.lsp.log')
 
     -- (_, result, {method=method})
@@ -52,7 +54,7 @@ end
 --[[
 Analogue to VSCode's PeekDefiniton.
 ]]
-function _G.lsp_peek_definition()
+function M.lsp_peek_definition()
     return vim.lsp.buf_request(
         0,
         'textDocument/definition',
@@ -66,7 +68,7 @@ local orig_set_signs = vim.lsp.diagnostic.set_signs
 --[[
 Get most severe diagnostic sign per line.
 ]]
-function _G.lsp_set_signs_limited(diagnostics, bufnr, client_id, sign_ns, opts)
+function M.lsp_set_signs_limited(diagnostics, bufnr, client_id, sign_ns, opts)
     -- original func runs some checks, which I
     -- think is worth doing but maybe overkill
     if not diagnostics then
@@ -107,7 +109,7 @@ LSP's 'textDocument/formatting' handler.
 ]]
 -- TODO: https://github.com/lukas-reineke/dotfiles/blob/5b84e9264d3ca9e40fd773642e5a1d335224733e/vim/lua/lsp/formatting.lua#L38-L43
 -- TODO: https://github.com/lukas-reineke/dotfiles/blob/5b84e9264d3ca9e40fd773642e5a1d335224733e/vim/lua/lsp/handlers.lua#L1-L15
-function _G.lsp_formatting_handler(err, _, result, _, bufnr)
+function M.lsp_formatting_handler(err, _, result, _, bufnr)
     if err ~= nil or result == nil then
         return
     end
@@ -126,7 +128,7 @@ function _G.lsp_formatting_handler(err, _, result, _, bufnr)
     end
 end
 
-function _G.typescript_sort_imports(bufnr, post)
+function M.typescript_sort_imports(bufnr, post)
     bufnr = bufnr or vim.api.nvim_get_current_buf()
     local METHOD = 'workspace/executeCommand'
     local params = {
@@ -294,7 +296,7 @@ end
 --[[
 Returns a config for a LSP client to activate keybindings and enables snippet support, as well as include autocompletion plugin stuff.
 ]]
-function _G.lsp_make_config(config)
+function M.lsp_make_config(config)
     local capabilities = lsp.protocol.make_client_capabilities()
 
     -- enable snippets
@@ -328,3 +330,5 @@ function _G.lsp_make_config(config)
 
     return config
 end
+
+return M

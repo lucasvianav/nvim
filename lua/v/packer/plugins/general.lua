@@ -21,28 +21,28 @@ local M = {
         },
     },
 
-    { 'lewis6991/impatient.nvim'        }, -- improve startup time
+    { 'lewis6991/impatient.nvim' }, -- improve startup time
     { 'antoinemadec/FixCursorHold.nvim' }, -- fixes CursorHold and CursorHoldl
-    { 'nvim-lua/plenary.nvim'           }, -- great utility lua functions
-    { 'editorconfig/editorconfig-vim'   }, -- follow .editorconfig files
+    { 'nvim-lua/plenary.nvim' }, -- great utility lua functions
+    { 'editorconfig/editorconfig-vim' }, -- follow .editorconfig files
+    { 'milisims/nvim-luaref', ft = 'lua' }, -- lua documentation in :help
 
     -- TODO: define mappings for other prefixes
     -- TODO: https://github.com/folke/which-key.nvim/issues/90
     { 'folke/which-key.nvim' }, -- displays a popup with keybindings
 
     { 'max397574/better-escape.nvim', event = 'InsertEnter' }, -- better <Esc> with jk
-    { 'wellle/targets.vim',           event = 'CursorMoved' }, -- provides great new text objects
-    { 'andymass/vim-matchup',         event = 'CursorHold'  }, -- make % smarter
-    { 'windwp/nvim-autopairs',        event = 'InsertEnter' }, -- auto pairs for {[()]}
+    { 'wellle/targets.vim', event = 'CursorMoved' }, -- provides great new text objects
+    { 'andymass/vim-matchup', event = 'CursorHold' }, -- make % smarter
+    { 'windwp/nvim-autopairs', event = 'InsertEnter' }, -- auto pairs for {[()]}
 
     -- pairs of handy bracket maps
     -- TODO: maybe ditch my fork and just add modifications to my config
     { 'lucasvianav/vim-unimpaired', event = 'CursorMoved' },
 
-    { 'chrisbra/NrrwRgn',  cmd = { 'NR', 'NUD'          } }, -- focus narrow code section
+    { 'chrisbra/NrrwRgn', cmd = { 'NR', 'NUD' } }, -- focus narrow code section
     { 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } }, -- easily swap function arguments
-    { 'tpope/vim-repeat',  keys = '.', fn = 'repeat#set'  }, -- enables . repeat for plugins
-
+    { 'tpope/vim-repeat', keys = '.', fn = 'repeat#set' }, -- enables . repeat for plugins
 
     -- use nvim in the browser
     -- TODO: make this work pls (should work now)
@@ -84,8 +84,8 @@ local M = {
     -- word manipulation utilities
     {
         'tpope/vim-abolish',
-        cmd   = { 'Abolish', 'Subvert' },
-        keys  = 'cr',
+        cmd = { 'Abolish', 'Subvert' },
+        keys = 'cr',
         after = 'vim-repeat',
     },
 
@@ -179,7 +179,7 @@ local M = {
     {
         'AndrewRadev/splitjoin.vim',
         keys = { 'gS', 'gJ' },
-        -- after = 'vim-easyclip',
+        after = 'vim-easyclip',
     },
 
     -- 2-char search motion

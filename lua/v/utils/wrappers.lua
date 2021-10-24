@@ -20,6 +20,19 @@ function M.loadfile(module)
     end
 end
 
+function M.format_for_inspection(...)
+    local objects, v = {}, nil
+    for i = 1, select('#', ...) do
+        v = select(i, ...)
+        table.insert(objects, vim.inspect(v, {
+            indent = '    ',
+            depth = 4,
+        }))
+    end
+
+    return table.concat(objects, '\n')
+end
+
 --[[
 Inspect contents of an object. Wraps `print(vim.inspect(args))`.
 
@@ -30,16 +43,7 @@ Inspect contents of an object. Wraps `print(vim.inspect(args))`.
 @vararg any
 ]]
 function M.inspect(...)
-    local objects, v = {}, nil
-    for i = 1, select('#', ...) do
-        v = select(i, ...)
-        table.insert(objects, vim.inspect(v, {
-            indent = '    ',
-            depth = 4,
-        }))
-    end
-
-    print(table.concat(objects, '\n'))
+    print(M.format_for_inspection(...))
     return ...
 end
 
