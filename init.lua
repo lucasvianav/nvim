@@ -15,13 +15,14 @@
     https://github.com/100lvlmaster/dots/tree/master
     https://www.youtube.com/watch?v=brtIZxOwDXE
     https://www.reddit.com/r/neovim/comments/qbmbj8/cosmicnvim_a_lightweight_and_opinionated_neovim/
-    https://github.com/mattleong/CosmicNvim
     https://github.com/ecosse3/nvim
     https://github.com/albingroen/nvim-lsp-typescript-config
 
     TODO: setup cleaning for log.txt
     TODO: check if there are any plugins missing
     TODO: setup wrapper commands for :LspStuff
+
+    https://github.com/sumneko/lua-language-server/wiki/EmmyLua-Annotations#optional-params
 ]]
 
 pcall(require, 'impatient')

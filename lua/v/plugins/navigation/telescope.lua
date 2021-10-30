@@ -2,7 +2,10 @@
 -- https://github.com/danielnehrig/nvim/blob/master/lua/telescope/_extensions/dotfiles.lua
 -- https://github.com/danielnehrig/nvim/blob/master/lua/plugins/telescope/init.lua
 
-local actions   = require('telescope.actions')
+-- TODO: https://github.com/mattleong/CosmicNvim/blob/main/lua/cosmic/core/navigation/init.lua
+-- https://github.com/mattleong/CosmicNvim/blob/main/lua/cosmic/core/navigation/mappings.lua
+
+local actions = require('telescope.actions')
 local telescope = require('telescope')
 
 telescope.setup({
@@ -38,8 +41,7 @@ telescope.setup({
         },
     },
 
-    pickers = {
-    },
+    pickers = {},
 
     extensions = {
         lsp_handlers = {
@@ -61,7 +63,11 @@ require('v.utils.mappings').set_keybindings({
     { 'n', '<Leader>fc', [[:<C-U>lua require('telescope.builtin').commands()<cr>]] },
     { 'n', '<Leader>fch', [[:<C-U>lua require('telescope.builtin').command_history()<cr>]] },
     { 'n', '<Leader>fj', [[:<C-U>lua require('telescope.builtin').jumplist()<cr>]] },
-    { 'n', '<Leader>f/', [[:<C-U>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]] },
+    {
+        'n',
+        '<Leader>f/',
+        [[:<C-U>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]],
+    },
 
     -- lsp
     { 'n', 'gd', [[:<C-U>lua require('telescope.builtin').lsp_definitions()<cr>]] },
@@ -73,8 +79,16 @@ require('v.utils.mappings').set_keybindings({
         [[:<C-U>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_dropdown({}))<cr>]],
     },
     { 'v', '<Leader>ca', [[:<C-U>lua require('telescope.builtin').lsp_range_code_actions()<cr>]] },
-    { 'n', '<Leader>fg', [[:<C-U>lua require('telescope.builtin').lsp_document_diagnostics()<cr>]] },
-    { 'n', '<Leader>fgw', [[:<C-U>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>]] },
+    {
+        'n',
+        '<Leader>fg',
+        [[:<C-U>lua require('telescope.builtin').lsp_document_diagnostics()<cr>]],
+    },
+    {
+        'n',
+        '<Leader>fgw',
+        [[:<C-U>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>]],
+    },
 
     -- git
     { 'n', '<Leader>gc', [[:<C-U>lua require('telescope.builtin').git_commits()<cr>]] },
@@ -82,7 +96,11 @@ require('v.utils.mappings').set_keybindings({
 
     -- extensions
     { 'n', '<Leader>fh', [[:<C-U>lua require('telescope').extensions.heading.heading()<cr>]] },
-    { 'n', '<Leader>fs', [[:<C-U>lua require('telescope').extensions['session-lens'].search_session()<cr>]] },
+    {
+        'n',
+        '<Leader>fs',
+        [[:<C-U>lua require('telescope').extensions['session-lens'].search_session()<cr>]],
+    },
 })
 
 local map = require('v.utils.mappings').map

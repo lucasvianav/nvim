@@ -1,4 +1,5 @@
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/statusline.lua
+-- TODO: https://github.com/mattleong/CosmicNvim/blob/main/lua/cosmic/core/statusline/init.lua
 
 --  _   _ _____ ___ _     ___ _____ ___ _____ ____
 -- | | | |_   _|_ _| |   |_ _|_   _|_ _| ____/ ___|
@@ -32,21 +33,21 @@ local mode_colors = {
 
 local icons = {
     addition = '  ',
-    bar      = '▋',
-    diff     = '   ',
-    dir      = '  ',
-    empty    = '  ',
-    engine   = '   ',
-    error    = '  ',
-    git      = '  ',
-    left     = '',
-    main     = 'ಠ_ಠ ', -- 🌜
-    pos_col  = '㏇',
+    bar = '▋',
+    diff = '   ',
+    dir = '  ',
+    empty = '  ',
+    engine = '   ',
+    error = '  ',
+    git = '  ',
+    left = '',
+    main = 'ಠ_ಠ ', -- 🌜
+    pos_col = '㏇',
     position = ' ',
     remotion = '  ',
-    right    = ' ', -- 
-    vi_mode  = ' ',
-    warning  = '  ',
+    right = ' ', -- 
+    vi_mode = ' ',
+    warning = '  ',
 }
 
 local function str(args)
@@ -59,9 +60,6 @@ local function mode(field)
     local current_mode = vim.fn.mode()
     return mode_colors[current_mode:byte()][field]
 end
-
-
-
 
 --   ____    _    _        _    __  ____   ___     ___ _   _ _____
 --  / ___|  / \  | |      / \   \ \/ /\ \ / / |   |_ _| \ | | ____|
@@ -230,7 +228,7 @@ gls.short_line_left = {
         FileName = {
             provider = function()
                 return (vim.api.nvim_buf_get_name(0):len() == 0) and icons.empty
-                or fileinfo.get_current_file_name()
+                    or fileinfo.get_current_file_name()
             end,
             highlight = { colors.fg_dark, colors.transparent },
         },
