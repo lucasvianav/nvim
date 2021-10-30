@@ -4,7 +4,7 @@ local M = {}
     Open NvimTree with :NvimTreeFind file and closes it with :NvimTreeClose.
 ]]
 function M.nvim_tree_toggle()
-    local is_packer_loaded, packer = pcall(require, 'packer')
+    local is_packer_loaded, packer = require('v.utils.packer').get_packer()
 
     if is_packer_loaded then
         packer.loader('nvim-tree')
