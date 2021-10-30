@@ -84,7 +84,7 @@ function M.lsp_peek_definition()
     )
 end
 
-local orig_set_signs = vim.lsp.diagnostic.set_signs
+M.original_set_signs = vim.lsp.diagnostic.set_signs
 
 --[[
 Get most severe diagnostic sign per line.
@@ -122,7 +122,7 @@ function M.lsp_set_signs_limited(diagnostics, bufnr, client_id, sign_ns, opts)
     end
 
     -- call original func
-    orig_set_signs(filtered_diagnostics, bufnr, client_id, sign_ns, opts)
+    M.original_set_signs(filtered_diagnostics, bufnr, client_id, sign_ns, opts)
 end
 
 --[[
@@ -173,7 +173,7 @@ local function disable_formatting(client)
 end
 
 local specific_on_attach = {
-    typescript = function(client, bufnr)
+    tsserver = function(client, bufnr)
         local function buf_set_keymap(...)
             local args = { ... }
             api.nvim_buf_set_keymap(bufnr, args[1], args[2], args[3], {
@@ -235,42 +235,56 @@ local specific_on_attach = {
     end,
 
     efm = function(client, bufnr)
-        client.resolved_capabilities.rename = false
+        client.resolved_capabilities.document_formatting = true
+        client.resolved_capabilities.document_range_formatting = true
         client.resolved_capabilities.hover = false
+        client.resolved_capabilities.rename = false
     end,
 
-    angular = disable_formatting,
-    css = disable_formatting,
+    eslint = disable_formatting,
+    angularls = disable_formatting,
+    cssls = disable_formatting,
     graphql = disable_formatting,
-    json = disable_formatting,
     html = disable_formatting,
-    lua = disable_formatting,
-    python = disable_formatting,
-    vim = disable_formatting,
+    jedi_language_server = disable_formatting,
+    jsonls = disable_formatting,
+    sumneko_lua = disable_formatting,
+    vimls = disable_formatting,
 }
 
 local function conditional_autocmds(client)
     if client.resolved_capabilities.document_highlight then
         api.nvim_exec(
             [[
-        augroup lsp_document_highlight
-        au! * <buffer>
-        au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
-        au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        augroup END
-        ]],
+                augroup lsp_document_highlight
+                au! * <buffer>
+                au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
+                au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+                augroup END
+            ]],
             false
         )
     end
 
     if client.resolved_capabilities.document_formatting then
-        -- au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
         api.nvim_exec(
             [[
-            augroup AutoFormat
-            au! * <buffer>
-            au BufWritePost <buffer> lua vim.lsp.buf.formatting()
-            augroup END
+                augroup AutoFormat
+                au! * <buffer>
+                au BufWritePost <buffer> lua vim.lsp.buf.formatting()
+                augroup END
+            ]],
+            false
+        )
+    end
+
+    if client.name == 'eslint' then
+        vim.api.nvim_exec(
+            [[
+                augroup AutoFormatEslint
+                au! * <buffer>
+                au BufWritePre <buffer> EslintFixAll
+                augroup END
             ]],
             false
         )

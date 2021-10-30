@@ -20,10 +20,7 @@
         cmake
 ]]
 
--- TODO: https://www.reddit.com/r/neovim/comments/qdb50v/quick_tip_for_anyone_having_cpu_spikes_with_efm/
-
 -- linting and simple formatting for js/ts
--- TODO: change for language server
 local eslint_d = {
     lintCommand = 'eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}',
     lintStdin = true,
@@ -47,20 +44,29 @@ local eslint_d = {
 }
 
 -- formatting for js/ts/json/yaml/html/css, etc
--- TODO: change for prettier_d_slim
 local prettier = {
-    -- PRETTIER:
-    --formatCommand = ([[
-    --$([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier")
-    ----find-config-path
-    ----stdin-filepath
-    --${INPUT}
-    --]]):gsub("\n", " "),
-
     formatCommand = ([[
-    $([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettierd")
-    "${INPUT}"
+    $([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier")
+    --find-config-path
+    --stdin-filepath
+    ${INPUT}
+    ]]):gsub("\n", " "),
+
+    formatStdin = true,
+    rootMarkers = {
+        '.prettierrc',
+        '.prettierrc.json',
+        'package.json',
+    },
+}
+
+-- formatting for js/ts/json/yaml/html/css, etc
+local prettierd = {
+    formatCommand = ([[
+        $([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettierd")
+        "${INPUT}"
     ]]):gsub('\n', ' '),
+
     formatStdin = true,
     rootMarkers = {
         '.prettierrc',
@@ -68,7 +74,6 @@ local prettier = {
         'package.json',
     },
 
-    -- PRETTIERD:
     env = {
         string.format('PRETTIERD_DEFAULT_CONFIG=%s', vim.fn.expand('~/.prettierrc.json')),
     },
@@ -162,14 +167,14 @@ local M = {
     filetypes = {
         'css',
         'html',
-        'javascript',
+        -- 'javascript',
         'javascript.jsx',
         'javascriptreact',
         'json',
         'lua',
         'python',
         'scss',
-        'typescript',
+        -- 'typescript',
         'typescript.tsx',
         'typescriptreact',
         'vim',
@@ -178,12 +183,12 @@ local M = {
     root_dir = vim.loop.cwd,
     settings = {
         rootMarkers = {
-            '.eslintrc.cjs',
-            '.eslintrc.js',
-            '.eslintrc.json',
-            '.eslintrc.ts',
-            '.eslintrc.yaml',
-            '.eslintrc.yml',
+            -- '.eslintrc.cjs',
+            -- '.eslintrc.js',
+            -- '.eslintrc.json',
+            -- '.eslintrc.ts',
+            -- '.eslintrc.yaml',
+            -- '.eslintrc.yml',
             '.git/',
             '.prettierrc',
             '.prettierrc.json',
@@ -191,24 +196,22 @@ local M = {
             'package.json',
             'requirements.txt',
         },
-        lintDebounce = '100ms',
+        lintDebounce = 100,
         logLevel = 10,
         logFile = '/tmp/efm.log',
         languages = {
-            -- TODO: setup estlint --> pretier
-            -- https://github.com/JoosepAlviste/dotfiles/blob/b09a4eed7bf4c7862a02aa8b14ffe29896a0bfa5/config/nvim/lua/j/plugins/lsp/efm_ls.lua#L26-L38
-            javascript = { eslint_d }, -- prettier?
-            javascriptreact = { eslint_d }, -- prettier?
-            typescript = { eslint_d }, -- prettier?
-            typescriptreact = { eslint_d }, -- prettier?
+            -- javascript = { eslint_d },
+            -- typescript = { eslint_d },
+            javascriptreact = { prettierd },
+            typescriptreact = { prettierd },
             -- markdown = { prettier, markdownlint },
 
-            css = { prettier },
-            graphql = { prettier },
-            html = { prettier },
-            json = { prettier },
-            scss = { prettier },
-            yaml = { prettier },
+            css = { prettierd },
+            graphql = { prettierd },
+            html = { prettierd },
+            json = { prettierd },
+            scss = { prettierd },
+            yaml = { prettierd },
             vim = { vint },
             lua = { stylua },
 

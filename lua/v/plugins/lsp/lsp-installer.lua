@@ -5,6 +5,7 @@ local luadev_loaded, luadev = pcall(require, 'lua-dev')
 
 for _, server_name in ipairs(utils.servers) do
     local ok, server = lsp_installer_servers.get_server(server_name)
+
     if ok then
         if not server:is_installed() then
             server:install()
