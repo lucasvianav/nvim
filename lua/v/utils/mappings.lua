@@ -1,4 +1,4 @@
-local t  = require('v.utils.wrappers').termcode
+local t = require('v.utils.wrappers').termcode
 local fn = vim.fn
 
 -- TODO: create functions for autocmds, augroups and commands
@@ -24,8 +24,11 @@ function M.map(modes, lhs, rhs, opts)
         noremap = rhs:lower():match('^<plug>.+') == nil,
         silent = true,
     }, opts or {})
+
     local buffer = options.buffer
+    local bufnr = options.bufnr
     options.buffer = nil
+    options.bufnr = nil
 
     local available_modes = 'nvsxo!ilct'
 
@@ -34,7 +37,7 @@ function M.map(modes, lhs, rhs, opts)
 
         if #mode == 1 and is_valid_mode then
             if buffer then
-                vim.api.nvim_buf_set_keymap(0, mode, lhs, rhs, options)
+                vim.api.nvim_buf_set_keymap(bufnr or 0, mode, lhs, rhs, options)
             else
                 vim.api.nvim_set_keymap(mode, lhs, rhs, options)
             end
@@ -59,7 +62,7 @@ function M.unmap(modes, lhs)
         local is_valid_mode = string.find(available_modes, mode)
 
         if #mode == 1 and is_valid_mode then
-            vim.api.nvim_set_keymap(mode, lhs, t'<nop>', {})
+            vim.api.nvim_set_keymap(mode, lhs, t('<nop>'), {})
         end
     end
 end
@@ -69,12 +72,12 @@ function M.CR()
 
     if fn.pumvisible() ~= 0 then
         if fn.complete_info({ 'selected' }).selected == -1 then
-            return has_npairs and (npairs.esc('<c-e>') .. npairs.autopairs_cr()) or t'<C-e><CR>'
+            return has_npairs and (npairs.esc('<c-e>') .. npairs.autopairs_cr()) or t('<C-e><CR>')
         else
-            return has_npairs and npairs.esc('<c-y>') or t'<C-y>'
+            return has_npairs and npairs.esc('<c-y>') or t('<C-y>')
         end
     else
-        return has_npairs and npairs.autopairs_cr() or t'<CR>'
+        return has_npairs and npairs.autopairs_cr() or t('<CR>')
     end
 end
 
@@ -82,9 +85,9 @@ function M.BS()
     local has_npairs, npairs = pcall(require, 'nvim-autopairs')
 
     if fn.pumvisible() ~= 0 and fn.complete_info({ 'mode' }).mode == 'eval' then
-        return has_npairs and (npairs.esc('<c-e>') .. npairs.autopairs_bs()) or t'<C-e><BS>'
+        return has_npairs and (npairs.esc('<c-e>') .. npairs.autopairs_bs()) or t('<C-e><BS>')
     else
-        return has_npairs and npairs.autopairs_bs() or t'<BS>'
+        return has_npairs and npairs.autopairs_bs() or t('<BS>')
     end
 end
 

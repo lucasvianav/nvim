@@ -50,7 +50,7 @@ local prettier = {
     --find-config-path
     --stdin-filepath
     ${INPUT}
-    ]]):gsub("\n", " "),
+    ]]):gsub('\n', ' '),
 
     formatStdin = true,
     rootMarkers = {

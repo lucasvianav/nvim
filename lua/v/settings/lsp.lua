@@ -19,4 +19,5 @@ lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(lsp.diagnostic.on_pub
     update_in_insert = false,
 })
 
--- lsp.handlers['textDocument/formatting'] = lsp_formatting_handler,
+-- lsp.handlers['textDocument/formatting'] = require('v.utils.lsp').formatting
+-- lsp.handlers['textDocument/rangeFormatting'] = require('v.utils.lsp').formatting

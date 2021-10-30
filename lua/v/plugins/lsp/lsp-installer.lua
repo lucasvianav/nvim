@@ -16,7 +16,7 @@ for _, server_name in ipairs(utils.servers) do
             )
         end
 
-        local config = utils.lsp_make_config()
+        local config = utils.make_config()
 
         local custom_config_path = 'v.plugins.lsp.servers.' .. server_name
         local has_custom_config, custom_config = pcall(require, custom_config_path)
@@ -36,5 +36,3 @@ end
 lsp_installer.on_server_ready(function()
     vim.api.nvim_command('do User LspAttachBuffers')
 end)
-
-vim.lsp.diagnostic.set_signs = utils.lsp_set_signs_limited

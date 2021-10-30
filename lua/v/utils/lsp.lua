@@ -4,8 +4,6 @@
 local lsp = vim.lsp
 local fn = vim.fn
 local api = vim.api
-local cmd = vim.cmd
-local util = lsp.util
 
 local M = {}
 
@@ -27,44 +25,7 @@ M.servers = {
     'vimls',
 }
 
---[[
-Built-in LSP's GoToDefinition handler that supports splitting.
-]]
-function M.lsp_goto_definition(split_cmd)
-    local log = require('vim.lsp.log')
-
-    -- (_, result, {method=method})
-    local handler = function(_, method, result)
-        if result == nil or vim.tbl_isempty(result) then
-            local _ = log.info() and log.info(method, 'No location found')
-            return nil
-        end
-
-        if split_cmd then
-            if vim.tbl_contains({ 'split', 'vsplit' }, split_cmd) then
-                cmd(split_cmd)
-            else
-                cmd('vsplit')
-            end
-        end
-
-        if vim.tbl_islist(result) then
-            util.jump_to_location(result[1])
-
-            if #result > 1 then
-                util.set_qflist(util.locations_to_items(result))
-                api.nvim_command('copen')
-                api.nvim_command('wincmd p')
-            end
-        else
-            util.jump_to_location(result)
-        end
-    end
-
-    return handler
-end
-
-local function peek_definitin_callback(_, result)
+local function __peek_definitin_callback(_, result)
     if result == nil or vim.tbl_isempty(result) then
         return nil
     end
@@ -72,79 +33,33 @@ local function peek_definitin_callback(_, result)
     lsp.util.preview_location(result[1])
 end
 
---[[
-Analogue to VSCode's PeekDefiniton.
-]]
-function M.lsp_peek_definition()
+--- Peek definition for symbl below the cursor. Similar to VSCode's Peek
+--- Definition.
+function M.peek_definition()
     return vim.lsp.buf_request(
         0,
         'textDocument/definition',
         lsp.util.make_position_params(),
-        peek_definitin_callback
+        __peek_definitin_callback
     )
 end
 
-M.original_set_signs = vim.lsp.diagnostic.set_signs
-
---[[
-Get most severe diagnostic sign per line.
-]]
-function M.lsp_set_signs_limited(diagnostics, bufnr, client_id, sign_ns, opts)
-    -- original func runs some checks, which I
-    -- think is worth doing but maybe overkill
-    if not diagnostics then
-        diagnostics = diagnostic_cache[bufnr][client_id]
-    end
-
-    -- early escape
-    if not diagnostics then
-        return
-    end
-
-    -- work out max severity diagnostic per line
-    local max_severity_per_line = {}
-    for _, d in pairs(diagnostics) do
-        if max_severity_per_line[d.range.start.line] then
-            local current_d = max_severity_per_line[d.range.start.line]
-
-            if d.severity < current_d.severity then
-                max_severity_per_line[d.range.start.line] = d
-            end
-        else
-            max_severity_per_line[d.range.start.line] = d
-        end
-    end
-
-    -- map to list
-    local filtered_diagnostics = {}
-    for i, v in pairs(max_severity_per_line) do
-        table.insert(filtered_diagnostics, v)
-    end
-
-    -- call original func
-    M.original_set_signs(filtered_diagnostics, bufnr, client_id, sign_ns, opts)
-end
-
---[[
-LSP's 'textDocument/formatting' handler.
-]]
--- TODO: https://github.com/lukas-reineke/dotfiles/blob/5b84e9264d3ca9e40fd773642e5a1d335224733e/vim/lua/lsp/formatting.lua#L38-L43
--- TODO: https://github.com/lukas-reineke/dotfiles/blob/5b84e9264d3ca9e40fd773642e5a1d335224733e/vim/lua/lsp/handlers.lua#L1-L15
-function M.lsp_formatting_handler(err, _, result, _, bufnr)
+--- Function for LSP's 'textDocument/formatting' handler.
+--- (not working for some reason?)
+function M.formatting(err, _, result, _, bufnr)
     if err ~= nil or result == nil then
         return
     end
 
     if not api.nvim_buf_get_option(bufnr, 'modified') then
         local view = fn.winsaveview()
-
         lsp.util.apply_text_edits(result, bufnr)
         fn.winrestview(view)
 
         if bufnr == api.nvim_get_current_buf() then
             api.nvim_command('noautocmd :update')
         else
-            vim.notify('Formatted: ' .. bufnr, 'info', { title = 'LSP' })
+            api.nvim_notify('Formatted buffer ' .. bufnr, 2, { title = 'LSP --- Formatting' })
         end
     end
 end
@@ -167,12 +82,14 @@ function M.typescript_sort_imports(bufnr, post)
     vim.lsp.buf_request(bufnr, METHOD, params, callback)
 end
 
+--- Disables formatting capabilities for an LSP client.
+--- @param client table
 local function disable_formatting(client)
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
 end
 
-local specific_on_attach = {
+local __specific_on_attach = {
     tsserver = function(client, bufnr)
         local function buf_set_keymap(...)
             local args = { ... }
@@ -241,9 +158,9 @@ local specific_on_attach = {
         client.resolved_capabilities.rename = false
     end,
 
-    eslint = disable_formatting,
     angularls = disable_formatting,
     cssls = disable_formatting,
+    eslint = disable_formatting,
     graphql = disable_formatting,
     html = disable_formatting,
     jedi_language_server = disable_formatting,
@@ -252,7 +169,9 @@ local specific_on_attach = {
     vimls = disable_formatting,
 }
 
-local function conditional_autocmds(client)
+--- Setup autcommands based on LSP client's characteristics.
+--- @param client table
+local function __conditional_autocmds(client)
     if client.resolved_capabilities.document_highlight then
         api.nvim_exec(
             [[
@@ -291,54 +210,50 @@ local function conditional_autocmds(client)
     end
 end
 
-local function on_attach(client, bufnr)
-    local function buf_set_keymap(...)
-        local args = { ... }
-        api.nvim_buf_set_keymap(bufnr, args[1], args[2], args[3], {
-            noremap = true,
-            silent = true,
-        })
+--- Calls LSP hover or activates Vim doc (`:h`) depending on filetype.
+function M.show_documentation()
+    if vim.tbl_contains({ 'vim', 'help', 'lua' }, vim.o.filetype) then
+        vim.api.nvim_command('h ' .. vim.fn.expand('<cword>'))
+    else
+        vim.lsp.buf.hover()
     end
+end
+
+local function __on_attach(client, bufnr)
+    local opts = { buffer = true, bufnr = bufnr }
+
+    require('v.utils.mappings').set_keybindings({
+        { 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts },
+        { 'n', '<leader>gp', '<cmd>lua require("v.utils.lsp").peek_definition()<CR>', opts },
+        { 'n', '<space>e', '<cmd>lua vim.diagnostic.show_line_diagnostics()<CR>', opts },
+        { 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts },
+        { 'n', 'K', '<cmd>lua require("v.utils.lsp").show_documentation()<CR>', opts },
+        { 'n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts },
+        { 'n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts },
+        { 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts },
+        { 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts },
+        { 'n', 'gq', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts },
+    })
 
     -- enable completion triggered by <c-x><c-o>
     api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    -- mappings
-    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-    buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>')
-    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-    buf_set_keymap('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
-    buf_set_keymap('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
-
-    -- TODO: also show help
-    -- https://github.com/lucasvianav/nvim/blob/21062452bc1f7db702cc9a0d537cbad4b2aa683b/general/plugins/config/coc.vim#L79-L87
-    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-
-    -- buf_set_keymap('n', 'gd',        '<cmd>lua vim.lsp.buf.definition()<CR>')
-    -- buf_set_keymap('n', '<space>D',  '<cmd>lua vim.lsp.buf.type_definition()<CR>')
-    -- buf_set_keymap('n', '<C-k>',     '<cmd>lua vim.lsp.buf.signature_help()<CR>',               opts)
-    -- buf_set_keymap('n', '<space>e',  '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-    -- buf_set_keymap('n', '<space>q',  '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>',           opts)
-    -- buf_set_keymap('n', '<space>f',  '<cmd>lua vim.lsp.buf.formatting()<CR>',                   opts)
-
-    if specific_on_attach[client.name] then
-        specific_on_attach[client.name](client, bufnr)
+    if __specific_on_attach[client.name] then
+        __specific_on_attach[client.name](client, bufnr)
     end
 
-    conditional_autocmds(client)
+    __conditional_autocmds(client)
 end
 
---[[
-Returns a config for a LSP client to activate keybindings and enables snippet support, as well as include autocompletion plugin stuff.
-]]
-function M.lsp_make_config(config)
+--- Generates a language server config to be passed into `nvim-lspconfig`,
+--- enabling snippets and including autcompletion plugin stuff.
+--- @param config? table
+--- @return table
+function M.make_config(config)
     local capabilities = lsp.protocol.make_client_capabilities()
 
     -- enable snippets
     capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-    -- TODO: https://github.com/JoosepAlviste/dotfiles/blob/b09a4eed7bf4c7862a02aa8b14ffe29896a0bfa5/config/nvim/lua/j/plugins/lsp/init.lua#L115-L132
-    -- not too sure
     capabilities.textDocument.completion.completionItem.resolveSupport = {
         properties = {
             'documentation',
@@ -355,7 +270,7 @@ function M.lsp_make_config(config)
 
     config = vim.tbl_deep_extend('keep', config or {}, {
         capabilities = capabilities,
-        on_attach = on_attach,
+        on_attach = __on_attach,
     })
 
     local has_coq, coq = pcall(require, 'coq')
