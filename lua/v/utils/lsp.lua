@@ -41,7 +41,7 @@ function M.lsp_goto_definition(split_cmd)
         end
 
         if split_cmd then
-            if contains(split_cmd, { 'split', 'vsplit' }) then
+            if vim.tbl_contains({ 'split', 'vsplit' }, split_cmd) then
                 cmd(split_cmd)
             else
                 cmd('vsplit')

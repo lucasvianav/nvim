@@ -15,13 +15,3 @@ end
 function _G.D(...)
     return wrappers.dump_text(...)
 end
-
-function _G.contains(x, list)
-    for _, y in pairs(list) do
-        if x == y then
-            return true
-        end
-    end
-
-    return false
-end
