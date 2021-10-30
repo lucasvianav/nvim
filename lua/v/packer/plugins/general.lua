@@ -4,6 +4,9 @@
 -- TODO: https://github.com/puremourning/vimspector
 -- TODO: better distribute this plugins
 -- TODO: https://github.com/dstein64/vim-startuptime
+-- https://www.reddit.com/r/neovim/comments/qhv7e2/remove_surrounding_function_call/
+-- https://github.com/AndrewRadev/dsf.vim
+-- https://github.com/gelguy/wilder.nvim
 
 local M = {
     -- packer can manage itself as an optional plugin

@@ -9,15 +9,20 @@
 ]]
 
 local M = {
-    { 'rcarriga/nvim-notify'      }, -- beautiful notifications
+    { 'rcarriga/nvim-notify' }, -- beautiful notifications
     { 'kwkarlwang/bufresize.nvim' }, -- preserve window sizes on terminal resize
-    { 'crispgm/nvim-tabline'      }, -- display opened tabs (2+)
+    { 'crispgm/nvim-tabline' }, -- display opened tabs (2+)
 
-    { 'kyazdani42/nvim-web-devicons', as    = 'devicons'        }, -- colored icons
-    { 'p00f/nvim-ts-rainbow',         after = 'nvim-treesitter' }, -- colored matching brackets
+    { 'kyazdani42/nvim-web-devicons', as = 'devicons' }, -- colored icons
+    { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }, -- colored matching brackets
 
-    -- TODO: maybe swap for RRethy/vim-hexokinase
-    { 'norcalli/nvim-colorizer.lua',  event = 'CursorHold'      }, -- colored color codes
+    -- colored color codes
+    -- DEPENDENCY: Golang
+    {
+        'RRethy/vim-hexokinase',
+        event = 'CursorHold',
+        run = 'make hexokinase',
+    },
 
     -- indent lines
     {

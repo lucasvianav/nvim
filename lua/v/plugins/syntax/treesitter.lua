@@ -23,17 +23,21 @@ local parsers = {
     'yaml',
 }
 
+-- TODO: setup indenting for TSX
+-- https://github.com/MaxMEllon/vim-jsx-pretty ???
+-- https://www.reddit.com/r/neovim/comments/mgyfys/tressitter_query_can_i_specify_vimpolyglot/gt01lnf/
+-- TODO: maybe remove "syntax on" from settings
+
 require('nvim-treesitter.configs').setup({
     ensure_installed = parsers,
 
-    autopairs             = { enable = true },
-    autotag               = { enable = true },
-    highlight             = { enable = true },
+    autopairs = { enable = true },
+    autotag = { enable = true },
+    highlight = { enable = true },
     context_commentstring = { enable = true },
-
+    indent = { enable = false },
     rainbow = {
         enable = true,
         extended_mode = true,
     },
 })
-

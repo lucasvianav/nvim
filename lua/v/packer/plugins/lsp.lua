@@ -8,7 +8,7 @@ local M = {
     { 'neovim/nvim-lspconfig' }, -- config for language servers
 
     { 'folke/lua-dev.nvim', ft = 'lua', as = 'lua-dev' }, -- setup LSP for lua-nvim dev
-    { 'kosayoda/nvim-lightbulb', event = 'CursorHold'  }, -- indicates code actions
+    { 'kosayoda/nvim-lightbulb', event = 'CursorHold' }, -- indicates code actions
 
     -- not actually LSP-related but what the heck
     -- DEPENDENCY: universal-ctags, ctags
@@ -17,7 +17,6 @@ local M = {
         'ludovicchabant/vim-gutentags',
         requires = 'skywind3000/gutentags_plus',
     },
-
 
     -- TODO: get this to work
     -- show function signature
@@ -28,15 +27,9 @@ local M = {
     },
 
     -- easier way to install language servers
-    -- (unsing my fork because of angular)
-    -- TODO: switch to williamboman/nvim-lsp-installer
     {
-        'nvim-lspinstall', -- @DEPRECATED
+        'williamboman/nvim-lsp-installer',
         after = 'nvim-lspconfig',
-        __opts = {
-            dev = true,
-            fallback = 'lucasvianav/nvim-lspinstall',
-        },
     },
 
     -- code completion and snippets
@@ -44,6 +37,8 @@ local M = {
     -- https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/cmp.lua
     -- https://github.com/danielnehrig/nvim/blob/master/lua/plugins/cmp/init.lua
     -- TODO: lukas-reineke/cmp-under-comparator
+    -- https://github.com/lukas-reineke/cmp-rg
+    -- https://github.com/petertriho/cmp-git
     -- DEPENDENCY: python3-venv
     { 'ms-jpq/coq_nvim', branch = 'coq' },
     { 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' }, -- snippets

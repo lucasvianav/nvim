@@ -1,3 +1,7 @@
+" TODO:
+" https://www.reddit.com/r/neovim/comments/qdfaw8/is_there_a_way_to_set_abbreviations_through_lua/
+" https://gitlab.com/yorickpeterse/dotfiles/-/blob/c2fd334e7690b1955a59b9f3f92149dbfb88f9f8/dotfiles/.config/nvim/lua/dotfiles/abbrev.lua
+
 " commands i always get wrong
 cabbrev E e
 cabbrev E! e!

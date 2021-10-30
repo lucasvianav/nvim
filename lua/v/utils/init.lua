@@ -3,8 +3,8 @@ local cmd = vim.api.nvim_command
 
 local M = {}
 
-M.colors   = require('v.utils.colors')
-M.ascii    = require('v.utils.ascii')
+M.colors = require('v.utils.colors')
+M.ascii = require('v.utils.ascii')
 
 -- TODO: great utilities https://github.com/JoosepAlviste/dotfiles/blob/master/config/nvim/lua/j/utils.lua
 -- TODO: https://github.com/jose-elias-alvarez/dotfiles/blob/main/.config/nvim/lua/utils.lua
@@ -82,11 +82,11 @@ function M.set_viml_options(lead, opts, unique_value)
     lead = lead or ''
 
     local no_uppercase_initial = lead:match('^[^A-Z]')
-    local is_caps_lock         = lead:match('^[A-Z]+$')
-    local has_no_separator     = lead:match('[a-zA-Z0-9]$')
+    local is_caps_lock = lead:match('^[A-Z]+$')
+    local has_no_separator = lead:match('[a-zA-Z0-9]$')
 
     if (no_uppercase_initial or is_caps_lock) and has_no_separator then
-        lead =  lead .. '_'
+        lead = lead .. '_'
     end
 
     if unique_value then

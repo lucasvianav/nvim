@@ -1,3 +1,6 @@
+-- TODO: override renaming handler https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp/rename.lua
+-- TODO: diagnostics https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp/diagnostics.lua#L15
+
 local lsp = vim.lsp
 local fn = vim.fn
 local api = vim.api
@@ -5,6 +8,24 @@ local cmd = vim.cmd
 local util = lsp.util
 
 local M = {}
+
+M.servers = {
+    'angularls',
+    'bashls',
+    'clangd',
+    'cssls',
+    'dockerls',
+    'efm',
+    'emmet_ls',
+    'eslint',
+    'graphql',
+    'html',
+    'jedi_language_server',
+    'jsonls',
+    'sumneko_lua',
+    'tsserver',
+    'vimls',
+}
 
 --[[
 Built-in LSP's GoToDefinition handler that supports splitting.
