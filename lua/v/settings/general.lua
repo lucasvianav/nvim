@@ -48,6 +48,7 @@ o.undofile = true -- have persistent undo-tree for buffers
 o.updatetime = 300 -- faster completion
 o.wrapscan = false -- search don't wrap around the EOF
 o.writebackup = false -- don't backup files before overwriting them
+o.wildmenu = true -- better completion for cli
 
 o.foldtext = "v:lua.require('v.utils.folding').foldtext()"
 
@@ -168,5 +169,8 @@ o.diffopt = {
     'iwhite', -- ignore trailing whitespaces
     'vertical', -- use vertical split by default
 }
+
+-- surrunding pairs, jumpable with %
+o.matchpairs = { '(:)', '{:}', '[:]', '<:>' }
 
 return M

@@ -1,12 +1,11 @@
--- TODO: override renaming handler https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp/rename.lua
--- TODO: diagnostics https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp/diagnostics.lua#L15
-
 local lsp = vim.lsp
 local fn = vim.fn
 local api = vim.api
+local cmd = vim.api.nvim_command
 
 local M = {}
 
+--- Language servers to keep installed
 M.servers = {
     'angularls',
     'bashls',
@@ -24,25 +23,6 @@ M.servers = {
     'tsserver',
     'vimls',
 }
-
-local function __peek_definitin_callback(_, result)
-    if result == nil or vim.tbl_isempty(result) then
-        return nil
-    end
-
-    lsp.util.preview_location(result[1])
-end
-
---- Peek definition for symbl below the cursor. Similar to VSCode's Peek
---- Definition.
-function M.peek_definition()
-    return vim.lsp.buf_request(
-        0,
-        'textDocument/definition',
-        lsp.util.make_position_params(),
-        __peek_definitin_callback
-    )
-end
 
 --- Function for LSP's 'textDocument/formatting' handler.
 --- (not working for some reason?)
@@ -62,6 +42,123 @@ function M.formatting(err, _, result, _, bufnr)
             api.nvim_notify('Formatted buffer ' .. bufnr, 2, { title = 'LSP --- Formatting' })
         end
     end
+end
+
+local __rename_prompt = 'Rename   '
+
+local function __rename_handler(...)
+    local err = select(1, ...)
+    local is_new = not select(4, ...) or type(select(4, ...)) ~= 'number'
+
+    local result
+    local method
+
+    if is_new then
+        method = select(3, ...).method
+        result = select(2, ...)
+    else
+        method = select(2, ...)
+        result = select(3, ...)
+    end
+
+    if err then
+        vim.api.nvim_notify(
+            ("Error running LSP query '%s': %s"):format(method, err),
+            vim.log.levels.ERROR,
+            { title = 'LSP --- Renaming' }
+        )
+        return
+    end
+
+    -- echo the resulting changes
+    if result and result.changes then
+        local new_word = ''
+        local msg = ''
+
+        for file, change in pairs(result.changes) do
+            new_word = change[1].newText
+            msg = msg
+                .. ('%d changes -> %s'):format(#change, require('v.utils').get_relative_path(file))
+                .. '\n'
+        end
+
+        local currName = vim.fn.expand('<cword>')
+        msg = msg:sub(1, #msg - 1)
+        vim.notify(
+            msg,
+            vim.log.levels.INFO,
+            { title = ('Rename: %s =>> %s'):format(currName, new_word) }
+        )
+    end
+
+    vim.lsp.handlers[method](...)
+end
+
+--- Confirms/declines the renaming.
+function M.rename_callback()
+    local new_name = vim.trim(vim.fn.getline('.'):sub(#__rename_prompt + 1, -1))
+    cmd([[stopinsert]])
+    cmd([[bd!]])
+
+    if new_name and #new_name > 0 and new_name ~= vim.fn.expand('<cword>') then
+        local params = vim.lsp.util.make_position_params()
+        params.newName = new_name
+        vim.lsp.buf_request(0, 'textDocument/rename', params, __rename_handler)
+    end
+end
+
+--- Custom rename prompt for symbol below cursor.
+function M.rename()
+    local current_name = vim.fn.expand('<cword>')
+    local bufnr = vim.api.nvim_create_buf(false, true)
+
+    vim.api.nvim_buf_set_option(bufnr, 'buftype', 'prompt')
+    vim.api.nvim_buf_set_option(bufnr, 'bufhidden', 'wipe')
+    vim.api.nvim_buf_add_highlight(bufnr, -1, 'RenamePrompt', 0, 0, #__rename_prompt)
+
+    vim.fn.prompt_setprompt(bufnr, __rename_prompt)
+    local winnr = vim.api.nvim_open_win(bufnr, true, {
+        relative = 'cursor',
+        width = 50,
+        height = 1,
+        row = -3,
+        col = 1,
+        style = 'minimal',
+        border = 'single',
+    })
+
+    vim.api.nvim_win_set_option(winnr, 'winhl', 'Normal:Floating')
+    vim.api.nvim_win_set_option(winnr, 'cursorline', false)
+    vim.api.nvim_win_set_option(winnr, 'scrolloff', 0)
+
+    local opts = { buffer = true }
+    require('v.utils.mappings').set_keybindings({
+        { 'n', '<ESC>', '<cmd>bd!<CR>', opts },
+        { 'n', '<C-C>', '<cmd>bd!<CR>', opts },
+        { { 'n', 'i' }, '<CR>', "<cmd>lua require('v.utils.lsp').rename_callback()<CR>", opts },
+        { 'i', '<BS>', '<ESC>"_xi', opts },
+    })
+
+    cmd('normal i' .. current_name)
+end
+
+local function __peek_definitin_callback(_, result)
+    if result == nil or vim.tbl_isempty(result) then
+        return nil
+    end
+
+    lsp.util.preview_location(result[1])
+end
+
+--- Peek definition for symbl below the cursor. Similar to VSCode's Peek
+--- Definition.
+function M.peek_definition()
+    return vim.lsp.buf_request(
+        0,
+        'textDocument/definition',
+        lsp.util.make_position_params(),
+        __peek_definitin_callback
+    )
 end
 
 function M.typescript_sort_imports(bufnr, post)
@@ -213,7 +310,7 @@ end
 --- Calls LSP hover or activates Vim doc (`:h`) depending on filetype.
 function M.show_documentation()
     if vim.tbl_contains({ 'vim', 'help', 'lua' }, vim.o.filetype) then
-        vim.api.nvim_command('h ' .. vim.fn.expand('<cword>'))
+        cmd('h ' .. vim.fn.expand('<cword>'))
     else
         vim.lsp.buf.hover()
     end
@@ -223,16 +320,22 @@ local function __on_attach(client, bufnr)
     local opts = { buffer = true, bufnr = bufnr }
 
     require('v.utils.mappings').set_keybindings({
-        { 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts },
         { 'n', '<leader>gp', '<cmd>lua require("v.utils.lsp").peek_definition()<CR>', opts },
-        { 'n', '<space>e', '<cmd>lua vim.diagnostic.show_line_diagnostics()<CR>', opts },
-        { 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts },
+        { 'n', '<leader>s', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts },
+        { 'n', '<space>rn', '<cmd>lua require("v.utils.lsp").rename()<CR>', opts },
         { 'n', 'K', '<cmd>lua require("v.utils.lsp").show_documentation()<CR>', opts },
         { 'n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts },
         { 'n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts },
         { 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts },
         { 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts },
         { 'n', 'gq', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts },
+
+        {
+            'n',
+            'gl',
+            "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line', border = 'single' })<CR>",
+            opts,
+        },
     })
 
     -- enable completion triggered by <c-x><c-o>

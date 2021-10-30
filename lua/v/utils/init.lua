@@ -101,4 +101,17 @@ function M.set_viml_options(lead, opts, unique_value)
     end
 end
 
+--- Uses Plenary to get a relative path to `filepath` from the cwd.
+--- @params file_path string
+--- @return string
+function M.get_relative_path(filepath)
+    local is_plenary_loaded, plenary = pcall(require, 'plenary.path')
+
+    if is_plenary_loaded then
+        local parsed_path = filepath:gsub('file://', '')
+        local relative_path = plenary:new(parsed_path):make_relative(vim.fn.getcwd())
+        return './' .. relative_path
+    end
+end
+
 return M
