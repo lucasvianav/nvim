@@ -24,9 +24,8 @@ if not is_loaded and not exists then
         utils.setup(packer)
         packer.sync()
     else
-        vim.api.nvim_notify('Shit happened.', 4, { title = 'Packer' })
+        vim.api.nvim_notify('Shit happened.', vim.log.levels.ERROR, { title = 'Packer' })
     end
 else
     pcall(require, 'packer_compiled')
 end
-

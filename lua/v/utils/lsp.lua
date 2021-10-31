@@ -25,11 +25,15 @@ M.servers = {
 }
 
 --- Function for LSP's 'textDocument/formatting' handler.
---- (not working for some reason?)
-function M.formatting(err, _, result, _, bufnr)
+--- @param err table
+--- @param ctx table
+--- @param config table
+function M.formatting(err, result, ctx, config)
     if err ~= nil or result == nil then
         return
     end
+
+    local bufnr = ctx.bufnr
 
     if not api.nvim_buf_get_option(bufnr, 'modified') then
         local view = fn.winsaveview()
@@ -39,7 +43,11 @@ function M.formatting(err, _, result, _, bufnr)
         if bufnr == api.nvim_get_current_buf() then
             api.nvim_command('noautocmd :update')
         else
-            api.nvim_notify('Formatted buffer ' .. bufnr, 2, { title = 'LSP --- Formatting' })
+            api.nvim_notify(
+                'Formatted buffer ' .. bufnr,
+                vim.log.levels.INFO,
+                { title = 'LSP --- Formatting' }
+            )
         end
     end
 end
@@ -180,7 +188,7 @@ function M.typescript_sort_imports(bufnr, post)
 end
 
 --- Disables formatting capabilities for an LSP client.
---- @param client table
+--- @param client table lsp client
 local function disable_formatting(client)
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
@@ -267,15 +275,16 @@ local __specific_on_attach = {
 }
 
 --- Setup autcommands based on LSP client's characteristics.
---- @param client table
+--- @param client table lsp client
 local function __conditional_autocmds(client)
     if client.resolved_capabilities.document_highlight then
         api.nvim_exec(
             [[
-                augroup lsp_document_highlight
-                au! * <buffer>
-                au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
-                au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+                augroup LspSymbolHighlight
+                    au! * <buffer>
+                    au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
+                    au CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
+                    au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
                 augroup END
             ]],
             false
@@ -286,8 +295,8 @@ local function __conditional_autocmds(client)
         api.nvim_exec(
             [[
                 augroup AutoFormat
-                au! * <buffer>
-                au BufWritePost <buffer> lua vim.lsp.buf.formatting()
+                    au! * <buffer>
+                    au BufWritePost <buffer> lua vim.lsp.buf.formatting()
                 augroup END
             ]],
             false
@@ -298,8 +307,8 @@ local function __conditional_autocmds(client)
         vim.api.nvim_exec(
             [[
                 augroup AutoFormatEslint
-                au! * <buffer>
-                au BufWritePre <buffer> EslintFixAll
+                    au! * <buffer>
+                    au BufWritePre <buffer> EslintFixAll
                 augroup END
             ]],
             false
@@ -380,6 +389,26 @@ function M.make_config(config)
     if has_coq then
         config = coq.lsp_ensure_capabilities(config)
     end
+
+    config.handlers = {
+        ['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
+            border = 'single',
+        }),
+
+        ['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, {
+            border = 'single',
+        }),
+
+        ['textDocument/publishDiagnostics'] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
+            border = 'single',
+            virtual_text = { source = 'always' }, -- or 'if_many'
+            severity_sort = true,
+            underline = true,
+            update_in_insert = false,
+        }),
+
+        ['textDocument/formatting'] = M.formatting,
+    }
 
     return config
 end

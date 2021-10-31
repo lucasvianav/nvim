@@ -1,7 +1,6 @@
 local lsp_installer = require('nvim-lsp-installer')
 local lsp_installer_servers = require('nvim-lsp-installer.servers')
 local utils = require('v.utils.lsp')
-local luadev_loaded, luadev = pcall(require, 'lua-dev')
 
 for _, server_name in ipairs(utils.servers) do
     local ok, server = lsp_installer_servers.get_server(server_name)
@@ -11,7 +10,7 @@ for _, server_name in ipairs(utils.servers) do
             server:install()
             vim.api.nvim_notify(
                 server_name .. ' successfully installed.',
-                2,
+                vim.log.levels.INFO,
                 { title = 'LspInstall' }
             )
         end
@@ -25,8 +24,11 @@ for _, server_name in ipairs(utils.servers) do
             config = vim.tbl_deep_extend('force', config, custom_config)
         end
 
-        if server_name == 'sumneko_lua' and luadev_loaded then
-            config = luadev.setup({ lspconfig = config })
+        if server_name == 'sumneko_lua' then
+            local luadev_loaded, luadev = pcall(require, 'lua-dev')
+            if luadev_loaded then
+                config = luadev.setup({ lspconfig = config })
+            end
         end
 
         server:setup(config)

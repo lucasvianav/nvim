@@ -17,6 +17,7 @@
     https://www.reddit.com/r/neovim/comments/qbmbj8/cosmicnvim_a_lightweight_and_opinionated_neovim/
     https://github.com/ecosse3/nvim
     https://github.com/albingroen/nvim-lsp-typescript-config
+    https://github.com/shaeinst/roshnivim
 
     TODO: setup cleaning for log.txt
     TODO: check if there are any plugins missing

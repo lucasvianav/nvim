@@ -7,6 +7,7 @@
 -- https://www.reddit.com/r/neovim/comments/qhv7e2/remove_surrounding_function_call/
 -- https://github.com/AndrewRadev/dsf.vim
 -- https://github.com/gelguy/wilder.nvim
+-- https://github.com/vuki656/package-info.nvim
 
 local M = {
     -- packer can manage itself as an optional plugin
@@ -150,6 +151,7 @@ local M = {
     },
 
     -- html super snippets
+    -- TOOD: https://github.com/pedro757/emmet
     {
         'mattn/emmet-vim',
         ft = {

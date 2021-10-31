@@ -29,6 +29,6 @@ set_keybindings({
     { 'n', '<C-l>', '<C-w>l' },
 
     -- better nav for omnicomplete
-    { 'i', '<C-j>', '<C-n>' },
-    { 'i', '<C-k>', '<C-p>' },
+    { { 'c', 'i' }, '<C-j>', '<C-n>' },
+    { { 'c', 'i' }, '<C-k>', '<C-p>' },
 })

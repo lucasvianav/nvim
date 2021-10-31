@@ -6,6 +6,10 @@ local fn = vim.fn
 -- https://github.com/akinsho/dotfiles/blob/148d1b720b296ad9ef6943da4e7b9d2c4f86c59b/.config/nvim/lua/as/globals.lua#L320-L334
 -- https://github.com/danielnehrig/nvim/blob/4331ba8b2f3d4676476dabaa2f82e31b00061e6e/lua/utils/init.lua#L26-L41
 
+-- TODO: setup whichkey registering on the fly
+-- https://github.com/folke/which-key.nvim#-setup
+-- https://github.com/akinsho/dotfiles/blob/c81dadf0c570ce39543a9b43a75f41256ecd03fc/.config/nvim/lua/as/plugins/lspconfig.lua#L61-L119
+
 local M = {}
 
 --[[
@@ -50,7 +54,7 @@ Wrapper for vim.api.nvim_set_keymap(), mapping the `lhs` to `<nop>`.
 ]]
 function M.unmap(modes, lhs)
     if not lhs then
-        vim.api.nvim_notify("Didn't receive a LHS.", 4, { title = 'Unmapping' })
+        vim.api.nvim_notify("Didn't receive a LHS.", vim.log.levels.ERROR, { title = 'Unmapping' })
         return
     elseif type(modes) ~= 'table' then
         modes = { modes }
