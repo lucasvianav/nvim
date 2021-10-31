@@ -35,7 +35,7 @@ require('nvim-treesitter.configs').setup({
     autotag = { enable = true },
     highlight = { enable = true },
     context_commentstring = { enable = true },
-    indent = { enable = false },
+    indent = { enable = true },
     rainbow = {
         enable = true,
         extended_mode = true,
