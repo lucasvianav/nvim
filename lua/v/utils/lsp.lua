@@ -14,7 +14,7 @@ M.servers = {
     'dockerls',
     'efm',
     'emmet_ls',
-    'eslint',
+    -- 'eslint',
     'graphql',
     'html',
     'jedi_language_server',
