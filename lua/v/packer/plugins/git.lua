@@ -1,4 +1,3 @@
--- TODO: kdheepak/lazygit.nvim
 -- TODO: sindrets/diffview.nvim
 -- https://www.reddit.com/r/neovim/comments/n2vww8/diffviewnvim_cycle_through_diffs_for_all_modified/
 -- https://www.reddit.com/r/neovim/comments/n2vww8/diffviewnvim_cycle_through_diffs_for_all_modified/gwnahs3/
@@ -49,6 +48,13 @@ local M = {
         'lewis6991/gitsigns.nvim',
         after = 'plenary.nvim',
         event = 'CursorHold',
+    },
+
+    -- practical git diff for modified files
+    {
+        'sindrets/diffview.nvim',
+        cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
+        after = 'devicons',
     },
 }
 
