@@ -78,8 +78,8 @@ local function __rename_handler(...)
         return
     end
 
-    -- echo the resulting changes
-    if result and result.changes then
+    -- notify the files in which the change happened
+    if result and result.changes and #result.changes > 1 then
         local new_word = ''
         local msg = ''
 

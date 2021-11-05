@@ -1,7 +1,3 @@
--- TODO: sindrets/diffview.nvim
--- https://www.reddit.com/r/neovim/comments/n2vww8/diffviewnvim_cycle_through_diffs_for_all_modified/
--- https://www.reddit.com/r/neovim/comments/n2vww8/diffviewnvim_cycle_through_diffs_for_all_modified/gwnahs3/
-
 local M = {
     -- show git blame info on lines
     {

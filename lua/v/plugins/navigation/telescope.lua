@@ -7,6 +7,7 @@
 
 local actions = require('telescope.actions')
 local telescope = require('telescope')
+local utils = require('v.utils.telescope')
 
 telescope.setup({
     defaults = {
@@ -41,7 +42,20 @@ telescope.setup({
         },
     },
 
-    pickers = {},
+    pickers = {
+        git_commits = {
+            mappings = {
+                i = {
+                    ['<CR>'] = utils.open_in_diff,
+                    ['<c-o>'] = utils.open_in_diff,
+                },
+
+                n = {
+                    ['<CR>'] = utils.open_in_diff,
+                },
+            },
+        },
+    },
 
     extensions = {
         lsp_handlers = {
