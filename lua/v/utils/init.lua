@@ -61,8 +61,15 @@ function M.reload_or_source_current()
     local action
 
     if filetype == 'lua' then
-        require('v.utils.wrappers').reload(_get_current_require_path())
-        action = 'Reloaded '
+        local filepath = _get_current_require_path()
+
+        if filepath then
+            require('v.utils.wrappers').reload(filepath)
+            action = 'Reloaded '
+        else
+            cmd('luafile %')
+            action = 'Ran '
+        end
     elseif filetype == 'vim' then
         cmd('source %')
         action = 'Sourced '
