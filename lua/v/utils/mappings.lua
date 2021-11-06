@@ -17,7 +17,9 @@ Wrapper for vim.api.nvim_set_keymap(), but defaulting `noremap` and 'silent' opt
 ]]
 function M.map(modes, lhs, rhs, opts)
     if not lhs then
-        vim.api.nvim_notify("Didn't receive a LHS.", 4, { title = 'Unmapping' })
+        vim.api.nvim_notify("Didn't receive a LHS.", vim.log.levels.ERROR, {
+            title = 'Unmapping',
+        })
         return
     elseif type(modes) ~= 'table' then
         modes = { modes }
