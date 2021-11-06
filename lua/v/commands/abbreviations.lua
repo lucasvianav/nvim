@@ -1,6 +1,4 @@
-local utils = require('v.utils.abbreviations')
-
-utils.set_abbreviations({
+require('v.utils.abbreviations').set_abbreviations({
     -- commands I always get wrong
     { 'E', 'e' },
     { 'E!', 'e!' },

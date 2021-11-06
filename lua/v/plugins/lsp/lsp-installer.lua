@@ -25,10 +25,8 @@ for _, server_name in ipairs(utils.servers) do
         end
 
         if server_name == 'sumneko_lua' then
-            P('oi')
             local luadev_loaded, luadev = pcall(require, 'lua-dev')
             if luadev_loaded then
-                P('entrou', 'netrou')
                 config = luadev.setup({ lspconfig = config })
             end
         end

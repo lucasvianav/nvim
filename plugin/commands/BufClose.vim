@@ -1,3 +1,5 @@
+" TODO: convert to Lua
+
 command! -nargs=? -complete=buffer -bang Bclose
             \ :call BufClose('<args>', '<bang>')
 command! -nargs=? -complete=buffer -bang BClose
