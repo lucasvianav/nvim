@@ -1,10 +1,3 @@
--- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/telescope.lua
--- https://github.com/danielnehrig/nvim/blob/master/lua/telescope/_extensions/dotfiles.lua
--- https://github.com/danielnehrig/nvim/blob/master/lua/plugins/telescope/init.lua
-
--- TODO: https://github.com/mattleong/CosmicNvim/blob/main/lua/cosmic/core/navigation/init.lua
--- https://github.com/mattleong/CosmicNvim/blob/main/lua/cosmic/core/navigation/mappings.lua
-
 local actions = require('telescope.actions')
 local telescope = require('telescope')
 local utils = require('v.utils.telescope')
@@ -12,14 +5,21 @@ local utils = require('v.utils.telescope')
 telescope.setup({
     defaults = {
         prompt_prefix = '   ',
-        selection_caret = ' > ',
+        selection_caret = '  ',
         entry_prefix = '   ',
         initial_mode = 'insert',
-        file_sorter = require('telescope.sorters').get_fuzzy_file,
-        file_ignore_patterns = {},
-        generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
-        set_env = { ['COLORTERM'] = 'truecolor' },
         color_devicons = true,
+
+        set_env = { ['COLORTERM'] = 'truecolor' },
+        path_display = { 'smart', 'absolute' },
+
+        file_ignore_patterns = {
+            '%.jpg',
+            '%.jpeg',
+            '%.png',
+            '%.otf',
+            '%.ttf',
+        },
 
         mappings = {
             i = {
@@ -29,6 +29,12 @@ telescope.setup({
                 ['<C-v>'] = actions.file_vsplit,
                 ['<C-h>'] = actions.file_split,
                 ['<C-s>'] = actions.file_split,
+                ['<C-y>'] = actions.toggle_selection,
+                ['<C-a>'] = actions.select_all,
+                ['<M-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
+                ['<M-C-Q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+                ['<TAB>'] = actions.toggle_selection + actions.move_selection_next,
+                ['<S-TAB>'] = actions.toggle_selection + actions.move_selection_previous,
             },
 
             n = {
@@ -38,12 +44,26 @@ telescope.setup({
                 ['q'] = actions.close,
                 ['v'] = actions.file_vsplit,
                 ['s'] = actions.file_split,
+                ['<C-y>'] = actions.toggle_selection,
+                ['<C-a>'] = actions.select_all,
+                ['<M-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
+                ['<M-C-Q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+                ['<TAB>'] = actions.toggle_selection + actions.move_selection_next,
+                ['<S-TAB>'] = actions.toggle_selection + actions.move_selection_previous,
             },
         },
     },
 
     pickers = {
+        find_files = {
+            follow = true,
+            hidden = true,
+        },
+
         git_commits = {
+            previewer = false,
+            theme = 'dropdown',
+
             mappings = {
                 i = {
                     ['<CR>'] = utils.open_in_diff,
@@ -55,33 +75,54 @@ telescope.setup({
                 },
             },
         },
-    },
 
-    extensions = {
-        lsp_handlers = {
-            code_action = {
-                telescope = require('telescope.themes').get_dropdown({}),
+        buffers = {
+            ignore_current_buffer = true,
+            sort_lastused = true,
+            show_all_buffers = true,
+            previewer = false,
+            theme = 'dropdown',
+
+            mappings = {
+                i = {
+                    ['<M-C-S-H>'] = actions.delete_buffer,
+                },
+
+                n = {
+                    ['dd'] = actions.delete_buffer,
+                },
             },
+        },
+
+        git_branches = {
+            theme = 'dropdown',
+            previewer = false,
+            layout_strategy = 'center',
+        },
+
+        lsp_code_actions = {
+            theme = 'cursor',
+            promppt_tile = 'Code Actions',
+        },
+
+        lsp_range_code_actions = {
+            theme = 'cursor',
+            promppt_tile = 'Code Actions',
         },
     },
 })
 
-telescope.load_extension('heading')
+telescope.load_extension('fzy_native')
 
 require('v.utils.mappings').set_keybindings({
     -- general
     { 'n', '<Leader>ff', [[:<C-U>lua require('telescope.builtin').find_files()<cr>]] },
-    { 'n', '<Leader>fr', [[:<C-U>lua require('telescope.builtin').oldfiles()<cr>]] },
+    { 'n', '<Leader>fr', [[:<C-U>lua require('telescope.builtin').resume()<cr>]] },
     { 'n', '<Leader>fp', [[:<C-U>lua require('telescope.builtin').live_grep()<cr>]] },
     { 'n', '<Leader>fb', [[:<C-U>lua require('telescope.builtin').buffers()<cr>]] },
     { 'n', '<Leader>fc', [[:<C-U>lua require('telescope.builtin').commands()<cr>]] },
     { 'n', '<Leader>fch', [[:<C-U>lua require('telescope.builtin').command_history()<cr>]] },
     { 'n', '<Leader>fj', [[:<C-U>lua require('telescope.builtin').jumplist()<cr>]] },
-    {
-        'n',
-        '<Leader>f/',
-        [[:<C-U>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]],
-    },
 
     -- lsp
     { 'n', 'gd', [[:<C-U>lua require('telescope.builtin').lsp_definitions()<cr>]] },
@@ -90,7 +131,7 @@ require('v.utils.mappings').set_keybindings({
     {
         'n',
         '<Leader>ca',
-        [[:<C-U>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_dropdown({}))<cr>]],
+        [[:<C-U>lua require('telescope.builtin').lsp_code_actions()<cr>]],
     },
     { 'v', '<Leader>ca', [[:<C-U>lua require('telescope.builtin').lsp_range_code_actions()<cr>]] },
     {
@@ -106,7 +147,7 @@ require('v.utils.mappings').set_keybindings({
 
     -- git
     { 'n', '<Leader>gc', [[:<C-U>lua require('telescope.builtin').git_commits()<cr>]] },
-    { 'n', '<Leader>gs', [[:<C-U>lua require('telescope.builtin').git_status()<cr>]] },
+    { 'n', '<Leader>gb', [[:<C-U>lua require('telescope.builtin').git_branches()<cr>]] },
 
     -- extensions
     { 'n', '<Leader>fh', [[:<C-U>lua require('telescope').extensions.heading.heading()<cr>]] },
@@ -115,26 +156,11 @@ require('v.utils.mappings').set_keybindings({
         '<Leader>fs',
         [[:<C-U>lua require('telescope').extensions['session-lens'].search_session()<cr>]],
     },
+
+    -- custom functions
+    { 'n', '<leader>fu', '<cmd>lua require("v.utils.telescope").find_unimed()<cr>' },
+    { 'n', '<leader>fpu', '<cmd>lua require("v.utils.telescope").grep_unimed()<cr>' },
+    { 'n', '<leader>fn', '<cmd>lua require("v.utils.telescope").find_nvim()<cr>' },
+    { 'n', '<leader>fd', '<cmd>lua require("v.utils.telescope").find_dotfiles()<cr>' },
+    { 'n', '<leader>f/', '<cmd>lua require("v.utils.telescope").grep_last_search()<cr>' },
 })
-
-local map = require('v.utils.mappings').map
-
--- TODO: fix these functions and move them to utils
-function _G.find_unimed()
-    require('telescope.builtin').find_files({
-        shorten_path = false,
-        cwd = vim.fn.expand('$WORK_DIR') .. '/unimed-pj',
-        prompt = '~ unimed ~',
-    })
-end
-
-function _G.grep_unimed()
-    require('telescope.builtin').live_grep({
-        shorten_path = false,
-        cwd = vim.fn.expand('$WORK_DIR') .. '/unimed-pj',
-        prompt = '~ unimed ~',
-    })
-end
-
-map('n', '<leader>fu', '<cmd>lua find_unimed()<cr>')
-map('n', '<leader>fpu', '<cmd>lua grep_unimed()<cr>')

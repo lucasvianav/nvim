@@ -18,6 +18,7 @@
     https://github.com/ecosse3/nvim
     https://github.com/albingroen/nvim-lsp-typescript-config
     https://github.com/shaeinst/roshnivim
+    https://github.com/ayamir/nvimdots
 
     TODO: setup cleaning for log.txt
     TODO: check if there are any plugins missing

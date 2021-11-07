@@ -25,6 +25,7 @@ local M = {
         },
     },
 
+    -- TODO: test https://github.com/tami5/impatient.nvim
     { 'lewis6991/impatient.nvim' }, -- improve startup time
     { 'antoinemadec/FixCursorHold.nvim' }, -- fixes CursorHold and CursorHoldl
     { 'nvim-lua/plenary.nvim' }, -- great utility lua functions
@@ -42,7 +43,7 @@ local M = {
 
     -- pairs of handy bracket maps
     -- TODO: maybe ditch my fork and just add modifications to my config
-    { 'lucasvianav/vim-unimpaired', event = 'CursorMoved' },
+    { 'lucasvianav/vim-unimpaired', keys = { '[', ']' } },
 
     { 'chrisbra/NrrwRgn', cmd = { 'NR', 'NUD' } }, -- focus narrow code section
     { 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } }, -- easily swap function arguments
@@ -144,6 +145,7 @@ local M = {
 
     -- better clipboard
     -- TODO: lua port
+    -- https://github.com/AckslD/nvim-neoclip.lua
     {
         'svermeulen/vim-easyclip',
         event = { 'CursorMoved', 'InsertEnter' },

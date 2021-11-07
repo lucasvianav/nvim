@@ -1,11 +1,13 @@
+-- TODO: https://github.com/nathom/filetype.nvim
+
 local M = {
-    { 'lervag/vimtex',       ft = { 'tex', 'plaintex' } }, -- LaTeX
-    { 'fladson/vim-kitty',   ft = { 'kitty' }           }, -- kitty config
-    { 'tpope/vim-sleuth',    event = 'CursorHold'       }, -- autodetect indent
-    { 'dkarter/bullets.vim', ft = 'markdown'            }, -- markdown lists
+    { 'lervag/vimtex', ft = { 'tex', 'plaintex' } }, -- LaTeX
+    { 'fladson/vim-kitty', ft = { 'kitty' } }, -- kitty config
+    { 'tpope/vim-sleuth', event = 'CursorHold' }, -- autodetect indent
+    { 'dkarter/bullets.vim', ft = 'markdown' }, -- markdown lists
 
     { 'jose-elias-alvarez/nvim-lsp-ts-utils', ft = 'typescript' }, -- TypeScript utilities
-    { 'nvim-treesitter/nvim-treesitter',      run = ':TSUpdate' }, -- code parsing for syntax highlighting, etc
+    { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }, -- code parsing for syntax highlighting, etc
 
     -- JSON
     -- TODO: can this work with treesitter and LSP?

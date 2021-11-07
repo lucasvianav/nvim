@@ -19,8 +19,8 @@ require('v.utils.abbreviations').set_abbreviations({
     { 'wqb', 'BqWrite' },
 
     -- Packer
-    { 'PS ', 'PackerSync' },
-    { 'PC ', 'PackerCompile' },
+    { 'PS', 'PackerSync' },
+    { 'PC', 'PackerCompile' },
     { 'PCl', 'PackerClean' },
     { 'PSt', 'PackerStatus' },
 
