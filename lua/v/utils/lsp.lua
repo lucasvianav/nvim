@@ -277,42 +277,26 @@ local __specific_on_attach = {
 --- Setup autcommands based on LSP client's characteristics.
 --- @param client table lsp client
 local function __conditional_autocmds(client)
+    local augroup = require('v.utils.autocmds').augroup
+
     if client.resolved_capabilities.document_highlight then
-        api.nvim_exec(
-            [[
-                augroup LspSymbolHighlight
-                    au! * <buffer>
-                    au CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
-                    au CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
-                    au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-                augroup END
-            ]],
-            false
-        )
+        augroup('LspSymbolHighlight', {
+            { 'CursorHold', '<buffer>', 'lua vim.lsp.buf.document_highlight()' },
+            { 'CursorHoldI', '<buffer>', 'lua vim.lsp.buf.document_highlight()' },
+            { 'CursorMoved', '<buffer>', 'lua vim.lsp.buf.clear_references()' },
+        })
     end
 
     if client.resolved_capabilities.document_formatting then
-        api.nvim_exec(
-            [[
-                augroup AutoFormat
-                    au! * <buffer>
-                    au BufWritePost <buffer> lua vim.lsp.buf.formatting()
-                augroup END
-            ]],
-            false
-        )
+        augroup('AutoFormat', {
+            { 'BufWritePost', '<buffer>', 'lua vim.lsp.buf.formatting()' },
+        })
     end
 
     if client.name == 'eslint' then
-        vim.api.nvim_exec(
-            [[
-                augroup AutoFormatEslint
-                    au! * <buffer>
-                    au BufWritePre <buffer> EslintFixAll
-                augroup END
-            ]],
-            false
-        )
+        augroup('AutoFormatEslint', {
+            { 'BufWritePre', '<buffer>', 'EslintFixAll' },
+        })
     end
 end
 

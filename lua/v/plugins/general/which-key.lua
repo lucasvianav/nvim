@@ -5,71 +5,77 @@ local wk = require('which-key')
 
 wk.setup({
     plugins = {
-        marks     = true,
+        marks = true,
         registers = false,
-        spelling  = { enabled = false },
+        spelling = { enabled = false },
 
         -- help for built-in stuff
         presets = {
-            operators    = false,
-            motions      = false,
+            operators = false,
+            motions = false,
             text_objects = false,
-            windows      = true,
-            nav          = false,
-            z            = true,
-            g            = true,
+            windows = true,
+            nav = false,
+            z = true,
+            g = true,
         },
     },
 
     key_labels = {
         ['<space>'] = 'SPC',
-        ['<cr>']    = 'RET',
-        ['<tab>']   = 'TAB',
+        ['<cr>'] = 'RET',
+        ['<tab>'] = 'TAB',
     },
 
     icons = {
         breadcrumb = '»', -- shows your active key combo
-        separator  = '➜', -- used between a key and it's label
-        group      = '+', -- prepended to a group
+        separator = '➜', -- used between a key and it's label
+        group = '+', -- prepended to a group
     },
 
     window = {
-        border   = 'single',
+        border = 'single',
         position = 'bottom',
-        margin   = { 1, 0, 0, 0 },
-        padding  = { 2, 2, 2, 2 },
+        margin = { 1, 0, 0, 0 },
+        padding = { 2, 2, 2, 2 },
     },
 
     hidden = {
-        '<silent>', '<cmd>', '<Cmd>',
-        '<CR>', 'call', 'lua', '^:', '^ ',
+        '<silent>',
+        '<cmd>',
+        '<Cmd>',
+        '<CR>',
+        'call',
+        'lua',
+        '^:',
+        '^ ',
     },
 
-    ignore_missing = true,   -- hide mappings with no label
-    show_help      = true,   -- help message on the command line w/ popup visible
+    ignore_missing = true, -- hide mappings with no label
+    show_help = true, -- help message on the command line w/ popup visible
     -- triggers = {'<leader>'} -- or specify a list manually
 })
 
 local opts = {
-    mode    = "n",
-    prefix  = "<Leader>",
-    silent  = true,
+    mode = 'n',
+    prefix = '<Leader>',
+    silent = true,
     noremap = true,
-    nowait  = true,
+    nowait = true,
 }
 
 local mappings = {
     ['<space>'] = 'surround in blanklines',
-    a           = 'easyalign',
-    e           = 'nvimtree',
-    j           = 'jsdoc',
-    n           = 'hide highlights',
-    r           = 'ranger',
-    S           = 'spectre',
+    a = 'easyalign',
+    e = 'nvimtree',
+    j = 'jsdoc',
+    n = 'hide highlights',
+    r = 'ranger',
+    S = 'spectre',
 
-    h = {  '<C-w>s',            'split below'  },
-    q = {  '<cmd>BufClose<cr>', 'close buffer' },
-    v = {  '<C-w>v',            'split right'  },
+    h = { '<C-w>s', 'split below' },
+    q = { '<cmd>BufClose<cr>', 'close buffer' },
+    v = { '<C-w>v', 'split right' },
 
     s = {
         name = '???',
@@ -83,51 +89,51 @@ local mappings = {
 
     r = {
         name = '???',
-        n    = 'rename symbol'
+        n = 'rename symbol',
     },
 
     f = {
-        name  = 'find',
+        name = 'find',
         ['/'] = 'in current buffer',
-        b     = 'buffers',
-        c     = 'commands',
-        ch    = 'command history',
-        e     = 'emojis',
-        f     = 'files',
-        g     = 'diagnostics',
-        gw    = 'workspace diagnostics',
-        h     = 'markdown headings',
-        j     = 'jumplist',
-        p     = 'pattern (grep)',
-        r     = 'file history',
-        s     = 'sessions',
+        b = 'buffers',
+        c = 'commands',
+        ch = 'command history',
+        e = 'emojis',
+        f = 'files',
+        g = 'diagnostics',
+        gw = 'workspace diagnostics',
+        h = 'markdown headings',
+        j = 'jumplist',
+        p = 'pattern (grep)',
+        r = 'file history',
+        s = 'sessions',
     },
 
     g = {
         name = 'git',
-        b    = 'open in browser (github, bitbucket)',
-        c    = 'commits',
-        s    = 'status',
-        d    = 'merge diff',
-        h    = 'merge from left (target branch)',
-        l    = 'merge from right (merge branch)',
-        i   = 'git blame (info)',
-        m    = 'git messenger',
+        b = 'open in browser (github, bitbucket)',
+        c = 'commits',
+        s = 'status',
+        d = 'merge diff',
+        h = 'merge from left (target branch)',
+        l = 'merge from right (merge branch)',
+        i = 'git blame (info)',
+        m = 'git messenger',
     },
 
     c = {
         name = '???',
-        a    = 'Code Actions',
+        a = 'Code Actions',
     },
 
     t = {
         name = 'tmux',
-        p    = 'prompt for command',
-        r    = 'repeats last command',
-        i    = 'inspect runner page',
-        z    = 'zooom tmux pane',
-        c    = 'clear tmux pane',
-        t    = 'toggle tmux pane',
+        p = 'prompt for command',
+        r = 'repeats last command',
+        i = 'inspect runner page',
+        z = 'zooom tmux pane',
+        c = 'clear tmux pane',
+        t = 'toggle tmux pane',
     },
 }
 
@@ -137,11 +143,10 @@ wk.register(mappings, opts)
 vim.cmd([[ hi! WhichKeyFloat ctermbg=NONE guibg=NONE ]])
 
 -- hides cursorline
-vim.cmd([[
-augroup WhichKeyStatusLine
-au! FileType WhichKey
-au  FileType WhichKey set noruler
-\| autocmd BufLeave <buffer> set ruler
-augroup END
-]])
-
+require('v.utils.autocmds').augroup('WhichKeyStatusLine', {
+    {
+        'FileType',
+        'WhichKey',
+        'set noruler | autocmd BufLeave <buffer> set ruler',
+    },
+})
