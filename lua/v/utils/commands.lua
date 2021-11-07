@@ -1,3 +1,6 @@
+-- TODO: accept lua function as rhs
+-- https://github.com/akinsho/dotfiles/blob/148d1b720b296ad9ef6943da4e7b9d2c4f86c59b/.config/nvim/lua/as/globals.lua#L320-L334
+
 local M = {}
 
 ---Wrapper for defining commands with `:command`
