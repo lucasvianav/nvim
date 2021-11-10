@@ -23,9 +23,7 @@ function M.trim_trailing_whitespaces()
     end
 end
 
---[[
-Sources the `.nvimrc` file at the `cwd` if it's under `$WORK_DIR`.
-]]
+--Sources the `.nvimrc` file at the `cwd` if it's under `$WORK_DIR`.
 function M.source_local_config()
     local cwd = fn.getcwd()
     local work_dir = os.getenv('WORK_DIR')
@@ -53,24 +51,16 @@ local function _get_current_require_path()
     end
 end
 
---[[
-Sources the current file if it's VimL and reloads (w/ `require`) if it's Lua.
-]]
+---Sources the current file if it's VimL and reloads (w/ `require`) if it's Lua.
 function M.reload_or_source_current()
     local filetype = vim.opt_local.ft._value
+    local require_path = _get_current_require_path()
     local action
 
-    if filetype == 'lua' then
-        local filepath = _get_current_require_path()
-
-        if filepath then
-            require('v.utils.wrappers').reload(filepath)
-            action = 'Reloaded '
-        else
-            cmd('luafile %')
-            action = 'Ran '
-        end
-    elseif filetype == 'vim' then
+    if filetype == 'lua' and require_path then
+        require('v.utils.wrappers').reload(require_path)
+        action = 'Reloaded '
+    elseif filetype == 'vim' or filetype == 'lua' then
         cmd('source %')
         action = 'Sourced '
     else

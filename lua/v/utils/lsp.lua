@@ -7,7 +7,8 @@ local M = {}
 
 --- Language servers to keep installed
 M.servers = {
-    'angularls',
+    -- TODO: find out why isn't working
+    -- 'angularls',
     'bashls',
     'clangd',
     'cssls',
@@ -205,7 +206,8 @@ local __specific_on_attach = {
         end
 
         disable_formatting(client)
-        client.resolved_capabilities.rename = false
+        -- TODO: uncomment when angularls works
+        -- client.resolved_capabilities.rename = false
 
         -- TODO: can I organize imports without ts-utils?
         -- https://github.com/mrjones2014/dotfiles/blob/6159bc2ddfae95af8eed57109b416c37868199a7/.config/nvim/lua/modules/lsp-utils.lua#L57-L73
@@ -373,6 +375,11 @@ function M.make_config(config)
     if has_coq then
         config = coq.lsp_ensure_capabilities(config)
     end
+
+    -- local has_cmp, cmp = pcall(require, 'cmp_nvim_lsp')
+    -- if has_cmp then
+    --     config = cmp.update_capabilities(config)
+    -- end
 
     config.handlers = {
         ['textDocument/hover'] = lsp.with(lsp.handlers.hover, {

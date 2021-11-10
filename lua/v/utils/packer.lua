@@ -9,7 +9,7 @@ local cmd = vim.api.nvim_command
 
 local function __get_local_plugin_path(arg)
     local path = arg
-    local plugins_dir = fn.expand('$HOME') .. '/nvim-plugins/'
+    local plugins_dir = os.getenv('HOME') .. '/nvim-plugins/'
     local implicit_path = [[^[^\~/.]\+\|^\[^\/]*$]*$\|^\[^\~/]*]]
 
     if vim.regex(implicit_path):match_str(path) then

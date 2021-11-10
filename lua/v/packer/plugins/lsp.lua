@@ -9,6 +9,7 @@ local M = {
 
     { 'folke/lua-dev.nvim', ft = 'lua', as = 'lua-dev' }, -- setup LSP for lua-nvim dev
     { 'kosayoda/nvim-lightbulb', event = 'CursorHold' }, -- indicates code actions
+    { 'SirVer/ultisnips', event = 'InsertEnter' }, -- cool snippet engine
 
     -- not actually LSP-related but what the heck
     -- DEPENDENCY: universal-ctags, ctags
@@ -32,17 +33,27 @@ local M = {
         after = 'nvim-lspconfig',
     },
 
-    -- code completion and snippets
-    -- TODO: try hrsh7th/nvim-cmp (?????)
-    -- https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/cmp.lua
-    -- https://github.com/danielnehrig/nvim/blob/master/lua/plugins/cmp/init.lua
-    -- TODO: lukas-reineke/cmp-under-comparator
-    -- https://github.com/lukas-reineke/cmp-rg
-    -- https://github.com/petertriho/cmp-git
-    -- DEPENDENCY: python3-venv
-    { 'ms-jpq/coq_nvim', branch = 'coq' },
-    { 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' }, -- snippets
-    { 'ms-jpq/coq.thirdparty', branch = '3p', after = 'coq_nvim' }, -- completion sources
+    --[[
+        -- code completion and snippets
+        -- DEPENDENCY: python3-venv
+        { 'ms-jpq/coq_nvim', branch = 'coq' },
+        { 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' }, -- snippets
+        { 'ms-jpq/coq.thirdparty', branch = '3p', after = 'coq_nvim' }, -- completion sources
+    ]]
+
+    {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'lukas-reineke/cmp-under-comparator',
+            'hrsh7th/cmp-nvim-lua',
+            'ray-x/cmp-treesitter',
+            'onsails/lspkind-nvim',
+        },
+    },
 
     -- pretty list for lsp
     {

@@ -14,27 +14,27 @@ for _, server_name in ipairs(utils.servers) do
                 { title = 'LspInstall' }
             )
         end
-
-        local config = utils.make_config()
-
-        local custom_config_path = 'v.plugins.lsp.servers.' .. server_name
-        local has_custom_config, custom_config = pcall(require, custom_config_path)
-
-        if has_custom_config then
-            config = vim.tbl_deep_extend('force', config, custom_config)
-        end
-
-        if server_name == 'sumneko_lua' then
-            local luadev_loaded, luadev = pcall(require, 'lua-dev')
-            if luadev_loaded then
-                config = luadev.setup({ lspconfig = config })
-            end
-        end
-
-        server:setup(config)
     end
 end
 
-lsp_installer.on_server_ready(function()
+lsp_installer.on_server_ready(function(server)
     vim.api.nvim_command('do User LspAttachBuffers')
+
+    local config = utils.make_config()
+
+    local custom_config_path = 'v.plugins.lsp.servers.' .. server.name
+    local has_custom_config, custom_config = pcall(require, custom_config_path)
+
+    if has_custom_config then
+        config = vim.tbl_deep_extend('force', config, custom_config)
+    end
+
+    if server.name == 'sumneko_lua' then
+        local luadev_loaded, luadev = pcall(require, 'lua-dev')
+        if luadev_loaded then
+            config = luadev.setup({ lspconfig = config })
+        end
+    end
+
+    server:setup(config)
 end)

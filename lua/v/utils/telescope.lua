@@ -17,7 +17,7 @@ end
 
 M.find_nvim = function()
     require('telescope.builtin').find_files({
-        cwd = vim.fn.expand('$HOME') .. '/dotfiles/nvim/.config/nvim',
+        cwd = vim.fn.stdpath('config'),
         prompt_title = '~ neovim ~',
         results_title = 'Neovim Dotfiles',
     })
@@ -32,7 +32,7 @@ end
 
 M.find_dotfiles = function()
     require('telescope.builtin').git_files({
-        cwd = vim.fn.expand('$HOME') .. '/dotfiles',
+        cwd = os.getenv('HOME') .. '/dotfiles',
         prompt_title = '~ dotfiles ~',
         results_title = 'Dotfiles',
     })
@@ -41,7 +41,7 @@ end
 M.find_unimed = function()
     require('telescope.builtin').find_files({
         file_ignore_patterns = { 'parceiros/', 'libs/' },
-        cwd = vim.fn.expand('$WORK_DIR') .. '/unimed-pj',
+        cwd = os.getenv('WORK_DIR') .. '/unimed-pj',
         prompt_title = '~ unimed ~',
         results_title = 'Unimed Files',
     })
@@ -50,7 +50,7 @@ end
 M.grep_unimed = function()
     require('telescope.builtin').live_grep({
         file_ignore_patterns = { 'parceiros/' },
-        cwd = vim.fn.expand('$WORK_DIR') .. '/unimed-pj',
+        cwd = os.getenv('WORK_DIR') .. '/unimed-pj',
         prompt_title = '~ grep unimed ~',
         results_title = 'Unimed',
     })

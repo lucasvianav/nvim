@@ -43,7 +43,16 @@ local M = {
 
     -- pairs of handy bracket maps
     -- TODO: maybe ditch my fork and just add modifications to my config
-    { 'lucasvianav/vim-unimpaired', keys = { '[', ']' } },
+    {
+        'lucasvianav/vim-unimpaired',
+        keys = {
+            '[',
+            ']',
+            '<M-k>',
+            '<M-j>',
+            '<Space><Space>',
+        },
+    },
 
     { 'chrisbra/NrrwRgn', cmd = { 'NR', 'NUD' } }, -- focus narrow code section
     { 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } }, -- easily swap function arguments
