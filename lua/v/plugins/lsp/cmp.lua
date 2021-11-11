@@ -1,3 +1,5 @@
+-- TODO: https://github.com/petertriho/cmp-git
+
 local cmp = require('cmp')
 
 require('lspkind').init()
@@ -15,7 +17,8 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         ['<Esc>'] = cmp.mapping({
             i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
+            c = cmp.mapping.abort(),
+            -- c = cmp.mapping.close(),
         }),
         ['<C-c>'] = cmp.mapping({
             i = cmp.mapping.abort(),
@@ -57,6 +60,7 @@ cmp.setup({
         { name = 'nvim_lsp' },
         { name = 'treesitter' },
         { name = 'path' },
+        { name = 'spell' },
         { name = 'cmdline' },
         { name = 'buffer' },
     }),
@@ -102,11 +106,19 @@ cmp.setup({
     },
 })
 
+local search_sources = {
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp_document_symbol' },
+    }, {
+        { name = 'buffer' },
+    }),
+}
+
 -- use buffer source for `?`
-cmp.setup.cmdline('?', { sources = { { name = 'buffer' } } })
+cmp.setup.cmdline('?', search_sources)
 
 -- use buffer source for `/`
-cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })
+cmp.setup.cmdline('/', search_sources)
 
 -- use cmdline and path source for ':'
 cmp.setup.cmdline(':', {
@@ -116,4 +128,3 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' },
     }),
 })
-

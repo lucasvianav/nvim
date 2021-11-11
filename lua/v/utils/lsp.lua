@@ -116,6 +116,8 @@ function M.rename_callback()
     end
 end
 
+-- TODO: https://github.com/filipdutescu/renamer.nvim
+-- TODO: https://github.com/neovim/neovim/commit/16d4af6d2f549709aa55510f5ae52238c5cadb9c
 --- Custom rename prompt for symbol below cursor.
 function M.rename()
     local current_name = vim.fn.expand('<cword>')
@@ -159,6 +161,7 @@ local function __peek_definitin_callback(_, result)
     lsp.util.preview_location(result[1])
 end
 
+-- TODO: https://www.reddit.com/r/neovim/comments/qpfc25/telescope_preview_definition/
 --- Peek definition for symbl below the cursor. Similar to VSCode's Peek
 --- Definition.
 function M.peek_definition()

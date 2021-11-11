@@ -196,7 +196,9 @@ local M = {
             'package.json',
             'requirements.txt',
         },
-        lintDebounce = 100,
+        lintDebounce = 150,
+        lint_debounce = 150,
+        debounce = 150,
         logLevel = 10,
         logFile = '/tmp/efm.log',
         languages = {
@@ -205,7 +207,7 @@ local M = {
             javascriptreact = { eslint_d, prettierd },
             typescriptreact = { eslint_d, prettierd },
             markdown = { prettier },
-            -- markdown = { prettier, markdownlint },
+            -- markdown     = { prettier, markdownlint },
 
             css = { prettierd },
             graphql = { prettierd },

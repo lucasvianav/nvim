@@ -1,6 +1,5 @@
 augroup RelativeNumberManagement
     au!
     au InsertEnter * set norelativenumber
-    au CmdlineEnter * set norelativenumber | redraw
-    au InsertLeave,CmdlineLeave * set relativenumber
+    au InsertLeavePre * if &bt != 'prompt' | set relativenumber | endif
 augroup END

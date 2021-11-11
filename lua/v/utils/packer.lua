@@ -199,7 +199,7 @@ function M.init(packer)
                 prompt_border = 'single',
             },
             profile = {
-                enable = false,
+                enable = true,
                 treshold = 1,
             },
             compile_path = M.compile_path,

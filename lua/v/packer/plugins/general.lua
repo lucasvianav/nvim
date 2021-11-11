@@ -1,13 +1,11 @@
--- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/init.lua
--- TODO: https://github.com/danielnehrig/nvim/blob/master/lua/packer-config/init.lua
+-- TODO: better distribute this plugins
+-- https://github.com/gelguy/wilder.nvim
+-- https://github.com/kevinhwang91/nvim-bqf
+-- https://github.com/ThePrimeagen/refactoring.nvim
+-- https://github.com/ThePrimeagen/harpoon
+
 -- TODO: https://github.com/mfussenegger/nvim-dap
 -- TODO: https://github.com/puremourning/vimspector
--- TODO: better distribute this plugins
--- TODO: https://github.com/dstein64/vim-startuptime
--- https://www.reddit.com/r/neovim/comments/qhv7e2/remove_surrounding_function_call/
--- https://github.com/AndrewRadev/dsf.vim
--- https://github.com/gelguy/wilder.nvim
--- https://github.com/vuki656/package-info.nvim
 
 local M = {
     -- packer can manage itself as an optional plugin
@@ -30,6 +28,7 @@ local M = {
     { 'antoinemadec/FixCursorHold.nvim' }, -- fixes CursorHold and CursorHoldl
     { 'nvim-lua/plenary.nvim' }, -- great utility lua functions
     { 'editorconfig/editorconfig-vim' }, -- follow .editorconfig files
+    { 'nathom/filetype.nvim' }, -- faster filetype detection
     { 'milisims/nvim-luaref', ft = 'lua' }, -- lua documentation in :help
 
     -- TODO: define mappings for other prefixes
@@ -40,6 +39,7 @@ local M = {
     { 'wellle/targets.vim', event = 'CursorMoved' }, -- provides great new text objects
     { 'andymass/vim-matchup', event = 'CursorHold' }, -- make % smarter
     { 'windwp/nvim-autopairs', event = 'InsertEnter' }, -- auto pairs for {[()]}
+    { 'dstein64/vim-startuptime', cmd = 'StartupTime' }, -- startup profiling
 
     -- pairs of handy bracket maps
     -- TODO: maybe ditch my fork and just add modifications to my config
@@ -92,6 +92,18 @@ local M = {
             'ds',
             { 'x', 'S' },
             { 'v', 'S' },
+        },
+    },
+
+    -- like tpope/vim-surround but for functions
+    {
+        'AndrewRadev/dsf.vim',
+        keys = {
+            'csf',
+            'dsf',
+            'dsnf',
+            'if',
+            'af',
         },
     },
 
@@ -162,7 +174,9 @@ local M = {
     },
 
     -- html super snippets
-    -- TOOD: https://github.com/pedro757/emmet
+    -- TODO: https://github.com/pedro757/emmet
+    -- TODO: emmet_ls
+    -- TODO: https://pbs.twimg.com/media/FC6NKbQWEAA6ZLc?format=jpg&name=4096x4096
     {
         'mattn/emmet-vim',
         ft = {
@@ -269,6 +283,16 @@ local M = {
         keys = {
             '<Leader>S',
             { 'v', '<Leader>S' },
+        },
+    },
+
+    {
+        'tommcdo/vim-exchange',
+        keys = {
+            'cx',
+            'cxx',
+            'cxc',
+            { 'v', 'X' },
         },
     },
 }

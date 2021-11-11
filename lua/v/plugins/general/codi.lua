@@ -1,7 +1,9 @@
+-- TODO: activate for Lua
+
 require('v.utils').set_viml_options('codi#', {
     -- use virtual text instead of new window
-    virtual_text        = true,
-    virtual_text_prefix = " ",
+    virtual_text = true,
+    virtual_text_prefix = ' ',
 
     autoclose = true,
     aliases = {
@@ -12,4 +14,3 @@ require('v.utils').set_viml_options('codi#', {
 
 -- change the color
 -- vim.cmd('highlight CodiVirtualText guifg=cyan')
-

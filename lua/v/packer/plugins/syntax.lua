@@ -1,10 +1,11 @@
--- TODO: https://github.com/nathom/filetype.nvim
-
 local M = {
+    { 'itchyny/vim-highlighturl' }, -- highlight urls
+
     { 'lervag/vimtex', ft = { 'tex', 'plaintex' } }, -- LaTeX
     { 'fladson/vim-kitty', ft = { 'kitty' } }, -- kitty config
     { 'tpope/vim-sleuth', event = 'CursorHold' }, -- autodetect indent
     { 'dkarter/bullets.vim', ft = 'markdown' }, -- markdown lists
+    { 'vuki656/package-info.nvim', ft = 'json' }, -- package.json
 
     { 'jose-elias-alvarez/nvim-lsp-ts-utils', ft = 'typescript' }, -- TypeScript utilities
     { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }, -- code parsing for syntax highlighting, etc
@@ -68,6 +69,20 @@ local M = {
             'javascriptreact',
             'typescript.tsx',
             'typescriptreact',
+        },
+    },
+
+    -- fix `gf` for some filetypes
+    {
+        'tpope/vim-apathy',
+        ft = {
+            'go',
+            'javascript',
+            'typescript',
+            'lua',
+            'python',
+            'c',
+            'cpp',
         },
     },
 }

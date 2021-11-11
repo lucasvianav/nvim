@@ -1,4 +1,5 @@
 -- TODO: https://github.com/pwntester/octo.nvim
+-- https://github.com/rhysd/conflict-marker.vim
 
 local M = {
     -- show git blame info on lines

@@ -44,15 +44,18 @@ local M = {
     {
         'hrsh7th/nvim-cmp',
         requires = {
-            'hrsh7th/cmp-nvim-lsp',
+            'f3fora/cmp-spell',
             'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
-            'lukas-reineke/cmp-under-comparator',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-nvim-lsp-document-symbol',
             'hrsh7th/cmp-nvim-lua',
-            'ray-x/cmp-treesitter',
+            'hrsh7th/cmp-path',
+            'lukas-reineke/cmp-under-comparator',
             'onsails/lspkind-nvim',
+            'ray-x/cmp-treesitter',
         },
+        event = { 'InsertEnter', 'CmdLineEnter' },
     },
 
     -- pretty list for lsp

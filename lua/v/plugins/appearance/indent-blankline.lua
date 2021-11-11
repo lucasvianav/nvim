@@ -1,7 +1,8 @@
 require('indent_blankline').setup({
     buftype_exclude = {
         'terminal',
-        'NvimTree',
+        'nofile',
+        'prompt',
     },
     filetype_exclude = {
         'help',
@@ -11,11 +12,31 @@ require('indent_blankline').setup({
         'startify',
         'NvimTree',
         'lsp-installer',
+        'markdown',
+        'packer',
+        'gitcommit',
     },
 
     show_trailing_blankline_indent = false,
     show_first_indent_level = false,
     show_end_of_line = false,
+    use_treesitter = true,
+    show_foldtext = false,
+
     show_current_context = true,
-    show_context_start = true,
+    show_current_context_start = true,
+    context_char = '┃',
+    context_patterns = {
+        'class',
+        'function',
+        'method',
+        'block',
+        'list_literal',
+        'selector',
+        '^if',
+        '^table',
+        'if_statement',
+        'while',
+        'for',
+    },
 })
