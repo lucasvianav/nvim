@@ -41,9 +41,13 @@ M.commands = [[
     hi! TabLineSel guibg=]] .. colors.grey_dark .. [[ guifg=]] .. colors.off_white .. '\n' .. [[
 ]]
 
+-- TODO: convert to this after writing function for highlights
+-- M.post_colorscheme_hook = function()
+-- end
+
 o.listchars = {
     conceal = '┊',
-    eol = ' ',
+    eol = ' ', -- ↲
     extends = '>',
     nbsp = '☠',
     precedes = '<',

@@ -1,6 +1,3 @@
-
--- TODO: https://www.reddit.com/r/neovim/comments/q7bgwo/marksnvim_a_plugin_for_viewing_and_interacting/
-
 local M = {
     -- start screen
     {
@@ -11,8 +8,7 @@ local M = {
         },
     },
 
-    -- seamless navigation between
-    -- neovim widows and tmux panes
+    -- seamless navigation between neovim widows and tmux panes
     {
         'numToStr/Navigator.nvim',
         keys = {

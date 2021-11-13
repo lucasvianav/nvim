@@ -1,14 +1,6 @@
 -- TODO: https://github.com/pwntester/octo.nvim
--- https://github.com/rhysd/conflict-marker.vim
 
 local M = {
-    -- show git blame info on lines
-    {
-        'f-person/git-blame.nvim',
-        keys = '<leader>gi',
-        cmd = 'GitBameToggle',
-    },
-
     -- show commit in floating window
     {
         'rhysd/git-messenger.vim',
@@ -35,9 +27,9 @@ local M = {
             '<leader>gd',
             '<leader>gh',
             '<leader>gl',
-            '<leader>gb',
+            '<leader>gg',
             '<Leader>ga',
-            { 'v', '<leader>gb' },
+            { 'v', '<leader>gg' },
         },
     },
 

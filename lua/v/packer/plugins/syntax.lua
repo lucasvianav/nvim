@@ -30,35 +30,6 @@ local M = {
         after = { 'vim-commentary', 'nvim-treesitter' },
     },
 
-    -- prettier
-    -- TODO: what is the use of this?
-    -- DEPENDENCY: npm (yarn?)
-    {
-        'prettier/vim-prettier',
-        disable = true,
-        ft = {
-            'javascript',
-            'typescript',
-            'javascript.jsx',
-            'typescript.tsx',
-            'vue',
-            'graphql',
-            'html',
-            'css',
-            'scss',
-            'json',
-            'markdown',
-            'yaml',
-        },
-        cmd = {
-            'Prettier',
-            'PrettierAsync',
-            'PrettierPartial',
-            'PrettierFragment',
-        },
-        run = 'npm install', -- TODO: must be yarn?
-    },
-
     -- autoclose and autoedit html tags
     {
         'windwp/nvim-ts-autotag',

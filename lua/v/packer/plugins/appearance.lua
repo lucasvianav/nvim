@@ -1,12 +1,7 @@
---[[ TODO: look into this
-    https://github.com/edluffy/hologram.nvim
-    https://www.reddit.com/r/neovim/comments/pv4ujz/is_there_a_way_to_see_images_in_neovim/
-
-    global status bar:
-    https://github.com/windwp/floatline.nvim
-    https://github.com/windwp/windline.nvim
-    https://www.reddit.com/r/neovim/comments/pxkf16/windlinenvim_one_global_status_line_on_floating/
-]]
+-- TODO: global status bar:
+-- https://github.com/windwp/floatline.nvim
+-- https://github.com/windwp/windline.nvim
+-- https://www.reddit.com/r/neovim/comments/pxkf16/windlinenvim_one_global_status_line_on_floating/
 
 local M = {
     { 'rcarriga/nvim-notify' }, -- beautiful notifications

@@ -1,5 +1,3 @@
-local cmd = vim.cmd
-
 vim.g.firenvim_config = {
     globalSettings = {
         alt = 'all',
@@ -7,8 +5,8 @@ vim.g.firenvim_config = {
 
     localSettings = {
         ['.*'] = {
-            cmdline  = 'neovim',
-            content  = 'text',
+            cmdline = 'neovim',
+            content = 'text',
             priority = 0,
             selector = 'textarea:not([readonly]), div[role="textbox"]',
             takeover = 'always',
@@ -17,16 +15,17 @@ vim.g.firenvim_config = {
 }
 
 -- set filetype to markdown for all GitHub buffers
-cmd([[au BufEnter github.com_*.txt set filetype=markdown]])
+vim.api.nvim_command('au BufEnter github.com_*.txt set filetype=markdown')
 
-local function disable(pattern)
-    vim.g.firenvim_config['localSettings'][pattern] = {
+local disable = {
+    'https?://w{0,3}twitch.tv/',
+    'https?://w{0,3}twitter.com/',
+    'https?://w{0,3}web.whatsapp.com/',
+}
+
+for _, pattern in ipairs(disable) do
+    vim.g.firenvim_config.localSettings[pattern] = {
         takeover = 'never',
         priority = 1,
     }
 end
-
-
-disable('https?://w{0,3}twitter.com/')
-disable('https?://w{0,3}twitch.tv/')
-disable('https?://w{0,3}web.whatsapp.com/')

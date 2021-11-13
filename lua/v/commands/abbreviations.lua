@@ -25,7 +25,10 @@ require('v.utils.abbreviations').set_abbreviations({
     { 'PSt', 'PackerStatus' },
 
     -- LSP
+    { 'LA', 'LspStart' },
     { 'LI', 'LspInfo' },
+    { 'LO', 'LspStop' },
+    { 'LR', 'LspRestart' },
 
     -- other plugins
     { 'DO', 'DiffviewOpen' },

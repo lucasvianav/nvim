@@ -11,7 +11,7 @@ telescope.setup({
         color_devicons = true,
 
         set_env = { ['COLORTERM'] = 'truecolor' },
-        path_display = { 'smart', 'absolute' },
+        path_display = { 'absolute' },
 
         file_ignore_patterns = {
             '%.jpg',
@@ -58,6 +58,7 @@ telescope.setup({
         find_files = {
             follow = true,
             hidden = true,
+            file_ignore_patterns = { '.git', '.git/', '.git/*' },
         },
 
         git_commits = {
@@ -146,8 +147,8 @@ require('v.utils.mappings').set_keybindings({
     },
 
     -- git
-    { 'n', '<Leader>gc', [[:<C-U>lua require('telescope.builtin').git_commits()<cr>]] },
     { 'n', '<Leader>gb', [[:<C-U>lua require('telescope.builtin').git_branches()<cr>]] },
+    { 'n', '<Leader>gc', [[:<C-U>lua require('telescope.builtin').git_commits()<cr>]] },
 
     -- extensions
     { 'n', '<Leader>fh', [[:<C-U>lua require('telescope').extensions.heading.heading()<cr>]] },

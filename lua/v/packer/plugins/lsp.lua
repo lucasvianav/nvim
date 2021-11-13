@@ -1,8 +1,5 @@
--- TODO: https://www.reddit.com/r/neovim/comments/px1hnf/popup_menu_for_code_actions_to_show/
--- https://github.com/weilbith/nvim-code-action-menu
--- TODO: https://github.com/lspcontainers/lspcontainers.nvim
--- TODO: https://www.reddit.com/r/neovim/comments/q9g6e7/which_one_do_you_like_better_for_completion/hgxp01w/
--- TODO: https://elijahmanor.com/blog/neovim-tailwindcss
+-- ok so there's not only lsp stuff in here
+-- there's all kind of completion-related plugins
 
 local M = {
     { 'neovim/nvim-lspconfig' }, -- config for language servers
@@ -10,6 +7,14 @@ local M = {
     { 'folke/lua-dev.nvim', ft = 'lua', as = 'lua-dev' }, -- setup LSP for lua-nvim dev
     { 'kosayoda/nvim-lightbulb', event = 'CursorHold' }, -- indicates code actions
     { 'SirVer/ultisnips', event = 'InsertEnter' }, -- cool snippet engine
+
+    --[[
+        -- nice code actions
+        {
+            'weilbith/nvim-code-action-menu',
+            key = '<leader>ca',
+        },
+    ]]
 
     -- not actually LSP-related but what the heck
     -- DEPENDENCY: universal-ctags, ctags
@@ -44,16 +49,16 @@ local M = {
     {
         'hrsh7th/nvim-cmp',
         requires = {
-            'f3fora/cmp-spell',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-cmdline',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-nvim-lsp-document-symbol',
-            'hrsh7th/cmp-nvim-lua',
-            'hrsh7th/cmp-path',
-            'lukas-reineke/cmp-under-comparator',
-            'onsails/lspkind-nvim',
-            'ray-x/cmp-treesitter',
+            { 'f3fora/cmp-spell', after = 'nvim-cmp' },
+            { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+            { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+            { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+            { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' },
+            { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+            { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+            { 'lukas-reineke/cmp-under-comparator', after = 'nvim-cmp' },
+            { 'onsails/lspkind-nvim', after = 'nvim-cmp' },
+            { 'ray-x/cmp-treesitter', after = 'nvim-cmp' },
         },
         event = { 'InsertEnter', 'CmdLineEnter' },
     },
@@ -68,6 +73,20 @@ local M = {
         },
         cmd = 'Trouble',
         disable = true,
+    },
+
+    -- html super snippets
+    -- TODO: https://github.com/pedro757/emmet
+    -- TODO: emmet_ls
+    -- TODO: https://pbs.twimg.com/media/FC6NKbQWEAA6ZLc?format=jpg&name=4096x4096
+    {
+        'mattn/emmet-vim',
+        ft = {
+            'html',
+            'vue',
+            'javascript.jsx',
+            'typescript.tsx',
+        },
     },
 }
 

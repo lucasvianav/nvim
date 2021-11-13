@@ -25,7 +25,7 @@ require('indent_blankline').setup({
 
     show_current_context = true,
     show_current_context_start = true,
-    context_char = '┃',
+    -- context_char = '┃',
     context_patterns = {
         'class',
         'function',

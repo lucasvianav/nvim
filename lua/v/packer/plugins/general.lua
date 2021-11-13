@@ -1,11 +1,6 @@
--- TODO: better distribute this plugins
--- https://github.com/gelguy/wilder.nvim
--- https://github.com/kevinhwang91/nvim-bqf
+-- TODO:
 -- https://github.com/ThePrimeagen/refactoring.nvim
--- https://github.com/ThePrimeagen/harpoon
-
--- TODO: https://github.com/mfussenegger/nvim-dap
--- TODO: https://github.com/puremourning/vimspector
+-- https://github.com/mfussenegger/nvim-dap
 
 local M = {
     -- packer can manage itself as an optional plugin
@@ -23,23 +18,35 @@ local M = {
         },
     },
 
-    -- TODO: test https://github.com/tami5/impatient.nvim
+    -- TODO: doesn't work for some reason
+    -- { 'nathom/filetype.nvim' }, -- faster filetype detection
+
     { 'lewis6991/impatient.nvim' }, -- improve startup time
     { 'antoinemadec/FixCursorHold.nvim' }, -- fixes CursorHold and CursorHoldl
     { 'nvim-lua/plenary.nvim' }, -- great utility lua functions
     { 'editorconfig/editorconfig-vim' }, -- follow .editorconfig files
-    { 'nathom/filetype.nvim' }, -- faster filetype detection
-    { 'milisims/nvim-luaref', ft = 'lua' }, -- lua documentation in :help
 
-    -- TODO: define mappings for other prefixes
-    -- TODO: https://github.com/folke/which-key.nvim/issues/90
-    { 'folke/which-key.nvim' }, -- displays a popup with keybindings
-
-    { 'max397574/better-escape.nvim', event = 'InsertEnter' }, -- better <Esc> with jk
-    { 'wellle/targets.vim', event = 'CursorMoved' }, -- provides great new text objects
-    { 'andymass/vim-matchup', event = 'CursorHold' }, -- make % smarter
-    { 'windwp/nvim-autopairs', event = 'InsertEnter' }, -- auto pairs for {[()]}
+    { 'chrisbra/NrrwRgn', cmd = { 'NR', 'NUD' } }, -- focus narrow code section
     { 'dstein64/vim-startuptime', cmd = 'StartupTime' }, -- startup profiling
+    { 'folke/which-key.nvim', event = 'CursorHold' }, -- displays a popup with keybindings
+    { 'max397574/better-escape.nvim', event = 'InsertEnter' }, -- better <Esc> with jk
+    { 'milisims/nvim-luaref', ft = 'lua' }, -- lua documentation in :help
+    { 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } }, -- easily swap function arguments
+    { 'tpope/vim-repeat', keys = '.', fn = 'repeat#set' }, -- enables . repeat for plugins
+    { 'wellle/targets.vim', event = 'CursorMoved' }, -- provides great new text objects
+    { 'windwp/nvim-autopairs', event = 'InsertEnter' }, -- auto pairs for {[()]}
+
+    -- make % smarter
+    {
+        'andymass/vim-matchup',
+        keys = {
+            '%',
+            'g%',
+            '[%',
+            ']%',
+            'z%',
+        },
+    },
 
     -- pairs of handy bracket maps
     -- TODO: maybe ditch my fork and just add modifications to my config
@@ -54,16 +61,12 @@ local M = {
         },
     },
 
-    { 'chrisbra/NrrwRgn', cmd = { 'NR', 'NUD' } }, -- focus narrow code section
-    { 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } }, -- easily swap function arguments
-    { 'tpope/vim-repeat', keys = '.', fn = 'repeat#set' }, -- enables . repeat for plugins
-
     -- use nvim in the browser
-    -- TODO: make this work pls (should work now)
+    -- TODO: make this work pls
     {
         'glacambre/firenvim',
         run = function()
-            vim.fn['firenvim#install'](7)
+            vim.fn['firenvim#install'](0)
         end,
     },
 
@@ -86,6 +89,7 @@ local M = {
     {
         'tpope/vim-surround',
         after = 'vim-repeat',
+        event = 'InsertEnter',
         keys = {
             'cs',
             'xs',
@@ -116,7 +120,6 @@ local M = {
     },
 
     -- maps for toggling comments
-    -- ALTERNATIVE: terrortylor/nvim-comment
     -- TODO: swap for numToStr/Comment.nvim
     -- TODO: https://www.reddit.com/r/neovim/comments/q6lq5o/commentnvim_features_go_brrrrr/hgcxcok/?utm_source=reddit&utm_medium=web2x&context=3
     {
@@ -138,23 +141,6 @@ local M = {
         },
     },
 
-    -- fixes <c-a>/<c-x> for dates, negative numbers, markdown headers, etc
-    -- ALTERNATIVE: tpope/vim-speeddating
-    -- increment sequences with visual block
-    -- ALTERNATIVE: triglav/vim-visual-increment
-    {
-        'monaqa/dial.nvim',
-        keys = {
-            '<C-a>',
-            '<C-x>',
-            { 'v', '<C-a>' },
-            { 'v', '<C-x>' },
-            { 'v', 'g<C-a>' },
-            { 'v', 'g<C-x>' },
-        },
-        after = 'vim-repeat',
-    },
-
     -- align blocks of code
     -- TODO: checkout tabular?
     -- TODO: invest some time into this
@@ -171,20 +157,6 @@ local M = {
         'svermeulen/vim-easyclip',
         event = { 'CursorMoved', 'InsertEnter' },
         after = 'vim-repeat',
-    },
-
-    -- html super snippets
-    -- TODO: https://github.com/pedro757/emmet
-    -- TODO: emmet_ls
-    -- TODO: https://pbs.twimg.com/media/FC6NKbQWEAA6ZLc?format=jpg&name=4096x4096
-    {
-        'mattn/emmet-vim',
-        ft = {
-            'html',
-            'vue',
-            'javascript.jsx',
-            'typescript.tsx',
-        },
     },
 
     -- TSDoc docstrings generation
@@ -219,7 +191,6 @@ local M = {
     },
 
     -- pulse cursorline after search (easier to find the cursor)
-    -- TODO: lua version?
     {
         'inside/vim-search-pulse',
         keys = {
@@ -239,33 +210,6 @@ local M = {
         event = 'CursorMoved',
     },
 
-    -- awesme ascii box drawer
-    -- TODO: how to actually use this?
-    {
-        'gyim/vim-boxdraw',
-        disable = true,
-        keys = {
-            { 'v', '+o' },
-            { 'v', '+O' },
-            { 'v', '+c' },
-            { 'v', '+-' },
-            { 'v', '+_' },
-            { 'v', '+>' },
-            { 'v', '+<' },
-            { 'v', '++>' },
-            { 'v', '++<' },
-            { 'v', '+|' },
-            { 'v', '+^' },
-            { 'v', '+v' },
-            { 'v', '+V' },
-            { 'v', '++^' },
-            { 'v', '++v' },
-            { 'v', '++V' },
-            { 'v', '+io' },
-            { 'v', '+ao' },
-        },
-    },
-
     -- markdown previewer in browser
     -- DEPENDENCY: npm
     {
@@ -275,7 +219,6 @@ local M = {
     },
 
     -- project-wide search and replace
-    -- TODO: work on this config
     -- DEPENDENCY: RG, sed
     {
         'windwp/nvim-spectre',
