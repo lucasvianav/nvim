@@ -113,7 +113,7 @@ telescope.setup({
     },
 })
 
-telescope.load_extension('fzy_native')
+telescope.load_extension('fzf')
 
 require('v.utils.mappings').set_keybindings({
     -- general

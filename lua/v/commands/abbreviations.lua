@@ -6,6 +6,8 @@ require('v.utils.abbreviations').set_abbreviations({
     { 'E1', 'e!' },
     { 'Q', 'q' },
     { 'q1', 'q!' },
+    { 'q!!', 'noautocmd q' },
+    { 'qa!!', 'noautocmd qa' },
 
     -- overwriting
     { 'W', 'up' },

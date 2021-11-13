@@ -23,7 +23,7 @@ wk.setup({
 
     key_labels = {
         ['<space>'] = 'SPC',
-        ['<cr>'] = 'RET',
+        ['<cr>'] = 'ENT',
         ['<tab>'] = 'TAB',
     },
 

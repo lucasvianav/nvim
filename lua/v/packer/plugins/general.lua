@@ -39,13 +39,13 @@ local M = {
     -- make % smarter
     {
         'andymass/vim-matchup',
-        keys = {
-            '%',
-            'g%',
-            '[%',
-            ']%',
-            'z%',
-        },
+        -- keys = {
+        --     '%',
+        --     'g%',
+        --     '[%',
+        --     ']%',
+        --     'z%',
+        -- },
     },
 
     -- pairs of handy bracket maps
@@ -106,8 +106,8 @@ local M = {
             'csf',
             'dsf',
             'dsnf',
-            'if',
-            'af',
+            { 'o', 'if' },
+            { 'o', 'af' },
         },
     },
 
@@ -126,19 +126,6 @@ local M = {
         'tpope/vim-commentary',
         cmd = { 'Comment', 'Commentary' },
         keys = { 'gc', { 'v', 'gc' } },
-    },
-
-    -- interactive scratchpad for js/ts and python
-    -- DEPENDENCY: tsun
-    -- TODO: make this work for typescript
-    {
-        'metakirby5/codi.vim',
-        disable = true,
-        cmd = {
-            'Codi',
-            'Codi!',
-            'Codi!!',
-        },
     },
 
     -- align blocks of code
@@ -229,6 +216,7 @@ local M = {
         },
     },
 
+    -- exchange motions
     {
         'tommcdo/vim-exchange',
         keys = {

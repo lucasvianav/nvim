@@ -79,7 +79,7 @@ local M = {
             { 'crispgm/telescope-heading.nvim' },
 
             -- C sorter
-            { 'nvim-telescope/telescope-fzy-native.nvim' },
+            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
 
             -- github and octo integration
             -- { 'nvim-telescope/telescope-github.nvim' },
