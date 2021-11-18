@@ -7,8 +7,7 @@ local M = {}
 
 --- Language servers to keep installed
 M.servers = {
-    -- TODO: find out why isn't working
-    -- 'angularls',
+    'angularls', -- TODO: lsp-installer#261
     'bashls',
     'clangd',
     'cssls',
@@ -223,8 +222,7 @@ local __specific_on_attach = {
         end
 
         disable_formatting(client)
-        -- TODO: uncomment when angularls works
-        -- client.resolved_capabilities.rename = false
+        client.resolved_capabilities.rename = false
 
         -- TODO: can I organize imports without ts-utils?
         -- https://github.com/mrjones2014/dotfiles/blob/6159bc2ddfae95af8eed57109b416c37868199a7/.config/nvim/lua/modules/lsp-utils.lua#L57-L73

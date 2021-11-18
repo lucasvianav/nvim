@@ -162,6 +162,7 @@ require('v.utils.mappings').set_keybindings({
     { 'n', '<leader>fu', '<cmd>lua require("v.utils.telescope").find_unimed()<cr>' },
     { 'n', '<leader>fpu', '<cmd>lua require("v.utils.telescope").grep_unimed()<cr>' },
     { 'n', '<leader>fn', '<cmd>lua require("v.utils.telescope").find_nvim()<cr>' },
+    { 'n', '<leader>fk', '<cmd>lua require("v.utils.telescope").find_in_plugins()<cr>' },
     { 'n', '<leader>fd', '<cmd>lua require("v.utils.telescope").find_dotfiles()<cr>' },
     { 'n', '<leader>f/', '<cmd>lua require("v.utils.telescope").grep_last_search()<cr>' },
 })

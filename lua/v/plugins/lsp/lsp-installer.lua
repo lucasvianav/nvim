@@ -37,6 +37,20 @@ lsp_installer.on_server_ready(function(server)
         if luadev_loaded then
             config = luadev.setup({ lspconfig = config })
         end
+    elseif server.name == 'angularls' then -- TODO: remove this
+        local cmd = {
+            server.root_dir .. '/node_modules/.bin/ngserver',
+            '--stdio',
+            '--tsProbeLocations',
+            server.root_dir,
+            '--ngProbeLocations',
+            server.root_dir,
+        }
+
+        config.cmd = cmd
+        config.on_new_config = function(new_config)
+            new_config.cmd = cmd
+        end
     end
 
     server:setup(config)
