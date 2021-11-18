@@ -7,18 +7,21 @@ require('v.utils.abbreviations').set_abbreviations({
     { 'Q', 'q' },
     { 'q1', 'q!' },
 
-    { 'q!!', 'noautocmd q' },
-    { 'qa!!', 'noautocmd qa' },
-    { 'w!!', 'noautocmd w' },
-    { 'wa!!', 'noautocmd wa' },
-
     -- overwriting
     { 'W', 'up' },
     { 'w', 'up' },
     { 'Wq', 'x' },
     { 'wq', 'x' },
 
-    -- other commands
+    -- no autocommands
+    { 'q!!', 'noautocmd q' },
+    { 'qa!!', 'noautocmd qa' },
+    { 'w!!', 'noautocmd up' },
+    { 'up!!', 'noautocmd up' },
+    { 'wr!!', 'noautocmd w' },
+    { 'wa!!', 'noautocmd wa' },
+
+    -- closing buffers
     { 'bufo', 'BufOnly' },
     { 'qb', 'BufClose' },
     { 'wqb', 'BqWrite' },
@@ -37,4 +40,5 @@ require('v.utils.abbreviations').set_abbreviations({
 
     -- other plugins
     { 'DO', 'DiffviewOpen' },
+    { 'DH', 'DiffviewFileHistory' },
 }, 'c')
