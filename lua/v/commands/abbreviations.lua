@@ -16,10 +16,10 @@ require('v.utils.abbreviations').set_abbreviations({
     -- no autocommands
     { 'q!!', 'noautocmd q' },
     { 'qa!!', 'noautocmd qa' },
-    { 'w!!', 'noautocmd up' },
     { 'up!!', 'noautocmd up' },
     { 'wr!!', 'noautocmd w' },
     { 'wa!!', 'noautocmd wa' },
+    { 'x!!', 'noautocmd x' },
 
     -- closing buffers
     { 'bufo', 'BufOnly' },
