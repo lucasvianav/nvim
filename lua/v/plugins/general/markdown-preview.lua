@@ -3,7 +3,7 @@ require('v.utils').set_viml_options('mkdp', {
     auto_close        = false,
     refresh_slow      = true,
     open_to_the_world = false,
-    browser           = 'brave-browser', -- khell command
+    browser           = 'brave-browser', -- shell command
 })
 
-vim.cmd([[cabbrev MDPrev MarkdownPreviewToggle]])
+require('v.utils.abbreviations').cabbrev('MD', 'MarkdownPreviewToggle')

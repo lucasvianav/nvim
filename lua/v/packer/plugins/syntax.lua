@@ -10,6 +10,17 @@ local M = {
     { 'jose-elias-alvarez/nvim-lsp-ts-utils', ft = 'typescript' }, -- TypeScript utilities
     { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }, -- code parsing for syntax highlighting, etc
 
+    -- better treesitter highlithing in angular
+    {
+        'nvim-treesitter/nvim-treesitter-angular',
+        ft = {
+            'typescript',
+            'javascript',
+            'html',
+        },
+        after = 'nvim-treesitter',
+    },
+
     -- JSON
     -- TODO: can this work with treesitter and LSP?
     -- TODO: also this https://github.com/akinsho/dotfiles/blob/main/.config/nvim/after/syntax/markdown.vim
@@ -40,6 +51,7 @@ local M = {
             'javascriptreact',
             'typescript.tsx',
             'typescriptreact',
+            'markdown',
         },
     },
 

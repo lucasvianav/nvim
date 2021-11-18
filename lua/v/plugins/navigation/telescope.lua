@@ -58,7 +58,7 @@ telescope.setup({
         find_files = {
             follow = true,
             hidden = true,
-            file_ignore_patterns = { '.git', '.git/', '.git/*' },
+            file_ignore_patterns = { '^.git', '^.git/' },
         },
 
         git_commits = {

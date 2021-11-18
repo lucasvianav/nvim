@@ -31,7 +31,6 @@ local M = {
     { 'folke/which-key.nvim', event = 'CursorHold' }, -- displays a popup with keybindings
     { 'max397574/better-escape.nvim', event = 'InsertEnter' }, -- better <Esc> with jk
     { 'milisims/nvim-luaref', ft = 'lua' }, -- lua documentation in :help
-    { 'mizlan/iswap.nvim', cmd = { 'ISwap', 'ISwapWith' } }, -- easily swap function arguments
     { 'tpope/vim-repeat', keys = '.', fn = 'repeat#set' }, -- enables . repeat for plugins
     { 'wellle/targets.vim', event = 'CursorMoved' }, -- provides great new text objects
     { 'windwp/nvim-autopairs', event = 'InsertEnter' }, -- auto pairs for {[()]}
@@ -217,6 +216,7 @@ local M = {
     },
 
     -- exchange motions
+    -- ALTERNATIVE: mizlan/iswap.nvim
     {
         'tommcdo/vim-exchange',
         keys = {

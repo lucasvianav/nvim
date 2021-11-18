@@ -100,13 +100,17 @@ local function __get_config_filepath(plugin_name, plugin_type, category)
     return path .. plugin_name
 end
 
-local function __get_plugin_table(args, type, category)
+local function __get_plugin_table(args, plugin_type, category)
+    if type(args) == 'string' then
+        args = { args }
+    end
+
     if not args or #args == 0 or not args[1] then
         return
     end
 
     local name = args.as or __get_plugin_name(args[1])
-    local is_theme = type == 'theme'
+    local is_theme = plugin_type == 'theme'
     local opts = args.__opts or {}
     args.__opts = nil -- we don't wanna pass this do packer
 
@@ -133,7 +137,7 @@ local function __get_plugin_table(args, type, category)
     end
 
     if not args.config or (args.use_setup and not args.setup) then
-        local config_path = __get_config_filepath(name, type, category)
+        local config_path = __get_config_filepath(name, plugin_type, category)
         local require_str = __get_config_setup_str(config_path, name, is_theme)
 
         if opts.setup then

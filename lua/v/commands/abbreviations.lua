@@ -6,8 +6,11 @@ require('v.utils.abbreviations').set_abbreviations({
     { 'E1', 'e!' },
     { 'Q', 'q' },
     { 'q1', 'q!' },
+
     { 'q!!', 'noautocmd q' },
     { 'qa!!', 'noautocmd qa' },
+    { 'w!!', 'noautocmd w' },
+    { 'wa!!', 'noautocmd wa' },
 
     -- overwriting
     { 'W', 'up' },
@@ -23,8 +26,8 @@ require('v.utils.abbreviations').set_abbreviations({
     -- Packer
     { 'PS', 'PackerSync' },
     { 'PC', 'PackerCompile' },
-    { 'PCl', 'PackerClean' },
-    { 'PSt', 'PackerStatus' },
+    { 'PL', 'PackerClean' },
+    { 'PT', 'PackerStatus' },
 
     -- LSP
     { 'LA', 'LspStart' },

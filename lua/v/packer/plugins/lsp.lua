@@ -8,20 +8,19 @@ local M = {
     { 'kosayoda/nvim-lightbulb', event = 'CursorHold' }, -- indicates code actions
     { 'SirVer/ultisnips', event = 'InsertEnter' }, -- cool snippet engine
 
-    --[[
-        -- nice code actions
-        {
-            'weilbith/nvim-code-action-menu',
-            key = '<leader>ca',
-        },
-    ]]
+    -- nice code actions
+    {
+        'weilbith/nvim-code-action-menu',
+        key = '<leader>ca',
+        disable = true,
+    },
 
-    -- not actually LSP-related but what the heck
+    -- code completion + lsp-like functionalities without actual lsp
     -- DEPENDENCY: universal-ctags, ctags
-    -- TODO: solve VimLeave errors and setup keybindings
     {
         'ludovicchabant/vim-gutentags',
         requires = 'skywind3000/gutentags_plus',
+        disable = true,
     },
 
     -- TODO: get this to work
@@ -46,6 +45,7 @@ local M = {
         { 'ms-jpq/coq.thirdparty', branch = '3p', after = 'coq_nvim' }, -- completion sources
     ]]
 
+    -- code completion
     {
         'hrsh7th/nvim-cmp',
         requires = {

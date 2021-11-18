@@ -58,7 +58,7 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
-        { name = 'treesitter' },
+        -- { name = 'treesitter' },
         { name = 'path' },
         { name = 'spell' },
         { name = 'cmdline' },

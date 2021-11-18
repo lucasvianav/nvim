@@ -50,4 +50,3 @@ set_keybindings({
     -- save with Enter key
     { 'n', '<CR>', '<CMD>update<CR>' },
 })
-

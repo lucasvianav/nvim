@@ -1,3 +1,6 @@
+-- TODO: write function to diff between current branch and another one
+-- maybe get name from input? origin's default branch?
+
 local cb = require('diffview.config').diffview_callback
 
 require('diffview').setup({
