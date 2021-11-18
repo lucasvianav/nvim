@@ -27,6 +27,7 @@ M.servers = {
 
 --- Function for LSP's 'textDocument/formatting' handler.
 --- @param err table
+--- @param result table
 --- @param ctx table
 --- @param config table
 function M.formatting(err, result, ctx, config)
@@ -55,21 +56,7 @@ end
 
 local __rename_prompt = 'Rename   '
 
-local function __rename_handler(...)
-    local err = select(1, ...)
-    local is_new = not select(4, ...) or type(select(4, ...)) ~= 'number'
-
-    local result
-    local method
-
-    if is_new then
-        method = select(3, ...).method
-        result = select(2, ...)
-    else
-        method = select(2, ...)
-        result = select(3, ...)
-    end
-
+local function __rename_handler(err, result, ctx, config)
     if err then
         vim.api.nvim_notify(
             ("Error running LSP query '%s': %s"):format(method, err),
@@ -80,34 +67,33 @@ local function __rename_handler(...)
     end
 
     -- notify the files in which the change happened
-    if result and result.changes and #result.changes > 1 then
-        local new_word = ''
-        local msg = ''
+    if result and result.documentChanges and #result.documentChanges > 1 then
+        local new_word = ctx.params.newName
+        local no_files = #result.documentChanges
+        local msg = ('The symbol was renamed in %d files:\n'):format(no_files)
 
-        for file, change in pairs(result.changes) do
-            new_word = change[1].newText
-            msg = msg
-                .. ('%d changes -> %s'):format(#change, require('v.utils').get_relative_path(file))
-                .. '\n'
+        for _, change in ipairs(result.documentChanges) do
+            local get_path = require('v.utils').get_relative_path
+            msg = msg .. (' - %s\n'):format(get_path(change.textDocument.uri))
         end
 
-        local currName = vim.fn.expand('<cword>')
+        local curr_name = vim.fn.expand('<cword>')
         msg = msg:sub(1, #msg - 1)
         vim.notify(
             msg,
             vim.log.levels.INFO,
-            { title = ('Rename: %s =>> %s'):format(currName, new_word) }
+            { title = ('LSP Rename: %s =>> %s'):format(curr_name, new_word) }
         )
     end
 
-    vim.lsp.handlers[method](...)
+    vim.lsp.handlers[ctx.method](err, result, ctx, config)
 end
 
 --- Confirms/declines the renaming.
 function M.rename_callback()
     local new_name = vim.trim(vim.fn.getline('.'):sub(#__rename_prompt + 1, -1))
-    cmd([[stopinsert]])
-    cmd([[bd!]])
+    vim.api.nvim_command([[stopinsert]])
+    vim.api.nvim_command([[bd!]])
 
     if new_name and #new_name > 0 and new_name ~= vim.fn.expand('<cword>') then
         local params = vim.lsp.util.make_position_params()
@@ -126,17 +112,42 @@ function M.rename()
     vim.api.nvim_buf_set_option(bufnr, 'buftype', 'prompt')
     vim.api.nvim_buf_set_option(bufnr, 'bufhidden', 'wipe')
     vim.api.nvim_buf_add_highlight(bufnr, -1, 'RenamePrompt', 0, 0, #__rename_prompt)
-
     vim.fn.prompt_setprompt(bufnr, __rename_prompt)
-    local winnr = vim.api.nvim_open_win(bufnr, true, {
+
+    local win_opts = {
         relative = 'cursor',
-        width = 50,
+        width = 55,
         height = 1,
         row = -3,
         col = 1,
         style = 'minimal',
         border = 'single',
-    })
+    }
+    local winnr = vim.api.nvim_open_win(bufnr, true, win_opts)
+
+    --[[ TODO: add border with title using plenary
+        -- checkout plenary.popup
+        -- https://github.com/filipdutescu/renamer.nvim/blob/37c27fa77571ba9a81d06e148500fad9638bbe42/lua/renamer/init.lua
+        -- https://github.com/nvim-lua/popup.nvim/blob/master/lua/popup/init.lua
+
+        vim.api.nvim_set_current_win(border.win_id)
+        local border = require('plenary.window.border'):new(bufnr, winnr, win_opts, {
+            top = '─',
+            right = '│',
+            bot = '─',
+            left = '│',
+            topright = '╮',
+            botleft = '╰',
+            topleft = '╭',
+            botright = '╯',
+            title = 'Rename',
+        })
+        P(border, border.win_id)
+
+        vim.api.nvim_win_set_option(border.win_id, 'winhl', 'Normal:Floating')
+        vim.api.nvim_win_set_option(border.win_id, 'cursorline', false)
+        vim.api.nvim_win_set_option(border.win_id, 'scrolloff', 0)
+    ]]
 
     vim.api.nvim_win_set_option(winnr, 'winhl', 'Normal:Floating')
     vim.api.nvim_win_set_option(winnr, 'cursorline', false)
@@ -146,8 +157,11 @@ function M.rename()
     require('v.utils.mappings').set_keybindings({
         { 'n', '<ESC>', '<cmd>bd!<CR>', opts },
         { 'n', '<C-C>', '<cmd>bd!<CR>', opts },
+        { 'n', 'q', '<cmd>bd!<CR>', opts },
+        { 'i', '<ESC>', '<Esc><cmd>bd!<CR>', opts },
+        { 'i', '<C-C>', '<Esc><cmd>bd!<CR>', opts },
+        { 'i', '<BS>', '<ESC>"_xi', opts }, -- TODO: make this better
         { { 'n', 'i' }, '<CR>', "<cmd>lua require('v.utils.lsp').rename_callback()<CR>", opts },
-        { 'i', '<BS>', '<ESC>"_xi', opts },
     })
 
     cmd('normal i' .. current_name)

@@ -24,6 +24,7 @@ function M.map(modes, lhs, rhs, opts)
         -- disable noremap for <Plug> mappings
         noremap = rhs:lower():match('^<plug>.+') == nil,
         silent = true,
+        nowait = true, -- TODO: does this break anything?
     }, opts or {})
 
     local buffer = options.buffer
