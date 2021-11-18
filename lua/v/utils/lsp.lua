@@ -24,6 +24,35 @@ M.servers = {
     'vimls',
 }
 
+---Creates table for setting LSP keybindings (to be used in on_attach).
+---@param bufnr number
+---@returns table
+local __keybindings = function(bufnr)
+    local __opts = {
+        buffer = true,
+        bufnr = bufnr,
+    }
+
+    return {
+        { 'n', '<leader>gp', '<cmd>lua require("v.utils.lsp").peek_definition()<CR>', __opts },
+        { 'n', '<leader>s', '<cmd>lua vim.lsp.buf.signature_help()<CR>', __opts },
+        { 'n', '<space>rn', '<cmd>lua require("v.utils.lsp").rename()<CR>', __opts },
+        { 'n', 'K', '<cmd>lua require("v.utils.lsp").show_documentation()<CR>', __opts },
+        { 'n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', __opts },
+        { 'n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', __opts },
+        { 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', __opts },
+        { 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', __opts },
+        { 'n', 'gq', '<cmd>lua vim.diagnostic.setqflist()<CR>', __opts },
+
+        {
+            'n',
+            'gl',
+            "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line', border = 'single' })<CR>",
+            __opts,
+        },
+    }
+end
+
 --- Function for LSP's 'textDocument/formatting' handler.
 --- @param err table
 --- @param result table
@@ -58,7 +87,7 @@ local __rename_prompt = 'Rename   '
 local function __rename_handler(err, result, ctx, config)
     if err then
         vim.api.nvim_notify(
-            ("Error running LSP query '%s': %s"):format(method, err),
+            ("Error running LSP query '%s': %s"):format(ctx.method, err),
             vim.log.levels.ERROR,
             { title = 'LSP --- Renaming' }
         )
@@ -273,7 +302,7 @@ local __specific_on_attach = {
         -- buf_set_keymap('n', '<leader>si', '<cmd>lua typescript_sort_imports(' .. bufnr .. ')<CR>')
     end,
 
-    efm = function(client, bufnr)
+    efm = function(client)
         client.resolved_capabilities.document_formatting = true
         client.resolved_capabilities.document_range_formatting = true
         client.resolved_capabilities.hover = false
@@ -310,6 +339,12 @@ local function __conditional_autocmds(client)
         })
     end
 
+    if client.resolved_capabilities.signature_help then
+        augroup('SignatureHelp', {
+            { 'CursorHoldI', '<buffer>', 'silent! lua vim.lsp.buf.signature_help()' },
+        })
+    end
+
     if client.name == 'eslint' then
         augroup('AutoFormatEslint', {
             { 'BufWritePre', '<buffer>', 'EslintFixAll' },
@@ -327,26 +362,7 @@ function M.show_documentation()
 end
 
 local function __on_attach(client, bufnr)
-    local opts = { buffer = true, bufnr = bufnr }
-
-    require('v.utils.mappings').set_keybindings({
-        { 'n', '<leader>gp', '<cmd>lua require("v.utils.lsp").peek_definition()<CR>', opts },
-        { 'n', '<leader>s', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts },
-        { 'n', '<space>rn', '<cmd>lua require("v.utils.lsp").rename()<CR>', opts },
-        { 'n', 'K', '<cmd>lua require("v.utils.lsp").show_documentation()<CR>', opts },
-        { 'n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts },
-        { 'n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts },
-        { 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts },
-        { 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts },
-        { 'n', 'gq', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts },
-
-        {
-            'n',
-            'gl',
-            "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line', border = 'single' })<CR>",
-            opts,
-        },
-    })
+    require('v.utils.mappings').set_keybindings(__keybindings(bufnr))
 
     -- enable completion triggered by <c-x><c-o>
     api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
