@@ -106,7 +106,18 @@ cmp.setup({
     },
 })
 
-local search_sources = {
+-- add parenthesis on function/method completion
+local ok, npairs_cmp = pcall(require, 'nvim-autopairs.completion.cmp')
+if ok then
+    cmp.event:on(
+        'confirm_done',
+        npairs_cmp.on_confirm_done({
+            map_char = { tex = '' },
+        })
+    )
+end
+
+local __search_sources = {
     sources = cmp.config.sources({
         { name = 'nvim_lsp_document_symbol' },
     }, {
@@ -115,10 +126,10 @@ local search_sources = {
 }
 
 -- use buffer source for `?`
-cmp.setup.cmdline('?', search_sources)
+cmp.setup.cmdline('?', __search_sources)
 
 -- use buffer source for `/`
-cmp.setup.cmdline('/', search_sources)
+cmp.setup.cmdline('/', __search_sources)
 
 -- use cmdline and path source for ':'
 cmp.setup.cmdline(':', {
