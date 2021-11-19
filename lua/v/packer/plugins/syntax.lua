@@ -1,6 +1,4 @@
 local M = {
-    { 'itchyny/vim-highlighturl' }, -- highlight urls
-
     { 'lervag/vimtex', ft = { 'tex', 'plaintex' } }, -- LaTeX
     { 'fladson/vim-kitty', ft = { 'kitty' } }, -- kitty config
     { 'tpope/vim-sleuth', event = 'CursorHold' }, -- autodetect indent
@@ -8,7 +6,25 @@ local M = {
     { 'vuki656/package-info.nvim', ft = 'json' }, -- package.json
 
     { 'jose-elias-alvarez/nvim-lsp-ts-utils', ft = 'typescript' }, -- TypeScript utilities
-    { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }, -- code parsing for syntax highlighting, etc
+
+    -- code parsing for syntax highlighting, etc
+    {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        event = {
+            'CursorHold',
+            'CursorMoved',
+        },
+    },
+
+    -- highlight urls
+    {
+        'itchyny/vim-highlighturl',
+        event = {
+            'CursorHold',
+            'CursorMoved',
+        },
+    },
 
     -- better treesitter highlithing in angular
     {

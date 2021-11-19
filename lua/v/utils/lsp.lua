@@ -7,7 +7,7 @@ local M = {}
 
 --- Language servers to keep installed
 M.servers = {
-    'angularls', -- TODO: lsp-installer#261
+    'angularls',
     'bashls',
     'clangd',
     'cssls',
@@ -24,10 +24,10 @@ M.servers = {
     'vimls',
 }
 
----Creates table for setting LSP keybindings (to be used in on_attach).
+---Creates table for setting LSP keybindings (to be used in client.on_attach).
 ---@param bufnr number
 ---@returns table
-local __keybindings = function(bufnr)
+local __mappings = function(bufnr)
     local __opts = {
         buffer = true,
         bufnr = bufnr,
@@ -35,14 +35,15 @@ local __keybindings = function(bufnr)
 
     return {
         { 'n', '<leader>gp', '<cmd>lua require("v.utils.lsp").peek_definition()<CR>', __opts },
-        { 'n', '<leader>s', '<cmd>lua vim.lsp.buf.signature_help()<CR>', __opts },
         { 'n', '<space>rn', '<cmd>lua require("v.utils.lsp").rename()<CR>', __opts },
+        { 'n', '<space>F', '<cmd>lua vim.lsp.buf.formatting_sync({}, 1000)<CR>', __opts },
         { 'n', 'K', '<cmd>lua require("v.utils.lsp").show_documentation()<CR>', __opts },
         { 'n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', __opts },
         { 'n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', __opts },
         { 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', __opts },
         { 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', __opts },
         { 'n', 'gq', '<cmd>lua vim.diagnostic.setqflist()<CR>', __opts },
+        { 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', __opts },
 
         {
             'n',
@@ -53,11 +54,11 @@ local __keybindings = function(bufnr)
     }
 end
 
---- Function for LSP's 'textDocument/formatting' handler.
---- @param err table
---- @param result table
---- @param ctx table
---- @param config table
+---Function for LSP's 'textDocument/formatting' handler.
+---@param err table
+---@param result table
+---@param ctx table
+---@param config table
 function M.formatting(err, result, ctx, config)
     if err ~= nil or result == nil then
         return
@@ -84,6 +85,11 @@ end
 
 local __rename_prompt = 'Rename   '
 
+---Function for LSP's 'textDocument/rename' handler.
+---@param err table
+---@param result table
+---@param ctx table
+---@param config table
 local function __rename_handler(err, result, ctx, config)
     if err then
         vim.api.nvim_notify(
@@ -117,7 +123,7 @@ local function __rename_handler(err, result, ctx, config)
     vim.lsp.handlers[ctx.method](err, result, ctx, config)
 end
 
---- Confirms/declines the renaming.
+---Confirms/declines the renaming.
 function M.rename_callback()
     local new_name = vim.trim(vim.fn.getline('.'):sub(#__rename_prompt + 1, -1))
     vim.api.nvim_command([[stopinsert]])
@@ -132,7 +138,7 @@ end
 
 -- TODO: https://github.com/filipdutescu/renamer.nvim
 -- TODO: https://github.com/neovim/neovim/commit/16d4af6d2f549709aa55510f5ae52238c5cadb9c
---- Custom rename prompt for symbol below cursor.
+---Custom rename prompt for symbol below cursor.
 function M.rename()
     local current_name = vim.fn.expand('<cword>')
     local bufnr = vim.api.nvim_create_buf(false, true)
@@ -204,8 +210,8 @@ local function __peek_definitin_callback(_, result)
 end
 
 -- TODO: https://www.reddit.com/r/neovim/comments/qpfc25/telescope_preview_definition/
---- Peek definition for symbl below the cursor. Similar to VSCode's Peek
---- Definition.
+---Peek definition for symbl below the cursor. Similar to VSCode's Peek
+---Definition.
 function M.peek_definition()
     return vim.lsp.buf_request(
         0,
@@ -233,8 +239,8 @@ function M.typescript_sort_imports(bufnr, post)
     vim.lsp.buf_request(bufnr, METHOD, params, callback)
 end
 
---- Disables formatting capabilities for an LSP client.
---- @param client table lsp client
+---Disables formatting capabilities for an LSP client.
+---@param client table lsp client
 local function disable_formatting(client)
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
@@ -339,7 +345,8 @@ local function __conditional_autocmds(client)
         })
     end
 
-    if client.resolved_capabilities.signature_help then
+    local signature_ok = pcall(require, 'lsp_signature')
+    if client.resolved_capabilities.signature_help and not signature_ok then
         augroup('SignatureHelp', {
             { 'CursorHoldI', '<buffer>', 'silent! lua vim.lsp.buf.signature_help()' },
         })
@@ -362,7 +369,7 @@ function M.show_documentation()
 end
 
 local function __on_attach(client, bufnr)
-    require('v.utils.mappings').set_keybindings(__keybindings(bufnr))
+    require('v.utils.mappings').set_keybindings(__mappings(bufnr))
 
     -- enable completion triggered by <c-x><c-o>
     api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')

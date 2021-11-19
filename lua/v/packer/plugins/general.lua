@@ -32,20 +32,41 @@ local M = {
     { 'max397574/better-escape.nvim', event = 'InsertEnter' }, -- better <Esc> with jk
     { 'milisims/nvim-luaref', ft = 'lua' }, -- lua documentation in :help
     { 'tpope/vim-repeat', keys = '.', fn = 'repeat#set' }, -- enables . repeat for plugins
-    { 'wellle/targets.vim', event = 'CursorMoved' }, -- provides great new text objects
     { 'windwp/nvim-autopairs', event = 'InsertEnter' }, -- auto pairs for {[()]}
-    { 'AndrewRadev/splitjoin.vim', keys = { 'gS', 'gJ' } }, -- single <-> multi-line
+
+    -- provides great new text objects
+    {
+        'wellle/targets.vim',
+        event = {
+            'CursorHold',
+            'CursorMoved',
+        },
+    },
+
+    -- single <-> multi-line
+    {
+        'AndrewRadev/splitjoin.vim',
+        keys = { 'gS', 'gJ' },
+        event = {
+            'CursorHold',
+            'CursorMoved',
+        },
+    },
 
     -- make % smarter
     {
         'andymass/vim-matchup',
-        -- keys = {
-        --     '%',
-        --     'g%',
-        --     '[%',
-        --     ']%',
-        --     'z%',
-        -- },
+        event = {
+            'CursorHold',
+            'CursorMoved',
+        },
+        keys = {
+            '%',
+            'g%',
+            '[%',
+            ']%',
+            'z%',
+        },
     },
 
     -- pairs of handy bracket maps
@@ -89,13 +110,14 @@ local M = {
     {
         'tpope/vim-surround',
         after = 'vim-repeat',
-        event = 'InsertEnter',
         keys = {
             'cs',
             'xs',
             'ds',
             { 'x', 'S' },
             { 'v', 'S' },
+            { 'x', 'gS' },
+            { 'v', 'gS' },
         },
     },
 

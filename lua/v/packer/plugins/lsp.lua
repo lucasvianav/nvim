@@ -4,9 +4,16 @@
 local M = {
     { 'neovim/nvim-lspconfig' }, -- config for language servers
 
+    { 'SirVer/ultisnips', event = 'InsertEnter' }, -- cool snippet engine
     { 'folke/lua-dev.nvim', ft = 'lua', as = 'lua-dev' }, -- setup LSP for lua-nvim dev
     { 'kosayoda/nvim-lightbulb', event = 'CursorHold' }, -- indicates code actions
-    { 'SirVer/ultisnips', event = 'InsertEnter' }, -- cool snippet engine
+
+    -- show function signature
+    {
+        'ray-x/lsp_signature.nvim',
+        event = 'CursorHold',
+        after = 'nvim-lspconfig',
+    },
 
     -- nice code actions
     {
@@ -21,14 +28,6 @@ local M = {
         'ludovicchabant/vim-gutentags',
         requires = 'skywind3000/gutentags_plus',
         disable = true,
-    },
-
-    -- TODO: get this to work
-    -- show function signature
-    {
-        'ray-x/lsp_signature.nvim',
-        disable = true,
-        after = 'coq_nvim',
     },
 
     -- easier way to install language servers
