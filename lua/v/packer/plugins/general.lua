@@ -34,6 +34,7 @@ local M = {
     { 'tpope/vim-repeat', keys = '.', fn = 'repeat#set' }, -- enables . repeat for plugins
     { 'wellle/targets.vim', event = 'CursorMoved' }, -- provides great new text objects
     { 'windwp/nvim-autopairs', event = 'InsertEnter' }, -- auto pairs for {[()]}
+    { 'AndrewRadev/splitjoin.vim', keys = { 'gS', 'gJ' } }, -- single <-> multi-line
 
     -- make % smarter
     {
@@ -160,14 +161,6 @@ local M = {
         'mg979/vim-visual-multi',
         as = 'multi',
         keys = { '<C-n>', 'gl', { 'x', '<C-n>' } },
-    },
-
-    -- switch between single-line and multiline statement
-    -- TODO: lua version?
-    {
-        'AndrewRadev/splitjoin.vim',
-        keys = { 'gS', 'gJ' },
-        after = 'vim-easyclip',
     },
 
     -- 2-char search motion
