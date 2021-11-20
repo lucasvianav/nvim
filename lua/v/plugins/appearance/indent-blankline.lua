@@ -1,20 +1,21 @@
 require('indent_blankline').setup({
     buftype_exclude = {
-        'terminal',
         'nofile',
         'prompt',
-    },
-    filetype_exclude = {
-        'help',
         'terminal',
-        'dashboard',
-        'packer',
-        'startify',
+    },
+
+    filetype_exclude = {
         'NvimTree',
+        'dashboard',
+        'gitcommit',
+        'help',
         'lsp-installer',
         'markdown',
         'packer',
-        'gitcommit',
+        'packer',
+        'startify',
+        'terminal',
     },
 
     show_trailing_blankline_indent = false,
@@ -25,7 +26,6 @@ require('indent_blankline').setup({
 
     show_current_context = true,
     show_current_context_start = true,
-    -- context_char = '┃',
     context_patterns = {
         'class',
         'function',

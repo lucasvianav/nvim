@@ -79,6 +79,7 @@ local M = {
             '<M-k>',
             '<M-j>',
             '<Space><Space>',
+            'yo',
         },
     },
 
@@ -92,17 +93,17 @@ local M = {
     },
 
     -- session manager
-    -- TODO: work on #69 (https://github.com/rmagatti/auto-session/issues/69)
-    -- https://github.com/lucasvianav/auto-session
-    -- TODO:
-    -- https://github.com/JoosepAlviste/dotfiles/blob/b09a4eed7bf4c7862a02aa8b14ffe29896a0bfa5/config/nvim/lua/j/plugins.lua#L33-L37
     {
-        'rmagatti/auto-session',
+        'auto-session',
         event = 'VimLeavePre',
         cmd = {
             'SaveSession',
             'RestoreSession',
             'DeleteSession',
+        },
+        __opts = {
+            dev = true,
+            fallback = 'rmagatti/auto-session',
         },
     },
 

@@ -1,5 +1,10 @@
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/statusline.lua
 -- TODO: https://github.com/mattleong/CosmicNvim/blob/main/lua/cosmic/core/statusline/init.lua
+-- TODO: https://github.com/nvim-lualine/lualine.nvim
+-- TODO: https://github.com/Famiu/feline.nvim
+-- TODO: https://github.com/windwp/windline.nvim
+-- https://www.reddit.com/r/neovim/comments/pxkf16/windlinenvim_one_global_status_line_on_floating/
+
 
 --  _   _ _____ ___ _     ___ _____ ___ _____ ____
 -- | | | |_   _|_ _| |   |_ _|_   _|_ _| ____/ ___|
