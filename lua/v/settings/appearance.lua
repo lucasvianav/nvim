@@ -3,8 +3,6 @@ local o = vim.opt
 
 local M = {}
 
--- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/highlights.lua
-
 o.background = 'dark' -- the background color is dark
 o.colorcolumn = '+1' -- show mark at column 80
 o.cursorline = true -- highlights current line
