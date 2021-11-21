@@ -52,35 +52,24 @@ local function __get_config_setup_str(module, plugin_name, is_theme)
         return
     end
 
-    local require_str = [[
-        local ok, module = pcall(require, ']] .. module .. [[')
+    local require_str = ([[
+        local ok, module = pcall(require, '%s')
 
         if not ok then
             require('v.utils.log').log(module)
         end
-    ]]
+    ]]):format(module)
 
     if is_theme and plugin_name then
-        local appearance_commands = require('v.settings').appearance.commands
-        local cmds = fn.substitute(appearance_commands, [[.\+]], '[[&]]', '')
-        cmds = cmds and 'vim.cmd(' .. cmds .. ')' or ''
+        require_str = ([[%s
+            local settings = require('v.settings').appearance
+            local colorscheme = settings.colorscheme
 
-        require_str = require_str
-            .. [[
-
-            local colorscheme = require('v.settings').appearance.colorscheme
-
-            if colorscheme == ']]
-            .. plugin_name
-            .. [[' then
-                vim.cmd('colorscheme ]]
-            .. plugin_name
-            .. [[')
-                ]]
-            .. cmds
-            .. [[
+            if colorscheme == %s then
+                vim.api.nvim_command('colorscheme %s')
+                settings.post_colorscheme_hook()
             end
-        ]]
+        ]]):format(require_str, plugin_name, plugin_name)
     end
 
     return require_str

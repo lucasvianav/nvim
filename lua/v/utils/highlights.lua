@@ -18,6 +18,8 @@ M.highlight = function(group, tbl)
     for key, value in pairs(tbl) do
         if type(key) == 'string' and value and type(value) == 'string' then
             cmd = ('%s %s=%s'):format(cmd, key, value)
+        elseif value == 'transparent' then
+            cmd = cmd .. 'ctermbg=NONE guibg=NONE'
         end
     end
 

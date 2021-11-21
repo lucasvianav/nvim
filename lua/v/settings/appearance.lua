@@ -27,21 +27,25 @@ o.wrap = false -- don't wrap lines by default
 -- will be loaded by packer :)
 M.colorscheme = 'tokyonight'
 
--- common config to be run for each plugin
-M.commands = [[
-    hi! Folded ctermbg=NONE guibg=NONE
-    hi! BufferLineFill ctermbg=none guibg=none
-    hi! NormalFloat ctermbg=NONE guibg=NONE
-    hi! TabLineFill ctermbg=NONE guibg=NONE
-    hi! CursorLine guibg=]] .. colors.grey .. '\n' .. [[
-    hi! ColorColumn guibg=]] .. colors.black .. '\n' .. [[
-    hi! TabLine    guibg=NONE guifg=]] .. colors.cyan_grey .. '\n' .. [[
-    hi! TabLineSel guibg=]] .. colors.grey_dark .. [[ guifg=]] .. colors.off_white .. '\n' .. [[
-]]
-
--- TODO: convert to this after writing function for highlights
--- M.post_colorscheme_hook = function()
--- end
+--- function to be ran after a colorscheme is applied
+M.post_colorscheme_hook = function()
+    require('v.utils.highlights').set_highlights({
+        { 'Folded', { 'transparent' } },
+        { 'BufferLineFill', { 'transparent' } },
+        { 'NormalFloat', { 'transparent' } },
+        { 'TabLineFill', { 'transparent' } },
+        { 'CursorLine', { guibg = colors.grey } },
+        { 'ColorColumn', { guibg = colors.black } },
+        { 'TabLine', { 'transparent', guifg = colors.cyan_grey } },
+        {
+            'TabLineSel',
+            {
+                guibg = colors.grey_dark,
+                guifg = colors.off_white,
+            },
+        },
+    })
+end
 
 o.listchars = {
     conceal = '┊',
@@ -60,7 +64,5 @@ o.fillchars = {
     stl = ' ',
     stlnc = ' ',
 }
-
-vim.api.nvim_exec(M.commands, false)
 
 return M
