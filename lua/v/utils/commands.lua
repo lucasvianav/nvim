@@ -13,7 +13,7 @@ local M = {}
 ---the command should be defined with a bang (`:command!` instead of `:command`)
 M.command = function(lhs, rhs, opts)
     if
-        (not type(lhs) == 'string' or not type(rhs) == 'string')
+        (type(lhs) ~= 'string' or type(rhs) ~= 'string')
         or (opts and type(opts) ~= 'table')
     then
         vim.api.nvim_notify('Invalid parameter(s).', vim.log.levels.ERROR, {
