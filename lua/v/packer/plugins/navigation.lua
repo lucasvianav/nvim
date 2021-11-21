@@ -47,6 +47,7 @@ local M = {
         as = 'quickscope',
         keys = { 'f', 'F', 't', 'T' },
         __opts = { setup = true },
+        disable = true,
     },
 
     -- run commands in tmux pane from neovim

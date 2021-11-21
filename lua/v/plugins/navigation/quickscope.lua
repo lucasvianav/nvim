@@ -4,8 +4,10 @@ require('v.utils').set_viml_options('qs', {
 
     -- trigger a highlight in the appropriate direction
     highlight_on_keys = {
-        'f', 'F',
-        't', 'T',
+        'f',
+        'F',
+        't',
+        'T',
     },
 
     -- don't use plugin in startify/dashboard
@@ -16,3 +18,5 @@ require('v.utils').set_viml_options('qs', {
     },
 })
 
+-- hi QuickScopePrimary   gui=underline,bold cterm=underline,bold
+-- hi QuickScopeSecondary gui=underline,bold cterm=underline,bold
