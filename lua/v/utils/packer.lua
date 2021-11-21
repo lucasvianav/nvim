@@ -65,7 +65,7 @@ local function __get_config_setup_str(module, plugin_name, is_theme)
             local settings = require('v.settings').appearance
             local colorscheme = settings.colorscheme
 
-            if colorscheme == %s then
+            if colorscheme == '%s' then
                 vim.api.nvim_command('colorscheme %s')
                 settings.post_colorscheme_hook()
             end

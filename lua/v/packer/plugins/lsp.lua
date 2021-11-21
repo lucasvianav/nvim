@@ -4,6 +4,7 @@
 local M = {
     { 'neovim/nvim-lspconfig' }, -- config for language servers
 
+    -- TODO: consider swapping for L3MON4D3/LuaSnip
     { 'SirVer/ultisnips', event = 'InsertEnter' }, -- cool snippet engine
     { 'folke/lua-dev.nvim', ft = 'lua', as = 'lua-dev' }, -- setup LSP for lua-nvim dev
     { 'kosayoda/nvim-lightbulb', event = 'CursorHold' }, -- indicates code actions

@@ -90,6 +90,7 @@ local M = {
         run = function()
             vim.fn['firenvim#install'](0)
         end,
+        disable = true,
     },
 
     -- session manager
