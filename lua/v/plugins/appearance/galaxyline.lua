@@ -5,7 +5,6 @@
 -- TODO: https://github.com/windwp/windline.nvim
 -- https://www.reddit.com/r/neovim/comments/pxkf16/windlinenvim_one_global_status_line_on_floating/
 
-
 --  _   _ _____ ___ _     ___ _____ ___ _____ ____
 -- | | | |_   _|_ _| |   |_ _|_   _|_ _| ____/ ___|
 -- | | | | | |  | || |    | |  | |  | ||  _| \___ \
@@ -239,3 +238,15 @@ gls.short_line_left = {
         },
     },
 }
+
+require('v.utils.highlights').set_highlights({
+    { 'StatusLine', { 'transparent' } },
+    -- {
+    --     'StatusLineNC',
+    --     {
+    --         gui = 'underline',
+    --         guifg = colors.black,
+    --         'transparent',
+    --     },
+    -- },
+})
