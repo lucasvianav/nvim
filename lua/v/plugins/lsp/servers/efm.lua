@@ -5,14 +5,15 @@
         cargo
 
     @SOFTWARES:
-        markdownlint-cli (npm)
         eslint_d         (npm)
-        prettier         (npm)
         fsouza/prettierd (npm)
+        markdownlint-cli (npm)
+        prettier         (npm)
+        sqlint           (npm)
         black            (pip)
+        flake8           (pip)
         isort            (pip)
         mypy             (pip)
-        flake8           (pip)
         vim-vint         (pip)
         stylua           (cargo)
 
@@ -143,6 +144,24 @@ local markdownlint = {
     },
 }
 
+-- linting for sql
+local sqlint = {
+    lintCommand = 'sqlint -f stylish --stdin',
+    lintStdin = true,
+    lintFormats = {
+        '%f(%l:%c) %tarning %m',
+        '%f(%l:%c) %rror %m',
+    },
+    lintIgnoreExitCode = true,
+    formatCommand = 'sqlint -f stylish --stdin --fix',
+    formatStdin = true,
+    lintSource = 'sqlint',
+    rootMarkers = {
+        '.sqlintrc.json',
+        'package.json',
+    },
+}
+
 --[[ @BASH LINTING/FORMATTING
     local shfmt = {
         formatCommand = "shfmt ${-i:tabWidth}",
@@ -174,6 +193,7 @@ local M = {
         'lua',
         'python',
         'scss',
+        -- 'sql',
         'typescript',
         'typescript.tsx',
         'typescriptreact',
@@ -192,6 +212,7 @@ local M = {
             '.git/',
             '.prettierrc',
             '.prettierrc.json',
+            -- '.sqlintrc.json',
             '.stylua.toml',
             'package.json',
             'requirements.txt',
@@ -206,9 +227,8 @@ local M = {
             typescript = { eslint_d },
             javascriptreact = { eslint_d, prettierd },
             typescriptreact = { eslint_d, prettierd },
-            markdown = { prettier },
-            -- markdown     = { prettier, markdownlint },
 
+            markdown = { prettier },
             css = { prettierd },
             graphql = { prettierd },
             html = { prettierd },
@@ -217,6 +237,7 @@ local M = {
             yaml = { prettierd },
             vim = { vint },
             lua = { stylua },
+            -- sql = { sqlint },
 
             python = {
                 black,
