@@ -19,6 +19,7 @@ M.servers = {
     'html',
     'jedi_language_server',
     'jsonls',
+    'sqls',
     'sumneko_lua',
     'tsserver',
     'vimls',
@@ -313,6 +314,15 @@ local __specific_on_attach = {
         client.resolved_capabilities.document_range_formatting = true
         client.resolved_capabilities.hover = false
         client.resolved_capabilities.rename = false
+    end,
+
+    sqls = function(client)
+        local ok, sqls = pcall(require, 'sqls')
+        if ok then
+            client.resolved_capabilities.execute_command = true
+            client.commands = sqls.commands
+            sqls.setup({ picker = 'telescope' })
+        end
     end,
 
     angularls = disable_formatting,

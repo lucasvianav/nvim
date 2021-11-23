@@ -2,6 +2,12 @@ local colors = require('v.utils').colors
 
 require('nvim-web-devicons').setup({
     override = {
+        ['docker-compose.yml'] = {
+            icon = '',
+            color = colors.lightBlue,
+            name = 'Dockerfile',
+        },
+
         Dockerfile = {
             icon = '',
             color = colors.lightBlue,

@@ -1,8 +1,11 @@
+-- ok so there's not only actual syntax stuff in here
+-- there's all kind of filetype-specific plugins
+
 local M = {
-    { 'lervag/vimtex', ft = { 'tex', 'plaintex' } }, -- LaTeX
-    { 'fladson/vim-kitty', ft = { 'kitty' } }, -- kitty config
-    { 'tpope/vim-sleuth', event = 'CursorHold' }, -- autodetect indent
     { 'dkarter/bullets.vim', ft = 'markdown' }, -- markdown lists
+    { 'fladson/vim-kitty', ft = { 'kitty' } }, -- kitty config
+    { 'lervag/vimtex', ft = { 'tex', 'plaintex' } }, -- LaTeX
+    { 'tpope/vim-sleuth', event = 'CursorHold' }, -- autodetect indent
     { 'vuki656/package-info.nvim', ft = 'json' }, -- package.json
 
     { 'jose-elias-alvarez/nvim-lsp-ts-utils', ft = 'typescript' }, -- TypeScript utilities

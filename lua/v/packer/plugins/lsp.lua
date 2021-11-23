@@ -8,6 +8,7 @@ local M = {
     { 'SirVer/ultisnips', event = 'InsertEnter' }, -- cool snippet engine
     { 'folke/lua-dev.nvim', ft = 'lua', as = 'lua-dev' }, -- setup LSP for lua-nvim dev
     { 'kosayoda/nvim-lightbulb', event = 'CursorHold' }, -- indicates code actions
+    { 'nanotee/sqls.nvim', ft = 'sql' }, -- sql commands and code actions
 
     -- show function signature
     {
