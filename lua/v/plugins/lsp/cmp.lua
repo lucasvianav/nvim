@@ -2,7 +2,23 @@
 
 local cmp = require('cmp')
 
-require('lspkind').init()
+local ok_lspkind, lspkind = pcall(require, 'lspkind')
+if ok_lspkind then
+    lspkind.init()
+else
+    require('v.utils.log').log(lspkind)
+    vim.api.nvim_notify("Couldn't load `lspkind`.", vim.log.levels.ERROR, {
+        title = 'Error - CMP',
+    })
+end
+
+local ok_comparator, comparator = pcall(require, 'cmp-under-comparator')
+if not ok_comparator then
+    require('v.utils.log').log(comparator)
+    vim.api.nvim_notify("Couldn't load `cmp-under-comparator`.", vim.log.levels.ERROR, {
+        title = 'Error - CMP',
+    })
+end
 
 cmp.setup({
     snippet = {
@@ -74,7 +90,7 @@ cmp.setup({
     },
 
     formatting = {
-        format = require('lspkind').cmp_format({
+        format = ok_lspkind and lspkind.cmp_format({
             with_text = true,
             maxwidth = 50,
             menu = {
@@ -85,7 +101,7 @@ cmp.setup({
                 treesitter = '[Treesitter]',
                 cmdline = '[CMD]',
             },
-        }),
+        }) or nil,
     },
 
     sorting = {
@@ -93,7 +109,7 @@ cmp.setup({
             cmp.config.compare.offset,
             cmp.config.compare.exact,
             cmp.config.compare.score,
-            require('cmp-under-comparator').under,
+            ok_comparator and require('cmp-under-comparator').under or nil,
             cmp.config.compare.kind,
             cmp.config.compare.sort_text,
             cmp.config.compare.length,
@@ -107,13 +123,20 @@ cmp.setup({
 })
 
 -- add parenthesis on function/method completion
-local ok, npairs_cmp = pcall(require, 'nvim-autopairs.completion.cmp')
-if ok then
+local ok_npairs, npairs_cmp = pcall(require, 'nvim-autopairs.completion.cmp')
+if ok_npairs then
     cmp.event:on(
         'confirm_done',
         npairs_cmp.on_confirm_done({
             map_char = { tex = '' },
         })
+    )
+else
+    require('v.utils.log').log(npairs_cmp)
+    vim.api.nvim_notify(
+        "Couldn't load `nvim-autopairs.completion.cmp`.",
+        vim.log.levels.ERROR,
+        { title = 'Error - CMP' }
     )
 end
 
