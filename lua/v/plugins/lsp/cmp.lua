@@ -1,4 +1,5 @@
 -- TODO: https://github.com/petertriho/cmp-git
+-- https://www.reddit.com/r/neovim/comments/r42njg/here_are_the_vs_code_theme_colors_for_the_new/hme3pb7/
 
 local cmp = require('cmp')
 
@@ -81,9 +82,9 @@ cmp.setup({
         { name = 'buffer' },
     }),
 
-    completion = {
-        autocomplete = true,
-    },
+    -- completion = {
+    --     autocomplete = false,
+    -- },
 
     documentation = {
         border = 'single',
