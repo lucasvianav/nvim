@@ -139,6 +139,7 @@ end
 
 -- TODO: https://github.com/filipdutescu/renamer.nvim
 -- TODO: https://github.com/neovim/neovim/commit/16d4af6d2f549709aa55510f5ae52238c5cadb9c
+-- TODO: https://www.reddit.com/r/neovim/comments/r0omlv/start_your_search_from_a_more_comfortable_place/
 ---Custom rename prompt for symbol below cursor.
 function M.rename()
     local current_name = vim.fn.expand('<cword>')
@@ -195,7 +196,7 @@ function M.rename()
         { 'n', 'q', '<cmd>bd!<CR>', opts },
         { 'i', '<ESC>', '<Esc><cmd>bd!<CR>', opts },
         { 'i', '<C-C>', '<Esc><cmd>bd!<CR>', opts },
-        { 'i', '<BS>', '<ESC>"_xi', opts }, -- TODO: make this better
+        { 'i', '<BS>', '<ESC>"_xi', opts }, -- TODO: make this better https://gist.github.com/VonHeikemen/a0a58cab2c910065420ecf5f4102c58c
         { { 'n', 'i' }, '<CR>', "<cmd>lua require('v.utils.lsp').rename_callback()<CR>", opts },
     })
 
@@ -380,6 +381,7 @@ function M.show_documentation()
     end
 end
 
+-- TODO: https://github.com/hrsh7th/nvim-cmp/issues/465#issuecomment-981159946
 local function __on_attach(client, bufnr)
     require('v.utils.mappings').set_keybindings(__mappings(bufnr))
 

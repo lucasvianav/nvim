@@ -22,6 +22,10 @@
     https://github.com/ayamir/nvimdots
     https://github.com/kyle-mccarthy/nvim-dotfiles
 
+    TODO: docker container?
+    https://github.com/nvim-lsp/try.nvim
+    https://github.com/NvChad/NvChad
+
     https://github.com/sumneko/lua-language-server/wiki/EmmyLua-Annotations#optional-params
 ]]
 

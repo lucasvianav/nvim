@@ -1,6 +1,8 @@
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/treesitter.lua
 -- https://github.com/nvim-treesitter/nvim-treesitter/commit/d78fb79ed6f3e5260db48f352d8dcbd3e82935a3
 
+-- READ: https://www.masteringemacs.org/article/tree-sitter-complications-of-parsing-languages
+
 -- list of desired treesitter parsers
 local parsers = {
     'bash',
@@ -37,7 +39,7 @@ require('nvim-treesitter.configs').setup({
     autotag = { enable = true },
     context_commentstring = { enable = true },
     highlight = { enable = true },
-    indent = { enable = true },
+    indent = { enable = false },
     matchup = { enable = true },
 
     rainbow = {

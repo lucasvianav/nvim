@@ -146,6 +146,7 @@ local M = {
     -- maps for toggling comments
     -- TODO: swap for numToStr/Comment.nvim
     -- TODO: https://www.reddit.com/r/neovim/comments/q6lq5o/commentnvim_features_go_brrrrr/hgcxcok/?utm_source=reddit&utm_medium=web2x&context=3
+    -- https://www.reddit.com/r/neovim/comments/r15nzf/commentnvim_3_treesitter_and_some_new_chef_kiss/
     {
         'tpope/vim-commentary',
         cmd = { 'Comment', 'Commentary' },

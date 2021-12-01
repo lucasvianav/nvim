@@ -21,6 +21,17 @@ if not ok_comparator then
     })
 end
 
+-- TODO ???? fix this pls
+local armengue = 0
+local cmdline_escape = function()
+    cmp.mapping.abort()
+    if armengue > 1 then
+        vim.api.nvim_feedkeys('<ESC>', 'c', true)
+    else
+        armengue = armengue + 1
+    end
+end
+
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -34,12 +45,11 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         ['<Esc>'] = cmp.mapping({
             i = cmp.mapping.abort(),
-            c = cmp.mapping.abort(),
-            -- c = cmp.mapping.close(),
+            c = cmdline_escape(),
         }),
         ['<C-c>'] = cmp.mapping({
             i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
+            c = cmdline_escape(),
         }),
         ['<C-e>'] = cmp.mapping({
             i = cmp.mapping.abort(),
