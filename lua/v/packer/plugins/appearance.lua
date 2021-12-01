@@ -20,6 +20,15 @@ local M = {
         after = 'nvim-treesitter',
     },
 
+    -- colorcolumn with virtual text
+    {
+        'lukas-reineke/virt-column.nvim',
+        event = {
+            'CursorHold',
+            'CursorMoved',
+        },
+    },
+
     -- fancy statusline
     {
         'NTBBloodbath/galaxyline.nvim',

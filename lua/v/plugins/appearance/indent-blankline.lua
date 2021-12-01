@@ -14,6 +14,7 @@ require('indent_blankline').setup({
         'markdown',
         'packer',
         'packer',
+        'sql',
         'startify',
         'terminal',
     },

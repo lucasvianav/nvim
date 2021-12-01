@@ -323,6 +323,8 @@ local __specific_on_attach = {
             client.commands = sqls.commands
             sqls.setup({ picker = 'telescope' })
         end
+
+        disable_formatting(client)
     end,
 
     angularls = disable_formatting,

@@ -1,12 +1,4 @@
 require('v.utils').set_viml_options('nvim_tree', {
-    -- dirs/files to be ignored
-    ignore = {
-        '.git',
-        'node_modules',
-        '.cache',
-        '__pycache__',
-    },
-
     -- dirs/files to be highlighted
     special_files = {
         ['README.md'] = 1,
@@ -15,17 +7,16 @@ require('v.utils').set_viml_options('nvim_tree', {
     },
 
     -- cosmetic
-    indent_markers          = false, -- show indentation rulers
-    hide_dotfiles           = true,  -- hide dirs/files starting with '.'
-    git_hl                  = false, -- highlight files with git attributtes
-    add_trailing            = true,  -- append trailing / to dir names
-    group_empty             = true,  -- compact nested directories with no other files
+    indent_markers = false, -- show indentation rulers
+    git_hl = false, -- highlight files with git attributtes
+    add_trailing = true, -- append trailing / to dir names
+    group_empty = true, -- compact nested directories with no other files
     create_in_closed_folder = false, -- cursor is on a closed dir: create new file on the parent
 
     show_icons = {
-        git           = 0,
-        folders       = 1,
-        files         = 1,
+        git = 0,
+        folders = 1,
+        files = 1,
         folder_arrows = 1,
     },
 })
@@ -84,11 +75,11 @@ require('nvim-tree').setup({
     diagnostics = {
         enable = true,
         icons = {
-            hint    = "",
-            info    = "",
-            warning = "",
-            error   = "",
-        }
+            hint = '',
+            info = '',
+            warning = '',
+            error = '',
+        },
     },
 
     -- show focused file on the tree
@@ -105,6 +96,18 @@ require('nvim-tree').setup({
         mappings = {
             custom_only = true,
             list = keybindings,
+        },
+    },
+
+    filters = {
+        dotfiles = true, -- hide dirs/files starting with '.'
+
+        -- dirs/files to be ignored
+        ignore = {
+            '.git',
+            'node_modules',
+            '.cache',
+            '__pycache__',
         },
     },
 })

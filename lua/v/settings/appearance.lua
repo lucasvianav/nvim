@@ -32,8 +32,8 @@ M.post_colorscheme_hook = function()
         { 'BufferLineFill', { 'transparent' } },
         { 'NormalFloat', { 'transparent' } },
         { 'TabLineFill', { 'transparent' } },
-        { 'CursorLine', { guibg = colors.grey } },
-        { 'ColorColumn', { guibg = colors.black } },
+        { 'CursorLine', { guibg = colors.cyan_grey_dark } },
+        { 'ColorColumn', { guibg = colors.cyan_grey_dark } },
         { 'TabLine', { 'transparent', guifg = colors.cyan_grey } },
         {
             'TabLineSel',
