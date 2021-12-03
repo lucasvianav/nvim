@@ -217,9 +217,9 @@ local M = {
             'package.json',
             'requirements.txt',
         },
-        lintDebounce = 150,
-        lint_debounce = 150,
-        debounce = 150,
+        lintDebounce = 200,
+        lint_debounce = 200,
+        debounce = 200,
         logLevel = 10,
         logFile = '/tmp/efm.log',
         languages = {

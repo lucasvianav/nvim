@@ -404,36 +404,20 @@ end
 function M.make_config(config)
     local capabilities = lsp.protocol.make_client_capabilities()
 
-    -- enable snippets
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    capabilities.textDocument.completion.completionItem.resolveSupport = {
-        properties = {
-            'documentation',
-            'detail',
-            'additionalTextEdits',
-        },
-    }
-    capabilities.textDocument.completion.completionItem.preselectSupport = true
-    capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-    capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-    capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-    capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-    capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+    local has_coq, coq = pcall(require, 'coq')
+    if has_coq then
+        capabilities = coq.lsp_ensure_capabilities(capabilities)
+    end
+
+    local has_cmp, cmp = pcall(require, 'cmp_nvim_lsp')
+    if has_cmp then
+        capabilities = cmp.update_capabilities(capabilities)
+    end
 
     config = vim.tbl_deep_extend('keep', config or {}, {
         capabilities = capabilities,
         on_attach = __on_attach,
     })
-
-    local has_coq, coq = pcall(require, 'coq')
-    if has_coq then
-        config = coq.lsp_ensure_capabilities(config)
-    end
-
-    -- local has_cmp, cmp = pcall(require, 'cmp_nvim_lsp')
-    -- if has_cmp then
-    --     config = cmp.update_capabilities(config)
-    -- end
 
     config.handlers = {
         ['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
