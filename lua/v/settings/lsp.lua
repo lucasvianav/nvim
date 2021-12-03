@@ -23,13 +23,23 @@ M.servers = {
 
 --- General diagnostics settings
 vim.diagnostic.config({
-    virtual_text = { source = 'always' }, -- or 'if_many'
     severity_sort = true,
     underline = true,
     update_in_insert = false,
     float = {
         scope = 'line',
         border = 'single',
+        source = 'always',
+        focusable = false,
+        close_events = {
+            'BufLeave',
+            'CursorMoved',
+            'InsertEnter',
+            'FocusLost',
+        },
+    },
+    virtual_text = {
+        source = 'always',
     },
 })
 

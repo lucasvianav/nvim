@@ -352,9 +352,16 @@ local function __conditional_autocmds(client)
 
     if client.resolved_capabilities.document_highlight then
         augroup('LspSymbolHighlight', {
+            -- highlight
             { 'CursorHold', '<buffer>', 'lua vim.lsp.buf.document_highlight()' },
             { 'CursorHoldI', '<buffer>', 'lua vim.lsp.buf.document_highlight()' },
+
+            -- clear
             { 'CursorMoved', '<buffer>', 'lua vim.lsp.buf.clear_references()' },
+            { 'CursorMovedI', '<buffer>', 'lua vim.lsp.buf.clear_references()' },
+            { 'FocusLost', '<buffer>', 'lua vim.lsp.buf.clear_references()' },
+            { 'BufLeave', '<buffer>', 'lua vim.lsp.buf.clear_references()' },
+            { 'InsertEnter', '<buffer>', 'lua vim.lsp.buf.clear_references()' },
         })
     end
 
@@ -417,6 +424,9 @@ function M.make_config(config)
     config = vim.tbl_deep_extend('keep', config or {}, {
         capabilities = capabilities,
         on_attach = __on_attach,
+        flags = {
+            debounce_text_changes = 200,
+        },
     })
 
     config.handlers = {
@@ -425,10 +435,6 @@ function M.make_config(config)
         }),
 
         ['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, {
-            border = 'single',
-        }),
-
-        ['textDocument/publishDiagnostics'] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
             border = 'single',
         }),
 
