@@ -5,55 +5,7 @@ local cmd = vim.api.nvim_command
 
 local M = {}
 
---- Language servers to keep installed
-M.servers = {
-    'angularls',
-    'bashls',
-    'clangd',
-    'cssls',
-    'dockerls',
-    'efm',
-    'emmet_ls',
-    -- 'eslint',
-    'graphql',
-    'html',
-    'jedi_language_server',
-    'jsonls',
-    'sqls',
-    'sumneko_lua',
-    'tsserver',
-    'vimls',
-}
-
----Creates table for setting LSP keybindings (to be used in client.on_attach).
----@param bufnr number
----@returns table
-local __mappings = function(bufnr)
-    local __opts = {
-        buffer = true,
-        bufnr = bufnr,
-    }
-
-    return {
-        { 'n', '<leader>gp', '<cmd>lua require("v.utils.lsp").peek_definition()<CR>', __opts },
-        { 'n', '<space>rn', '<cmd>lua require("v.utils.lsp").rename()<CR>', __opts },
-        { 'n', '<space>F', '<cmd>lua vim.lsp.buf.formatting_sync({}, 1000)<CR>', __opts },
-        { 'n', 'K', '<cmd>lua require("v.utils.lsp").show_documentation()<CR>', __opts },
-        { 'n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', __opts },
-        { 'n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', __opts },
-        { 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', __opts },
-        { 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', __opts },
-        { 'n', 'gq', '<cmd>lua vim.diagnostic.setqflist()<CR>', __opts },
-        { 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', __opts },
-
-        {
-            'n',
-            'gl',
-            "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line', border = 'single' })<CR>",
-            __opts,
-        },
-    }
-end
+M.servers = require('v.settings.lsp').servers
 
 ---Function for LSP's 'textDocument/formatting' handler.
 ---@param err table
@@ -381,9 +333,14 @@ function M.show_documentation()
     end
 end
 
+local __keybindings = require('v.keybindings.lsp')
+
 -- TODO: https://github.com/hrsh7th/nvim-cmp/issues/465#issuecomment-981159946
 local function __on_attach(client, bufnr)
-    require('v.utils.mappings').set_keybindings(__mappings(bufnr))
+    require('v.utils.mappings').set_keybindings(__keybindings, {
+        buffer = true,
+        bufnr = bufnr,
+    })
 
     -- enable completion triggered by <c-x><c-o>
     api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -444,10 +401,6 @@ function M.make_config(config)
 
         ['textDocument/publishDiagnostics'] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
             border = 'single',
-            virtual_text = { source = 'always' }, -- or 'if_many'
-            severity_sort = true,
-            underline = true,
-            update_in_insert = false,
         }),
 
         ['textDocument/formatting'] = M.formatting,

@@ -5,6 +5,7 @@ local M = {
     appearance = req_submodule('appearance'),
     providers = req_submodule('providers'),
     builtin = req_submodule('builtin'),
+    builtin = req_submodule('lsp'),
 }
 
 return M

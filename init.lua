@@ -21,6 +21,7 @@
     https://github.com/shaeinst/roshnivim
     https://github.com/ayamir/nvimdots
     https://github.com/kyle-mccarthy/nvim-dotfiles
+    https://github.com/bfredl/bfredl.github.io/tree/master/nvim
 
     TODO: docker container?
     https://github.com/nvim-lsp/try.nvim
