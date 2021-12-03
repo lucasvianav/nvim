@@ -129,6 +129,8 @@ local M = {
         keys = {
             'csf',
             'dsf',
+            'dif',
+            'daf',
             'dsnf',
             { 'o', 'if' },
             { 'o', 'af' },
@@ -165,6 +167,7 @@ local M = {
     -- better clipboard
     -- TODO: lua port
     -- https://github.com/AckslD/nvim-neoclip.lua
+    -- https://github.com/bfredl/nvim-miniyank
     {
         'svermeulen/vim-easyclip',
         event = { 'CursorMoved', 'InsertEnter' },

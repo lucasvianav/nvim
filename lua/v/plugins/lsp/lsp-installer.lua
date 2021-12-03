@@ -2,20 +2,20 @@ local lsp_installer = require('nvim-lsp-installer')
 local lsp_installer_servers = require('nvim-lsp-installer.servers')
 local utils = require('v.utils.lsp')
 
-for _, server_name in ipairs(utils.servers) do
-    local ok, server = lsp_installer_servers.get_server(server_name)
+-- for _, server_name in ipairs(utils.servers) do
+--     local ok, server = lsp_installer_servers.get_server(server_name)
 
-    if ok then
-        if not server:is_installed() then
-            server:install()
-            vim.api.nvim_notify(
-                server_name .. "'s installation queued.",
-                vim.log.levels.INFO,
-                { title = 'LspInstall' }
-            )
-        end
-    end
-end
+--     if ok then
+--         if not server:is_installed() then
+--             server:install()
+--             vim.api.nvim_notify(
+--                 server_name .. "'s installation queued.",
+--                 vim.log.levels.INFO,
+--                 { title = 'LspInstall' }
+--             )
+--         end
+--     end
+-- end
 
 lsp_installer.on_server_ready(function(server)
     local config = utils.make_config()

@@ -69,4 +69,17 @@ M.grep_last_search = function()
     end
 end
 
+M.pickers = {
+    center_dropdown = {
+        theme = 'dropdown',
+        previewer = false,
+        layout_strategy = 'center',
+    },
+
+    code_actions = {
+        theme = 'cursor',
+        prompt_title = 'Code Actions',
+    },
+}
+
 return M

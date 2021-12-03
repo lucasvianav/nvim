@@ -23,6 +23,7 @@ local M = {
     -- colorcolumn with virtual text
     {
         'lukas-reineke/virt-column.nvim',
+        disable = true,
         event = {
             'CursorHold',
             'CursorMoved',

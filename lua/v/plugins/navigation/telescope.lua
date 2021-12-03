@@ -95,21 +95,11 @@ telescope.setup({
             },
         },
 
-        git_branches = {
-            theme = 'dropdown',
-            previewer = false,
-            layout_strategy = 'center',
-        },
-
-        lsp_code_actions = {
-            theme = 'cursor',
-            promppt_tile = 'Code Actions',
-        },
-
-        lsp_range_code_actions = {
-            theme = 'cursor',
-            promppt_tile = 'Code Actions',
-        },
+        git_branches = utils.pickers.center_dropdown,
+        lsp_document_diagnostics = utils.pickers.center_dropdown,
+        lsp_workspace_diagnostics = utils.pickers.center_dropdown,
+        lsp_code_actions = utils.pickers.code_actions,
+        lsp_range_code_actions = utils.pickers.code_actions,
     },
 })
 
@@ -129,11 +119,7 @@ require('v.utils.mappings').set_keybindings({
     { 'n', 'gd', [[:<C-U>lua require('telescope.builtin').lsp_definitions()<cr>]] },
     { 'n', 'gr', [[:<C-U>lua require('telescope.builtin').lsp_references()<cr>]] },
     { 'n', 'gi', [[:<C-U>lua require('telescope.builtin').lsp_implementations()<cr>]] },
-    {
-        'n',
-        '<Leader>ca',
-        [[:<C-U>lua require('telescope.builtin').lsp_code_actions()<cr>]],
-    },
+    { 'n', '<Leader>ca', [[:<C-U>lua require('telescope.builtin').lsp_code_actions()<cr>]] },
     { 'v', '<Leader>ca', [[:<C-U>lua require('telescope.builtin').lsp_range_code_actions()<cr>]] },
     {
         'n',
@@ -159,8 +145,6 @@ require('v.utils.mappings').set_keybindings({
     },
 
     -- custom functions
-    { 'n', '<leader>fu', '<cmd>lua require("v.utils.telescope").find_unimed()<cr>' },
-    { 'n', '<leader>fpu', '<cmd>lua require("v.utils.telescope").grep_unimed()<cr>' },
     { 'n', '<leader>fn', '<cmd>lua require("v.utils.telescope").find_nvim()<cr>' },
     { 'n', '<leader>fk', '<cmd>lua require("v.utils.telescope").find_in_plugins()<cr>' },
     { 'n', '<leader>fd', '<cmd>lua require("v.utils.telescope").find_dotfiles()<cr>' },

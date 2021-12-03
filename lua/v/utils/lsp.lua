@@ -141,15 +141,16 @@ function M.rename()
     vim.api.nvim_win_set_option(winnr, 'cursorline', false)
     vim.api.nvim_win_set_option(winnr, 'scrolloff', 0)
 
-    local opts = { buffer = true }
     require('v.utils.mappings').set_keybindings({
-        { 'n', '<ESC>', '<cmd>bd!<CR>', opts },
-        { 'n', '<C-C>', '<cmd>bd!<CR>', opts },
-        { 'n', 'q', '<cmd>bd!<CR>', opts },
-        { 'i', '<ESC>', '<Esc><cmd>bd!<CR>', opts },
-        { 'i', '<C-C>', '<Esc><cmd>bd!<CR>', opts },
-        { 'i', '<BS>', '<ESC>"_xi', opts }, -- TODO: make this better https://gist.github.com/VonHeikemen/a0a58cab2c910065420ecf5f4102c58c
-        { { 'n', 'i' }, '<CR>', "<cmd>lua require('v.utils.lsp').rename_callback()<CR>", opts },
+        { 'n', '<ESC>', '<cmd>bd!<CR>' },
+        { 'n', '<C-C>', '<cmd>bd!<CR>' },
+        { 'n', 'q', '<cmd>bd!<CR>' },
+        { 'i', '<ESC>', '<Esc><cmd>bd!<CR>' },
+        { 'i', '<C-C>', '<Esc><cmd>bd!<CR>' },
+        { 'i', '<BS>', '<ESC>"_xi' }, -- TODO: make this better https://gist.github.com/VonHeikemen/a0a58cab2c910065420ecf5f4102c58c
+        { { 'n', 'i' }, '<CR>', "<cmd>lua require('v.utils.lsp').rename_callback()<CR>" },
+    }, {
+        buffer = true,
     })
 
     cmd('normal i' .. current_name)
