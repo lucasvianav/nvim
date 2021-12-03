@@ -31,6 +31,7 @@ M.post_colorscheme_hook = function()
         { 'Folded', { 'transparent' } },
         { 'BufferLineFill', { 'transparent' } },
         { 'NormalFloat', { 'transparent' } },
+        { 'FloatBorder', { 'transparent' } },
         { 'TabLineFill', { 'transparent' } },
         { 'CursorLine', { guibg = colors.cyan_grey_dark } },
         { 'ColorColumn', { guibg = colors.cyan_grey_dark } },
