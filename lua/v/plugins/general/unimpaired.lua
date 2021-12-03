@@ -6,8 +6,8 @@ require('v.utils.mappings').set_keybindings({
 
     -- alt + j/k moves current line or
     -- selection [count] lines up/down
-    { 'n', '<M-k>', '<Plug>unimpairedMoveUp'                },
-    { 'n', '<M-j>', '<Plug>unimpairedMoveDown'              },
-    { 'x', '<M-k>', '<Plug>unimpairedMoveKeepSelectionUp'   },
+    { 'n', '<M-k>', '<Plug>unimpairedMoveUp' },
+    { 'n', '<M-j>', '<Plug>unimpairedMoveDown' },
+    { 'x', '<M-k>', '<Plug>unimpairedMoveKeepSelectionUp' },
     { 'x', '<M-j>', '<Plug>unimpairedMoveKeepSelectionDown' },
 })

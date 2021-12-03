@@ -10,6 +10,7 @@ local M = {
     { 'n', 'gq', '<cmd>lua vim.diagnostic.setqflist()<CR>' },
     { 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>' },
     { 'n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>' },
+    { 'n', 'yog', '<cmd>lua require("v.utils.lsp").toggle_diagnostics_visibility()<CR>' },
 }
 
 return M

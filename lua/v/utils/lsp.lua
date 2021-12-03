@@ -7,6 +7,33 @@ local M = {}
 
 M.servers = require('v.settings.lsp').servers
 
+--  ____                           _     _   _ _   _ _
+-- / ___| ___ _ __   ___ _ __ __ _| |   | | | | |_(_) |___
+--| |  _ / _ \ '_ \ / _ \ '__/ _` | |   | | | | __| | / __|
+--| |_| |  __/ | | |  __/ | | (_| | |   | |_| | |_| | \__ \
+--\____|\___|_| |_|\___|_|  \__,_|_|    \___/ \__|_|_|___/
+
+local are_diagnostics_visible = true
+---Toggle vim.diagnostics (visibility only).
+M.toggle_diagnostics_visibility = function()
+    if are_diagnostics_visible then
+        vim.diagnostic.hide()
+        are_diagnostics_visible = false
+    else
+        vim.diagnostic.show()
+        are_diagnostics_visible = true
+    end
+end
+
+---Calls LSP hover or activates Vim doc (`:h`) depending on filetype.
+function M.show_documentation()
+    if vim.tbl_contains({ 'vim', 'help', 'lua' }, vim.o.filetype) then
+        cmd('h ' .. vim.fn.expand('<cword>'))
+    else
+        vim.lsp.buf.hover()
+    end
+end
+
 ---Function for LSP's 'textDocument/formatting' handler.
 ---@param err table
 ---@param result table
@@ -35,6 +62,31 @@ function M.formatting(err, result, ctx, config)
         end
     end
 end
+
+function M.typescript_sort_imports(bufnr, post)
+    bufnr = bufnr or vim.api.nvim_get_current_buf()
+    local METHOD = 'workspace/executeCommand'
+    local params = {
+        command = '_typescript.organizeImports',
+        arguments = { vim.api.nvim_buf_get_name(bufnr) },
+        title = '',
+    }
+
+    local callback = function(err)
+        if not err and post then
+            post()
+        end
+    end
+
+    vim.lsp.buf_request(bufnr, METHOD, params, callback)
+end
+
+-- ____                            _
+--|  _ \ ___ _ __   __ _ _ __ ___ (_)_ __   __ _
+--| |_) / _ \ '_ \ / _` | '_ ` _ \| | '_ \ / _` |
+--|  _ <  __/ | | | (_| | | | | | | | | | | (_| |
+--|_| \_\___|_| |_|\__,_|_| |_| |_|_|_| |_|\__, |
+--                                         |___/
 
 local __rename_prompt = 'Rename   '
 
@@ -156,6 +208,12 @@ function M.rename()
     cmd('normal i' .. current_name)
 end
 
+-- ____           _      ____        __ _       _ _   _
+--|  _ \ ___  ___| | __ |  _ \  ___ / _(_)_ __ (_) |_(_) ___  _ __
+--| |_) / _ \/ _ \ |/ / | | | |/ _ \ |_| | '_ \| | __| |/ _ \| '_ \
+--|  __/  __/  __/   <  | |_| |  __/  _| | | | | | |_| | (_) | | | |
+--|_|   \___|\___|_|\_\ |____/ \___|_| |_|_| |_|_|\__|_|\___/|_| |_|
+
 local function __peek_definitin_callback(_, result)
     if result == nil or vim.tbl_isempty(result) then
         return nil
@@ -176,23 +234,18 @@ function M.peek_definition()
     )
 end
 
-function M.typescript_sort_imports(bufnr, post)
-    bufnr = bufnr or vim.api.nvim_get_current_buf()
-    local METHOD = 'workspace/executeCommand'
-    local params = {
-        command = '_typescript.organizeImports',
-        arguments = { vim.api.nvim_buf_get_name(bufnr) },
-        title = '',
-    }
-
-    local callback = function(err)
-        if not err and post then
-            post()
-        end
-    end
-
-    vim.lsp.buf_request(bufnr, METHOD, params, callback)
-end
+--    _        _               _   _     ____  ____
+--   / \   ___| |_ _   _  __ _| | | |   / ___||  _ \
+--  / _ \ / __| __| | | |/ _` | | | |   \___ \| |_) |
+-- / ___ \ (__| |_| |_| | (_| | | | |___ ___) |  __/
+--/_/   \_\___|\__|\__,_|\__,_|_| |_____|____/|_|
+--
+-- ____       _   _   _
+--/ ___|  ___| |_| |_(_)_ __   __ _ ___
+--\___ \ / _ \ __| __| | '_ \ / _` / __|
+-- ___) |  __/ |_| |_| | | | | (_| \__ \
+--|____/ \___|\__|\__|_|_| |_|\__, |___/
+--                            |___/
 
 ---Disables formatting capabilities for an LSP client.
 ---@param client table lsp client
@@ -322,15 +375,6 @@ local function __conditional_autocmds(client)
         augroup('AutoFormatEslint', {
             { 'BufWritePre', '<buffer>', 'EslintFixAll' },
         })
-    end
-end
-
---- Calls LSP hover or activates Vim doc (`:h`) depending on filetype.
-function M.show_documentation()
-    if vim.tbl_contains({ 'vim', 'help', 'lua' }, vim.o.filetype) then
-        cmd('h ' .. vim.fn.expand('<cword>'))
-    else
-        vim.lsp.buf.hover()
     end
 end
 
