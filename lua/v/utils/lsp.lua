@@ -382,6 +382,7 @@ local __specific_on_attach = {
     html = disable_formatting,
     jedi_language_server = disable_formatting,
     jsonls = disable_formatting,
+    pylsp = disable_formatting,
     sumneko_lua = disable_formatting,
     vimls = disable_formatting,
 }
