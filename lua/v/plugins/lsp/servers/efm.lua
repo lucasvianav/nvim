@@ -106,7 +106,7 @@ local isort = {
 
 -- type annotation checker for python
 local mypy = {
-    lintCommand = 'mypy --show-column-numbers --ignore-missing-imports',
+    lintCommand = 'mypy --show-column-numbers',
     lintFormats = {
         '%f:%l:%c: %trror: %m',
         '%f:%l:%c: %tarning: %m',
@@ -118,7 +118,7 @@ local mypy = {
 
 -- linter for python
 local flake8 = {
-    lintCommand = "flake8 --max-line-length 160 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
+    lintCommand = "flake8 --max-line-length 80 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
     lintStdin = true,
     lintIgnoreExitCode = true,
     lintFormats = { '%f:%l:%c: %t%n%n%n %m' },
@@ -191,7 +191,7 @@ local M = {
         'javascriptreact',
         'json',
         'lua',
-        'python',
+        -- 'python',
         'scss',
         -- 'sql',
         'typescript',
@@ -239,12 +239,12 @@ local M = {
             lua = { stylua },
             -- sql = { sqlint },
 
-            python = {
-                black,
-                isort,
-                flake8,
-                mypy,
-            },
+            -- python = {
+            --     black,
+            --     isort,
+            --     flake8,
+            --     mypy,
+            -- },
         },
     },
 }
