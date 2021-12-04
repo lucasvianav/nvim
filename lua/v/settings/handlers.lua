@@ -1,4 +1,20 @@
+local lsp = vim.lsp
 local utils = require('v.utils.lsp')
+
+lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
+    border = 'single',
+    max_width = utils.max_float_width,
+    max_height = utils.max_float_height,
+})
+
+lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, {
+    border = 'single',
+    max_width = utils.max_float_width,
+    max_height = utils.max_float_height,
+})
+
+lsp.handlers['textDocument/formatting'] = utils.formatting
+
 -- ____ ___ ____ _   _     ____ ___  _    _   _ __  __ _   _
 --/ ___|_ _/ ___| \ | |   / ___/ _ \| |  | | | |  \/  | \ | |
 --\___ \| | |  _|  \| |  | |  | | | | |  | | | | |\/| |  \| |

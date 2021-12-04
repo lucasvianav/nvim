@@ -10,6 +10,8 @@
 
     - https://www.youtube.com/channel/UCXPHFM88IlFn68OmLwtPmZA
 
+    TODO: use `assert` to check for argument types
+
     TODO:
     https://spacevim.org/SpaceVim-release-v1.8.0/#.YVsDlG_4ps8.reddit
     https://github.com/crivotz/nv-ide

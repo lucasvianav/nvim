@@ -13,8 +13,16 @@ M.servers = require('v.settings.lsp').servers
 --| |_| |  __/ | | |  __/ | | (_| | |   | |_| | |_| | \__ \
 --\____|\___|_| |_|\___|_|  \__,_|_|    \___/ \__|_|_|___/
 
+---Max width for floating window stuff, like hover and signature help.
+---@see https://github.com/akinsho/dotfiles/blob/d3526289627b72e4b6a3ddcbfe0411b5217a4a88/.config/nvim/plugin/lsp.lua#L145-L158
+M.max_float_width = math.max(math.floor(vim.o.columns * 0.7), 100)
+---Max height for floating window stuff, like hover and signature help.
+M.max_float_height = math.max(math.floor(vim.o.lines * 0.3), 30)
+
 local are_diagnostics_visible = true
+
 ---Toggle vim.diagnostics (visibility only).
+---@return nil
 M.toggle_diagnostics_visibility = function()
     if are_diagnostics_visible then
         vim.diagnostic.hide()
@@ -26,9 +34,14 @@ M.toggle_diagnostics_visibility = function()
 end
 
 ---Calls LSP hover or activates Vim doc (`:h`) depending on filetype.
+---@return nil
 function M.show_documentation()
     if vim.tbl_contains({ 'vim', 'help', 'lua' }, vim.o.filetype) then
-        cmd('h ' .. vim.fn.expand('<cword>'))
+        local has_docs = pcall(cmd, 'help ' .. vim.fn.expand('<cword>'))
+
+        if not has_docs then
+            vim.lsp.buf.hover()
+        end
     else
         vim.lsp.buf.hover()
     end
@@ -39,6 +52,7 @@ end
 ---@param result table
 ---@param ctx table
 ---@param config table
+---@return nil
 function M.formatting(err, result, ctx, config)
     if err ~= nil or result == nil then
         return
@@ -456,17 +470,17 @@ function M.make_config(config)
         },
     })
 
-    config.handlers = {
-        ['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
-            border = 'single',
-        }),
+    -- config.handlers = {
+    --     ['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
+    --         border = 'single',
+    --     }),
 
-        ['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, {
-            border = 'single',
-        }),
+    --     ['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, {
+    --         border = 'single',
+    --     }),
 
-        ['textDocument/formatting'] = M.formatting,
-    }
+    --     ['textDocument/formatting'] = M.formatting,
+    -- }
 
     return config
 end
