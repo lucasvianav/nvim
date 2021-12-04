@@ -1,13 +1,6 @@
 -- TODO: https://github.com/pwntester/octo.nvim
 
 local M = {
-    -- show commit in floating window
-    {
-        'rhysd/git-messenger.vim',
-        keys = '<leader>gm',
-        cmd = 'GitMessenger',
-    },
-
     -- git CLI for command mode
     -- TODO: something like this would be nice https://www.reddit.com/r/neovim/comments/qatokl/using_nvim_as_mergetool_with_vimfugitive/
     {
@@ -34,7 +27,6 @@ local M = {
     },
 
     -- git decorations
-    -- TODO: config this
     {
         'lewis6991/gitsigns.nvim',
         after = 'plenary.nvim',
