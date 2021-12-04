@@ -25,6 +25,7 @@ vim.diagnostic.config({
     severity_sort = true,
     underline = true,
     update_in_insert = false,
+    signs = true,
     float = {
         scope = 'line',
         border = 'single',
