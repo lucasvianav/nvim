@@ -471,18 +471,6 @@ function M.make_config(config)
         },
     })
 
-    -- config.handlers = {
-    --     ['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
-    --         border = 'single',
-    --     }),
-
-    --     ['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, {
-    --         border = 'single',
-    --     }),
-
-    --     ['textDocument/formatting'] = M.formatting,
-    -- }
-
     return config
 end
 

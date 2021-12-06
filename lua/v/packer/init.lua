@@ -1,7 +1,7 @@
 local fn = vim.fn
 local utils = require('v.utils.packer')
 
-local is_loaded, packer = utils.get_packer()
+local is_loaded, packer = pcall(require, 'packer')
 local exists = (fn.isdirectory(utils.path) == 1)
 
 if not is_loaded and not exists then

@@ -33,8 +33,8 @@ M.post_colorscheme_hook = function()
         { 'NormalFloat', { 'transparent' } },
         { 'FloatBorder', { 'transparent' } },
         { 'TabLineFill', { 'transparent' } },
-        { 'CursorLine', { guibg = colors.cyan_grey_dark } },
-        { 'ColorColumn', { guibg = colors.cyan_grey_dark } },
+        -- { 'CursorLine', { guibg = colors.cyan_grey_dark } },
+        -- { 'ColorColumn', { guibg = colors.cyan_grey_dark } },
         { 'TabLine', { 'transparent', guifg = colors.cyan_grey } },
         {
             'TabLineSel',
