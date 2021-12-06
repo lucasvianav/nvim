@@ -66,7 +66,7 @@ function M.formatting(err, result, ctx, config)
         fn.winrestview(view)
 
         if bufnr == api.nvim_get_current_buf() then
-            api.nvim_command('noautocmd :update')
+            vim.api.nvim_command('noautocmd :update')
         else
             api.nvim_notify(
                 'Formatted buffer ' .. bufnr,
@@ -341,15 +341,11 @@ local __specific_on_attach = {
 
             -- sets up auto-sorting of imports if not on $WORK_DIR
             if fn.empty(work_dir) == 1 or not regexp:match_str(cwd) then
-                api.nvim_exec(
-                    [[
-                        augroup SortImports
-                        au! * <buffer>
-                        au BufWritePre <buffer> TSLspOrganizeSync
-                        augroup END
-                    ]],
-                    false
-                )
+                require('v.utils.autocmds').augroup('SortImportsTS', {
+                    { 'BufWritePre', 'TSLspOrganizeSync' },
+                }, {
+                    buffer = true,
+                })
             end
 
             buf_set_keymap('n', '<leader>si', '<cmd>TSLspOrganize<CR>')
@@ -395,34 +391,42 @@ local function __conditional_autocmds(client)
     if client.resolved_capabilities.document_highlight then
         augroup('LspSymbolHighlight', {
             -- highlight
-            { 'CursorHold', '<buffer>', 'lua vim.lsp.buf.document_highlight()' },
-            { 'CursorHoldI', '<buffer>', 'lua vim.lsp.buf.document_highlight()' },
+            { 'CursorHold', 'lua vim.lsp.buf.document_highlight()' },
+            { 'CursorHoldI', 'lua vim.lsp.buf.document_highlight()' },
 
             -- clear
-            { 'CursorMoved', '<buffer>', 'lua vim.lsp.buf.clear_references()' },
-            { 'CursorMovedI', '<buffer>', 'lua vim.lsp.buf.clear_references()' },
-            { 'FocusLost', '<buffer>', 'lua vim.lsp.buf.clear_references()' },
-            { 'BufLeave', '<buffer>', 'lua vim.lsp.buf.clear_references()' },
-            { 'InsertEnter', '<buffer>', 'lua vim.lsp.buf.clear_references()' },
+            { 'CursorMoved', 'lua vim.lsp.buf.clear_references()' },
+            { 'CursorMovedI', 'lua vim.lsp.buf.clear_references()' },
+            { 'FocusLost', 'lua vim.lsp.buf.clear_references()' },
+            { 'BufLeave', 'lua vim.lsp.buf.clear_references()' },
+            { 'InsertEnter', 'lua vim.lsp.buf.clear_references()' },
+        }, {
+            buffer = true,
         })
     end
 
     if client.resolved_capabilities.document_formatting then
         augroup('AutoFormat', {
-            { 'BufWritePost', '<buffer>', 'lua vim.lsp.buf.formatting()' },
+            { 'BufWritePost', 'lua vim.lsp.buf.formatting()' },
+        }, {
+            buffer = true,
         })
     end
 
     local signature_ok = pcall(require, 'lsp_signature')
     if client.resolved_capabilities.signature_help and not signature_ok then
         augroup('SignatureHelp', {
-            { 'CursorHoldI', '<buffer>', 'silent! lua vim.lsp.buf.signature_help()' },
+            { 'CursorHoldI', 'silent! lua vim.lsp.buf.signature_help()' },
+        }, {
+            buffer = true,
         })
     end
 
     if client.name == 'eslint' then
         augroup('AutoFormatEslint', {
-            { 'BufWritePre', '<buffer>', 'EslintFixAll' },
+            { 'BufWritePre', 'EslintFixAll' },
+        }, {
+            buffer = true,
         })
     end
 end

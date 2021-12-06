@@ -35,7 +35,7 @@ end
 ---@param name string
 ---@param autocmds Autocommand[] will be unpacked and passed to this module's autocmd()
 ---@return nil
-M.augroup = function(name, autocmds)
+M.augroup = function(name, autocmds, options)
     if type(name) ~= 'string' or type(autocmds) ~= 'table' then
         vim.api.nvim_notify('Invalid parameter(s).', vim.log.levels.ERROR, {
             title = 'Augroups',
@@ -44,11 +44,29 @@ M.augroup = function(name, autocmds)
         return
     end
 
-    vim.api.nvim_command('augroup ' .. name)
-    vim.api.nvim_command('au!')
+    options = vim.tbl_extend('keep', options or {}, { bang = true })
 
-    for _, a in ipairs(autocmds) do
-        M.autocmd(unpack(a))
+    vim.api.nvim_command('augroup ' .. name)
+    if options.bang and not options.buffer then
+        vim.api.nvim_command('au!')
+    elseif options.bang and options.buffer then
+        vim.api.nvim_command('au! * <buffer>')
+    end
+
+    for _, tbl in ipairs(autocmds) do
+        if options.buffer then
+            if #tbl == 2 then
+                table.insert(tbl, 2, '<buffer>')
+            elseif #tbl == 3 then
+                if type(table[2]) == 'table' then
+                    table.insert(tbl, '<buffer>')
+                else
+                    tbl[2] = { tbl[2], '<buffer>' }
+                end
+            end
+        end
+
+        M.autocmd(unpack(tbl))
     end
 
     vim.api.nvim_command('augroup END')
