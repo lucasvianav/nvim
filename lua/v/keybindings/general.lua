@@ -56,6 +56,7 @@ set_keybindings({
     -- replay macro in q register
     { 'n', 'Q', '@q' },
 
+    -- FIXME: how to not get delay?
     -- insert escaped '/' while inputting a search pattern (by akisho)
-    { 'c', '/', [[getcmdtype() == "/" ? "\\/" : "/"]], { expr = true } },
+    -- { 'c', '/', [[getcmdtype() == "/" ? "\\/" : "/"]], { expr = true } },
 })

@@ -7,6 +7,7 @@ local M = {
     { 'lervag/vimtex', ft = { 'tex', 'plaintex' } }, -- LaTeX
     { 'tpope/vim-sleuth', event = 'CursorHold' }, -- autodetect indent
     { 'vuki656/package-info.nvim', ft = 'json' }, -- package.json
+    { 'Vimjas/vim-python-pep8-indent', ft = 'python' }, -- better indenting in python
 
     { 'jose-elias-alvarez/nvim-lsp-ts-utils', ft = 'typescript' }, -- TypeScript utilities
 
