@@ -4,7 +4,10 @@ o.colorcolumn = ''
 o.synmaxcol = 3000
 o.textwidth = 0
 o.wrap = true
-o.spell = true
+
+-- TODO: I'm not sure why vim.o.spell = true
+-- doesn't work. maybe open an issue?
+vim.api.nvim_command('setlocal spell')
 
 require('v.utils.mappings').set_keybindings({
     { 'i', '<C-i>', '<C-c>xsiw*lf*a' },
