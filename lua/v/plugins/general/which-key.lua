@@ -73,9 +73,9 @@ local mappings = {
     r = 'ranger',
     S = 'spectre',
 
-    h = { '<C-w>s', 'split below' },
+    h = { 'split below' },
     q = { '<cmd>BufClose<cr>', 'close buffer' },
-    v = { '<C-w>v', 'split right' },
+    v = { 'split right' },
 
     s = {
         name = '???',

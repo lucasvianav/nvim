@@ -29,13 +29,13 @@ M.colorscheme = 'tokyonight'
 M.post_colorscheme_hook = function()
     require('v.utils.highlights').set_highlights({
         { 'Folded', { 'transparent' } },
-        { 'BufferLineFill', { 'transparent' } },
         { 'NormalFloat', { 'transparent' } },
         { 'FloatBorder', { 'transparent' } },
+        { 'BufferLineFill', { 'transparent' } },
+        { 'TabLine', { 'transparent', guifg = colors.cyan_grey } },
         { 'TabLineFill', { 'transparent' } },
         -- { 'CursorLine', { guibg = colors.cyan_grey_dark } },
         -- { 'ColorColumn', { guibg = colors.cyan_grey_dark } },
-        { 'TabLine', { 'transparent', guifg = colors.cyan_grey } },
         {
             'TabLineSel',
             {
@@ -50,9 +50,9 @@ o.listchars = {
     conceal = '┊',
     eol = ' ', -- ↲
     extends = '>',
-    nbsp = '☠',
+    nbsp = '␣',
     precedes = '<',
-    space = ' ', -- ␣
+    space = ' ',
     tab = '» ',
     trail = '•',
 }

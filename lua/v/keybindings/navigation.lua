@@ -1,14 +1,6 @@
 local set_keybindings = require('v.utils.mappings').set_keybindings
 
 set_keybindings({
-    -- buffer movement with horizontal arrows
-    { 'n', '<Right>', '<cmd>bn<CR>' },
-    { 'n', '<Left>', '<cmd>bp<CR>' },
-
-    -- tab movement with vertical arrows
-    { 'n', '<Up>', '<cmd>tabn<CR>' },
-    { 'n', '<Down>', '<cmd>tabp<CR>' },
-
     -- tab movement with ctrl + tab
     -- and ctrl + shift + tab (you
     -- also need to config your
@@ -31,4 +23,7 @@ set_keybindings({
     -- better nav for omnicomplete
     { { 'c', 'i' }, '<C-j>', '<C-n>' },
     { { 'c', 'i' }, '<C-k>', '<C-p>' },
+
+    -- ignore trailing whitespaces when going to end of line
+    { 'n', '$', 'g_' },
 })

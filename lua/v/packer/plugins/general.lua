@@ -156,7 +156,7 @@ local M = {
     },
 
     -- align blocks of code
-    -- TODO: checkout tabular?
+    -- ALTERNATIVE: vim-tabular
     -- TODO: invest some time into this
     {
         'junegunn/vim-easy-align',

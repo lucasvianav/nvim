@@ -10,12 +10,6 @@ set_keybindings({
     -- leave terminal mode with jk
     { 't', 'jk', [[<C-\><C-n>]] },
 
-    -- alt + shift + hjkl to resize windows
-    { 'n', '<S-M-J>', '2<C-w>-' },
-    { 'n', '<S-M-K>', '2<C-w>+' },
-    { 'n', '<S-A-H>', '2<C-w><' },
-    { 'n', '<S-A-L>', '2<C-w>>' },
-
     -- break line after/before current position
     { 'n', ']b', 'a<CR><Esc>k$' },
     { 'n', '[b', 'i<CR><Esc>k$' },
@@ -49,4 +43,19 @@ set_keybindings({
 
     -- save with Enter key
     { 'n', '<CR>', '<CMD>update<CR>' },
+
+    -- show last 40 messages (by Justinmk)
+    { 'n', 'g>', '<cmd>set nomore<bar>40messages<bar>set more<CR>' },
+
+    -- disable all other folds
+    { 'n', '<leader>z', 'zMzvzz' },
+
+    -- gf in a vertical split
+    { 'n', '<c-w>f', '<c-w>vgf' },
+
+    -- replay macro in q register
+    { 'n', 'Q', '@q' },
+
+    -- insert escaped '/' while inputting a search pattern (by akisho)
+    { 'c', '/', [[getcmdtype() == "/" ? "\\/" : "/"]], { expr = true } },
 })
