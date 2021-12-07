@@ -1,15 +1,30 @@
 local M = {}
 
 ---Wrapper for defining highlights like with `:highlight`
----@param group string the highlighting group's name
+---@param groups string|string[] the highlighting groups' names
 ---@param tbl table<string,string> the highlighting modifications
 ---@return nil
-M.highlight = function(group, tbl)
-    if type(group) ~= 'string' or type(tbl) ~= 'table' then
+M.highlight = function(groups, tbl)
+    if type(groups) == 'string' then
+        groups = { groups }
+    end
+
+    if
+        type(groups) ~= 'table'
+        or type(tbl) ~= 'table'
+        or (tbl.link and type(tbl.link) ~= 'string')
+    then
         vim.api.nvim_notify('Invalid parameter(s).', vim.log.levels.ERROR, {
             title = 'Highlights',
         })
-        require('v.utils.wrappers').inspect(group, tbl)
+        require('v.utils.wrappers').inspect(groups, tbl)
+        return
+    end
+
+    if tbl.link then
+        for _, group in ipairs(groups) do
+            vim.highlight.link(group, tbl.link, tbl.bang)
+        end
         return
     end
 
@@ -30,7 +45,18 @@ M.highlight = function(group, tbl)
         tbl.cterm = table.concat(tbl.cterm, ',')
     end
 
-    vim.highlight.create(group, tbl)
+    local unlink = tbl.unlink
+    tbl.unlink = nil
+
+    -- TODO: swap for vim.api.nvim_set_hl
+    for _, group in ipairs(groups) do
+        if unlink then
+            vim.highlight.link(group, 'NONE', true)
+        end
+        if tbl then
+            vim.highlight.create(group, tbl)
+        end
+    end
 
     --[[ version using `:hi!`
         local cmd = 'hi! ' .. group
@@ -48,15 +74,15 @@ M.highlight = function(group, tbl)
 end
 
 ---@class HighlightTable
----@field group string the highlighting group's name
+---@field groups string|string[] the highlighting groups' names
 ---@field tbl table<string,string> the highlighting modifications
 
 ---Wrapper for defining multiple highlights (`:h :highlight`) in one function call
 ---@param args HighlightTable[]
 ---@return nil
 M.set_highlights = function(args)
-    for _, cmd_table in ipairs(args) do
-        M.highlight(unpack(cmd_table))
+    for _, tbl in ipairs(args) do
+        M.highlight(unpack(tbl))
     end
 end
 
