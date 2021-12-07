@@ -41,17 +41,6 @@ local M = {
         after = 'nvim-treesitter',
     },
 
-    -- better indenting in react
-    {
-        'MaxMEllon/vim-jsx-pretty',
-        ft = {
-            'javascript.jsx',
-            'javascriptreact',
-            'typescript.tsx',
-            'typescriptreact',
-        },
-    },
-
     -- JSON
     -- TODO: can this work with treesitter and LSP?
     -- TODO: also this https://github.com/akinsho/dotfiles/blob/main/.config/nvim/after/syntax/markdown.vim

@@ -34,11 +34,13 @@ require('nvim-treesitter.configs').setup({
 
     autopairs = enable,
     autotag = enable,
-    highlight = enable,
     indent = disable,
     matchup = enable,
 
-    additional_vim_regex_highlighting = false,
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
 
     context_commentstring = {
         enable = true,
@@ -49,4 +51,13 @@ require('nvim-treesitter.configs').setup({
         enable = true,
         extended_mode = true,
     },
+})
+
+local indent_on = 'lua require("nvim-treesitter.configs").setup({ indent = { enable = true } })'
+local indent_off = 'lua require("nvim-treesitter.configs").setup({ indent = { enable = true } })'
+
+-- use treesitter indent module only for React files
+require('v.utils.autocmds').augroup('ReactIndentTS', {
+    { 'BufEnter', { '*.tsx', '*.jsx' }, indent_on },
+    { 'BufLeave', { '*.tsx', '*.jsx' }, indent_off },
 })
