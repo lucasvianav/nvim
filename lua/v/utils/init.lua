@@ -87,6 +87,10 @@ function M.set_viml_options(lead, opts, unique_value)
     end
 
     if unique_value then
+        if type(unique_value) == 'boolean' then
+            unique_value = unique_value and 1 or 0
+        end
+
         for i, option in ipairs(opts) do
             vim.g[lead .. option] = unique_value
             opts[i] = nil
@@ -94,6 +98,10 @@ function M.set_viml_options(lead, opts, unique_value)
     end
 
     for option, value in pairs(opts) do
+        if type(value) == 'boolean' then
+            value = value and 1 or 0
+        end
+
         vim.g[lead .. option] = value
     end
 end

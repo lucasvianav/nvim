@@ -4,8 +4,16 @@ require('v.utils').set_viml_options('tokyonight', {
     italic_keywords = true,
     italic_variables = false,
     italic_functions = false,
-    transparent = true,
-    transparent_sidebar = true,
-    dark_sidebar = false,
-    dark_float = true, -- darker bg for floating windows
+    transparent = false,
+    transparent_sidebar = false,
+    hide_inactive_statusline = true,
+    dark_sidebar = true,
+    dark_float = true,
+    sidebars = {
+        'qf',
+        'NvimTree',
+        'terminal',
+        'packer',
+        'spectre_panel',
+    },
 })

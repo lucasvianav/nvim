@@ -1,3 +1,5 @@
+-- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/external.lua
+
 local colors = require('v.utils').colors
 local o = vim.opt
 
@@ -28,14 +30,14 @@ M.colorscheme = 'tokyonight'
 --- function to be ran after a colorscheme is applied
 M.post_colorscheme_hook = function()
     require('v.utils.highlights').set_highlights({
-        { 'Folded', { 'transparent' } },
-        { 'NormalFloat', { 'transparent' } },
+        -- { 'CursorLine', { guibg = colors.cyan_grey_dark } },
+        -- { 'ColorColumn', { guibg = colors.cyan_grey_dark } },
+        -- { 'NormalFloat', { 'transparent' } },
         { 'FloatBorder', { 'transparent' } },
+        { 'Folded', { 'transparent' } },
         { 'BufferLineFill', { 'transparent' } },
         { 'TabLine', { 'transparent', guifg = colors.cyan_grey } },
         { 'TabLineFill', { 'transparent' } },
-        -- { 'CursorLine', { guibg = colors.cyan_grey_dark } },
-        -- { 'ColorColumn', { guibg = colors.cyan_grey_dark } },
         {
             'TabLineSel',
             {
@@ -58,7 +60,7 @@ o.listchars = {
 }
 
 o.fillchars = {
-    eob = '~',
+    eob = ' ',
     fold = ' ',
     stl = ' ',
     stlnc = ' ',
