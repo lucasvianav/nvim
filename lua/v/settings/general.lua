@@ -1,13 +1,12 @@
 local o = vim.opt
-local cmd = vim.api.nvim_command
 
 local M = {}
 
 -- enable syntax highlighting, filetype
 -- detection and loading of filetype specific
 -- plugins and indentation config
-cmd('syntax on')
-cmd('filetype plugin indent on')
+vim.api.nvim_command('syntax on')
+vim.api.nvim_command('filetype plugin indent on')
 
 -- general settings
 o.autoindent = true -- auto indent
@@ -49,6 +48,7 @@ o.updatetime = 300 -- faster completion
 o.wrapscan = false -- search don't wrap around the EOF
 o.writebackup = false -- don't backup files before overwriting them
 o.wildmenu = true -- better completion for cli
+o.swapfile = false -- backup-like files
 
 o.foldtext = "v:lua.require('v.utils.folding').foldtext()"
 

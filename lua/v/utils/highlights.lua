@@ -48,7 +48,7 @@ M.highlight = function(groups, tbl)
     local unlink = tbl.unlink
     tbl.unlink = nil
 
-    -- TODO: swap for vim.api.nvim_set_hl
+    -- TODO: swap for nvim_set_hl, nvim_buf_add_highlight
     for _, group in ipairs(groups) do
         if unlink then
             vim.highlight.link(group, 'NONE', true)

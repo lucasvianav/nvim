@@ -7,12 +7,12 @@
     https://github.com/100lvlmaster/dots/tree/master
     https://www.youtube.com/watch?v=brtIZxOwDXE
     https://www.reddit.com/r/neovim/comments/qbmbj8/cosmicnvim_a_lightweight_and_opinionated_neovim/
-    https://github.com/ecosse3/nvim
     https://github.com/albingroen/nvim-lsp-typescript-config
     https://github.com/shaeinst/roshnivim
     https://github.com/ayamir/nvimdots
     https://github.com/kyle-mccarthy/nvim-dotfiles
     https://github.com/bfredl/bfredl.github.io/tree/master/nvim
+    https://github.com/kabouzeid
 
     TODO: docker container?
     https://github.com/nvim-lsp/try.nvim

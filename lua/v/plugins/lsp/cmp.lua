@@ -83,13 +83,14 @@ cmp.setup({
     },
 
     sources = cmp.config.sources({
-        { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
-        -- { name = 'treesitter' },
+        { name = 'nvim_lua' },
+        { name = 'ultisnips' },
         { name = 'path' },
         { name = 'spell' },
         { name = 'cmdline' },
-        { name = 'buffer' },
+        { name = 'buffer', keyword_length = 5 },
+        { name = 'calc' },
     }),
 
     -- completion = {
@@ -109,7 +110,6 @@ cmp.setup({
                 nvim_lsp = '[LSP]',
                 nvim_lua = '[Lua]',
                 path = '[Path]',
-                treesitter = '[Treesitter]',
                 cmdline = '[CMD]',
             },
         }) or nil,
@@ -130,6 +130,7 @@ cmp.setup({
 
     experimental = {
         ghost_text = true,
+        native_menu = false,
     },
 })
 

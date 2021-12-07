@@ -84,7 +84,7 @@ require('nvim-tree').setup({
     auto_close = true, -- autoclose if it's the last window
     open_on_tab = false, -- opens nvimtree when on a new tab
     hijack_cursor = false, -- keep cursor at filename's start
-    update_cwd = false, -- do not change cwd
+    update_cwd = true, -- update cwd on `DirChanged`
 
     -- show diagnostics in the signcol
     diagnostics = {
@@ -135,6 +135,7 @@ require('v.utils.mappings').map('n', '<Leader>e', toggle_cmd)
 local colors = require('v.utils').colors
 local hl_utils = require('v.utils.highlights')
 local alter_color = hl_utils.alter_color
+
 hl_utils.set_highlights({
     {
         'NvimTreeRootFolder',

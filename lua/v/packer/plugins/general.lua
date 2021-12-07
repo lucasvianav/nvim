@@ -1,6 +1,7 @@
 -- TODO:
 -- https://github.com/ThePrimeagen/refactoring.nvim
 -- https://github.com/mfussenegger/nvim-dap
+-- folke/twilight.nvim
 
 local M = {
     -- packer can manage itself as an optional plugin
@@ -21,6 +22,7 @@ local M = {
     -- TODO: doesn't work for some reason
     -- { 'nathom/filetype.nvim' }, -- faster filetype detection
 
+    -- TODO: use {'lewis6991/impatient.nvim', rocks = 'mpack'}
     { 'lewis6991/impatient.nvim' }, -- improve startup time
     { 'antoinemadec/FixCursorHold.nvim' }, -- fixes CursorHold and CursorHoldl
     { 'nvim-lua/plenary.nvim' }, -- great utility lua functions
