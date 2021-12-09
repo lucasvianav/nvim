@@ -185,14 +185,6 @@ local M = {
         run = 'make install',
     },
 
-    -- multiple cursors
-    -- TODO: either ditch this or make it work better
-    {
-        'mg979/vim-visual-multi',
-        as = 'multi',
-        keys = { '<C-n>', 'gl', { 'x', '<C-n>' } },
-    },
-
     -- 2-char search motion
     {
         'ggandor/lightspeed.nvim',
