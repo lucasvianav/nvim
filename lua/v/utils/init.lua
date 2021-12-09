@@ -119,4 +119,38 @@ function M.get_relative_path(filepath)
     end
 end
 
+---Executes the current line in VimL or Lua
+---@return nil
+M.exec_line = function()
+    local filetype = vim.opt_local.ft._value
+    local file = string.gsub(vim.api.nvim_buf_get_name(0), [[^.+/(%w+/%w+)]], '%1')
+
+    local command
+
+    if filetype ~= 'lua' and filetype ~= 'vim' then
+        return
+    end
+
+    local mode = vim.api.nvim_get_mode().mode
+    local line = vim.fn.line('.')
+
+    if mode == 'V' then
+        local start_visual = vim.fn.line('v')
+        command = vim.api.nvim_buf_get_lines(0, start_visual - 1, line, false)
+        line = math.min(line, start_visual) .. ':' .. math.max(line, start_visual)
+    elseif mode == 'n' then
+        command = vim.api.nvim_get_current_line()
+    else
+        return
+    end
+
+    if filetype == 'lua' then
+        command = 'lua << EOF\n' .. table.concat(command, '\n') .. '\nEOF'
+    end
+
+    vim.api.nvim_exec(command, false)
+
+    vim.notify(('Executed %s, %s'):format(file, line), 'info', { title = 'Line Execution' })
+end
+
 return M

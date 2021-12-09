@@ -18,6 +18,10 @@ set_keybindings({
     { 'n', '<Leader>o', 'o<Esc>^Da' },
     { 'n', '<Leader>O', 'O<Esc>^Da' },
 
+    -- new line above or below in insert mode
+    { 'i', '<C-CR>', '<C-O>o' },
+    { 'i', '<S-CR>', '<C-O>O' },
+
     -- delete word with alt + backspace
     { 'i', '<M-BS>', '<C-w>' },
 
@@ -55,6 +59,12 @@ set_keybindings({
 
     -- replay macro in q register
     { 'n', 'Q', '@q' },
+
+    -- rerun the last command
+    { 'n', '<leader><leader>c', ':<up><cr>' },
+
+    -- execute currenbt line/selection
+    { { 'n', 'v' }, '<leader>x', '<cmd>lua require("v.utils").exec_line()<CR>' },
 
     -- FIXME: how to not get delay?
     -- insert escaped '/' while inputting a search pattern (by akisho)

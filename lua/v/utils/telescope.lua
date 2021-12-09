@@ -32,6 +32,7 @@ end
 
 M.find_dotfiles = function()
     require('telescope.builtin').git_files({
+        file_ignore_patterns = { 'icons/', 'themes/' },
         cwd = os.getenv('HOME') .. '/dotfiles',
         prompt_title = '~ dotfiles ~',
         results_title = 'Dotfiles',
