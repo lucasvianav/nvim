@@ -2,10 +2,10 @@
 
 require('v.utils').set_viml_options('dashboard', {
     disable_at_vimenter = 1, -- I open it manually
-    disable_statusline  = 1,
-    default_executive   = 'telescope',
+    disable_statusline = 1,
+    default_executive = 'telescope',
 
-    custom_header = require('v.utils').ascii.beholder,
+    custom_header = require('v.utils').ascii.neovim_3,
 
     custom_section = {
         a = {

@@ -4,6 +4,7 @@ local fn = vim.fn
 -- TODO: setup whichkey registering on the fly
 -- https://github.com/folke/which-key.nvim#-setup
 -- https://github.com/akinsho/dotfiles/blob/c81dadf0c570ce39543a9b43a75f41256ecd03fc/.config/nvim/lua/as/plugins/lspconfig.lua#L61-L119
+-- https://github.com/folke/which-key.nvim/issues/153
 
 local M = {}
 
@@ -72,32 +73,6 @@ function M.unmap(modes, lhs)
     end
 end
 
----<CR> action compatible with nvim-autopairs and completion plugins.
-function M.CR()
-    local has_npairs, npairs = pcall(require, 'nvim-autopairs')
-
-    if fn.pumvisible() ~= 0 then
-        if fn.complete_info({ 'selected' }).selected == -1 then
-            return has_npairs and (npairs.esc('<c-e>') .. npairs.autopairs_cr()) or t('<C-e><CR>')
-        else
-            return has_npairs and npairs.esc('<c-y>') or t('<C-y>')
-        end
-    else
-        return has_npairs and npairs.autopairs_cr() or t('<CR>')
-    end
-end
-
----<BS> action compatible with nvim-autopairs and completion plugins.
-function M.BS()
-    local has_npairs, npairs = pcall(require, 'nvim-autopairs')
-
-    if fn.pumvisible() ~= 0 and fn.complete_info({ 'mode' }).mode == 'eval' then
-        return has_npairs and (npairs.esc('<c-e>') .. npairs.autopairs_bs()) or t('<C-e><BS>')
-    else
-        return has_npairs and npairs.autopairs_bs() or t('<BS>')
-    end
-end
-
 ---@class KeybindingTable
 ---@field modes string|string[] mode or list of modes (`:h map-modes`)
 ---@field lhs string keybinding
@@ -126,6 +101,32 @@ end
 function M.unset_keybindings(args)
     for _, map_table in ipairs(args) do
         M.unmap(unpack(map_table))
+    end
+end
+
+---`<CR>` action compatible with nvim-autopairs and completion plugins.
+function M.CR()
+    local has_npairs, npairs = pcall(require, 'nvim-autopairs')
+
+    if fn.pumvisible() ~= 0 then
+        if fn.complete_info({ 'selected' }).selected == -1 then
+            return has_npairs and (npairs.esc('<c-e>') .. npairs.autopairs_cr()) or t('<C-e><CR>')
+        else
+            return has_npairs and npairs.esc('<c-y>') or t('<C-y>')
+        end
+    else
+        return has_npairs and npairs.autopairs_cr() or t('<CR>')
+    end
+end
+
+---`<BS>` action compatible with nvim-autopairs and completion plugins.
+function M.BS()
+    local has_npairs, npairs = pcall(require, 'nvim-autopairs')
+
+    if fn.pumvisible() ~= 0 and fn.complete_info({ 'mode' }).mode == 'eval' then
+        return has_npairs and (npairs.esc('<c-e>') .. npairs.autopairs_bs()) or t('<C-e><BS>')
+    else
+        return has_npairs and npairs.autopairs_bs() or t('<BS>')
     end
 end
 

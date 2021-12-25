@@ -64,7 +64,7 @@ set_keybindings({
     { 'n', '<leader><leader>c', ':<up><cr>' },
 
     -- execute currenbt line/selection
-    { { 'n', 'v' }, '<leader>x', '<cmd>lua require("v.utils").exec_line()<CR>' },
+    { { 'n', 'v' }, '<leader>x', '<cmd>lua require("v.utils").exec_line_or_make()<CR>' },
 
     -- FIXME: how to not get delay?
     -- insert escaped '/' while inputting a search pattern (by akisho)

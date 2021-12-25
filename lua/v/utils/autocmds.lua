@@ -1,3 +1,5 @@
+-- TODO: https://github.com/akinsho/dotfiles/blob/f714d4cdd2de74c7393ca3ae69bdbb3619e06174/.config/nvim/lua/as/globals.lua#L211-L243
+
 ---@class Autocommands
 local M = {}
 

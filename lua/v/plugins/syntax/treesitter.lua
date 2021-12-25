@@ -19,6 +19,7 @@ local parsers = {
     'json',
     'jsonc',
     'lua',
+    'markdown',
     'python',
     'scss',
     'tsx',

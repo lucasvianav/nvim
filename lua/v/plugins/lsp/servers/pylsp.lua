@@ -1,3 +1,5 @@
+-- TODO: https://github.com/williamboman/nvim-lsp-installer/blob/main/lua/nvim-lsp-installer/servers/pylsp/README.md
+
 local M = {}
 
 -- DEPENCENCIES:

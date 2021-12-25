@@ -11,9 +11,7 @@ M.ascii = require('v.utils.ascii')
 -- TODO: function to read last 500 lines from lsp log
 -- TODO: https://gitlab.com/yorickpeterse/dotfiles/-/blob/c2fd334e7690b1955a59b9f3f92149dbfb88f9f8/dotfiles/.config/nvim/lua/dotfiles/abbrev.lua
 
---[[
-Deletes all trailing whitespaces in a file if it's not binary nor a diff.
-]]
+---Deletes all trailing whitespaces in a file if it's not binary nor a diff.
 function M.trim_trailing_whitespaces()
     local o = vim.o
     if not o.binary and o.filetype ~= 'diff' then
@@ -23,7 +21,7 @@ function M.trim_trailing_whitespaces()
     end
 end
 
---Sources the `.nvimrc` file at the `cwd` if it's under `$WORK_DIR`.
+---Sources the `.nvimrc` file at the `cwd` if it's under `$WORK_DIR`.
 function M.source_local_config()
     local cwd = fn.getcwd()
     local work_dir = os.getenv('WORK_DIR')
@@ -34,9 +32,7 @@ function M.source_local_config()
     end
 end
 
---[[
-Return the path to the current lua file inside `nvim/lua/` in order to require it.
-]]
+---Return the path to the current lua file inside `nvim/lua/` in order to require it.
 local function _get_current_require_path()
     local filepath = vim.api.nvim_buf_get_name('.')
     local regexp = [[^.\+nvim/lua/\(.\+\)\.lua$]]
@@ -72,9 +68,7 @@ function M.reload_or_source_current()
     })
 end
 
---[[
-Sets all VimL options for a plugin from a `opts` table.
-]]
+---Sets all VimL options for a plugin from a `opts` table.
 function M.set_viml_options(lead, opts, unique_value)
     lead = lead or ''
 
@@ -106,9 +100,9 @@ function M.set_viml_options(lead, opts, unique_value)
     end
 end
 
---- Uses Plenary to get a relative path to `filepath` from the cwd.
---- @params file_path string
---- @return string
+---Uses Plenary to get a relative path to `filepath` from the cwd.
+---@params filepath string
+---@return string
 function M.get_relative_path(filepath)
     local is_plenary_loaded, plenary = pcall(require, 'plenary.path')
 
@@ -121,18 +115,19 @@ end
 
 ---Executes the current line in VimL or Lua
 ---@return nil
-M.exec_line = function()
+M.exec_line_or_make = function()
     local filetype = vim.opt_local.ft._value
-    local file = string.gsub(vim.api.nvim_buf_get_name(0), [[^.+/(%w+/%w+)]], '%1')
 
-    local command
-
-    if filetype ~= 'lua' and filetype ~= 'vim' then
+    if vim.tbl_contains({ 'c', 'cpp' }, filetype) then
+        vim.api.nvim_command('make')
+        return
+    elseif not vim.tbl_contains({ 'lua', 'vim' }, filetype) then
         return
     end
 
     local mode = vim.api.nvim_get_mode().mode
     local line = vim.fn.line('.')
+    local command
 
     if mode == 'V' then
         local start_visual = vim.fn.line('v')
@@ -150,6 +145,7 @@ M.exec_line = function()
 
     vim.api.nvim_exec(command, false)
 
+    local file = string.gsub(vim.api.nvim_buf_get_name(0), [[^.+/(%w+/%w+)]], '%1')
     vim.notify(('Executed %s, %s'):format(file, line), 'info', { title = 'Line Execution' })
 end
 

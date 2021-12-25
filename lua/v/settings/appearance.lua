@@ -1,4 +1,8 @@
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/external.lua
+-- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/external.lua
+-- TODO: https://github.com/akinsho/dotfiles/blob/f714d4cdd2de74c7393ca3ae69bdbb3619e06174/.config/nvim/plugin/autocommands.lua#L158-L187
+-- TODO: https://github.com/akinsho/dotfiles/blob/main/tmux/.tmux.conf
+-- TODO: https://github.com/akinsho/dotfiles/blob/main/tmux/tmux-status.conf
 
 local colors = require('v.utils').colors
 local o = vim.opt

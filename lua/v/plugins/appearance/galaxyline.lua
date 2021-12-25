@@ -1,4 +1,5 @@
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/statusline.lua
+-- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/utils/statusline.lua
 -- TODO: https://github.com/mattleong/CosmicNvim/blob/main/lua/cosmic/core/statusline/init.lua
 -- TODO: https://github.com/nvim-lualine/lualine.nvim
 -- TODO: https://github.com/Famiu/feline.nvim

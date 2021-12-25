@@ -431,11 +431,16 @@ local function __conditional_autocmds(client)
     end
 end
 
-local __keybindings = require('v.keybindings.lsp')
-
 -- TODO: https://github.com/hrsh7th/nvim-cmp/issues/465#issuecomment-981159946
 local function __on_attach(client, bufnr)
-    require('v.utils.mappings').set_keybindings(__keybindings, {
+    local keybindings = require('v.keybindings.lsp')
+
+    -- create `__specific_keybindings()`
+    if client.name == 'clangd' then
+        table.insert(keybindings, { 'n', 'gpp', '<cmd>ClangdSwitchSourceHeader<cr>' })
+    end
+
+    require('v.utils.mappings').set_keybindings(keybindings, {
         buffer = true,
         bufnr = bufnr,
     })

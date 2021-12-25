@@ -13,9 +13,9 @@
 " KEYBINDINGS:
 " cn: change word forwards
 " cN: change word backwards
-" cl: change word in the whole buffer
 " cq: play macro on word forwards
 " cQ: play macro on word backwards
+" <leader>s: change word in the whole buffer
 
 let g:mc = "\"zy/\\V\<C-r>=escape(@z, '/')\<CR>\<CR>"
 
@@ -35,5 +35,5 @@ nnoremap cQ :call SetupCR()<CR>#``qz
 vnoremap <expr> cq ":\<C-u>call SetupCR()\<CR>" . "gv" . g:mc . "``qz"
 vnoremap <expr> cQ ":\<C-u>call SetupCR()\<CR>" . "gv" . substitute(g:mc, '/', '?', 'g') . "``qz"
 
-nnoremap cl :%s/\<<c-r><c-w>\>//gI<left><left><left>
+nnoremap <leader>s :%s/\<<c-r><c-w>\>//gI<left><left><left>
 
