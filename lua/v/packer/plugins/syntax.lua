@@ -8,6 +8,7 @@ local M = {
     { 'tpope/vim-sleuth', event = 'CursorHold' }, -- autodetect indent
     { 'vuki656/package-info.nvim', ft = 'json' }, -- package.json
     { 'Vimjas/vim-python-pep8-indent', ft = 'python' }, -- better indenting in python
+    { 'mboughaba/i3config.vim', ft = 'i3config' }, -- i3wm cofig file
 
     { 'jose-elias-alvarez/nvim-lsp-ts-utils', ft = 'typescript' }, -- TypeScript utilities
 
