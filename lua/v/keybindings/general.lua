@@ -45,9 +45,6 @@ set_keybindings({
     -- untabs in insert mode
     { 'i', '<S-TAB>', '<C-D>' },
 
-    -- save with Enter key
-    { 'n', '<CR>', '<CMD>update<CR>' },
-
     -- show last 40 messages (by Justinmk)
     { 'n', 'g>', '<cmd>set nomore<bar>40messages<bar>set more<CR>' },
 
