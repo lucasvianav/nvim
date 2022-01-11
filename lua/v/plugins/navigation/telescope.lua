@@ -58,7 +58,7 @@ telescope.setup({
         find_files = {
             follow = true,
             hidden = true,
-            file_ignore_patterns = { '^.git', '^.git/' },
+            file_ignore_patterns = { '^.git', '^.git/', '^.git/*' },
         },
 
         git_commits = {
@@ -120,7 +120,11 @@ require('v.utils.mappings').set_keybindings({
     { 'n', 'gr', [[:<C-U>lua require('telescope.builtin').lsp_references()<cr>]] },
     { 'n', 'gi', [[:<C-U>lua require('telescope.builtin').lsp_implementations()<cr>]] },
     { 'n', '<Leader>ca', [[:<C-U>lua require('telescope.builtin').lsp_code_actions()<cr>]] },
-    { 'v', '<Leader>ca', [[:<C-U>lua require('telescope.builtin').lsp_range_code_actions()<cr>]] },
+    {
+        'v',
+        '<Leader>ca',
+        [[:<C-U>lua require('telescope.builtin').lsp_range_code_actions()<cr>]],
+    },
     {
         'n',
         '<Leader>fg',
