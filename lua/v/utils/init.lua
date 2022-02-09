@@ -34,7 +34,7 @@ end
 
 ---Return the path to the current lua file inside `nvim/lua/` in order to require it.
 local function _get_current_require_path()
-    local filepath = vim.api.nvim_buf_get_name('.')
+    local filepath = vim.api.nvim_buf_get_name(0)
     local regexp = [[^.\+nvim/lua/\(.\+\)\.lua$]]
 
     if not vim.regex(regexp):match_str(filepath) then
@@ -101,7 +101,7 @@ function M.set_viml_options(lead, opts, unique_value)
 end
 
 ---Uses Plenary to get a relative path to `filepath` from the cwd.
----@params filepath string
+---@param filepath string
 ---@return string
 function M.get_relative_path(filepath)
     local is_plenary_loaded, plenary = pcall(require, 'plenary.path')
@@ -147,6 +147,14 @@ M.exec_line_or_make = function()
 
     local file = string.gsub(vim.api.nvim_buf_get_name(0), [[^.+/(%w+/%w+)]], '%1')
     vim.notify(('Executed %s, %s'):format(file, line), 'info', { title = 'Line Execution' })
+end
+
+---Open a file with the same name as the current's but another extension.
+---@param extension string the target-file's extension
+---@return nil
+M.open_file_swap_extension = function(extension)
+    local filename = vim.api.nvim_buf_get_name(0):gsub('%.%w+$', '')
+    cmd('e ' .. filename .. '.' .. extension)
 end
 
 return M

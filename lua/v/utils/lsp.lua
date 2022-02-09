@@ -62,7 +62,7 @@ function M.formatting(err, result, ctx, config)
 
     if not api.nvim_buf_get_option(bufnr, 'modified') then
         local view = fn.winsaveview()
-        lsp.util.apply_text_edits(result, bufnr)
+        lsp.util.apply_text_edits(result, bufnr, 'utf-16')
         fn.winrestview(view)
 
         if bufnr == api.nvim_get_current_buf() then
@@ -435,9 +435,16 @@ end
 local function __on_attach(client, bufnr)
     local keybindings = require('v.keybindings.lsp')
 
-    -- create `__specific_keybindings()`
     if client.name == 'clangd' then
         table.insert(keybindings, { 'n', 'gpp', '<cmd>ClangdSwitchSourceHeader<cr>' })
+    elseif client.name == 'angularls' then
+        local fun = function(ext)
+            return '<cmd>lua require("v.utils").open_file_swap_extension("' .. ext .. '")<cr>'
+        end
+
+        table.insert(keybindings, { 'n', 'gpt', fun('ts') })
+        table.insert(keybindings, { 'n', 'gph', fun('html') })
+        table.insert(keybindings, { 'n', 'gps', fun('scss') })
     end
 
     require('v.utils.mappings').set_keybindings(keybindings, {
