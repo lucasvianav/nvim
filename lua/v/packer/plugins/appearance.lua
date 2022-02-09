@@ -32,9 +32,8 @@ local M = {
 
     -- fancy statusline
     {
-        'NTBBloodbath/galaxyline.nvim',
+        'nvim-lualine/lualine.nvim',
         after = { 'devicons' },
-        commit = 'f8c3653f34f8993a1aff1a7fad7052c11e75cfbe',
     },
 
     -- show cursor context in statusline
