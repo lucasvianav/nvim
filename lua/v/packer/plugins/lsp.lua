@@ -38,14 +38,6 @@ local M = {
         after = 'nvim-lspconfig',
     },
 
-    --[[
-        -- code completion and snippets
-        -- DEPENDENCY: python3-venv
-        { 'ms-jpq/coq_nvim', branch = 'coq' },
-        { 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' }, -- snippets
-        { 'ms-jpq/coq.thirdparty', branch = '3p', after = 'coq_nvim' }, -- completion sources
-    ]]
-
     -- code completion
     {
         'hrsh7th/nvim-cmp',
@@ -55,7 +47,6 @@ local M = {
             { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
             { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
             { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-            { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' },
             { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
             { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
 

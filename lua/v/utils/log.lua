@@ -6,8 +6,12 @@ M.path = fn.stdpath('config') .. '/log.txt'
 
 function M.log(...)
     local content = require('v.utils.wrappers').format_for_inspection(...)
-    local fp      = io.open(M.path, 'a+')
+    local fp = io.open(M.path, 'a+')
     local date = os.date('*t')
+
+    if fp == nil then
+        fp = io.open(M.path, 'w')
+    end
 
     date = {
         date.year,

@@ -96,8 +96,7 @@ telescope.setup({
         },
 
         git_branches = utils.pickers.center_dropdown,
-        lsp_document_diagnostics = utils.pickers.center_dropdown,
-        lsp_workspace_diagnostics = utils.pickers.center_dropdown,
+        diagnostics = utils.pickers.center_dropdown,
         lsp_code_actions = utils.pickers.code_actions,
         lsp_range_code_actions = utils.pickers.code_actions,
     },
@@ -128,12 +127,12 @@ require('v.utils.mappings').set_keybindings({
     {
         'n',
         '<Leader>fg',
-        [[:<C-U>lua require('telescope.builtin').lsp_document_diagnostics()<cr>]],
+        [[:<C-U>lua require('telescope.builtin').diagnostics({ bufnr = 0 })<cr>]],
     },
     {
         'n',
         '<Leader>fgw',
-        [[:<C-U>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>]],
+        [[:<C-U>lua require('telescope.builtin').diagnostics()<cr>]],
     },
 
     -- git

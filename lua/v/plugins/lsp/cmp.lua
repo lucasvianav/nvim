@@ -21,7 +21,7 @@ if not ok_comparator then
     })
 end
 
--- TODO ???? fix this pls
+-- TODO FIXME ???? fix this pls
 local armengue = 0
 local cmdline_escape = function()
     cmp.mapping.abort()
