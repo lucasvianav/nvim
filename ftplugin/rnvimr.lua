@@ -1,7 +1,7 @@
-local opts = {
+require('v.utils.mappings').set_keybindings({
+    { 't', 'j', 'j' },
+    { 't', 'k', 'k' },
+}, {
     nowait = true,
     buffer = true,
-}
-
-require('v.utils.mappings').map('t', 'j', 'j', opts)
-require('v.utils.mappings').map('t', 'k', 'k', opts)
+})

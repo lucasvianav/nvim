@@ -18,5 +18,5 @@ local map = require('v.utils.mappings').map
 map('n', '<C-s>', '<Plug>Lightspeed_s')
 
 -- I used to use <C-M-S>, but then I learned to config
--- Kitty do correctly expose ctrl + shift + s as <C-S-S>
+-- Kitty to correctly expose ctrl + shift + s as <C-S-s>
 map('n', '<C-S-s>', '<Plug>Lightspeed_S')

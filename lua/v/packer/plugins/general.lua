@@ -110,24 +110,10 @@ local M = {
         },
     },
 
-    -- surrounding manipulatiuon maps
-    {
-        'tpope/vim-surround',
-        after = 'vim-repeat',
-        keys = {
-            'cs',
-            'xs',
-            'ds',
-            { 'x', 'S' },
-            { 'v', 'S' },
-            { 'x', 'gS' },
-            { 'v', 'gS' },
-        },
-    },
-
     -- like tpope/vim-surround but for functions
     {
         'AndrewRadev/dsf.vim',
+        after = 'vim-surround',
         keys = {
             'csf',
             'dsf',
@@ -137,6 +123,13 @@ local M = {
             { 'o', 'if' },
             { 'o', 'af' },
         },
+    },
+
+    -- surrounding manipulatiuon maps
+    {
+        'tpope/vim-surround',
+        after = 'vim-repeat',
+        event = { 'CursorMoved', 'CursorHold' },
     },
 
     -- word manipulation utilities

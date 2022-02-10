@@ -170,7 +170,7 @@ local function __rename_handler(err, result, ctx, config)
 end
 
 ---Confirms/declines the renaming.
-function M.rename_callback()
+local __rename_callback = function()
     local new_name = vim.trim(vim.fn.getline('.'):sub(#__rename_prompt + 1, -1))
     vim.api.nvim_command([[stopinsert]])
     vim.api.nvim_command([[bd!]])
@@ -241,7 +241,7 @@ function M.rename()
         { 'i', '<ESC>', '<Esc><cmd>bd!<CR>' },
         { 'i', '<C-C>', '<Esc><cmd>bd!<CR>' },
         { 'i', '<BS>', '<ESC>"_xi' }, -- TODO: make this better https://gist.github.com/VonHeikemen/a0a58cab2c910065420ecf5f4102c58c
-        { { 'n', 'i' }, '<CR>', "<cmd>lua require('v.utils.lsp').rename_callback()<CR>" },
+        { { 'n', 'i' }, '<CR>', __rename_callback },
     }, {
         buffer = true,
     })
@@ -447,10 +447,7 @@ local function __on_attach(client, bufnr)
         table.insert(keybindings, { 'n', 'gps', fun('scss') })
     end
 
-    require('v.utils.mappings').set_keybindings(keybindings, {
-        buffer = true,
-        bufnr = bufnr,
-    })
+    require('v.utils.mappings').set_keybindings(keybindings, { buffer = bufnr })
 
     -- enable completion triggered by <c-x><c-o>
     api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')

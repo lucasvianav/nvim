@@ -9,10 +9,10 @@ require('v.utils').set_viml_options('Vimux', {
 cmd('command VimuxClearScreenHistory VimuxClearTerminalScreen | VimuxClearRunnerHistory')
 
 require('v.utils.mappings').set_keybindings({
-    { 'n', '<Leader>tp', ':<C-U>VimuxPromptCommand<CR>' },
-    { 'n', '<Leader>tr', ':<C-U>VimuxRunLastCommand<CR>' },
-    { 'n', '<Leader>ti', ':<C-U>VimuxInspectRunner<CR>' },
-    { 'n', '<Leader>tz', ':<C-U>VimuxZoomRunner<CR>' },
-    { 'n', '<Leader>tc', ':<C-U>VimuxClearScreenHistory<CR>' },
-    { 'n', '<Leader>tt', ':<C-U>VimuxTogglePane<CR>' },
+    { 'n', '<Leader>tp', '<cmd>VimuxPromptCommand<CR>' },
+    { 'n', '<Leader>tr', '<cmd>VimuxRunLastCommand<CR>' },
+    { 'n', '<Leader>ti', '<cmd>VimuxInspectRunner<CR>' },
+    { 'n', '<Leader>tz', '<cmd>VimuxZoomRunner<CR>' },
+    { 'n', '<Leader>tc', '<cmd>VimuxClearScreenHistory<CR>' },
+    { 'n', '<Leader>tt', '<cmd>VimuxTogglePane<CR>' },
 })

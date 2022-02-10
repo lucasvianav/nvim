@@ -40,6 +40,7 @@ local keybindings = {
     { key = { 'v', '<C-v>' }, cb = cb('vsplit') },
     { key = { 's', '<C-h>', '<C-x>' }, cb = cb('split') },
     { key = { 't', '<C-t>' }, cb = cb('tabnew') },
+    { key = { '<CR>', 'l' }, cb = cb('edit') },
     { key = 'h', cb = cb('close_node') },
     { key = '<Tab>', cb = cb('preview') },
     { key = 'P', cb = cb('parent_node') },
@@ -67,7 +68,7 @@ local keybindings = {
 }
 
 require('nvim-tree').setup({
-    disable_netrw = true, -- disables netrw completely
+    disable_netrw = false, -- disables netrw completely
     hijack_netrw = true, -- hijack netrw window on startup
     open_on_setup = false, -- open the tree on setup
     auto_close = true, -- autoclose if it's the last window
@@ -118,8 +119,7 @@ require('nvim-tree').setup({
     },
 })
 
-local toggle_cmd = '<cmd>lua require("v.utils.tree").nvim_tree_toggle()<cr>'
-require('v.utils.mappings').map('n', '<Leader>e', toggle_cmd)
+require('v.utils.mappings').map('n', '<Leader>e', require('v.utils.tree').nvim_tree_toggle)
 
 local colors = require('v.utils').colors
 local hl_utils = require('v.utils.highlights')

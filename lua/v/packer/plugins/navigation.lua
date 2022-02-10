@@ -30,7 +30,6 @@ local M = {
             'NvimTreeClose',
         },
         keys = '<Leader>e',
-        fn = { 'nvim_tree_toggle' },
     },
 
     -- ranger file explorer
@@ -84,6 +83,15 @@ local M = {
 
             -- github and octo integration
             -- { 'nvim-telescope/telescope-github.nvim' },
+        },
+        keys = {
+            '<leader>ff',
+            '<leader>ca',
+            '<leader>fp',
+            '<leader>fb',
+            'gd',
+            'gr',
+            'gi',
         },
     },
 

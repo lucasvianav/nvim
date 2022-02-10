@@ -1,4 +1,6 @@
-require('spectre').setup({
+local spectre = require('spectre')
+
+spectre.setup({
     color_devicons = true,
     open_cmd = 'vnew',
     live_update = false, -- auto excute search again when you write any file in vim
@@ -12,7 +14,7 @@ require('spectre').setup({
 })
 
 require('v.utils.mappings').set_keybindings({
-    { 'n', '<Leader>S', [[:<C-u>lua require('spectre').open()<CR>]] },
+    { 'n', '<Leader>S', spectre.open },
     { 'v', '<Leader>S', [[:lua require('spectre').open_visual()<CR>]] },
 })
 

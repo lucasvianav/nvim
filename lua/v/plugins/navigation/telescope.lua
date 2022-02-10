@@ -1,6 +1,7 @@
 local actions = require('telescope.actions')
 local telescope = require('telescope')
 local utils = require('v.utils.telescope')
+local builtin = require('telescope.builtin')
 
 telescope.setup({
     defaults = {
@@ -106,50 +107,40 @@ telescope.load_extension('fzf')
 
 require('v.utils.mappings').set_keybindings({
     -- general
-    { 'n', '<Leader>ff', [[:<C-U>lua require('telescope.builtin').find_files()<cr>]] },
-    { 'n', '<Leader>fr', [[:<C-U>lua require('telescope.builtin').resume()<cr>]] },
-    { 'n', '<Leader>fp', [[:<C-U>lua require('telescope.builtin').live_grep()<cr>]] },
-    { 'n', '<Leader>fb', [[:<C-U>lua require('telescope.builtin').buffers()<cr>]] },
-    { 'n', '<Leader>fc', [[:<C-U>lua require('telescope.builtin').commands()<cr>]] },
-    { 'n', '<Leader>fch', [[:<C-U>lua require('telescope.builtin').command_history()<cr>]] },
-    { 'n', '<Leader>fj', [[:<C-U>lua require('telescope.builtin').jumplist()<cr>]] },
+    { 'n', '<Leader>ff', builtin.find_files },
+    { 'n', '<Leader>fr', builtin.resume },
+    { 'n', '<Leader>fp', builtin.live_grep },
+    { 'n', '<Leader>fb', builtin.buffers },
+    { 'n', '<Leader>fc', builtin.commands },
+    { 'n', '<Leader>fch', builtin.command_history },
+    { 'n', '<Leader>fj', builtin.jumplist },
 
     -- lsp
-    { 'n', 'gd', [[:<C-U>lua require('telescope.builtin').lsp_definitions()<cr>]] },
-    { 'n', 'gr', [[:<C-U>lua require('telescope.builtin').lsp_references()<cr>]] },
-    { 'n', 'gi', [[:<C-U>lua require('telescope.builtin').lsp_implementations()<cr>]] },
-    { 'n', '<Leader>ca', [[:<C-U>lua require('telescope.builtin').lsp_code_actions()<cr>]] },
-    {
-        'v',
-        '<Leader>ca',
-        [[:<C-U>lua require('telescope.builtin').lsp_range_code_actions()<cr>]],
-    },
+    { 'n', 'gd', builtin.lsp_definitions },
+    { 'n', 'gr', builtin.lsp_references },
+    { 'n', 'gi', builtin.lsp_implementations },
+    { 'n', '<Leader>ca', builtin.lsp_code_actions },
+    { 'v', '<Leader>ca', builtin.lsp_range_code_actions },
     {
         'n',
         '<Leader>fg',
-        [[:<C-U>lua require('telescope.builtin').diagnostics({ bufnr = 0 })<cr>]],
+        function()
+            builtin.diagnostics({ bufnr = 0 })
+        end,
     },
-    {
-        'n',
-        '<Leader>fgw',
-        [[:<C-U>lua require('telescope.builtin').diagnostics()<cr>]],
-    },
+    { 'n', '<Leader>fgw', builtin.diagnostics },
 
     -- git
-    { 'n', '<Leader>gb', [[:<C-U>lua require('telescope.builtin').git_branches()<cr>]] },
-    { 'n', '<Leader>gc', [[:<C-U>lua require('telescope.builtin').git_commits()<cr>]] },
+    { 'n', '<Leader>gb', builtin.git_branches },
+    { 'n', '<Leader>gc', builtin.git_commits },
 
     -- extensions
-    { 'n', '<Leader>fh', [[:<C-U>lua require('telescope').extensions.heading.heading()<cr>]] },
-    {
-        'n',
-        '<Leader>fs',
-        [[:<C-U>lua require('telescope').extensions['session-lens'].search_session()<cr>]],
-    },
+    { 'n', '<Leader>fh', telescope.extensions.heading.heading },
+    { 'n', '<Leader>fs', telescope.extensions['session-lens'].search_session },
 
     -- custom functions
-    { 'n', '<leader>fn', '<cmd>lua require("v.utils.telescope").find_nvim()<cr>' },
-    { 'n', '<leader>fk', '<cmd>lua require("v.utils.telescope").find_in_plugins()<cr>' },
-    { 'n', '<leader>fd', '<cmd>lua require("v.utils.telescope").find_dotfiles()<cr>' },
-    { 'n', '<leader>f/', '<cmd>lua require("v.utils.telescope").grep_last_search()<cr>' },
+    { 'n', '<leader>fn', require('v.utils.telescope').find_nvim },
+    { 'n', '<leader>fk', require('v.utils.telescope').find_in_plugins },
+    { 'n', '<leader>fd', require('v.utils.telescope').find_dotfiles },
+    { 'n', '<leader>f/', require('v.utils.telescope').grep_last_search },
 })

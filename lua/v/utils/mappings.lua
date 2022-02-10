@@ -8,92 +8,72 @@ local fn = vim.fn
 
 local M = {}
 
----Wrapper for vim.api.nvim_set_keymap(). Defaults `noremap`, `silent` and
----`nowait`.
----@param modes string|string[] mode or list of modes (`:h map-modes`)
+---Wrapper for `vim.keymap.set`
+---@param mode string|string[] mode or list of modes (`:h map-modes`)
 ---@param lhs string keybinding
----@param rhs string action
----@param opts table<string, boolean|string> usual map options + `buffer` and `bufnr`
-function M.map(modes, lhs, rhs, opts)
+---@param rhs string|function action
+---@param opts table<string, boolean|string> usual map options + `buffer` (`:h vim.keymap.set`)
+function M.map(mode, lhs, rhs, opts)
     if not lhs then
-        vim.api.nvim_notify("Didn't receive a LHS.", vim.log.levels.ERROR, {
-            title = 'Unmapping',
+        vim.api.nvim_notify('No LHS.', vim.log.levels.ERROR, {
+            title = 'Mapping',
         })
         return
-    elseif type(modes) ~= 'table' then
-        modes = { modes }
     end
 
     local options = vim.tbl_extend('force', {
-        -- disable noremap for <Plug> mappings
-        noremap = rhs:lower():match('^<plug>.+') == nil,
         silent = true,
         nowait = true, -- TODO: does this break anything?
+        replace_keycodes = false,
     }, opts or {})
 
     local buffer = options.buffer
-    local bufnr = options.bufnr
-    options.buffer = nil
-    options.bufnr = nil
-
-    local available_modes = 'nvsxo!ilct'
-
-    for _, mode in ipairs(modes) do
-        local is_valid_mode = string.find(available_modes, mode)
-
-        if #mode == 1 and is_valid_mode then
-            if buffer then
-                vim.api.nvim_buf_set_keymap(bufnr or 0, mode, lhs, rhs, options)
-            else
-                vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-            end
-        end
+    if buffer and type(buffer) ~= 'number' then
+        buffer = 0
     end
+
+    vim.keymap.set(mode, lhs, rhs, options)
 end
 
----Wrapper for vim.api.nvim_set_keymap(), mapping the `lhs` to `<nop>`.
----@param modes string|string[] mode or list of modes (`:h map-modes`)
+---Wrapper for `vim.keymap.del`
+---@param mode string|string[] mode or list of modes (`:h map-modes`)
 ---@param lhs string keybinding
-function M.unmap(modes, lhs)
+---@param buffer? number buffer id
+function M.unmap(mode, lhs, buffer)
     if not lhs then
-        vim.api.nvim_notify("Didn't receive a LHS.", vim.log.levels.ERROR, { title = 'Unmapping' })
+        vim.api.nvim_notify('No LHS.', vim.log.levels.ERROR, { title = 'Unmapping' })
         return
-    elseif type(modes) ~= 'table' then
-        modes = { modes }
     end
 
-    local available_modes = 'nvsxo!ilct'
+    local ok, _ = pcall(vim.keymap.del, mode, lhs, { buffer = buffer })
 
-    for _, mode in ipairs(modes) do
-        local is_valid_mode = string.find(available_modes, mode)
-
-        if #mode == 1 and is_valid_mode then
-            vim.api.nvim_set_keymap(mode, lhs, t('<nop>'), {})
-        end
+    if not ok then
+        M.map(mode, lhs, t('<nop>'), { buffer = buffer })
     end
 end
 
 ---@class KeybindingTable
----@field modes string|string[] mode or list of modes (`:h map-modes`)
+---@field mode string|string[] mode or list of modes (`:h map-modes`)
 ---@field lhs string keybinding
----@field rhs string action
----@field opts table<string, boolean|string> usual map options + `buffer` and `bufnr`
+---@field rhs string|function action
+---@param opts table<string, boolean|string> usual map options + `buffer` (`:h vim.keymap.set`)
 
 ---Sets a list of keybindings.
 ---@param args KeybindingTable[] parameters to be passed to v.utils.mappings.map
----@param common_opts table<string, boolean|string> options to be appled to all keybindings. The keybindng's individual options have higher prority.
+---@param common_opts table<string, boolean|string> options to be appled to all keybindings. The keybinding's individual options have higher prority.
 ---@see v.utils.mappings.map
 function M.set_keybindings(args, common_opts)
     for _, map_table in ipairs(args) do
-        local modes, lhs, rhs, opts = unpack(map_table)
+        local mode, lhs, rhs, opts = unpack(map_table)
         local options = vim.tbl_extend('force', common_opts or {}, opts or {})
-        M.map(modes, lhs, rhs, options)
+        M.map(mode, lhs, rhs, options)
     end
 end
 
 ---@class UnkeybindingTable
----@field modes string|string[] mode or list of modes (`:h map-modes`)
+---@field mode string|string[] mode or list of modes (`:h map-modes`)
 ---@field lhs string keybinding
+---@param buffer? number buffer id
 
 ---Unsets a list of keybindings.
 ---@param args UnkeybindingTable[] parameters to be passed to v.utils.mappings.unmap
