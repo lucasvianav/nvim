@@ -12,11 +12,12 @@
 
 local utils = require('v.utils.statusline')
 local colors = require('v.utils.colors')
+local lualine_utils = require('lualine.utils.utils')
 
 local bubbles_theme = {
     normal = {
         b = { fg = colors.white, bg = colors.grey },
-        c = { fg = colors.black, bg = colors.transparent },
+        c = { fg = colors.black, bg = lualine_utils.extract_highlight_colors('Normal', 'bg') },
         x = { fg = colors.white, bg = colors.black },
         y = { fg = colors.black, bg = colors.red },
         z = { fg = colors.white, bg = colors.off_black },
@@ -24,7 +25,7 @@ local bubbles_theme = {
 
     insert = { y = { fg = colors.black, bg = colors.blue } },
     visual = { y = { fg = colors.black, bg = colors.cyan } },
-    replace = { y = { fg = colors.black, bg = colors.orange } },
+    replace = { y = { fg = colors.black, bg = colors.yellow } },
 
     inactive = {
         a = { fg = colors.cyan_grey, bg = colors.off_black },
