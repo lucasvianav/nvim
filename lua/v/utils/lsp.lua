@@ -335,18 +335,27 @@ local __specific_on_attach = {
 
             ts_utils.setup_client(client)
 
-            local work_dir = os.getenv('WORK_DIR')
-            local regexp = vim.regex('^' .. fn.escape(work_dir, '.'))
-            local cwd = fn.getcwd()
+            -- auto sort imports
+            require('v.utils.autocmds').augroup('SortImportsTS', {
+                { 'BufWritePre', 'TSLspOrganizeSync' },
+            }, {
+                buffer = true,
+            })
 
-            -- sets up auto-sorting of imports if not on $WORK_DIR
-            if fn.empty(work_dir) == 1 or not regexp:match_str(cwd) then
-                require('v.utils.autocmds').augroup('SortImportsTS', {
-                    { 'BufWritePre', 'TSLspOrganizeSync' },
-                }, {
-                    buffer = true,
-                })
-            end
+            -- don't autosort in $WORK_DIR
+            --[[
+                local work_dir = os.getenv('WORK_DIR')
+                -- sets up auto-sorting of imports if not on $WORK_DIR
+                local regexp = vim.regex('^' .. fn.escape(work_dir, '.'))
+                local cwd = fn.getcwd()
+                if fn.empty(work_dir) == 1 or not regexp:match_str(cwd) then
+                    require('v.utils.autocmds').augroup('SortImportsTS', {
+                        { 'BufWritePre', 'TSLspOrganizeSync' },
+                    }, {
+                        buffer = true,
+                    })
+                end
+            ]]
 
             buf_set_keymap('n', '<leader>si', '<cmd>TSLspOrganize<CR>')
         end

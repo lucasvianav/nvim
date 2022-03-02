@@ -97,17 +97,14 @@ local M = {
 
     -- session manager
     {
-        'auto-session',
+        'rmagatti/auto-session',
         event = 'VimLeavePre',
         cmd = {
             'SaveSession',
             'RestoreSession',
             'DeleteSession',
         },
-        __opts = {
-            dev = true,
-            fallback = 'rmagatti/auto-session',
-        },
+        keys = { '<Leader>fs' },
     },
 
     -- like tpope/vim-surround but for functions

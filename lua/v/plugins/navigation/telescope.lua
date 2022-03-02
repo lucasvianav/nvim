@@ -136,7 +136,11 @@ require('v.utils.mappings').set_keybindings({
 
     -- extensions
     { 'n', '<Leader>fh', telescope.extensions.heading.heading },
-    { 'n', '<Leader>fs', telescope.extensions['session-lens'].search_session },
+    {
+        'n',
+        '<Leader>fs',
+        [[<cmd>lua require('telescope').extensions['session-lens'].search_session()<cr>]],
+    },
 
     -- custom functions
     { 'n', '<leader>fn', require('v.utils.telescope').find_nvim },

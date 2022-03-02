@@ -11,7 +11,7 @@ require('auto-session').setup({
     post_restore_cmds = { 'silent !kill -s SIGWINCH $PPID' },
 
     -- TODO: create function to do this when restoring multiple windows
-    -- pre_restore_cmds = { 'silent! windo e' },
+    -- pre_restore_cmds = { 'silent! tabdo windo e | silent! tabdo windo zv' },
 
     -- TODO: maybe swap for allowed dirs
     auto_session_suppress_dirs = require('v.utils.wrappers').expand_in_list({
@@ -24,23 +24,18 @@ require('auto-session').setup({
         '~/Pictures',
     }),
 
-    auto_session_suppress_filetypes = {
+    bypass_session_save_file_types = {
+        '',
         'NvimTree',
         'dashboard',
         'gitcommit',
         'help',
         'lsp-installer',
-        'lua',
         'packer',
         'packer',
         'startify',
         'terminal',
         'text',
-    },
-
-    auto_session_suppress_buftypes = {
-        'nofile',
-        'prompt',
-        'terminal',
+        'text',
     },
 })

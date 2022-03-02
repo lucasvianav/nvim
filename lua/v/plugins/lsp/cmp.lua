@@ -1,5 +1,6 @@
 -- TODO: https://github.com/petertriho/cmp-git
 -- https://www.reddit.com/r/neovim/comments/r42njg/here_are_the_vs_code_theme_colors_for_the_new/hme3pb7/
+-- https://github.com/hrsh7th/nvim-cmp/issues/465#issuecomment-981159946
 
 local cmp = require('cmp')
 

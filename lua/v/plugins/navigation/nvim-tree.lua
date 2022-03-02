@@ -67,7 +67,9 @@ local keybindings = {
     { key = 'cd', cb = cb('cd') },
 }
 
-require('nvim-tree').setup({
+local nvim_tree = require('nvim-tree')
+
+nvim_tree.setup({
     disable_netrw = false, -- disables netrw completely
     hijack_netrw = true, -- hijack netrw window on startup
     open_on_setup = false, -- open the tree on setup
@@ -118,6 +120,10 @@ require('nvim-tree').setup({
         },
     },
 })
+
+-- FIXME: ~gambiarra~ to make the following map work
+nvim_tree.toggle()
+nvim_tree.toggle()
 
 require('v.utils.mappings').map('n', '<Leader>e', require('v.utils.tree').nvim_tree_toggle)
 
