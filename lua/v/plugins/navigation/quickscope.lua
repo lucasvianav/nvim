@@ -15,6 +15,7 @@ require('v.utils').set_viml_options('qs', {
         'startify',
         'dashboard',
         'NvimTree',
+        'NvimTree_*',
     },
 })
 

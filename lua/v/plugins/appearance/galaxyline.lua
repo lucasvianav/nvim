@@ -68,7 +68,7 @@ end
 -- | |_| |/ ___ \| |___ / ___ \  /  \   | | | |___ | || |\  | |___
 --  \____/_/   \_\_____/_/   \_\/_/\_\  |_| |_____|___|_| \_|_____|
 
-gl.short_line_list = { 'NvimTree', 'packer' }
+gl.short_line_list = { 'NvimTree', 'NvimTree_*', 'packer' }
 
 gls.left = {
     {

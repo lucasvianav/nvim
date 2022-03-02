@@ -12,6 +12,7 @@ require('v.utils').set_viml_options('tokyonight', {
     sidebars = {
         'qf',
         'NvimTree',
+        'NvimTree_*',
         'terminal',
         'packer',
         'spectre_panel',

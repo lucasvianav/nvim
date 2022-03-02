@@ -7,6 +7,7 @@ require('indent_blankline').setup({
 
     filetype_exclude = {
         'NvimTree',
+        'NvimTree_*',
         'dashboard',
         'gitcommit',
         'help',
