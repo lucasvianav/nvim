@@ -134,7 +134,7 @@ M.exec_line_or_make = function()
         command = vim.api.nvim_buf_get_lines(0, start_visual - 1, line, false)
         line = math.min(line, start_visual) .. ':' .. math.max(line, start_visual)
     elseif mode == 'n' then
-        command = vim.api.nvim_get_current_line()
+        command = { vim.api.nvim_get_current_line() }
     else
         return
     end
@@ -143,10 +143,14 @@ M.exec_line_or_make = function()
         command = 'lua << EOF\n' .. table.concat(command, '\n') .. '\nEOF'
     end
 
-    vim.api.nvim_exec(command, false)
+    local ok, _ = pcall(vim.api.nvim_exec, command, false)
 
     local file = string.gsub(vim.api.nvim_buf_get_name(0), [[^.+/(%w+/%w+)]], '%1')
-    vim.notify(('Executed %s, %s'):format(file, line), 'info', { title = 'Line Execution' })
+    vim.notify(
+        ('Executed %s, %s.\n(%s)'):format(file, line, ok and 'successful' or 'failed'),
+        'info',
+        { title = 'Line Execution' }
+    )
 end
 
 ---Open a file with the same name as the current's but another extension.

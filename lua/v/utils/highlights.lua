@@ -1,5 +1,7 @@
 local M = {}
 
+M.colors = require('v.utils.colors')
+
 ---Wrapper for defining highlights like with `:highlight`
 ---@param groups string|string[] the highlighting groups' names
 ---@param tbl table<string,string> the highlighting modifications

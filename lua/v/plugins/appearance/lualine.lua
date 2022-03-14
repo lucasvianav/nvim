@@ -1,26 +1,19 @@
--- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/statusline.lua
--- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/utils/statusline.lua
--- TODO: https://github.com/mattleong/CosmicNvim/blob/main/lua/cosmic/core/statusline/init.lua
--- TODO: https://github.com/nvim-lualine/lualine.nvim
--- TODO: https://github.com/Famiu/feline.nvim
--- TODO: https://github.com/windwp/windline.nvim
--- https://www.reddit.com/r/neovim/comments/pxkf16/windlinenvim_one_global_status_line_on_floating/
-
--- Bubbles config for lualine
--- Author: lokesh-krishna
--- MIT license, see LICENSE for more details.
+---Heavily inspired by:
+---https://github.com/akinsho/dotfiles
+---https://github.com/NvChad/NvChad
 
 local utils = require('v.utils.statusline')
-local colors = require('v.utils.colors')
-local lualine_utils = require('lualine.utils.utils')
+local colors = require('v.utils.highlights').colors
+local alter_color = require('v.utils.highlights').alter_color
 
 local bubbles_theme = {
     normal = {
-        b = { fg = colors.white, bg = colors.grey },
-        c = { fg = colors.black, bg = lualine_utils.extract_highlight_colors('Normal', 'bg') },
-        x = { fg = colors.white, bg = colors.black },
-        y = { fg = colors.black, bg = colors.red },
-        z = { fg = colors.white, bg = colors.off_black },
+        a = { fg = colors.grey_light, bg = colors.grey_darker },
+        b = { fg = colors.white, bg = colors.grey_darker },
+        c = { fg = colors.black, bg = alter_color(colors.cyan_grey_dark, -25) },
+        x = { fg = colors.white, bg = colors.grey_darker },
+        y = { fg = colors.black, bg = colors.green },
+        z = { fg = colors.white, bg = colors.grey_darker },
     },
 
     insert = { y = { fg = colors.black, bg = colors.blue } },
@@ -37,38 +30,157 @@ local bubbles_theme = {
 require('lualine').setup({
     options = {
         theme = bubbles_theme,
-        component_separators = '|',
+        component_separators = '',
         section_separators = { left = '', right = '' },
     },
     sections = {
-        lualine_a = {},
-        lualine_b = { 'filename', 'require("v.utils.statusline").get_current_files_dir()' },
-        lualine_c = { 'diagnostics' },
-        lualine_x = { 'branch', 'filetype', 'progress' },
-        lualine_y = {
-            { 'mode' },
+        lualine_a = {
+            {
+                'filename',
+                fmt = function(str)
+                    if str == '' then
+                        return ' '
+                    end
+
+                    local cwd = vim.loop.cwd():gsub('.+%/[^/]+%/([^/]+)$', '%1')
+                    local first_dir = str:gsub('([^/]+)/.+$', '%1')
+                    local remaining = first_dir == str and '' or '/-'
+                    return cwd .. '/' .. first_dir .. remaining
+                end,
+                path = 1,
+                file_status = true,
+                separator = { right = '' },
+                padding = { left = 1, right = 0 },
+                symbols = {
+                    modified = '',
+                    readonly = '',
+                    unnamed = '',
+                },
+            },
         },
+        lualine_b = {
+            {
+                'filename',
+                fmt = function(str)
+                    return str:gsub('.+(%/[^/]+)%/[^/]+$', '%1')
+                end,
+                path = 1,
+                file_status = true,
+                padding = 0,
+                color = { fg = colors.green, gui = 'bold' },
+                symbols = {
+                    modified = '',
+                    readonly = '',
+                    unnamed = '',
+                },
+            },
+            {
+                'filename',
+                fmt = function(str)
+                    return str:gsub('.+%/[^/]+(%/[^/]+)$', '%1')
+                end,
+                path = 1,
+                file_status = true,
+                padding = { left = 0, right = 1 },
+                color = { fg = colors.off_white, gui = 'bold,italic' },
+                symbols = {
+                    modified = ' ',
+                    readonly = ' ',
+                    unnamed = '[No Name]',
+                },
+            },
+        },
+        lualine_c = {
+            {
+                'diagnostics',
+                symbols = {
+                    error = '  ',
+                    warn = '  ',
+                    info = '  ',
+                    hint = '  ',
+                },
+            },
+        },
+        lualine_x = {
+            {
+                'branch',
+                icon = { '', color = { fg = colors.yellow } },
+                color = {
+                    fg = colors.off_white,
+                    bg = colors.cyan_grey,
+                    gui = 'bold',
+                },
+                separator = { left = '', right = '' },
+            },
+            {
+                '" LSP"',
+                cond = function()
+                    local buf_clients = vim.lsp.buf_get_clients()
+                    return #buf_clients > 0
+                end,
+                color = {
+                    fg = colors.cyan,
+                    bg = colors.cyan_grey_dark,
+                    gui = 'bold',
+                },
+                separator = { left = '', right = '' },
+            },
+            {
+                'filetype',
+                color = { fg = colors.white, bg = colors.grey_dark },
+            },
+        },
+        lualine_y = { 'mode' },
         lualine_z = {
             {
-                'progress',
-                fmt = function(str)
-                    return ' ' .. str
+                '"l"',
+                color = { fg = colors.grey_light, gui = 'italic' },
+            },
+            {
+                function()
+                    local curr, _ = utils.get_line_extremes()
+                    return curr
                 end,
+                color = { gui = 'bold' },
+                padding = 0,
+            },
+            {
+                function()
+                    local _, last = utils.get_line_extremes()
+                    return '/' .. last
+                end,
+                padding = { left = 0, right = 1 },
+                color = { fg = colors.grey_light, gui = 'italic' },
+            },
+            {
+                '"Co."',
+                color = { fg = colors.grey_light, gui = 'italic' },
             },
             {
                 'location',
-                -- get col
                 fmt = function(str)
-                    return '㏇' .. str:sub(5)
+                    return str:sub(5) -- get col
                 end,
+                padding = { left = 0, right = 1 },
+                color = { gui = 'bold' },
             },
         },
     },
     inactive_sections = {
-        lualine_a = { 'filename' },
+        lualine_a = {
+            {
+                'filename',
+                fmt = function(str)
+                    return str:gsub(
+                        '(.+%/)[^/]+(%/[^/]+)$',
+                        '%1' .. utils.get_current_files_dir() .. '%2'
+                    )
+                end,
+                path = 1,
+            },
+        },
         lualine_b = {},
         lualine_c = {},
-
         lualine_x = {},
         lualine_y = {},
         lualine_z = {},
