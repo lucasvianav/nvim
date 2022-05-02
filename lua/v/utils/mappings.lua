@@ -27,9 +27,8 @@ function M.map(mode, lhs, rhs, opts)
     replace_keycodes = false,
   }, opts or {})
 
-  local buffer = options.buffer
-  if buffer and type(buffer) ~= 'number' then
-    buffer = 0
+  if options.buffer and type(options.buffer) ~= 'number' then
+    options.buffer = 0
   end
 
   vim.keymap.set(mode, lhs, rhs, options)
@@ -81,32 +80,6 @@ end
 function M.unset_keybindings(args)
   for _, map_table in ipairs(args) do
     M.unmap(unpack(map_table))
-  end
-end
-
----`<CR>` action compatible with nvim-autopairs and completion plugins.
-function M.CR()
-  local has_npairs, npairs = pcall(require, 'nvim-autopairs')
-
-  if fn.pumvisible() ~= 0 then
-    if fn.complete_info({ 'selected' }).selected == -1 then
-      return has_npairs and (npairs.esc('<c-e>') .. npairs.autopairs_cr()) or t('<C-e><CR>')
-    else
-      return has_npairs and npairs.esc('<c-y>') or t('<C-y>')
-    end
-  else
-    return has_npairs and npairs.autopairs_cr() or t('<CR>')
-  end
-end
-
----`<BS>` action compatible with nvim-autopairs and completion plugins.
-function M.BS()
-  local has_npairs, npairs = pcall(require, 'nvim-autopairs')
-
-  if fn.pumvisible() ~= 0 and fn.complete_info({ 'mode' }).mode == 'eval' then
-    return has_npairs and (npairs.esc('<c-e>') .. npairs.autopairs_bs()) or t('<C-e><BS>')
-  else
-    return has_npairs and npairs.autopairs_bs() or t('<BS>')
   end
 end
 

@@ -100,8 +100,6 @@ telescope.setup({
 
     git_branches = utils.pickers.center_dropdown,
     diagnostics = utils.pickers.center_dropdown,
-    lsp_code_actions = utils.pickers.code_actions,
-    lsp_range_code_actions = utils.pickers.code_actions,
   },
 })
 
@@ -121,8 +119,6 @@ require('v.utils.mappings').set_keybindings({
   { 'n', 'gd', builtin.lsp_definitions },
   { 'n', 'gr', builtin.lsp_references },
   { 'n', 'gi', builtin.lsp_implementations },
-  { 'n', '<Leader>ca', builtin.lsp_code_actions },
-  { 'v', '<Leader>ca', builtin.lsp_range_code_actions },
   {
     'n',
     '<Leader>fg',
@@ -151,4 +147,20 @@ require('v.utils.mappings').set_keybindings({
   { 'n', '<leader>f/', utils.grep_last_search },
   { 'n', '<leader>fu', utils.find_unimed },
   { 'n', '<leader>fpu', utils.grep_unimed },
+
+  -- code actions
+  {
+    'n',
+    '<Leader>ca',
+    function()
+      vim.lsp.buf.code_action()
+    end,
+  },
+  {
+    'v',
+    '<Leader>ca',
+    function()
+      vim.lsp.buf.range_code_action()
+    end,
+  },
 })

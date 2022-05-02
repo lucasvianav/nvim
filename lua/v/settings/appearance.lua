@@ -3,6 +3,7 @@
 -- TODO: https://github.com/akinsho/dotfiles/blob/f714d4cdd2de74c7393ca3ae69bdbb3619e06174/.config/nvim/plugin/autocommands.lua#L158-L187
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/tmux/.tmux.conf
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/tmux/tmux-status.conf
+-- TODO: https://www.reddit.com/r/neovim/comments/r0omlv/start_your_search_from_a_more_comfortable_place/
 
 local colors = require('v.utils').colors
 local o = vim.opt
@@ -33,41 +34,41 @@ M.colorscheme = 'tokyonight'
 
 --- function to be ran after a colorscheme is applied
 M.post_colorscheme_hook = function()
-    require('v.utils.highlights').set_highlights({
-        -- { 'CursorLine', { guibg = colors.cyan_grey_dark } },
-        -- { 'ColorColumn', { guibg = colors.cyan_grey_dark } },
-        -- { 'NormalFloat', { 'transparent' } },
-        { 'FloatBorder', { 'transparent' } },
-        { 'Folded', { 'transparent' } },
-        { 'BufferLineFill', { 'transparent' } },
-        { 'TabLine', { 'transparent', guifg = colors.cyan_grey } },
-        { 'TabLineFill', { 'transparent' } },
-        {
-            'TabLineSel',
-            {
-                guibg = colors.grey_dark,
-                guifg = colors.off_white,
-            },
-        },
-    })
+  require('v.utils.highlights').set_highlights({
+    -- { 'CursorLine', { guibg = colors.cyan_grey_dark } },
+    -- { 'ColorColumn', { guibg = colors.cyan_grey_dark } },
+    { 'NormalFloat', { link = 'Normal', bang = true } },
+    { 'FloatBorder', { 'transparent' } },
+    { 'Folded', { 'transparent' } },
+    { 'BufferLineFill', { 'transparent' } },
+    { 'TabLine', { 'transparent', guifg = colors.cyan_grey } },
+    { 'TabLineFill', { 'transparent' } },
+    {
+      'TabLineSel',
+      {
+        guibg = colors.grey_dark,
+        guifg = colors.off_white,
+      },
+    },
+  })
 end
 
 o.listchars = {
-    conceal = '┊',
-    eol = ' ', -- ↲
-    extends = '>',
-    nbsp = '␣',
-    precedes = '<',
-    space = ' ',
-    tab = '» ',
-    trail = '•',
+  conceal = '┊',
+  eol = ' ', -- ↲
+  extends = '>',
+  nbsp = '␣',
+  precedes = '<',
+  space = ' ',
+  tab = '» ',
+  trail = '•',
 }
 
 o.fillchars = {
-    eob = ' ',
-    fold = ' ',
-    stl = ' ',
-    stlnc = ' ',
+  eob = ' ',
+  fold = ' ',
+  stl = ' ',
+  stlnc = ' ',
 }
 
 return M

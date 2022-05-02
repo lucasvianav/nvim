@@ -8,7 +8,7 @@ npairs.setup({
   enable_afterquote = true, -- add bracket pairs after quote
   enable_check_bracket_line = true, -- check bracket in same line
   check_ts = true,
-  map_bs = false, -- <BS>
+  map_bs = true, -- <BS>
 })
 
 -- endwise
@@ -44,12 +44,4 @@ npairs.add_rules({
       return opts.prev_char:match('.%]') ~= nil
     end)
     :use_key(']'),
-})
-
-local utils = require('v.utils.mappings')
-utils.set_keybindings({
-  { 'i', '<CR>', utils.CR },
-  { 'i', '<BS>', utils.BS },
-}, {
-  expr = true,
 })

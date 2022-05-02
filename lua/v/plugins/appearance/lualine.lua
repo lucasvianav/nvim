@@ -2,6 +2,8 @@
 ---https://github.com/akinsho/dotfiles
 ---https://github.com/NvChad/NvChad
 
+-- TODO: global statusline (+ 0.7 options)
+
 local utils = require('v.utils.statusline')
 local colors = require('v.utils.highlights').colors
 local alter_color = require('v.utils.highlights').alter_color

@@ -5,60 +5,67 @@
 
 -- list of desired treesitter parsers
 local parsers = {
-    'bash',
-    'bibtex',
-    'c',
-    'comment',
-    'cpp',
-    'css',
-    'dockerfile',
-    'graphql',
-    'html',
-    'javascript',
-    'jsdoc',
-    'json',
-    'jsonc',
-    'lua',
-    'markdown',
-    'python',
-    'scss',
-    'tsx',
-    'typescript',
-    'vim',
-    'yaml',
+  'bash',
+  'bibtex',
+  'c',
+  'comment',
+  'cpp',
+  'css',
+  'dockerfile',
+  'graphql',
+  'html',
+  'javascript',
+  'jsdoc',
+  'json',
+  'jsonc',
+  'lua',
+  'markdown',
+  'python',
+  'scss',
+  'tsx',
+  'typescript',
+  'vim',
+  'yaml',
 }
 
+local treesitter = require('nvim-treesitter.configs')
 local enable = { enable = true }
 local disable = { enable = false }
-require('nvim-treesitter.configs').setup({
-    ensure_installed = parsers,
 
-    autopairs = enable,
-    autotag = enable,
-    indent = disable,
-    matchup = enable,
+treesitter.setup({
+  ensure_installed = parsers,
 
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-    },
+  autopairs = enable,
+  autotag = enable,
+  indent = disable,
+  matchup = enable,
 
-    context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
-    },
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
 
-    rainbow = {
-        enable = true,
-        extended_mode = true,
-    },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+  },
+
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+  },
 })
 
-local indent_on = 'lua require("nvim-treesitter.configs").setup({ indent = { enable = true } })'
-local indent_off = 'lua require("nvim-treesitter.configs").setup({ indent = { enable = true } })'
+local indent_on = function()
+  treesitter.setup({ indent = { enable = true } })
+end
+
+local indent_off = function()
+  treesitter.setup({ indent = { enable = true } })
+end
 
 -- use treesitter indent module only for React files
 require('v.utils.autocmds').augroup('ReactIndentTS', {
-    { 'BufEnter', { '*.tsx', '*.jsx' }, indent_on },
-    { 'BufLeave', { '*.tsx', '*.jsx' }, indent_off },
+  { event = 'BufEnter', opts = { pattern = { '*.tsx', '*.jsx' }, callback = indent_on } },
+  { event = 'BufLeave', opts = { pattern = { '*.tsx', '*.jsx' }, callback = indent_off } },
 })
