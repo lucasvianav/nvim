@@ -4,147 +4,151 @@ local utils = require('v.utils.telescope')
 local builtin = require('telescope.builtin')
 
 telescope.setup({
-    defaults = {
-        prompt_prefix = '   ',
-        selection_caret = '  ',
-        entry_prefix = '   ',
-        initial_mode = 'insert',
-        color_devicons = true,
+  defaults = {
+    prompt_prefix = '   ',
+    selection_caret = '  ',
+    entry_prefix = '   ',
+    initial_mode = 'insert',
+    color_devicons = true,
 
-        set_env = { ['COLORTERM'] = 'truecolor' },
-        path_display = { 'absolute' },
+    set_env = { ['COLORTERM'] = 'truecolor' },
+    path_display = { 'absolute' },
 
-        file_ignore_patterns = {
-            '%.jpg',
-            '%.jpeg',
-            '%.png',
-            '%.otf',
-            '%.ttf',
-        },
-
-        mappings = {
-            i = {
-                ['<C-k>'] = actions.move_selection_previous,
-                ['<C-j>'] = actions.move_selection_next,
-                ['<Esc>'] = actions.close,
-                ['<C-v>'] = actions.file_vsplit,
-                ['<C-h>'] = actions.file_split,
-                ['<C-s>'] = actions.file_split,
-                ['<C-y>'] = actions.toggle_selection,
-                ['<C-a>'] = actions.select_all,
-                ['<M-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
-                ['<M-C-Q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-                ['<TAB>'] = actions.toggle_selection + actions.move_selection_next,
-                ['<S-TAB>'] = actions.toggle_selection + actions.move_selection_previous,
-            },
-
-            n = {
-                ['<C-k>'] = actions.move_selection_previous,
-                ['<C-j>'] = actions.move_selection_next,
-                ['<C-c>'] = actions.close,
-                ['q'] = actions.close,
-                ['v'] = actions.file_vsplit,
-                ['s'] = actions.file_split,
-                ['<C-y>'] = actions.toggle_selection,
-                ['<C-a>'] = actions.select_all,
-                ['<M-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
-                ['<M-C-Q>'] = actions.smart_send_to_qflist + actions.open_qflist,
-                ['<TAB>'] = actions.toggle_selection + actions.move_selection_next,
-                ['<S-TAB>'] = actions.toggle_selection + actions.move_selection_previous,
-            },
-        },
+    file_ignore_patterns = {
+      '%.jpg',
+      '%.jpeg',
+      '%.png',
+      '%.otf',
+      '%.ttf',
+      '%.eot',
+      '%.svg',
     },
 
-    pickers = {
-        find_files = {
-            follow = true,
-            hidden = true,
-            file_ignore_patterns = { '^.git', '^.git/', '^.git/*' },
-        },
+    mappings = {
+      i = {
+        ['<C-k>'] = actions.move_selection_previous,
+        ['<C-j>'] = actions.move_selection_next,
+        ['<Esc>'] = actions.close,
+        ['<C-v>'] = actions.file_vsplit,
+        ['<C-h>'] = actions.file_split,
+        ['<C-s>'] = actions.file_split,
+        ['<C-y>'] = actions.toggle_selection,
+        ['<C-a>'] = actions.select_all,
+        ['<M-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
+        ['<M-C-Q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<TAB>'] = actions.toggle_selection + actions.move_selection_next,
+        ['<S-TAB>'] = actions.toggle_selection + actions.move_selection_previous,
+      },
 
-        git_commits = {
-            previewer = false,
-            theme = 'dropdown',
-
-            mappings = {
-                i = {
-                    ['<CR>'] = utils.open_in_diff,
-                    ['<c-o>'] = utils.open_in_diff,
-                },
-
-                n = {
-                    ['<CR>'] = utils.open_in_diff,
-                },
-            },
-        },
-
-        buffers = {
-            ignore_current_buffer = true,
-            sort_lastused = true,
-            show_all_buffers = true,
-            previewer = false,
-            theme = 'dropdown',
-
-            mappings = {
-                i = {
-                    ['<M-C-S-H>'] = actions.delete_buffer,
-                },
-
-                n = {
-                    ['dd'] = actions.delete_buffer,
-                },
-            },
-        },
-
-        git_branches = utils.pickers.center_dropdown,
-        diagnostics = utils.pickers.center_dropdown,
-        lsp_code_actions = utils.pickers.code_actions,
-        lsp_range_code_actions = utils.pickers.code_actions,
+      n = {
+        ['<C-k>'] = actions.move_selection_previous,
+        ['<C-j>'] = actions.move_selection_next,
+        ['<C-c>'] = actions.close,
+        ['q'] = actions.close,
+        ['v'] = actions.file_vsplit,
+        ['s'] = actions.file_split,
+        ['<C-y>'] = actions.toggle_selection,
+        ['<C-a>'] = actions.select_all,
+        ['<M-q>'] = actions.smart_add_to_qflist + actions.open_qflist,
+        ['<M-C-Q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+        ['<TAB>'] = actions.toggle_selection + actions.move_selection_next,
+        ['<S-TAB>'] = actions.toggle_selection + actions.move_selection_previous,
+      },
     },
+  },
+
+  pickers = {
+    find_files = {
+      follow = true,
+      hidden = true,
+      file_ignore_patterns = { '^.git', '^.git/', '^.git/*' },
+    },
+
+    git_commits = {
+      previewer = false,
+      theme = 'dropdown',
+
+      mappings = {
+        i = {
+          ['<CR>'] = utils.open_in_diff,
+          ['<c-o>'] = utils.open_in_diff,
+        },
+
+        n = {
+          ['<CR>'] = utils.open_in_diff,
+        },
+      },
+    },
+
+    buffers = {
+      ignore_current_buffer = true,
+      sort_lastused = true,
+      show_all_buffers = true,
+      previewer = false,
+      theme = 'dropdown',
+
+      mappings = {
+        i = {
+          ['<M-C-S-H>'] = actions.delete_buffer,
+        },
+
+        n = {
+          ['dd'] = actions.delete_buffer,
+        },
+      },
+    },
+
+    git_branches = utils.pickers.center_dropdown,
+    diagnostics = utils.pickers.center_dropdown,
+    lsp_code_actions = utils.pickers.code_actions,
+    lsp_range_code_actions = utils.pickers.code_actions,
+  },
 })
 
 telescope.load_extension('fzf')
 
 require('v.utils.mappings').set_keybindings({
-    -- general
-    { 'n', '<Leader>ff', builtin.find_files },
-    { 'n', '<Leader>fr', builtin.resume },
-    { 'n', '<Leader>fp', builtin.live_grep },
-    { 'n', '<Leader>fb', builtin.buffers },
-    { 'n', '<Leader>fc', builtin.commands },
-    { 'n', '<Leader>fch', builtin.command_history },
-    { 'n', '<Leader>fj', builtin.jumplist },
+  -- general
+  { 'n', '<Leader>ff', builtin.find_files },
+  { 'n', '<Leader>fr', builtin.resume },
+  { 'n', '<Leader>fp', builtin.live_grep },
+  { 'n', '<Leader>fb', builtin.buffers },
+  { 'n', '<Leader>fc', builtin.commands },
+  { 'n', '<Leader>fch', builtin.command_history },
+  { 'n', '<Leader>fj', builtin.jumplist },
 
-    -- lsp
-    { 'n', 'gd', builtin.lsp_definitions },
-    { 'n', 'gr', builtin.lsp_references },
-    { 'n', 'gi', builtin.lsp_implementations },
-    { 'n', '<Leader>ca', builtin.lsp_code_actions },
-    { 'v', '<Leader>ca', builtin.lsp_range_code_actions },
-    {
-        'n',
-        '<Leader>fg',
-        function()
-            builtin.diagnostics({ bufnr = 0 })
-        end,
-    },
-    { 'n', '<Leader>fgw', builtin.diagnostics },
+  -- lsp
+  { 'n', 'gd', builtin.lsp_definitions },
+  { 'n', 'gr', builtin.lsp_references },
+  { 'n', 'gi', builtin.lsp_implementations },
+  { 'n', '<Leader>ca', builtin.lsp_code_actions },
+  { 'v', '<Leader>ca', builtin.lsp_range_code_actions },
+  {
+    'n',
+    '<Leader>fg',
+    function()
+      builtin.diagnostics({ bufnr = 0 })
+    end,
+  },
+  { 'n', '<Leader>fgw', builtin.diagnostics },
 
-    -- git
-    { 'n', '<Leader>gb', builtin.git_branches },
-    { 'n', '<Leader>gc', builtin.git_commits },
+  -- git
+  { 'n', '<Leader>gb', builtin.git_branches },
+  { 'n', '<Leader>gc', builtin.git_commits },
 
-    -- extensions
-    { 'n', '<Leader>fh', telescope.extensions.heading.heading },
-    {
-        'n',
-        '<Leader>fs',
-        [[<cmd>lua require('telescope').extensions['session-lens'].search_session()<cr>]],
-    },
+  -- extensions
+  { 'n', '<Leader>fh', telescope.extensions.heading.heading },
+  {
+    'n',
+    '<Leader>fs',
+    [[<cmd>lua require('telescope').extensions['session-lens'].search_session()<cr>]],
+  },
 
-    -- custom functions
-    { 'n', '<leader>fn', require('v.utils.telescope').find_nvim },
-    { 'n', '<leader>fk', require('v.utils.telescope').find_in_plugins },
-    { 'n', '<leader>fd', require('v.utils.telescope').find_dotfiles },
-    { 'n', '<leader>f/', require('v.utils.telescope').grep_last_search },
+  -- custom functions
+  { 'n', '<leader>fn', utils.find_nvim },
+  { 'n', '<leader>fk', utils.find_in_plugins },
+  { 'n', '<leader>fd', utils.find_dotfiles },
+  { 'n', '<leader>f/', utils.grep_last_search },
+  { 'n', '<leader>fu', utils.find_unimed },
+  { 'n', '<leader>fpu', utils.grep_unimed },
 })

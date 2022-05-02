@@ -46,16 +46,16 @@ require('lualine').setup({
           local dirs = utils.convert_path_to_list(str)
 
           if dirs[1] == cwd or #dirs == 1 then
-            return ''
+            return ' '
           end
 
-          local remaining = (#dirs > 2) and (dirs[1] .. '/-/') or '/'
-          return cwd .. '/' .. remaining
+          local remaining = (#dirs > 2) and (dirs[1] .. '/-/') or ''
+          return ' ' .. cwd .. '/' .. remaining
         end,
         path = 1,
         file_status = true,
         separator = { right = '' },
-        padding = { left = 1, right = 0 },
+        padding = 0,
         symbols = {
           modified = '',
           readonly = '',
@@ -67,6 +67,10 @@ require('lualine').setup({
       {
         'filename',
         fmt = function(str)
+          if str == '' then
+            return ''
+          end
+
           local cwd = utils.get_cwd()
           local nodes = utils.convert_path_to_list(str)
 
@@ -89,7 +93,11 @@ require('lualine').setup({
       {
         'filename',
         fmt = function(str)
-          return str:gsub('.+%/[^/]+%/([^/]+)$', '%1')
+          if str == '' then
+            return ''
+          end
+
+          return str:gsub('.+%/([^/]+)$', '%1')
         end,
         path = 1,
         file_status = true,

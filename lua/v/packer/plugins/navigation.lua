@@ -86,6 +86,10 @@ local M = {
         },
         keys = {
             '<leader>ff',
+            '<leader>fd',
+            '<leader>fn',
+            '<leader>fu',
+            '<leader>fpu',
             '<leader>ca',
             '<leader>fp',
             '<leader>fb',

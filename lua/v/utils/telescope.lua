@@ -39,6 +39,22 @@ M.find_dotfiles = function()
     })
 end
 
+M.find_unimed = function()
+    require('telescope.builtin').find_files({
+        cwd = os.getenv('WORK_DIR') .. '/seguros-unimed',
+        prompt_title = '~ unimed libs ~',
+        results_title = 'Unimed Files',
+    })
+end
+
+M.grep_unimed = function()
+    require('telescope.builtin').live_grep({
+        cwd = os.getenv('WORK_DIR') .. '/seguros-unimed',
+        prompt_title = '~ grep unimed ~',
+        results_title = 'Unimed',
+    })
+end
+
 M.grep_last_search = function()
     local register = vim.fn.getreg('/'):gsub('\\<', ''):gsub('\\>', '')
 
