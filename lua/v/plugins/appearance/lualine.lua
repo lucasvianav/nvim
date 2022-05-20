@@ -2,8 +2,6 @@
 ---https://github.com/akinsho/dotfiles
 ---https://github.com/NvChad/NvChad
 
--- TODO: global statusline (+ 0.7 options)
-
 local utils = require('v.utils.statusline')
 local colors = require('v.utils.highlights').colors
 local alter_color = require('v.utils.highlights').alter_color
@@ -34,6 +32,7 @@ require('lualine').setup({
     theme = bubbles_theme,
     component_separators = '',
     section_separators = { left = '', right = '' },
+    globalstatus = false,
   },
   sections = {
     lualine_a = {

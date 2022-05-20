@@ -52,7 +52,6 @@ local keybindings = {
   { key = 'dd', action = 'remove' },
   { key = 'r', action = 'rename' },
   { key = '<C-r>', action = 'full_rename' },
-  { key = '<S-r>', action = 'full_rename' },
   { key = 'xx', action = 'cut' },
   { key = 'yy', action = 'copy' },
   { key = 'p', action = 'paste' },

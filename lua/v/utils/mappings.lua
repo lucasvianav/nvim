@@ -1,5 +1,4 @@
 local t = require('v.utils.wrappers').termcode
-local fn = vim.fn
 
 -- TODO: setup whichkey registering on the fly
 -- https://github.com/folke/which-key.nvim#-setup
@@ -59,7 +58,7 @@ end
 
 ---Sets a list of keybindings.
 ---@param args KeybindingTable[] parameters to be passed to v.utils.mappings.map
----@param common_opts table<string, boolean|string> options to be appled to all keybindings. The keybinding's individual options have higher prority.
+---@param common_opts? table<string, boolean|string> options to be appled to all keybindings. The keybinding's individual options have higher prority.
 ---@see v.utils.mappings.map
 function M.set_keybindings(args, common_opts)
   for _, map_table in ipairs(args) do
