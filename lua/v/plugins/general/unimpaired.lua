@@ -2,6 +2,7 @@
 -- TODO: https://github.com/odnoletkov/dotfiles/blob/ba319018c881527149b80e23a0278afab91af228/.vim/plugin/jumpbuffer.vim
 
 local feedkeys = vim.api.nvim_feedkeys
+local t = require('v.utils.wrappers').termcode
 
 ---Adds `count` blank lines above the selection.
 ---@param count? number
@@ -13,7 +14,7 @@ local blank_up_selection = function(count)
   count = count or vim.v.count1
 
   -- saves selection positions
-  local cursor_col = vim.fn.getpos('.')[2]
+  local cursor_col = vim.fn.getpos('.')[3]
   local cursor_line = vim.fn.line('.') + vim.v.count1
   local visual_line = vim.fn.line('v') + vim.v.count1
 
@@ -38,7 +39,7 @@ local blank_down_selection = function(count)
   count = count or vim.v.count1
 
   -- saves selection positions
-  local cursor_col = vim.fn.getpos('.')[2]
+  local cursor_col = vim.fn.getpos('.')[3]
   local cursor_line = vim.fn.line('.')
   local visual_line = vim.fn.line('v')
 
@@ -64,6 +65,80 @@ local blank_around = function()
     feedkeys(('%d%c%c%cunimpairedBlankUp'):format(count, 0x80, 253, 83), 'n', false)
     feedkeys(('%d%c%c%cunimpairedBlankDown'):format(count, 0x80, 253, 83), 'n', false)
   end
+end
+
+---Last direction in which a line was duplicated.
+---@type boolean
+local dupl_dir_up
+
+---Last count of duplicated lines.
+---@type number
+local dupl_count
+
+---Duplicate a line to the specified direction.
+---@param up? boolean
+local duplicate_line = function(up)
+  if up ~= nil then
+    dupl_dir_up = up
+    dupl_count = vim.v.count1
+  elseif dupl_dir_up == nil then
+    return
+  end
+
+  local cmd = string.rep('copy ' .. (dupl_dir_up and '-1' or '+0') .. ' | ', dupl_count):gsub(
+    ' | $',
+    ''
+  )
+  vim.api.nvim_exec('silent!' .. cmd, false)
+
+  vim.fn['repeat#set'](t('<Plug>DuplicateLineRepeat'), dupl_count)
+end
+
+---Duplicate a selection to the specified direction.
+---@param up? boolean
+local duplicate_selection = function(up)
+  if up ~= nil then
+    dupl_dir_up = up
+    dupl_count = vim.v.count1
+  elseif dupl_dir_up == nil then
+    return
+  end
+
+  -- saves selection positions
+  local cursor_col = vim.fn.getpos('.')[3]
+  local cursor_line = vim.fn.line('.')
+  local visual_line = vim.fn.line('v')
+
+  local higher_line = math.min(cursor_line, visual_line)
+  local lower_line = math.max(cursor_line, visual_line)
+
+  local range = higher_line .. ',' .. lower_line
+  local length = lower_line - higher_line + 1
+
+  -- copy up
+  local i = 0
+  while i < dupl_count do
+    local cmd = range .. 'copy -1 | normal ' .. higher_line .. 'G'
+    vim.api.nvim_exec('silent! ' .. cmd, false)
+    i = i + 1
+  end
+
+  -- if the direction was not up, fix the selection
+  if not up then
+    -- leave visual mode
+    vim.api.nvim_exec('silent! normal! ' .. t('<Esc>'), false)
+
+    -- calculate the bottomost selection selection's
+    -- position (length*i is the final offset)
+    local new_visual_line = visual_line + i * length
+    local new_cursor_line = cursor_line + i * length
+
+    -- create a new selection maintaining the cursor column
+    local cmd = 'normal ' .. new_visual_line .. 'GV' .. new_cursor_line .. 'G' .. cursor_col .. '|'
+    vim.api.nvim_exec('silent! ' .. cmd, false)
+  end
+
+  vim.fn['repeat#set'](t('<Plug>DuplicateSelectionRepeat'), dupl_count)
 end
 
 -- :c
@@ -115,4 +190,36 @@ require('v.utils.mappings').set_keybindings({
   { 'n', '<M-j>', '<Plug>unimpairedMoveDown' },
   { 'x', '<M-k>', '<Plug>unimpairedMoveKeepSelectionUp' },
   { 'x', '<M-j>', '<Plug>unimpairedMoveKeepSelectionDown' },
+
+  -- [d, ]d duplicates [count] lines above/below
+  {
+    'n',
+    '[d',
+    function()
+      duplicate_line(true)
+    end,
+  },
+  {
+    'n',
+    ']d',
+    function()
+      duplicate_line(false)
+    end,
+  },
+  {
+    'x',
+    '[d',
+    function()
+      duplicate_selection(true)
+    end,
+  },
+  {
+    'x',
+    ']d',
+    function()
+      duplicate_selection(false)
+    end,
+  },
+  { 'n', '<Plug>DuplicateLineRepeat', duplicate_line },
+  { 'x', '<Plug>DuplicateSelectionRepeat', duplicate_selection },
 })
