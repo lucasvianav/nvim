@@ -300,22 +300,35 @@ local __specific_on_attach = {
 
       -- don't autosort in $WORK_DIR
       --[[
-                local work_dir = os.getenv('WORK_DIR')
-                -- sets up auto-sorting of imports if not on $WORK_DIR
-                local regexp = vim.regex('^' .. fn.escape(work_dir, '.'))
-                local cwd = fn.getcwd()
-                if fn.empty(work_dir) == 1 or not regexp:match_str(cwd) then
-                    require('v.utils.autocmds').augroup('SortImportsTS', {
-                        { 'BufWritePre', 'TSLspOrganizeSync' },
-                    }, {
-                        buffer = true,
-                    })
-                end
-            ]]
+        local work_dir = os.getenv('WORK_DIR')
+        -- sets up auto-sorting of imports if not on $WORK_DIR
+        local regexp = vim.regex('^' .. fn.escape(work_dir, '.'))
+        local cwd = fn.getcwd()
+        if fn.empty(work_dir) == 1 or not regexp:match_str(cwd) then
+            require('v.utils.autocmds').augroup('SortImportsTS', {
+                { 'BufWritePre', 'TSLspOrganizeSync' },
+            }, {
+                buffer = true,
+            })
+        end
+      ]]
 
       buf_set_keymap('n', '<leader>si', '<cmd>TSLspOrganize<CR>')
     end
     -- buf_set_keymap('n', '<leader>si', '<cmd>lua typescript_sort_imports(' .. bufnr .. ')<CR>')
+  end,
+
+  pyright = function(client, bufnr)
+    local function buf_set_keymap(...)
+      local args = { ... }
+      api.nvim_buf_set_keymap(bufnr, args[1], args[2], args[3], {
+        noremap = true,
+        silent = true,
+      })
+    end
+
+    __disable_formatting(client)
+    buf_set_keymap('n', '<leader>si', '<cmd>PyrightOrganizeImports<CR>')
   end,
 
   efm = function(client)

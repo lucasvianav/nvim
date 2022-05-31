@@ -37,7 +37,7 @@ require('v.utils').set_viml_options('nvim_tree', {
 
 local keybindings = {
   { key = { 'v', '<C-v>' }, action = 'vsplit' },
-  { key = { 's', '<C-h>', '<C-x>' }, action = 'split' },
+  { key = { 's', '<C-x>' }, action = 'split' },
   { key = { 't', '<C-t>' }, action = 'tabnew' },
   { key = { '<CR>', 'l' }, action = 'edit' },
   { key = 'h', action = 'close_node' },
