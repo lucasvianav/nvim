@@ -1,5 +1,6 @@
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/treesitter.lua
 -- https://github.com/nvim-treesitter/nvim-treesitter/commit/d78fb79ed6f3e5260db48f352d8dcbd3e82935a3
+-- TODO: https://www.reddit.com/r/neovim/comments/v3npcv/highlighting_graphql_template_strings_in_jsts/
 
 -- READ: https://www.masteringemacs.org/article/tree-sitter-complications-of-parsing-languages
 

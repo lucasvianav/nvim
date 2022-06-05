@@ -289,6 +289,12 @@ local __specific_on_attach = {
 
         -- update imports on file move
         update_imports_on_move = false,
+
+        -- inlay hints
+        auto_inlay_hints = true,
+        inlay_hints_highlight = 'Comment',
+        inlay_hints_priority = 200, -- priority of the hint extmarks
+        inlay_hints_throttle = 150, -- throttle the inlay hint request
       })
 
       ts_utils.setup_client(client)
