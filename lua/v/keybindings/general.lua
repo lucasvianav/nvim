@@ -21,6 +21,7 @@ set_keybindings({
   -- new line above or below in insert mode
   { 'i', '<C-CR>', '<C-O>o' },
   { 'i', '<S-CR>', '<C-O>O' },
+  { 'i', '<M-CR>', '<C-O>O' },
 
   -- delete word with alt + backspace
   { 'i', '<M-BS>', '<C-w>' },
