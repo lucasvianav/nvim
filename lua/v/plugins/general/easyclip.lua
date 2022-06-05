@@ -28,4 +28,8 @@ require('v.utils.mappings').set_keybindings({
   { 'n', '[p', '<Plug>EasyClipRotateYanksBackward' },
   { 'x', ']p', '<Plug>EasyClipRotateYanksForward' },
   { 'x', '[p', '<Plug>EasyClipRotateYanksBackward' },
+
+  -- restore mark mapping
+  { 'n', 'm', 'm' },
+  { 'n', 'mm', 'mm' },
 })
