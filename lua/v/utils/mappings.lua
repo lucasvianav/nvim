@@ -11,7 +11,7 @@ local M = {}
 ---@param mode string|string[] mode or list of modes (`:h map-modes`)
 ---@param lhs string keybinding
 ---@param rhs string|function action
----@param opts table<string, boolean|string> usual map options + `buffer` (`:h vim.keymap.set`)
+---@param opts? table<string, boolean|string> usual map options + `buffer` (`:h vim.keymap.set`)
 function M.map(mode, lhs, rhs, opts)
   if not lhs then
     vim.api.nvim_notify('No LHS.', vim.log.levels.ERROR, {

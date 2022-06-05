@@ -1,40 +1,3 @@
-require('v.utils').set_viml_options('nvim_tree', {
-  -- dirs/files to be highlighted
-  special_files = {
-    ['README.md'] = 1,
-    ['Makefile'] = 1,
-    ['MAKEFILE'] = 1,
-  },
-
-  -- cosmetic
-  -- indent_markers = true, -- show indentation rulers
-  git_hl = true, -- highlight files with git attributtes
-  add_trailing = true, -- trailing `/` to dir names
-  group_empty = true, -- compact empty nested directories
-  create_in_closed_folder = false, -- cursor is on a closed dir: create new file on the parent
-  root_folder_modifier = ':t', -- tail cwd
-  highlight_opened_files = true,
-
-  icons = {
-    default = '',
-    git = {
-      unstaged = '',
-      staged = '',
-      unmerged = '',
-      renamed = '',
-      untracked = '',
-      deleted = '',
-    },
-  },
-
-  show_icons = {
-    git = 1,
-    folders = 1,
-    files = 1,
-    folder_arrows = 1,
-  },
-})
-
 local keybindings = {
   { key = { 'v', '<C-v>' }, action = 'vsplit' },
   { key = { 's', '<C-x>' }, action = 'split' },
@@ -75,6 +38,7 @@ nvim_tree.setup({
   open_on_tab = false, -- opens nvimtree when on a new tab
   hijack_cursor = false, -- keep cursor at filename's start
   update_cwd = true, -- update cwd on `DirChanged`
+  create_in_closed_folder = false, -- cursor is on a closed dir: create new file on the parent
 
   -- show diagnostics in the signcol
   diagnostics = {
@@ -95,6 +59,7 @@ nvim_tree.setup({
   },
 
   view = {
+    adaptive_size = true,
     width = '13%',
     side = 'left',
     mappings = {
@@ -104,8 +69,40 @@ nvim_tree.setup({
   },
 
   renderer = {
+    group_empty = true, -- compact empty nested directories
+    add_trailing = true, -- trailing `/` to dir names
+    highlight_git = true, -- highlight files with git attributtes
+    highlight_opened_files = 'all',
+    root_folder_modifier = ':t', -- tail cwd
+
     indent_markers = {
       enable = true,
+    },
+    icons = {
+      git_placement = 'after',
+      show = {
+        git = true,
+        folder = true,
+        file = true,
+        folder_arrow = true,
+      },
+      glyphs = {
+        default = '',
+        git = {
+          unstaged = '',
+          staged = '',
+          unmerged = '',
+          renamed = '',
+          untracked = '',
+          deleted = '',
+        },
+      },
+    },
+    special_files = {
+      'MAKEFILE',
+      'Makefile',
+      'README.md',
+      'package.json',
     },
   },
 
@@ -124,9 +121,6 @@ nvim_tree.setup({
   },
 })
 
--- FIXME: ~gambiarra~ to make the following map work
-nvim_tree.toggle()
-nvim_tree.toggle()
 
 require('v.utils.mappings').map('n', '<Leader>e', require('v.utils.tree').nvim_tree_toggle)
 
