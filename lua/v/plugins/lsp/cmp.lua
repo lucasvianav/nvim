@@ -69,6 +69,7 @@ cmp.setup({
           fallback()
         end
       end,
+      c = cmp.mapping.select_next_item(),
     }),
     ['<S-Tab>'] = cmp.mapping({
       i = function(fallback)
@@ -80,6 +81,7 @@ cmp.setup({
           fallback()
         end
       end,
+      c = cmp.mapping.select_prev_item(),
     }),
   },
 
