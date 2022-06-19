@@ -12,6 +12,7 @@ M.servers = {
   'efm',
   'emmet_ls',
   'graphql',
+  'hls',
   'html',
   'jsonls',
   'pylsp',

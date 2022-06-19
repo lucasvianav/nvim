@@ -14,6 +14,7 @@ local parsers = {
   'css',
   'dockerfile',
   'graphql',
+  'haskell',
   'html',
   'javascript',
   'jsdoc',
