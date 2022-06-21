@@ -1,7 +1,7 @@
 require('v.utils.mappings').set_keybindings({
-    { 't', 'j', 'j' },
-    { 't', 'k', 'k' },
+  { 't', 'j', 'j' },
+  { 't', 'k', 'k' },
 }, {
-    nowait = true,
-    buffer = true,
+  nowait = true,
+  buffer = true,
 })
