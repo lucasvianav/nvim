@@ -265,7 +265,11 @@ local __specific_on_attach = {
     end
 
     __disable_formatting(client)
-    client.server_capabilities.renameProvider = false
+
+    local angular_project = vim.fn.filereadable(vim.loop.cwd() .. '/angular.json')
+    if not angular_project then
+      client.server_capabilities.renameProvider = false
+    end
 
     -- TODO: can I organize imports without ts-utils?
     -- https://github.com/mrjones2014/dotfiles/blob/6159bc2ddfae95af8eed57109b416c37868199a7/.config/nvim/lua/modules/lsp-utils.lua#L57-L73
