@@ -102,6 +102,7 @@ nvim_tree.setup({
       'MAKEFILE',
       'Makefile',
       'README.md',
+      '.gitignore',
       'package.json',
     },
   },
@@ -111,16 +112,15 @@ nvim_tree.setup({
 
     -- dirs/files to be ignored
     custom = {
-      '.git',
-      'node_modules',
-      '.cache',
-      '__pycache__',
-      '.DS_Store',
-      'package-lock.json',
+      '^\\.git$',
+      '^node_modules$',
+      '^\\.cache$',
+      '^__pycache__$',
+      '^.DS_Store$',
+      '^package-lock\\.json$',
     },
   },
 })
-
 
 require('v.utils.mappings').map('n', '<Leader>e', require('v.utils.tree').nvim_tree_toggle)
 
