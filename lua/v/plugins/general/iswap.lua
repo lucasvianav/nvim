@@ -4,5 +4,5 @@ require('iswap').setup({
   hl_snipe = 'Search', -- highlight group for the sniping value
   hl_selection = 'Visual', -- highlight group for the visual selection of terms
   hl_grey = 'Comment', -- highlight group for the greyed background
-  autoswap = nil,                           -- automatically swap with only two arguments
+  autoswap = nil, -- automatically swap with only two arguments
 })
