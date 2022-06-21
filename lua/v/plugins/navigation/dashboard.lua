@@ -1,26 +1,44 @@
--- TODO: https://github.com/danielnehrig/nvim/blob/master/lua/plugins/dashboard/init.lua
+local pad = require('v.utils').pad_string_right
+local db = require('dashboard')
 
-require('v.utils').set_viml_options('dashboard', {
-    disable_at_vimenter = 1, -- I open it manually
-    disable_statusline = 1,
-    default_executive = 'telescope',
+db.custom_header = require('v.utils.ascii').neovim_3
+db.custom_center = {
+  {
+    icon = pad('', 5),
+    desc = pad('Find File', 40),
+    shortcut = 'SPC f f',
+    action = 'Telescope find_files',
+  },
+  {
+    icon = pad('', 5),
+    desc = pad('Grep', 40),
+    shortcut = 'SPC f p',
+    action = 'Telescope live_grep',
+  },
+  {
+    icon = pad('', 5),
+    desc = pad('New File', 40),
+    shortcut = 'CMD ene',
+    action = 'DashboardNewFile',
+  },
+  {
+    icon = pad('', 5),
+    desc = pad('Navigate Dotfiles', 40),
+    shortcut = 'SPC f d',
+    action = function()
+      require('v.utils.telescope').find_dotfiles()
+    end,
+  },
+  {
+    icon = pad('', 5),
+    desc = pad('Navigate Neovim Settings', 40),
+    shortcut = 'SPC f n',
+    action = function()
+      require('v.utils.telescope').find_nvim()
+    end,
+  },
+}
+db.custom_footer = { '      ' }
 
-    custom_header = require('v.utils').ascii.neovim_3,
-
-    custom_section = {
-        a = {
-            description = { '  Find File                 SPC f f' },
-            command = 'Telescope find_files',
-        },
-        b = {
-            description = { '  Grep                      SPC f p' },
-            command = 'Telescope live_grep',
-        },
-        c = {
-            description = { '洛 New File                  CMD ene' },
-            command = 'DashboardNewFile',
-        },
-    },
-
-    custom_footer = { '      ' },
-})
+db.hide_statusline = true
+db.hide_tabline = true

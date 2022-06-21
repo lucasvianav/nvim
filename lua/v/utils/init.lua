@@ -4,7 +4,6 @@ local cmd = vim.api.nvim_command
 local M = {}
 
 M.colors = require('v.utils.colors')
-M.ascii = require('v.utils.ascii')
 
 -- TODO: great utilities https://github.com/JoosepAlviste/dotfiles/blob/master/config/nvim/lua/j/utils.lua
 -- TODO: https://github.com/jose-elias-alvarez/dotfiles/blob/main/.config/nvim/lua/utils.lua
@@ -159,6 +158,20 @@ end
 M.open_file_swap_extension = function(extension)
   local filename = vim.api.nvim_buf_get_name(0):gsub('%.%w+$', '')
   cmd('e ' .. filename .. '.' .. extension)
+end
+
+---Add padding to the right of a string.
+---@param str string string to be padded
+---@param len number final length (for the padded string)
+---@param char? string character to be pad the string with (default blankspace)
+M.pad_string_right = function(str, len, char)
+  if char == nil then
+    char = ' '
+  elseif #char > 1 then
+    char = char:sub(1, 1)
+  end
+
+  return str .. string.rep(char, len - #str)
 end
 
 return M
