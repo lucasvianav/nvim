@@ -31,6 +31,12 @@ local pydocstyle_ignore = {
   'D205',
   'D400',
 }
+local pycodestyle_ignore = {
+  'E203',
+}
+local flake8_ignore = {
+  'E203',
+}
 
 M.settings = {
   pylsp = {
@@ -43,15 +49,21 @@ M.settings = {
         enabled = true,
         hangClosing = false,
         maxLineLength = 160,
+        ignore = flake8_ignore,
+        addIgnore = flake8_ignore,
       },
       pyls_flake8 = {
         enabled = true,
         hangClosing = false,
         maxLineLength = 160,
+        ignore = flake8_ignore,
+        addIgnore = flake8_ignore,
       },
       pycodestyle = {
         hangClosing = false,
         maxLineLength = 160,
+        ignore = pycodestyle_ignore,
+        addIgnore = pycodestyle_ignore,
       },
       pydocstyle = {
         enabled = true,

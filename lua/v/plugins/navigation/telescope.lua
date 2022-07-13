@@ -22,6 +22,7 @@ telescope.setup({
       '%.ttf',
       '%.eot',
       '%.svg',
+      '%.woff2',
     },
 
     mappings = {
@@ -61,7 +62,19 @@ telescope.setup({
     find_files = {
       follow = true,
       hidden = true,
-      file_ignore_patterns = { '^.git', '^.git/', '^.git/*', '^./.git' },
+      file_ignore_patterns = {
+        '^.git',
+        '**/.git',
+        '^.git/',
+        '**/.git/',
+        '^.git/*',
+        '**/.git/*',
+        '^./.git',
+      },
+    },
+
+    live_grep = {
+      glob_pattern = '!package-lock.json',
     },
 
     git_commits = {
@@ -146,6 +159,7 @@ require('v.utils.mappings').set_keybindings({
   { 'n', '<leader>fd', utils.find_dotfiles },
   { 'n', '<leader>f/', utils.grep_last_search },
   { 'n', '<leader>fu', utils.find_unimed },
+  { 'n', '<leader>fw', utils.find_work },
   { 'n', '<leader>fpu', utils.grep_unimed },
 
   -- code actions

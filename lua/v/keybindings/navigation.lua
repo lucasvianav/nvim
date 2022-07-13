@@ -26,4 +26,13 @@ set_keybindings({
 
   -- ignore trailing whitespaces when going to end of line
   { 'n', '$', 'g_' },
+
+  -- open document for current daily
+  {
+    'n',
+    '<leader>d',
+    function()
+      require('v.utils.dailies').open_curr(vim.v.count)
+    end,
+  },
 })

@@ -18,4 +18,7 @@ require('v.utils.commands').set_commands({
   -- wrappers
   { 'P', 'lua require("v.utils.wrappers").inspect(<args>)', { nargs = 1 } },
   { 'R', 'lua require("v.utils").reload_or_source_current()' },
+
+  -- open document for current daily
+  { 'D', 'lua require("v.utils.dailies").open_curr(<count>)', { count = true } },
 })

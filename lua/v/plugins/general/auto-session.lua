@@ -37,6 +37,5 @@ require('auto-session').setup({
     'startify',
     'terminal',
     'text',
-    'text',
   },
 })

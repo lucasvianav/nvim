@@ -39,6 +39,14 @@ M.find_dotfiles = function()
   })
 end
 
+M.find_work = function()
+  require('telescope.builtin').find_files({
+    cwd = os.getenv('WORK_DIR'),
+    prompt_title = '~ work ~',
+    results_title = 'Work Files',
+  })
+end
+
 M.find_unimed = function()
   require('telescope.builtin').find_files({
     cwd = os.getenv('WORK_DIR') .. '/seguros-unimed',

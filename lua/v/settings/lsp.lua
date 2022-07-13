@@ -3,7 +3,6 @@ local M = {}
 ---Language servers to keep installed
 M.servers = {
   'angularls',
-  'arduino_language_server',
   'bashls',
   'clangd',
   'cssls',
@@ -12,7 +11,6 @@ M.servers = {
   'efm',
   'emmet_ls',
   'graphql',
-  'hls',
   'html',
   'jsonls',
   'pylsp',

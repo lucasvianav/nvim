@@ -295,7 +295,7 @@ local __specific_on_attach = {
         update_imports_on_move = false,
 
         -- inlay hints
-        auto_inlay_hints = true,
+        auto_inlay_hints = false,
         inlay_hints_highlight = 'Comment',
         inlay_hints_priority = 200, -- priority of the hint extmarks
         inlay_hints_throttle = 150, -- throttle the inlay hint request
