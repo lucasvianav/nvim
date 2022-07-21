@@ -205,7 +205,7 @@ local M = {
   {
     'iamcco/markdown-preview.nvim',
     ft = 'markdown',
-    run = 'cd app && npm install',
+    run = 'npm install && cd app && npm install',
   },
 
   -- project-wide search and replace

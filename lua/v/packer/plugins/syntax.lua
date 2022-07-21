@@ -10,6 +10,7 @@ local M = {
   { 'Vimjas/vim-python-pep8-indent', ft = 'python' }, -- better indenting in python
   { 'mboughaba/i3config.vim', ft = 'i3config' }, -- i3wm cofig file
 
+  -- TODO: https://github.com/jose-elias-alvarez/typescript.nvim
   { 'jose-elias-alvarez/nvim-lsp-ts-utils', ft = 'typescript' }, -- TypeScript utilities
 
   -- code parsing for syntax highlighting, etc

@@ -20,6 +20,7 @@ M.servers = {
   'sumneko_lua',
   'tsserver',
   'vimls',
+  'yamlls',
 }
 
 ---General diagnostics settings
