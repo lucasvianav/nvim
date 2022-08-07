@@ -41,7 +41,7 @@ M.post_colorscheme_hook = function()
     { 'FloatBorder', { transparent = true } },
     { 'Folded', { transparent = true } },
     { 'BufferLineFill', { transparent = true } },
-    { 'TabLine', {  transparent = true , fg = colors.cyan_grey } },
+    { 'TabLine', { transparent = true, fg = colors.cyan_grey } },
     { 'TabLineFill', { transparent = true } },
     {
       'TabLineSel',

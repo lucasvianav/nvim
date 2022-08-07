@@ -11,12 +11,14 @@ vim.api.nvim_command('setlocal spell')
 
 require('v.utils.mappings').set_keybindings({
   { 'i', '<C-i>', '<C-c>xsiw*lf*a' },
+  { 'i', '<C-m>', '<C-c>xsiw`lf`a' },
   { 'i', '<C-b>', '<C-c>xsiw*l.l2f*a' },
-  { 'i', '<C-S-i>', '<C-c>xsiW*lf*a' },
-  { 'i', '<C-S-b>', '<C-c>xsiW*l.l2f*a' },
+  { 'i', '<M-i>', '<C-c>xsiW*lf*a' },
+  { 'i', '<M-m>', '<C-c>xsiW`lf`a' },
+  { 'i', '<M-b>', '<C-c>xsiW*l.l2f*a' },
   { 'v', '<C-i>', 'S*' },
   { 'v', '<C-b>', 'S*gvS*' },
 }, {
   buffer = true,
-  noremap = false,
+  remap = true,
 })

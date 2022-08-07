@@ -1,6 +1,6 @@
 local M = {}
 
-M.daily_time = 11
+M.daily_time = 12
 
 ---Open the Markdown document for a daily report inside $WORK_DIR.
 ---@param count? number how many days ago the document should be read from
@@ -57,7 +57,7 @@ M.open_curr = function(count)
     }
     vim.api.nvim_buf_set_lines(0, 0, #report_template, false, report_template)
     vim.api.nvim_win_set_cursor(0, { 5, 1 })
-    vim.api.nvim_command('noautocmd w')
+    vim.api.nvim_command('noautocmd w!')
   end
 end
 
