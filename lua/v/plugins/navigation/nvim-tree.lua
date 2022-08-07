@@ -132,20 +132,21 @@ hl_utils.set_highlights({
   {
     'NvimTreeRootFolder',
     {
-      gui = { 'bold', 'italic' },
-      guifg = colors.off_white,
+      bold = true,
+      italic = true,
+      fg = colors.off_white,
     },
   },
-  { 'Directory', { gui = 'bold' } },
+  { 'Directory', { bold = true } },
   {
     'NvimTreeGitDirty',
-    { guifg = alter_color(colors.blue_light, -10) },
+    { fg = alter_color(colors.blue_light, -10) },
   },
   {
     'NvimTreeOpenedFolderName',
     {
       gui = { 'bold', 'italic' },
-      guifg = alter_color(colors.yellow, -10),
+      fg = alter_color(colors.yellow, -10),
     },
   },
 })

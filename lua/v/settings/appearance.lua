@@ -35,19 +35,19 @@ M.colorscheme = 'tokyonight'
 --- function to be ran after a colorscheme is applied
 M.post_colorscheme_hook = function()
   require('v.utils.highlights').set_highlights({
-    -- { 'CursorLine', { guibg = colors.cyan_grey_dark } },
-    -- { 'ColorColumn', { guibg = colors.cyan_grey_dark } },
-    { 'NormalFloat', { link = 'Normal', bang = true } },
-    { 'FloatBorder', { 'transparent' } },
-    { 'Folded', { 'transparent' } },
-    { 'BufferLineFill', { 'transparent' } },
-    { 'TabLine', { 'transparent', guifg = colors.cyan_grey } },
-    { 'TabLineFill', { 'transparent' } },
+    -- { 'CursorLine', { bg = colors.cyan_grey_dark } },
+    -- { 'ColorColumn', { bg = colors.cyan_grey_dark } },
+    { 'NormalFloat', { link = 'Normal' } },
+    { 'FloatBorder', { transparent = true } },
+    { 'Folded', { transparent = true } },
+    { 'BufferLineFill', { transparent = true } },
+    { 'TabLine', {  transparent = true , fg = colors.cyan_grey } },
+    { 'TabLineFill', { transparent = true } },
     {
       'TabLineSel',
       {
-        guibg = colors.grey_dark,
-        guifg = colors.off_white,
+        bg = colors.grey_dark,
+        fg = colors.off_white,
       },
     },
   })
