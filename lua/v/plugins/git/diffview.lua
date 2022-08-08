@@ -1,7 +1,4 @@
--- TODO: write function to diff between current branch and another one
--- maybe get name from input? origin's default branch?
-
-local cb = require('diffview.config').diffview_callback
+local actions = require('diffview.actions')
 
 require('diffview').setup({
   diff_binaries = false,
@@ -31,12 +28,22 @@ require('diffview').setup({
       height = 16,
     },
     log_options = {
-      max_count = 256, -- Limit the number of commits
-      follow = false, -- Follow renames (only for single file)
-      all = false, -- Include all refs under 'refs/' including HEAD
-      merges = false, -- List only merge commits
-      no_merges = false, -- List no merge commits
-      reverse = false, -- List commits in reverse order
+      single_files = {
+        max_count = 256, -- Limit the number of commits
+        follow = true, -- Follow renames (only for single file)
+        all = false, -- Include all refs under 'refs/' including HEAD
+        merges = false, -- List only merge commits
+        no_merges = true, -- List no merge commits
+        reverse = false, -- List commits in reverse order
+      },
+      multi_files = {
+        max_count = 256,
+        follow = false,
+        all = false,
+        merges = false,
+        no_merges = true,
+        reverse = false,
+      },
     },
   },
 
@@ -44,64 +51,64 @@ require('diffview').setup({
     disable_defaults = true,
 
     view = {
-      ['<tab>'] = cb('select_next_entry'),
-      ['<s-tab>'] = cb('select_prev_entry'),
-      ['gf'] = cb('goto_file'),
-      ['<C-w><C-f>'] = cb('goto_file_split'),
-      ['<C-w>f'] = cb('goto_file_split'),
-      ['<C-w>gf'] = cb('goto_file_tab'),
-      ['<leader>e'] = cb('focus_files'),
-      ['<leader>b'] = cb('toggle_files'),
+      ['<tab>'] = actions.select_next_entry,
+      ['<s-tab>'] = actions.select_prev_entry,
+      ['gf'] = actions.goto_file,
+      ['<C-w><C-f>'] = actions.goto_file_split,
+      ['<C-w>f'] = actions.goto_file_split,
+      ['<C-w>gf'] = actions.goto_file_tab,
+      ['<leader>e'] = actions.focus_files,
+      ['<leader>b'] = actions.toggle_files,
     },
 
     file_panel = {
-      ['j'] = cb('next_entry'),
-      ['k'] = cb('prev_entry'),
-      ['<cr>'] = cb('select_entry'),
-      ['l'] = cb('select_entry'),
-      ['<2-LeftMouse>'] = cb('select_entry'),
-      ['-'] = cb('toggle_stage_entry'),
-      ['s'] = cb('toggle_stage_entry'),
-      ['S'] = cb('stage_all'),
-      ['U'] = cb('unstage_all'),
-      ['X'] = cb('restore_entry'),
-      ['R'] = cb('refresh_files'),
-      ['<tab>'] = cb('select_next_entry'),
-      ['<s-tab>'] = cb('select_prev_entry'),
-      ['gf'] = cb('goto_file'),
-      ['<C-w><C-f>'] = cb('goto_file_split'),
-      ['<C-w>f'] = cb('goto_file_split'),
-      ['<C-w>gf'] = cb('goto_file_tab'),
-      ['i'] = cb('listing_style'), -- toggle between 'list' and 'tree' views
-      ['f'] = cb('toggle_flatten_dirs'),
-      ['<leader>e'] = cb('focus_files'),
-      ['<leader>b'] = cb('toggle_files'),
+      ['j'] = actions.next_entry,
+      ['k'] = actions.prev_entry,
+      ['<cr>'] = actions.select_entry,
+      ['l'] = actions.select_entry,
+      ['<2-LeftMouse>'] = actions.select_entry,
+      ['-'] = actions.toggle_stage_entry,
+      ['s'] = actions.toggle_stage_entry,
+      ['S'] = actions.stage_all,
+      ['U'] = actions.unstage_all,
+      ['X'] = actions.restore_entry,
+      ['R'] = actions.refresh_files,
+      ['<tab>'] = actions.select_next_entry,
+      ['<s-tab>'] = actions.select_prev_entry,
+      ['gf'] = actions.goto_file,
+      ['<C-w><C-f>'] = actions.goto_file_split,
+      ['<C-w>f'] = actions.goto_file_split,
+      ['<C-w>gf'] = actions.goto_file_tab,
+      ['i'] = actions.listing_style, -- toggle between 'list' and 'tree' views
+      ['f'] = actions.toggle_flatten_dirs,
+      ['<leader>e'] = actions.focus_files,
+      ['<leader>b'] = actions.toggle_files,
     },
 
     file_history_panel = {
-      ['g!'] = cb('options'),
-      ['<C-A-d>'] = cb('open_in_diffview'),
-      ['y'] = cb('copy_hash'),
-      ['zR'] = cb('open_all_folds'),
-      ['zM'] = cb('close_all_folds'),
-      ['j'] = cb('next_entry'),
-      ['k'] = cb('prev_entry'),
-      ['<cr>'] = cb('select_entry'),
-      ['l'] = cb('select_entry'),
-      ['<2-LeftMouse>'] = cb('select_entry'),
-      ['<tab>'] = cb('select_next_entry'),
-      ['<s-tab>'] = cb('select_prev_entry'),
-      ['gf'] = cb('goto_file'),
-      ['<C-w><C-f>'] = cb('goto_file_split'),
-      ['<C-w>f'] = cb('goto_file_split'),
-      ['<C-w>gf'] = cb('goto_file_tab'),
-      ['<leader>e'] = cb('focus_files'),
-      ['<leader>b'] = cb('toggle_files'),
+      ['g!'] = actions.options,
+      ['<C-A-d>'] = actions.open_in_diffview,
+      ['y'] = actions.copy_hash,
+      ['zR'] = actions.open_all_folds,
+      ['zM'] = actions.close_all_folds,
+      ['j'] = actions.next_entry,
+      ['k'] = actions.prev_entry,
+      ['<cr>'] = actions.select_entry,
+      ['l'] = actions.select_entry,
+      ['<2-LeftMouse>'] = actions.select_entry,
+      ['<tab>'] = actions.select_next_entry,
+      ['<s-tab>'] = actions.select_prev_entry,
+      ['gf'] = actions.goto_file,
+      ['<C-w><C-f>'] = actions.goto_file_split,
+      ['<C-w>f'] = actions.goto_file_split,
+      ['<C-w>gf'] = actions.goto_file_tab,
+      ['<leader>e'] = actions.focus_files,
+      ['<leader>b'] = actions.toggle_files,
     },
 
     option_panel = {
-      ['<tab>'] = cb('select'),
-      ['q'] = cb('close'),
+      ['<tab>'] = actions.select_entry,
+      ['q'] = actions.close,
     },
   },
 })

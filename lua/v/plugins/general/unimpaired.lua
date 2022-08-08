@@ -85,10 +85,8 @@ local duplicate_line = function(up)
     return
   end
 
-  local cmd = string.rep('copy ' .. (dupl_dir_up and '-1' or '+0') .. ' | ', dupl_count):gsub(
-    ' | $',
-    ''
-  )
+  local cmd =
+    string.rep('copy ' .. (dupl_dir_up and '-1' or '+0') .. ' | ', dupl_count):gsub(' | $', '')
   vim.api.nvim_exec('silent!' .. cmd, false)
 
   vim.fn['repeat#set'](t('<Plug>DuplicateLineRepeat'), dupl_count)

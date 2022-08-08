@@ -71,14 +71,12 @@ function M.reload(module)
 end
 
 ---Returns a function to require files inside `dir`.
+---@param dir string
+---@return function
 function M.get_require_submodule(dir)
-  if not dir then
-    return nil
-  end
-
-  ---Requires `file` inside `dir`.
   return function(file)
-    return require(dir .. '.' .. file)
+    local _, output = pcall(require, dir .. '.' .. file)
+    return output
   end
 end
 

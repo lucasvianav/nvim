@@ -4,7 +4,7 @@ M.colors = require('v.utils.colors')
 
 ---Wrapper for defining highlights like with `:highlight`
 ---@param groups string|string[] the highlighting groups' names
----@param tbl table<string,string> the highlighting modifications
+---@param tbl table<string,any> the highlighting modifications
 ---@return nil
 M.highlight = function(groups, tbl)
   if type(groups) == 'string' then
@@ -23,56 +23,15 @@ M.highlight = function(groups, tbl)
     return
   end
 
-  if tbl.link then
-    for _, group in ipairs(groups) do
-      vim.highlight.link(group, tbl.link, tbl.bang)
-    end
-    return
+  if tbl.transparent then
+    tbl.ctermbg = 'NONE'
+    tbl.bg = 'NONE'
+    tbl.transparent = nil
   end
 
-  for pos, value in ipairs(tbl) do
-    if value == 'transparent' then
-      tbl.ctermbg = 'NONE'
-      tbl.guibg = 'NONE'
-    end
-
-    tbl[pos] = nil
-  end
-
-  if type(tbl.gui) == 'table' then
-    tbl.gui = table.concat(tbl.gui, ',')
-  end
-
-  if type(tbl.cterm) == 'table' then
-    tbl.cterm = table.concat(tbl.cterm, ',')
-  end
-
-  local unlink = tbl.unlink
-  tbl.unlink = nil
-
-  -- TODO: swap for nvim_set_hl, nvim_buf_add_highlight
   for _, group in ipairs(groups) do
-    if unlink then
-      vim.highlight.link(group, 'NONE', true)
-    end
-    if tbl then
-      vim.highlight.create(group, tbl)
-    end
+    vim.api.nvim_set_hl(0, group, tbl)
   end
-
-  --[[ version using `:hi!`
-        local cmd = 'hi! ' .. group
-
-        for key, value in pairs(tbl) do
-            if type(key) == 'string' and value and type(value) == 'string' then
-                cmd = ('%s %s=%s'):format(cmd, key, value)
-            elseif value == 'transparent' then
-                cmd = cmd .. 'ctermbg=NONE guibg=NONE'
-            end
-        end
-
-        vim.api.nvim_command(cmd)
-    ]]
 end
 
 ---@class HighlightTable

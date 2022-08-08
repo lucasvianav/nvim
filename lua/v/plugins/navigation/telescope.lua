@@ -127,6 +127,7 @@ require('v.utils.mappings').set_keybindings({
   { 'n', '<Leader>fc', builtin.commands },
   { 'n', '<Leader>fch', builtin.command_history },
   { 'n', '<Leader>fj', builtin.jumplist },
+  { 'n', 'z=', builtin.spell_suggest },
 
   -- lsp
   { 'n', 'gd', builtin.lsp_definitions },
