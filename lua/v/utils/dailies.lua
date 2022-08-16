@@ -8,7 +8,7 @@ M.daily_time = 12
 ---@return osdate
 local get_report_days = function(count)
   local today = os.date('*t')
-  local post_daily = today.hour > M.daily_time
+  local post_daily = today.hour >= M.daily_time
   local offset = (post_daily and 1 or 0) - count
 
   local weekend = (today.wday == 2 and not post_daily) and 2 or 0
@@ -21,7 +21,7 @@ local get_report_days = function(count)
     })
   )
 
-  weekend = today.wday == 6 and 2 or 0
+  weekend = (today.wday == 6 and post_daily) and 2 or 0
   local second_day = os.date(
     '*t',
     os.time({
