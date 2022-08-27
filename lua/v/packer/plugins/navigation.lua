@@ -17,6 +17,9 @@ local M = {
       '<C-k>',
       '<C-l>',
     },
+    cond = function()
+      return vim.env.TMUX ~= nil
+    end,
   },
 
   -- nerdtree-like file explorer
@@ -68,6 +71,9 @@ local M = {
       '<Leader>tc',
       '<Leader>tt',
     },
+    cond = function()
+      return vim.env.TMUX ~= nil
+    end,
   },
 
   -- fuzzy finder for lots of stuff

@@ -230,6 +230,12 @@ local M = {
       { 'v', 'X' },
     },
   },
+
+  {
+    'untitled-ai/jupyter_ascending.vim',
+    event = 'BufEnter *.sync.py',
+    disable = true,
+  },
 }
 
 return M

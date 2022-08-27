@@ -5,6 +5,7 @@ require('auto-session').setup({
   auto_restore_enabled = false,
   pre_save_cmds = { 'silent! tabdo NvimTreeClose' },
   auto_session_allowed_dirs = nil,
+  log_level = 'error',
 
   -- fix Neovim height after it is started, so
   -- cmdheight isn't super large (#64) (#11330)

@@ -90,6 +90,13 @@ local M = {
       'cpp',
     },
   },
+
+  -- enable navigation of jupyter notebook files
+  {
+    'goerz/jupytext.vim',
+    event = 'BufAdd,BufEnter *.ipynb',
+    disable = true,
+  },
 }
 
 return M
