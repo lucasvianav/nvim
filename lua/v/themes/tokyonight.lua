@@ -1,14 +1,15 @@
-require('v.utils').set_viml_options('tokyonight', {
-  style = 'storm',
-  italic_coments = true,
-  italic_keywords = true,
-  italic_variables = false,
-  italic_functions = false,
+require('tokyonight').setup({
+  style = 'storm', -- storm, moon, night
   transparent = false,
-  transparent_sidebar = false,
-  hide_inactive_statusline = true,
-  dark_sidebar = true,
-  dark_float = true,
+  terminal_colors = true,
+  styles = {
+    comments = { italic = true },
+    keywords = { italic = true },
+    functions = { italic = false },
+    variables = { italic = false },
+    sidebars = 'dark', -- dark, transparent, normal
+    floats = 'dark', -- dark, transparent, normal
+  },
   sidebars = {
     'qf',
     'NvimTree',
@@ -17,4 +18,7 @@ require('v.utils').set_viml_options('tokyonight', {
     'packer',
     'spectre_panel',
   },
+  hide_inactive_statusline = false,
+  dim_inactive = false,
+  lualine_bold = false,
 })

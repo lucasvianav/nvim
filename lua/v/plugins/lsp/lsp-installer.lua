@@ -23,7 +23,7 @@ for _, server in ipairs(utils.servers) do
 
     local luadev_loaded, luadev = pcall(require, 'lua-dev')
     if luadev_loaded then
-      config = luadev.setup({ lspconfig = config })
+      config = luadev.setup({})
     end
   end
 
