@@ -69,6 +69,7 @@ local M = {
       ']%',
       'z%',
     },
+    after = 'nvim-treesitter',
   },
 
   -- pairs of handy bracket maps

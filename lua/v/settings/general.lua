@@ -21,6 +21,7 @@ o.fileencoding = 'UTF-8' -- the encoding written to file
 o.foldmethod = 'indent' -- faster
 o.foldminlines = 1 -- enable folding 2+ lines
 o.foldnestmax = 4 -- fold 4 nested indent levels at most
+o.foldlevelstart = 1 -- starting folding when opening new file
 o.foldignore = '' -- don't ignore any lines in folding
 o.hidden = true -- switch unsaved buffers
 o.ignorecase = true -- case insensitive search
@@ -118,10 +119,8 @@ o.path:append({
 -- what to save in a session
 o.sessionoptions = {
   'curdir', -- cwd
-  -- 'blank',    -- empty windows
   'help', -- help window
   'winsize', -- window sizes
-  -- 'buffers',  -- hidden buffers
   'tabpages', -- tabpages (welp)
   'winpos', -- Neovim window's position
   'folds', -- folding state

@@ -16,11 +16,9 @@ local M = {
   -- code parsing for syntax highlighting, etc
   {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    event = {
-      'CursorHold',
-      'CursorMoved',
-    },
+    run = function()
+      require('nvim-treesitter.install').update({ with_sync = true })
+    end,
   },
 
   -- highlight urls
@@ -41,6 +39,7 @@ local M = {
       'html',
     },
     after = 'nvim-treesitter',
+    disable = true,
   },
 
   -- JSON

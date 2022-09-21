@@ -1,6 +1,7 @@
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/plugins/treesitter.lua
 -- https://github.com/nvim-treesitter/nvim-treesitter/commit/d78fb79ed6f3e5260db48f352d8dcbd3e82935a3
 -- TODO: https://www.reddit.com/r/neovim/comments/v3npcv/highlighting_graphql_template_strings_in_jsts/
+-- TODO: https://github.com/nvim-treesitter/nvim-treesitter-context
 
 -- READ: https://www.masteringemacs.org/article/tree-sitter-complications-of-parsing-languages
 
@@ -22,6 +23,7 @@ local parsers = {
   'jsonc',
   'lua',
   'markdown',
+  'prisma',
   'python',
   'scss',
   'tsx',
@@ -40,7 +42,10 @@ treesitter.setup({
   autopairs = enable,
   autotag = enable,
   indent = disable,
-  matchup = enable,
+  matchup = {
+    enable = true,
+    include_match_words = true,
+  },
 
   highlight = {
     enable = true,

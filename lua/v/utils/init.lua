@@ -101,7 +101,7 @@ end
 
 ---Uses Plenary to get a relative path to `filepath` from the cwd.
 ---@param filepath string
----@return string
+---@return string|nil
 function M.get_relative_path(filepath)
   local is_plenary_loaded, plenary = pcall(require, 'plenary.path')
 
@@ -110,6 +110,8 @@ function M.get_relative_path(filepath)
     local relative_path = plenary:new(parsed_path):make_relative(vim.fn.getcwd())
     return './' .. relative_path
   end
+
+  return nil
 end
 
 ---Executes the current line in VimL or Lua
@@ -120,7 +122,7 @@ M.exec_line_or_make = function()
   if vim.tbl_contains({ 'c', 'cpp' }, filetype) then
     vim.api.nvim_command('make')
     return
-  elseif not vim.tbl_contains({ 'lua', 'vim' }, filetype) then
+  elseif not vim.tbl_contains({ 'lua', 'vim'}, filetype) then
     return
   end
 

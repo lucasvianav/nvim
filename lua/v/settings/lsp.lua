@@ -13,6 +13,7 @@ M.servers = {
   'graphql',
   'html',
   'jsonls',
+  'prismals',
   'pylsp',
   'pyright',
   'sqlls',

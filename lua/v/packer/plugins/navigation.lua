@@ -99,6 +99,7 @@ local M = {
       '<leader>ca',
       '<leader>fp',
       '<leader>fb',
+      '<leader>fw',
       'gd',
       'gr',
       'gi',

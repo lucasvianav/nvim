@@ -1,6 +1,7 @@
 local M = {}
 
-M.daily_time = 12
+M.daily_hour = 16
+M.daily_minutes = 45
 
 ---Parse the days to be used in a daily report.
 ---@param count number
@@ -8,7 +9,8 @@ M.daily_time = 12
 ---@return osdate
 local get_report_days = function(count)
   local today = os.date('*t')
-  local post_daily = today.hour >= M.daily_time
+  local post_daily = (today.hour == M.daily_hour and today.min >= M.daily_minutes)
+    or today.hour > M.daily_hour
   local offset = (post_daily and 1 or 0) - count
 
   local weekend = (today.wday == 2 and not post_daily) and 2 or 0
@@ -51,7 +53,6 @@ local write_report_template_to_file = function(first_day, second_day)
   }
   vim.api.nvim_buf_set_lines(0, 0, #report_template, false, report_template)
   vim.api.nvim_win_set_cursor(0, { 5, 1 })
-  vim.api.nvim_command('noautocmd w!')
 end
 
 ---Open the Markdown document for a daily report inside $WORK_DIR.
