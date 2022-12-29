@@ -209,6 +209,11 @@ local M = {
     run = 'npm install && cd app && npm install',
   },
 
+  {
+    'frabjous/knap',
+    ft = { 'markdown', 'tex', 'plaintex' },
+  },
+
   -- project-wide search and replace
   -- DEPENDENCY: RG, sed
   {

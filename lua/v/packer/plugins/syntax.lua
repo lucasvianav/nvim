@@ -4,7 +4,7 @@
 local M = {
   { 'dkarter/bullets.vim', ft = 'markdown' }, -- markdown lists
   { 'fladson/vim-kitty', ft = { 'kitty' } }, -- kitty config
-  { 'lervag/vimtex', ft = { 'tex', 'plaintex' } }, -- LaTeX
+  { 'lervag/vimtex', ft = { 'tex', 'plaintex' }, disable = true }, -- LaTeX
   { 'tpope/vim-sleuth', event = 'CursorHold' }, -- autodetect indent
   { 'vuki656/package-info.nvim', ft = 'json' }, -- package.json
   { 'Vimjas/vim-python-pep8-indent', ft = 'python' }, -- better indenting in python

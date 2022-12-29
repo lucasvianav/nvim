@@ -21,6 +21,7 @@ local parsers = {
   'jsdoc',
   'json',
   'jsonc',
+  'latex',
   'lua',
   'markdown',
   'prisma',
