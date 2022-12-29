@@ -1,7 +1,7 @@
 local M = {}
 
-M.daily_hour = 16
-M.daily_minutes = 45
+M.daily_hour = 10
+M.daily_minutes = 30
 
 ---Parse the days to be used in a daily report.
 ---@param count number
@@ -10,7 +10,7 @@ M.daily_minutes = 45
 local get_report_days = function(count)
   local today = os.date('*t')
   local post_daily = (today.hour == M.daily_hour and today.min >= M.daily_minutes)
-    or today.hour > M.daily_hour
+      or today.hour > M.daily_hour
   local offset = (post_daily and 1 or 0) - count
 
   local weekend = (today.wday == 2 and not post_daily) and 2 or 0

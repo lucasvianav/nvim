@@ -50,6 +50,10 @@ M.settings = {
         fileMatch = { '.clasp.json' },
         url = 'http://json.schemastore.org/clasp',
       },
+      {
+        fileMatch = { '/.github/workflows/*' },
+        url = 'https://json.schemastore.org/github-workflow.json',
+      },
     },
   },
 }

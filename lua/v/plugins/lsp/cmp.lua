@@ -91,7 +91,7 @@ cmp.setup({
     { name = 'ultisnips' },
     { name = 'path' },
     { name = 'spell' },
-    { name = 'cmdline' },
+    -- { name = 'cmdline' },
     { name = 'buffer', keyword_length = 5 },
     { name = 'calc' },
   }),
@@ -156,19 +156,14 @@ else
   )
 end
 
-local __search_sources = {
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = 'nvim_lsp_document_symbol' },
   }, {
     { name = 'buffer' },
   }),
-}
-
--- use buffer source for `?`
-cmp.setup.cmdline('?', __search_sources)
-
--- use buffer source for `/`
-cmp.setup.cmdline('/', __search_sources)
+})
 
 -- use cmdline and path source for ':'
 cmp.setup.cmdline(':', {

@@ -21,6 +21,7 @@ require('v.utils.mappings').set_keybindings({
   { 'n', '<leader>cf', '<plug>EasyClipToggleFormattedPaste' },
 
   -- paste in insert mode
+  { 'i', '<m-v>', '<c-v>' },
   { 'i', '<c-v>', '<plug>EasyClipInsertModePaste' },
 
   -- navigate through the yank ring

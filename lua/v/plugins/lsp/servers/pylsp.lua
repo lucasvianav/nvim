@@ -36,6 +36,8 @@ local pycodestyle_ignore = {
 }
 local flake8_ignore = {
   'E203',
+  'F401',
+  'F841',
 }
 
 M.settings = {

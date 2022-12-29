@@ -118,7 +118,7 @@ local mypy = {
 
 -- linter for python
 local flake8 = {
-  lintCommand = "flake8 --max-line-length 80 --ignore E203 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
+  lintCommand = "flake8 --max-line-length 80 --ignore E203,F841 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
   lintStdin = true,
   lintIgnoreExitCode = true,
   lintFormats = { '%f:%l:%c: %t%n%n%n %m' },

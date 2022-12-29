@@ -7,7 +7,7 @@ local M = {}
 ---Wrapper for defining commands with `:command`
 ---@param lhs string the command's name
 ---@param rhs string the command's action
----@param opts table<string,string|number|boolean> the command's attributes (see `:h :command`)
+---@param opts? table<string,string|number|boolean> the command's attributes (see `:h :command`)
 ---@return nil
 ---
 ---opts.def_bang is an custom boolean option (default `true`) that specifies if

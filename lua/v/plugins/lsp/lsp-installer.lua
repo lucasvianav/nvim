@@ -25,6 +25,8 @@ for _, server in ipairs(utils.servers) do
     if luadev_loaded then
       config = luadev.setup({})
     end
+  elseif server == 'clangd' then
+    config.capabilities.offsetEncoding = 'utf-8'
   end
 
   require('lspconfig')[server].setup(config)
