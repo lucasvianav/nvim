@@ -464,14 +464,9 @@ end
 function M.make_config(config)
   local capabilities = lsp.protocol.make_client_capabilities()
 
-  local has_coq, coq = pcall(require, 'coq')
-  if has_coq then
-    capabilities = coq.lsp_ensure_capabilities(capabilities)
-  end
-
   local has_cmp, cmp = pcall(require, 'cmp_nvim_lsp')
   if has_cmp then
-    capabilities = cmp.update_capabilities(capabilities)
+    capabilities = cmp.default_capabilities()
   end
 
   config = vim.tbl_deep_extend('keep', config or {}, {

@@ -6,7 +6,9 @@ require('dressing').setup({
     insert_only = false,
     border = 'rounded',
     relative = 'cursor',
-    winblend = 4,
+    win_options = {
+      winblend = 4,
+    },
   },
 
   select = {
@@ -16,7 +18,9 @@ require('dressing').setup({
     builtin = {
       border = 'rounded',
       relative = 'editor',
-      winblend = 10,
+      win_options = {
+        winblend = 10,
+      },
     },
   },
 })

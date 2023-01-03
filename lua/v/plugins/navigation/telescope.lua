@@ -165,17 +165,10 @@ require('v.utils.mappings').set_keybindings({
 
   -- code actions
   {
-    'n',
+    { 'n', 'v' },
     '<Leader>ca',
     function()
       vim.lsp.buf.code_action()
-    end,
-  },
-  {
-    'v',
-    '<Leader>ca',
-    function()
-      vim.lsp.buf.range_code_action()
     end,
   },
 })

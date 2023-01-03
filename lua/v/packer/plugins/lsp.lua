@@ -6,7 +6,7 @@ local M = {
 
   -- TODO: consider swapping for L3MON4D3/LuaSnip
   { 'SirVer/ultisnips', event = 'InsertEnter' }, -- cool snippet engine
-  { 'folke/lua-dev.nvim', ft = 'lua', as = 'lua-dev' }, -- setup LSP for lua-nvim dev
+  { 'folke/neodev.nvim', ft = 'lua', as = 'neodev' }, -- setup LSP for lua-nvim dev
   { 'kosayoda/nvim-lightbulb', event = 'CursorHold' }, -- indicates code actions
   { 'nanotee/sqls.nvim', ft = 'sql' }, -- sql commands and code actions
 

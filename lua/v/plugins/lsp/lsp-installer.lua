@@ -18,12 +18,21 @@ for _, server in ipairs(utils.servers) do
   if server == 'sumneko_lua' then
     local is_packer_loaded, packer = require('v.utils.packer').get_packer()
     if is_packer_loaded then
-      packer.loader('lua-dev')
+      packer.loader('neodev')
     end
 
-    local luadev_loaded, luadev = pcall(require, 'lua-dev')
-    if luadev_loaded then
-      config = luadev.setup({})
+    local neodev_loaded, neodev = pcall(require, 'neodev')
+    if neodev_loaded then
+      neodev.setup({})
+      config = {
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = 'Replace',
+            },
+          },
+        },
+      }
     end
   elseif server == 'clangd' then
     config.capabilities.offsetEncoding = 'utf-8'

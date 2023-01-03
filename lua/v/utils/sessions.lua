@@ -31,7 +31,7 @@ end
 function M.load_session_or_dashboard()
   local command = fn.trim(fn.system([[tr "\0" " " </proc/]] .. fn.getpid() .. '/cmdline'))
 
-  if command:match('nvim$') and not M.load_cwd_session() then
+  if (command:match('nvim$') or command:match('nvim %-%-embed$')) and not M.load_cwd_session() then
     load_dashboard()
   end
 end
