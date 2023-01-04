@@ -70,6 +70,7 @@ telescope.setup({
         '^.git/*',
         '**/.git/*',
         '^./.git',
+        '**/node_modules/*',
       },
     },
 

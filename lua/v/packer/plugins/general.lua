@@ -1,7 +1,7 @@
 -- TODO:
 -- https://github.com/ThePrimeagen/refactoring.nvim
--- https://github.com/mfussenegger/nvim-dap
 -- folke/twilight.nvim
+-- https://github.com/nvim-neotest/neotest
 
 local M = {
   -- packer can manage itself as an optional plugin
@@ -241,6 +241,35 @@ local M = {
     'untitled-ai/jupyter_ascending.vim',
     event = 'BufEnter *.sync.py',
     disable = true,
+  },
+
+  -- lsp but for debugging
+  {
+    'mfussenegger/nvim-dap',
+    keys = {
+      '<Leader>dL',
+      '<Leader>db',
+      '<Leader>dB',
+      '<Leader>dc',
+      '<Leader>de',
+      '<Leader>di',
+      '<Leader>do',
+      '<Leader>dl',
+      '<Leader>dt',
+    },
+    requires = {
+      {
+        'mxsdev/nvim-dap-vscode-js',
+        opt = true,
+        requires = {
+          {
+            'microsoft/vscode-js-debug',
+            opt = true,
+            run = 'npm install --legacy-peer-deps && npm run compile',
+          },
+        },
+      },
+    },
   },
 }
 

@@ -30,7 +30,7 @@ set_keybindings({
   -- open document for current daily
   {
     'n',
-    '<leader>d',
+    '<leader><leader>d',
     function()
       require('v.utils.dailies').open_curr(vim.v.count)
     end,

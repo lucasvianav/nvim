@@ -242,4 +242,16 @@ function M.is_plugin_installed(plugin)
   return plugin_list[plugin]
 end
 
+---@param plugin_name string
+function M.load_plugin(plugin_name)
+  require('packer').loader(plugin_name)
+end
+
+---@param plugin_name string
+---@return table plugin the required plugin
+function M.load_and_require_plugin(plugin_name)
+  require('packer').loader(plugin_name)
+  return require(plugin_name)
+end
+
 return M
