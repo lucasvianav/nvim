@@ -39,7 +39,7 @@ local M = {
       'html',
     },
     after = 'nvim-treesitter',
-    disable = true,
+    branch = 'topic/jsx-fix',
   },
 
   -- JSON
