@@ -1,8 +1,9 @@
 local utils = require('v.utils.lsp')
 
-require('nvim-lsp-installer').setup({
+require('mason').setup()
+require('mason-lspconfig').setup({
   ensure_installed = utils.servers,
-  automatic_installation = true,
+  automatic_installation = false,
 })
 
 for _, server in ipairs(utils.servers) do
@@ -15,7 +16,7 @@ for _, server in ipairs(utils.servers) do
     config = vim.tbl_deep_extend('force', config, custom_config)
   end
 
-  if server == 'sumneko_lua' then
+  if server == 'lua_ls' then
     local is_packer_loaded, packer = require('v.utils.packer').get_packer()
     if is_packer_loaded then
       packer.loader('neodev')

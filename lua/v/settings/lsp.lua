@@ -19,7 +19,7 @@ M.servers = {
   'pyright',
   'sqlls',
   'sqls',
-  'sumneko_lua',
+  'lua_ls',
   'texlab',
   'tsserver',
   'vimls',

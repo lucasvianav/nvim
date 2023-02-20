@@ -34,8 +34,11 @@ local M = {
 
   -- easier way to install language servers
   {
-    'williamboman/nvim-lsp-installer',
+    'williamboman/mason.nvim',
     after = 'nvim-lspconfig',
+    requires = {
+      { "williamboman/mason-lspconfig.nvim" }
+    }
   },
 
   -- code completion

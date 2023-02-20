@@ -40,6 +40,7 @@ local M = {
     },
     after = 'nvim-treesitter',
     branch = 'topic/jsx-fix',
+    disable = true,
   },
 
   -- JSON

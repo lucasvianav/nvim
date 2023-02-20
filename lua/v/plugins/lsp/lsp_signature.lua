@@ -13,6 +13,6 @@ require('lsp_signature').setup({
   fix_pos = function(signatures, client)
     local s = signatures[1]
 
-    return client.name == 'sumneko_lua' or (s and s.activeParameter >= 0 and #s.parameters > 1)
+    return client.name == 'lua_ls' or (s and s.activeParameter >= 0 and #s.parameters > 1)
   end,
 })

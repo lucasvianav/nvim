@@ -366,7 +366,7 @@ local __specific_on_attach = {
   jedi_language_server = __disable_formatting,
   jsonls = __disable_formatting,
   pylsp = __disable_formatting,
-  sumneko_lua = __disable_formatting,
+  lua_ls = __disable_formatting,
   vimls = __disable_formatting,
 }
 
