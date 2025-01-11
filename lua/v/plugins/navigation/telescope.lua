@@ -57,7 +57,6 @@ telescope.setup({
       },
     },
   },
-
   pickers = {
     find_files = {
       follow = true,
@@ -71,11 +70,16 @@ telescope.setup({
         '**/.git/*',
         '^./.git',
         '**/node_modules/*',
+        'package-lock.json',
+        'yarn.lock',
       },
     },
 
     live_grep = {
-      glob_pattern = '!package-lock.json',
+      glob_pattern = {
+        '!package-lock.json',
+        '!yarn.lock',
+      },
     },
 
     git_commits = {
@@ -121,19 +125,19 @@ telescope.load_extension('fzf')
 
 require('v.utils.mappings').set_keybindings({
   -- general
-  { 'n', '<Leader>ff', builtin.find_files },
-  { 'n', '<Leader>fr', builtin.resume },
-  { 'n', '<Leader>fp', builtin.live_grep },
-  { 'n', '<Leader>fb', builtin.buffers },
-  { 'n', '<Leader>fc', builtin.commands },
+  { 'n', '<Leader>ff',  builtin.find_files },
+  { 'n', '<Leader>fr',  builtin.resume },
+  { 'n', '<Leader>fp',  builtin.live_grep },
+  { 'n', '<Leader>fb',  builtin.buffers },
+  { 'n', '<Leader>fc',  builtin.commands },
   { 'n', '<Leader>fch', builtin.command_history },
-  { 'n', '<Leader>fj', builtin.jumplist },
-  { 'n', 'z=', builtin.spell_suggest },
+  { 'n', '<Leader>fj',  builtin.jumplist },
+  { 'n', 'z=',          builtin.spell_suggest },
 
   -- lsp
-  { 'n', 'gd', builtin.lsp_definitions },
-  { 'n', 'gr', builtin.lsp_references },
-  { 'n', 'gi', builtin.lsp_implementations },
+  { 'n', 'gd',          builtin.lsp_definitions },
+  { 'n', 'gr',          builtin.lsp_references },
+  { 'n', 'gi',          builtin.lsp_implementations },
   {
     'n',
     '<Leader>fg',
@@ -144,11 +148,11 @@ require('v.utils.mappings').set_keybindings({
   { 'n', '<Leader>fgw', builtin.diagnostics },
 
   -- git
-  { 'n', '<Leader>gb', builtin.git_branches },
-  { 'n', '<Leader>gc', builtin.git_commits },
+  { 'n', '<Leader>gb',  builtin.git_branches },
+  { 'n', '<Leader>gc',  builtin.git_commits },
 
   -- extensions
-  { 'n', '<Leader>fh', telescope.extensions.heading.heading },
+  { 'n', '<Leader>fh',  telescope.extensions.heading.heading },
   {
     'n',
     '<Leader>fs',
@@ -156,12 +160,12 @@ require('v.utils.mappings').set_keybindings({
   },
 
   -- custom functions
-  { 'n', '<leader>fn', utils.find_nvim },
-  { 'n', '<leader>fk', utils.find_in_plugins },
-  { 'n', '<leader>fd', utils.find_dotfiles },
-  { 'n', '<leader>f/', utils.grep_last_search },
-  { 'n', '<leader>fu', utils.find_unimed },
-  { 'n', '<leader>fw', utils.find_work },
+  { 'n', '<leader>fn',  utils.find_nvim },
+  { 'n', '<leader>fk',  utils.find_in_plugins },
+  { 'n', '<leader>fd',  utils.find_dotfiles },
+  { 'n', '<leader>f/',  utils.grep_last_search },
+  { 'n', '<leader>fu',  utils.find_unimed },
+  { 'n', '<leader>fw',  utils.find_work },
   { 'n', '<leader>fpu', utils.grep_unimed },
 
   -- code actions
