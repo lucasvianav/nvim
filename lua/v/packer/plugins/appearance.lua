@@ -1,11 +1,17 @@
 local M = {
-  { 'rcarriga/nvim-notify' }, -- beautiful notifications
-  { 'kwkarlwang/bufresize.nvim' }, -- preserve window sizes on terminal resize
-  { 'crispgm/nvim-tabline' }, -- display opened tabs (2+)
-  { 'stevearc/dressing.nvim' }, -- improve vim.ui
+  { 'rcarriga/nvim-notify' },                                       -- beautiful notifications
+  { 'kwkarlwang/bufresize.nvim' },                                  -- preserve window sizes on terminal resize
+  { 'crispgm/nvim-tabline' },                                       -- display opened tabs (2+)
+  { 'stevearc/dressing.nvim' },                                     -- improve vim.ui
 
-  { 'kyazdani42/nvim-web-devicons', as = 'devicons' }, -- colored icons
-  { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }, -- colored matching brackets
+  { 'hiphish/rainbow-delimiters.nvim', after = 'nvim-treesitter' }, -- colored matching brackets
+
+  -- colored icons
+  {
+    'nvim-tree/nvim-web-devicons',
+    as = 'devicons',
+    commit = '855c97005c8eebcdd19846f2e54706bffd40ee96',
+  },
 
   -- colored color codes
   -- DEPENDENCY: Golang
@@ -19,6 +25,7 @@ local M = {
   {
     'lukas-reineke/indent-blankline.nvim',
     after = 'nvim-treesitter',
+    commit = '005b56001b2cb30bfa61b7986bc50657816ba4ba',
   },
 
   -- colorcolumn with virtual text

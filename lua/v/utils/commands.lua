@@ -14,7 +14,7 @@ local M = {}
 ---the command should be defined with a bang (`:command!` instead of `:command`)
 M.command = function(lhs, rhs, opts)
   if (type(lhs) ~= 'string' or type(rhs) ~= 'string') or (opts and type(opts) ~= 'table') then
-    vim.api.nvim_notify('Invalid parameter(s).', vim.log.levels.ERROR, {
+    vim.notify('Invalid parameter(s).', vim.log.levels.ERROR, {
       title = 'Commands',
     })
     require('v.utils.wrappers').inspect(lhs, rhs, opts)

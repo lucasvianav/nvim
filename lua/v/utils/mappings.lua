@@ -7,11 +7,11 @@ local M = {}
 
 ---Wrapper for `vim.keymap.set`
 ---@param mode string|string[] mode or list of modes (`:h map-modes`)
----@param lhs string keybinding
+---@param lhs string|string[] keybinding(s)
 ---@param rhs string|function action
 ---@param opts? table<string, boolean|string|number> usual map options + `buffer` (`:h vim.keymap.set`)
 function M.map(mode, lhs, rhs, opts)
-  if not lhs then
+  if not lhs or (type(lhs) == 'table' and next(table) == nil) then
     vim.api.nvim_notify('No LHS.', vim.log.levels.ERROR, {
       title = 'Mapping',
     })
@@ -33,7 +33,13 @@ function M.map(mode, lhs, rhs, opts)
     options.noremap = nil
   end
 
-  vim.keymap.set(mode, lhs, rhs, options)
+  if type(lhs) == 'table' then
+    for _, lhs_element in ipairs(lhs) do
+      vim.keymap.set(mode, lhs_element, rhs, options)
+    end
+  else
+    vim.keymap.set(mode, lhs, rhs, options)
+  end
 end
 
 ---Wrapper for `vim.keymap.del`
@@ -56,9 +62,9 @@ end
 
 ---@class KeybindingTable
 ---@field mode string|string[] mode or list of modes (`:h map-modes`)
----@field lhs string keybinding
+---@field lhs string|string[] keybinding(s)
 ---@field rhs string|function action
----@field opts table<string, boolean|string> usual map options + `buffer` (`:h vim.keymap.set`)
+---@field opts? table<string, boolean|string> usual map options + `buffer` (`:h vim.keymap.set`)
 
 ---Sets a list of keybindings.
 ---@param args KeybindingTable[] parameters to be passed to v.utils.mappings.map

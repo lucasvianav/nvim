@@ -23,18 +23,24 @@ local M = {
   -- { 'nathom/filetype.nvim' }, -- faster filetype detection
 
   -- TODO: use {'lewis6991/impatient.nvim', rocks = 'mpack'}
-  { 'lewis6991/impatient.nvim' }, -- improve startup time
-  { 'antoinemadec/FixCursorHold.nvim' }, -- fixes CursorHold and CursorHoldl
-  { 'nvim-lua/plenary.nvim' }, -- great utility lua functions
-  { 'editorconfig/editorconfig-vim' }, -- follow .editorconfig files
+  { 'lewis6991/impatient.nvim' },                        -- improve startup time
+  { 'antoinemadec/FixCursorHold.nvim' },                 -- fixes CursorHold and CursorHoldl
+  { 'nvim-lua/plenary.nvim' },                           -- great utility lua functions
+  { 'editorconfig/editorconfig-vim' },                   -- follow .editorconfig files
 
-  { 'chrisbra/NrrwRgn', cmd = { 'NR', 'NUD' } }, -- focus narrow code section
-  { 'dstein64/vim-startuptime', cmd = 'StartupTime' }, -- startup profiling
-  { 'folke/which-key.nvim', event = 'CursorHold' }, -- displays a popup with keybindings
-  { 'max397574/better-escape.nvim', event = 'InsertEnter' }, -- better <Esc> with jk
-  { 'milisims/nvim-luaref', ft = 'lua' }, -- lua documentation in :help
-  { 'tpope/vim-repeat', keys = '.', fn = 'repeat#set' }, -- enables . repeat for plugins
-  { 'windwp/nvim-autopairs', event = 'InsertEnter' }, -- auto pairs for {[()]}
+  { 'chrisbra/NrrwRgn',               cmd = { 'NR', 'NUD' } }, -- focus narrow code section
+  { 'dstein64/vim-startuptime',       cmd = 'StartupTime' }, -- startup profiling
+  { 'folke/which-key.nvim',           event = 'CursorHold' }, -- displays a popup with keybindings
+  { 'milisims/nvim-luaref',           ft = 'lua' },      -- lua documentation in :help
+  { 'tpope/vim-repeat',               keys = '.',           fn = 'repeat#set' }, -- enables . repeat for plugins
+  { 'windwp/nvim-autopairs',          event = 'InsertEnter' }, -- auto pairs for {[()]}
+
+  -- better <Esc> with jk
+  {
+    'max397574/better-escape.nvim',
+    event = 'InsertEnter',
+    commit = '9738a470d93e2e52815bc46b4042372ca198cbd6',
+  },
 
   -- provides great new text objects
   {
@@ -100,11 +106,12 @@ local M = {
     'rmagatti/auto-session',
     event = 'VimLeavePre',
     cmd = {
-      'SaveSession',
-      'RestoreSession',
-      'DeleteSession',
+      'SessionSave',
+      'SessionRestore',
+      'SessionDelete',
     },
     keys = { '<Leader>fs' },
+    commit = '00334ee24b9a05001ad50221c8daffbeedaa0842',
   },
 
   -- like tpope/vim-surround but for functions
@@ -157,13 +164,11 @@ local M = {
   },
 
   -- better clipboard
-  -- TODO: lua port
-  -- https://github.com/AckslD/nvim-neoclip.lua
-  -- https://github.com/bfredl/nvim-miniyank
   {
-    'svermeulen/vim-easyclip',
+    'lucasvianav/vim-easyclip',
     event = { 'CursorMoved', 'InsertEnter' },
     after = 'vim-repeat',
+    commit = '37b3ca606166752ec9e62f60e11fe8dfa866bda4',
   },
 
   -- TSDoc docstrings generation

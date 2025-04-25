@@ -1,8 +1,16 @@
 require('better_escape').setup({
-  mapping = { 'jk' },
+  default = false,
+  mappings = {
+    i = { -- mode
+      i = { -- first key
+        j = '<Esc>', -- second key -> action
+      },
+    },
+    v = {
+      i = {
+        j = '<Esc>',
+      },
+    },
+  },
   timeout = 200,
-  keys = function()
-    -- move to the right to keep cursor position
-    return vim.fn.col('.') == 1 and '<esc>' or '<esc>l'
-  end,
 })

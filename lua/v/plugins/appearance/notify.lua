@@ -3,7 +3,19 @@
 local notify = require('notify')
 notify.setup({ stages = 'slide' })
 
-vim.notify = notify
+local banned_messages = {
+  'no manual entry for',
+  'No matching notification found to replace',
+}
+
+vim.notify = function(msg, ...)
+  for _, banned in ipairs(banned_messages) do
+    if string.match(msg, banned) then
+      return
+    end
+  end
+  notify(msg, ...)
+end
 
 require('v.utils.commands').command(
   'Notifications',

@@ -19,6 +19,7 @@ local M = {
     run = function()
       require('nvim-treesitter.install').update({ with_sync = true })
     end,
+    commit = '684eeac91ed8e297685a97ef70031d19ac1de25a',
   },
 
   -- highlight urls
@@ -61,6 +62,7 @@ local M = {
     'JoosepAlviste/nvim-ts-context-commentstring',
     as = 'context-commentstring',
     after = { 'vim-commentary', 'nvim-treesitter' },
+    commit = '1b212c2eee76d787bbea6aa5e92a2b534e7b4f8f',
   },
 
   -- autoclose and autoedit html tags

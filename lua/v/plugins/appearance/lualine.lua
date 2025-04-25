@@ -15,11 +15,9 @@ local bubbles_theme = {
     y = { fg = colors.black, bg = colors.green },
     z = { fg = colors.white, bg = colors.grey_darker },
   },
-
   insert = { y = { fg = colors.black, bg = colors.blue } },
   visual = { y = { fg = colors.black, bg = colors.cyan } },
   replace = { y = { fg = colors.black, bg = colors.yellow } },
-
   inactive = {
     a = { fg = colors.cyan_grey, bg = colors.off_black },
     b = { fg = colors.cyan_grey, bg = colors.off_black },
@@ -136,7 +134,7 @@ require('lualine').setup({
       {
         '" LSP"',
         cond = function()
-          local buf_clients = vim.lsp.buf_get_clients()
+          local buf_clients = vim.lsp.get_clients({ buffer = vim.fn.bufnr() })
           return #buf_clients > 0
         end,
         color = {

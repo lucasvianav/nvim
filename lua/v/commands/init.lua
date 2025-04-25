@@ -5,7 +5,7 @@ require('v.commands.abbreviations')
 
 require('v.utils.commands').set_commands({
   -- how many times does this pattern appear in the file
-  { 'Count', 'keeppatterns %s/<args>//gn | noh', { nargs = 1 } },
+  { 'Count', 'keeppatterns <line1>,<line2>s/<args>//gn | noh', { nargs = 1, range = true } },
 
   -- saves buffer and then closes it
   { 'BqWrite', 'update | BufClose' },
@@ -21,4 +21,7 @@ require('v.utils.commands').set_commands({
 
   -- open document for current daily
   { 'D', 'lua require("v.utils.dailies").open_curr(<count>)', { count = true } },
+
+  -- get filepath for current buffer
+  { 'Path', 'echo expand("%")' }
 })

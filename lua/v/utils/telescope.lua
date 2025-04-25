@@ -63,6 +63,14 @@ M.grep_unimed = function()
   })
 end
 
+M.grep_cur_dir = function()
+  require('telescope.builtin').live_grep({
+    cwd = require('telescope.utils').buffer_dir(),
+    prompt_title = "~ grep current file's dir ~",
+    results_title = 'Current Dir',
+  })
+end
+
 M.grep_last_search = function()
   local register = vim.fn.getreg('/'):gsub('\\<', ''):gsub('\\>', '')
 

@@ -1,15 +1,20 @@
 require('v.utils').set_viml_options('EasyClip', {
+  AutoFormat = true,
   UseSubstituteDefaults = false,
   UseCutDefaults = false,
-  AutoFormat = true,
+  EnableBlackHoleRedirect = true,
+  UseYankDefaults = true,
+  UsePasteDefaults = true,
+  UsePasteToggleDefaults = false,
+  UseGlobalPasteToggle = false,
 })
 
 require('v.utils.mappings').set_keybindings({
   -- use s for substituting
-  { 'n', 's',          '<plug>SubstituteOverMotionMap' },
-  { 'n', 'ss',         '<plug>SubstituteLine' },
-  { 'x', 's',          '<plug>XEasyClipPaste' },
-  { 'n', 'S',          '<plug>SubstituteToEndOfLine' },
+  { 'n', 's',          '<Plug>SubstituteOverMotionMap' },
+  { 'n', 'ss',         '<Plug>SubstituteLine' },
+  { 'x', 's',          '<Plug>XEasyClipPaste' },
+  { 'n', 'S',          '<Plug>SubstituteToEndOfLine' },
 
   -- use x for cutting
   { 'n', 'x',          '<Plug>MoveMotionPlug' },
@@ -18,11 +23,11 @@ require('v.utils.mappings').set_keybindings({
   { 'n', 'X',          '<Plug>MoveMotionEndOfLinePlug' },
 
   -- toggle paste autoformat
-  { 'n', '<leader>cf', '<plug>EasyClipToggleFormattedPaste' },
+  { 'n', '<leader>cf', '<Plug>EasyClipToggleFormattedPaste' },
 
   -- paste in insert mode
   { 'i', '<m-v>',      '<c-v>' },
-  { 'i', '<c-v>',      '<plug>EasyClipInsertModePaste' },
+  { 'i', '<c-v>',      '<Plug>EasyClipInsertModePaste' },
 
   -- navigate through the yank ring
   { 'n', '[p',         '<Plug>EasyClipRotateYanksForward' },

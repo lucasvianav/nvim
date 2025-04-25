@@ -6,6 +6,8 @@ local M = {
       'Dashboard',
       'DashboardNewFile',
     },
+    commit = 'b0551fae871fc39454a67cca1adcf76fbe2f61f9',
+    reuqires = 'nvim-tree/nvim-web-devicons',
   },
 
   -- seamless navigation between neovim widows and tmux panes
@@ -24,7 +26,7 @@ local M = {
 
   -- nerdtree-like file explorer
   {
-    'kyazdani42/nvim-tree.lua',
+    'nvim-tree/nvim-tree.lua',
     as = 'nvim-tree',
     after = 'devicons',
     cmd = {
@@ -100,10 +102,12 @@ local M = {
       '<leader>fp',
       '<leader>fb',
       '<leader>fw',
+      '<leader>fs',
       'gd',
       'gr',
       'gi',
     },
+    commit = 'a4ed82509cecc56df1c7138920a1aeaf246c0ac5',
   },
 
   -- auto-session picker for telescope

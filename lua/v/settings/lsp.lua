@@ -2,7 +2,7 @@ local M = {}
 
 ---Language servers to keep installed
 M.servers = {
-  'angularls',
+  -- 'angularls',
   'bashls',
   'clangd',
   'cssls',
@@ -13,15 +13,15 @@ M.servers = {
   'graphql',
   'html',
   'jsonls',
-  'ltex',
-  'prismals',
+  -- 'ltex',
+  -- 'prismals',
   'pylsp',
   'pyright',
   'sqlls',
   'sqls',
   'lua_ls',
-  'texlab',
-  'tsserver',
+  -- 'texlab',
+  'ts_ls',
   'vimls',
   'yamlls',
 }

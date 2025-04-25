@@ -24,6 +24,7 @@ local parsers = {
   'latex',
   'lua',
   'markdown',
+  'markdown_inline',
   'prisma',
   'python',
   'scss',
@@ -39,7 +40,6 @@ local disable = { enable = false }
 
 treesitter.setup({
   ensure_installed = parsers,
-
   autopairs = enable,
   autotag = enable,
   indent = disable,
@@ -47,17 +47,10 @@ treesitter.setup({
     enable = true,
     include_match_words = true,
   },
-
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
   },
-
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-  },
-
   rainbow = {
     enable = true,
     extended_mode = true,

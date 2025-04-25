@@ -128,6 +128,7 @@ require('v.utils.mappings').set_keybindings({
   { 'n', '<Leader>ff',  builtin.find_files },
   { 'n', '<Leader>fr',  builtin.resume },
   { 'n', '<Leader>fp',  builtin.live_grep },
+  { 'n', '<Leader>fpc',  utils.grep_cur_dir },
   { 'n', '<Leader>fb',  builtin.buffers },
   { 'n', '<Leader>fc',  builtin.commands },
   { 'n', '<Leader>fch', builtin.command_history },
