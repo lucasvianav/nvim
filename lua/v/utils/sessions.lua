@@ -51,7 +51,13 @@ end
 ---Load the current dir's session if there is one, otherwise starts Dashboard.
 ---Also considers if Neovim was started with arguments.
 function M.load_session_or_dashboard()
-  local command = fn.trim(fn.system([[tr "\0" " " </proc/]] .. fn.getpid() .. '/cmdline'))
+  local command = fn.trim(
+    fn.system(
+      [[ps aux | grep ]] .. fn.getpid() ..
+      [[ | awk '$2 == "]] .. fn.getpid() ..
+      [[" { col = ""; for (i = 11; i <= NF; i++) col = col $i " "; print col }']]
+    )
+  )
   local opened_nvim_without_file_arg = command:match('nvim$') or command:match('nvim %-%-embed$')
 
   if opened_nvim_without_file_arg and not M.load_cwd_session() then
