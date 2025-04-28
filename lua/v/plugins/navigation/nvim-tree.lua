@@ -38,37 +38,37 @@ local on_attach = function(bufnr)
   end
 
   require('v.utils.mappings').set_keybindings({
-    { 'n', { 'v', '<C-v>' }, api.node.open.vertical, desc("Open: Vertical Split")},
-    { 'n', { 's', '<C-x>' }, api.node.open.horizontal, desc("Open: Horizontal Split") },
-    { 'n', { 't', '<C-t>' }, api.node.open.tab, desc("Open: New Tab") },
-    { 'n', { '<CR>', 'l' }, api.node.open.edit, desc("Open") },
-    { 'n', 'h', api.node.navigate.parent_close, desc("Close Directory")},
-    { 'n', '<Tab>', api.node.open.preview, desc("Open Preview") },
-    { 'n', 'P', api.node.navigate.parent, desc("Parent Directory") },
-    { 'n', 'K', api.node.navigate.sibling.first, desc("First Sibling") },
-    { 'n', 'J', api.node.navigate.sibling.last, desc("Last Sibling") },
-    { 'n', 'I', api.tree.toggle_gitignore_filter, desc("Toggle Filter: Git Ignore") },
-    { 'n', { 'H', 'zh', 'gh' }, api.tree.toggle_hidden_filter, desc("Toggle Filter: Dotfiles") },
-    { 'n', 'R', api.tree.reload, desc("Refresh") },
-    { 'n', { 'a', 'A' }, api.fs.create, desc("Create File Or Directory") },
-    { 'n', 'dd', api.fs.remove, desc("Delete") },
-    { 'n', 'r', api.fs.rename, desc("Rename") },
-    { 'n', '<C-r>', api.fs.rename_full, desc("Rename: Full Path") },
-    { 'n', 'xx', api.fs.cut, desc("Cut") },
-    { 'n', 'yy', api.fs.copy.node, desc("Copy") },
-    { 'n', 'p', api.fs.paste, desc("Paste") },
-    { 'n', 'yn', api.fs.copy.filename, desc("Copy Name") },
-    { 'n', { 'yp', 'Y' }, api.fs.copy.relative_path, desc("Copy Relative Path") },
-    { 'n', { 'ya', 'gy' }, api.fs.copy.absolute_path, desc("Copy Absolute Path") },
-    { 'n', ']c', api.node.navigate.git.prev, desc("Prev Git") },
-    { 'n', '[c', api.node.navigate.git.next, desc("Next Git") },
-    { 'n', '<BS>', api.tree.change_root_to_parent, desc("Up") },
-    { 'n', 'q', api.tree.close, desc("Close") },
-    { 'n', '?', api.tree.toggle_help, desc("Help") },
-    { 'n', 'cd', api.tree.change_root_to_node, desc("CD") },
+    { 'n', { 'v', '<C-v>' },    api.node.open.vertical,           desc("Open: Vertical Split") },
+    { 'n', { 's', '<C-x>' },    api.node.open.horizontal,         desc("Open: Horizontal Split") },
+    { 'n', { 't', '<C-t>' },    api.node.open.tab,                desc("Open: New Tab") },
+    { 'n', { '<CR>', 'l' },     api.node.open.edit,               desc("Open") },
+    { 'n', 'h',                 api.node.navigate.parent_close,   desc("Close Directory") },
+    { 'n', '<Tab>',             api.node.open.preview,            desc("Open Preview") },
+    { 'n', 'P',                 api.node.navigate.parent,         desc("Parent Directory") },
+    { 'n', 'K',                 api.node.navigate.sibling.first,  desc("First Sibling") },
+    { 'n', 'J',                 api.node.navigate.sibling.last,   desc("Last Sibling") },
+    { 'n', 'I',                 api.tree.toggle_gitignore_filter, desc("Toggle Filter: Git Ignore") },
+    { 'n', { 'H', 'zh', 'gh' }, api.tree.toggle_hidden_filter,    desc("Toggle Filter: Dotfiles") },
+    { 'n', 'R',                 api.tree.reload,                  desc("Refresh") },
+    { 'n', { 'a', 'A' },        api.fs.create,                    desc("Create File Or Directory") },
+    { 'n', 'dd',                api.fs.remove,                    desc("Delete") },
+    { 'n', 'r',                 api.fs.rename,                    desc("Rename") },
+    { 'n', '<C-r>',             api.fs.rename_full,               desc("Rename: Full Path") },
+    { 'n', 'xx',                api.fs.cut,                       desc("Cut") },
+    { 'n', 'yy',                api.fs.copy.node,                 desc("Copy") },
+    { 'n', 'p',                 api.fs.paste,                     desc("Paste") },
+    { 'n', 'yn',                api.fs.copy.filename,             desc("Copy Name") },
+    { 'n', { 'yp', 'Y' },       api.fs.copy.relative_path,        desc("Copy Relative Path") },
+    { 'n', { 'ya', 'gy' },      api.fs.copy.absolute_path,        desc("Copy Absolute Path") },
+    { 'n', ']c',                api.node.navigate.git.prev,       desc("Prev Git") },
+    { 'n', '[c',                api.node.navigate.git.next,       desc("Next Git") },
+    { 'n', '<BS>',              api.tree.change_root_to_parent,   desc("Up") },
+    { 'n', 'q',                 api.tree.close,                   desc("Close") },
+    { 'n', '?',                 api.tree.toggle_help,             desc("Help") },
+    { 'n', 'cd',                api.tree.change_root_to_node,     desc("CD") },
   }, {
-      buffer = bufnr,
-      noremap = true,
+    buffer = bufnr,
+    noremap = true,
   })
 end
 
@@ -187,4 +187,26 @@ hl_utils.set_highlights({
       fg = alter_color(colors.yellow, -10),
     },
   },
+})
+
+-- trigger LSP rename using Snacks
+
+local prev = { new_name = "", old_name = "" } -- Prevent duplicate events
+vim.api.nvim_create_autocmd("User", {
+  pattern = "NvimTreeSetup",
+  callback = function()
+    local events = require("nvim-tree.api").events
+    events.subscribe(events.Event.NodeRenamed, function(data)
+      local snacks_ok, snacks = pcall(require, 'snacks')
+
+      if not snacks_ok then
+        return
+      end
+
+      if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
+        snacks.rename.on_rename_file(data.old_name, data.new_name)
+        prev = data
+      end
+    end)
+  end,
 })

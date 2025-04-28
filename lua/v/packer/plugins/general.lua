@@ -23,17 +23,17 @@ local M = {
   -- { 'nathom/filetype.nvim' }, -- faster filetype detection
 
   -- TODO: use {'lewis6991/impatient.nvim', rocks = 'mpack'}
-  { 'lewis6991/impatient.nvim' },                        -- improve startup time
-  { 'antoinemadec/FixCursorHold.nvim' },                 -- fixes CursorHold and CursorHoldl
-  { 'nvim-lua/plenary.nvim' },                           -- great utility lua functions
-  { 'editorconfig/editorconfig-vim' },                   -- follow .editorconfig files
+  { 'lewis6991/impatient.nvim' },                                                -- improve startup time
+  { 'antoinemadec/FixCursorHold.nvim' },                                         -- fixes CursorHold and CursorHoldl
+  { 'nvim-lua/plenary.nvim' },                                                   -- great utility lua functions
+  { 'editorconfig/editorconfig-vim' },                                           -- follow .editorconfig files
 
-  { 'chrisbra/NrrwRgn',               cmd = { 'NR', 'NUD' } }, -- focus narrow code section
-  { 'dstein64/vim-startuptime',       cmd = 'StartupTime' }, -- startup profiling
-  { 'folke/which-key.nvim',           event = 'CursorHold' }, -- displays a popup with keybindings
-  { 'milisims/nvim-luaref',           ft = 'lua' },      -- lua documentation in :help
+  { 'chrisbra/NrrwRgn',               cmd = { 'NR', 'NUD' } },                   -- focus narrow code section
+  { 'dstein64/vim-startuptime',       cmd = 'StartupTime' },                     -- startup profiling
+  { 'folke/which-key.nvim',           event = 'CursorHold' },                    -- displays a popup with keybindings
+  { 'milisims/nvim-luaref',           ft = 'lua' },                              -- lua documentation in :help
   { 'tpope/vim-repeat',               keys = '.',           fn = 'repeat#set' }, -- enables . repeat for plugins
-  { 'windwp/nvim-autopairs',          event = 'InsertEnter' }, -- auto pairs for {[()]}
+  { 'windwp/nvim-autopairs',          event = 'InsertEnter' },                   -- auto pairs for {[()]}
 
   -- better <Esc> with jk
   {
@@ -49,33 +49,6 @@ local M = {
       'CursorHold',
       'CursorMoved',
     },
-  },
-
-  -- single <-> multi-line
-  {
-    'AndrewRadev/splitjoin.vim',
-    keys = { 'gS', 'gJ' },
-    event = {
-      'CursorHold',
-      'CursorMoved',
-    },
-  },
-
-  -- make % smarter
-  {
-    'andymass/vim-matchup',
-    event = {
-      'CursorHold',
-      'CursorMoved',
-    },
-    keys = {
-      '%',
-      'g%',
-      '[%',
-      ']%',
-      'z%',
-    },
-    after = 'nvim-treesitter',
   },
 
   -- pairs of handy bracket maps

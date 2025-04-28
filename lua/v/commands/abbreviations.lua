@@ -35,6 +35,7 @@ require('v.utils.abbreviations').set_abbreviations({
   -- LSP
   { 'LA',   'LspStart' },
   { 'LI',   'LspInfo' },
+  { 'LL',   'LspLog' },
   { 'LO',   'LspStop' },
   { 'LR',   'LspRestart' },
 

@@ -2,13 +2,13 @@
 -- there's all kind of filetype-specific plugins
 
 local M = {
-  { 'dkarter/bullets.vim', ft = 'markdown' }, -- markdown lists
-  { 'fladson/vim-kitty', ft = { 'kitty' } }, -- kitty config
-  { 'lervag/vimtex', ft = { 'tex', 'plaintex' }, disable = true }, -- LaTeX
-  { 'tpope/vim-sleuth', event = 'CursorHold' }, -- autodetect indent
-  { 'vuki656/package-info.nvim', ft = 'json' }, -- package.json
-  { 'Vimjas/vim-python-pep8-indent', ft = 'python' }, -- better indenting in python
-  { 'mboughaba/i3config.vim', ft = 'i3config' }, -- i3wm cofig file
+  { 'dkarter/bullets.vim',                  ft = 'markdown' },                            -- markdown lists
+  { 'fladson/vim-kitty',                    ft = { 'kitty' } },                           -- kitty config
+  { 'lervag/vimtex',                        ft = { 'tex', 'plaintex' }, disable = true }, -- LaTeX
+  { 'tpope/vim-sleuth',                     event = 'CursorHold' },                       -- autodetect indent
+  { 'vuki656/package-info.nvim',            ft = 'json' },                                -- package.json
+  { 'Vimjas/vim-python-pep8-indent',        ft = 'python' },                              -- better indenting in python
+  { 'mboughaba/i3config.vim',               ft = 'i3config' },                            -- i3wm cofig file
 
   -- TODO: https://github.com/jose-elias-alvarez/typescript.nvim
   { 'jose-elias-alvarez/nvim-lsp-ts-utils', ft = 'typescript' }, -- TypeScript utilities
@@ -98,6 +98,35 @@ local M = {
     'goerz/jupytext.vim',
     event = 'BufAdd,BufEnter *.ipynb',
     disable = true,
+  },
+
+
+  -- single <-> multi-line
+  {
+    'AndrewRadev/splitjoin.vim',
+    keys = { 'gS', 'gJ' },
+    event = {
+      'CursorHold',
+      'CursorMoved',
+    },
+  },
+
+  -- make % smarter
+  {
+    'andymass/vim-matchup',
+    event = {
+      'CursorHold',
+      'CursorMoved',
+    },
+    keys = {
+      '%',
+      'g%',
+      '[%',
+      ']%',
+      'z%',
+    },
+    after = 'nvim-treesitter',
+    commit = 'ea2ff43e09e68b63fc6d9268fc5d82d82d433cb3',
   },
 }
 

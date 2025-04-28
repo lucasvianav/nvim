@@ -1,10 +1,16 @@
 local M = {
-  { 'rcarriga/nvim-notify' },                                       -- beautiful notifications
-  { 'kwkarlwang/bufresize.nvim' },                                  -- preserve window sizes on terminal resize
-  { 'crispgm/nvim-tabline' },                                       -- display opened tabs (2+)
-  { 'stevearc/dressing.nvim' },                                     -- improve vim.ui
+  { 'rcarriga/nvim-notify' },      -- beautiful notifications
+  { 'kwkarlwang/bufresize.nvim' }, -- preserve window sizes on terminal resize
+  { 'crispgm/nvim-tabline' },      -- display opened tabs (2+)
 
-  { 'hiphish/rainbow-delimiters.nvim', after = 'nvim-treesitter' }, -- colored matching brackets
+  -- improve vim.ui
+  {
+    'folke/snacks.nvim',
+    commit = 'bc0630e43be5699bb94dadc302c0d21615421d93',
+  },
+
+  -- colored matching brackets
+  { 'hiphish/rainbow-delimiters.nvim', after = 'nvim-treesitter' },
 
   -- colored icons
   {

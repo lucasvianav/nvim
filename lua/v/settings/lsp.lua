@@ -2,7 +2,6 @@ local M = {}
 
 ---Language servers to keep installed
 M.servers = {
-  -- 'angularls',
   'bashls',
   'clangd',
   'cssls',
@@ -13,17 +12,19 @@ M.servers = {
   'graphql',
   'html',
   'jsonls',
-  -- 'ltex',
-  -- 'prismals',
+  'lua_ls',
+  'protols',
   'pylsp',
   'pyright',
   'sqlls',
   'sqls',
-  'lua_ls',
-  -- 'texlab',
   'ts_ls',
   'vimls',
   'yamlls',
+  -- 'angularls',
+  -- 'ltex',
+  -- 'prismals',
+  -- 'texlab',
 }
 
 ---General diagnostics settings
@@ -48,5 +49,7 @@ vim.diagnostic.config({
     source = 'always',
   },
 })
+
+vim.lsp.set_log_level("debug")
 
 return M

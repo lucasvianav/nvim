@@ -6,6 +6,9 @@ notify.setup({ stages = 'slide' })
 local banned_messages = {
   'no manual entry for',
   'No matching notification found to replace',
+  'method textDocument/codeAction is not supported by any of the servers registered for the current buffer',
+  '',
+  '""',
 }
 
 vim.notify = function(msg, ...)

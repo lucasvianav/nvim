@@ -186,11 +186,11 @@ end
 function M.rename()
   local curr_word = vim.fn.expand('<cword>')
 
-  require('v.utils.autocmds').augroup('DressingRename', {
+  require('v.utils.autocmds').augroup('SnacksRename', {
     {
       event = 'FileType',
       opts = {
-        pattern = 'DressingInput',
+        pattern = 'snacks_input',
         callback = function()
           vim.api.nvim_feedkeys(curr_word, 'i', false)
           vim.api.nvim_feedkeys(t('<Esc>'), 'n', false)
@@ -378,15 +378,15 @@ local function __conditional_autocmds(client)
   if client.server_capabilities.documentHighlightProvider then
     augroup('LspSymbolHighlight', {
       -- highlight
-      { event = 'CursorHold', opts = { callback = vim.lsp.buf.document_highlight } },
-      { event = 'CursorHoldI', opts = { callback = vim.lsp.buf.document_highlight } },
+      { event = 'CursorHold',   opts = { callback = vim.lsp.buf.document_highlight } },
+      { event = 'CursorHoldI',  opts = { callback = vim.lsp.buf.document_highlight } },
 
       -- clear
-      { event = 'CursorMoved', opts = { callback = vim.lsp.buf.clear_references } },
+      { event = 'CursorMoved',  opts = { callback = vim.lsp.buf.clear_references } },
       { event = 'CursorMovedI', opts = { callback = vim.lsp.buf.clear_references } },
-      { event = 'FocusLost', opts = { callback = vim.lsp.buf.clear_references } },
-      { event = 'BufLeave', opts = { callback = vim.lsp.buf.clear_references } },
-      { event = 'InsertEnter', opts = { callback = vim.lsp.buf.clear_references } },
+      { event = 'FocusLost',    opts = { callback = vim.lsp.buf.clear_references } },
+      { event = 'BufLeave',     opts = { callback = vim.lsp.buf.clear_references } },
+      { event = 'InsertEnter',  opts = { callback = vim.lsp.buf.clear_references } },
     }, {
       buffer = 0,
     })
