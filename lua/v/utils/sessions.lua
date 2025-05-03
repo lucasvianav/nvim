@@ -1,5 +1,5 @@
 local fn = vim.fn
-local cmd = vim.api.nvim_command
+local utils = require('v.utils.packer')
 
 local function get_cwd_session_path()
   local expanded_dir = vim.fn.stdpath('data') .. '/sessions/'
@@ -10,11 +10,19 @@ local function get_cwd_session_path()
 end
 
 local function load_dashboard()
-  cmd('silent! Dashboard')
+  vim.api.nvim_command('silent! Dashboard')
 end
 
-local function load_cwd_session()
-  cmd('silent! SessionRestore')
+---@param session_filepath string
+local function load_session(session_filepath)
+  local auto_session_ok, auto_session = utils.load_and_require_plugin('auto-session')
+
+  if auto_session_ok then
+    auto_session.RestoreSessionFile(session_filepath, {
+      is_startup_autorestore = false,
+      show_message = false,
+    })
+  end
 end
 
 local M = {}
@@ -30,7 +38,7 @@ end
 
 ---Loads the current dir's session if there is one.
 function M.load_cwd_session()
-  local auto_session_ok, auto_session = pcall(require, 'auto-session')
+  local auto_session_ok, auto_session = utils.load_and_require_plugin('auto-session')
 
   if not auto_session_ok then
     require('v.utils.log').log(auto_session)
@@ -40,8 +48,10 @@ function M.load_cwd_session()
     return false
   end
 
-  if M.session_exists_for_cwd() then
-    load_cwd_session()
+  local cwd_session_filepath = M.get_cwd_session_path_if_exists()
+
+  if cwd_session_filepath ~= nil then
+    load_session(cwd_session_filepath)
     return true
   end
 
@@ -53,9 +63,11 @@ end
 function M.load_session_or_dashboard()
   local command = fn.trim(
     fn.system(
-      [[ps aux | grep ]] .. fn.getpid() ..
-      [[ | awk '$2 == "]] .. fn.getpid() ..
-      [[" { col = ""; for (i = 11; i <= NF; i++) col = col $i " "; print col }']]
+      [[ps aux | grep ]]
+      .. fn.getpid()
+      .. [[ | awk '$2 == "]]
+      .. fn.getpid()
+      .. [[" { col = ""; for (i = 11; i <= NF; i++) col = col $i " "; print col }']]
     )
   )
   local opened_nvim_without_file_arg = command:match('nvim$') or command:match('nvim %-%-embed$')
@@ -64,7 +76,5 @@ function M.load_session_or_dashboard()
     load_dashboard()
   end
 end
-
-M.load_session_or_dashboard()
 
 return M
