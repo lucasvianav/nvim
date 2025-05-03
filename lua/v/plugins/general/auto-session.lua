@@ -10,11 +10,19 @@ require('auto-session').setup({
   allowed_dirs = nil,
   log_level = 'error',
 
+  -- delete sessions that haven't been used for 15 days
+  purge_after_minutes = 60 * 24 * 15,
+
   -- close unwanted windows before saving
   pre_save_cmds = { 'silent! tabdo NvimTreeClose' },
 
   -- fix Neovim height after start (so cmdheight isn't huge) (#64) (#11330)
   post_restore_cmds = { 'silent !kill -s SIGWINCH $PPID' },
+
+  session_lens = {
+    load_on_setup = true,
+    previewer = false,
+  },
 
   -- TODO: maybe swap for allowed dirs
   suppressed_dirs = require('v.utils.wrappers').expand_in_list({
