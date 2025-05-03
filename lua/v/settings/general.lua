@@ -68,10 +68,11 @@ o.spelllang = {
 -- globs to be ignored from path
 o.wildignore = {
   '**/node_modules/**',
-  '**/__pycache__/**,',
-  '**/.git/**,',
-  '**/.vscode/**,',
-  '**/.idea/**,',
+  '**/__pycache__/**',
+  '**/.git/**',
+  '**/.vscode/**',
+  '**/.idea/**',
+  '.git',
   '*.o',
   '*.obj',
   '*.dll',
