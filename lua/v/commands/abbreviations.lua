@@ -43,6 +43,9 @@ require('v.utils.abbreviations').set_abbreviations({
   { 'SS',   'SessionSave' },
   { 'SD',   'SessionDelete' },
 
+  -- tabs
+  { 'tq',   'tabclose' },
+
   -- other plugins
   { 'DO',   'DiffviewOpen' },
   { 'DH',   'DiffviewFileHistory' },
