@@ -8,6 +8,9 @@ local M = {}
 vim.api.nvim_command('syntax on')
 vim.api.nvim_command('filetype plugin indent on')
 
+-- improve startup time
+vim.loader.enable()
+
 -- general settings
 o.autoindent = true -- auto indent
 o.backup = false -- don't backup files before overwriting them
@@ -119,13 +122,13 @@ o.path:append({
 
 -- what to save in a session
 o.sessionoptions = {
-  'curdir',   -- cwd
-  'help',     -- help window
-  'winsize',  -- window sizes
-  'tabpages', -- tabpages (welp)
-  'winpos',   -- Neovim window's position
-  'folds',    -- folding state
-  'tabpages', -- tabs
+  'curdir',       -- cwd
+  'help',         -- help window
+  'winsize',      -- window sizes
+  'tabpages',     -- tabpages (welp)
+  'winpos',       -- Neovim window's position
+  'folds',        -- folding state
+  'tabpages',     -- tabs
   'localoptions', -- needed to starts highlights
 }
 

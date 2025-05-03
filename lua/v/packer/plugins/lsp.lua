@@ -2,26 +2,48 @@
 -- there's all kind of completion-related plugins
 
 local M = {
-  { 'neovim/nvim-lspconfig' }, -- config for language servers
+  -- config for language servers
+  { 'neovim/nvim-lspconfig' },
 
   -- TODO: consider swapping for L3MON4D3/LuaSnip
-  { 'SirVer/ultisnips', event = 'InsertEnter' }, -- cool snippet engine
-  { 'folke/neodev.nvim', ft = 'lua', as = 'neodev' }, -- setup LSP for lua-nvim dev
-  { 'kosayoda/nvim-lightbulb', event = 'CursorHold' }, -- indicates code actions
-  { 'nanotee/sqls.nvim', ft = 'sql' }, -- sql commands and code actions
+  -- cool snippet engine
+  {
+    'SirVer/ultisnips',
+    event = 'InsertEnter',
+    commit = 'dbc458e110bb49299da76ec53f8b09b4f6dce28a',
+  },
+
+  -- setup LSP for lua-nvim dev
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    as = 'lazydev',
+    commit = '2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c',
+  },
+
+  -- indicates code actions
+  {
+    'kosayoda/nvim-lightbulb',
+    event = {
+      'CursorHold',
+      'CursorHoldI',
+    },
+    commit = 'aa3a8b0f4305b25cfe368f6c9be9923a7c9d0805',
+  },
+
+  -- sql commands and code actions
+  {
+    'nanotee/sqls.nvim',
+    ft = 'sql',
+    commit = 'd1bc5421ef3e8edc5101e37edbb7de6639207a09kA',
+  },
 
   -- show function signature
   {
     'ray-x/lsp_signature.nvim',
     event = 'CursorHold',
     after = 'nvim-lspconfig',
-  },
-
-  -- nice code actions
-  {
-    'weilbith/nvim-code-action-menu',
-    key = '<leader>ca',
-    disable = true,
+    commit = 'a793d02b6a5e639fa9d3f2a89a839fa688ab2d0aA',
   },
 
   -- code completion + lsp-like functionalities without actual lsp
@@ -30,6 +52,7 @@ local M = {
     'ludovicchabant/vim-gutentags',
     requires = 'skywind3000/gutentags_plus',
     disable = true,
+    commit = 'aa47c5e29c37c52176c44e61c780032dfacef3dd',
   },
 
   -- easier way to install language servers
@@ -37,22 +60,22 @@ local M = {
     'williamboman/mason.nvim',
     after = 'nvim-lspconfig',
     requires = {
-      { "williamboman/mason-lspconfig.nvim" }
-    }
+      { 'williamboman/mason-lspconfig.nvim' },
+    },
+    commit = 'fc98833b6da5de5a9c5b1446ac541577059555bekA,',
   },
 
   -- code completion
   {
     'hrsh7th/nvim-cmp',
     requires = {
-      { 'f3fora/cmp-spell', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+      { 'f3fora/cmp-spell',     after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-buffer',   after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-calc',     after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-cmdline',  after = 'nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-
+      { 'hrsh7th/cmp-path',     after = 'nvim-cmp' },
       {
         'lukas-reineke/cmp-under-comparator',
         event = {
@@ -69,6 +92,7 @@ local M = {
       },
     },
     event = { 'InsertEnter', 'CmdLineEnter' },
+    commit = 'b5311ab3ed9c846b585c0c15b7559be131ec4be9',
   },
 
   -- pretty list for lsp
@@ -81,6 +105,7 @@ local M = {
     },
     cmd = 'Trouble',
     disable = true,
+    commit = '85bedb7eb7fa331a2ccbecb9202d8abba64d37b3',
   },
 
   -- html super snippets
@@ -95,6 +120,37 @@ local M = {
       'javascript.jsx',
       'typescript.tsx',
     },
+    commit = '6c511a8d7d2863066f32e25543e2bb99d505172cA',
+  },
+
+  -- like lsp but for debugging
+  {
+    'mfussenegger/nvim-dap',
+    keys = {
+      '<Leader>dL',
+      '<Leader>db',
+      '<Leader>dB',
+      '<Leader>dc',
+      '<Leader>de',
+      '<Leader>di',
+      '<Leader>do',
+      '<Leader>dl',
+      '<Leader>dt',
+    },
+    requires = {
+      {
+        'mxsdev/nvim-dap-vscode-js',
+        opt = true,
+        requires = {
+          {
+            'microsoft/vscode-js-debug',
+            opt = true,
+            run = 'npm install --legacy-peer-deps && npm run compile',
+          },
+        },
+      },
+    },
+    commit = '8df427aeba0a06c6577dc3ab82de3076964e3b8d',
   },
 }
 

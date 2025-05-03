@@ -1,7 +1,21 @@
 local M = {
-  { 'rcarriga/nvim-notify' },      -- beautiful notifications
-  { 'kwkarlwang/bufresize.nvim' }, -- preserve window sizes on terminal resize
-  { 'crispgm/nvim-tabline' },      -- display opened tabs (2+)
+  -- beautiful notifications
+  {
+    'rcarriga/nvim-notify',
+    commit = 'b5825cf9ee881dd8e43309c93374ed5b87b7a896',
+  },
+
+  -- preserve window sizes on terminal resize
+  {
+    'kwkarlwang/bufresize.nvim',
+    commit = '3b19527ab936d6910484dcc20fb59bdb12322d8b',
+  },
+
+  -- display opened tabs (2+)
+  {
+    'crispgm/nvim-tabline',
+    commit = '287cd88157f98da76cb32ac7df7ec5c546414ec0',
+  },
 
   -- improve vim.ui
   {
@@ -10,7 +24,11 @@ local M = {
   },
 
   -- colored matching brackets
-  { 'hiphish/rainbow-delimiters.nvim', after = 'nvim-treesitter' },
+  {
+    'hiphish/rainbow-delimiters.nvim',
+    after = 'nvim-treesitter',
+    commit = '55ad4fb76ab68460f700599b7449385f0c4e858e',
+  },
 
   -- colored icons
   {
@@ -25,6 +43,7 @@ local M = {
     'RRethy/vim-hexokinase',
     event = 'CursorHold',
     run = 'make hexokinase',
+    commit = '62324b43ea858e268fb70665f7d012ae67690f43',
   },
 
   -- indent lines
@@ -37,17 +56,18 @@ local M = {
   -- colorcolumn with virtual text
   {
     'lukas-reineke/virt-column.nvim',
-    disable = true,
     event = {
       'CursorHold',
       'CursorMoved',
     },
+    commit = 'b87e3e0864211a32724a2ebf3be37e24e9e2fa99',
   },
 
   -- fancy statusline
   {
     'nvim-lualine/lualine.nvim',
     after = { 'devicons' },
+    commit = '15884cee63a8c205334ab13ab1c891cd4d27101a',
   },
 
   -- show cursor context in statusline

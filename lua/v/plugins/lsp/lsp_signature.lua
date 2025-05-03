@@ -7,7 +7,7 @@ require('lsp_signature').setup({
   transparency = 100,
 
   handler_opts = {
-    border = 'single',
+    border = 'rounded',
   },
 
   fix_pos = function(signatures, client)

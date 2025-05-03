@@ -19,21 +19,56 @@ local M = {
     },
   },
 
-  -- TODO: doesn't work for some reason
-  -- { 'nathom/filetype.nvim' }, -- faster filetype detection
+  -- great utility lua functions
+  {
+    'nvim-lua/plenary.nvim',
+    commit = '857c5ac632080dba10aae49dba902ce3abf91b35',
+  },
 
-  -- TODO: use {'lewis6991/impatient.nvim', rocks = 'mpack'}
-  { 'lewis6991/impatient.nvim' },                                                -- improve startup time
-  { 'antoinemadec/FixCursorHold.nvim' },                                         -- fixes CursorHold and CursorHoldl
-  { 'nvim-lua/plenary.nvim' },                                                   -- great utility lua functions
-  { 'editorconfig/editorconfig-vim' },                                           -- follow .editorconfig files
+  -- follow .editorconfig files
+  {
+    'editorconfig/editorconfig-vim',
+    commit = '6a58b7c11f79c0e1d0f20533b3f42f2a11490cf8',
+  },
 
-  { 'chrisbra/NrrwRgn',               cmd = { 'NR', 'NUD' } },                   -- focus narrow code section
-  { 'dstein64/vim-startuptime',       cmd = 'StartupTime' },                     -- startup profiling
-  { 'folke/which-key.nvim',           event = 'CursorHold' },                    -- displays a popup with keybindings
-  { 'milisims/nvim-luaref',           ft = 'lua' },                              -- lua documentation in :help
-  { 'tpope/vim-repeat',               keys = '.',           fn = 'repeat#set' }, -- enables . repeat for plugins
-  { 'windwp/nvim-autopairs',          event = 'InsertEnter' },                   -- auto pairs for {[()]}
+  -- startup profiling
+  {
+    'dstein64/vim-startuptime',
+    cmd = 'StartupTime',
+    commit = 'b6f0d93f6b8cf6eee0b4c94450198ba2d6a05ff6',
+  },
+
+  -- displays a popup with keybindings
+  {
+    'folke/which-key.nvim',
+    event = {
+      'CursorHold',
+      'CursorMoved',
+    },
+    commit = '370ec46f710e058c9c1646273e6b225acf47cbed',
+  },
+
+  -- lua documentation in :help
+  {
+    'milisims/nvim-luaref',
+    ft = 'lua',
+    commit = '9cd3ed50d5752ffd56d88dd9e395ddd3dc2c7127',
+  },
+
+  -- enables . repeat for plugins
+  {
+    'tpope/vim-repeat',
+    keys = '.',
+    fn = 'repeat#set',
+    commit = '65846025c15494983dafe5e3b46c8f88ab2e9635',
+  },
+
+  -- auto pairs for {[()]}
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    commit = '4d74e75913832866aa7de35e4202463ddf6efd1b',
+  },
 
   -- better <Esc> with jk
   {
@@ -49,11 +84,16 @@ local M = {
       'CursorHold',
       'CursorMoved',
     },
+    commit = '6325416da8f89992b005db3e4517aaef0242602e',
   },
 
   -- pairs of handy bracket maps
   {
     'tpope/vim-unimpaired',
+    event = {
+      'CursorHold',
+      'CursorMoved',
+    },
     keys = {
       '[',
       ']',
@@ -62,6 +102,7 @@ local M = {
       '<Space><Space>',
       'yo',
     },
+    commit = '6d44a6dc2ec34607c41ec78acf81657248580bf1',
   },
 
   -- use nvim in the browser
@@ -72,6 +113,7 @@ local M = {
       vim.fn['firenvim#install'](0)
     end,
     disable = true,
+    commit = 'c4ab7d2aeb145cd93db8660cb134f771722f2b5e',
   },
 
   -- session manager
@@ -100,6 +142,7 @@ local M = {
       { 'o', 'if' },
       { 'o', 'af' },
     },
+    commit = 'b88e64d0987ab3ad7e7aebf94ded656d70c924e3',
   },
 
   -- surrounding manipulatiuon maps
@@ -107,6 +150,7 @@ local M = {
     'tpope/vim-surround',
     after = 'vim-repeat',
     event = { 'CursorMoved', 'CursorHold' },
+    commit = '3d188ed2113431cf8dac77be61b842acb64433d9',
   },
 
   -- word manipulation utilities
@@ -115,6 +159,7 @@ local M = {
     cmd = { 'Abolish', 'Subvert' },
     keys = 'cr',
     after = 'vim-repeat',
+    commit = 'dcbfe065297d31823561ba787f51056c147aa682',
   },
 
   -- maps for toggling comments
@@ -125,23 +170,24 @@ local M = {
     'tpope/vim-commentary',
     cmd = { 'Comment', 'Commentary' },
     keys = { 'gc', { 'v', 'gc' } },
+    commit = '64a654ef4a20db1727938338310209b6a63f60c9',
   },
 
   -- align blocks of code
   -- ALTERNATIVE: vim-tabular
-  -- TODO: invest some time into this
   {
     'junegunn/vim-easy-align',
     cmd = 'EasyAlign',
     keys = '<Leader>a',
+    commit = '9815a55dbcd817784458df7a18acacc6f82b1241',
   },
 
   -- better clipboard
   {
-    'lucasvianav/vim-easyclip',
+    'svermeulen/vim-easyclip',
     event = { 'CursorMoved', 'InsertEnter' },
     after = 'vim-repeat',
-    commit = '37b3ca606166752ec9e62f60e11fe8dfa866bda4',
+    commit = '4601faae051bec8ced37b452b32defca62a633f3',
   },
 
   -- TSDoc docstrings generation
@@ -151,12 +197,14 @@ local M = {
     cmd = { 'JsDoc', 'JsDocFormat' },
     keys = '<Leader>j',
     run = 'make install',
+    commit = '6e5bc2a1f98a69e4902081c9f5969b228a7a5fd6',
   },
 
   -- 2-char search motion
   {
     'ggandor/lightspeed.nvim',
     keys = { '<C-s>', '<C-S-s>' },
+    commit = 'fcc72d8a4d5f4ebba62d8a3a0660f88f1b5c3b05',
   },
 
   -- pulse cursorline after search (easier to find the cursor)
@@ -170,6 +218,7 @@ local M = {
       '*',
       '#',
     },
+    commit = '006934330dc9eab47a09eeee4c8a50a9b4c065b8',
   },
 
   -- custom "indent block" text object
@@ -177,6 +226,7 @@ local M = {
     'kana/vim-textobj-indent',
     requires = { 'kana/vim-textobj-user' },
     event = 'CursorMoved',
+    commit = 'deb76867c302f933c8f21753806cbf2d8461b548',
   },
 
   -- markdown previewer in browser
@@ -185,11 +235,13 @@ local M = {
     'iamcco/markdown-preview.nvim',
     ft = 'markdown',
     run = 'npm install && cd app && npm install',
+    commit = 'a923f5fc5ba36a3b17e289dc35dc17f66d0548ee',
   },
 
   {
     'frabjous/knap',
-    ft = { 'markdown', 'tex', 'plaintex' },
+    ft = { 'tex', 'plaintex' },
+    commit = '7db44d0bb760120142cc1e8f43e44976de59c2f6',
   },
 
   -- project-wide search and replace
@@ -201,6 +253,7 @@ local M = {
       '<Leader>S',
       { 'v', '<Leader>S' },
     },
+    commit = '197150cd3f30eeb1b3fd458339147533d91ac385',
   },
 
   -- exchange motions
@@ -213,41 +266,14 @@ local M = {
       'cxc',
       { 'v', 'X' },
     },
+    commit = 'd6c1e9790bcb8df27c483a37167459bbebe0112e',
   },
 
   {
     'untitled-ai/jupyter_ascending.vim',
     event = 'BufEnter *.sync.py',
     disable = true,
-  },
-
-  -- lsp but for debugging
-  {
-    'mfussenegger/nvim-dap',
-    keys = {
-      '<Leader>dL',
-      '<Leader>db',
-      '<Leader>dB',
-      '<Leader>dc',
-      '<Leader>de',
-      '<Leader>di',
-      '<Leader>do',
-      '<Leader>dl',
-      '<Leader>dt',
-    },
-    requires = {
-      {
-        'mxsdev/nvim-dap-vscode-js',
-        opt = true,
-        requires = {
-          {
-            'microsoft/vscode-js-debug',
-            opt = true,
-            run = 'npm install --legacy-peer-deps && npm run compile',
-          },
-        },
-      },
-    },
+    commit = '8b0f533fbf7f48d12feddedc10b78c53afa41bc2',
   },
 }
 

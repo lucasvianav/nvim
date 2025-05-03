@@ -17,14 +17,10 @@ for _, server in ipairs(utils.servers) do
   end
 
   if server == 'lua_ls' then
-    local is_packer_loaded, packer = require('v.utils.packer').get_packer()
-    if is_packer_loaded then
-      packer.loader('neodev')
-    end
+    local lazydev_loaded, lazydev = require('v.utils.packer').load_and_require_plugin('lazydev')
 
-    local neodev_loaded, neodev = pcall(require, 'neodev')
-    if neodev_loaded then
-      neodev.setup({})
+    if lazydev_loaded then
+      lazydev.setup({})
       config = {
         settings = {
           Lua = {

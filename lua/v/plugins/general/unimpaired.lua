@@ -3,6 +3,7 @@
 
 local feedkeys = vim.api.nvim_feedkeys
 local t = require('v.utils.wrappers').termcode
+local exec = vim.api.nvim_exec2
 
 ---Adds `count` blank lines above the selection.
 ---@param count? number
@@ -19,14 +20,14 @@ local blank_up_selection = function(count)
   local visual_line = vim.fn.line('v') + vim.v.count1
 
   local higher_line = math.min(vim.fn.line('.'), vim.fn.line('v'))
-  vim.api.nvim_exec(higher_line .. 'put!=repeat(nr2char(10), ' .. count .. ')', false)
+  exec(higher_line .. 'put!=repeat(nr2char(10), ' .. count .. ')', { output = false })
 
   -- makes sure it's in normal mode
-  vim.api.nvim_exec('normal \\<Esc>', false)
+  exec('normal \\<Esc>', { output = false })
 
   -- restores selection
   local select = ('normal %sGV%sG%s|'):format(visual_line, cursor_line, cursor_col)
-  vim.api.nvim_exec(select, false)
+  exec(select, { output = false })
 end
 
 ---Adds `count` blank lines below the selection.
@@ -44,14 +45,14 @@ local blank_down_selection = function(count)
   local visual_line = vim.fn.line('v')
 
   local lower_line = math.max(cursor_line, visual_line)
-  vim.api.nvim_exec(lower_line .. 'put=repeat(nr2char(10),' .. count .. ')', false)
+  exec(lower_line .. 'put=repeat(nr2char(10),' .. count .. ')', { output = false })
 
   -- makes sure it's in normal mode
-  vim.api.nvim_exec('normal \\<Esc>', false)
+  exec('normal \\<Esc>', { output = false })
 
   -- restores selection
   local select = ('normal %sGV%sG%s|'):format(visual_line, cursor_line, cursor_col)
-  vim.api.nvim_exec(select, false)
+  exec(select, { output = false })
 end
 
 ---Adds blank lines around the selection.
@@ -86,8 +87,8 @@ local duplicate_line = function(up)
   end
 
   local cmd =
-    string.rep('copy ' .. (dupl_dir_up and '-1' or '+0') .. ' | ', dupl_count):gsub(' | $', '')
-  vim.api.nvim_exec('silent!' .. cmd, false)
+      string.rep('copy ' .. (dupl_dir_up and '-1' or '+0') .. ' | ', dupl_count):gsub(' | $', '')
+  exec('silent!' .. cmd, { output = false })
 
   vim.fn['repeat#set'](t('<Plug>DuplicateLineRepeat'), dupl_count)
 end
@@ -117,14 +118,14 @@ local duplicate_selection = function(up)
   local i = 0
   while i < dupl_count do
     local cmd = range .. 'copy -1 | normal ' .. higher_line .. 'G'
-    vim.api.nvim_exec('silent! ' .. cmd, false)
+    exec('silent! ' .. cmd, { output = false })
     i = i + 1
   end
 
   -- if the direction was not up, fix the selection
   if not up then
     -- leave visual mode
-    vim.api.nvim_exec('silent! normal! ' .. t('<Esc>'), false)
+    exec('silent! normal! ' .. t('<Esc>'), { output = false })
 
     -- calculate the bottomost selection selection's
     -- position (length*i is the final offset)
@@ -133,14 +134,14 @@ local duplicate_selection = function(up)
 
     -- create a new selection maintaining the cursor column
     local cmd = 'normal ' .. new_visual_line .. 'GV' .. new_cursor_line .. 'G' .. cursor_col .. '|'
-    vim.api.nvim_exec('silent! ' .. cmd, false)
+    exec('silent! ' .. cmd, { output = false })
   end
 
   vim.fn['repeat#set'](t('<Plug>DuplicateSelectionRepeat'), dupl_count)
 end
 
 -- :c
-vim.api.nvim_exec(
+exec(
   [[
     function! ExecMove(cmd) abort
       let old_fdm = &foldmethod
@@ -172,22 +173,22 @@ vim.api.nvim_exec(
     noremap  <silent> <Plug>unimpairedMoveKeepSelectionUp   :<C-U>call MoveKeepSelectionUp(v:count1)<CR>
     noremap  <silent> <Plug>unimpairedMoveKeepSelectionDown :<C-U>call MoveKeepSelectionDown(v:count1)<CR>
 ]],
-  false
+  { output = false }
 )
 
 require('v.utils.mappings').set_keybindings({
   -- <Space><Space> surrounds current line
   -- or selection with [count] blank lines
-  { { 'n', 'x' }, '<Space><Space>', blank_around, nowait = false },
-  { 'x', '[<Space>', blank_up_selection },
-  { 'x', ']<Space>', blank_down_selection },
+  { { 'n', 'x' }, '<Space><Space>', blank_around,                           nowait = false },
+  { 'x',          '[<Space>',       blank_up_selection },
+  { 'x',          ']<Space>',       blank_down_selection },
 
   -- alt + j/k moves current line or
   -- selection [count] lines up/down
-  { 'n', '<M-k>', '<Plug>unimpairedMoveUp' },
-  { 'n', '<M-j>', '<Plug>unimpairedMoveDown' },
-  { 'x', '<M-k>', '<Plug>unimpairedMoveKeepSelectionUp' },
-  { 'x', '<M-j>', '<Plug>unimpairedMoveKeepSelectionDown' },
+  { 'n',          '<M-k>',          '<Plug>unimpairedMoveUp' },
+  { 'n',          '<M-j>',          '<Plug>unimpairedMoveDown' },
+  { 'x',          '<M-k>',          '<Plug>unimpairedMoveKeepSelectionUp' },
+  { 'x',          '<M-j>',          '<Plug>unimpairedMoveKeepSelectionDown' },
 
   -- [d, ]d duplicates [count] lines above/below
   {
@@ -218,6 +219,6 @@ require('v.utils.mappings').set_keybindings({
       duplicate_selection(false)
     end,
   },
-  { 'n', '<Plug>DuplicateLineRepeat', duplicate_line },
+  { 'n', '<Plug>DuplicateLineRepeat',      duplicate_line },
   { 'x', '<Plug>DuplicateSelectionRepeat', duplicate_selection },
 })

@@ -7,6 +7,7 @@
 
 -- list of desired treesitter parsers
 local parsers = {
+  'angular',
   'bash',
   'bibtex',
   'c',
