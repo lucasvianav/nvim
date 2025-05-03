@@ -27,8 +27,8 @@ local function __get_plugin_name(arg)
   local name = ''
 
   local re = {
-    leadingPath = [[^.\+\/]], -- matches leading path
-    extension = [[\.[^.]\+$]], -- matches trailing extension
+    leadingPath = [[^.\+\/]],               -- matches leading path
+    extension = [[\.[^.]\+$]],              -- matches trailing extension
 
     vim = [[[-_]n\?vim\|n\?vim]] .. '[-_]', -- matches "-vim" or "vim-" (also nvim and _)
     lua = [[[-_]n\?lua\|n\?lua]] .. '[-_]', -- matches "-lua" or "lua-" (also _)
@@ -113,10 +113,10 @@ local function __get_plugin_table(args, plugin_type, category)
       else
         vim.notify(
           'The plugin "'
-            .. name
-            .. '" was not found at: "'
-            .. args[1]
-            .. '". No fallback was provided.',
+          .. name
+          .. '" was not found at: "'
+          .. args[1]
+          .. '". No fallback was provided.',
           'error'
         )
 
@@ -174,7 +174,8 @@ local M = {}
 M.path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 M.compile_path = fn.stdpath('config') .. '/lua/packer_compiled.lua'
 
---- Loads packer.nvim (since it's lazy-loaded) and pcall requires it.
+---Loads packer.nvim (since it's lazy-loaded) and pcall requires it.
+---@return boolean, table
 function M.get_packer()
   pcall(cmd, 'packadd packer.nvim')
   local is_loaded, packer = pcall(require, 'packer')
@@ -210,48 +211,74 @@ function M.setup_plugins(packer)
     end
   end
 
-  local table = {
+  __load_plugins({
     plugins = require('v.packer.plugins'),
     themes = require('v.packer.themes'),
-  }
-
-  __load_plugins(table, packer.use)
+  }, packer.use)
 end
 
-function M.setup(packer)
-  if not packer then
-    local is_loaded
-    is_loaded, packer = M.get_packer()
+---@return table packer
+function M.setup()
+  local is_loaded, packer = M.get_packer()
 
-    if not is_loaded then
-      return
-    end
+  if not packer or not is_loaded then
+    vim.notify("Couldn't init packer.", vim.log.levels.ERROR, { title = 'Packer' })
+    return {}
   end
 
   M.init(packer)
   M.setup_plugins(packer)
+
+  return packer
 end
 
 function M.is_plugin_loaded(plugin)
   local plugin_list = packer_plugins or {}
-  return plugin_list[plugin] and plugin_list[plugin].loaded
+  return plugin_list[plugin] and plugin_list[plugin].loaded or false
 end
 
 function M.is_plugin_installed(plugin)
   local plugin_list = packer_plugins or {}
-  return plugin_list[plugin]
+  return plugin_list[plugin] or false
 end
 
 ---@param plugin_name string
+---@return boolean loaded
 function M.load_plugin(plugin_name)
-  require('packer').loader(plugin_name)
+  local packer_ok, packer = M.get_packer()
+
+  if not packer_ok then
+    return false
+  elseif not M.is_plugin_installed(plugin_name) then
+    vim.notify(
+      "Couldn't load `" .. plugin_name .. '` because it is not installed.',
+      vim.log.levels.ERROR,
+      { title = 'Error - Packer' }
+    )
+    return false
+  elseif M.is_plugin_loaded(plugin_name) then
+    return true
+  end
+
+  local loaded, _ = pcall(packer.loader, plugin_name)
+
+  if not loaded then
+    vim.notify("Couldn't load `" .. plugin_name .. '`.', vim.log.levels.ERROR, {
+      title = 'Error - Packer',
+    })
+  end
+
+  return loaded and M.is_plugin_loaded(plugin_name)
 end
 
 ---@param plugin_name string
----@return table plugin the required plugin
+---@return boolean, table plugin the required plugin
 function M.load_and_require_plugin(plugin_name)
-  require('packer').loader(plugin_name)
-  return require(plugin_name)
+  if not M.load_plugin(plugin_name) then
+    return false, {}
+  end
+
+  return pcall(require, plugin_name)
 end
 
 return M

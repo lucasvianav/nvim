@@ -1,7 +1,7 @@
 local fn = vim.fn
 local utils = require('v.utils.packer')
 
-local is_loaded, packer = pcall(require, 'packer')
+local is_loaded, packer = utils.get_packer()
 local exists = (fn.isdirectory(utils.path) == 1)
 
 if not is_loaded and not exists then
@@ -18,14 +18,9 @@ if not is_loaded and not exists then
     utils.path,
   })
 
-  is_loaded, packer = utils.get_packer()
-
-  if is_loaded then
-    utils.setup(packer)
-    packer.sync()
-  else
-    vim.api.nvim_notify('Shit happened.', vim.log.levels.ERROR, { title = 'Packer' })
-  end
+  packer = utils.setup()
+  pcall(packer.sync)
 else
+  utils.setup()
   pcall(require, 'packer_compiled')
 end
