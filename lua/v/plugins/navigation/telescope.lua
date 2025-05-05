@@ -12,7 +12,7 @@ telescope.setup({
     color_devicons = true,
 
     set_env = { ['COLORTERM'] = 'truecolor' },
-    path_display = { 'absolute' },
+    path_display = { 'smart' },
 
     file_ignore_patterns = {
       '%.jpg',
