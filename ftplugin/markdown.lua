@@ -1,3 +1,9 @@
+-- in case it's a signature buffer
+if vim.api.nvim_get_option_value('buftype', {buf = 0}) == 'nofile' then
+  vim.api.nvim_command('setlocal nospell')
+  return
+end
+
 local o = vim.opt_local
 
 o.textwidth = 0
@@ -8,7 +14,6 @@ o.wrap = true
 -- doesn't work. maybe open an issue?
 -- swap it for vim.wo (it's a window option)
 vim.api.nvim_command('setlocal spell')
-
 require('v.utils.mappings').set_keybindings({
   { 'i', '<C-i>', '<C-c>xsiw*lf*a' },
   { 'i', '<C-h>', '<C-c>xsiw`lf`a' },
