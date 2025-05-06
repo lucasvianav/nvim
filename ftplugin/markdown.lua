@@ -1,5 +1,5 @@
 -- in case it's a signature buffer
-if vim.api.nvim_get_option_value('buftype', {buf = 0}) == 'nofile' then
+if vim.api.nvim_get_option_value('buftype', { buf = 0 }) == 'nofile' then
   vim.api.nvim_command('setlocal nospell')
   return
 end
@@ -23,6 +23,13 @@ require('v.utils.mappings').set_keybindings({
   { 'i', '<M-b>', '<C-c>xsiW*l.l2f*a' },
   { 'v', '<C-i>', 'S*' },
   { 'v', '<C-b>', 'S*gvS*' },
+  {
+    'n',
+    '<Leader>fh',
+    function()
+      require('telescope').extensions.heading.heading()
+    end,
+  },
 }, {
   buffer = true,
   remap = true,

@@ -12,7 +12,7 @@ telescope.setup({
     color_devicons = true,
 
     set_env = { ['COLORTERM'] = 'truecolor' },
-    path_display = { 'smart' },
+    path_display = { 'truncate' },
 
     file_ignore_patterns = {
       '%.jpg',
@@ -119,20 +119,25 @@ telescope.setup({
     git_branches = utils.pickers.center_dropdown,
     diagnostics = utils.pickers.center_dropdown,
   },
+  extensions = {
+    wrap_results = true,
+    fzf = {},
+  }
 })
 
-telescope.load_extension('fzf')
+pcall(telescope.load_extension, 'fzf')
 
 require('v.utils.mappings').set_keybindings({
   -- general
   { 'n', '<Leader>ff',  builtin.find_files },
   { 'n', '<Leader>fr',  builtin.resume },
-  { 'n', '<Leader>fp',  builtin.live_grep },
-  { 'n', '<Leader>fpc', utils.grep_cur_dir },
+  { 'n', '<Leader>fpp',  utils.multi_grep },
+  { 'n', '<Leader>fp', utils.grep_cur_dir },
   { 'n', '<Leader>fb',  builtin.buffers },
   { 'n', '<Leader>fco', builtin.commands },
   { 'n', '<Leader>fch', builtin.command_history },
   { 'n', '<Leader>fj',  builtin.jumplist },
+  { 'n', '<Leader>fh',  builtin.help_tags },
   { 'n', 'z=',          builtin.spell_suggest },
 
   -- lsp
@@ -146,14 +151,20 @@ require('v.utils.mappings').set_keybindings({
       builtin.diagnostics({ bufnr = 0 })
     end,
   },
-  { 'n', '<Leader>fgw', builtin.diagnostics },
+  { 'n', '<Leader>fgg', builtin.diagnostics },
+  {
+    { 'n', 'v' },
+    '<Leader>ca',
+    function()
+      vim.lsp.buf.code_action()
+    end,
+  },
 
   -- git
   { 'n', '<Leader>gb',  builtin.git_branches },
   { 'n', '<Leader>gc',  builtin.git_commits },
 
   -- extensions
-  { 'n', '<Leader>fh',  telescope.extensions.heading.heading },
   {
     'n',
     '<Leader>fs',
@@ -165,16 +176,4 @@ require('v.utils.mappings').set_keybindings({
   { 'n', '<leader>fk',  utils.find_in_plugins },
   { 'n', '<leader>fd',  utils.find_dotfiles },
   { 'n', '<leader>f/',  utils.grep_last_search },
-  { 'n', '<leader>fu',  utils.find_unimed },
-  { 'n', '<leader>fw',  utils.find_work },
-  { 'n', '<leader>fpu', utils.grep_unimed },
-
-  -- code actions
-  {
-    { 'n', 'v' },
-    '<Leader>ca',
-    function()
-      vim.lsp.buf.code_action()
-    end,
-  },
 })

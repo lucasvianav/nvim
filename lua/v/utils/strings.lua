@@ -4,7 +4,7 @@ local M = {}
 ---@param input_str string The string to split
 ---@param sep string? The separator to use
 ---@return table table A table of strings
-M.split = function(input_str, sep)
+string.split = function(input_str, sep)
   if sep == nil then
     sep = "%s"
   end
@@ -18,5 +18,7 @@ M.split = function(input_str, sep)
 
   return parts
 end
+
+M.split = string.split
 
 return M

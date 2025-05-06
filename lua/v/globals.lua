@@ -11,8 +11,12 @@ end
 function _G.P(...)
   return wrappers.inspect(...)
 end
+
 vim.print = _G.P
 
 function _G.D(...)
   return wrappers.dump_text(...)
 end
+
+-- load string globals
+require('v.utils.strings')
