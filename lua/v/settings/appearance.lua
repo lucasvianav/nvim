@@ -27,6 +27,7 @@ o.sidescrolloff = 5     -- number of screen columns around cursor
 o.signcolumn = 'yes:2'  -- always display 2 signcolumns
 o.termguicolors = true  -- true color support
 o.wrap = false          -- don't wrap lines by default
+o.cmdwinheight = 1      -- height for cmdline-window
 
 -- only the chosen colorscheme
 -- will be loaded by packer :)
@@ -69,6 +70,13 @@ o.fillchars = {
   fold = ' ',
   stl = ' ',
   stlnc = ' ',
+}
+
+-- change cursor shape depending on mode
+o.guicursor = {
+  'n-v-c-sm:block',
+  'i-ci-ve:ver25',
+  'r-cr-o:hor20',
 }
 
 return M

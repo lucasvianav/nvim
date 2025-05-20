@@ -42,6 +42,7 @@ require('v.utils.abbreviations').set_abbreviations({
   -- sessions
   { 'SS',   'SessionSave' },
   { 'SD',   'SessionDelete' },
+  { 'DS',   'SessionDelete' },
 
   -- tabs
   { 'tq',   'tabclose' },

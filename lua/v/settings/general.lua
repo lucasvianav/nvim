@@ -122,14 +122,13 @@ o.path:append({
 
 -- what to save in a session
 o.sessionoptions = {
-  'curdir',       -- cwd
-  'help',         -- help window
-  'winsize',      -- window sizes
-  'tabpages',     -- tabpages (welp)
-  'winpos',       -- Neovim window's position
-  'folds',        -- folding state
-  'tabpages',     -- tabs
+  'curdir',
+  'folds',
+  'help',
   'localoptions', -- needed to starts highlights
+  'tabpages',
+  'winpos',
+  'winsize',
 }
 
 -- messages
