@@ -15,8 +15,8 @@ require('lightspeed').setup({
 
 local map = require('v.utils.mappings').map
 
-map('n', '<C-s>', '<Plug>Lightspeed_s')
+map({ 'n', '<C-s>', '<Plug>Lightspeed_s' })
 
 -- I used to use <C-M-S>, but then I learned to config
 -- Kitty to correctly expose ctrl + shift + s as <C-S-s>
-map('n', '<C-S-s>', '<Plug>Lightspeed_S')
+map({ 'n', '<C-S-s>', '<Plug>Lightspeed_S' })

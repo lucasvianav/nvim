@@ -122,58 +122,74 @@ telescope.setup({
   extensions = {
     wrap_results = true,
     fzf = {},
-  }
+  },
 })
 
 pcall(telescope.load_extension, 'fzf')
 
 require('v.utils.mappings').set_keybindings({
   -- general
-  { 'n', '<Leader>ff',  builtin.find_files },
-  { 'n', '<Leader>fr',  builtin.resume },
-  { 'n', '<Leader>fpp',  utils.multi_grep },
-  { 'n', '<Leader>fp', utils.grep_cur_dir },
-  { 'n', '<Leader>fb',  builtin.buffers },
-  { 'n', '<Leader>fco', builtin.commands },
-  { 'n', '<Leader>fch', builtin.command_history },
-  { 'n', '<Leader>fj',  builtin.jumplist },
-  { 'n', '<Leader>fh',  builtin.help_tags },
-  { 'n', 'z=',          builtin.spell_suggest },
+  { 'n', '<Leader>ff', builtin.find_files, desc = 'Find Files' },
+  { 'n', '<Leader>fr', builtin.resume,     desc = 'Resume Last Search' },
+  {
+    'n',
+    '<Leader>fp',
+    utils.grep_cur_dir,
+    desc = 'Grep Current Dir',
+    { nowait = false },
+  },
+  { 'n', '<Leader>fpp', utils.multi_grep,            desc = 'Grep' },
+  { 'n', '<Leader>fb',  builtin.buffers,             desc = 'Find Buffers' },
+  { 'n', '<Leader>fco', builtin.commands,            desc = 'Find Commands' },
+  { 'n', '<Leader>fch', builtin.command_history,     desc = 'Find Command History' },
+  { 'n', '<Leader>fj',  builtin.jumplist,            desc = 'Find Jumplist' },
+  { 'n', '<Leader>fh',  builtin.help_tags,           desc = 'Find Help' },
+  { 'n', 'z=',          builtin.spell_suggest,       desc = 'Spelling Suggestions' },
 
   -- lsp
-  { 'n', 'gd',          builtin.lsp_definitions },
-  { 'n', 'gr',          builtin.lsp_references },
-  { 'n', 'gi',          builtin.lsp_implementations },
+  { 'n', 'gd',          builtin.lsp_definitions,     desc = 'Goto Definition' },
+  { 'n', 'gr',          builtin.lsp_references,      desc = 'Goto References' },
+  { 'n', 'gi',          builtin.lsp_implementations, desc = 'Goto Implementation' },
   {
     'n',
     '<Leader>fg',
     function()
       builtin.diagnostics({ bufnr = 0 })
     end,
+    desc = 'Diagnostics in Cur Buf',
   },
-  { 'n', '<Leader>fgg', builtin.diagnostics },
+  { 'n', '<Leader>fgg', builtin.diagnostics,  desc = 'Diagnostics Workspace' },
   {
     { 'n', 'v' },
     '<Leader>ca',
     function()
       vim.lsp.buf.code_action()
     end,
+    desc = 'Code Actions',
   },
 
   -- git
-  { 'n', '<Leader>gb',  builtin.git_branches },
-  { 'n', '<Leader>gc',  builtin.git_commits },
+  { 'n', '<Leader>gb',  builtin.git_branches, desc = 'Git Branches' },
+  { 'n', '<Leader>gc',  builtin.git_commits,  desc = 'Git Commits' },
+  { 'n', '<Leader>gs',  builtin.git_status,   desc = 'Git Status' },
 
   -- extensions
   {
     'n',
     '<Leader>fs',
     [[<cmd>lua require('telescope').extensions['session-lens'].search_session()<cr>]],
+    desc = 'Neovim Sessions',
   },
 
   -- custom functions
-  { 'n', '<leader>fn',  utils.find_nvim },
-  { 'n', '<leader>fk',  utils.find_in_plugins },
-  { 'n', '<leader>fd',  utils.find_dotfiles },
-  { 'n', '<leader>f/',  utils.grep_last_search },
+  { 'n', '<leader>fn',  utils.find_nvim,        desc = 'Find Neovim Dotfiles' },
+  { 'n', '<leader>fk',  utils.find_in_plugins,  desc = 'Find Plugins' },
+  { 'n', '<leader>fpk', utils.grep_in_plugins,  desc = 'Grep Plugins' },
+  { 'n', '<leader>fd',  utils.find_dotfiles,    desc = 'Find Dotfiles' },
+  { 'n', '<leader>f/',  utils.grep_last_search, desc = 'Grep Last /' },
+
+  groups = {
+    { '<leader>f', 'Find' },
+    { '<leader>g', 'Git (Find)' },
+  },
 })

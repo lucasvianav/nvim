@@ -3,152 +3,96 @@
 
 local wk = require('which-key')
 
+---@param str string
+---@return boolean
+local function __is_function_ref(str)
+  local _, count = str:gsub('^function: 0x', '')
+  return count > 0
+end
+
+---@diagnostic disable-next-line: missing-fields
 wk.setup({
+  preset = 'modern',
+  expand = 2,
+  ignore_missing = true,
+  show_help = true,
+  notify = true,
+  delay = 300,
+
+  filter = function(m)
+    return m.desc and m.desc ~= '' and not __is_function_ref(m.desc)
+  end,
   plugins = {
     marks = true,
     registers = false,
     spelling = { enabled = false },
-
-    -- help for built-in stuff
     presets = {
       operators = false,
       motions = false,
       text_objects = false,
       windows = true,
       nav = false,
-      z = true,
-      g = true,
+      z = false,
+      g = false,
     },
   },
-
-  key_labels = {
-    ['<space>'] = 'SPC',
-    ['<cr>'] = 'ENT',
-    ['<tab>'] = 'TAB',
-  },
-
   icons = {
     breadcrumb = '»', -- shows your active key combo
     separator = '➜', -- used between a key and it's label
     group = '+', -- prepended to a group
-  },
-
-  window = {
-    border = 'single',
-    position = 'bottom',
-    margin = { 1, 0, 0, 0 },
-    padding = { 2, 2, 2, 2 },
-  },
-
-  hidden = {
-    '<silent>',
-    '<cmd>',
-    '<Cmd>',
-    '<CR>',
-    'call',
-    'lua',
-    '^:',
-    '^ ',
-  },
-
-  ignore_missing = true, -- hide mappings with no label
-  show_help = true, -- help message on the command line w/ popup visible
-  -- triggers = {'<leader>'} -- or specify a list manually
-})
-
-local opts = {
-  mode = 'n',
-  prefix = '<Leader>',
-  silent = true,
-  noremap = true,
-  nowait = true,
-}
-
-local mappings = {
-  ['<space>'] = 'surround in blanklines',
-  a = 'easyalign',
-  e = 'nvimtree',
-  j = 'jsdoc',
-  n = 'hide highlights',
-  r = 'ranger',
-  S = 'spectre',
-
-  h = { 'split below' },
-  q = { '<cmd>BufClose<cr>', 'close buffer' },
-  v = { 'split right' },
-
-  s = {
-    name = '???',
-    i = 'Sort imports',
-  },
-
-  w = {
-    name = '???',
-    q = 'buffer :wq',
-  },
-
-  r = {
-    name = '???',
-    n = 'rename symbol',
-  },
-
-  f = {
-    name = 'find',
-    ['/'] = 'in current buffer',
-    b = 'buffers',
-    c = 'commands',
-    ch = 'command history',
-    e = 'emojis',
-    f = 'files',
-    g = 'diagnostics',
-    gw = 'workspace diagnostics',
-    h = 'markdown headings',
-    j = 'jumplist',
-    p = 'pattern (grep)',
-    r = 'file history',
-    s = 'sessions',
-  },
-
-  g = {
-    name = 'git',
-    b = 'open in browser (github, bitbucket)',
-    c = 'commits',
-    s = 'status',
-    d = 'merge diff',
-    h = 'merge from left (target branch)',
-    l = 'merge from right (merge branch)',
-    i = 'git blame (info)',
-    m = 'git messenger',
-  },
-
-  c = {
-    name = '???',
-    a = 'Code Actions',
-  },
-
-  t = {
-    name = 'tmux',
-    p = 'prompt for command',
-    r = 'repeats last command',
-    i = 'inspect runner page',
-    z = 'zooom tmux pane',
-    c = 'clear tmux pane',
-    t = 'toggle tmux pane',
-  },
-}
-
-wk.register(mappings, opts)
-
--- remove floating window BG
-vim.cmd([[ hi! WhichKeyFloat ctermbg=NONE guibg=NONE ]])
-
--- hides cursorline
-require('v.utils.autocmds').augroup('WhichKeyStatusLine', {
-  {
-    event = 'FileType',
-    opts = {
-      pattern = 'WhichKey',
-      command = 'set noruler | autocmd BufLeave <buffer> set ruler',
+    keys = {
+      Up = '<up>',
+      Down = '<down>',
+      Left = '<left>',
+      Right = '<right>',
+      C = '<ctrl>',
+      M = '<alt>',
+      D = '<cmd>',
+      S = '<shift>',
+      CR = '<cr>',
+      Esc = '<esc>',
+      ScrollWheelDown = '󱕐 ',
+      ScrollWheelUp = '󱕑 ',
+      NL = '<nl>',
+      BS = '<bs>',
+      Space = '󱁐 ',
+      Tab = '<tab>',
+      F1 = '<F1>',
+      F2 = '<F2>',
+      F3 = '<F3>',
+      F4 = '<F4>',
+      F5 = '<F5>',
+      F6 = '<F6>',
+      F7 = '<F7>',
+      F8 = '<F8>',
+      F9 = '<F9>',
+      F10 = '<F10>',
+      F11 = '<F11>',
+      F12 = '<F12>',
     },
   },
+  win = {
+    no_overlap = false,
+    border = 'rounded',
+    -- row = 34,
+    -- col = 20,
+    -- height = 15,
+    -- width = 270,
+    -- position = 'bottom',
+    padding = { 2, 2 },
+  },
 })
+
+-- extend the background to below the border
+require('v.utils.highlights').highlight('WhichKeyBorder', { link = 'WhichKeyNormal' })
+
+-- TODO: hide cursor in whichkey window (see :h winhighlight)
+-- require('v.utils.autocmds').augroup('WhichKeyStatusLine', {
+--   {
+--     event = 'FileType',
+--     opts = {
+--       pattern = 'wk',
+--       command = 'set noruler | autocmd BufLeave <buffer> set ruler',
+--     },
+--   },
+-- })

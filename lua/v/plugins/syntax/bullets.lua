@@ -9,4 +9,4 @@ require('v.utils').set_viml_options('bullets', {
   renumber_on_change = true,
 })
 
-require('v.utils.mappings').map('i', '<S-TAB>', '<C-D>', { remap = true })
+require('v.utils.mappings').map({ 'i', '<S-TAB>', '<C-D>', { remap = true } })

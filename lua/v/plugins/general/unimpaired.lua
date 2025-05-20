@@ -179,7 +179,7 @@ exec(
 require('v.utils.mappings').set_keybindings({
   -- <Space><Space> surrounds current line
   -- or selection with [count] blank lines
-  { { 'n', 'x' }, '<Space><Space>', blank_around,                           nowait = false },
+  { { 'n', 'x' }, '<Space><Space>', blank_around,                           { nowait = false } },
   { 'x',          '[<Space>',       blank_up_selection },
   { 'x',          ']<Space>',       blank_down_selection },
 

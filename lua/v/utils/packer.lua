@@ -55,7 +55,7 @@ local function __get_config_setup_str(module, plugin_name, is_theme)
   local require_str = ([[
         local ok, module = pcall(require, '%s')
 
-        if not ok then
+        if false and not ok then
             require('v.utils.log').log(module)
         end
     ]]):format(module)
