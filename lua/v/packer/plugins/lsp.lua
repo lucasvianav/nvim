@@ -55,14 +55,17 @@ local M = {
     commit = 'aa47c5e29c37c52176c44e61c780032dfacef3dd',
   },
 
-  -- easier way to install language servers
+  -- language server manager
   {
-    'williamboman/mason.nvim',
+    'mason-org/mason.nvim',
     after = 'nvim-lspconfig',
     requires = {
-      { 'williamboman/mason-lspconfig.nvim' },
+      {
+        'mason-org/mason-lspconfig.nvim',
+        commit = 'a3f07c36b24136d4e238f58c196daf5bed5e70be',
+      },
     },
-    commit = 'fc98833b6da5de5a9c5b1446ac541577059555bekA,',
+    commit = 'f74983e782b7394f5737df99f8823e196a23291d',
   },
 
   -- code completion
