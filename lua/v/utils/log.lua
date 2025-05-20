@@ -24,7 +24,7 @@ function M.log(...)
 
   fp:seek('end')
   fp:write(string.format('%s/%s/%s - %s:%s:%s :::\n', unpack(date)))
-  fp:write(content)
+  fp:write(debug.traceback(content))
   fp:write('\n================================================\n\n\n\n\n')
 
   fp:close()

@@ -2,35 +2,27 @@ local M = {}
 
 M.colors = require('v.utils.colors')
 
+---@class HighlighDefinition: vim.api.keyset.highlight
+---@field transparent? boolean
+
 ---Wrapper for defining highlights like with `:highlight`
 ---@param groups string|string[] the highlighting groups' names
----@param tbl table<string,any> the highlighting modifications
----@return nil
-M.highlight = function(groups, tbl)
-  if type(groups) == 'string' then
-    groups = { groups }
-  end
+---@param hldef HighlighDefinition the highlighting modifications
+M.highlight = function(groups, hldef)
+  ---@cast groups string[]
+  groups = type(groups) == 'string' and { groups } or groups
 
-  if
-    type(groups) ~= 'table'
-    or type(tbl) ~= 'table'
-    or (tbl.link and type(tbl.link) ~= 'string')
-  then
-    vim.api.nvim_notify('Invalid parameter(s).', vim.log.levels.ERROR, {
-      title = 'Highlights',
-    })
-    require('v.utils.wrappers').inspect(groups, tbl)
-    return
-  end
+  vim.validate('hldef', hldef, 'table')
+  vim.validate('hldef.link', hldef.link, 'string', true)
 
-  if tbl.transparent then
-    tbl.ctermbg = 'NONE'
-    tbl.bg = 'NONE'
-    tbl.transparent = nil
+  if hldef.transparent then
+    hldef.ctermbg = 'NONE'
+    hldef.bg = 'NONE'
+    hldef.transparent = nil
   end
 
   for _, group in ipairs(groups) do
-    vim.api.nvim_set_hl(0, group, tbl)
+    vim.api.nvim_set_hl(0, group, hldef)
   end
 end
 
