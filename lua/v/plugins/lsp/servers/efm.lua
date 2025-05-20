@@ -118,7 +118,8 @@ local mypy = {
 
 -- linter for python
 local flake8 = {
-  lintCommand = "flake8 --max-line-length 80 --ignore E203,F841 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
+  lintCommand =
+  "flake8 --max-line-length 80 --ignore E203,F841 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
   lintStdin = true,
   lintIgnoreExitCode = true,
   lintFormats = { '%f:%l:%c: %t%n%n%n %m' },
@@ -187,6 +188,27 @@ local hlint = {
     }
 ]]
 
+local ktlint_default_config = {
+  ruleset_version = nil,
+  baseline_file = nil,
+  ruleset_jar = nil
+}
+
+-- kotlin
+local ktlint = {
+  lintCommand = "ktlint --stdin",
+  lintFormats = {
+    "%f:%l:%c: %m",
+  },
+  lintStdin = true,
+  formatCommand = "ktlint -R " .. ktlint_default_config .. "-F --stdin || true",
+  formatStdin = true,
+  rootMarkers = {
+    'ktlint-baseline.xml',
+    'BUILD.bazel',
+  },
+}
+
 local M = {
   init_options = {
     codeAction = false,
@@ -212,6 +234,7 @@ local M = {
     'vim',
     'yaml',
     'haskell',
+    'kotlin',
   },
   root_dir = vim.loop.cwd,
   settings = {
@@ -231,6 +254,8 @@ local M = {
       'requirements.txt',
       'hie.yaml',
       'stack.yaml',
+      'ktlint-baseline.xml',
+      'BUILD.bazel',
     },
     lintDebounce = 200,
     lint_debounce = 200,
@@ -250,10 +275,12 @@ local M = {
       json = { prettierd },
       scss = { prettierd },
       yaml = { prettierd },
+
       vim = { vint },
       lua = { stylua },
       sql = { sqlint },
       haskell = { hlint },
+      kotlin = { ktlint },
 
       python = {
         black,

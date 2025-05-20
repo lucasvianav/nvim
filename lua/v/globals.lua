@@ -32,3 +32,6 @@ vim.deprecate = function(...)
     return __vim_deprecate(...)
   end
 end
+
+---
+_G.local_config = {}
