@@ -27,7 +27,7 @@ M.join = function(...)
   end
 
   for _, arg in ipairs(args) do
-    vim.list_extend(all_parts, require('v.utils.strings').split(arg, M.path_separator))
+    vim.list_extend(all_parts, string.split(arg, M.path_separator))
   end
 
   return table.concat(all_parts, M.path_separator)

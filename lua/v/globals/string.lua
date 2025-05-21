@@ -1,5 +1,3 @@
-local M = {}
-
 ---Split string into a table of strings using a separator
 ---@param input_str string The string to split
 ---@param sep string? The separator to use
@@ -32,9 +30,3 @@ end
 function string.starts_with(input_str, pattern)
   return input_str:sub(1, #pattern) == pattern
 end
-
-M.split = string.split
-M.contains = string.contains
-M.starts_with = string.starts_with
-
-return M
