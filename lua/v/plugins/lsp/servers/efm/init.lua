@@ -21,6 +21,9 @@
         cmake
 ]]
 
+local tbl_utils = require('v.utils.tables')
+local local_efm_config = v.local_config.efm or {}
+
 -- linting and simple formatting for js/ts
 local eslint_d = {
   lintCommand = 'eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}',
@@ -188,26 +191,7 @@ local hlint = {
     }
 ]]
 
-local ktlint_default_config = {
-  ruleset_version = nil,
-  baseline_file = nil,
-  ruleset_jar = nil
-}
-
--- kotlin
-local ktlint = {
-  lintCommand = "ktlint --stdin",
-  lintFormats = {
-    "%f:%l:%c: %m",
-  },
-  lintStdin = true,
-  formatCommand = "ktlint -R " .. ktlint_default_config .. "-F --stdin || true",
-  formatStdin = true,
-  rootMarkers = {
-    'ktlint-baseline.xml',
-    'BUILD.bazel',
-  },
-}
+local ktlint = require('v.plugins.lsp.servers.efm.ktlint').config
 
 local M = {
   init_options = {
@@ -236,9 +220,9 @@ local M = {
     'haskell',
     'kotlin',
   },
-  root_dir = vim.loop.cwd,
+  root_dir = vim.uv.cwd,
   settings = {
-    rootMarkers = {
+    rootMarkers = tbl_utils.merge_lists({
       '.eslintrc.cjs',
       '.eslintrc.js',
       '.eslintrc.json',
@@ -254,9 +238,8 @@ local M = {
       'requirements.txt',
       'hie.yaml',
       'stack.yaml',
-      'ktlint-baseline.xml',
-      'BUILD.bazel',
-    },
+      ktlint.rootMarkers,
+    }),
     lintDebounce = 200,
     lint_debounce = 200,
     debounce = 200,

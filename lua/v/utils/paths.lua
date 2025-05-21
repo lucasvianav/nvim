@@ -45,4 +45,10 @@ M.dir_exists = function(path)
   return fn.isdirectory(fn.expand(path)) == 1
 end
 
+---@param path string
+---@returns string
+M.resolve = function(path)
+  return fn.resolve(fn.expand(path))
+end
+
 return M

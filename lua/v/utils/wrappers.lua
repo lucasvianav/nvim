@@ -1,5 +1,8 @@
 local M = {}
 
+local path = require('v.utils.paths')
+local tbl_utils = require('v.utils.tables')
+
 ---Wrapper for `vim.api.nvim_replace_termcodes`. Same as escaping a key code in VimL ('t' for 'termcodes').
 ---e.g.: t'<Esc>' in lua is the same as "\<Esc>" in VimL.
 function M.termcode(key)
@@ -93,7 +96,10 @@ end
 ---@param list string[]
 ---@return string[]
 M.expand_in_list = function(list)
-  return vim.tbl_map(vim.fn.expand, list)
+  local with_symlinks = vim.tbl_map(vim.fn.expand, list)
+  local no_symlink = vim.tbl_map(path.resolve, list)
+
+  return tbl_utils.list_distinct(tbl_utils.merge_lists({ with_symlinks, no_symlink }))
 end
 
 return M
