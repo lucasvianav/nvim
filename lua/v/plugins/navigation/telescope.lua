@@ -149,6 +149,7 @@ require('v.utils.mappings').set_keybindings({
   -- lsp
   { 'n', 'gd',          builtin.lsp_definitions,     desc = 'Goto Definition' },
   { 'n', 'gr',          builtin.lsp_references,      desc = 'Goto References' },
+  { 'n', 'grr',         builtin.lsp_references,      desc = 'Goto References' },
   { 'n', 'gi',          builtin.lsp_implementations, desc = 'Goto Implementation' },
   {
     'n',

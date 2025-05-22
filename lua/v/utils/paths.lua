@@ -9,6 +9,7 @@ if is_windows then
 end
 
 ---Joins an arbitrary number of paths together
+---@deprecated use vim.fs.joinpath instead
 ---@param ... string The paths to join
 ---@return string string The resulting path
 M.join = function(...)
@@ -26,16 +27,28 @@ M.join = function(...)
   end
 
   for _, arg in ipairs(args) do
-    vim.list_extend(all_parts, require('v.utils.strings').split(arg, M.path_separator))
+    vim.list_extend(all_parts, string.split(arg, M.path_separator))
   end
 
   return table.concat(all_parts, M.path_separator)
 end
 
----@param file_path string
+---@param path string
 ---@returns boolean
-M.file_exists = function(file_path)
-  return fn.filereadable(file_path) == 1
+M.file_exists = function(path)
+  return fn.filereadable(fn.expand(path)) == 1
+end
+
+---@param path string
+---@returns boolean
+M.dir_exists = function(path)
+  return fn.isdirectory(fn.expand(path)) == 1
+end
+
+---@param path string
+---@returns string
+M.resolve = function(path)
+  return fn.resolve(fn.expand(path))
 end
 
 return M
