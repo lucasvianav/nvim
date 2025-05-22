@@ -20,10 +20,10 @@
 --
 --https://github.com/sumneko/lua-language-server/wiki/EmmyLua-Annotations#optional-params
 
-pcall(require, 'impatient')
+pcall(require, "impatient")
 
-require('v.globals')
-require('v.settings')
-require('v.keybindings')
-require('v.commands')
-require('v.packer')
+require("v.globals")
+require("v.settings")
+require("v.keybindings")
+require("v.commands")
+require("v.packer")

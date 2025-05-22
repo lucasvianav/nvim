@@ -13,7 +13,7 @@
 --   'for',
 -- },
 
-local ibl = require('ibl')
+local ibl = require("ibl")
 local hooks = ibl.hooks
 
 ibl.setup({
@@ -27,31 +27,31 @@ ibl.setup({
   },
   exclude = {
     buftypes = {
-      'nofile',
-      'prompt',
-      'terminal',
-      'lspinfo',
-      'packer',
-      'checkhealth',
-      'help',
-      'man',
+      "nofile",
+      "prompt",
+      "terminal",
+      "lspinfo",
+      "packer",
+      "checkhealth",
+      "help",
+      "man",
     },
     filetypes = {
-      'NvimTree',
-      'NvimTree_*',
-      'dashboard',
-      'gitcommit',
-      'help',
-      'lsp-installer',
-      'markdown',
-      'packer',
-      'packer',
-      'sql',
-      'startify',
-      'terminal',
-      'nofile',
-      'quickfix',
-      'prompt',
+      "NvimTree",
+      "NvimTree_*",
+      "dashboard",
+      "gitcommit",
+      "help",
+      "lsp-installer",
+      "markdown",
+      "packer",
+      "packer",
+      "sql",
+      "startify",
+      "terminal",
+      "nofile",
+      "quickfix",
+      "prompt",
     },
   },
 })

@@ -5,13 +5,13 @@
 
 local M = {
   ---@type LocalNvimConfig?
-  config = nil
+  config = nil,
 }
 
 local fs = vim.fs
-local utils = require('v.utils.paths')
+local utils = require("v.utils.paths")
 
-local config_dir_path = fs.joinpath(vim.uv.cwd(), ".nvimrc", 'v')
+local config_dir_path = fs.joinpath(vim.uv.cwd(), ".nvimrc", "v")
 local config_init_path = fs.joinpath(config_dir_path, "init.lua")
 local config_exists = utils.file_exists(config_init_path)
 
@@ -24,11 +24,11 @@ local initial_package_path = package.path
 local initial_v_package = package.loaded.v
 
 -- add local config to package path
-local config_dir_wildcard = fs.joinpath(config_dir_path, '?.lua')
+local config_dir_wildcard = fs.joinpath(config_dir_path, "?.lua")
 package.loaded.v = nil
-package.path = table.concat({ config_init_path, config_dir_wildcard }, ';') .. package.path
+package.path = table.concat({ config_init_path, config_dir_wildcard }, ";") .. package.path
 
-local config_ok, config = pcall(require, 'v')
+local config_ok, config = pcall(require, "v")
 
 if config_ok then
   ---@cast config LocalNvimConfig?

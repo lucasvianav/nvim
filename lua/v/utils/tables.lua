@@ -1,6 +1,6 @@
 local M = {}
 
-local util = require('v.utils.numbers')
+local util = require("v.utils.numbers")
 
 ---@param tbl table
 ---@return boolean
@@ -15,7 +15,7 @@ M.has_both_implicit_and_named_fields = function(tbl)
   local has_named_fields = false
 
   for k, _ in pairs(tbl) do
-    if type(k) ~= 'number' or not util.is_int(k) or k > #tbl then
+    if type(k) ~= "number" or not util.is_int(k) or k > #tbl then
       has_named_fields = true
       break
     end
@@ -30,8 +30,8 @@ end
 ---@return T
 function M.merge_named_and_pos_fields(fields, values)
   if M.has_both_implicit_and_named_fields(values) then
-    local msg = 'Table must have only named fields or only implicit positional fields.'
-    require('v.utils.log').log(msg)
+    local msg = "Table must have only named fields or only implicit positional fields."
+    require("v.utils.log").log(msg)
     vim.notify(msg)
     vim.print(msg)
     error(msg)
@@ -52,7 +52,6 @@ function M.merge_named_and_pos_fields(fields, values)
   return output
 end
 
-
 ---@param tbl table
 ---@return any[]
 function M.list_distinct(tbl)
@@ -61,7 +60,7 @@ function M.list_distinct(tbl)
 
   for _, element in ipairs(tbl) do
     if not hash[element] then
-      res[#res+1] = element
+      res[#res + 1] = element
       hash[element] = true
     end
   end
@@ -75,12 +74,12 @@ function M.merge_lists(lists)
   local res = {}
 
   for _, element in ipairs(lists) do
-    if type(element) == 'table' then
+    if type(element) == "table" then
       for _, v in ipairs(element) do
-        res[#res+1] = v
+        res[#res + 1] = v
       end
     else
-        res[#res+1] = element
+      res[#res + 1] = element
     end
   end
 
@@ -90,7 +89,9 @@ end
 ---@param tbl table
 ---@return table
 function M.filter_non_nil(tbl)
-  return vim.tbl_filter(function(it) return it ~= nil end, tbl)
+  return vim.tbl_filter(function(it)
+    return it ~= nil
+  end, tbl)
 end
 
 return M

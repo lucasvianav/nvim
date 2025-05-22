@@ -1,53 +1,53 @@
-local colors = require('v.utils').colors
+local colors = require("v.utils").colors
 
-require('nvim-web-devicons').setup({
+require("nvim-web-devicons").setup({
   override = {
-    ['docker-compose.yml'] = {
-      icon = '',
+    ["docker-compose.yml"] = {
+      icon = "",
       color = colors.lightBlue,
-      name = 'Dockerfile',
+      name = "Dockerfile",
     },
 
     Dockerfile = {
-      icon = '',
+      icon = "",
       color = colors.lightBlue,
-      name = 'Dockerfile',
+      name = "Dockerfile",
     },
 
     graphql = {
-      icon = '',
+      icon = "",
       color = colors.pink,
-      name = 'GraphQL',
+      name = "GraphQL",
     },
 
     gql = {
-      icon = '',
+      icon = "",
       color = colors.pink,
-      name = 'GraphQL',
+      name = "GraphQL",
     },
 
-    ['test.js'] = {
-      icon = 'ﭧ',
+    ["test.js"] = {
+      icon = "ﭧ",
       color = colors.yellow,
-      name = 'JavascriptTest',
+      name = "JavascriptTest",
     },
 
-    ['spec.js'] = {
-      icon = 'ﭧ',
+    ["spec.js"] = {
+      icon = "ﭧ",
       color = colors.yellow,
-      name = 'JavascriptTest',
+      name = "JavascriptTest",
     },
 
-    ['test.ts'] = {
-      icon = 'ﭧ',
+    ["test.ts"] = {
+      icon = "ﭧ",
       color = colors.cyan,
-      name = 'TypescriptTest',
+      name = "TypescriptTest",
     },
 
-    ['spec.ts'] = {
-      icon = 'ﭧ',
+    ["spec.ts"] = {
+      icon = "ﭧ",
       color = colors.cyan,
-      name = 'TypescriptTest',
+      name = "TypescriptTest",
     },
   },
 

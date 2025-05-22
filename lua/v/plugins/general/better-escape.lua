@@ -1,14 +1,14 @@
-require('better_escape').setup({
+require("better_escape").setup({
   default = false,
   mappings = {
     i = { -- mode
       i = { -- first key
-        j = '<Esc>', -- second key -> action
+        j = "<Esc>", -- second key -> action
       },
     },
     v = {
       i = {
-        j = '<Esc>',
+        j = "<Esc>",
       },
     },
   },

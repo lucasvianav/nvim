@@ -1,4 +1,4 @@
-local wrappers = require('v.utils.wrappers')
+local wrappers = require("v.utils.wrappers")
 
 function _G.t(key)
   return wrappers.termcode(key)
@@ -17,6 +17,6 @@ function _G.D(...)
 end
 
 -- load string globals
-require('v.globals.string')
-require('v.globals.v')
-require('v.globals.vim')
+require("v.globals.string")
+require("v.globals.v")
+require("v.globals.vim")

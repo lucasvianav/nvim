@@ -13,28 +13,28 @@ local M = {}
 ---opts.def_bang is an custom boolean option (default `true`) that specifies if
 ---the command should be defined with a bang (`:command!` instead of `:command`)
 M.command = function(lhs, rhs, opts)
-  if (type(lhs) ~= 'string' or type(rhs) ~= 'string') or (opts and type(opts) ~= 'table') then
-    vim.notify('Invalid parameter(s).', vim.log.levels.ERROR, {
-      title = 'Commands',
+  if (type(lhs) ~= "string" or type(rhs) ~= "string") or (opts and type(opts) ~= "table") then
+    vim.notify("Invalid parameter(s).", vim.log.levels.ERROR, {
+      title = "Commands",
     })
-    require('v.utils.wrappers').inspect(lhs, rhs, opts)
+    require("v.utils.wrappers").inspect(lhs, rhs, opts)
     return
   end
 
-  opts = vim.tbl_extend('force', { def_bang = true }, opts or {})
+  opts = vim.tbl_extend("force", { def_bang = true }, opts or {})
   local bang = opts.def_bang
   opts.def_bang = nil
 
-  local cmd = 'command' .. (bang and '!' or '')
+  local cmd = "command" .. (bang and "!" or "")
 
   for opt, value in pairs(opts) do
     if value then
-      local setv = type(value) ~= 'boolean'
-      cmd = ('%s -%s'):format(cmd, opt) .. (setv and '=' .. value or '')
+      local setv = type(value) ~= "boolean"
+      cmd = ("%s -%s"):format(cmd, opt) .. (setv and "=" .. value or "")
     end
   end
 
-  cmd = ('%s %s %s'):format(cmd, lhs, rhs)
+  cmd = ("%s %s %s"):format(cmd, lhs, rhs)
 
   vim.api.nvim_command(cmd)
 end
@@ -64,7 +64,7 @@ M.clear_cmdline = function()
     end
 
     timer = vim.defer_fn(function()
-      if vim.api.nvim_get_mode().mode == 'n' then
+      if vim.api.nvim_get_mode().mode == "n" then
         vim.api.nvim_command([[echon '']])
       end
     end, 10000)

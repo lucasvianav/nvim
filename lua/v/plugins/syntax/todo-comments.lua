@@ -1,21 +1,21 @@
-local todo_comments = require('todo-comments')
+local todo_comments = require("todo-comments")
 
 todo_comments.setup({ signs = false })
 
-require('v.utils.mappings').set_keybindings({
+require("v.utils.mappings").set_keybindings({
   {
-    'n',
-    '[c',
+    "n",
+    "[c",
     todo_comments.jump_prev,
   },
   {
-    'n',
-    ']c',
+    "n",
+    "]c",
     todo_comments.jump_next,
   },
   {
-    'n',
-    '<leader>fc',
-    '<cmd>TodoTelescope<cr>',
+    "n",
+    "<leader>fc",
+    "<cmd>TodoTelescope<cr>",
   },
 })

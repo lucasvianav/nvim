@@ -7,38 +7,38 @@
 
 -- list of desired treesitter parsers
 local parsers = {
-  'angular',
-  'bash',
-  'bibtex',
-  'c',
-  'comment',
-  'cpp',
-  'css',
-  'dockerfile',
-  'elixir',
-  'graphql',
-  'haskell',
-  'html',
-  'javascript',
-  'jsdoc',
-  'json',
-  'jsonc',
-  'kotlin',
-  'latex',
-  'lua',
-  'markdown',
-  'markdown_inline',
-  'prisma',
-  'proto',
-  'python',
-  'scss',
-  'tsx',
-  'typescript',
-  'vim',
-  'yaml',
+  "angular",
+  "bash",
+  "bibtex",
+  "c",
+  "comment",
+  "cpp",
+  "css",
+  "dockerfile",
+  "elixir",
+  "graphql",
+  "haskell",
+  "html",
+  "javascript",
+  "jsdoc",
+  "json",
+  "jsonc",
+  "kotlin",
+  "latex",
+  "lua",
+  "markdown",
+  "markdown_inline",
+  "prisma",
+  "proto",
+  "python",
+  "scss",
+  "tsx",
+  "typescript",
+  "vim",
+  "yaml",
 }
 
-local treesitter = require('nvim-treesitter.configs')
+local treesitter = require("nvim-treesitter.configs")
 local enable = { enable = true }
 local disable = { enable = false }
 
@@ -70,7 +70,7 @@ local indent_off = function()
 end
 
 -- use treesitter indent module only for React files
-require('v.utils.autocmds').augroup('ReactIndentTS', {
-  { event = 'BufEnter', opts = { pattern = { '*.tsx', '*.jsx' }, callback = indent_on } },
-  { event = 'BufLeave', opts = { pattern = { '*.tsx', '*.jsx' }, callback = indent_off } },
+require("v.utils.autocmds").augroup("ReactIndentTS", {
+  { event = "BufEnter", opts = { pattern = { "*.tsx", "*.jsx" }, callback = indent_on } },
+  { event = "BufLeave", opts = { pattern = { "*.tsx", "*.jsx" }, callback = indent_off } },
 })

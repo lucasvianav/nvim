@@ -5,7 +5,7 @@ local cmd = vim.api.nvim_command
 
 local M = {}
 
-M.servers = require('v.settings.lsp').servers
+M.servers = require("v.settings.lsp").servers
 
 --  ____                           _     _   _ _   _ _
 -- / ___| ___ _ __   ___ _ __ __ _| |   | | | | |_(_) |___
@@ -36,8 +36,8 @@ end
 ---Calls LSP hover or activates Vim doc (`:h`) depending on filetype.
 ---@return nil
 function M.show_documentation()
-  if vim.tbl_contains({ 'vim', 'help', 'lua' }, vim.o.filetype) then
-    local has_docs = pcall(cmd, 'help ' .. vim.fn.expand('<cword>'))
+  if vim.tbl_contains({ "vim", "help", "lua" }, vim.o.filetype) then
+    local has_docs = pcall(cmd, "help " .. vim.fn.expand("<cword>"))
 
     if not has_docs then
       vim.lsp.buf.hover()
@@ -60,18 +60,18 @@ function M.formatting(err, result, ctx, config)
 
   local bufnr = ctx.bufnr
 
-  if not api.nvim_buf_get_option(bufnr, 'modified') then
+  if not api.nvim_buf_get_option(bufnr, "modified") then
     local view = fn.winsaveview()
-    lsp.util.apply_text_edits(result, bufnr, 'utf-16')
+    lsp.util.apply_text_edits(result, bufnr, "utf-16")
     fn.winrestview(view)
 
     if bufnr == api.nvim_get_current_buf() then
-      vim.api.nvim_command('noautocmd :update')
+      vim.api.nvim_command("noautocmd :update")
     else
       api.nvim_notify(
-        'Formatted buffer ' .. bufnr,
+        "Formatted buffer " .. bufnr,
         vim.log.levels.INFO,
-        { title = 'LSP --- Formatting' }
+        { title = "LSP --- Formatting" }
       )
     end
   end
@@ -79,11 +79,11 @@ end
 
 function M.typescript_sort_imports(bufnr, post)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
-  local METHOD = 'workspace/executeCommand'
+  local METHOD = "workspace/executeCommand"
   local params = {
-    command = '_typescript.organizeImports',
+    command = "_typescript.organizeImports",
     arguments = { vim.api.nvim_buf_get_name(bufnr) },
-    title = '',
+    title = "",
   }
 
   local callback = function(err)
@@ -139,7 +139,7 @@ local function __rename_handler(err, result, ctx, config)
     vim.api.nvim_notify(
       ("Error running LSP query '%s': %s"):format(ctx.method, err),
       vim.log.levels.ERROR,
-      { title = 'LSP --- Renaming' }
+      { title = "LSP --- Renaming" }
     )
     return
   end
@@ -148,19 +148,19 @@ local function __rename_handler(err, result, ctx, config)
   if result and result.documentChanges and #result.documentChanges > 1 then
     local new_word = ctx.params.newName
     local no_files = #result.documentChanges
-    local msg = ('The symbol was renamed in %d files:\n'):format(no_files)
+    local msg = ("The symbol was renamed in %d files:\n"):format(no_files)
 
     for _, change in ipairs(result.documentChanges) do
-      local get_path = require('v.utils').get_relative_path
-      msg = msg .. (' - %s\n'):format(get_path(change.textDocument.uri))
+      local get_path = require("v.utils").get_relative_path
+      msg = msg .. (" - %s\n"):format(get_path(change.textDocument.uri))
     end
 
-    local curr_name = vim.fn.expand('<cword>')
+    local curr_name = vim.fn.expand("<cword>")
     msg = msg:sub(1, #msg - 1)
     vim.notify(
       msg,
       vim.log.levels.INFO,
-      { title = ('LSP Rename: %s =>> %s'):format(curr_name, new_word) }
+      { title = ("LSP Rename: %s =>> %s"):format(curr_name, new_word) }
     )
   end
 
@@ -178,29 +178,29 @@ local __rename_callback = function(new, previous)
   if new_name and #new_name > 0 and new_name ~= previous then
     local params = vim.lsp.util.make_position_params()
     params.newName = new_name
-    vim.lsp.buf_request(0, 'textDocument/rename', params, __rename_handler)
+    vim.lsp.buf_request(0, "textDocument/rename", params, __rename_handler)
   end
 end
 
 ---Rename prompt for symbol below cursor.
 function M.rename()
-  local curr_word = vim.fn.expand('<cword>')
+  local curr_word = vim.fn.expand("<cword>")
 
-  require('v.utils.autocmds').augroup('SnacksRename', {
+  require("v.utils.autocmds").augroup("SnacksRename", {
     {
-      event = 'FileType',
+      event = "FileType",
       opts = {
-        pattern = 'snacks_input',
+        pattern = "snacks_input",
         callback = function()
-          vim.api.nvim_feedkeys(curr_word, 'i', false)
-          vim.api.nvim_feedkeys(t('<Esc>'), 'n', false)
+          vim.api.nvim_feedkeys(curr_word, "i", false)
+          vim.api.nvim_feedkeys(t("<Esc>"), "n", false)
         end,
         once = true,
       },
     },
   })
 
-  vim.ui.input({ prompt = 'Rename symbol' }, function(input)
+  vim.ui.input({ prompt = "Rename symbol" }, function(input)
     __rename_callback(input, curr_word)
   end)
 end
@@ -225,7 +225,7 @@ end
 function M.peek_definition()
   return vim.lsp.buf_request(
     0,
-    'textDocument/definition',
+    "textDocument/definition",
     lsp.util.make_position_params(),
     __peek_definitin_callback
   )
@@ -266,14 +266,14 @@ local __specific_on_attach = {
 
     __disable_formatting(client)
 
-    local angular_project = vim.fn.filereadable(vim.loop.cwd() .. '/angular.json')
+    local angular_project = vim.fn.filereadable(vim.loop.cwd() .. "/angular.json")
     if not angular_project then
       client.server_capabilities.renameProvider = false
     end
 
     -- TODO: can I organize imports without ts-utils?
     -- https://github.com/mrjones2014/dotfiles/blob/6159bc2ddfae95af8eed57109b416c37868199a7/.config/nvim/lua/modules/lsp-utils.lua#L57-L73
-    local has_ts_utils, ts_utils = pcall(require, 'nvim-lsp-ts-utils')
+    local has_ts_utils, ts_utils = pcall(require, "nvim-lsp-ts-utils")
 
     if has_ts_utils then
       ts_utils.setup({
@@ -283,11 +283,11 @@ local __specific_on_attach = {
         -- eslint
         eslint_enable_code_actions = true,
         eslint_enable_disable_comments = true,
-        eslint_bin = 'eslint_d',
+        eslint_bin = "eslint_d",
         eslint_enable_diagnostics = true,
 
         -- formatting
-        formatter = 'eslint_d',
+        formatter = "eslint_d",
         -- formatter = 'prettier',
         formatter_opts = {},
 
@@ -296,7 +296,7 @@ local __specific_on_attach = {
 
         -- inlay hints
         auto_inlay_hints = false,
-        inlay_hints_highlight = 'Comment',
+        inlay_hints_highlight = "Comment",
         inlay_hints_priority = 200, -- priority of the hint extmarks
         inlay_hints_throttle = 150, -- throttle the inlay hint request
       })
@@ -304,11 +304,11 @@ local __specific_on_attach = {
       ts_utils.setup_client(client)
 
       -- auto sort imports
-      require('v.utils.autocmds').augroup('SortImportsTS', {
-        { event = 'BufWritePre', opts = { command = 'TSLspOrganizeSync', buffer = 0 } },
+      require("v.utils.autocmds").augroup("SortImportsTS", {
+        { event = "BufWritePre", opts = { command = "TSLspOrganizeSync", buffer = 0 } },
       })
 
-      buf_set_keymap('n', '<leader>si', '<cmd>TSLspOrganize<CR>')
+      buf_set_keymap("n", "<leader>si", "<cmd>TSLspOrganize<CR>")
     end
     -- buf_set_keymap('n', '<leader>si', '<cmd>lua typescript_sort_imports(' .. bufnr .. ')<CR>')
   end,
@@ -323,7 +323,7 @@ local __specific_on_attach = {
     end
 
     __disable_formatting(client)
-    buf_set_keymap('n', '<leader>si', '<cmd>PyrightOrganizeImports<CR>')
+    buf_set_keymap("n", "<leader>si", "<cmd>PyrightOrganizeImports<CR>")
   end,
 
   efm = function(client)
@@ -334,10 +334,10 @@ local __specific_on_attach = {
   end,
 
   sqls = function(client)
-    local ok, sqls = pcall(require, 'sqls')
+    local ok, sqls = pcall(require, "sqls")
     if ok then
       client.commands = sqls.commands
-      sqls.setup({ picker = 'telescope' })
+      sqls.setup({ picker = "telescope" })
     end
 
     __disable_formatting(client)
@@ -359,29 +359,29 @@ local __specific_on_attach = {
 --- Setup autcommands based on LSP client's characteristics.
 --- @param client table lsp client
 local function __conditional_autocmds(client)
-  local augroup = require('v.utils.autocmds').augroup
+  local augroup = require("v.utils.autocmds").augroup
 
   if client.server_capabilities.documentHighlightProvider then
-    augroup('LspSymbolHighlight', {
+    augroup("LspSymbolHighlight", {
       -- highlight
-      { event = 'CursorHold',   opts = { callback = vim.lsp.buf.document_highlight } },
-      { event = 'CursorHoldI',  opts = { callback = vim.lsp.buf.document_highlight } },
+      { event = "CursorHold", opts = { callback = vim.lsp.buf.document_highlight } },
+      { event = "CursorHoldI", opts = { callback = vim.lsp.buf.document_highlight } },
 
       -- clear
-      { event = 'CursorMoved',  opts = { callback = vim.lsp.buf.clear_references } },
-      { event = 'CursorMovedI', opts = { callback = vim.lsp.buf.clear_references } },
-      { event = 'FocusLost',    opts = { callback = vim.lsp.buf.clear_references } },
-      { event = 'BufLeave',     opts = { callback = vim.lsp.buf.clear_references } },
-      { event = 'InsertEnter',  opts = { callback = vim.lsp.buf.clear_references } },
+      { event = "CursorMoved", opts = { callback = vim.lsp.buf.clear_references } },
+      { event = "CursorMovedI", opts = { callback = vim.lsp.buf.clear_references } },
+      { event = "FocusLost", opts = { callback = vim.lsp.buf.clear_references } },
+      { event = "BufLeave", opts = { callback = vim.lsp.buf.clear_references } },
+      { event = "InsertEnter", opts = { callback = vim.lsp.buf.clear_references } },
     }, {
       buffer = 0,
     })
   end
 
   if client.server_capabilities.documentFormattingProvider then
-    augroup('AutoFormat', {
+    augroup("AutoFormat", {
       {
-        event = 'BufWritePost',
+        event = "BufWritePost",
         opts = {
           callback = function()
             vim.lsp.buf.format({ async = true })
@@ -392,49 +392,49 @@ local function __conditional_autocmds(client)
     })
   end
 
-  local signature_ok = pcall(require, 'lsp_signature')
+  local signature_ok = pcall(require, "lsp_signature")
   if client.server_capabilities.signatureHelpProvider and not signature_ok then
-    augroup('SignatureHelp', {
-      { event = 'CursorHoldI', opts = { callback = vim.lsp.buf.signature_help, buffer = 0 } },
+    augroup("SignatureHelp", {
+      { event = "CursorHoldI", opts = { callback = vim.lsp.buf.signature_help, buffer = 0 } },
     })
   end
 
-  if client.name == 'eslint' then
-    augroup('AutoFormatEslint', {
-      { event = 'BufWritePre', opts = { command = 'EslintFixAll', buffer = 0 } },
+  if client.name == "eslint" then
+    augroup("AutoFormatEslint", {
+      { event = "BufWritePre", opts = { command = "EslintFixAll", buffer = 0 } },
     })
   end
 end
 
 -- TODO: https://github.com/hrsh7th/nvim-cmp/issues/465#issuecomment-981159946
 local function __on_attach(client, bufnr)
-  local keybindings = require('v.keybindings.lsp')
+  local keybindings = require("v.keybindings.lsp")
 
-  if client.name == 'clangd' then
-    table.insert(keybindings, { 'n', 'gpp', '<cmd>ClangdSwitchSourceHeader<cr>' })
-  elseif client.name == 'angularls' then
+  if client.name == "clangd" then
+    table.insert(keybindings, { "n", "gpp", "<cmd>ClangdSwitchSourceHeader<cr>" })
+  elseif client.name == "angularls" then
     local fun = function(ext)
-      return '<cmd>lua require("v.utils").open_file_swap_extension("' .. ext .. '")<cr>'
+      return "<cmd>lua require(\"v.utils\").open_file_swap_extension(\"" .. ext .. "\")<cr>"
     end
 
-    table.insert(keybindings, { 'n', 'gpt', fun('ts') })
-    table.insert(keybindings, { 'n', 'gph', fun('html') })
-    table.insert(keybindings, { 'n', 'gps', fun('scss') })
+    table.insert(keybindings, { "n", "gpt", fun("ts") })
+    table.insert(keybindings, { "n", "gph", fun("html") })
+    table.insert(keybindings, { "n", "gps", fun("scss") })
   end
 
   -- formatting keybinding
   table.insert(keybindings, {
-    'n',
-    '<space>F',
+    "n",
+    "<space>F",
     function()
       vim.lsp.buf.format({ async = true })
     end,
   })
 
-  require('v.utils.mappings').set_keybindings(keybindings, { buffer = bufnr })
+  require("v.utils.mappings").set_keybindings(keybindings, { buffer = bufnr })
 
   -- enable completion triggered by <c-x><c-o>
-  api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   if __specific_on_attach[client.name] then
     __specific_on_attach[client.name](client, bufnr)
@@ -450,12 +450,12 @@ end
 function M.make_config(config)
   local capabilities = lsp.protocol.make_client_capabilities()
 
-  local has_cmp, cmp = pcall(require, 'cmp_nvim_lsp')
+  local has_cmp, cmp = pcall(require, "cmp_nvim_lsp")
   if has_cmp then
     capabilities = cmp.default_capabilities()
   end
 
-  config = vim.tbl_deep_extend('keep', config or {}, {
+  config = vim.tbl_deep_extend("keep", config or {}, {
     capabilities = capabilities,
     on_attach = __on_attach,
     flags = {

@@ -3,7 +3,7 @@ local M = {}
 M.settings = {
   python = {
     analysis = {
-      extraPaths = { '.', './*', './**/*', './**/**/*' },
+      extraPaths = { ".", "./*", "./**/*", "./**/**/*" },
       useImportHeuristic = true,
     },
   },

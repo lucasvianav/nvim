@@ -1,58 +1,58 @@
 local M = {}
 
-M.filetypes = { 'json', 'jsonc' }
+M.filetypes = { "json", "jsonc" }
 
 M.settings = {
   json = {
     -- https://www.schemastore.org
     schemas = {
       {
-        fileMatch = { 'package.json' },
-        url = 'https://json.schemastore.org/package.json',
+        fileMatch = { "package.json" },
+        url = "https://json.schemastore.org/package.json",
       },
       {
-        fileMatch = { 'tsconfig*.json' },
-        url = 'https://json.schemastore.org/tsconfig.json',
-      },
-      {
-        fileMatch = {
-          '.prettierrc',
-          '.prettierrc.json',
-          'prettier.config.json',
-        },
-        url = 'https://json.schemastore.org/prettierrc.json',
-      },
-      {
-        fileMatch = { '.eslintrc', '.eslintrc.json' },
-        url = 'https://json.schemastore.org/eslintrc.json',
+        fileMatch = { "tsconfig*.json" },
+        url = "https://json.schemastore.org/tsconfig.json",
       },
       {
         fileMatch = {
-          '.babelrc',
-          '.babelrc.json',
-          'babel.config.json',
+          ".prettierrc",
+          ".prettierrc.json",
+          "prettier.config.json",
         },
-        url = 'https://json.schemastore.org/babelrc.json',
+        url = "https://json.schemastore.org/prettierrc.json",
       },
       {
-        fileMatch = { 'angular.json' },
-        url = 'https://raw.githubusercontent.com/angular/angular-cli/master/packages/angular/cli/lib/config/workspace-schema.json',
+        fileMatch = { ".eslintrc", ".eslintrc.json" },
+        url = "https://json.schemastore.org/eslintrc.json",
       },
       {
-        fileMatch = { '.angular-cli.json' },
-        url = 'https://raw.githubusercontent.com/angular/angular-cli/v10.1.6/packages/angular/cli/lib/config/schema.json',
+        fileMatch = {
+          ".babelrc",
+          ".babelrc.json",
+          "babel.config.json",
+        },
+        url = "https://json.schemastore.org/babelrc.json",
       },
       {
-        fileMatch = { 'appsscript.json' },
-        url = 'http://json.schemastore.org/appsscript',
+        fileMatch = { "angular.json" },
+        url = "https://raw.githubusercontent.com/angular/angular-cli/master/packages/angular/cli/lib/config/workspace-schema.json",
       },
       {
-        fileMatch = { '.clasp.json' },
-        url = 'http://json.schemastore.org/clasp',
+        fileMatch = { ".angular-cli.json" },
+        url = "https://raw.githubusercontent.com/angular/angular-cli/v10.1.6/packages/angular/cli/lib/config/schema.json",
       },
       {
-        fileMatch = { '/.github/workflows/*' },
-        url = 'https://json.schemastore.org/github-workflow.json',
+        fileMatch = { "appsscript.json" },
+        url = "http://json.schemastore.org/appsscript",
+      },
+      {
+        fileMatch = { ".clasp.json" },
+        url = "http://json.schemastore.org/clasp",
+      },
+      {
+        fileMatch = { "/.github/workflows/*" },
+        url = "https://json.schemastore.org/github-workflow.json",
       },
     },
   },

@@ -1,22 +1,22 @@
-local set_keybindings = require('v.utils.mappings').set_keybindings
+local set_keybindings = require("v.utils.mappings").set_keybindings
 
 set_keybindings({
   -- toggle buffer last visited buffer
-  { 'n', '<BS>', '<C-^>' },
+  { "n", "<BS>", "<C-^>" },
 
   -- toggle buffer last visited tab
-  { 'n', '<M-C-S-H>', 'g<Tab>' },
+  { "n", "<M-C-S-H>", "g<Tab>" },
 
   -- better window navigation
-  { 'n', '<C-h>', '<C-w>h' },
-  { 'n', '<C-j>', '<C-w>j' },
-  { 'n', '<C-k>', '<C-w>k' },
-  { 'n', '<C-l>', '<C-w>l' },
+  { "n", "<C-h>", "<C-w>h" },
+  { "n", "<C-j>", "<C-w>j" },
+  { "n", "<C-k>", "<C-w>k" },
+  { "n", "<C-l>", "<C-w>l" },
 
   -- better nav for omnicomplete
-  { { 'c', 'i' }, '<C-j>', '<C-n>' },
-  { { 'c', 'i' }, '<C-k>', '<C-p>' },
+  { { "c", "i" }, "<C-j>", "<C-n>" },
+  { { "c", "i" }, "<C-k>", "<C-p>" },
 
   -- ignore trailing whitespaces when going to end of line
-  { 'n', '$', 'g_' },
+  { "n", "$", "g_" },
 })

@@ -2,18 +2,18 @@ local M = {}
 
 M.settings = {
   texlab = {
-    auxDirectory = '.',
-    bibtexFormatter = 'texlab',
+    auxDirectory = ".",
+    bibtexFormatter = "texlab",
     build = {
       args = {
-        '-X',
-        'compile',
-        '%f',
-        '--synctex',
-        '--keep-logs',
-        '--keep-intermediates',
+        "-X",
+        "compile",
+        "%f",
+        "--synctex",
+        "--keep-logs",
+        "--keep-intermediates",
       },
-      executable = 'tectonic',
+      executable = "tectonic",
       forwardSearchAfter = false,
       onSave = false,
     },
@@ -26,7 +26,7 @@ M.settings = {
     forwardSearch = {
       args = {},
     },
-    latexFormatter = 'latexindent',
+    latexFormatter = "latexindent",
     latexindent = {
       modifyLineBreaks = false,
     },

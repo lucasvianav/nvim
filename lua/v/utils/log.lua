@@ -2,15 +2,15 @@ local fn = vim.fn
 
 local M = {}
 
-M.path = fn.stdpath('config') .. '/log.txt'
+M.path = fn.stdpath("config") .. "/log.txt"
 
 function M.log(...)
-  local content = require('v.utils.wrappers').format_for_inspection(...)
-  local fp = io.open(M.path, 'a+')
-  local date = os.date('*t')
+  local content = require("v.utils.wrappers").format_for_inspection(...)
+  local fp = io.open(M.path, "a+")
+  local date = os.date("*t")
 
   if fp == nil then
-    fp = io.open(M.path, 'w')
+    fp = io.open(M.path, "w")
   end
 
   date = {
@@ -22,16 +22,16 @@ function M.log(...)
     date.sec,
   }
 
-  fp:seek('end')
-  fp:write(string.format('%s/%s/%s - %s:%s:%s :::\n', unpack(date)))
+  fp:seek("end")
+  fp:write(string.format("%s/%s/%s - %s:%s:%s :::\n", unpack(date)))
   fp:write(debug.traceback(content))
-  fp:write('\n================================================\n\n\n\n\n')
+  fp:write("\n================================================\n\n\n\n\n")
 
   fp:close()
 end
 
 function M.clean()
-  local fp = io.open(M.path, 'w')
+  local fp = io.open(M.path, "w")
   fp:close()
 end
 

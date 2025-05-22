@@ -20,24 +20,24 @@ local M = {}
 local enable = { enable = true }
 local disable = { enable = false }
 local pydocstyle_ignore = {
-  'D100',
-  'D101',
-  'D102',
-  'D103',
-  'D104',
-  'D105',
-  'D106',
-  'D107',
-  'D205',
-  'D400',
+  "D100",
+  "D101",
+  "D102",
+  "D103",
+  "D104",
+  "D105",
+  "D106",
+  "D107",
+  "D205",
+  "D400",
 }
 local pycodestyle_ignore = {
-  'E203',
+  "E203",
 }
 local flake8_ignore = {
-  'E203',
-  'F401',
-  'F841',
+  "E203",
+  "F401",
+  "F841",
 }
 
 M.settings = {
@@ -69,7 +69,7 @@ M.settings = {
       },
       pydocstyle = {
         enabled = true,
-        convention = 'numpy',
+        convention = "numpy",
         ignore = pydocstyle_ignore,
         addIgnore = pydocstyle_ignore,
       },

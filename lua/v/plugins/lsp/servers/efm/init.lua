@@ -21,28 +21,28 @@
         cmake
 ]]
 
-require('v.utils.packer').load_plugin('efmls-configs-nvim')
+require("v.utils.packer").load_plugin("efmls-configs-nvim")
 
 -- linting and simple formatting for js/ts
 local eslint_d = {
-  lintCommand = 'eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}',
+  lintCommand = "eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}",
   lintStdin = true,
   lintFormats = {
-    '%f(%l,%c): %tarning %m',
-    '%f(%l,%c): %rror %m',
+    "%f(%l,%c): %tarning %m",
+    "%f(%l,%c): %rror %m",
   },
   lintIgnoreExitCode = true,
-  formatCommand = 'eslint_d -f visualstudio --fix-to-stdout --stdin --stdin-filename=${INPUT}',
+  formatCommand = "eslint_d -f visualstudio --fix-to-stdout --stdin --stdin-filename=${INPUT}",
   formatStdin = true,
-  lintSource = 'eslint_d',
+  lintSource = "eslint_d",
   rootMarkers = {
-    '.eslintrc.cjs',
-    '.eslintrc.js',
-    '.eslintrc.ts',
-    '.eslintrc.yaml',
-    '.eslintrc.yml',
-    '.eslintrc.json',
-    'package.json',
+    ".eslintrc.cjs",
+    ".eslintrc.js",
+    ".eslintrc.ts",
+    ".eslintrc.yaml",
+    ".eslintrc.yml",
+    ".eslintrc.json",
+    "package.json",
   },
 }
 
@@ -53,13 +53,13 @@ local prettier = {
     --find-config-path
     --stdin-filepath
     ${INPUT}
-    ]]):gsub('\n', ' '),
+    ]]):gsub("\n", " "),
 
   formatStdin = true,
   rootMarkers = {
-    '.prettierrc',
-    '.prettierrc.json',
-    'package.json',
+    ".prettierrc",
+    ".prettierrc.json",
+    "package.json",
   },
 }
 
@@ -68,17 +68,17 @@ local prettierd = {
   formatCommand = ([[
         $([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettierd")
         "${INPUT}"
-    ]]):gsub('\n', ' '),
+    ]]):gsub("\n", " "),
 
   formatStdin = true,
   rootMarkers = {
-    '.prettierrc',
-    '.prettierrc.json',
-    'package.json',
+    ".prettierrc",
+    ".prettierrc.json",
+    "package.json",
   },
 
   env = {
-    string.format('PRETTIERD_DEFAULT_CONFIG=%s', vim.fn.expand('~/.prettierrc.json')),
+    string.format("PRETTIERD_DEFAULT_CONFIG=%s", vim.fn.expand("~/.prettierrc.json")),
   },
 }
 
@@ -87,85 +87,84 @@ local prettierd = {
 -- https://github.com/rockerBOO/dotfiles/blob/current/config/efm-langserver/config.yaml#L3-L4
 -- TODO: setup CI w/ github actions (+ unit tests --> lua busted)
 local stylua = {
-  formatCommand = 'stylua -s --stdin-filepath ${INPUT} -',
+  formatCommand = "stylua -s --stdin-filepath ${INPUT} -",
   formatStdin = true,
   rootMarkers = {
-    '.stylua.toml',
+    ".stylua.toml",
   },
 }
 
 -- formatting for python
 local black = {
-  formatCommand = 'black --fast -',
+  formatCommand = "black --fast -",
   formatStdin = true,
 }
 
 -- sorting imports for python
 local isort = {
-  formatCommand = 'isort --stdout --profile black -',
+  formatCommand = "isort --stdout --profile black -",
   formatStdin = true,
 }
 
 -- type annotation checker for python
 local mypy = {
-  lintCommand = 'mypy --show-column-numbers',
+  lintCommand = "mypy --show-column-numbers",
   lintFormats = {
-    '%f:%l:%c: %trror: %m',
-    '%f:%l:%c: %tarning: %m',
-    '%f:%l:%c: %tote: %m',
+    "%f:%l:%c: %trror: %m",
+    "%f:%l:%c: %tarning: %m",
+    "%f:%l:%c: %tote: %m",
   },
-  lintSource = 'mypy',
+  lintSource = "mypy",
   lintStdin = true,
 }
 
 -- linter for python
 local flake8 = {
-  lintCommand =
-  "flake8 --max-line-length 80 --ignore E203,F841 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
+  lintCommand = "flake8 --max-line-length 80 --ignore E203,F841 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
   lintStdin = true,
   lintIgnoreExitCode = true,
-  lintFormats = { '%f:%l:%c: %t%n%n%n %m' },
-  lintSource = 'flake8',
+  lintFormats = { "%f:%l:%c: %t%n%n%n %m" },
+  lintSource = "flake8",
 }
 
 -- linting for markdown
 local markdownlint = {
-  lintCommand = 'markdownlint -s',
+  lintCommand = "markdownlint -s",
   lintStdin = true,
   lintFormats = {
-    '%f:%l %m',
-    '%f:%l:%c %m',
-    '%f: %l: %m',
+    "%f:%l %m",
+    "%f:%l:%c %m",
+    "%f: %l: %m",
   },
 }
 
 -- linting for sql
 local sqlint = {
-  lintCommand = 'sqlint -f stylish --stdin',
+  lintCommand = "sqlint -f stylish --stdin",
   lintStdin = true,
   lintFormats = {
-    '%f(%l:%c) %tarning %m',
-    '%f(%l:%c) %rror %m',
+    "%f(%l:%c) %tarning %m",
+    "%f(%l:%c) %rror %m",
   },
   lintIgnoreExitCode = true,
-  formatCommand = 'sqlint -f stylish --stdin --fix',
+  formatCommand = "sqlint -f stylish --stdin --fix",
   formatStdin = true,
-  lintSource = 'sqlint',
+  lintSource = "sqlint",
   rootMarkers = {
-    '.sqlintrc.json',
-    'package.json',
+    ".sqlintrc.json",
+    "package.json",
   },
 }
 
 -- linting for haskell
 local hlint = {
   lintStdin = true,
-  lintCommand = 'hlint -j -f',
+  lintCommand = "hlint -j -f",
   formatStdin = true,
-  formatCommand = 'hlint --refactor -j -f',
+  formatCommand = "hlint --refactor -j -f",
   rootMarkers = {
-    'hie.yaml',
-    'stack.yaml',
+    "hie.yaml",
+    "stack.yaml",
   },
 }
 
@@ -182,11 +181,11 @@ local hlint = {
     }
 ]]
 
-local ktlint = require('v.plugins.lsp.servers.efm.ktlint').config
+local ktlint = require("v.plugins.lsp.servers.efm.ktlint").config
 ---@type LinterConfig
-local vint = require('efmls-configs.linters.vint')
+local vint = require("efmls-configs.linters.vint")
 ---@type LinterConfig
-local biome = require('efmls-configs.formatters.biome')
+local biome = require("efmls-configs.formatters.biome")
 
 local languages = {
   javascript = { eslint_d, prettierd, biome },
@@ -228,21 +227,21 @@ local M = {
   filetypes = vim.tbl_keys(languages),
   root_dir = vim.uv.cwd,
   settings = {
-    rootMarkers = require('v.utils.tables').merge_lists({
-      '.eslintrc.cjs',
-      '.eslintrc.js',
-      '.eslintrc.json',
-      '.eslintrc.ts',
-      '.eslintrc.yaml',
-      '.eslintrc.yml',
-      '.prettierrc',
-      '.prettierrc.json',
-      '.sqlintrc.json',
-      '.stylua.toml',
-      'package.json',
-      'requirements.txt',
-      'hie.yaml',
-      'stack.yaml',
+    rootMarkers = require("v.utils.tables").merge_lists({
+      ".eslintrc.cjs",
+      ".eslintrc.js",
+      ".eslintrc.json",
+      ".eslintrc.ts",
+      ".eslintrc.yaml",
+      ".eslintrc.yml",
+      ".prettierrc",
+      ".prettierrc.json",
+      ".sqlintrc.json",
+      ".stylua.toml",
+      "package.json",
+      "requirements.txt",
+      "hie.yaml",
+      "stack.yaml",
       ktlint.rootMarkers,
       vint.rootMarkers,
       biome.rootMarkers,
@@ -251,7 +250,7 @@ local M = {
     lint_debounce = 200,
     debounce = 200,
     logLevel = 10,
-    logFile = '/tmp/efm.log',
+    logFile = "/tmp/efm.log",
     languages = languages,
   },
 }

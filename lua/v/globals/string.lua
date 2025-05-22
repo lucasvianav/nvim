@@ -4,11 +4,11 @@
 ---@return table table A table of strings
 function string.split(input_str, sep)
   if sep == nil then
-    sep = '%s'
+    sep = "%s"
   end
 
   local parts = {}
-  local pattern = ('([^%s]+)'):format(sep)
+  local pattern = ("([^%s]+)"):format(sep)
 
   for part in input_str:gmatch(pattern) do
     table.insert(parts, part)
@@ -35,5 +35,5 @@ end
 ---@param pattern string
 ---@return boolean
 function string:ends_with(pattern)
-  return self:sub(- #pattern) == pattern
+  return self:sub(-#pattern) == pattern
 end

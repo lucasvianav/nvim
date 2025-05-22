@@ -1,11 +1,11 @@
 -- update lightbulb whenever cursor stops
-require('v.utils.autocmds').augroup('LspLightbulb', {
+require("v.utils.autocmds").augroup("LspLightbulb", {
   {
-    event = { 'CursorHold', 'CursorHoldI' },
+    event = { "CursorHold", "CursorHoldI" },
     opts = {
-      pattern = '*',
+      pattern = "*",
       callback = function()
-        local loaded, lightbulb = pcall(require, 'nvim-lightbulb')
+        local loaded, lightbulb = pcall(require, "nvim-lightbulb")
 
         if not loaded then
           return

@@ -1,4 +1,4 @@
-local snacks = require('snacks')
+local snacks = require("snacks")
 
 local enabled = { enabled = true }
 local disabled = { enabled = false }
@@ -15,11 +15,11 @@ snacks.setup({
   indent = disabled,
   input = {
     enabled = true,
-    prompt_pos = 'left',
+    prompt_pos = "left",
     win = {
-      relative = 'cursor',
-      style = 'input',
-      border = 'rounded',
+      relative = "cursor",
+      style = "input",
+      border = "rounded",
       backdrop = {
         transparent = true,
         blend = 80,
@@ -40,9 +40,9 @@ snacks.setup({
     win = {
       input = {
         keys = {
-          ["<Esc>"] = { "close", mode = { "n", "i" } }
+          ["<Esc>"] = { "close", mode = { "n", "i" } },
         },
-      }
+      },
     },
   },
   profiler = disabled, -- TODO
@@ -60,7 +60,7 @@ snacks.setup({
   zen = {
     enabled = true,
     win = {
-      style = 'zen',
+      style = "zen",
       width = 140,
       backdrop = {
         transparent = true,

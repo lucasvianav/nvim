@@ -1,34 +1,34 @@
-local actions = require('telescope.actions')
-local state = require('telescope.actions.state')
+local actions = require("telescope.actions")
+local state = require("telescope.actions.state")
 
 ---@return table<string, string>
 local __get_rg_gitignore_glob_args = function()
-  local gitignore_path = vim.fs.joinpath(vim.loop.cwd(), '.gitignore')
-  local gitignore_file = io.open(gitignore_path, 'r')
+  local gitignore_path = vim.fs.joinpath(vim.loop.cwd(), ".gitignore")
+  local gitignore_file = io.open(gitignore_path, "r")
 
   if gitignore_file == nil then
     return {}
   end
 
   ---@type string
-  local gitignore = gitignore_file:read('*a')
-  local ignore_globs = vim.tbl_deep_extend('keep', gitignore:gsub('\n+', '\n'):split('\n'), {
-    'package-lock.json',
-    'yarn.lock',
-    '^.git',
-    '**/.git',
-    '^.git/',
-    '**/.git/',
-    '^.git/*',
-    '**/.git/*',
-    '^./.git',
+  local gitignore = gitignore_file:read("*a")
+  local ignore_globs = vim.tbl_deep_extend("keep", gitignore:gsub("\n+", "\n"):split("\n"), {
+    "package-lock.json",
+    "yarn.lock",
+    "^.git",
+    "**/.git",
+    "^.git/",
+    "**/.git/",
+    "^.git/*",
+    "**/.git/*",
+    "^./.git",
   })
 
   local ignore_args = {}
 
   for _, glob in ipairs(ignore_globs) do
-    table.insert(ignore_args, '-g')
-    table.insert(ignore_args, '!' .. glob)
+    table.insert(ignore_args, "-g")
+    table.insert(ignore_args, "!" .. glob)
   end
 
   return ignore_args
@@ -40,61 +40,61 @@ M.open_in_diff = function(prompt_bufnr)
   actions.close(prompt_bufnr)
   local commit_hash = state.get_selected_entry().value
 
-  local ok_packer, packer = require('v.utils.packer').get_packer()
+  local ok_packer, packer = require("v.utils.packer").get_packer()
 
   if ok_packer then
-    pcall(packer.loader, 'diffview.nvim')
-    require('diffview').open(commit_hash .. '~1..' .. commit_hash)
+    pcall(packer.loader, "diffview.nvim")
+    require("diffview").open(commit_hash .. "~1.." .. commit_hash)
   end
 end
 
 M.find_nvim = function()
-  require('telescope.builtin').find_files({
-    cwd = vim.fn.stdpath('config'),
-    prompt_title = '~ neovim ~',
-    results_title = 'Neovim Dotfiles',
+  require("telescope.builtin").find_files({
+    cwd = vim.fn.stdpath("config"),
+    prompt_title = "~ neovim ~",
+    results_title = "Neovim Dotfiles",
   })
 end
 
 M.find_in_plugins = function()
-  require('telescope.builtin').find_files({
-    cwd = vim.fn.stdpath('data') .. '/site/pack/packer',
-    prompt_title = '~ plugins ~',
-    results_title = 'Packer Plugins',
+  require("telescope.builtin").find_files({
+    cwd = vim.fn.stdpath("data") .. "/site/pack/packer",
+    prompt_title = "~ plugins ~",
+    results_title = "Packer Plugins",
   })
 end
 
 M.grep_in_plugins = function()
   M.multi_grep({
-    cwd = vim.fn.stdpath('data') .. '/site/pack/packer',
-    prompt_title = '~ grep plugins ~',
-    results_title = 'Packer Plugins',
+    cwd = vim.fn.stdpath("data") .. "/site/pack/packer",
+    prompt_title = "~ grep plugins ~",
+    results_title = "Packer Plugins",
   })
 end
 
 M.find_dotfiles = function()
-  require('telescope.builtin').git_files({
-    file_ignore_patterns = { 'icons/', 'themes/' },
-    cwd = os.getenv('HOME') .. '/dotfiles',
-    prompt_title = '~ dotfiles ~',
-    results_title = 'Dotfiles',
+  require("telescope.builtin").git_files({
+    file_ignore_patterns = { "icons/", "themes/" },
+    cwd = os.getenv("HOME") .. "/dotfiles",
+    prompt_title = "~ dotfiles ~",
+    results_title = "Dotfiles",
   })
 end
 
 M.grep_cur_dir = function()
   M.multi_grep({
-    cwd = require('telescope.utils').buffer_dir(),
+    cwd = require("telescope.utils").buffer_dir(),
     prompt_title = "~ grep current file's dir ~",
-    results_title = 'Current Dir',
+    results_title = "Current Dir",
   })
 end
 
 M.grep_last_search = function()
-  local register = vim.fn.getreg('/'):gsub('\\<', ''):gsub('\\>', '')
+  local register = vim.fn.getreg("/"):gsub("\\<", ""):gsub("\\>", "")
 
-  if register and register ~= '' then
-    require('telescope.builtin').grep_string({
-      path_display = { 'shorten' },
+  if register and register ~= "" then
+    require("telescope.builtin").grep_string({
+      path_display = { "shorten" },
       search = register,
     })
   else
@@ -118,49 +118,49 @@ end
 
 ---@param options? GrepOptions
 M.multi_grep = function(options)
-  local buf_cwd = vim.fn.expand('%:h')
+  local buf_cwd = vim.fn.expand("%:h")
   local shortcuts = {
-    ['l'] = '*.lua',
-    ['v'] = '*.vim',
-    ['n'] = '*.{vim,lua}',
-    ['k'] = '*.kt',
-    ['p'] = '*.proto',
-    ['c'] = vim.fs.joinpath(buf_cwd, '**'),
-    ['.'] = function()
-      local path_parts = buf_cwd:split('/')
-      return vim.fs.joinpath(path_parts[1], path_parts[2], '**')
+    ["l"] = "*.lua",
+    ["v"] = "*.vim",
+    ["n"] = "*.{vim,lua}",
+    ["k"] = "*.kt",
+    ["p"] = "*.proto",
+    ["c"] = vim.fs.joinpath(buf_cwd, "**"),
+    ["."] = function()
+      local path_parts = buf_cwd:split("/")
+      return vim.fs.joinpath(path_parts[1], path_parts[2], "**")
     end,
   }
 
   ---@type table<string|number, any>
-  local opts = vim.tbl_deep_extend('keep', options or {}, {
+  local opts = vim.tbl_deep_extend("keep", options or {}, {
     cwd = vim.loop.cwd(),
     shortcuts = shortcuts,
-    pattern = '%s',
+    pattern = "%s",
   })
 
-  local custom_grep = require('telescope.finders').new_async_job({
+  local custom_grep = require("telescope.finders").new_async_job({
     command_generator = function(prompt)
-      if not prompt or prompt == '' then
+      if not prompt or prompt == "" then
         return nil
       end
 
-      local prompt_split = vim.split(prompt, '  ')
+      local prompt_split = vim.split(prompt, "  ")
 
-      local args = { 'rg' }
+      local args = { "rg" }
       if prompt_split[1] then
-        table.insert(args, '-e')
+        table.insert(args, "-e")
         table.insert(args, prompt_split[1])
       end
 
       -- patterns
       if prompt_split[2] then
-        table.insert(args, '-g')
+        table.insert(args, "-g")
 
         local pattern
-        if type(opts.shortcuts[prompt_split[2]]) == 'string' then
+        if type(opts.shortcuts[prompt_split[2]]) == "string" then
           pattern = opts.shortcuts[prompt_split[2]]
-        elseif type(opts.shortcuts[prompt_split[2]]) == 'function' then
+        elseif type(opts.shortcuts[prompt_split[2]]) == "function" then
           pattern = opts.shortcuts[prompt_split[2]]()
         else
           pattern = prompt_split[2]
@@ -170,41 +170,41 @@ M.multi_grep = function(options)
       end
 
       return vim
-          .iter({
-            args,
-            __get_rg_gitignore_glob_args(),
-            {
-              '--color=never',
-              '--no-heading',
-              '--with-filename',
-              '--line-number',
-              '--column',
-              '--smart-case',
-            },
-          })
-          :flatten()
-          :totable()
+        .iter({
+          args,
+          __get_rg_gitignore_glob_args(),
+          {
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+          },
+        })
+        :flatten()
+        :totable()
     end,
-    entry_maker = require('telescope.make_entry').gen_from_vimgrep(opts),
+    entry_maker = require("telescope.make_entry").gen_from_vimgrep(opts),
     cwd = opts.cwd,
   })
 
-  require('telescope.pickers')
-      .new(opts, {
-        debounce = 100,
-        prompt_title = '~ grep ~',
-        finder = custom_grep,
-        previewer = require('telescope.config').values.grep_previewer(opts),
-        sorter = require('telescope.sorters').empty(),
-      })
-      :find()
+  require("telescope.pickers")
+    .new(opts, {
+      debounce = 100,
+      prompt_title = "~ grep ~",
+      finder = custom_grep,
+      previewer = require("telescope.config").values.grep_previewer(opts),
+      sorter = require("telescope.sorters").empty(),
+    })
+    :find()
 end
 
 M.pickers = {
   center_dropdown = {
-    theme = 'dropdown',
+    theme = "dropdown",
     previewer = false,
-    layout_strategy = 'center',
+    layout_strategy = "center",
   },
 }
 

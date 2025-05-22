@@ -1,19 +1,19 @@
 local lsp = vim.lsp
-local utils = require('v.utils.lsp')
+local utils = require("v.utils.lsp")
 
-lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
-  border = 'rounded',
+lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
+  border = "rounded",
   max_width = utils.max_float_width,
   max_height = utils.max_float_height,
 })
 
-lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, {
-  border = 'rounded',
+lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
+  border = "rounded",
   max_width = utils.max_float_width,
   max_height = utils.max_float_height,
 })
 
-lsp.handlers['textDocument/formatting'] = utils.formatting
+lsp.handlers["textDocument/formatting"] = utils.formatting
 
 -- ____ ___ ____ _   _     ____ ___  _    _   _ __  __ _   _
 --/ ___|_ _/ ___| \ | |   / ___/ _ \| |  | | | |  \/  | \ | |
@@ -22,7 +22,7 @@ lsp.handlers['textDocument/formatting'] = utils.formatting
 --|____/___\____|_| \_|   \____\___/|_____\___/|_|  |_|_| \_|
 
 ---custom namespace
-local ns = vim.api.nvim_create_namespace('severe-diagnostics')
+local ns = vim.api.nvim_create_namespace("severe-diagnostics")
 
 ---reference to the original handler
 local orig_signs_handler = vim.diagnostic.handlers.signs

@@ -1,4 +1,4 @@
-require('v.utils').set_viml_options('nord', {
+require("v.utils").set_viml_options("nord", {
   contrast = false, -- different bg for popup and menus
   borders = true, -- vertical borders between windows
   disable_background = true,

@@ -5,8 +5,8 @@
 
 local M = {}
 
-local util = require('v.utils.tables')
-local logger = require('v.utils.log')
+local logger = require("v.utils.log")
+local util = require("v.utils.tables")
 
 ---@alias KeybindingMode "n"|"v"|"s"|"x"|"o"|"i"|"l"|"c"|"t"
 
@@ -23,11 +23,11 @@ local logger = require('v.utils.log')
 ---@param desc? string
 ---@param buffer integer
 local function __create_whichkey_mapping(mode, lhs, rhs, desc, buffer)
-  if not desc and type(rhs) ~= 'string' then
+  if not desc and type(rhs) ~= "string" then
     return
   end
 
-  local wk_ok, wk = pcall(require, 'which-key')
+  local wk_ok, wk = pcall(require, "which-key")
 
   if not wk_ok then
     return
@@ -50,30 +50,30 @@ function M.map(keybinding)
   keybinding.desc = nil
 
   local k = util.merge_named_and_pos_fields({
-    'mode',
-    'lhs',
-    'rhs',
-    'opts',
+    "mode",
+    "lhs",
+    "rhs",
+    "opts",
   }, keybinding)
   local mode, lhs, rhs, opts = k.mode, k.lhs, k.rhs, k.opts
   ---@cast lhs string[]
-  lhs = type(lhs) == 'string' and { lhs } or lhs
+  lhs = type(lhs) == "string" and { lhs } or lhs
 
   if #lhs == 0 then
-    logger.log('No LHS for mapping.')
-    vim.notify('No LHS.', vim.log.levels.ERROR, {
-      title = 'Mapping',
+    logger.log("No LHS for mapping.")
+    vim.notify("No LHS.", vim.log.levels.ERROR, {
+      title = "Mapping",
     })
     return
   end
 
-  local options = vim.tbl_extend('force', {
+  local options = vim.tbl_extend("force", {
     silent = true,
     nowait = true, -- TODO: does this break anything?
     replace_keycodes = false,
   }, opts or {}) or {}
 
-  if options.buffer and type(options.buffer) ~= 'number' then
+  if options.buffer and type(options.buffer) ~= "number" then
     options.buffer = 0
   end
 
@@ -98,16 +98,16 @@ end
 ---@param keybinding UnkeybindingTable
 function M.unmap(keybinding)
   local k = util.merge_named_and_pos_fields({
-    'mode',
-    'lhs',
-    'buffer',
+    "mode",
+    "lhs",
+    "buffer",
   }, keybinding)
   local mode, lhs, buffer = k.mode, k.lhs, k.buffer
 
   if #lhs == 0 then
-    logger.log('No LHS for unmapping.')
-    vim.notify('No LHS.', vim.log.levels.ERROR, {
-      title = 'Unmapping',
+    logger.log("No LHS for unmapping.")
+    vim.notify("No LHS.", vim.log.levels.ERROR, {
+      title = "Unmapping",
     })
     return
   end
@@ -115,7 +115,7 @@ function M.unmap(keybinding)
   local ok, _ = pcall(vim.keymap.del, mode, lhs, { buffer = buffer })
 
   if not ok then
-    M.map({ mode, lhs, '<nop>', { buffer = buffer } })
+    M.map({ mode, lhs, "<nop>", { buffer = buffer } })
   end
 end
 
@@ -133,7 +133,7 @@ end
 ---@param buffer? integer|boolean
 local function __create_whichkey_group(group, groups, buffer)
   ---@cast buffer integer
-  buffer = type(buffer) == 'boolean' and 1 or buffer
+  buffer = type(buffer) == "boolean" and 1 or buffer
   groups = groups or {}
 
   if group then
@@ -144,7 +144,7 @@ local function __create_whichkey_group(group, groups, buffer)
     return
   end
 
-  local wk_ok, wk = pcall(require, 'which-key')
+  local wk_ok, wk = pcall(require, "which-key")
 
   if not wk_ok then
     return
@@ -152,8 +152,8 @@ local function __create_whichkey_group(group, groups, buffer)
 
   for _, grp in ipairs(groups) do
     local g = util.merge_named_and_pos_fields({
-      'lhs',
-      'grp',
+      "lhs",
+      "grp",
     }, grp)
     local lhs, name = g.lhs, g.group
 
@@ -179,12 +179,12 @@ function M.set_keybindings(args, common_opts)
     map_table.desc = nil
 
     local k = util.merge_named_and_pos_fields({
-      'mode',
-      'lhs',
-      'rhs',
-      'opts',
+      "mode",
+      "lhs",
+      "rhs",
+      "opts",
     }, map_table)
-    local options = vim.tbl_extend('force', common_opts or {}, k.opts or {})
+    local options = vim.tbl_extend("force", common_opts or {}, k.opts or {})
 
     M.map({ k.mode, k.lhs, k.rhs, options, desc = desc })
   end
@@ -196,9 +196,9 @@ end
 function M.unset_keybindings(args)
   for _, map_table in ipairs(args) do
     local k = util.merge_named_and_pos_fields({
-      'mode',
-      'lhs',
-      'buffer',
+      "mode",
+      "lhs",
+      "buffer",
     }, map_table)
 
     M.unmap({ k.mode, k.lhs, k.buffer })

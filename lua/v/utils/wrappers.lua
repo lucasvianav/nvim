@@ -1,7 +1,7 @@
 local M = {}
 
-local path = require('v.utils.paths')
-local tbl_utils = require('v.utils.tables')
+local path = require("v.utils.paths")
+local tbl_utils = require("v.utils.tables")
 
 ---Wrapper for `vim.api.nvim_replace_termcodes`. Same as escaping a key code in VimL ('t' for 'termcodes').
 ---e.g.: t'<Esc>' in lua is the same as "\<Esc>" in VimL.
@@ -19,18 +19,18 @@ end
 
 function M.format_for_inspection(...)
   local objects, v = {}, nil
-  for i = 1, select('#', ...) do
+  for i = 1, select("#", ...) do
     v = select(i, ...)
     table.insert(
       objects,
       vim.inspect(v, {
-        indent = '    ',
+        indent = "    ",
         depth = 4,
       })
     )
   end
 
-  return table.concat(objects, '\n')
+  return table.concat(objects, "\n")
 end
 
 ---Inspect contents of an object. Wraps `print(vim.inspect(args))`.
@@ -46,7 +46,7 @@ function M.inspect(...)
   vim.notify(
     formatted,
     vim.log.levels.INFO,
-    { title = "Inspecting " .. callerFile .. ':' .. caller.linedefined }
+    { title = "Inspecting " .. callerFile .. ":" .. caller.linedefined }
   )
   print(formatted)
   return ...
@@ -59,12 +59,12 @@ end
 ---@vararg any
 function M.dump_text(...)
   local objects, v = {}, nil
-  for i = 1, select('#', ...) do
+  for i = 1, select("#", ...) do
     v = select(i, ...)
     table.insert(objects, vim.inspect(v))
   end
 
-  local lines = vim.split(table.concat(objects, '\n'), '\n')
+  local lines = vim.split(table.concat(objects, "\n"), "\n")
   local lnum = vim.api.nvim_win_get_cursor(0)[1]
   vim.fn.append(lnum, lines)
   return ...
@@ -72,7 +72,7 @@ end
 
 ---Reload a lua module using Plenary.
 function M.reload(module)
-  local is_plenary_loaded, plenary = pcall(require, 'plenary.reload')
+  local is_plenary_loaded, plenary = pcall(require, "plenary.reload")
 
   if is_plenary_loaded then
     plenary.reload_module(module)
@@ -87,7 +87,7 @@ end
 ---@return function
 function M.get_require_submodule(dir)
   return function(file)
-    local _, output = pcall(require, dir .. '.' .. file)
+    local _, output = pcall(require, dir .. "." .. file)
     return output
   end
 end

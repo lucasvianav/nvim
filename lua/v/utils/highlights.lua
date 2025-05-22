@@ -1,6 +1,6 @@
 local M = {}
 
-M.colors = require('v.utils.colors')
+M.colors = require("v.utils.colors")
 
 ---@class HighlighDefinition: vim.api.keyset.highlight
 ---@field transparent? boolean
@@ -10,14 +10,14 @@ M.colors = require('v.utils.colors')
 ---@param hldef HighlighDefinition the highlighting modifications
 M.highlight = function(groups, hldef)
   ---@cast groups string[]
-  groups = type(groups) == 'string' and { groups } or groups
+  groups = type(groups) == "string" and { groups } or groups
 
-  vim.validate('hldef', hldef, 'table')
-  vim.validate('hldef.link', hldef.link, 'string', true)
+  vim.validate("hldef", hldef, "table")
+  vim.validate("hldef.link", hldef.link, "string", true)
 
   if hldef.transparent then
-    hldef.ctermbg = 'NONE'
-    hldef.bg = 'NONE'
+    hldef.ctermbg = "NONE"
+    hldef.bg = "NONE"
     hldef.transparent = nil
   end
 
@@ -45,7 +45,7 @@ end
 ---@return number Blue
 ---@return number Green
 local function __hex_to_rgb(color)
-  local hex = color:gsub('#', '')
+  local hex = color:gsub("#", "")
   return tonumber(hex:sub(1, 2), 16), tonumber(hex:sub(3, 4), 16), tonumber(hex:sub(5), 16)
 end
 
@@ -64,12 +64,12 @@ function M.alter_color(color, percent)
   local r, g, b = __hex_to_rgb(color)
 
   if not r or not g or not b then
-    return 'NONE'
+    return "NONE"
   end
 
   r, g, b = __alter(r, percent), __alter(g, percent), __alter(b, percent)
   r, g, b = math.min(r, 255), math.min(g, 255), math.min(b, 255)
-  return string.format('#%02x%02x%02x', r, g, b)
+  return string.format("#%02x%02x%02x", r, g, b)
 end
 
 return M

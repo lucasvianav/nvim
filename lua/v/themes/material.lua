@@ -1,6 +1,6 @@
-vim.g.material_style = 'deep ocean'
+vim.g.material_style = "deep ocean"
 
-require('material').setup({
+require("material").setup({
   contrast = true, -- contrast for sidebars, floating windows and popup menus like nvim-tree
   borders = true, -- borders between verticaly split windows
 
@@ -13,7 +13,7 @@ require('material').setup({
   },
 
   -- specify which windows get the contrasted (darker) background
-  contrast_windows = { 'packer' },
+  contrast_windows = { "packer" },
 
   text_contrast = { lighter = false, darker = false },
 

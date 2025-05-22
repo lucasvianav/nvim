@@ -1,9 +1,9 @@
 local M = {}
 
 M.init_options = {
-  hostInfo = 'neovim',
+  hostInfo = "neovim",
   preferences = {
-    includeInlayParameterNameHints = 'all',
+    includeInlayParameterNameHints = "all",
     includeInlayParameterNameHintsWhenArgumentMatchesName = true,
     includeInlayFunctionParameterTypeHints = true,
     includeInlayVariableTypeHints = true,

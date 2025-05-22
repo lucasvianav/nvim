@@ -22,11 +22,11 @@ local M = {}
 ---@param opts? AutocommandOptions
 ---@return nil
 M.augroup = function(name, autocmds, opts)
-  if type(name) ~= 'string' or type(autocmds) ~= 'table' then
-    vim.api.nvim_notify('Invalid parameter(s).', vim.log.levels.ERROR, {
-      title = 'Augroups',
+  if type(name) ~= "string" or type(autocmds) ~= "table" then
+    vim.api.nvim_notify("Invalid parameter(s).", vim.log.levels.ERROR, {
+      title = "Augroups",
     })
-    require('v.utils.wrappers').inspect(name, autocmds)
+    require("v.utils.wrappers").inspect(name, autocmds)
     return
   end
 
@@ -34,9 +34,9 @@ M.augroup = function(name, autocmds, opts)
   opts.group = vim.api.nvim_create_augroup(name, { clear = true })
 
   for _, tbl in ipairs(autocmds) do
-    opts = vim.tbl_extend('keep', tbl.opts or {}, opts)
+    opts = vim.tbl_extend("keep", tbl.opts or {}, opts)
 
-    if type(opts.buffer) == 'boolean' then
+    if type(opts.buffer) == "boolean" then
       opts.buffer = 0
     end
 

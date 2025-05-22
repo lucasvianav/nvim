@@ -1,81 +1,81 @@
-local set_keybindings = require('v.utils.mappings').set_keybindings
+local set_keybindings = require("v.utils.mappings").set_keybindings
 
 -- sets <Leader> to <Space>
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 
 set_keybindings({
   -- substitutes Esc by Ctrl+C in normal mode
-  { 'n', '<C-c>', '<Esc>' },
+  { "n", "<C-c>", "<Esc>" },
 
   -- leave terminal mode with jk
-  { 't', 'jk', [[<C-\><C-n>]] },
+  { "t", "jk", [[<C-\><C-n>]] },
 
   -- break line after/before current position
-  { 'n', ']b', 'a<CR><Esc>k$' },
-  { 'n', '[b', 'i<CR><Esc>k$' },
+  { "n", "]b", "a<CR><Esc>k$" },
+  { "n", "[b", "i<CR><Esc>k$" },
 
   -- get blank new line
-  { 'n', '<Leader>o', 'o<Esc>^Da' },
-  { 'n', '<Leader>O', 'O<Esc>^Da' },
+  { "n", "<Leader>o", "o<Esc>^Da" },
+  { "n", "<Leader>O", "O<Esc>^Da" },
 
   -- new line above or below in insert mode
-  { 'i', '<C-CR>', '<C-O>o' },
-  { 'i', '<S-CR>', '<C-O>O' },
-  { 'i', '<M-CR>', '<C-O>O' },
+  { "i", "<C-CR>", "<C-O>o" },
+  { "i", "<S-CR>", "<C-O>O" },
+  { "i", "<M-CR>", "<C-O>O" },
 
   -- delete word with alt + backspace
-  { 'i', '<M-BS>', '<C-w>' },
+  { "i", "<M-BS>", "<C-w>" },
 
   -- delete word with ctrl + backspace (it's actually
   -- ctrl + shift + alt + backspace, but I've remapped
   -- that to ctrl + backspace in Kitty, so yeah)
-  { 'i', '<M-C-S-H>', '<C-w>' },
+  { "i", "<M-C-S-H>", "<C-w>" },
 
   -- indenting in visual mode
   -- maintains selection
-  { 'v', '<', '<gv' },
-  { 'v', '>', '>gv' },
+  { "v", "<", "<gv" },
+  { "v", ">", ">gv" },
 
   -- selects last pasted text
-  { 'n', 'gp', '`[v`]' },
-  { 'n', 'gP', '`[V`]' },
+  { "n", "gp", "`[v`]" },
+  { "n", "gP", "`[V`]" },
 
   -- hides highlights
-  { 'n', '<Leader>n', '<CMD>noh<CR>' },
+  { "n", "<Leader>n", "<CMD>noh<CR>" },
 
   -- untabs in insert mode
-  { 'i', '<S-TAB>', '<C-D>' },
+  { "i", "<S-TAB>", "<C-D>" },
 
   -- show last 40 messages (by Justinmk)
-  { 'n', 'g>', '<cmd>set nomore<bar>40messages<bar>set more<CR>' },
+  { "n", "g>", "<cmd>set nomore<bar>40messages<bar>set more<CR>" },
 
   -- disable all other folds
-  { 'n', '<leader>z', 'zMzvzz' },
+  { "n", "<leader>z", "zMzvzz" },
 
   -- gf in a vertical split
-  { 'n', '<c-w>f', '<c-w>vgf' },
+  { "n", "<c-w>f", "<c-w>vgf" },
 
   -- replay macro in q register
-  { 'n', 'Q', '@q' },
+  { "n", "Q", "@q" },
 
   -- rerun the last command
-  { 'n', '<leader><leader>c', ':<up><cr>' },
+  { "n", "<leader><leader>c", ":<up><cr>" },
 
   -- execute currenbt line/selection
   {
-    { 'n', 'v' },
-    '<leader>x',
+    { "n", "v" },
+    "<leader>x",
     function()
-      require('v.utils').exec_line_or_make()
+      require("v.utils").exec_line_or_make()
     end,
   },
 
   ---source/reload current file
   {
-    { 'n' },
-    '<leader>xx',
+    { "n" },
+    "<leader>xx",
     function()
-      require('v.utils').reload_or_source_current()
+      require("v.utils").reload_or_source_current()
     end,
   },
 
