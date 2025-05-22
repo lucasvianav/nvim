@@ -20,17 +20,6 @@ function M.trim_trailing_whitespaces()
   end
 end
 
----Sources the `.nvimrc` file at the `cwd` if it's under `$WORK_DIR`.
-function M.source_local_config()
-  local cwd = fn.getcwd()
-  local work_dir = os.getenv('WORK_DIR')
-  local regexp = vim.regex('^' .. fn.escape(work_dir, '.'))
-
-  if fn.empty(work_dir) == 0 and regexp:match_str(cwd) then
-    cmd('silent! source ' .. cwd .. '/.nvimrc')
-  end
-end
-
 ---Return the path to the current lua file inside `nvim/lua/` in order to require it.
 local function _get_current_require_path()
   local filepath = vim.api.nvim_buf_get_name(0)

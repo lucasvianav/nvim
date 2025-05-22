@@ -308,21 +308,6 @@ local __specific_on_attach = {
         { event = 'BufWritePre', opts = { command = 'TSLspOrganizeSync', buffer = 0 } },
       })
 
-      -- don't autosort in $WORK_DIR
-      --[[
-        local work_dir = os.getenv('WORK_DIR')
-        -- sets up auto-sorting of imports if not on $WORK_DIR
-        local regexp = vim.regex('^' .. fn.escape(work_dir, '.'))
-        local cwd = fn.getcwd()
-        if fn.empty(work_dir) == 1 or not regexp:match_str(cwd) then
-            require('v.utils.autocmds').augroup('SortImportsTS', {
-                { 'BufWritePre', 'TSLspOrganizeSync' },
-            }, {
-                buffer = true,
-            })
-        end
-      ]]
-
       buf_set_keymap('n', '<leader>si', '<cmd>TSLspOrganize<CR>')
     end
     -- buf_set_keymap('n', '<leader>si', '<cmd>lua typescript_sort_imports(' .. bufnr .. ')<CR>')
