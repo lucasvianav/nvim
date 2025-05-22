@@ -24,9 +24,16 @@ function string.contains(input_str, pattern)
   return input_str:find(pattern, 1, true) ~= nil
 end
 
----@param input_str string
+---@param str string
 ---@param pattern string
 ---@return boolean
-function string.starts_with(input_str, pattern)
-  return input_str:sub(1, #pattern) == pattern
+function string.starts_with(str, pattern)
+  return str:sub(1, #pattern) == pattern
+end
+
+---@param self string
+---@param pattern string
+---@return boolean
+function string:ends_with(pattern)
+  return self:sub(- #pattern) == pattern
 end

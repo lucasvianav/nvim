@@ -186,35 +186,46 @@ local ktlint = require('v.plugins.lsp.servers.efm.ktlint').config
 ---@type LinterConfig
 local vint = require('efmls-configs.linters.vint')
 ---@type LinterConfig
-local biome = require('efmls-configs.linters.biome')
+local biome = require('efmls-configs.formatters.biome')
+
+local languages = {
+  javascript = { eslint_d, prettierd, biome },
+  typescript = { eslint_d, prettierd, biome },
+  javascriptreact = { eslint_d, prettierd, biome },
+  typescriptreact = { eslint_d, prettierd, biome },
+
+  markdown = { prettier },
+  css = { prettierd },
+  graphql = { prettierd },
+  html = { prettierd },
+  json = { prettierd, biome },
+  scss = { prettierd },
+  yaml = { prettierd },
+
+  vim = { vint },
+  lua = { stylua },
+  sql = { sqlint },
+  haskell = { hlint },
+  kotlin = { ktlint },
+
+  python = {
+    black,
+    isort,
+    -- flake8,
+    -- mypy,
+  },
+}
 
 local M = {
   init_options = {
+    documentFormatting = true,
+    documentRangeFormatting = true,
     codeAction = false,
     completion = false,
-    documentFormatting = true,
     documentSymbol = false,
     hover = false,
   },
-  filetypes = {
-    'css',
-    'html',
-    'javascript',
-    'javascript.jsx',
-    'javascriptreact',
-    'json',
-    'lua',
-    'python',
-    'scss',
-    'sql',
-    'typescript',
-    'typescript.tsx',
-    'typescriptreact',
-    'vim',
-    'yaml',
-    'haskell',
-    'kotlin',
-  },
+  filetypes = vim.tbl_keys(languages),
   root_dir = vim.uv.cwd,
   settings = {
     rootMarkers = require('v.utils.tables').merge_lists({
@@ -224,7 +235,6 @@ local M = {
       '.eslintrc.ts',
       '.eslintrc.yaml',
       '.eslintrc.yml',
-      '.git/',
       '.prettierrc',
       '.prettierrc.json',
       '.sqlintrc.json',
@@ -242,33 +252,7 @@ local M = {
     debounce = 200,
     logLevel = 10,
     logFile = '/tmp/efm.log',
-    languages = {
-      javascript = { eslint_d, prettierd, biome },
-      typescript = { eslint_d, prettierd, biome },
-      javascriptreact = { eslint_d, prettierd, biome },
-      typescriptreact = { eslint_d, prettierd, biome },
-
-      markdown = { prettier },
-      css = { prettierd },
-      graphql = { prettierd },
-      html = { prettierd },
-      json = { prettierd, biome },
-      scss = { prettierd },
-      yaml = { prettierd },
-
-      vim = { vint },
-      lua = { stylua },
-      sql = { sqlint },
-      haskell = { hlint },
-      kotlin = { ktlint },
-
-      python = {
-        black,
-        isort,
-        -- flake8,
-        -- mypy,
-      },
-    },
+    languages = languages,
   },
 }
 

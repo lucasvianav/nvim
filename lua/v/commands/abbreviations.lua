@@ -46,6 +46,7 @@ require('v.utils.abbreviations').set_abbreviations({
 
   -- tabs
   { 'tq',   'tabclose' },
+  { 'to',   'tabonly' },
 
   -- other plugins
   { 'DO',   'DiffviewOpen' },

@@ -160,6 +160,14 @@ local M = {
     'creativenull/efmls-configs-nvim',
     commit = 'e071a098ac1e56e349af649c25e982348f5504e5',
     opt = true,
+  },
+
+  {
+    'brexhq/kotlin-bazel.nvim',
+    ft = { 'kotlin' },
+    disable = not require('v.utils.env').is_work_computer(),
+    cond = require('v.utils.env').is_work_computer,
+    lock = true,
   }
 }
 
