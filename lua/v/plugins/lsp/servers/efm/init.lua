@@ -21,8 +21,7 @@
         cmake
 ]]
 
-local tbl_utils = require('v.utils.tables')
-local local_efm_config = v.local_config.efm or {}
+require('v.utils.packer').load_plugin('efmls-configs-nvim')
 
 -- linting and simple formatting for js/ts
 local eslint_d = {
@@ -129,14 +128,6 @@ local flake8 = {
   lintSource = 'flake8',
 }
 
--- linter for viml
-local vint = {
-  lintCommand = 'vint -',
-  lintStdin = true,
-  lintFormats = { '%f:%l:%c: %m' },
-  lintSource = 'vint',
-}
-
 -- linting for markdown
 local markdownlint = {
   lintCommand = 'markdownlint -s',
@@ -192,6 +183,10 @@ local hlint = {
 ]]
 
 local ktlint = require('v.plugins.lsp.servers.efm.ktlint').config
+---@type LinterConfig
+local vint = require('efmls-configs.linters.vint')
+---@type LinterConfig
+local biome = require('efmls-configs.linters.biome')
 
 local M = {
   init_options = {
@@ -222,7 +217,7 @@ local M = {
   },
   root_dir = vim.uv.cwd,
   settings = {
-    rootMarkers = tbl_utils.merge_lists({
+    rootMarkers = require('v.utils.tables').merge_lists({
       '.eslintrc.cjs',
       '.eslintrc.js',
       '.eslintrc.json',
@@ -239,6 +234,8 @@ local M = {
       'hie.yaml',
       'stack.yaml',
       ktlint.rootMarkers,
+      vint.rootMarkers,
+      biome.rootMarkers,
     }),
     lintDebounce = 200,
     lint_debounce = 200,
@@ -246,16 +243,16 @@ local M = {
     logLevel = 10,
     logFile = '/tmp/efm.log',
     languages = {
-      javascript = { eslint_d, prettierd },
-      typescript = { eslint_d, prettierd },
-      javascriptreact = { eslint_d, prettierd },
-      typescriptreact = { eslint_d, prettierd },
+      javascript = { eslint_d, prettierd, biome },
+      typescript = { eslint_d, prettierd, biome },
+      javascriptreact = { eslint_d, prettierd, biome },
+      typescriptreact = { eslint_d, prettierd, biome },
 
       markdown = { prettier },
       css = { prettierd },
       graphql = { prettierd },
       html = { prettierd },
-      json = { prettierd },
+      json = { prettierd, biome },
       scss = { prettierd },
       yaml = { prettierd },
 

@@ -1,4 +1,5 @@
 local utils = require('v.utils.lsp')
+-- local formatters = require('v.settings.lsp').formatters
 
 require('mason').setup()
 require('mason-lspconfig').setup({

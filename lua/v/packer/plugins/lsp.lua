@@ -155,6 +155,12 @@ local M = {
     },
     commit = '8df427aeba0a06c6577dc3ab82de3076964e3b8d',
   },
+
+  {
+    'creativenull/efmls-configs-nvim',
+    commit = 'e071a098ac1e56e349af649c25e982348f5504e5',
+    opt = true,
+  }
 }
 
 return M

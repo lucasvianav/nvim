@@ -1,6 +1,18 @@
 local M = {}
 
----Language servers to keep installed
+M.formatters = {
+  'eslint_d',
+  'prettier',
+  'prettierd',
+  'markdownlint',
+  'black',
+  'blackd-client',
+  'flake8',
+  'mypy',
+  'vint',
+  'stylua',
+}
+
 M.servers = {
   'bashls',
   'clangd',
@@ -21,10 +33,6 @@ M.servers = {
   'ts_ls',
   'vimls',
   'yamlls',
-  -- 'angularls',
-  -- 'ltex',
-  -- 'prismals',
-  -- 'texlab',
 }
 
 ---General diagnostics settings
