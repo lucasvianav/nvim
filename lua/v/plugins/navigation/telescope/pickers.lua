@@ -8,12 +8,14 @@ local M = {
   },
 }
 
+---@param cwd string?
 ---@return table<string, string>
-local __get_rg_gitignore_glob_args = function()
-  local gitignore_path = vim.fs.joinpath(vim.loop.cwd(), ".gitignore")
-  local gitignore_file = io.open(gitignore_path, "r")
+local function get_rg_gitignore_glob_args(cwd)
+  ---@cast cwd string
+  cwd = cwd or vim.uv.cwd()
+  local gitignore_file = io.open(vim.fs.joinpath(cwd, ".gitignore"), "r")
 
-  if gitignore_file == nil then
+  if not gitignore_file then
     return {}
   end
 
@@ -42,53 +44,74 @@ local __get_rg_gitignore_glob_args = function()
 end
 
 ---@param options? GrepOptions
-M.multi_grep = function(options)
+function M.multi_grep(options)
+  local shortcut_sep = "  "
   local buf_cwd = vim.fn.expand("%:h")
   local shortcuts = {
     ["l"] = "*.lua",
     ["v"] = "*.vim",
     ["n"] = "*.{vim,lua}",
     ["k"] = "*.kt",
+    ["x"] = "*.ex",
     ["p"] = "*.proto",
-    ["c"] = vim.fs.joinpath(buf_cwd, "**"),
+    ["c"] = vim.fs.joinpath(buf_cwd, "**"), -- curr buf's dir
     ["."] = function()
       local path_parts = buf_cwd:split("/")
       return vim.fs.joinpath(path_parts[1], path_parts[2], "**")
     end,
   }
 
-  ---@type table<string|number, any>
+  ---@type {[string|number]: any}
   local opts = vim.tbl_deep_extend("keep", options or {}, {
-    cwd = vim.loop.cwd(),
+    cwd = vim.uv.cwd(),
     shortcuts = shortcuts,
     pattern = "%s",
   })
 
   local custom_grep = require("telescope.finders").new_async_job({
     command_generator = function(prompt)
-      if not prompt or prompt == "" then
+      ---@type string
+      prompt = prompt and prompt:trim() or nil
+      if not prompt or #prompt == 0 then
         return nil
       end
 
-      local prompt_split = vim.split(prompt, "  ")
+      local prompt_parts = prompt:reverse():split(shortcut_sep)
+      local n_parts = #prompt_parts
+      prompt_parts = vim
+        .iter(prompt_parts)
+        :map(function(it)
+          return it:reverse()
+        end)
+        :rev()
 
-      local args = { "rg" }
-      if prompt_split[1] then
-        table.insert(args, "-e")
-        table.insert(args, prompt_split[1])
+      local shortcut = nil
+      if n_parts > 1 then
+        ---@type string
+        shortcut = prompt_parts:pop():trim()
       end
 
-      -- patterns
-      if prompt_split[2] then
+      ---@type string
+      local search_prompt = prompt_parts:join(shortcut_sep)
+
+      local args = { "rg" }
+      if search_prompt then
+        table.insert(args, "-e")
+        table.insert(args, search_prompt)
+      end
+
+      if shortcut and #shortcut > 0 then
         table.insert(args, "-g")
 
-        local pattern
-        if type(opts.shortcuts[prompt_split[2]]) == "string" then
-          pattern = opts.shortcuts[prompt_split[2]]
-        elseif type(opts.shortcuts[prompt_split[2]]) == "function" then
-          pattern = opts.shortcuts[prompt_split[2]]()
+        local pattern = ""
+        local action = opts.shortcuts[shortcut]
+
+        if type(action) == "string" then
+          pattern = action
+        elseif type(action) == "function" then
+          pattern = action()
         else
-          pattern = prompt_split[2]
+          pattern = shortcut
         end
 
         table.insert(args, string.format(opts.pattern, pattern))
@@ -97,7 +120,7 @@ M.multi_grep = function(options)
       return vim
         .iter({
           args,
-          __get_rg_gitignore_glob_args(),
+          get_rg_gitignore_glob_args(opts.cwd),
           {
             "--color=never",
             "--no-heading",
