@@ -79,7 +79,17 @@ end
 ---@return function
 function M.get_require_submodule(dir)
   return function(file)
-    local _, output = pcall(require, dir .. "." .. file)
+    local module = dir .. "." .. file
+    local ok, output = pcall(require, module)
+
+    if not ok then
+      vim.notify(
+        "Couldn't load module [" .. module .. "].",
+        vim.log.levels.ERROR,
+        { title = "Error" }
+      )
+    end
+
     return output
   end
 end

@@ -25,10 +25,12 @@ function M.make_config(config)
 end
 
 M.rename_symbol = require("v.utils.lsp.renaming").rename_symbol
-M.handle_formatting = require("v.utils.lsp.formatting").handle_formatting
-M.smart_hover_docs = hover.smart_hover_docs
+M.handle_formatting = require("v.utils.lsp.formatting").handler
+M.smart_hover_docs = hover.smart_docs
 M.peek_definition = hover.peek_definition
+M.hover = hover.hover
+M.signature_help = hover.signature_help
 M.toggle_diagnostics_visibility = diagnostics.toggle_visibility
-M.filter_diagnostics = diagnostics.filter_diagnostics
+M.diagnostic_signs_handler = diagnostics.signs_handler
 
 return M

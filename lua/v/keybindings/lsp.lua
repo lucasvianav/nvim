@@ -13,20 +13,13 @@ local function goto_reference()
 end
 
 M.general = {
-  { "n", "<leader>gp", utils.peek_definition },
-  { "n", "<leader>rn", utils.rename_symbol },
-  { "n", "grn",        utils.rename_symbol },
-  { "n", "K",          utils.smart_hover_docs },
-  { "n", "gD",         vim.lsp.buf.declaration },
-  {
-    "n",
-    "gh",
-    function()
-      vim.lsp.buf.hover({ border = "rounded" })
-    end,
-  },
+  { "n", "grp", utils.peek_definition },
+  { "n", "grn", utils.rename_symbol },
+  { "n", "K",   utils.smart_hover_docs },
+  { "n", "gD",  vim.lsp.buf.declaration },
+  { "n", "gh",  utils.hover },
   { "n", "gq",  vim.diagnostic.setqflist },
-  { "n", "gs",  vim.lsp.buf.signature_help },
+  { "n", "gs",  utils.signature_help },
   { "n", "gl",  vim.diagnostic.open_float },
   { "n", "yog", utils.toggle_diagnostics_visibility },
   { "n", "gr",  goto_reference,                     desc = "Goto References" },

@@ -6,7 +6,6 @@ local M = {
   providers = req_submodule("providers"),
   builtin = req_submodule("builtin"),
   lsp = req_submodule("lsp"),
-  handlers = req_submodule("handlers"),
 }
 
 return M

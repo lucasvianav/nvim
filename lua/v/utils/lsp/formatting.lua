@@ -10,7 +10,7 @@ local api = vim.api
 ---@param ctx table
 ---@param config table
 ---@return nil
-function M.handle_formatting(err, result, ctx, config)
+function M.handler(err, result, ctx, config)
   if err ~= nil or result == nil then
     return
   end
