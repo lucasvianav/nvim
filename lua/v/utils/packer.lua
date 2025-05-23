@@ -27,8 +27,8 @@ local function __get_plugin_name(arg)
   local name = ""
 
   local re = {
-    leadingPath = [[^.\+\/]],               -- matches leading path
-    extension = [[\.[^.]\+$]],              -- matches trailing extension
+    leadingPath = [[^.\+\/]], -- matches leading path
+    extension = [[\.[^.]\+$]], -- matches trailing extension
 
     vim = [[[-_]n\?vim\|n\?vim]] .. "[-_]", -- matches "-vim" or "vim-" (also nvim and _)
     lua = [[[-_]n\?lua\|n\?lua]] .. "[-_]", -- matches "-lua" or "lua-" (also _)
@@ -113,10 +113,10 @@ local function __get_plugin_table(args, plugin_type, category)
       else
         vim.notify(
           "The plugin \""
-          .. name
-          .. "\" was not found at: \""
-          .. args[1]
-          .. "\". No fallback was provided.",
+            .. name
+            .. "\" was not found at: \""
+            .. args[1]
+            .. "\". No fallback was provided.",
           "error"
         )
 

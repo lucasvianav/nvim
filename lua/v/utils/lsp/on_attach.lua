@@ -53,7 +53,7 @@ local specific_on_attach = {
     -- TODO: can I organize imports without ts-utils?
     -- https://github.com/mrjones2014/dotfiles/blob/6159bc2ddfae95af8eed57109b416c37868199a7/.config/nvim/lua/modules/lsp-utils.lua#L57-L73
     local has_ts_utils, ts_utils =
-        require("v.utils.packer").load_and_require_plugin("nvim-lsp-ts-utils")
+      require("v.utils.packer").load_and_require_plugin("nvim-lsp-ts-utils")
 
     if has_ts_utils then
       ts_utils.setup({
@@ -145,15 +145,15 @@ local function setup_autocmds(client)
   if client.server_capabilities.documentHighlightProvider then
     augroup("LspSymbolHighlight", {
       -- highlight
-      { event = "CursorHold",   opts = { callback = vim.lsp.buf.document_highlight } },
-      { event = "CursorHoldI",  opts = { callback = vim.lsp.buf.document_highlight } },
+      { event = "CursorHold", opts = { callback = vim.lsp.buf.document_highlight } },
+      { event = "CursorHoldI", opts = { callback = vim.lsp.buf.document_highlight } },
 
       -- clear
-      { event = "CursorMoved",  opts = { callback = vim.lsp.buf.clear_references } },
+      { event = "CursorMoved", opts = { callback = vim.lsp.buf.clear_references } },
       { event = "CursorMovedI", opts = { callback = vim.lsp.buf.clear_references } },
-      { event = "FocusLost",    opts = { callback = vim.lsp.buf.clear_references } },
-      { event = "BufLeave",     opts = { callback = vim.lsp.buf.clear_references } },
-      { event = "InsertEnter",  opts = { callback = vim.lsp.buf.clear_references } },
+      { event = "FocusLost", opts = { callback = vim.lsp.buf.clear_references } },
+      { event = "BufLeave", opts = { callback = vim.lsp.buf.clear_references } },
+      { event = "InsertEnter", opts = { callback = vim.lsp.buf.clear_references } },
     }, {
       buffer = 0,
     })
@@ -196,7 +196,7 @@ function M.on_attach(client, bufnr)
 
   if lsp_keybindings[client.name] then
     keybindings =
-        require("v.utils.tables").merge_lists({ keybindings, lsp_keybindings[client.name] })
+      require("v.utils.tables").merge_lists({ keybindings, lsp_keybindings[client.name] })
   end
 
   require("v.utils.mappings").set_keybindings(keybindings, { buffer = bufnr })

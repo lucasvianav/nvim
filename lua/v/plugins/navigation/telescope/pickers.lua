@@ -4,7 +4,7 @@ local M = {
       theme = "dropdown",
       previewer = false,
       layout_strategy = "center",
-    }
+    },
   },
 }
 
@@ -95,34 +95,34 @@ M.multi_grep = function(options)
       end
 
       return vim
-      .iter({
-        args,
-        __get_rg_gitignore_glob_args(),
-        {
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-          "--smart-case",
-        },
-      })
-      :flatten()
-      :totable()
+        .iter({
+          args,
+          __get_rg_gitignore_glob_args(),
+          {
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+          },
+        })
+        :flatten()
+        :totable()
     end,
     entry_maker = require("telescope.make_entry").gen_from_vimgrep(opts),
     cwd = opts.cwd,
   })
 
   require("telescope.pickers")
-  .new(opts, {
-    debounce = 100,
-    prompt_title = "~ grep ~",
-    finder = custom_grep,
-    previewer = require("telescope.config").values.grep_previewer(opts),
-    sorter = require("telescope.sorters").empty(),
-  })
-  :find()
+    .new(opts, {
+      debounce = 100,
+      prompt_title = "~ grep ~",
+      finder = custom_grep,
+      previewer = require("telescope.config").values.grep_previewer(opts),
+      sorter = require("telescope.sorters").empty(),
+    })
+    :find()
 end
 
 return M

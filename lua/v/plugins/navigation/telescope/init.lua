@@ -130,7 +130,7 @@ pcall(telescope.load_extension, "fzf")
 require("v.utils.mappings").set_keybindings({
   -- general
   { "n", "<Leader>ff", builtin.find_files, desc = "Find Files" },
-  { "n", "<Leader>fr", builtin.resume,     desc = "Resume Last Search" },
+  { "n", "<Leader>fr", builtin.resume, desc = "Resume Last Search" },
   {
     "n",
     "<Leader>fp",
@@ -138,18 +138,18 @@ require("v.utils.mappings").set_keybindings({
     desc = "Grep Current Dir",
     { nowait = false },
   },
-  { "n", "<Leader>fpp", v.pickers.multi_grep,        desc = "Grep" },
-  { "n", "<Leader>fb",  builtin.buffers,             desc = "Find Buffers" },
-  { "n", "<Leader>fco", builtin.commands,            desc = "Find Commands" },
-  { "n", "<Leader>fch", builtin.command_history,     desc = "Find Command History" },
-  { "n", "<Leader>fj",  builtin.jumplist,            desc = "Find Jumplist" },
-  { "n", "<Leader>fh",  builtin.help_tags,           desc = "Find Help" },
-  { "n", "z=",          builtin.spell_suggest,       desc = "Spelling Suggestions" },
+  { "n", "<Leader>fpp", v.pickers.multi_grep, desc = "Grep" },
+  { "n", "<Leader>fb", builtin.buffers, desc = "Find Buffers" },
+  { "n", "<Leader>fco", builtin.commands, desc = "Find Commands" },
+  { "n", "<Leader>fch", builtin.command_history, desc = "Find Command History" },
+  { "n", "<Leader>fj", builtin.jumplist, desc = "Find Jumplist" },
+  { "n", "<Leader>fh", builtin.help_tags, desc = "Find Help" },
+  { "n", "z=", builtin.spell_suggest, desc = "Spelling Suggestions" },
 
   -- git
-  { "n", "<Leader>gb",  builtin.git_branches, desc = "Git Branches" },
-  { "n", "<Leader>gc",  builtin.git_commits,  desc = "Git Commits" },
-  { "n", "<Leader>gs",  builtin.git_status,   desc = "Git Status" },
+  { "n", "<Leader>gb", builtin.git_branches, desc = "Git Branches" },
+  { "n", "<Leader>gc", builtin.git_commits, desc = "Git Commits" },
+  { "n", "<Leader>gs", builtin.git_status, desc = "Git Status" },
 
   -- extensions
   {
@@ -160,11 +160,11 @@ require("v.utils.mappings").set_keybindings({
   },
 
   -- custom functions
-  { "n", "<leader>fn",  v.searchers.find_nvim,        desc = "Find Neovim Dotfiles" },
-  { "n", "<leader>fk",  v.searchers.find_in_plugins,  desc = "Find Plugins" },
-  { "n", "<leader>fpk", v.searchers.grep_in_plugins,  desc = "Grep Plugins" },
-  { "n", "<leader>fd",  v.searchers.find_dotfiles,    desc = "Find Dotfiles" },
-  { "n", "<leader>f/",  v.searchers.grep_last_search, desc = "Grep Last /" },
+  { "n", "<leader>fn", v.searchers.find_nvim, desc = "Find Neovim Dotfiles" },
+  { "n", "<leader>fk", v.searchers.find_in_plugins, desc = "Find Plugins" },
+  { "n", "<leader>fpk", v.searchers.grep_in_plugins, desc = "Grep Plugins" },
+  { "n", "<leader>fd", v.searchers.find_dotfiles, desc = "Find Dotfiles" },
+  { "n", "<leader>f/", v.searchers.grep_last_search, desc = "Grep Last /" },
 
   groups = {
     { "<leader>f", "Find" },
