@@ -17,11 +17,11 @@ function string.split(input_str, sep)
   return parts
 end
 
----@param input_str string
+---@param self string
 ---@param pattern string
 ---@return boolean
-function string.contains(input_str, pattern)
-  return input_str:find(pattern, 1, true) ~= nil
+function string:contains(pattern)
+  return self:find(pattern, 1, true) ~= nil
 end
 
 ---@param str string
@@ -35,5 +35,5 @@ end
 ---@param pattern string
 ---@return boolean
 function string:ends_with(pattern)
-  return self:sub(-#pattern) == pattern
+  return self:sub(- #pattern) == pattern
 end

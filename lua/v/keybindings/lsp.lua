@@ -1,25 +1,133 @@
 local utils = require("v.utils.lsp")
 
-local __next_diagnost = function()
-  vim.diagnostic.jump({ count = 1, float = true })
+local M = {}
+
+local function goto_reference()
+  local ok = require("v.utils.packer").load_plugin("telescope.nvim")
+  P(ok)
+  if ok then
+    require("telescope.builtin").lsp_references()
+  else
+    vim.lsp.buf.references()
+  end
 end
 
-local __prev_diagnost = function()
-  vim.diagnostic.jump({ count = -1, float = true })
-end
-
-local M = {
+M.general = {
   { "n", "<leader>gp", utils.peek_definition },
-  { "n", "<leader>rn", utils.rename },
-  { "n", "K", utils.show_documentation },
-  { "n", "[g", __prev_diagnost },
-  { "n", "]g", __next_diagnost },
-  { "n", "gD", vim.lsp.buf.declaration },
-  { "n", "gh", vim.lsp.buf.hover },
-  { "n", "gq", vim.diagnostic.setqflist },
-  { "n", "gs", vim.lsp.buf.signature_help },
-  { "n", "gl", vim.diagnostic.open_float },
-  { "n", "yog", utils.toggle_diagnostics_visibility },
+  { "n", "<leader>rn", utils.rename_symbol },
+  { "n", "grn",        utils.rename_symbol },
+  { "n", "K",          utils.smart_hover_docs },
+  { "n", "gD",         vim.lsp.buf.declaration },
+  { "n", "gh",         vim.lsp.buf.hover },
+  { "n", "gq",         vim.diagnostic.setqflist },
+  { "n", "gs",         vim.lsp.buf.signature_help },
+  { "n", "gl",         vim.diagnostic.open_float },
+  { "n", "yog",        utils.toggle_diagnostics_visibility },
+  { "n", "gr",         goto_reference,                     desc = "Goto References" },
+  { "n", "grr",        goto_reference,                     desc = "Goto References" },
+  {
+    "n",
+    "gd",
+    function()
+      local ok = require("v.utils.packer").load_plugin("telescope.nvim")
+      if ok then
+        require("telescope.builtin").lsp_definitions()
+      else
+        vim.lsp.buf.definition()
+      end
+    end,
+    desc = "Goto Definition",
+  },
+  {
+    "n",
+    "gi",
+    function()
+      local ok = require("v.utils.packer").load_plugin("telescope.nvim")
+      if ok then
+        require("telescope.builtin").lsp_implementations()
+      else
+        vim.lsp.buf.implementation()
+      end
+    end,
+    desc = "Goto Implementation",
+  },
+  {
+    "n",
+    "<Leader>fg",
+    function()
+      local ok = require("v.utils.packer").load_plugin("telescope.nvim")
+      if ok then
+        require("telescope.builtin").diagnostics({ bufnr = 0 })
+      end
+    end,
+    desc = "Diagnostics in Cur Buf",
+  },
+  {
+    "n",
+    "<Leader>fgg",
+    function()
+      local ok = require("v.utils.packer").load_plugin("telescope.nvim")
+      if ok then
+        require("telescope.builtin").diagnostics({ bufnr = 0 })
+      end
+    end,
+    desc = "Diagnostics Workspace",
+  },
+  {
+    { "n", "v" },
+    "<Leader>ca",
+    vim.lsp.buf.code_action,
+    desc = "Code Actions",
+  },
+  {
+    "n",
+    "[g",
+    function()
+      vim.diagnostic.jump({ count = -1, float = true })
+    end,
+  },
+  {
+    "n",
+    "]g",
+    function()
+      vim.diagnostic.jump({ count = 1, float = true })
+    end,
+  },
+  {
+    "n",
+    "<leader>F",
+    function()
+      vim.lsp.buf.format({ async = true })
+    end,
+  },
+}
+
+M.angularls = {
+  {
+    "n",
+    "gpt",
+    function()
+      require("v.utils").open_file_swap_extension("ts")
+    end,
+  },
+  {
+    "n",
+    "gph",
+    function()
+      require("v.utils").open_file_swap_extension("html")
+    end,
+  },
+  {
+    "n",
+    "gps",
+    function()
+      require("v.utils").open_file_swap_extension("scss")
+    end,
+  },
+}
+
+M.clangd = {
+  { "n", "gpp", "<cmd>ClangdSwitchSourceHeader<cr>" },
 }
 
 return M

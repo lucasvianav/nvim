@@ -44,6 +44,7 @@ local M = {
     event = "CursorHold",
     after = "nvim-lspconfig",
     commit = "a793d02b6a5e639fa9d3f2a89a839fa688ab2d0aA",
+    as = "lsp_signature",
   },
 
   -- code completion + lsp-like functionalities without actual lsp
@@ -72,13 +73,13 @@ local M = {
   {
     "hrsh7th/nvim-cmp",
     requires = {
-      { "f3fora/cmp-spell", after = "nvim-cmp" },
-      { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-      { "hrsh7th/cmp-calc", after = "nvim-cmp" },
-      { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+      { "f3fora/cmp-spell",     after = "nvim-cmp" },
+      { "hrsh7th/cmp-buffer",   after = "nvim-cmp" },
+      { "hrsh7th/cmp-calc",     after = "nvim-cmp" },
+      { "hrsh7th/cmp-cmdline",  after = "nvim-cmp" },
       { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
       { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-      { "hrsh7th/cmp-path", after = "nvim-cmp" },
+      { "hrsh7th/cmp-path",     after = "nvim-cmp" },
       {
         "lukas-reineke/cmp-under-comparator",
         event = {

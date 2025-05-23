@@ -1,13 +1,14 @@
 local utils = require("v.utils.lsp")
+local servers = require("v.settings.lsp").servers
 -- local formatters = require('v.settings.lsp').formatters
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = utils.servers,
-  automatic_installation = false,
+  ensure_installed = servers,
+  automatic_enable = false,
 })
 
-for _, server in ipairs(utils.servers) do
+for _, server in ipairs(servers) do
   local config = utils.make_config()
 
   local custom_config_path = "v.plugins.lsp.servers." .. server

@@ -1,19 +1,25 @@
 local lsp = vim.lsp
 local utils = require("v.utils.lsp")
 
+---Max width for floating window stuff, like hover and signature help.
+---@see https://github.com/akinsho/dotfiles/blob/d3526289627b72e4b6a3ddcbfe0411b5217a4a88/.config/nvim/plugin/lsp.lua#L145-L158
+local max_float_width = math.max(math.floor(vim.o.columns * 0.7), 100)
+---Max height for floating window stuff, like hover and signature help.
+local max_float_height = math.max(math.floor(vim.o.lines * 0.3), 30)
+
 lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
   border = "rounded",
-  max_width = utils.max_float_width,
-  max_height = utils.max_float_height,
+  max_width = max_float_width,
+  max_height = max_float_height,
 })
 
 lsp.handlers["textDocument/signatureHelp"] = lsp.with(lsp.handlers.signature_help, {
   border = "rounded",
-  max_width = utils.max_float_width,
-  max_height = utils.max_float_height,
+  max_width = max_float_width,
+  max_height = max_float_height,
 })
 
-lsp.handlers["textDocument/formatting"] = utils.formatting
+lsp.handlers["textDocument/formatting"] = utils.handle_formatting
 
 -- ____ ___ ____ _   _     ____ ___  _    _   _ __  __ _   _
 --/ ___|_ _/ ___| \ | |   / ___/ _ \| |  | | | |  \/  | \ | |

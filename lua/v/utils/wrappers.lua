@@ -40,14 +40,6 @@ end
 ---@vararg any
 function M.inspect(...)
   local formatted = M.format_for_inspection(...)
-  local caller = debug.getinfo(1, "S")
-  local callerFile = vim.fn.fnamemodify(caller.source:sub(2), ":~:.")
-
-  vim.notify(
-    formatted,
-    vim.log.levels.INFO,
-    { title = "Inspecting " .. callerFile .. ":" .. caller.linedefined }
-  )
   print(formatted)
   return ...
 end

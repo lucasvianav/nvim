@@ -97,8 +97,6 @@ local M = {
     keys = {
       "[",
       "]",
-      "<M-k>",
-      "<M-j>",
       "<Space><Space>",
       "yo",
     },

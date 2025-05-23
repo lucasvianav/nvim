@@ -16,6 +16,7 @@ snacks.setup({
   input = {
     enabled = true,
     prompt_pos = "left",
+    icon = "󰙏 ",
     win = {
       relative = "cursor",
       style = "input",
@@ -25,7 +26,8 @@ snacks.setup({
         blend = 80,
       },
       keys = {
-        i_esc = { "<esc>", { "cmp_close", "cancel" }, mode = "i", expr = true },
+        n_crtl_c = { "<c-c>", { "cmp_close", "cancel" }, mode = "n", expr = true },
+        i_crtl_c = { "<c-c>", { "cmp_close", "cancel" }, mode = "i", expr = true },
       },
     },
     expand = false,
@@ -41,6 +43,7 @@ snacks.setup({
       input = {
         keys = {
           ["<Esc>"] = { "close", mode = { "n", "i" } },
+          ["<c-c>"] = { "close", mode = { "n", "i" } },
         },
       },
     },

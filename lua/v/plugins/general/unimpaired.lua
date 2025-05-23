@@ -87,7 +87,7 @@ local duplicate_line = function(up)
   end
 
   local cmd =
-    string.rep("copy " .. (dupl_dir_up and "-1" or "+0") .. " | ", dupl_count):gsub(" | $", "")
+      string.rep("copy " .. (dupl_dir_up and "-1" or "+0") .. " | ", dupl_count):gsub(" | $", "")
   exec("silent!" .. cmd, { output = false })
 
   vim.fn["repeat#set"](t("<Plug>DuplicateLineRepeat"), dupl_count)
@@ -179,16 +179,16 @@ exec(
 require("v.utils.mappings").set_keybindings({
   -- <Space><Space> surrounds current line
   -- or selection with [count] blank lines
-  { { "n", "x" }, "<Space><Space>", blank_around, { nowait = false } },
-  { "x", "[<Space>", blank_up_selection },
-  { "x", "]<Space>", blank_down_selection },
+  { { "n", "x" }, "<Space><Space>", blank_around,        { nowait = false } },
+  { "x",          "[<Space>",       blank_up_selection },
+  { "x",          "]<Space>",       blank_down_selection },
 
   -- alt + j/k moves current line or
   -- selection [count] lines up/down
-  { "n", "<M-k>", "<Plug>unimpairedMoveUp" },
-  { "n", "<M-j>", "<Plug>unimpairedMoveDown" },
-  { "x", "<M-k>", "<Plug>unimpairedMoveKeepSelectionUp" },
-  { "x", "<M-j>", "<Plug>unimpairedMoveKeepSelectionDown" },
+  -- { "n", "<M-k>", "<Plug>unimpairedMoveUp" },
+  -- { "n", "<M-j>", "<Plug>unimpairedMoveDown" },
+  -- { "x", "<M-k>", "<Plug>unimpairedMoveKeepSelectionUp" },
+  -- { "x", "<M-j>", "<Plug>unimpairedMoveKeepSelectionDown" },
 
   -- [d, ]d duplicates [count] lines above/below
   {
@@ -219,6 +219,6 @@ require("v.utils.mappings").set_keybindings({
       duplicate_selection(false)
     end,
   },
-  { "n", "<Plug>DuplicateLineRepeat", duplicate_line },
+  { "n", "<Plug>DuplicateLineRepeat",      duplicate_line },
   { "x", "<Plug>DuplicateSelectionRepeat", duplicate_selection },
 })

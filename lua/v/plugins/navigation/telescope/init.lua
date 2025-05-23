@@ -146,29 +146,6 @@ require("v.utils.mappings").set_keybindings({
   { "n", "<Leader>fh",  builtin.help_tags,           desc = "Find Help" },
   { "n", "z=",          builtin.spell_suggest,       desc = "Spelling Suggestions" },
 
-  -- lsp
-  { "n", "gd",          builtin.lsp_definitions,     desc = "Goto Definition" },
-  { "n", "gr",          builtin.lsp_references,      desc = "Goto References" },
-  { "n", "grr",         builtin.lsp_references,      desc = "Goto References" },
-  { "n", "gi",          builtin.lsp_implementations, desc = "Goto Implementation" },
-  {
-    "n",
-    "<Leader>fg",
-    function()
-      builtin.diagnostics({ bufnr = 0 })
-    end,
-    desc = "Diagnostics in Cur Buf",
-  },
-  { "n", "<Leader>fgg", builtin.diagnostics,  desc = "Diagnostics Workspace" },
-  {
-    { "n", "v" },
-    "<Leader>ca",
-    function()
-      vim.lsp.buf.code_action()
-    end,
-    desc = "Code Actions",
-  },
-
   -- git
   { "n", "<Leader>gb",  builtin.git_branches, desc = "Git Branches" },
   { "n", "<Leader>gc",  builtin.git_commits,  desc = "Git Commits" },

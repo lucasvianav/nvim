@@ -27,8 +27,8 @@ local function __get_plugin_name(arg)
   local name = ""
 
   local re = {
-    leadingPath = [[^.\+\/]], -- matches leading path
-    extension = [[\.[^.]\+$]], -- matches trailing extension
+    leadingPath = [[^.\+\/]],               -- matches leading path
+    extension = [[\.[^.]\+$]],              -- matches trailing extension
 
     vim = [[[-_]n\?vim\|n\?vim]] .. "[-_]", -- matches "-vim" or "vim-" (also nvim and _)
     lua = [[[-_]n\?lua\|n\?lua]] .. "[-_]", -- matches "-lua" or "lua-" (also _)
@@ -113,10 +113,10 @@ local function __get_plugin_table(args, plugin_type, category)
       else
         vim.notify(
           "The plugin \""
-            .. name
-            .. "\" was not found at: \""
-            .. args[1]
-            .. "\". No fallback was provided.",
+          .. name
+          .. "\" was not found at: \""
+          .. args[1]
+          .. "\". No fallback was provided.",
           "error"
         )
 
@@ -232,14 +232,14 @@ function M.setup()
   return packer
 end
 
-function M.is_plugin_loaded(plugin)
-  local plugin_list = packer_plugins or {}
-  return plugin_list[plugin] and plugin_list[plugin].loaded or false
+function M.is_plugin_loaded(plugin_name)
+  local plugin = (packer_plugins or {})[plugin_name]
+  return plugin and plugin.loaded
 end
 
-function M.is_plugin_installed(plugin)
-  local plugin_list = packer_plugins or {}
-  return plugin_list[plugin] or false
+function M.is_plugin_installed(plugin_name)
+  local plugin = (packer_plugins or {})[plugin_name]
+  return plugin and require("v.utils.paths").dir_exists(plugin.path)
 end
 
 ---@param plugin_name string
@@ -249,6 +249,8 @@ function M.load_plugin(plugin_name)
 
   if not packer_ok then
     return false
+  elseif M.is_plugin_loaded(plugin_name) then
+    return true
   elseif not M.is_plugin_installed(plugin_name) then
     vim.notify(
       "Couldn't load `" .. plugin_name .. "` because it is not installed.",
@@ -256,8 +258,6 @@ function M.load_plugin(plugin_name)
       { title = "Error - Packer" }
     )
     return false
-  elseif M.is_plugin_loaded(plugin_name) then
-    return true
   end
 
   local loaded, _ = pcall(packer.loader, plugin_name)

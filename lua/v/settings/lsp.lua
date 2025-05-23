@@ -1,5 +1,6 @@
 local M = {}
 
+---Code formatters to auto-install
 M.formatters = {
   "eslint_d",
   "prettier",
@@ -13,6 +14,8 @@ M.formatters = {
   "stylua",
 }
 
+---LSP Servers to auto-install
+---@enum lsp_servers
 M.servers = {
   "bashls",
   "clangd",
@@ -43,9 +46,9 @@ vim.diagnostic.config({
   signs = true,
   float = {
     scope = "line",
-    border = "single",
-    source = "always",
-    focusable = false,
+    border = "rounded",
+    source = true,
+    focusable = true,
     close_events = {
       "BufLeave",
       "CursorMoved",
@@ -54,10 +57,9 @@ vim.diagnostic.config({
     },
   },
   virtual_text = {
-    source = "always",
+    source = true,
   },
 })
-
 vim.lsp.set_log_level("debug")
 
 return M

@@ -120,7 +120,8 @@ local mypy = {
 
 -- linter for python
 local flake8 = {
-  lintCommand = "flake8 --max-line-length 80 --ignore E203,F841 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
+  lintCommand =
+  "flake8 --max-line-length 80 --ignore E203,F841 --format '%(path)s:%(row)d:%(col)d: %(code)s %(code)s %(text)s' --stdin-display-name ${INPUT} -",
   lintStdin = true,
   lintIgnoreExitCode = true,
   lintFormats = { "%f:%l:%c: %t%n%n%n %m" },
@@ -183,9 +184,9 @@ local hlint = {
 
 local ktlint = require("v.plugins.lsp.servers.efm.ktlint").config
 ---@type LinterConfig
-local vint = require("efmls-configs.linters.vint")
+local vint = ({ pcall(require, "efmls-configs.linters.vint") })[2] or {}
 ---@type LinterConfig
-local biome = require("efmls-configs.formatters.biome")
+local biome = ({ pcall(require, "efmls-configs.formatters.biome") })[2] or {}
 
 local languages = {
   javascript = { eslint_d, prettierd, biome },
