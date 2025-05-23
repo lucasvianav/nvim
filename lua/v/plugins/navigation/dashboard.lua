@@ -34,7 +34,7 @@ require("dashboard").setup({
         desc = pad("Navigate Dotfiles", 40),
         keymap = "SPC f d",
         action = function()
-          require("v.utils.telescope").find_dotfiles()
+          require('v.plugins.navigation.telescope.searchers').find_dotfiles()
         end,
       },
       {
@@ -42,7 +42,7 @@ require("dashboard").setup({
         desc = pad("Navigate Neovim Settings", 40),
         keymap = "SPC f n",
         action = function()
-          require("v.utils.telescope").find_nvim()
+          require('v.plugins.navigation.telescope.searchers').find_nvim()
         end,
       },
     },
