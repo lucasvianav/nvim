@@ -73,13 +73,13 @@ local M = {
   {
     "hrsh7th/nvim-cmp",
     requires = {
-      { "f3fora/cmp-spell",     after = "nvim-cmp" },
-      { "hrsh7th/cmp-buffer",   after = "nvim-cmp" },
-      { "hrsh7th/cmp-calc",     after = "nvim-cmp" },
-      { "hrsh7th/cmp-cmdline",  after = "nvim-cmp" },
+      { "f3fora/cmp-spell", after = "nvim-cmp" },
+      { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+      { "hrsh7th/cmp-calc", after = "nvim-cmp" },
+      { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
       { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
       { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-      { "hrsh7th/cmp-path",     after = "nvim-cmp" },
+      { "hrsh7th/cmp-path", after = "nvim-cmp" },
       {
         "lukas-reineke/cmp-under-comparator",
         event = {
@@ -175,7 +175,7 @@ local M = {
     "pmizio/typescript-tools.nvim",
     ft = "typescript",
     commit = "3c501d7c7f79457932a8750a2a1476a004c5c1a9",
-  }
+  },
 }
 
 return M

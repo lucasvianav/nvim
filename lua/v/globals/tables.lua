@@ -7,7 +7,7 @@ function table.merge_lists(lists, ...)
 
   assert(type(lists) == "table")
 
-  if #({...}) > 0 then
+  if #{ ... } > 0 then
     lists = { lists, ... }
   end
 

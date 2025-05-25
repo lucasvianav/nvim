@@ -29,39 +29,39 @@ local function get_rg_exclude_glob_flags(no_gitignore)
 
   local globs = table.merge_lists({
     vim
-        .iter(ignored)
-        :map(function(it)
-          return {
-            "**/" .. it .. "/**",
-            "**/" .. it .. "",
-            "" .. it .. "/**",
-            "*" .. it .. "*",
-            it,
-          }
-        end)
-        :flatten()
-        :totable(),
+      .iter(ignored)
+      :map(function(it)
+        return {
+          "**/" .. it .. "/**",
+          "**/" .. it .. "",
+          "" .. it .. "/**",
+          "*" .. it .. "*",
+          it,
+        }
+      end)
+      :flatten()
+      :totable(),
     gitig_globs,
   })
 
   return vim
-      .iter(globs)
-      :map(function(it)
-        return { "-g", "!" .. it }
-      end)
-      :flatten()
-      :totable()
+    .iter(globs)
+    :map(function(it)
+      return { "-g", "!" .. it }
+    end)
+    :flatten()
+    :totable()
 end
 
 ---@return table<string, string>
 local function get_fd_exclude_flags()
   return vim
-      .iter(ignored)
-      :map(function(it)
-        return { "--exclude", it }
-      end)
-      :flatten()
-      :totable()
+    .iter(ignored)
+    :map(function(it)
+      return { "--exclude", it }
+    end)
+    :flatten()
+    :totable()
 end
 
 ---@param opts table<string, boolean|string|string[]>
@@ -100,9 +100,9 @@ local function get_shortcut_table()
     ["xs"] = { glob = "*.{ex,exs}", extensions = { "ex", "exs" } },
     ["p"] = { glob = "*.proto", extensions = { "proto" } },
     ["%"] = cur_buf,
-    ["."] = { path = utils.path_expand("%:h") },    -- curr buf's dir
+    ["."] = { path = utils.path_expand("%:h") }, -- curr buf's dir
     [".."] = { path = utils.path_expand("%:h:h") }, -- curr buf's parent dir
-    ["i"] = { flag = "--no-ignore" },               -- include ignored files
+    ["i"] = { flag = "--no-ignore" }, -- include ignored files
 
     {
       ---Traverse the current buffer's directory in the format `-2p` or `32p`
@@ -206,11 +206,11 @@ local function process_prompt(prompt, shortcuts, shortcut_sep)
   local prompt_parts = prompt:reverse():split(shortcut_sep)
   local n_parts = #prompt_parts
   prompt_parts = vim
-      .iter(prompt_parts)
-      :map(function(it)
-        return it:reverse()
-      end)
-      :rev()
+    .iter(prompt_parts)
+    :map(function(it)
+      return it:reverse()
+    end)
+    :rev()
 
   local shortcut_prompt = nil
   if n_parts > 1 then
@@ -240,12 +240,12 @@ local function get_rg_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
 
   local shortcuts = (p.shortcuts or {})
   local globs = vim
-      .iter(shortcuts.globs or {})
-      :map(function(it)
-        return { "-g", it }
-      end)
-      :flatten()
-      :totable()
+    .iter(shortcuts.globs or {})
+    :map(function(it)
+      return { "-g", it }
+    end)
+    :flatten()
+    :totable()
   local flags = shortcuts.flags or {}
 
   return table.merge_lists({
@@ -271,12 +271,12 @@ local function get_fd_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
 
   local shortcuts = (p.shortcuts or {})
   local extensions = vim
-      .iter(shortcuts.extensions or {})
-      :map(function(it)
-        return { "--extension", it }
-      end)
-      :flatten()
-      :totable()
+    .iter(shortcuts.extensions or {})
+    :map(function(it)
+      return { "--extension", it }
+    end)
+    :flatten()
+    :totable()
 
   return table.merge_lists({
     cmd,
@@ -308,38 +308,38 @@ function M.multi_grep(options)
   local custom_grep = require("telescope.finders").new_async_job({
     command_generator = function(prompt)
       return vim
-          .iter({
-            get_rg_cmd_from_prompt(prompt, opts.shortcuts, opts.shortcut_sep),
-            get_additional_flags(opts),
-            {
-              "--smart-case",
-              "--no-heading",
-              "--with-filename",
-              "--line-number",
-              "--column",
-            },
-          })
-          :flatten()
-          :totable()
+        .iter({
+          get_rg_cmd_from_prompt(prompt, opts.shortcuts, opts.shortcut_sep),
+          get_additional_flags(opts),
+          {
+            "--smart-case",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+          },
+        })
+        :flatten()
+        :totable()
     end,
     entry_maker = make_entry.gen_from_vimgrep(opts),
     cwd = opts.cwd,
   })
 
   pickers
-      .new(opts, {
-        debounce = 100,
-        prompt_title = "~ grep ~",
-        finder = custom_grep,
-        previewer = conf.grep_previewer(opts),
-        sorter = fzf and fzf.native_fzf_sorter(opts) or sorters.highlighter_only(opts),
-        attach_mappings = function(_, map)
-          map("i", "<c-space>", actions.to_fuzzy_refine)
-          return true
-        end,
-        push_cursor_on_edit = true,
-      })
-      :find()
+    .new(opts, {
+      debounce = 100,
+      prompt_title = "~ grep ~",
+      finder = custom_grep,
+      previewer = conf.grep_previewer(opts),
+      sorter = fzf and fzf.native_fzf_sorter(opts) or sorters.highlighter_only(opts),
+      attach_mappings = function(_, map)
+        map("i", "<c-space>", actions.to_fuzzy_refine)
+        return true
+      end,
+      push_cursor_on_edit = true,
+    })
+    :find()
 end
 
 ---Calls `rg` when input changes.
@@ -356,29 +356,29 @@ function M.find_files_rg(options)
   local custom_find_files = require("telescope.finders").new_async_job({
     command_generator = function(prompt)
       return vim
-          .iter({
-            get_rg_cmd_from_prompt(prompt, opts.shortcuts, opts.shortcut_sep),
-            get_additional_flags(opts),
-            opts.search_file and { "-g", "*" .. opts.search_file .. "*" } or {},
-            { "--files" },
-          })
-          :flatten()
-          :totable()
+        .iter({
+          get_rg_cmd_from_prompt(prompt, opts.shortcuts, opts.shortcut_sep),
+          get_additional_flags(opts),
+          opts.search_file and { "-g", "*" .. opts.search_file .. "*" } or {},
+          { "--files" },
+        })
+        :flatten()
+        :totable()
     end,
     entry_maker = make_entry.gen_from_file(opts),
     cwd = opts.cwd,
   })
 
   pickers
-      .new(opts, {
-        debounce = 100,
-        prompt_title = "~ find files ~",
-        finder = custom_find_files,
-        __locations_input = true,
-        previewer = conf.grep_previewer(opts),
-        sorter = fzf and fzf.native_fzf_sorter(opts) or conf.file_sorter(opts),
-      })
-      :find()
+    .new(opts, {
+      debounce = 100,
+      prompt_title = "~ find files ~",
+      finder = custom_find_files,
+      __locations_input = true,
+      previewer = conf.grep_previewer(opts),
+      sorter = fzf and fzf.native_fzf_sorter(opts) or conf.file_sorter(opts),
+    })
+    :find()
 end
 
 ---Calls `fd` when input changes.
@@ -395,29 +395,29 @@ function M.find_files_live_fd(options)
   local custom_find_files = require("telescope.finders").new_async_job({
     command_generator = function(prompt)
       return vim
-          .iter({
-            get_fd_cmd_from_prompt(prompt, opts.shortcuts, opts.shortcut_sep),
-            get_fd_exclude_flags(),
-            get_additional_flags(opts),
-            opts.search_file and { opts.search_file } or {},
-          })
-          :flatten()
-          :totable()
+        .iter({
+          get_fd_cmd_from_prompt(prompt, opts.shortcuts, opts.shortcut_sep),
+          get_fd_exclude_flags(),
+          get_additional_flags(opts),
+          opts.search_file and { opts.search_file } or {},
+        })
+        :flatten()
+        :totable()
     end,
     entry_maker = make_entry.gen_from_file(opts),
     cwd = opts.cwd,
   })
 
   pickers
-      .new(opts, {
-        debounce = 100,
-        prompt_title = "~ find files ~",
-        finder = custom_find_files,
-        __locations_input = true,
-        previewer = conf.grep_previewer(opts),
-        sorter = fzf and fzf.native_fzf_sorter(opts) or sorters.highlighter_only(opts),
-      })
-      :find()
+    .new(opts, {
+      debounce = 100,
+      prompt_title = "~ find files ~",
+      finder = custom_find_files,
+      __locations_input = true,
+      previewer = conf.grep_previewer(opts),
+      sorter = fzf and fzf.native_fzf_sorter(opts) or sorters.highlighter_only(opts),
+    })
+    :find()
 end
 
 ---Does not call `fd` when input changes. Just calls it once and sorts.
@@ -434,25 +434,25 @@ function M.find_files_fd(options)
   opts.entry_maker = make_entry.gen_from_file(opts)
 
   local cmd = vim
-      .iter({
-        get_fd_cmd_from_prompt("", { {} }, ""),
-        get_fd_exclude_flags(),
-        get_additional_flags(opts),
-        opts.search_file and { opts.search_file } or {},
-      })
-      :flatten()
-      :totable()
+    .iter({
+      get_fd_cmd_from_prompt("", { {} }, ""),
+      get_fd_exclude_flags(),
+      get_additional_flags(opts),
+      opts.search_file and { opts.search_file } or {},
+    })
+    :flatten()
+    :totable()
 
   pickers
-      .new(opts, {
-        debounce = 100,
-        prompt_title = "~ find files ~",
-        finder = require("telescope.finders").new_oneshot_job(cmd, opts),
-        __locations_input = true,
-        previewer = conf.grep_previewer(opts),
-        sorter = fzf and fzf.native_fzf_sorter(opts) or sorters.highlighter_only(opts),
-      })
-      :find()
+    .new(opts, {
+      debounce = 100,
+      prompt_title = "~ find files ~",
+      finder = require("telescope.finders").new_oneshot_job(cmd, opts),
+      __locations_input = true,
+      previewer = conf.grep_previewer(opts),
+      sorter = fzf and fzf.native_fzf_sorter(opts) or sorters.highlighter_only(opts),
+    })
+    :find()
 end
 
 return M

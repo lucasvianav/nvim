@@ -33,5 +33,5 @@ end
 ---@param pattern string
 ---@return boolean
 function string:ends_with(pattern)
-  return self:sub(- #pattern) == pattern
+  return self:sub(-#pattern) == pattern
 end
