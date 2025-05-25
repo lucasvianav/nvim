@@ -9,8 +9,7 @@ M.colors = require("v.utils.colors")
 ---@param groups string|string[] the highlighting groups' names
 ---@param hldef HighlighDefinition the highlighting modifications
 M.highlight = function(groups, hldef)
-  ---@cast groups string[]
-  groups = type(groups) == "string" and { groups } or groups
+  groups = type(groups) == "string" and { groups } or groups --[=[@as string[]]=]
 
   vim.validate("hldef", hldef, "table")
   vim.validate("hldef.link", hldef.link, "string", true)

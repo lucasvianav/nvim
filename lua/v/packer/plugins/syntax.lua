@@ -123,10 +123,20 @@ local M = {
     commit = "27128a0f55189724c841843ba41cd33cf7186032",
   },
 
-  -- single <-> multi-line
+  -- split <-> join expressions
+  {
+    "Wansmer/treesj",
+    keys = { "gS", "gJ" },
+    commit = "3b4a2bc42738a63de17e7485d4cc5e49970ddbcc",
+  },
+
+  -- fallback: split <-> join expressions
   {
     "AndrewRadev/splitjoin.vim",
-    keys = { "gS", "gJ" },
+    cmd = {
+      "SplitjoinSplit",
+      "SplitjoinJoin",
+    },
     commit = "6af1cdcae4b46a90dbcd59ce0ca3543f34c7732c",
   },
 

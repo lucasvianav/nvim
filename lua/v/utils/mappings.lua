@@ -56,8 +56,7 @@ function M.map(keybinding)
     "opts",
   }, keybinding)
   local mode, lhs, rhs, opts = k.mode, k.lhs, k.rhs, k.opts
-  ---@cast lhs string[]
-  lhs = type(lhs) == "string" and { lhs } or lhs
+  lhs = type(lhs) == "string" and { lhs } or lhs --[=[@as string[]]=]
 
   if #lhs == 0 then
     logger.log("No LHS for mapping.")
@@ -132,8 +131,7 @@ end
 ---@param groups? KeybindingGroup[]
 ---@param buffer? integer|boolean
 local function __create_whichkey_group(group, groups, buffer)
-  ---@cast buffer integer
-  buffer = type(buffer) == "boolean" and 1 or buffer
+  buffer = type(buffer) == "boolean" and 1 or buffer --[[@as integer]]
   groups = groups or {}
 
   if group then

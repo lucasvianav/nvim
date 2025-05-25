@@ -31,8 +31,7 @@ package.path = table.concat({ config_init_path, config_dir_wildcard }, ";") .. p
 local config_ok, config = pcall(require, "v")
 
 if config_ok then
-  ---@cast config LocalNvimConfig?
-  M.config = config
+  M.config = config --[[@as LocalNvimConfig?]]
 end
 
 -- restore initial state
