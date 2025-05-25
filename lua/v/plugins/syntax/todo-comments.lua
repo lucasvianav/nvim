@@ -15,7 +15,7 @@ require("v.utils.mappings").set_keybindings({
   },
   {
     "n",
-    "<leader>fc",
+    "<leader>to",
     "<cmd>TodoTelescope<cr>",
   },
 })
