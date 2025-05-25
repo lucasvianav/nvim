@@ -45,14 +45,16 @@ local function setup_autocmds(client)
     })
   end
 
-  local signature_ok = require("v.utils.packer").load_and_require_plugin("lsp_signature")
-  if client.server_capabilities.signatureHelpProvider and signature_ok then
-    augroup("SignatureHelp", {
-      {
-        event = "CursorHoldI",
-        opts = { callback = vim.lsp.buf.signature_help, buffer = 0 },
-      },
-    })
+  if client.server_capabilities.signatureHelpProvider then
+    -- if the plugin is properly loaded it'll take care of it
+    if not require("v.utils.packer").load_plugin("lsp_signature") then
+      augroup("SignatureHelp", {
+        {
+          event = "CursorHoldI",
+          opts = { callback = require("v.utils.lsp").signature_help, buffer = 0 },
+        },
+      })
+    end
   end
 end
 

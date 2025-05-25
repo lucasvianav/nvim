@@ -41,7 +41,7 @@ local M = {
   -- show function signature
   {
     "ray-x/lsp_signature.nvim",
-    event = "CursorHold",
+    event = { "CursorHoldI", "InsertEnter" },
     after = "nvim-lspconfig",
     commit = "a793d02b6a5e639fa9d3f2a89a839fa688ab2d0aA",
     as = "lsp_signature",

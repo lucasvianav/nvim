@@ -1,7 +1,7 @@
 local M = {}
 local lsp = vim.lsp
 
-local hover_config = {
+M.hover_config = {
   border = "rounded",
   ---@see https://github.com/akinsho/dotfiles/blob/d3526289627b72e4b6a3ddcbfe0411b5217a4a88/.config/nvim/plugin/lsp.lua#L145-L158
   max_width = math.max(math.floor(vim.o.columns * 0.7), 100),
@@ -19,17 +19,17 @@ function M.peek_definition()
       if result == nil or vim.tbl_isempty(result) then
         return nil
       end
-      lsp.util.preview_location(result[1], hover_config)
+      lsp.util.preview_location(result[1], M.hover_config)
     end
   )
 end
 
 function M.hover()
-  vim.lsp.buf.hover(hover_config)
+  vim.lsp.buf.hover(M.hover_config)
 end
 
 function M.signature_help()
-  vim.lsp.buf.signature_help(hover_config)
+  vim.lsp.buf.signature_help(M.hover_config)
 end
 
 ---Calls LSP hover or activates Vim doc (:h) depending on filetype.
