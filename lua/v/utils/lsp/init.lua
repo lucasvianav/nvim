@@ -10,7 +10,7 @@ local hover = require("v.utils.lsp.hover")
 function M.make_config(config)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-  require('v.utils.packer').load_plugin("cmp-nvim-lsp")
+  require("v.utils.packer").load_plugin("cmp-nvim-lsp")
   local has_cmp, cmp = pcall(require, "cmp_nvim_lsp")
   if has_cmp then
     capabilities = cmp.default_capabilities()

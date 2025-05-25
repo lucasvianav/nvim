@@ -19,50 +19,8 @@ vim.diagnostic.config({
     source = true,
   },
 })
-vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("INFO")
 
 local utils = require("v.utils.lsp")
 vim.diagnostic.handlers.signs = utils.diagnostic_signs_handler
 vim.lsp.handlers["textDocument/formatting"] = utils.handle_formatting
-
-local M = {}
-
----Code formatters to auto-install
-M.formatters = {
-  "eslint_d",
-  "prettier",
-  "prettierd",
-  "markdownlint",
-  "black",
-  "blackd-client",
-  "flake8",
-  "mypy",
-  "vint",
-  "stylua",
-}
-
----LSP Servers to auto-install
----@enum lsp_servers
-M.servers = {
-  "bashls",
-  "clangd",
-  "cssls",
-  "cssmodules_ls",
-  "dockerls",
-  "efm",
-  "emmet_ls",
-  "graphql",
-  "html",
-  "jsonls",
-  "lua_ls",
-  "protols",
-  "pylsp",
-  "pyright",
-  "sqlls",
-  "sqls",
-  "ts_ls",
-  "vimls",
-  "yamlls",
-}
-
-return M

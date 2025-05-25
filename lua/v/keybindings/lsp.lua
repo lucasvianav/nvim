@@ -4,7 +4,6 @@ local M = {}
 
 local function goto_reference()
   local ok = require("v.utils.packer").load_plugin("telescope.nvim")
-  P(ok)
   if ok then
     require("telescope.builtin").lsp_references()
   else

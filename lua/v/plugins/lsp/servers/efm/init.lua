@@ -227,9 +227,9 @@ M.config = {
     hover = false,
   },
   filetypes = vim.tbl_keys(languages),
-  root_dir = vim.uv.cwd,
+  root_dir = vim.uv.cwd(),
   settings = {
-    rootMarkers = require("v.utils.tables").merge_lists({
+    rootMarkers = table.merge_lists({
       ".eslintrc.cjs",
       ".eslintrc.js",
       ".eslintrc.json",
