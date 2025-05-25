@@ -3,23 +3,14 @@
 
 local M = {}
 
----@class AutocommandOptions
----@field pattern? string|string[]
----@field buffer? integer
----@field desc? string
----@field callback? fun(id: number, event: number|nil, group: number|nil, match: string, buf: number, file: string)|string
----@field command? string
----@field once? boolean
----@field nested? boolean
-
 ---@class Autocommand
 ---@field event string|string[]
----@field opts? AutocommandOptions
+---@field opts? vim.api.keyset.create_autocmd
 
 ---Wrapper for creating a new augroup and associating a list of commands to it.
 ---@param name string
 ---@param autocmds Autocommand[] will be unpacked and passed to nvim_create_autocmd
----@param opts? AutocommandOptions
+---@param opts? vim.api.keyset.create_autocmd
 ---@return nil
 M.augroup = function(name, autocmds, opts)
   if type(name) ~= "string" or type(autocmds) ~= "table" then
