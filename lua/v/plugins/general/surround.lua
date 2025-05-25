@@ -1,17 +1,35 @@
-local g = vim.g
+require("nvim-surround").setup({
+  keymaps = {
+    insert = false,
+    insert_line = false,
+    normal = false,
+    normal_cur = false,
+    normal_line = false,
+    normal_cur_line = false,
+    visual = false,
+    visual_line = false,
+    delete = false,
+    change = false,
+    change_line = false,
+  },
+})
 
-g.surround_no_mappings = true
-g.surround_no_insert_mappings = true
+local utils = require("v.utils.mappings")
 
-require("v.utils.mappings").set_keybindings({
-  { "n", "ds", "<Plug>Dsurround" },
-  { "n", "cs", "<Plug>Csurround" },
-  { "n", "cS", "<Plug>CSurround" },
-  { "n", "xss", "<Plug>Yssurround" },
-  { "n", "xSs", "<Plug>YSsurround" },
-  { "n", "xSS", "<Plug>YSsurround" },
-  { "n", "xs", "<Plug>Ysurround", { nowait = false } },
-  { "n", "xS", "<Plug>YSurround", { nowait = false } },
-  { "x", "S", "<Plug>VSurround" },
-  { "x", "gS", "<Plug>VgSurround" },
+-- I don't have the slightest clue WHY, but without this it doesn't work ????
+utils.unset_keybindings({
+  { "n", "xss" },
+  { "n", "xSS" },
+})
+
+utils.set_keybindings({
+  { "n", "ds", "<Plug>(nvim-surround-delete)" },
+  { "n", "cs", "<Plug>(nvim-surround-change)" },
+  { "n", "cS", "<Plug>(nvim-surround-change-line)" },
+  { "n", "xs", "<Plug>(nvim-surround-normal)", { nowait = false } },
+  { "n", "xss", "<Plug>(nvim-surround-normal-cur)" },
+  { "n", "xS", "<Plug>(nvim-surround-normal-line)", { nowait = false } },
+  { "n", "xSS", "<Plug>(nvim-surround-normal-cur-line)" },
+  { "x", "S", "<Plug>(nvim-surround-visual)" },
+  { "x", "gS", "<Plug>(nvim-surround-visual-line)" },
 })

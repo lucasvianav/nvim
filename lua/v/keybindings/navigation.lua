@@ -16,7 +16,4 @@ set_keybindings({
   -- better nav for omnicomplete
   { { "c", "i" }, "<C-j>", "<C-n>" },
   { { "c", "i" }, "<C-k>", "<C-p>" },
-
-  -- ignore trailing whitespaces when going to end of line
-  { "n", "$", "g_" },
 })

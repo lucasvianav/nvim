@@ -27,6 +27,7 @@ require("v.utils.abbreviations").set_abbreviations({
   { "wqb", "BqWrite" },
 
   -- Packer
+  { "PI", "PackerInstall" },
   { "PS", "PackerSync" },
   { "PC", "PackerCompile" },
   { "PL", "PackerClean" },

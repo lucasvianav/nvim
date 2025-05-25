@@ -127,28 +127,11 @@ local M = {
     commit = "00334ee24b9a05001ad50221c8daffbeedaa0842",
   },
 
-  -- like tpope/vim-surround but for functions
+  -- surrounding manipulation
   {
-    "AndrewRadev/dsf.vim",
-    after = "vim-surround",
-    keys = {
-      "csf",
-      "dsf",
-      "dif",
-      "daf",
-      "dsnf",
-      { "o", "if" },
-      { "o", "af" },
-    },
-    commit = "b88e64d0987ab3ad7e7aebf94ded656d70c924e3",
-  },
-
-  -- surrounding manipulatiuon maps
-  {
-    "tpope/vim-surround",
-    after = "vim-repeat",
+    "kylechui/nvim-surround",
     event = { "CursorMoved", "CursorHold" },
-    commit = "3d188ed2113431cf8dac77be61b842acb64433d9",
+    commit = "0e62500b98f4513feaaf7425c135472457ea5b7d",
   },
 
   -- word manipulation utilities
