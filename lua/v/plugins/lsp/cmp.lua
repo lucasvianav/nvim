@@ -9,7 +9,7 @@ if ok_lspkind then
   lspkind.init()
 else
   require("v.utils.log").log(lspkind)
-  vim.api.nvim_notify("Couldn't load `lspkind`.", vim.log.levels.ERROR, {
+  vim.notify("Couldn't load `lspkind`.", vim.log.levels.ERROR, {
     title = "Error - CMP",
   })
 end
@@ -17,7 +17,7 @@ end
 local ok_comparator, comparator = pcall(require, "cmp-under-comparator")
 if not ok_comparator then
   require("v.utils.log").log(comparator)
-  vim.api.nvim_notify("Couldn't load `cmp-under-comparator`.", vim.log.levels.ERROR, {
+  vim.notify("Couldn't load `cmp-under-comparator`.", vim.log.levels.ERROR, {
     title = "Error - CMP",
   })
 end
@@ -139,6 +139,7 @@ cmp.setup({
 })
 
 -- add parenthesis on function/method completion
+require('v.utils.packer').load_plugin("nvim-autopairs")
 local ok_npairs, npairs_cmp = pcall(require, "nvim-autopairs.completion.cmp")
 if ok_npairs then
   cmp.event:on(
@@ -149,7 +150,7 @@ if ok_npairs then
   )
 else
   require("v.utils.log").log(npairs_cmp)
-  vim.api.nvim_notify(
+  vim.notify(
     "Couldn't load `nvim-autopairs.completion.cmp`.",
     vim.log.levels.ERROR,
     { title = "Error - CMP" }

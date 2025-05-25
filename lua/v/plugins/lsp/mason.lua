@@ -20,6 +20,13 @@ for _, server in ipairs(servers) do
     config = vim.tbl_deep_extend("force", config, custom_config.config)
   end
 
-  require("lspconfig")[server].setup(config)
+  if  custom_config.legacy_config then
+    require("lspconfig")[server].setup(config)
+    goto continue
+  end
+
+  vim.lsp.config(server, config)
+  vim.lsp.enable(server)
+
   ::continue::
 end

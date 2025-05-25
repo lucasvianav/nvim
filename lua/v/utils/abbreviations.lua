@@ -4,12 +4,12 @@ local M = {}
 ---@return boolean is_mode_valid
 local function validate_mode(mode)
   if type(mode) ~= "string" then
-    vim.api.nvim_notify("Invalid mode. See `:messages`", vim.log.levels.ERROR, {
+    vim.notify("Invalid mode. See `:messages`", vim.log.levels.ERROR, {
       title = "Abbreviation",
     })
     require("v.utils.wrappers").inspect(mode)
   elseif not string.find("!ci", mode) or #mode ~= 1 then
-    vim.api.nvim_notify("Invalid mode: " .. mode, vim.log.levels.ERROR, {
+    vim.notify("Invalid mode: " .. mode, vim.log.levels.ERROR, {
       title = "Abbreviation",
     })
   else
@@ -39,7 +39,7 @@ M.abbreviate = function(mode, lhs, rhs)
   if not validate_mode(mode) then
     return
   elseif not type(lhs) == "string" or not type(rhs) == "string" then
-    vim.api.nvim_notify("Invalid parameter(s).", vim.log.levels.ERROR, {
+    vim.notify("Invalid parameter(s).", vim.log.levels.ERROR, {
       title = "Abbreviation",
     })
     require("v.utils.wrappers").inspect(mode, lhs, rhs)
@@ -86,7 +86,7 @@ M.set_abbreviations = function(args, mode)
     elseif #abbrev_table == 2 and mode then
       M.abbreviate(mode, unpack(abbrev_table))
     else
-      vim.api.nvim_notify("Something wrong... See `:messages`", vim.log.levels.ERRORS, {
+      vim.notify("Something wrong... See `:messages`", vim.log.levels.ERRORS, {
         title = "Setting Abbreviations",
       })
     end

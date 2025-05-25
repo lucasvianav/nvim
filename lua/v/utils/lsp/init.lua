@@ -4,12 +4,13 @@ local on_attach = require("v.utils.lsp.on_attach").on_attach
 local diagnostics = require("v.utils.lsp.diagnostics")
 local hover = require("v.utils.lsp.hover")
 
----Generate a language server config to be passed into `nvim-lspconfig`
+---Generate a language server config to be passed into [vim.lsp.config]
 ---@param config? table
 ---@return table
 function M.make_config(config)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
+  require('v.utils.packer').load_plugin("cmp-nvim-lsp")
   local has_cmp, cmp = pcall(require, "cmp_nvim_lsp")
   if has_cmp then
     capabilities = cmp.default_capabilities()

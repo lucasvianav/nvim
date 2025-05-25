@@ -63,10 +63,10 @@ local M = {
     requires = {
       {
         "mason-org/mason-lspconfig.nvim",
-        commit = "a3f07c36b24136d4e238f58c196daf5bed5e70be",
+        commit = "d24b3f1612e53f9d54d866b16bedab51813f2bf1",
       },
     },
-    commit = "f74983e782b7394f5737df99f8823e196a23291d",
+    commit = "8024d64e1330b86044fed4c8494ef3dcd483a67c",
   },
 
   -- code completion

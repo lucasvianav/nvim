@@ -23,7 +23,7 @@ local M = {}
 ---@return nil
 M.augroup = function(name, autocmds, opts)
   if type(name) ~= "string" or type(autocmds) ~= "table" then
-    vim.api.nvim_notify("Invalid parameter(s).", vim.log.levels.ERROR, {
+    vim.notify("Invalid parameter(s).", vim.log.levels.ERROR, {
       title = "Augroups",
     })
     require("v.utils.wrappers").inspect(name, autocmds)
