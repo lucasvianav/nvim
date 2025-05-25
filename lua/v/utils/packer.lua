@@ -174,6 +174,12 @@ local M = {}
 M.path = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
 M.compile_path = fn.stdpath("config") .. "/lua/packer_compiled.lua"
 
+---@param plugin string
+---@return string
+function M.get_plugin_path(plugin)
+  return ((packer_plugins or {})[plugin] or {}).path
+end
+
 ---Loads packer.nvim (since it's lazy-loaded) and pcall requires it.
 ---@return boolean, table
 function M.get_packer()
