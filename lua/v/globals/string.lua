@@ -7,7 +7,7 @@ end
 ---Split string into a table of strings using a separator
 ---@param self string The string to split
 ---@param sep string? The separator to use
----@return table table A table of strings
+---@return string[]
 function string:split(sep)
   if sep == nil then
     sep = "%s"

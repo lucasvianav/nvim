@@ -14,11 +14,9 @@ end
 wk.setup({
   preset = "modern",
   expand = 2,
-  ignore_missing = true,
   show_help = true,
   notify = true,
   delay = 300,
-
   filter = function(m)
     return m.desc and m.desc ~= "" and not __is_function_ref(m.desc)
   end,

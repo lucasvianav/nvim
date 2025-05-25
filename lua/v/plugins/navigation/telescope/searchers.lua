@@ -2,7 +2,7 @@ local M = {}
 local pickers = require("v.plugins.navigation.telescope.pickers")
 
 M.find_nvim = function()
-  require("telescope.builtin").find_files({
+  pickers.find_files_fd({
     cwd = vim.fn.stdpath("config"),
     prompt_title = "~ neovim ~",
     results_title = "Neovim Dotfiles",
@@ -10,7 +10,7 @@ M.find_nvim = function()
 end
 
 M.find_in_plugins = function()
-  require("telescope.builtin").find_files({
+  pickers.find_files_fd({
     cwd = vim.fn.stdpath("data") .. "/site/pack/packer",
     prompt_title = "~ plugins ~",
     results_title = "Packer Plugins",
@@ -20,13 +20,13 @@ end
 M.grep_in_plugins = function()
   pickers.multi_grep({
     cwd = vim.fn.stdpath("data") .. "/site/pack/packer",
-    prompt_title = "~ grep plugins ~",
+    prompt_title = "~ grep nvim plugins ~",
     results_title = "Packer Plugins",
   })
 end
 
 M.find_dotfiles = function()
-  require("telescope.builtin").git_files({
+  pickers.find_files_fd({
     file_ignore_patterns = { "icons/", "themes/" },
     cwd = os.getenv("HOME") .. "/dotfiles",
     prompt_title = "~ dotfiles ~",
@@ -34,25 +34,10 @@ M.find_dotfiles = function()
   })
 end
 
-M.grep_cur_dir = function()
-  pickers.multi_grep({
-    cwd = require("telescope.utils").buffer_dir(),
-    prompt_title = "~ grep current file's dir ~",
-    results_title = "Current Dir",
-  })
-end
-
 M.grep_last_search = function()
-  local register = vim.fn.getreg("/"):gsub("\\<", ""):gsub("\\>", "")
-
-  if register and register ~= "" then
-    require("telescope.builtin").grep_string({
-      path_display = { "shorten" },
-      search = register,
-    })
-  else
-    pickers.multi_grep()
-  end
+  pickers.multi_grep({
+    default_text = vim.fn.getreg("/"):gsub("\\<", ""):gsub("\\>", "") or "",
+  })
 end
 
 return M

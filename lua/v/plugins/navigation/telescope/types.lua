@@ -13,3 +13,15 @@
 ---@field file_encoding?        string          file encoding for the entry
 ---@field prompt_title?         string          title of the prompt box
 ---@field results_title?        string          tile of the results box
+
+---@alias PickerShortcutAction string|fun(shortcut: string): nil
+
+---@class PickerShortcutTable
+---@field [string] PickerShortcutAction
+---@field [1] table<string, PickerShortcutAction>
+
+---@class PickerProcessedShortcut
+---@field flags string[]
+---@field globs string[]
+---@field paths string[]
+---@field extensions string[]

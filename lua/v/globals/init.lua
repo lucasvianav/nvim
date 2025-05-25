@@ -18,5 +18,6 @@ end
 
 -- load string globals
 require("v.globals.string")
+require("v.globals.tables")
 require("v.globals.v")
 require("v.globals.vim")

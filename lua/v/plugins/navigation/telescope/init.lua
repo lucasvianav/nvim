@@ -1,11 +1,8 @@
 local actions = require("telescope.actions")
-local builtin = require("telescope.builtin")
 local telescope = require("telescope")
-
 local v = {
   actions = require("v.plugins.navigation.telescope.actions"),
-  pickers = require("v.plugins.navigation.telescope.pickers"),
-  searchers = require("v.plugins.navigation.telescope.searchers"),
+  configs = require("v.plugins.navigation.telescope.configs"),
 }
 
 local picker_mappings = {
@@ -63,28 +60,6 @@ telescope.setup({
     },
   },
   pickers = {
-    find_files = {
-      follow = true,
-      hidden = true,
-      file_ignore_patterns = {
-        "^.git",
-        "**/.git",
-        "^.git/",
-        "**/.git/",
-        "^.git/*",
-        "**/.git/*",
-        "^./.git",
-        "**/node_modules/*",
-        "package-lock.json",
-        "yarn.lock",
-      },
-    },
-    live_grep = {
-      glob_pattern = {
-        "!package-lock.json",
-        "!yarn.lock",
-      },
-    },
     git_commits = {
       previewer = false,
       theme = "dropdown",
@@ -116,40 +91,50 @@ telescope.setup({
       },
     },
 
-    git_branches = v.pickers.configs.center_dropdown,
-    diagnostics = v.pickers.configs.center_dropdown,
+    git_branches = v.configs.center_dropdown,
+    diagnostics = v.configs.center_dropdown,
   },
   extensions = {
     wrap_results = true,
-    fzf = {},
+    fzf = {
+      fuzzy = true,                   -- false will only do exact matching
+      override_generic_sorter = true, -- override the generic sorter
+      override_file_sorter = true,    -- override the file sorter
+      case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+    },
   },
 })
 
-pcall(telescope.load_extension, "fzf")
+local ok = pcall(telescope.load_extension, "fzf")
+
+if not ok then
+  vim.notify("Failed to load FZF extension.", vim.log.levels.ERROR, {
+    title = "Telescope",
+  })
+end
+
+local builtin = require("telescope.builtin")
+v.pickers = require("v.plugins.navigation.telescope.pickers")
+v.searchers = require("v.plugins.navigation.telescope.searchers")
 
 require("v.utils.mappings").set_keybindings({
-  -- general
-  { "n", "<Leader>ff", builtin.find_files, desc = "Find Files" },
-  { "n", "<Leader>fr", builtin.resume, desc = "Resume Last Search" },
-  {
-    "n",
-    "<Leader>fp",
-    v.searchers.grep_cur_dir,
-    desc = "Grep Current Dir",
-    { nowait = false },
-  },
-  { "n", "<Leader>fpp", v.pickers.multi_grep, desc = "Grep" },
-  { "n", "<Leader>fb", builtin.buffers, desc = "Find Buffers" },
-  { "n", "<Leader>fco", builtin.commands, desc = "Find Commands" },
+  -- search files and text
+  { "n", "<Leader>ff",  v.pickers.find_files_fd, desc = "Find Files" },
+  { "n", "<Leader>fpp", v.pickers.multi_grep,    desc = "Grep" },
+
+  -- utilities
+  { "n", "<Leader>fr",  builtin.resume,          desc = "Resume Last Search" },
+  { "n", "<Leader>fb",  builtin.buffers,         desc = "Find Buffers" },
+  { "n", "<Leader>fco", builtin.commands,        desc = "Find Commands" },
   { "n", "<Leader>fch", builtin.command_history, desc = "Find Command History" },
-  { "n", "<Leader>fj", builtin.jumplist, desc = "Find Jumplist" },
-  { "n", "<Leader>fh", builtin.help_tags, desc = "Find Help" },
-  { "n", "z=", builtin.spell_suggest, desc = "Spelling Suggestions" },
+  { "n", "<Leader>fj",  builtin.jumplist,        desc = "Find Jumplist" },
+  { "n", "<Leader>fh",  builtin.help_tags,       desc = "Find Help" },
+  { "n", "z=",          builtin.spell_suggest,   desc = "Spelling Suggestions" },
 
   -- git
-  { "n", "<Leader>gb", builtin.git_branches, desc = "Git Branches" },
-  { "n", "<Leader>gc", builtin.git_commits, desc = "Git Commits" },
-  { "n", "<Leader>gs", builtin.git_status, desc = "Git Status" },
+  { "n", "<Leader>gb",  builtin.git_branches,    desc = "Git Branches" },
+  { "n", "<Leader>gc",  builtin.git_commits,     desc = "Git Commits" },
+  { "n", "<Leader>gs",  builtin.git_status,      desc = "Git Status" },
 
   -- extensions
   {
@@ -160,11 +145,11 @@ require("v.utils.mappings").set_keybindings({
   },
 
   -- custom functions
-  { "n", "<leader>fn", v.searchers.find_nvim, desc = "Find Neovim Dotfiles" },
-  { "n", "<leader>fk", v.searchers.find_in_plugins, desc = "Find Plugins" },
-  { "n", "<leader>fpk", v.searchers.grep_in_plugins, desc = "Grep Plugins" },
-  { "n", "<leader>fd", v.searchers.find_dotfiles, desc = "Find Dotfiles" },
-  { "n", "<leader>f/", v.searchers.grep_last_search, desc = "Grep Last /" },
+  { "n", "<leader>fn",  v.searchers.find_nvim,        desc = "Find Neovim Dotfiles" },
+  { "n", "<leader>fk",  v.searchers.find_in_plugins,  desc = "Find Plugins" },
+  { "n", "<leader>fpk", v.searchers.grep_in_plugins,  desc = "Grep Plugins" },
+  { "n", "<leader>fd",  v.searchers.find_dotfiles,    desc = "Find Dotfiles" },
+  { "n", "<leader>f/",  v.searchers.grep_last_search, desc = "Grep Last /" },
 
   groups = {
     { "<leader>f", "Find" },

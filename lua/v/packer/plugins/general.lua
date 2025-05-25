@@ -167,7 +167,7 @@ local M = {
   {
     "tpope/vim-commentary",
     cmd = { "Comment", "Commentary" },
-    keys = { "gc", { "v", "gc" } },
+    keys = { "gc", "gcc", { "v", "gc" } },
     commit = "64a654ef4a20db1727938338310209b6a63f60c9",
   },
 
