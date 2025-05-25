@@ -61,24 +61,6 @@ set_keybindings({
   -- rerun the last command
   { "n", "<leader><leader>c", ":<up><cr>" },
 
-  -- execute currenbt line/selection
-  {
-    { "n", "v" },
-    "<leader>x",
-    function()
-      require("v.utils").exec_line_or_make()
-    end,
-  },
-
-  ---source/reload current file
-  {
-    { "n" },
-    "<leader>xx",
-    function()
-      require("v.utils").reload_or_source_current()
-    end,
-  },
-
   -- FIXME: how to not get delay?
   -- insert escaped '/' while inputting a search pattern (by akisho)
   -- { 'c', '/', [[getcmdtype() == "/" ? "\\/" : "/"]], { expr = true } },
