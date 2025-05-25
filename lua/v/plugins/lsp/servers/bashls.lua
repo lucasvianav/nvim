@@ -1,5 +1,7 @@
 local M = {}
 
-M.filetypes = { "bash", "sh" }
+M.config = {
+  filetypes = { "bash", "sh" },
+}
 
 return M

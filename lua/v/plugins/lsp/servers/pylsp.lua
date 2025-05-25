@@ -40,51 +40,55 @@ local flake8_ignore = {
   "F841",
 }
 
-M.settings = {
-  pylsp = {
-    plugins = {
-      jedi_completion = {
-        fuzzy = true,
-        include_params = true,
+M.config = {
+  settings = {
+    pylsp = {
+      plugins = {
+        jedi_completion = {
+          fuzzy = true,
+          include_params = true,
+        },
+        flake8 = {
+          enabled = true,
+          hangClosing = false,
+          maxLineLength = 160,
+          ignore = flake8_ignore,
+          addIgnore = flake8_ignore,
+        },
+        pyls_flake8 = {
+          enabled = true,
+          hangClosing = false,
+          maxLineLength = 160,
+          ignore = flake8_ignore,
+          addIgnore = flake8_ignore,
+        },
+        pycodestyle = {
+          hangClosing = false,
+          maxLineLength = 160,
+          ignore = pycodestyle_ignore,
+          addIgnore = pycodestyle_ignore,
+        },
+        pydocstyle = {
+          enabled = true,
+          convention = "numpy",
+          ignore = pydocstyle_ignore,
+          addIgnore = pydocstyle_ignore,
+        },
+        pylint = enable,
+        rope = disable,
+        pylsp_rope = disable,
+        pylsp_mypy = enable,
+        pyls_isort = disable,
+        autopep8 = disable,
+        black = disable,
+        python_lsp_black = disable,
+        pyls_black = disable,
+        pylsp_black = disable,
       },
-      flake8 = {
-        enabled = true,
-        hangClosing = false,
-        maxLineLength = 160,
-        ignore = flake8_ignore,
-        addIgnore = flake8_ignore,
-      },
-      pyls_flake8 = {
-        enabled = true,
-        hangClosing = false,
-        maxLineLength = 160,
-        ignore = flake8_ignore,
-        addIgnore = flake8_ignore,
-      },
-      pycodestyle = {
-        hangClosing = false,
-        maxLineLength = 160,
-        ignore = pycodestyle_ignore,
-        addIgnore = pycodestyle_ignore,
-      },
-      pydocstyle = {
-        enabled = true,
-        convention = "numpy",
-        ignore = pydocstyle_ignore,
-        addIgnore = pydocstyle_ignore,
-      },
-      pylint = enable,
-      rope = disable,
-      pylsp_rope = disable,
-      pylsp_mypy = enable,
-      pyls_isort = disable,
-      autopep8 = disable,
-      black = disable,
-      python_lsp_black = disable,
-      pyls_black = disable,
-      pylsp_black = disable,
     },
   },
 }
+
+M.on_attach = require("v.utils.lsp.on_attach").disable_formatting
 
 return M

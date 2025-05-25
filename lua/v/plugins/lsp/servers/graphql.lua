@@ -1,9 +1,5 @@
 local M = {}
 
-M.config = {
-  root_dir = require("lspconfig.util").root_pattern("angular.json"),
-}
-
 M.on_attach = require("v.utils.lsp.on_attach").disable_formatting
 
 return M

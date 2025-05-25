@@ -1,11 +1,9 @@
 local M = {}
 
-M.root_markers = { ".git", "BUILD.bazel" }
-M.rootMarkers = M.root_markers
-
-local ok, lspconfig_utils = pcall(require, "lspconfig.util")
-if ok then
-  M.root_dir = lspconfig_utils.root_pattern(unpack(M.root_markers))
-end
+M.config = {
+  root_markers = { ".git" },
+  rootMarkers = { ".git" },
+  root_dir = require("lspconfig.util").root_pattern(".git"),
+}
 
 return M

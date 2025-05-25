@@ -21,6 +21,8 @@
         cmake
 ]]
 
+local M = {}
+
 require("v.utils.packer").load_plugin("efmls-configs-nvim")
 
 -- linting and simple formatting for js/ts
@@ -215,7 +217,7 @@ local languages = {
   },
 }
 
-local M = {
+M.config = {
   init_options = {
     documentFormatting = true,
     documentRangeFormatting = true,
@@ -254,5 +256,12 @@ local M = {
     languages = languages,
   },
 }
+
+function M.on_attach(client)
+  client.server_capabilities.documentFormattingProvider = true
+  client.server_capabilities.documentRangeFormattingProvider = true
+  client.server_capabilities.hoverProvider = false
+  client.server_capabilities.renameProvider = false
+end
 
 return M

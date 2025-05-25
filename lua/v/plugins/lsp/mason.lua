@@ -10,32 +10,16 @@ require("mason-lspconfig").setup({
 
 for _, server in ipairs(servers) do
   local config = utils.make_config()
+  local has_custom_config, custom_config = pcall(require, "v.plugins.lsp.servers." .. server)
 
-  local custom_config_path = "v.plugins.lsp.servers." .. server
-  local has_custom_config, custom_config = pcall(require, custom_config_path)
-
-  if has_custom_config then
-    config = vim.tbl_deep_extend("force", config, custom_config)
+  if custom_config.skip_lsp_setup then
+    goto continue
   end
 
-  if server == "lua_ls" then
-    local lazydev_loaded, lazydev = require("v.utils.packer").load_and_require_plugin("lazydev")
-
-    if lazydev_loaded then
-      lazydev.setup({})
-      config = {
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = "Replace",
-            },
-          },
-        },
-      }
-    end
-  elseif server == "clangd" then
-    config.capabilities.offsetEncoding = "utf-8"
+  if has_custom_config and custom_config and custom_config.config then
+    config = vim.tbl_deep_extend("force", config, custom_config.config)
   end
 
   require("lspconfig")[server].setup(config)
+  ::continue::
 end

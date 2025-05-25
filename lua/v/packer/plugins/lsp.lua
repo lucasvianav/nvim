@@ -170,6 +170,12 @@ local M = {
     cond = require("v.utils.env").is_work_computer,
     lock = true,
   },
+
+  {
+    "pmizio/typescript-tools.nvim",
+    ft = "typescript",
+    commit = "3c501d7c7f79457932a8750a2a1476a004c5c1a9",
+  }
 }
 
 return M

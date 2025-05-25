@@ -1,5 +1,10 @@
 local M = {}
 
-M.filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
+M.config = {
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+  capabilities = {
+    offsetEncoding = "utf-8"
+  }
+}
 
 return M

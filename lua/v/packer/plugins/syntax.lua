@@ -52,14 +52,6 @@ local M = {
     commit = "5c753c56c033d3b17e5005a67cdb9653bbb88ba7",
   },
 
-  -- TODO: https://github.com/jose-elias-alvarez/typescript.nvim
-  -- TypeScript utilities
-  {
-    "jose-elias-alvarez/nvim-lsp-ts-utils",
-    ft = "typescript",
-    commit = "0a6a16ef292c9b61eac6dad00d52666c7f84b0e7",
-  },
-
   -- code parsing for syntax highlighting, etc
   {
     "nvim-treesitter/nvim-treesitter",
