@@ -33,10 +33,18 @@ function M.signature_help()
 end
 
 ---Calls LSP hover or activates Vim doc (:h) depending on filetype.
----@return nil
 function M.smart_docs()
   if vim.tbl_contains({ "vim", "help", "lua" }, vim.o.filetype) then
-    local has_docs = pcall(vim.api.nvim_command, "help " .. vim.fn.expand("<cword>"))
+    local original_iskeyword = vim.bo.iskeyword
+    vim.bo.iskeyword = vim.bo.iskeyword .. ",."
+    local outer_cword = vim.fn.expand("<cword>")
+    vim.bo.iskeyword = original_iskeyword
+    local inner_cword = vim.fn.expand("<cword>")
+
+    local _, j = vim.regex([[^\(\(vim.\)\?\(api\|cmd\|fn\)\|vim\)\.]]):match_str(outer_cword)
+    outer_cword = j and outer_cword:sub(j + 1) or outer_cword
+
+    local has_docs = pcall(vim.cmd.help, outer_cword) or pcall(vim.cmd.help, inner_cword)
     if has_docs then
       return
     end
