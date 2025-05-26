@@ -12,13 +12,9 @@
 --https://github.com/kyle-mccarthy/nvim-dotfiles
 --https://github.com/bfredl/bfredl.github.io/tree/master/nvim
 --https://github.com/kabouzeid
--- https://github.com/lewis6991/dotfiles/tree/master/config/nvim (+ https://github.com/lewis6991/spellsitter.nvim)
---
---TODO: docker container?
---https://github.com/nvim-lsp/try.nvim
---https://github.com/NvChad/NvChad
---
---https://github.com/sumneko/lua-language-server/wiki/EmmyLua-Annotations#optional-params
+-- https://github.com/lewis6991/dotfiles/tree/master/config/nvim
+
+-- TODO: https://github.com/tjdevries/lazy-require.nvim
 
 pcall(require, "impatient")
 

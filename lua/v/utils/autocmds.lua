@@ -1,15 +1,12 @@
 -- TODO: https://github.com/akinsho/dotfiles/blob/f714d4cdd2de74c7393ca3ae69bdbb3619e06174/.config/nvim/lua/as/globals.lua#L211-L243
--- TODO: :h nvim_create_autocmd, :h nvim_create_augroup
 
 local M = {}
 
----@class Autocommand
----@field event string|string[]
----@field opts? vim.api.keyset.create_autocmd
+local util = require("v.utils.tables")
 
 ---Wrapper for creating a new augroup and associating a list of commands to it.
 ---@param name string
----@param autocmds Autocommand[] will be unpacked and passed to nvim_create_autocmd
+---@param autocmds Autocmd[] will be unpacked and passed to nvim_create_autocmd
 ---@param opts? vim.api.keyset.create_autocmd
 ---@return nil
 M.augroup = function(name, autocmds, opts)
@@ -21,17 +18,20 @@ M.augroup = function(name, autocmds, opts)
     return
   end
 
-  opts = opts or {}
-  opts.group = vim.api.nvim_create_augroup(name, { clear = true })
+  local global_opts = opts or {}
+  global_opts.group = vim.api.nvim_create_augroup(name, { clear = true })
 
-  for _, tbl in ipairs(autocmds) do
-    opts = vim.tbl_extend("keep", tbl.opts or {}, opts)
+  for _, it in ipairs(autocmds) do
+    local input = util.merge_named_and_pos_fields({ "event", "opts" }, it)
+    local local_opts = vim.tbl_deep_extend("keep", input.opts or {}, global_opts)
 
-    if type(opts.buffer) == "boolean" then
-      opts.buffer = 0
+    local_opts.group = global_opts.group
+
+    if type(local_opts.buffer) == "boolean" and local_opts.buffer then
+      local_opts.buffer = 0
     end
 
-    vim.api.nvim_create_autocmd(tbl.event, opts)
+    vim.api.nvim_create_autocmd(input.event, local_opts)
   end
 end
 

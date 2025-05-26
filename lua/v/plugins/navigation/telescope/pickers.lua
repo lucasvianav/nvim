@@ -15,6 +15,8 @@ local ignored = {
   "package-lock.json",
   "yarn.lock",
   ".git",
+  ".gitignore",
+  "spell/",
 }
 
 ---@param no_gitignore boolean?
@@ -32,10 +34,10 @@ local function get_rg_exclude_glob_flags(no_gitignore)
       .iter(ignored)
       :map(function(it)
         return {
-          "**/" .. it .. "/**",
-          "**/" .. it .. "",
-          "" .. it .. "/**",
-          "*" .. it .. "*",
+          vim.fs.joinpath("**", it, "**"),
+          vim.fs.joinpath("**", it),
+          vim.fs.joinpath(it, "**"),
+          vim.fs.joinpath("*", it, "*"),
           it,
         }
       end)

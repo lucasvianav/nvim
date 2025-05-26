@@ -2,11 +2,10 @@ local o = vim.opt
 
 local M = {}
 
--- enable syntax highlighting, filetype
--- detection and loading of filetype specific
--- plugins and indentation config
-vim.api.nvim_command("syntax on")
-vim.api.nvim_command("filetype plugin indent on")
+-- enable syntax highlighting, filetype detection and loading
+-- of filetype-specific plugins and indentation configurations
+vim.api.nvim_exec2("syntax on", { output = false })
+vim.api.nvim_exec2("filetype plugin indent on", { output = false })
 
 -- improve startup time
 vim.loader.enable()
@@ -136,7 +135,7 @@ o.shortmess = {
   A = false, -- alert for swap files
   F = true, -- no file info when editing it (breaks autocmd messages)
   O = true, -- file-read message overwrites previous
-  S = false, -- show search countt (e.g. [1/5])
+  S = false, -- show search count (e.g. [1/5])
   T = true, -- truncate messages in middle
   W = true, -- no "written" or "[w]" when writing
   a = true, -- use abbreviations
@@ -179,7 +178,7 @@ o.diffopt = {
   "vertical", -- use vertical split by default
 }
 
--- surrunding pairs, jumpable with %
+-- surrounding pairs, jumpable with %
 o.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
 
 return M

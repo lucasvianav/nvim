@@ -10,4 +10,3 @@ augroup DisableNvimTreeStatusline
     au!
     au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * call s:disable_nvimtree_statusline()
 augroup END
-
