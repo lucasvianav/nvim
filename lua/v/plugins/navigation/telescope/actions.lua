@@ -1,7 +1,6 @@
 local actions = require("telescope.actions")
 local state = require("telescope.actions.state")
 local transform_mod = require("telescope.actions.mt").transform_mod
-local Path = require("plenary.path")
 
 local M = {}
 
@@ -41,11 +40,16 @@ end
 
 ---@param type 'abs'|'rel'|'name'
 local function __copy_path(type)
-  local path = Path:new(__get_selected_entry_filename())
+  local path = __get_selected_entry_filename()
+
+  if not path then
+    return
+  end
+
   local paths = {
-    abs = path:absolute(),
-    rel = path:normalize(vim.loop.cwd()),
-    name = vim.fn.fnamemodify(path.filename, ":t"),
+    abs = vim.fs.abspath(path),
+    rel = vim.fs.relpath(vim.loop.cwd() or vim.env.HOME, path),
+    name = vim.fs.basename(path),
   }
   require("v.utils.clipboard").copy(paths[type])
 end

@@ -1,3 +1,4 @@
+---@enum Colors
 local M = {
   black = "#151515",
   blacker = "#000000",

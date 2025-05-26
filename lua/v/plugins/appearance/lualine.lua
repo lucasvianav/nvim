@@ -36,25 +36,34 @@ require("lualine").setup({
     lualine_a = {
       {
         "filename",
-        fmt = function(str)
-          if str == "" then
-            return " "
+        fmt = function(filepath)
+          local path = { "" }
+
+          if #filepath == 0 then
+            return vim.fs.joinpath(unpack(path))
           end
 
-          local cwd = utils.get_cwd()
-          local dirs = utils.convert_path_to_list(str)
+          local root, parts = utils.get_path_parts(filepath)
 
-          if dirs[1] == cwd or #dirs == 1 then
-            return " "
+          if not root or parts[1] == root or #parts == 1 then
+            return vim.fs.joinpath(unpack(path))
           end
 
-          local remaining = (#dirs > 2) and (dirs[1] .. "/-/") or ""
-          return " " .. cwd .. "/" .. remaining
+          if root and parts[1] ~= root then
+            table.insert(path, root)
+          end
+          if #parts > 3 then
+            table.insert(path, parts[1])
+            table.insert(path, parts[2])
+            table.insert(path, "-")
+          end
+
+          return vim.fs.joinpath(unpack(path))
         end,
         path = 1,
         file_status = true,
         separator = { right = "" },
-        padding = 0,
+        padding = { left = 1, right = 0 },
         symbols = {
           modified = "",
           readonly = "",
@@ -65,19 +74,23 @@ require("lualine").setup({
     lualine_b = {
       {
         "filename",
-        fmt = function(str)
-          if str == "" then
-            return ""
+        fmt = function(filepath)
+          local path = {""}
+
+          if #filepath == 0 then
+            return vim.fs.joinpath(unpack(path))
           end
 
-          local cwd = utils.get_cwd()
-          local nodes = utils.convert_path_to_list(str)
+          local root, parts = utils.get_path_parts(filepath)
 
-          if nodes[1] == cwd or #nodes == 1 then
-            return cwd .. "/"
+          if #parts == 1 or (root and parts[1] == root) then
+            table.insert(path, parts[1])
+          else
+            table.insert(path, parts[#parts - 1])
           end
 
-          return nodes[#nodes - 1] .. "/"
+          table.insert(path, "")
+          return vim.fs.joinpath(unpack(path))
         end,
         path = 1,
         file_status = true,
@@ -91,13 +104,7 @@ require("lualine").setup({
       },
       {
         "filename",
-        fmt = function(str)
-          if str == "" then
-            return ""
-          end
-
-          return str:gsub(".+%/([^/]+)$", "%1")
-        end,
+        fmt = vim.fs.basename,
         path = 1,
         file_status = true,
         padding = { left = 0, right = 1 },
@@ -133,10 +140,17 @@ require("lualine").setup({
       },
       {
         "\" LSP\"",
-        cond = function()
-          local buf_clients = vim.lsp.get_clients({ buffer = vim.fn.bufnr() })
-          return #buf_clients > 0
-        end,
+        cond = utils.buf_has_lsp_attached,
+        color = {
+          fg = colors.cyan,
+          bg = colors.cyan_grey_dark,
+          gui = "bold",
+        },
+        separator = { left = "", right = "" },
+      },
+      {
+        "\"❇ EFM\"",
+        cond = utils.buf_has_formatter_attached,
         color = {
           fg = colors.cyan,
           bg = colors.cyan_grey_dark,
@@ -157,16 +171,21 @@ require("lualine").setup({
       },
       {
         function()
-          local curr, _ = utils.get_line_extremes()
-          return curr
+          return vim.fn.line(".")
         end,
         color = { gui = "bold" },
         padding = 0,
       },
       {
         function()
-          local _, last = utils.get_line_extremes()
-          return "/" .. last
+          return "/" .. vim.fn.line("$")
+        end,
+        padding = { left = 0, right = 1 },
+        color = { fg = colors.grey_light, gui = "italic" },
+      },
+      {
+        function()
+          return "(" .. utils.get_line_percentage() .. ")"
         end,
         padding = { left = 0, right = 1 },
         color = { fg = colors.grey_light, gui = "italic" },
@@ -189,8 +208,8 @@ require("lualine").setup({
     lualine_a = {
       {
         "filename",
-        fmt = function(str)
-          return str:gsub("(.+%/)[^/]+(%/[^/]+)$", "%1" .. utils.get_current_files_dir() .. "%2")
+        fmt = function(filename)
+          return filename
         end,
         path = 1,
       },
