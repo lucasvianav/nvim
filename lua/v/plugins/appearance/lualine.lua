@@ -2,6 +2,8 @@
 ---https://github.com/akinsho/dotfiles
 ---https://github.com/NvChad/NvChad
 
+--TODO: https://github.com/idr4n/nvim-lua/tree/master/lua/config/statusline
+
 local utils = require("v.utils.statusline")
 local colors = require("v.utils.highlights").colors
 local alter_color = require("v.utils.highlights").alter_color
@@ -18,6 +20,7 @@ local bubbles_theme = {
   insert = { y = { fg = colors.black, bg = colors.blue } },
   visual = { y = { fg = colors.black, bg = colors.cyan } },
   replace = { y = { fg = colors.black, bg = colors.yellow } },
+  command = { y = { fg = colors.black, bg =  colors.pink_light } },
   inactive = {
     a = { fg = colors.cyan_grey, bg = colors.off_black },
     b = { fg = colors.cyan_grey, bg = colors.off_black },
@@ -75,7 +78,7 @@ require("lualine").setup({
       {
         "filename",
         fmt = function(filepath)
-          local path = {""}
+          local path = { "" }
 
           if #filepath == 0 then
             return vim.fs.joinpath(unpack(path))
@@ -153,7 +156,7 @@ require("lualine").setup({
         cond = utils.buf_has_formatter_attached,
         color = {
           fg = colors.cyan,
-          bg = colors.cyan_grey_dark,
+          bg = alter_color(colors.cyan_grey_dark, -20),
           gui = "bold",
         },
         separator = { left = "", right = "" },
