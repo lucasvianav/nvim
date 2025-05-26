@@ -13,37 +13,33 @@ require("dashboard").setup({
     center = {
       {
         icon = pad("", 5),
-        desc = pad("Find File", 40),
+        desc = pad("Find File", 10),
         keymap = "SPC f f",
-        action = "Telescope find_files",
       },
       {
         icon = pad("", 5),
-        desc = pad("Grep", 40),
+        desc = pad("Grep", 10),
         keymap = "SPC f p",
-        action = "Telescope live_grep",
       },
       {
         icon = pad("", 5),
-        desc = pad("New File", 40),
+        desc = pad("New File", 10),
         keymap = "CMD ene",
-        action = "DashboardNewFile",
       },
       {
         icon = pad("", 5),
-        desc = pad("Navigate Dotfiles", 40),
+        desc = pad("Navigate Dotfiles", 10),
         keymap = "SPC f d",
-        action = function()
-          require("v.plugins.navigation.telescope.searchers").find_dotfiles()
-        end,
       },
       {
         icon = pad("", 5),
-        desc = pad("Navigate Neovim Settings", 40),
+        desc = pad("Navigate Neovim Settings", 10),
         keymap = "SPC f n",
-        action = function()
-          require("v.plugins.navigation.telescope.searchers").find_nvim()
-        end,
+      },
+      {
+        icon = pad("", 5),
+        desc = pad("Exit Dashboard", 10),
+        keymap = "q",
       },
     },
     footer = { "      " },

@@ -13,6 +13,10 @@ local function load_dashboard()
   vim.api.nvim_command("silent! Dashboard")
 end
 
+local function load_dashboard_in_new_tab()
+  vim.api.nvim_command("tabnew | silent! Dashboard")
+end
+
 ---@param session_filepath string
 local function load_session(session_filepath)
   local auto_session_ok, auto_session = utils.load_and_require_plugin("auto-session")
@@ -72,8 +76,14 @@ function M.load_session_or_dashboard()
   )
   local opened_nvim_without_file_arg = command:match("nvim$") or command:match("nvim %-%-embed$")
 
-  if opened_nvim_without_file_arg and not M.load_cwd_session() then
+  if not opened_nvim_without_file_arg then
+    return
+  end
+
+  if not M.load_cwd_session() then
     load_dashboard()
+  else
+    load_dashboard_in_new_tab()
   end
 end
 
