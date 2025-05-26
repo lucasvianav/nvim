@@ -284,7 +284,13 @@ function M.load_and_require_plugin(plugin_name)
     return false, {}
   end
 
-  return pcall(require, plugin_name)
+  local ok, plugin = pcall(require, plugin_name)
+
+  if ok then
+    return ok, plugin
+  end
+
+  return pcall(require, __get_plugin_name(plugin_name))
 end
 
 return M

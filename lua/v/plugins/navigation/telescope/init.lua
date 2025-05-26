@@ -105,9 +105,7 @@ telescope.setup({
   },
 })
 
-local ok = pcall(telescope.load_extension, "fzf")
-
-if not ok then
+if not pcall(telescope.load_extension, "fzf") then
   vim.notify("Failed to load FZF extension.", vim.log.levels.ERROR, {
     title = "Telescope",
   })

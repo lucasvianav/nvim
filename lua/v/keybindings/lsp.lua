@@ -21,7 +21,6 @@ M.general = {
   { "n", "gs", utils.signature_help },
   { "n", "gl", vim.diagnostic.open_float },
   { "n", "yog", utils.toggle_diagnostics_visibility },
-  { "n", "gr", goto_reference, desc = "Goto References" },
   { "n", "grr", goto_reference, desc = "Goto References" },
   {
     "n",

@@ -39,15 +39,6 @@ local M = {
     commit = "582ae48c9e43d2bcd55dfcc8e2e7a1f29065d924",
   },
 
-  -- ranger file explorer
-  {
-    "kevinhwang91/rnvimr",
-    as = "ranger",
-    cmd = "RnvimrToggle",
-    keys = "<Leader>r",
-    commit = "57f7a8edd629791557d1315463d9fb2e411a45f1",
-  },
-
   -- highlight f/F and t/T targets
   {
     "unblevable/quick-scope",
@@ -103,9 +94,9 @@ local M = {
       "<Leader>fr",
       "<Leader>fn",
       "<Leader>fk",
+      "<Leader>fpk",
       "<Leader>ca",
       "<Leader>fpp",
-      "<Leader>fp",
       "<Leader>f/",
       "<Leader>fb",
       "<Leader>fs",
@@ -115,11 +106,34 @@ local M = {
       "<Leader>fch",
       "<Leader>fco",
       "gd",
-      "gr",
+      "grr",
       "gi",
       "z=",
     },
     commit = "a4ed82509cecc56df1c7138920a1aeaf246c0ac5",
+  },
+
+  {
+    "ThePrimeagen/harpoon",
+    after = "plenary.nvim",
+    keys = {
+      "<leader><leader>h",
+      "grh",
+      "[H",
+      "]H",
+      "<m-h>",
+      "<m-j>",
+      "<m-k>",
+      "<m-l>",
+      "<m-s-h>",
+      "<m-s-j>",
+      "<m-s-k>",
+      "<m-s-l>",
+    },
+    cmd = {
+      "Harpoon",
+    },
+    commit = "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3",
   },
 }
 

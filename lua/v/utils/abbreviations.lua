@@ -31,7 +31,7 @@ M.evaluate_cabbrev = function(lhs, rhs)
 end
 
 ---Wrapper for :cabbreviate and :iabbreviate
----@param mode string can be either i (for insert), c (for command-line) or ! (for both)
+---@param mode "i"|"c"|"!" insert, cmdline or both
 ---@param lhs string abbreviation-trigger
 ---@param rhs string abbreviation-result
 ---@return nil
