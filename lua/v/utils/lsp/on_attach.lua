@@ -59,11 +59,10 @@ local function setup_autocmds(client)
 end
 
 function M.on_attach(client, bufnr)
-  local lsp_keyb = require("v.keybindings.lsp")
   local has_config, config = pcall(require, "v.plugins.lsp.servers." .. client.name)
 
   require("v.utils.mappings").set_keybindings(
-    table.merge_lists(lsp_keyb.general, lsp_keyb[client.name] or {}),
+    require("v.keybindings.lsp").mappings,
     { buffer = bufnr }
   )
 

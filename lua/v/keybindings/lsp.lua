@@ -11,7 +11,7 @@ local function goto_reference()
   end
 end
 
-M.general = {
+M.mappings = {
   { "n", "grp", utils.peek_definition },
   { "n", "grn", utils.rename_symbol },
   { "n", "K", utils.smart_hover_docs },
@@ -97,34 +97,6 @@ M.general = {
       vim.lsp.buf.format({ async = true })
     end,
   },
-}
-
-M.angularls = {
-  {
-    "n",
-    "gpt",
-    function()
-      require("v.utils").open_file_swap_extension("ts")
-    end,
-  },
-  {
-    "n",
-    "gph",
-    function()
-      require("v.utils").open_file_swap_extension("html")
-    end,
-  },
-  {
-    "n",
-    "gps",
-    function()
-      require("v.utils").open_file_swap_extension("scss")
-    end,
-  },
-}
-
-M.clangd = {
-  { "n", "gpp", "<cmd>ClangdSwitchSourceHeader<cr>" },
 }
 
 return M
