@@ -37,7 +37,7 @@ M.colorscheme = "tokyonight"
 M.post_colorscheme_hook = function()
   require("v.utils.highlights").set_highlights({
     -- { 'CursorLine', { bg = colors.cyan_grey_dark } },
-    -- { 'ColorColumn',    { bg = colors.cyan_grey_dark } },
+    { "ColorColumn", { bg = require("v.utils.highlights").alter_color(colors.cyan_grey_dark, -30) } },
     { "NormalFloat", { link = "Normal" } },
     { "FloatBorder", { transparent = true } },
     { "Folded", { transparent = true } },

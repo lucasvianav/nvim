@@ -54,11 +54,11 @@ end
 
 ---Lighten/darken a specified hex color
 ---@param color string
----@param percent number
+---@param percent number (< 0 will darken)
 ---@return string
----@source https://stackoverflow.com/q/5560248
----@source https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/highlights.lua
----@see: https://stackoverflow.com/a/37797380
+---@see https://stackoverflow.com/q/5560248
+---@see https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/highlights.lua
+---@see https://stackoverflow.com/a/37797380
 function M.alter_color(color, percent)
   local r, g, b = __hex_to_rgb(color)
 
