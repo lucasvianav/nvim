@@ -12,29 +12,34 @@
 ---@field dot_repeat boolean Use `dot` for repeat action
 ---@field on_error nil|function Callback for treesj error handler. func (err_text, level, ...other_text)
 
-local treesj = require('treesj')
-local langs = require('treesj.langs').presets
+local treesj = require("treesj")
+local langs = require("treesj.langs").presets
 
 treesj.setup({ --[[@as TreesjConfig]]
-  use_default_keymaps = true,
+  use_default_keymaps = false,
   check_syntax_error = true,
   max_join_length = 180,
-  cursor_behavior = 'hold',
+  cursor_behavior = "hold",
   notify = true,
   dot_repeat = true,
   on_error = nil,
 })
 
-require('v.utils.mappings').set_keybindings({
+require("v.utils.mappings").set_keybindings({
   { "n", "g-", treesj.toggle, desc = "Toggle expression split <-> join" },
-  { "n", "gS", function()
-    if langs[vim.bo.filetype] then
-      treesj.split()
-    else
-      require('v.utils.packer').load_plugin("splitjoin")
-      vim.api.nvim_exec2('SplitjoinSplit', { output = false })
-    end
-  end, desc = "Split expression" },
+  {
+    "n",
+    "gS",
+    function()
+      if langs[vim.bo.filetype] then
+        treesj.split()
+      else
+        require("v.utils.packer").load_plugin("splitjoin")
+        vim.api.nvim_exec2("SplitjoinSplit", { output = false })
+      end
+    end,
+    desc = "Split expression",
+  },
   {
     "n",
     "gJ",
@@ -42,8 +47,8 @@ require('v.utils.mappings').set_keybindings({
       if langs[vim.bo.filetype] then
         treesj.join()
       else
-        require('v.utils.packer').load_plugin("splitjoin")
-        vim.api.nvim_exec2('SplitjoinJoin', { output = false })
+        require("v.utils.packer").load_plugin("splitjoin")
+        vim.api.nvim_exec2("SplitjoinJoin", { output = false })
       end
     end,
     desc = "Join expression",
