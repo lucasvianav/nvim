@@ -20,6 +20,7 @@ local _ = {
   BufWinLeave = "BufWinLeave", -- Before a buffer is removed from a window
   BufWipeout = "BufWipeout", -- Before completely deleting a buffer
   BufWrite = "BufWrite", -- Before writing the whole buffer to a file
+  BufWritePre = "BufWritePre", -- Before writing the whole buffer to a file.
   BufWriteCmd = "BufWriteCmd", -- Before writing the whole buffer, should write file
   BufWritePost = "BufWritePost", -- After writing the whole buffer to a file
   ChanInfo = "ChanInfo", -- After channel state changes

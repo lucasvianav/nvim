@@ -11,23 +11,29 @@ end
 
 --- Setup autcommands based on the LSP capabilitier
 --- @param client table lsp client
-local function setup_autocmds(client)
+--- @param bufnr integer
+local function setup_autocmds(client, bufnr)
   local augroup = require("v.utils.autocmds").augroup
 
   if client.server_capabilities.documentHighlightProvider then
     augroup("LspSymbolHighlight", {
-      -- highlight
-      { event = "CursorHold", opts = { callback = vim.lsp.buf.document_highlight } },
-      { event = "CursorHoldI", opts = { callback = vim.lsp.buf.document_highlight } },
-
-      -- clear
-      { event = "CursorMoved", opts = { callback = vim.lsp.buf.clear_references } },
-      { event = "CursorMovedI", opts = { callback = vim.lsp.buf.clear_references } },
-      { event = "FocusLost", opts = { callback = vim.lsp.buf.clear_references } },
-      { event = "BufLeave", opts = { callback = vim.lsp.buf.clear_references } },
-      { event = "InsertEnter", opts = { callback = vim.lsp.buf.clear_references } },
+      {
+        event = { "CursorHold", "CursorHoldI" },
+        opts = { callback = vim.lsp.buf.document_highlight },
+      },
+      {
+        event = {
+          "BufLeave",
+          "CursorMoved",
+          "CursorMovedI",
+          "FocusLost",
+          "InsertEnter",
+          "InsertLeave",
+        },
+        opts = { callback = vim.lsp.buf.clear_references },
+      },
     }, {
-      buffer = 0,
+      buffer = bufnr,
     })
   end
 
@@ -39,7 +45,7 @@ local function setup_autocmds(client)
           callback = function()
             vim.lsp.buf.format({ async = true })
           end,
-          buffer = 0,
+          buffer = bufnr,
         },
       },
     })
@@ -51,7 +57,10 @@ local function setup_autocmds(client)
       augroup("SignatureHelp", {
         {
           event = "CursorHoldI",
-          opts = { callback = require("v.utils.lsp").signature_help, buffer = 0 },
+          opts = {
+            callback = require("v.utils.lsp").signature_help,
+            buffer = bufnr,
+          },
         },
       })
     end

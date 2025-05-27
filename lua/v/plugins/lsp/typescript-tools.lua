@@ -1,3 +1,5 @@
+P("CALLED", "CALLED", "CALLED")
+
 local config = require("v.utils.lsp").make_config()
 local ok, ts_ls = pcall(require, "v.plugins.lsp.servers.ts_ls")
 
@@ -5,10 +7,11 @@ if ok then
   config = vim.tbl_deep_extend("force", config, ts_ls.config)
 end
 
-require("typescript-tools").setup(vim.tbl_deep_extend("force", config, {
+require("typescript-tools").setup(P(vim.tbl_deep_extend("keep", config, {
   settings = {
     -- spawn additional tsserver instance to calculate diagnostics on it
     separate_diagnostic_server = true,
+    tsserver_max_memory = 8192,
     publish_diagnostic_on = "insert_leave",
     expose_as_code_action = "all",
     -- described below
@@ -43,7 +46,7 @@ require("typescript-tools").setup(vim.tbl_deep_extend("force", config, {
       jsxAttributeCompletionStyle = "braces",
       displayPartsForJSDoc = true,
       generateReturnInDocTemplate = true,
-      includeInlayParameterNameHints = "none",
+      includeInlayParameterNameHints = "all",
     },
     tsserver_locale = "en",
     complete_function_calls = false,
@@ -55,4 +58,4 @@ require("typescript-tools").setup(vim.tbl_deep_extend("force", config, {
       filetypes = { "javascriptreact", "typescriptreact" },
     },
   },
-}))
+})))

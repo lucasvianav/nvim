@@ -249,8 +249,9 @@ function M.is_plugin_installed(plugin_name)
 end
 
 ---@param plugin_name string
+---@param silent boolean?
 ---@return boolean loaded
-function M.load_plugin(plugin_name)
+function M.load_plugin(plugin_name, silent)
   local packer_ok, packer = M.get_packer()
 
   if not packer_ok then
@@ -258,17 +259,19 @@ function M.load_plugin(plugin_name)
   elseif M.is_plugin_loaded(plugin_name) then
     return true
   elseif not M.is_plugin_installed(plugin_name) then
-    vim.notify(
-      "Couldn't load `" .. plugin_name .. "` because it is not installed.",
-      vim.log.levels.ERROR,
-      { title = "Error - Packer" }
-    )
+    if not silent then
+      vim.notify(
+        "Couldn't load `" .. plugin_name .. "` because it is not installed.",
+        vim.log.levels.ERROR,
+        { title = "Error - Packer" }
+      )
+    end
     return false
   end
 
   local loaded, _ = pcall(packer.loader, plugin_name)
 
-  if not loaded then
+  if not loaded and not silent then
     vim.notify("Couldn't load `" .. plugin_name .. "`.", vim.log.levels.ERROR, {
       title = "Error - Packer",
     })

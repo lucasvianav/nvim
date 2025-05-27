@@ -72,7 +72,7 @@ M.mappings = {
   },
   {
     { "n", "v" },
-    "<Leader>ca",
+    "gra",
     vim.lsp.buf.code_action,
     desc = "Code Actions",
   },

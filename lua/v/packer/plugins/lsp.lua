@@ -172,7 +172,14 @@ local M = {
 
   {
     "pmizio/typescript-tools.nvim",
-    ft = "typescript",
+    ft = {
+      "javascript",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript",
+      "typescriptreact",
+      "typescript.tsx",
+    },
     commit = "3c501d7c7f79457932a8750a2a1476a004c5c1a9",
   },
 }

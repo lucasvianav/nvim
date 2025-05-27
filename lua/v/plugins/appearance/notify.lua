@@ -11,6 +11,7 @@ local banned_messages = {
   "No matching notification found to replace",
   "method textDocument/codeAction is not supported by any of the servers registered for the current buffer",
   "No signature help available",
+  "method textDocument/documentHighlight is not supported by any of the servers registered for the current buffer",
   "\"\"",
 }
 

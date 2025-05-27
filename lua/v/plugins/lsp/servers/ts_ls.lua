@@ -46,11 +46,11 @@ function M.on_attach(client, bufnr)
   require("v.utils.lsp.on_attach").disable_formatting(client)
 
   -- if it's in an angular project, [angularls] will take care of renaming
-  if vim.fn.filereadable(vim.loop.cwd() .. "/angular.json") then
+  if vim.fn.filereadable(vim.fs.joinpath(vim.uv.cwd(), "angular.json")) then
     client.server_capabilities.renameProvider = false
   end
 
-  if packer.load_plugin("typescript-tools.nvim") then
+  if packer.load_plugin("typescript-tools.nvim", true) then
     require("v.utils.autocmds").augroup("SortImportsTS", {
       { event = "BufWritePre", opts = { command = "TSToolsOrganizeImports", buffer = 0 } },
     })
