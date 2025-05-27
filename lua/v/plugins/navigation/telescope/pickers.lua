@@ -22,11 +22,17 @@ local ignored = {
 ---@param no_gitignore boolean?
 ---@return table<string, string>
 local function get_rg_exclude_glob_flags(no_gitignore)
-  local gitig_globs = {}
+  local gitig_globs, gitig_path = {}, nil
 
   if not no_gitignore then
-    local gitig_file = io.open(vim.fs.joinpath(vim.uv.cwd(), ".gitignore"), "r")
-    gitig_globs = gitig_file and gitig_file:read("*a"):gsub("\n+", "\n"):split("\n") or {}
+    gitig_path = vim.fs.joinpath(vim.uv.cwd(), ".gitignore")
+    local gitig_file = io.open(gitig_path, "r")
+
+    if gitig_file then
+      gitig_globs = gitig_file:read("*a"):gsub("\n+", "\n"):split("\n")
+    else
+      gitig_path = nil
+    end
   end
 
   local globs = table.merge_lists({
@@ -35,7 +41,6 @@ local function get_rg_exclude_glob_flags(no_gitignore)
       :map(function(it)
         return {
           vim.fs.joinpath("**", it, "**"),
-          vim.fs.joinpath("**", it),
           vim.fs.joinpath(it, "**"),
           vim.fs.joinpath("*", it, "*"),
           it,
@@ -46,13 +51,15 @@ local function get_rg_exclude_glob_flags(no_gitignore)
     gitig_globs,
   })
 
-  return vim
+  local res_globs = vim
     .iter(globs)
     :map(function(it)
-      return { "-g", "!" .. it }
+      return { "-g", "!" .. it  }
     end)
     :flatten()
     :totable()
+
+  return gitig_path and table.merge_lists("--ignore-file=" .. vim.fs.basename(gitig_path), res_globs) or res_globs
 end
 
 ---@return table<string, string>
@@ -92,7 +99,12 @@ end
 
 ---@return PickerShortcutTable
 local function get_shortcut_table()
-  local cur_buf = utils.path_expand("%")
+  -- paths need to be relative to cwd for it to work
+  local expanded_buf = utils.path_expand("%")
+  local cwd = vim.uv.cwd()
+  local cur_buf = cwd and vim.fs.relpath(cwd, expanded_buf) or expanded_buf
+  local cur_buf_dir = vim.fs.dirname(cur_buf)
+
   return {
     ["l"] = { glob = "*.lua", extensions = { "lua" } },
     ["v"] = { glob = "*.vim", extensions = { "vim" } },
@@ -102,8 +114,8 @@ local function get_shortcut_table()
     ["xs"] = { glob = "*.{ex,exs}", extensions = { "ex", "exs" } },
     ["p"] = { glob = "*.proto", extensions = { "proto" } },
     ["%"] = cur_buf,
-    ["."] = { path = utils.path_expand("%:h") }, -- curr buf's dir
-    [".."] = { path = utils.path_expand("%:h:h") }, -- curr buf's parent dir
+    ["."] = { path = cur_buf_dir }, -- curr buf's dir
+    [".."] = { path = vim.fs.dirname(cur_buf_dir) }, -- curr buf's parent dir
     ["i"] = { flag = "--no-ignore" }, -- include ignored files
 
     {
@@ -250,13 +262,15 @@ local function get_rg_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
     :totable()
   local flags = shortcuts.flags or {}
 
-  return table.merge_lists({
+  local res = table.merge_lists({
     cmd,
     { "-e", p.search },
-    globs,
     flags,
+    #globs > 0 and globs or { "-g", "**" },
     get_rg_exclude_glob_flags(vim.tbl_contains(flags, "--no-ignore")),
   })
+
+  return res
 end
 
 ---@param prompt string
@@ -334,7 +348,7 @@ function M.multi_grep(options)
       prompt_title = "~ grep ~",
       finder = custom_grep,
       previewer = conf.grep_previewer(opts),
-      sorter = fzf and fzf.native_fzf_sorter(opts) or sorters.highlighter_only(opts),
+      sorter = sorters.highlighter_only(opts), --fzf.native_fzf_sorter(opts)
       attach_mappings = function(_, map)
         map("i", "<c-space>", actions.to_fuzzy_refine)
         return true
