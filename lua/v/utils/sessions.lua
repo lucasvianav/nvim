@@ -1,5 +1,6 @@
 local fn = vim.fn
-local utils = require("v.utils.packer")
+local packer = require("v.utils.packer")
+local dashboard = require("v.utils.dashboard")
 
 local function get_cwd_session_path()
   local expanded_dir = vim.fn.stdpath("data") .. "/sessions/"
@@ -9,17 +10,9 @@ local function get_cwd_session_path()
   return expanded_dir .. encoded_cwd .. ".vim"
 end
 
-local function load_dashboard()
-  vim.api.nvim_command("silent! Dashboard")
-end
-
-local function load_dashboard_in_new_tab()
-  vim.api.nvim_command("tabnew | silent! Dashboard")
-end
-
 ---@param session_filepath string
 local function load_session(session_filepath)
-  local auto_session_ok, auto_session = utils.load_and_require_plugin("auto-session")
+  local auto_session_ok, auto_session = packer.load_and_require_plugin("auto-session")
 
   if auto_session_ok then
     auto_session.RestoreSessionFile(session_filepath, {
@@ -42,7 +35,7 @@ end
 
 ---Loads the current dir's session if there is one.
 function M.load_cwd_session()
-  local auto_session_ok, auto_session = utils.load_and_require_plugin("auto-session")
+  local auto_session_ok, auto_session = packer.load_and_require_plugin("auto-session")
 
   if not auto_session_ok then
     require("v.utils.log").log(auto_session)
@@ -81,9 +74,9 @@ function M.load_session_or_dashboard()
   end
 
   if not M.load_cwd_session() then
-    load_dashboard()
+    dashboard.open()
   else
-    load_dashboard_in_new_tab()
+    dashboard.open_in_new_tab()
   end
 end
 

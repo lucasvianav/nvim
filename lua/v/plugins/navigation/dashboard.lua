@@ -8,7 +8,6 @@ require("dashboard").setup({
     winbar = true,
   },
   config = {
-    -- colored icons
     header = require("v.utils.ascii").neovim_3,
     center = {
       {
@@ -50,11 +49,17 @@ require("dashboard").setup({
         end,
       },
       {
-        icon = pad("󰗼  ", 5),
+        icon = pad("  ", 5),
         desc = pad("Exit Dashboard", 35),
-        key = "<C-C>/q",
+        key = "CTR c/q",
+        action = require("v.utils.dashboard").quit_if_curr_buf,
+      },
+      {
+        icon = pad("󰗼  ", 5),
+        desc = pad("Exit Neovim", 35),
+        key = "CMD qui",
         action = function()
-          vim.api.nvim_buf_delete(0, { unload = true, force = true })
+          vim.api.nvim_exec2("qa", { output = false })
         end,
       },
     },
