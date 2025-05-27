@@ -1,11 +1,11 @@
 ---If only one param is passed, the lists inside it will be merged.
----@param lists any[]
+---@param lists any|any[]
 ---@param ... any
 ---@return any[]
 function table.merge_lists(lists, ...)
   local res = {}
 
-  assert(type(lists) == "table")
+  lists = type(lists) == "table" and lists or { lists } --[[@as table]]
 
   if #{ ... } > 0 then
     lists = { lists, ... }

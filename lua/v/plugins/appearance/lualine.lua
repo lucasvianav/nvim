@@ -20,7 +20,7 @@ local bubbles_theme = {
   insert = { y = { fg = colors.black, bg = colors.blue } },
   visual = { y = { fg = colors.black, bg = colors.cyan } },
   replace = { y = { fg = colors.black, bg = colors.yellow } },
-  command = { y = { fg = colors.black, bg =  colors.pink_light } },
+  command = { y = { fg = colors.black, bg = colors.pink_light } },
   inactive = {
     a = { fg = colors.cyan_grey, bg = colors.off_black },
     b = { fg = colors.cyan_grey, bg = colors.off_black },
@@ -133,6 +133,19 @@ require("lualine").setup({
     lualine_x = {
       {
         "branch",
+        fmt = function(
+          branch --[[@param branch string]]
+        )
+          if #branch > 30 then
+            local basename = vim.fs.basename(branch)
+            if #basename > 0 then
+              return basename:sub(1, 15) .. "..." .. basename:sub(#basename - 15, #basename)
+            end
+            return basename
+          end
+
+          return branch
+        end,
         icon = { "", color = { fg = colors.yellow } },
         color = {
           fg = colors.off_white,
@@ -211,8 +224,9 @@ require("lualine").setup({
     lualine_a = {
       {
         "filename",
-        fmt = function(filename)
-          return filename
+        fmt = function(filepath)
+          local root, parts = utils.get_path_parts(filepath)
+          return vim.fs.joinpath(unpack(table.merge_lists("", root or {}, parts)))
         end,
         path = 1,
       },
