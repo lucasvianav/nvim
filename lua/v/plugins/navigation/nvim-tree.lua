@@ -84,7 +84,7 @@ end
 
 require("nvim-tree").setup({
   disable_netrw = false, -- disables netrw completely
-  hijack_netrw = true, -- hijack netrw window on startup
+  hijack_netrw = false, -- hijack netrw window on startup
   open_on_tab = false, -- opens nvimtree when on a new tab
   hijack_cursor = false, -- keep cursor at filename's start
   update_cwd = true, -- update cwd on `DirChanged`

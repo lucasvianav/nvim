@@ -135,6 +135,12 @@ local M = {
     },
     commit = "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3",
   },
+
+  {
+    "stevearc/oil.nvim",
+    commit = "685cdb4ffa74473d75a1b97451f8654ceeab0f4a",
+    cmd = { "Oil" },
+  },
 }
 
 return M

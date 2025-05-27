@@ -39,19 +39,18 @@ require("lualine").setup({
     lualine_a = {
       {
         "filename",
-        fmt = function(filepath)
+        fmt = function(filepath) --[[@param filepath string]]
           local path = { "" }
 
           if #filepath == 0 then
             return vim.fs.joinpath(unpack(path))
           end
 
-          local root, parts = utils.get_path_parts(filepath)
+          local root, parts, is_dir = utils.get_path_parts(filepath)
 
           if not root or parts[1] == root or #parts == 1 then
             return vim.fs.joinpath(unpack(path))
           end
-
           if root and parts[1] ~= root then
             table.insert(path, root)
           end
@@ -61,7 +60,7 @@ require("lualine").setup({
             table.insert(path, "-")
           end
 
-          return vim.fs.joinpath(unpack(path))
+          return utils.with_prefix_if_dir(vim.fs.joinpath(unpack(path)), is_dir)
         end,
         path = 1,
         file_status = true,
@@ -92,7 +91,6 @@ require("lualine").setup({
             table.insert(path, parts[#parts - 1])
           end
 
-          table.insert(path, "")
           return vim.fs.joinpath(unpack(path))
         end,
         path = 1,
@@ -107,7 +105,16 @@ require("lualine").setup({
       },
       {
         "filename",
-        fmt = vim.fs.basename,
+        fmt = function(filepath)
+          local _, parts, is_dir = utils.get_path_parts(filepath)
+          local path = { "", parts[#parts] }
+
+          if is_dir then
+            table.insert(path, "")
+          end
+
+          return vim.fs.joinpath(unpack(path))
+        end,
         path = 1,
         file_status = true,
         padding = { left = 0, right = 1 },
@@ -225,8 +232,9 @@ require("lualine").setup({
       {
         "filename",
         fmt = function(filepath)
-          local root, parts = utils.get_path_parts(filepath)
-          return vim.fs.joinpath(unpack(table.merge_lists("", root or {}, parts)))
+          local root, parts, is_dir = utils.get_path_parts(filepath)
+          local path = vim.fs.joinpath(unpack(table.merge_lists("", root or {}, parts)))
+          return utils.with_prefix_if_dir(path, is_dir)
         end,
         path = 1,
       },
