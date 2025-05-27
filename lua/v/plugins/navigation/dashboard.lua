@@ -49,7 +49,7 @@ require("dashboard").setup({
         end,
       },
       {
-        icon = pad("  ", 5),
+        icon = pad("󰊔  ", 5),
         desc = pad("Exit Dashboard", 35),
         key = "CTR c/q",
         action = require("v.utils.dashboard").quit_if_curr_buf,
