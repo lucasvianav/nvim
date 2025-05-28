@@ -1,3 +1,5 @@
+---TODO: explore other plugin features
+
 local snacks = require("snacks")
 
 local enabled = { enabled = true }

@@ -26,9 +26,9 @@ M.mappings = {
     "n",
     "gd",
     function()
-      local ok = require("v.utils.packer").load_plugin("telescope.nvim")
+      local ok, snacks = require("v.utils.packer").load_and_require_plugin("snacks.nvim")
       if ok then
-        require("telescope.builtin").lsp_definitions()
+        snacks.picker.lsp_definitions({ unique_lines = true })
       else
         vim.lsp.buf.definition()
       end
