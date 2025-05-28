@@ -1,7 +1,7 @@
 vim.opt_local.foldenable = false
 
 local alt_file = vim.fn.getreg("#")
-local dashboard = require("v.utils.dashboard")
+local dashboard = require("v.plugins.navigation.dashboard.utils")
 local k = require("v.utils.mappings")
 
 k.map({
@@ -25,7 +25,7 @@ require("v.utils.autocmds").augroup("DashboardCleanup", {
           once = true,
           callback = function()
             dashboard.delete_buf(args.buf, alt_file)
-          end
+          end,
         })
       end,
     },

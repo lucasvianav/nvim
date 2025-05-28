@@ -1,6 +1,6 @@
 local fn = vim.fn
+local dashboard = require("v.plugins.navigation.dashboard.utils")
 local packer = require("v.utils.packer")
-local dashboard = require("v.utils.dashboard")
 
 local function get_cwd_session_path()
   local expanded_dir = vim.fn.stdpath("data") .. "/sessions/"
