@@ -182,6 +182,8 @@ local M = {
   },
 
   -- 2-char search motion
+  -- TODO: https://github.com/ggandor/leap.nvim
+  -- TODO: https://github.com/folke/flash.nvim?tab=readme-ov-file
   {
     "ggandor/lightspeed.nvim",
     keys = { "<C-s>", "<C-S-s>" },

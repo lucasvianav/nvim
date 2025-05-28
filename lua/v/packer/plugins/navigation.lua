@@ -41,11 +41,9 @@ local M = {
 
   -- highlight f/F and t/T targets
   {
-    "unblevable/quick-scope",
-    as = "quickscope",
+    "jinh0/eyeliner.nvim",
     keys = { "f", "F", "t", "T" },
-    __opts = { setup = true },
-    commit = "f2b6043e04d9ef05205c8953e389304a4c1946f2",
+    commit = "8f197eb30cecdf4c2cc9988a5eecc6bc34c0c7d6",
   },
 
   -- run commands in tmux pane from neovim
