@@ -47,7 +47,7 @@ end
 
 ---@return boolean
 function M.buf_has_lsp_attached()
-  local clients = vim.lsp.get_clients({ buffer = vim.api.nvim_get_current_buf() })
+  local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
   return vim.iter(clients):any(function(it) --[[@param it vim.lsp.Client]]
     return it.name ~= "efm"
   end)
@@ -55,7 +55,7 @@ end
 
 ---@return boolean
 function M.buf_has_formatter_attached()
-  local clients = vim.lsp.get_clients({ buffer = vim.api.nvim_get_current_buf() })
+  local clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
   return vim.iter(clients):any(function(it)
     return (it --[[@as vim.lsp.Client]]).name == "efm"
   end)

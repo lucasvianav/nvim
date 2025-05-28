@@ -56,6 +56,7 @@ end
 ---@param no_gitignore boolean?
 ---@return table<string, string>
 local function get_rg_exclude_glob_flags(no_gitignore)
+  --TODO: https://github.com/stevearc/oil.nvim/blob/master/doc/recipes.md#hide-gitignored-files-and-show-git-tracked-hidden-files
   local gitig_globs, gitig_path = {}, nil
 
   if not no_gitignore then

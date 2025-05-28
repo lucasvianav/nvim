@@ -12,6 +12,7 @@ local banned_messages = {
   "method textDocument/codeAction is not supported by any of the servers registered for the current buffer",
   "No signature help available",
   "method textDocument/documentHighlight is not supported by any of the servers registered for the current buffer",
+  "[LSP] Format request failed, no matching language servers.",
   "\"\"",
 }
 

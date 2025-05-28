@@ -1,3 +1,5 @@
+--TODO: https://github.com/stevearc/oil.nvim/blob/master/doc/recipes.md#hide-gitignored-files-and-show-git-tracked-hidden-files
+
 local oil = require("oil")
 
 local soft_hidden_files = {}
