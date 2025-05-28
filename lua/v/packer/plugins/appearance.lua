@@ -56,7 +56,7 @@ local M = {
   -- colorcolumn with virtual text
   {
     "lukas-reineke/virt-column.nvim",
-    disable = vim.fn.has("mac"), -- highlighting issues on mac
+    disable = vim.fn.has("mac") == 1, -- highlighting issues on mac
     event = {
       "CursorHold",
       "CursorMoved",
