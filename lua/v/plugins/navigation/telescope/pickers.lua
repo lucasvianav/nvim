@@ -3,13 +3,9 @@ local M = {}
 local actions = require("telescope.actions")
 local make_entry = require("telescope.make_entry")
 local pickers = require("telescope.pickers")
-local sorters = require("telescope.sorters")
-local utils = require("telescope.utils")
 local conf = require("telescope.config").values
-local fzf_ok, fzf = pcall(function()
-  return require("telescope").extensions.fzf
-end)
-fzf = fzf_ok and fzf or nil
+local sorters = require("v.plugins.navigation.telescope.sorters")
+local utils = require("v.plugins.navigation.telescope.utils")
 
 local ignored = {
   "package-lock.json",
@@ -18,6 +14,44 @@ local ignored = {
   ".gitignore",
   "spell/",
 }
+
+---@return PickerShortcutTable
+local function get_shortcut_table()
+  local cur_buf = utils.path_expand_rel_to_cwd("%")
+  local cur_buf_dir = vim.fs.dirname(cur_buf)
+
+  ---@type PickerShortcutTable
+  return {
+    ["l"] = { extension = "lua" },
+    ["v"] = { extension = "vim" },
+    ["n"] = { extensions = { "lua", "vim" } },
+    ["k"] = { glob = "!*Test.kt", fzf_token = "!Test.kt$" },
+    ["kt"] = { extension = "kt" },
+    ["x"] = { extension = "ex" },
+    ["xs"] = { extensions = { "ex", "exs" } },
+    ["p"] = { extensions = { "proto" } },
+    ["%"] = { glob = cur_buf, fzf_token = cur_buf },
+    ["."] = { path = cur_buf_dir }, -- curr buf's dir
+    [".."] = { path = vim.fs.dirname(cur_buf_dir) }, -- curr buf's parent dir
+    ["i"] = { flag = "--no-ignore" }, -- include ignored files
+
+    {
+      ---Traverse the current buffer's directory (p2-, p-2, 2p-, 2-p, -2p, -p2, 3p, p3)
+      [{ "^p[+-]?%d+[+-]?$", "^[+-]?%d+p[+-]?$", "^%d+[+-]?p$", "[+-]?p^%d+$" }] = function(input)
+        local sign_1, count, sign_2 = input:match("^p?([+-]?)(%d+)p?([+-]?)p?$")
+        local n_dirs = assert(tonumber(count))
+        local sign = sign_1 and #sign_1 > 0 and sign_1 or sign_2
+
+        if sign_1 and #sign_1 > 0 and sign_2 and #sign_2 > 0 then
+          return nil
+        end
+
+        local path = utils.traverse_parents(cur_buf, n_dirs, sign == "-" and "right" or "left")
+        return { path = path }
+      end,
+    },
+  }
+end
 
 ---@param no_gitignore boolean?
 ---@return table<string, string>
@@ -54,12 +88,14 @@ local function get_rg_exclude_glob_flags(no_gitignore)
   local res_globs = vim
     .iter(globs)
     :map(function(it)
-      return { "-g", "!" .. it  }
+      return { "-g", "!" .. it }
     end)
     :flatten()
     :totable()
 
-  return gitig_path and table.merge_lists("--ignore-file=" .. vim.fs.basename(gitig_path), res_globs) or res_globs
+  return gitig_path
+      and table.merge_lists("--ignore-file=" .. vim.fs.basename(gitig_path), res_globs)
+    or res_globs
 end
 
 ---@return table<string, string>
@@ -97,156 +133,12 @@ local function get_additional_flags(opts)
   return flags
 end
 
----@return PickerShortcutTable
-local function get_shortcut_table()
-  -- paths need to be relative to cwd for it to work
-  local expanded_buf = utils.path_expand("%")
-  local cwd = vim.uv.cwd()
-  local cur_buf = cwd and vim.fs.relpath(cwd, expanded_buf) or expanded_buf
-  local cur_buf_dir = vim.fs.dirname(cur_buf)
-
-  return {
-    ["l"] = { glob = "*.lua", extensions = { "lua" } },
-    ["v"] = { glob = "*.vim", extensions = { "vim" } },
-    ["n"] = { glob = "*.{vim,lua}", extensions = { "lua", "vim" } },
-    ["k"] = { glob = "*.kt", extensions = { "kt" } },
-    ["x"] = { glob = "*.ex", extensions = { "ex" } },
-    ["xs"] = { glob = "*.{ex,exs}", extensions = { "ex", "exs" } },
-    ["p"] = { glob = "*.proto", extensions = { "proto" } },
-    ["%"] = cur_buf,
-    ["."] = { path = cur_buf_dir }, -- curr buf's dir
-    [".."] = { path = vim.fs.dirname(cur_buf_dir) }, -- curr buf's parent dir
-    ["i"] = { flag = "--no-ignore" }, -- include ignored files
-
-    {
-      ---Traverse the current buffer's directory in the format `-2p` or `32p`
-      ---@param input string
-      ["^[+-]?%d+p$"] = function(input)
-        local path_parts = utils.path_expand(cur_buf .. ":h"):split("/")
-        local parts_it = vim.iter(path_parts)
-        local sign, count = input:match("^([+-]?)(%d+)p$")
-        local n_dirs = assert(tonumber(count))
-        local from_end = sign == "-"
-        local res = from_end and parts_it:rskip(n_dirs) or parts_it:take(n_dirs)
-
-        return { path = vim.fs.joinpath(unpack(table.merge_lists(res:totable()))) }
-      end,
-    },
-  }
-end
-
----@param prompt string
----@return PickerProcessedShortcut
-local function process_shortcut_prompt(prompt, shortcuts)
-  ---@type PickerProcessedShortcut
-  local output = {
-    globs = {},
-    flags = {},
-    paths = {},
-    extensions = {},
-  }
-
-  for _, shortcut in ipairs(prompt:split()) do
-    if not shortcut or #shortcut == 0 then
-      goto continue
-    end
-
-    local glob = ""
-    local action = shortcuts[shortcut]
-    local shortcut_res
-
-    if action == nil then
-      for re, act in pairs(shortcuts[1]) do
-        local matches = shortcut:match(re)
-        if matches then
-          action = act
-          break
-        end
-      end
-    end
-
-    if type(action) == "string" or type(action) == "table" then
-      shortcut_res = action
-    elseif type(action) == "function" then
-      shortcut_res = action(shortcut)
-    else
-      shortcut_res = shortcut
-    end
-
-    if type(shortcut_res) == "table" then
-      if shortcut_res.flag then
-        table.insert(output.flags, shortcut_res.flag)
-      end
-      if shortcut_res.path then
-        table.insert(output.paths, shortcut_res.path)
-        glob = vim.fs.joinpath(shortcut_res.path, "**")
-      end
-      if shortcut_res.glob then
-        glob = shortcut_res.glob
-      end
-      if shortcut_res.extensions and type(shortcut_res.extensions) == "table" then
-        for _, it in ipairs(shortcut_res.extensions) do
-          table.insert(output.extensions, it)
-        end
-      end
-    elseif type(shortcut_res) == "string" then
-      glob = shortcut_res
-    end
-
-    if #glob > 0 then
-      table.insert(output.globs, glob)
-    end
-
-    ::continue::
-  end
-
-  return output
-end
-
----@param prompt string
----@param shortcuts PickerShortcutTable
----@param shortcut_sep string
----@return { search: string?, shortcuts: PickerProcessedShortcut? }
-local function process_prompt(prompt, shortcuts, shortcut_sep)
-  local output = { search = nil, shortcuts = nil }
-
-  ---@type string
-  prompt = prompt and prompt:trim() or nil
-
-  if not prompt or #prompt == 0 then
-    return output
-  end
-
-  local prompt_parts = prompt:reverse():split(shortcut_sep)
-  local n_parts = #prompt_parts
-  prompt_parts = vim
-    .iter(prompt_parts)
-    :map(function(it)
-      return it:reverse()
-    end)
-    :rev()
-
-  local shortcut_prompt = nil
-  if n_parts > 1 then
-    ---@type string
-    shortcut_prompt = prompt_parts:pop():trim()
-  end
-
-  output.search = prompt_parts:join(shortcut_sep)
-
-  if shortcut_prompt and #shortcut_prompt > 0 then
-    output.shortcuts = process_shortcut_prompt(shortcut_prompt, shortcuts)
-  end
-
-  return output
-end
-
 ---@param prompt string
 ---@param shortcut_tbl PickerShortcutTable
----@param shortcut_sep string
+---@param shortcut_sep string?
 ---@return string[]
 local function get_rg_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
-  local cmd, p = { "rg" }, process_prompt(prompt, shortcut_tbl, shortcut_sep)
+  local cmd, p = { "rg" }, utils.process_prompt(prompt, shortcut_tbl, shortcut_sep)
 
   if not p.search then
     return table.merge_lists(cmd, get_rg_exclude_glob_flags())
@@ -275,11 +167,11 @@ end
 
 ---@param prompt string
 ---@param shortcut_tbl PickerShortcutTable
----@param shortcut_sep string
+---@param shortcut_sep string?
 ---@return string[]
 local function get_fd_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
-  local cmd = { "fd", "--type", "f" }
-  local p = process_prompt(prompt, shortcut_tbl, shortcut_sep)
+  local cmd = { "fd", "--type", "f", "--full-path" }
+  local p = utils.process_prompt(prompt, shortcut_tbl, shortcut_sep)
 
   if not p.search then
     return table.merge_lists(cmd, get_fd_exclude_flags())
@@ -348,7 +240,7 @@ function M.multi_grep(options)
       prompt_title = "~ grep ~",
       finder = custom_grep,
       previewer = conf.grep_previewer(opts),
-      sorter = sorters.highlighter_only(opts), --fzf.native_fzf_sorter(opts)
+      sorter = sorters.funky_fzf(opts) or sorters.funky_fzy(opts),
       attach_mappings = function(_, map)
         map("i", "<c-space>", actions.to_fuzzy_refine)
         return true
@@ -364,8 +256,8 @@ function M.find_files_rg(options)
   local opts = get_picker_opts(options)
 
   if opts.search_dirs then
-    for k, v in pairs(opts.search_dirs) do
-      opts.search_dirs[k] = utils.path_expand(v)
+    for dir, path in pairs(opts.search_dirs) do
+      opts.search_dirs[dir] = utils.path_expand(path)
     end
   end
 
@@ -391,8 +283,8 @@ function M.find_files_rg(options)
       prompt_title = "~ find files ~",
       finder = custom_find_files,
       __locations_input = true,
-      previewer = conf.grep_previewer(opts),
-      sorter = fzf and fzf.native_fzf_sorter(opts) or conf.file_sorter(opts),
+      previewer = conf.file_previewer(opts),
+      sorter = sorters.funky_fzf(opts) or conf.file_sorter(opts),
     })
     :find()
 end
@@ -403,8 +295,8 @@ function M.find_files_live_fd(options)
   local opts = get_picker_opts(options)
 
   if opts.search_dirs then
-    for k, v in pairs(opts.search_dirs) do
-      opts.search_dirs[k] = utils.path_expand(v)
+    for dir, path in pairs(opts.search_dirs) do
+      opts.search_dirs[dir] = utils.path_expand(path)
     end
   end
 
@@ -430,8 +322,13 @@ function M.find_files_live_fd(options)
       prompt_title = "~ find files ~",
       finder = custom_find_files,
       __locations_input = true,
-      previewer = conf.grep_previewer(opts),
-      sorter = fzf and fzf.native_fzf_sorter(opts) or sorters.highlighter_only(opts),
+      previewer = conf.file_previewer(opts),
+      sorter = sorters.funky_fzf(opts) or sorters.funky_fzy(opts),
+      attach_mappings = function(_, map)
+        map("i", "<c-space>", actions.to_fuzzy_refine)
+        return true
+      end,
+      push_cursor_on_edit = true,
     })
     :find()
 end
@@ -442,8 +339,8 @@ function M.find_files_fd(options)
   local opts = get_picker_opts(options)
 
   if opts.search_dirs then
-    for k, v in pairs(opts.search_dirs) do
-      opts.search_dirs[k] = utils.path_expand(v)
+    for dir, path in pairs(opts.search_dirs) do
+      opts.search_dirs[dir] = utils.path_expand(path)
     end
   end
 
@@ -465,8 +362,8 @@ function M.find_files_fd(options)
       prompt_title = "~ find files ~",
       finder = require("telescope.finders").new_oneshot_job(cmd, opts),
       __locations_input = true,
-      previewer = conf.grep_previewer(opts),
-      sorter = fzf and fzf.native_fzf_sorter(opts) or sorters.highlighter_only(opts),
+      previewer = conf.file_previewer(opts),
+      sorter = sorters.funky_fzf(opts, true) or sorters.funky_fzy(opts),
     })
     :find()
 end

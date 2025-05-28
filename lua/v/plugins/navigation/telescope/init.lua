@@ -118,6 +118,7 @@ v.searchers = require("v.plugins.navigation.telescope.searchers")
 require("v.utils.mappings").set_keybindings({
   -- search files and text
   { "n", "<Leader>ff", v.pickers.find_files_fd, desc = "Find Files" },
+  { "n", "<Leader>fl", v.pickers.find_files_live_fd, desc = "Find Files (live)" },
   { "n", "<Leader>fpp", v.pickers.multi_grep, desc = "Grep" },
 
   -- utilities

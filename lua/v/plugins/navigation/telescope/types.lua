@@ -14,14 +14,24 @@
 ---@field prompt_title?         string          title of the prompt box
 ---@field results_title?        string          tile of the results box
 
----@alias PickerShortcutAction string|fun(shortcut: string): nil
+---@class PickerShortcutAction
+---@field glob? string
+---@field fzf_token? string
+---@field path? string
+---@field flag? string
+---@field flags? string[]
+---@field extension? string
+---@field extensions? string[]
+
+---@alias PickerShortcutDefinition PickerShortcutAction|fun(shortcut: string): PickerShortcutAction?
 
 ---@class PickerShortcutTable
----@field [string] PickerShortcutAction
----@field [1] table<string, PickerShortcutAction>
+---@field [string] PickerShortcutDefinition?
+---@field [1] table<string|string[], PickerShortcutDefinition>
 
 ---@class PickerProcessedShortcut
 ---@field flags string[]
 ---@field globs string[]
 ---@field paths string[]
 ---@field extensions string[]
+---@field fzf_tokens string[]
