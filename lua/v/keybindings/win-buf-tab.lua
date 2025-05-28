@@ -1,9 +1,9 @@
 require("v.utils.mappings").set_keybindings({
   -- alt + shift + hjkl to resize windows
-  { "n", "<S-M-J>", "2<C-w>-" },
-  { "n", "<S-M-K>", "2<C-w>+" },
-  { "n", "<S-A-H>", "2<C-w><" },
-  { "n", "<S-A-L>", "2<C-w>>" },
+  { "n", "<m-s-j>", "2<C-w>-" },
+  { "n", "<m-s-k>", "2<C-w>+" },
+  { "n", "<m-s-h>", "2<C-w><" },
+  { "n", "<m-s-l>", "2<C-w>>" },
 
   -- { "n", "<m-l>", "<c-w>L" },
   -- { "n", "<m-h>", "<c-w>H" },

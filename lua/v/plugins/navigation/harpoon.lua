@@ -17,7 +17,7 @@ require("harpoon").setup({
 
 local telescope_ok, telescope = require("v.utils.packer").load_and_require_plugin("telescope.nvim")
 
-if not telescope_ok or not pcall(telescope.load_extension,"harpoon") then
+if not telescope_ok or not pcall(telescope.load_extension, "harpoon") then
   vim.notify("Failed to load Telescope extension.", vim.log.levels.ERROR, {
     title = "Harpoon",
   })
@@ -30,14 +30,62 @@ require("v.utils.mappings").set_keybindings({
   { "n", "grh", mark.toggle_file },
   { "n", "[H", ui.nav_prev },
   { "n", "]H", ui.nav_next },
-  { "n", "<m-h>", function() ui.nav_file(1) end },
-  { "n", "<m-j>", function() ui.nav_file(2) end },
-  { "n", "<m-k>", function() ui.nav_file(3) end },
-  { "n", "<m-l>", function() ui.nav_file(4) end },
-  { "n", "<m-s-h>", function() mark.set_current_at(1) end },
-  { "n", "<m-s-j>", function() mark.set_current_at(2) end },
-  { "n", "<m-s-k>", function() mark.set_current_at(3) end },
-  { "n", "<m-s-l>", function() mark.set_current_at(4) end },
+  {
+    "n",
+    "<m-h>",
+    function()
+      ui.nav_file(1)
+    end,
+  },
+  {
+    "n",
+    "<m-j>",
+    function()
+      ui.nav_file(2)
+    end,
+  },
+  {
+    "n",
+    "<m-k>",
+    function()
+      ui.nav_file(3)
+    end,
+  },
+  {
+    "n",
+    "<m-l>",
+    function()
+      ui.nav_file(4)
+    end,
+  },
+  {
+    "n",
+    "<c-s-h>",
+    function()
+      mark.set_current_at(1)
+    end,
+  },
+  {
+    "n",
+    "<s-nl>",
+    function()
+      mark.set_current_at(2)
+    end,
+  },
+  {
+    "n",
+    "<c-s-k>",
+    function()
+      mark.set_current_at(3)
+    end,
+  },
+  {
+    "n",
+    "<c-s-l>",
+    function()
+      mark.set_current_at(4)
+    end,
+  },
   {
     "n",
     "<leader><leader>h",
