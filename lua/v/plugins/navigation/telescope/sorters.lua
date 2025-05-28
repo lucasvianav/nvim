@@ -3,9 +3,16 @@ local M = {}
 local Sorter = require("telescope.sorters").Sorter
 local utils = require("v.plugins.navigation.telescope.utils")
 
+---@param prompt string
+---@return string
+local function unescape(prompt)
+  local pat = [[[^\\]\zs\\\ze[^\\]\|[^\\]\zs\\$\|^\\\ze[^\\]\|^\\$]]
+  return vim.fn.substitute(prompt, pat, "", "g")
+end
+
 ---@param opts any
----@param match_shortcut boolean?
-function M.funky_fzf(opts, match_shortcut)
+---@param process_shortcuts boolean?
+function M.funky_fzf(opts, process_shortcuts)
   local ok, extension = pcall(function()
     return require("telescope").extensions.fzf
   end)
@@ -15,15 +22,22 @@ function M.funky_fzf(opts, match_shortcut)
   end
 
   local fzf = extension.native_fzf_sorter(opts) --[[@as Sorter]]
-  local shortcut_table = match_shortcut and opts.shortcuts or nil
+  local shortcut_table = process_shortcuts and opts.shortcuts or nil
 
   ---@param prompt string
+  ---@param _proc_shrct? boolean default true
   ---@return string
-  local function process_prompt_for_sorter(prompt)
-    local p = utils.process_prompt(prompt, shortcut_table, opts.shortcut_sep)
-    local search = p.search or prompt
+  local function process_prompt_for_sorter(prompt, _proc_shrct)
+    if _proc_shrct == nil then
+      _proc_shrct = true
+    end
+
+    local p = utils.process_prompt(prompt, _proc_shrct and shortcut_table or nil, opts.shortcut_sep)
+    local search = unescape(p.search or prompt)
     local shortcuts = p.shortcuts or {}
 
+    -- TODO: when multiple extensions or multiple paths are present we should
+    -- pipe/OR them https://github.com/junegunn/fzf?tab=readme-ov-file#search-syntax
     if shortcuts.fzf_tokens and #shortcuts.fzf_tokens > 0 then
       return search .. " " .. vim.iter(shortcuts.fzf_tokens):join(" ")
     end
@@ -46,8 +60,7 @@ function M.funky_fzf(opts, match_shortcut)
       return fzf.scoring_function(self, process_prompt_for_sorter(prompt), line)
     end,
     highlighter = function(self, prompt, display)
-      local p = utils.process_prompt(prompt, nil, opts.shortcut_sep)
-      return fzf.highlighter(self, p.search or prompt, display)
+      return fzf.highlighter(self, process_prompt_for_sorter(prompt, false), display)
     end,
   })
 end
@@ -60,7 +73,7 @@ function M.highlighter_only(opts)
     end,
     highlighter = function(_, prompt, display)
       local p = utils.process_prompt(prompt, nil, opts.shortcut_sep)
-      return fzy.positions(p.search or prompt, display)
+      return fzy.positions(unescape(p.search or prompt), display)
     end,
   })
 end
@@ -73,10 +86,11 @@ function M.funky_fzy(opts, match_shortcut)
   local fzy_offset = -fzy.get_score_floor()
 
   ---@param prompt string
+  ---@param _proc_shrct? boolean
   ---@return string
-  local function process_prompt_for_sorter(prompt)
-    local p = utils.process_prompt(prompt, shortcut_table, opts.shortcut_sep)
-    local search = p.search or prompt
+  local function process_prompt_for_sorter(prompt, _proc_shrct)
+    local p = utils.process_prompt(prompt, _proc_shrct and shortcut_table or nil, opts.shortcut_sep)
+    local search = unescape(p.search or prompt)
     local shortcuts = p.shortcuts or {}
 
     if shortcuts.paths and #shortcuts.paths > 0 then
@@ -114,8 +128,7 @@ function M.funky_fzy(opts, match_shortcut)
       return 1 / (fzy_score + fzy_offset)
     end,
     highlighter = function(_, prompt, display)
-      local p = utils.process_prompt(prompt, nil, opts.shortcut_sep)
-      return fzy.positions(p.search or prompt, display)
+      return fzy.positions(process_prompt_for_sorter(prompt, false), display)
     end,
     discard = true,
   })
