@@ -77,6 +77,13 @@ local M = {
     after = "nvim-treesitter",
     disable = true,
   },
+
+  {
+    "shortcuts/no-neck-pain.nvim",
+    commit = "c824c54d837160ac32d0f877574ccfa2ecce9947",
+    cmd = { "NoNeckPain" },
+    keys = { "<leader>nn" },
+  },
 }
 
 return M
