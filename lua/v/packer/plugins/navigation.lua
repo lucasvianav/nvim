@@ -138,6 +138,7 @@ local M = {
     "stevearc/oil.nvim",
     commit = "685cdb4ffa74473d75a1b97451f8654ceeab0f4a",
     cmd = { "Oil" },
+    keys = { "-" },
   },
 }
 

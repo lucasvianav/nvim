@@ -1,4 +1,17 @@
-require("oil").setup({
+local oil = require("oil")
+
+local soft_hidden_files = {}
+
+local hard_hidden_files = {
+  "^%.git$",
+  "^node_modules$",
+  "^%.cache$",
+  "^__pycache__$",
+  "^%.DS_Store$",
+  "^package-lock%.json$",
+}
+
+oil.setup({
   default_file_explorer = true,
   columns = {
     { "icon", add_padding = true },
@@ -21,7 +34,7 @@ require("oil").setup({
   },
   delete_to_trash = false,
   -- (:help prompt_save_on_select_new_entry)
-  prompt_save_on_select_new_entry = true,
+  prompt_save_on_select_new_entry = false,
   cleanup_delay_ms = 2000,
   lsp_file_methods = {
     enabled = true,
@@ -32,22 +45,21 @@ require("oil").setup({
   watch_for_changes = false,
   keymaps = {
     ["g?"] = { "actions.show_help", mode = "n" },
-    ["<CR>"] = "actions.select",
-    ["<C-v>"] = { "actions.select", opts = { vertical = true } },
-    ["<C-s-v>"] = { "actions.select", opts = { vertical = true } },
-    ["<C-s-h>"] = { "actions.select", opts = { horizontal = true } },
-    ["<C-t>"] = { "actions.select", opts = { tab = true } },
-    ["<C-s-t>"] = { "actions.select", opts = { tab = true } },
-    ["<C-p>"] = "actions.preview",
-    ["<C-c>"] = { "actions.close", mode = "n" },
+    ["<cr>"] = "actions.select",
+    ["<c-v>"] = { "actions.select", opts = { vertical = true } },
+    ["<c-s-v>"] = { "actions.select", opts = { vertical = true } },
+    ["<c-s-h>"] = { "actions.select", opts = { horizontal = true } },
+    ["<c-t>"] = { "actions.select", opts = { tab = true } },
+    ["<c-s-t>"] = { "actions.select", opts = { tab = true } },
+    ["<c-p>"] = "actions.preview",
+    ["<c-c>"] = { "actions.close", mode = "n" },
     ["q"] = { "actions.close", mode = "n" },
     ["<m-r>"] = "actions.refresh",
-    ["<C-S-R>"] = "actions.refresh",
+    ["<c-s-r>"] = "actions.refresh",
     ["grr"] = "actions.refresh",
     ["-"] = { "actions.parent", mode = "n" },
+    [".."] = { "actions.parent", mode = "n" },
     ["_"] = { "actions.open_cwd", mode = "n" },
-    ["`"] = { "actions.cd", mode = "n" },
-    ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
     ["gs"] = { "actions.change_sort", mode = "n" },
     ["gx"] = "actions.open_external",
     ["g."] = { "actions.toggle_hidden", mode = "n" },
@@ -55,16 +67,39 @@ require("oil").setup({
   use_default_keymaps = false,
   view_options = {
     show_hidden = true,
-    is_hidden_file = function(
+    is_hidden_file = function(name, bufnr)
+      if name:match("^%.") ~= nil then
+        return true
+      end
+
+      for _, it in ipairs(soft_hidden_files) do
+        if name:match(it) then
+          return true
+        end
+      end
+
+      local dir = vim.api.nvim_buf_get_name(bufnr):gsub("^oil://", "")
+      local abspath = vim.fs.abspath(vim.fs.joinpath(dir, name))
+      local is_ignored = vim
+        .system({
+          "git",
+          "check-ignore",
+          abspath,
+        }, { timeout = 100 })
+        :wait().code == 0
+
+      return is_ignored
+    end,
+    is_always_hidden = function(
       name,
       _ --[[bufnr]]
     )
-      return name:match("^%.") ~= nil
-    end,
-    is_always_hidden = function(
-      _ --[[name]],
-      _ --[[bufnr]]
-    )
+      for _, it in ipairs(hard_hidden_files) do
+        if name:match(it) then
+          return true
+        end
+      end
+
       return false
     end,
     natural_order = "fast",
@@ -156,4 +191,22 @@ require("oil").setup({
   keymaps_help = {
     border = "rounded",
   },
+})
+
+require("v.utils.mappings").map({ "n", "-", oil.open, desc = "Open parent directory" })
+
+-- trigger LSP rename using Snacks
+vim.api.nvim_create_autocmd("User", {
+  pattern = "OilActionsPost",
+  callback = function(event)
+    if event.data.actions.type == "move" then
+      local snacks_ok, snacks = pcall(require, "snacks")
+
+      if not snacks_ok then
+        return
+      end
+
+      snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+    end
+  end,
 })
