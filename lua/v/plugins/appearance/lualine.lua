@@ -40,7 +40,8 @@ require("lualine").setup({
       {
         "filename",
         fmt = function(filepath) --[[@param filepath string]]
-          local path = { "" }
+          filepath = filepath:trim()
+          local path = { " " }
 
           if #filepath == 0 then
             return vim.fs.joinpath(unpack(path))
@@ -48,6 +49,9 @@ require("lualine").setup({
 
           local root, parts, is_dir = utils.get_path_parts(filepath)
 
+          if #parts == 0 then
+            return vim.fs.joinpath(unpack(path))
+          end
           if not root or parts[1] == root or #parts == 1 then
             return vim.fs.joinpath(unpack(path))
           end
@@ -63,9 +67,10 @@ require("lualine").setup({
           return utils.with_prefix_if_dir(vim.fs.joinpath(unpack(path)), is_dir)
         end,
         path = 1,
-        file_status = true,
+        file_status = false,
         separator = { right = "" },
-        padding = { left = 1, right = 0 },
+        padding = 0,
+        draw_empty = true,
         symbols = {
           modified = "",
           readonly = "",
@@ -76,7 +81,8 @@ require("lualine").setup({
     lualine_b = {
       {
         "filename",
-        fmt = function(filepath)
+        fmt = function(filepath) --[[@param filepath string]]
+          filepath = filepath:trim()
           local path = { "" }
 
           if #filepath == 0 then
@@ -85,6 +91,10 @@ require("lualine").setup({
 
           local root, parts = utils.get_path_parts(filepath)
 
+          if #parts == 0 then
+            table.insert(path, "")
+            return vim.fs.joinpath(unpack(path))
+          end
           if #parts == 1 or (root and parts[1] == root) then
             table.insert(path, parts[1])
           else
@@ -94,7 +104,7 @@ require("lualine").setup({
           return vim.fs.joinpath(unpack(path))
         end,
         path = 1,
-        file_status = true,
+        file_status = false,
         padding = 0,
         color = { fg = colors.green, gui = "bold" },
         symbols = {
@@ -105,24 +115,31 @@ require("lualine").setup({
       },
       {
         "filename",
-        fmt = function(filepath)
-          local _, parts, is_dir = utils.get_path_parts(filepath)
+        fmt = function(filepath) --[[@param filepath string]]
+          ---@diagnostic disable-next-line: redefined-local
+          local filepath, tail = filepath:trim():match("^(%S+)(.*)$")
+          local root, parts, is_dir = utils.get_path_parts(filepath)
+
+          if #parts == 0 then
+            return root .. tail
+          end
+
           local path = { "", parts[#parts] }
 
           if is_dir then
             table.insert(path, "")
           end
 
-          return vim.fs.joinpath(unpack(path))
+          return vim.fs.joinpath(unpack(path)) .. tail
         end,
         path = 1,
         file_status = true,
         padding = { left = 0, right = 1 },
         color = { fg = colors.off_white, gui = "bold,italic" },
         symbols = {
-          modified = " ",
-          readonly = " ",
-          unnamed = "[No Name]",
+          modified = "",
+          readonly = "",
+          unnamed = "[no name]",
         },
       },
     },
@@ -130,10 +147,10 @@ require("lualine").setup({
       {
         "diagnostics",
         symbols = {
-          error = "  ",
-          warn = "  ",
-          info = "  ",
-          hint = "  ",
+          error = " ",
+          warn = " ",
+          info = " ",
+          hint = " ",
         },
       },
     },

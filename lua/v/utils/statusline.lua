@@ -34,6 +34,10 @@ function M.get_path_parts(filepath)
   local root_dir = vim.fs.basename(root or "")
   local relpath = (root and vim.fs.relpath(root, filepath) or filepath):split("/")
 
+  if #relpath == 1 and relpath[1] == "." then
+    relpath = {}
+  end
+
   return (#root_dir > 0 and root_dir or nil), relpath, is_oil
 end
 
