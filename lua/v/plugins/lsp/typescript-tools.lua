@@ -1,5 +1,3 @@
-P("CALLED", "CALLED", "CALLED")
-
 local config = require("v.utils.lsp").make_config()
 local ok, ts_ls = pcall(require, "v.plugins.lsp.servers.ts_ls")
 
@@ -7,7 +5,7 @@ if ok then
   config = vim.tbl_deep_extend("force", config, ts_ls.config)
 end
 
-require("typescript-tools").setup(P(vim.tbl_deep_extend("keep", config, {
+require("typescript-tools").setup(vim.tbl_deep_extend("keep", config, {
   settings = {
     -- spawn additional tsserver instance to calculate diagnostics on it
     separate_diagnostic_server = true,
@@ -32,7 +30,7 @@ require("typescript-tools").setup(P(vim.tbl_deep_extend("keep", config, {
       insertSpaceBeforeFunctionParenthesis = false,
       placeOpenBraceOnNewLineForFunctions = false,
       placeOpenBraceOnNewLineForControlBlocks = false,
-      insertSpaceBeforeTypeAnnotation = true,
+      insertSpaceBeforeTypeAnnotation = false,
       semicolons = "insert",
     },
     tsserver_file_preferences = {
@@ -58,4 +56,15 @@ require("typescript-tools").setup(P(vim.tbl_deep_extend("keep", config, {
       filetypes = { "javascriptreact", "typescriptreact" },
     },
   },
-})))
+}))
+
+-- retrigger lspconfig's autocmd for all buffers that were already open.
+-- this is required for the lsp client to attach to them, since we only called
+-- setup (which creates the the autocmds) were created after the buffers opened
+local filetypes = vim.lsp.config.ts_ls.filetypes or {}
+for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+  local ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+  if vim.tbl_contains(filetypes, ft) then
+    vim.api.nvim_exec_autocmds("FileType", { group = "lspconfig", buffer = bufnr })
+  end
+end

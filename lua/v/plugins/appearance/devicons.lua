@@ -32,12 +32,12 @@ require("nvim-web-devicons").setup({
       name = "KotlinTest",
     },
     ["stories.jsx"] = {
-      icon = "",
+      icon = "ﭧ",
       color = colors.salmon,
       name = "JavascriptStorybook",
     },
     ["stories.tsx"] = {
-      icon = "",
+      icon = "ﭧ",
       color = colors.salmon,
       name = "TypescriptStorybook",
     },
