@@ -1,12 +1,10 @@
 ---@meta _
 
----@class LinterConfig
+---@class EfmExtensionConfig
+---@field enabled boolean?
 ---@field rootMarkers string[]
 ---@field formatStdin boolean?
 ---@field lintStdin boolean?
 ---@field lintFormats string[]?
 ---@field lintCommand string?
 ---@field formatCommand string?
-
----@class LinterModule
----@field config LinterConfig

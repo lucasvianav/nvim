@@ -27,6 +27,8 @@ local M = {}
 
 require("v.utils.packer").load_plugin("efmls-configs-nvim")
 
+local if_enabled = require("v.plugins.lsp.servers.efm.utils").if_enabled
+
 -- linting and simple formatting for js/ts
 local eslint_d = {
   lintCommand = "eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}",
@@ -51,7 +53,7 @@ local eslint_d = {
 }
 
 -- formatting for js/ts/json/yaml/html/css, etc
-local prettier = {
+local prettier = if_enabled("prettier", {
   formatCommand = ([[
     $([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettier")
     --find-config-path
@@ -65,10 +67,10 @@ local prettier = {
     ".prettierrc.json",
     "package.json",
   },
-}
+})
 
 -- formatting for js/ts/json/yaml/html/css, etc
-local prettierd = {
+local prettierd = if_enabled("prettier", {
   formatCommand = ([[
         $([ -n "$(command -v node_modules/.bin/prettier)" ] && echo "node_modules/.bin/prettier" || echo "prettierd")
         "${INPUT}"
@@ -84,7 +86,7 @@ local prettierd = {
   env = {
     string.format("PRETTIERD_DEFAULT_CONFIG=%s", vim.fn.expand("~/.prettierrc.json")),
   },
-}
+})
 
 -- formatting for lua
 -- TODO: setup luacheck? https://github.com/mpeterv/luacheck
@@ -185,11 +187,9 @@ local hlint = {
     }
 ]]
 
-local ktlint = require("v.plugins.lsp.servers.efm.ktlint").config
----@type LinterConfig
-local vint = ({ pcall(require, "efmls-configs.linters.vint") })[2] or {}
----@type LinterConfig
-local biome = ({ pcall(require, "efmls-configs.formatters.biome") })[2] or {}
+local ktlint = if_enabled(require("v.plugins.lsp.servers.efm.ktlint").config)
+local vint = if_enabled("vint", ({ pcall(require, "efmls-configs.linters.vint") })[2])
+local biome = if_enabled("biome", ({ pcall(require, "efmls-configs.formatters.biome") })[2])
 
 local languages = {
   javascript = { eslint_d, prettierd, biome },

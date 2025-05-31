@@ -13,13 +13,17 @@
 ---|"1.0.1"
 ---|"0.50.0"
 
----@class LocalKtlintConfig
+---@class EfmExtensionLocalConfig
+---@field enabled boolean?
+
+---@class LocalKtlintConfig : EfmExtensionLocalConfig
 ---@field ruleset_version KtlintRulesetVersionOpts?
 ---@field ruleset_jar_path string?
 ---@field baseline_file_path string?
 
 ---@class LocalEfmConfig
 ---@field ktlint LocalKtlintConfig?
+---@field [string] EfmExtensionLocalConfig?
 
 ---@class LocalNvimConfig
 ---@field efm LocalEfmConfig?

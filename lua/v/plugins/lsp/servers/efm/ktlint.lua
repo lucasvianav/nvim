@@ -4,7 +4,7 @@ local tbl_utils = require("v.utils.tables")
 local local_config = (v.local_config.efm or {}).ktlint or {}
 
 ---@type LocalKtlintConfig
-local default_config = {}
+local default_config = { enabled = true }
 ---@type LocalKtlintConfig
 local cfg = vim.tbl_deep_extend("force", default_config, local_config)
 
@@ -16,8 +16,9 @@ local ktlint_cmd_parts = tbl_utils.merge_lists({
 })
 local ktlint_cmd = table.concat(ktlint_cmd_parts, " ")
 
----@type LinterConfig
+---@type EfmExtensionConfig
 M.config = {
+  enabled = cfg.enabled,
   lintFormats = {
     "%f:%l:%c: %m",
   },
