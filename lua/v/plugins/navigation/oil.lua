@@ -118,6 +118,7 @@ oil.setup({
         _ --[[is_link_target]],
         _ --[[is_link_orphan]]
     )
+      -- TODO: custom highlight for git dirty files
       return nil
     end,
   },

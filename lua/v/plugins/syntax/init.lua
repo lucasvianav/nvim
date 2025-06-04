@@ -135,15 +135,6 @@ local M = {
   -- make % smarter
   {
     "andymass/vim-matchup",
-    keys = {
-      "%",
-      "g%",
-      "[%",
-      "]%",
-      "z%",
-      "i%",
-      "a%",
-    },
     dependencies = "nvim-treesitter",
     commit = "56c714495ec7f40cf2c7e92fb124067c7951e650",
   },

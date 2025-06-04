@@ -1,5 +1,5 @@
+local api = require("nvim-tree.api")
 local on_attach = function(bufnr)
-  local api = require("nvim-tree.api")
   local desc = function(description)
     return {
       desc = "nvim-tree: " .. description,
@@ -138,7 +138,17 @@ require("nvim-tree").setup({
   on_attach = on_attach,
 })
 
-require("v.utils.mappings").map({ "n", "<Leader>e", require("v.utils.tree").nvim_tree_toggle })
+-- when opening the tree, expand only current file
+require("v.utils.mappings").map({
+  "n",
+  "<Leader>e",
+  function()
+    api.tree.toggle({ find_file = true })
+  end,
+})
+api.events.subscribe(api.events.Event.TreeOpen, function()
+  api.tree.collapse_all(false)
+end)
 
 local colors = require("v.utils").colors
 local hl_utils = require("v.utils.highlights")
@@ -153,7 +163,6 @@ hl_utils.set_highlights({
       fg = colors.off_white,
     },
   },
-  { "Directory", { bold = true } },
   {
     "NvimTreeGitDirty",
     { fg = alter_color(colors.blue_light, -10) },

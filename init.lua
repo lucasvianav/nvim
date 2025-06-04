@@ -12,7 +12,9 @@
 --https://github.com/kyle-mccarthy/nvim-dotfiles
 --https://github.com/bfredl/bfredl.github.io/tree/master/nvim
 --https://github.com/kabouzeid
--- https://github.com/lewis6991/dotfiles/tree/master/config/nvim
+--https://github.com/lewis6991/dotfiles/tree/master/config/nvim
+--https://github.com/LunarVim/LunarVim
+--https://github.com/LazyVim/LazyVim
 
 -- TODO: https://github.com/tjdevries/lazy-require.nvim
 -- TODO: https://github.com/echasnovski/mini.nvim

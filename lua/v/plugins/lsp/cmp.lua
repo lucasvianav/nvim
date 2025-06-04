@@ -44,6 +44,7 @@ end
 -- TODO: https://github.com/quangnguyen30192/cmp-nvim-tags
 -- TODO: https://gist.github.com/jsr-p/93cfeda90588365feefaf4a8c78ff086
 -- TODO: https://github.com/onsails/lspkind.nvim/pull/30
+-- TODO: https://www.reddit.com/r/neovim/comments/1l075d8/with_cmp_why_is_the_lsp_entry_prioritized_by/?share_id=7C-5lLAYOPjYkXMS2aZXh&utm_medium=android_app&utm_name=androidcss&utm_source=share&utm_term=2
 
 local window_conf = cmp.config.window.bordered({
   scrollbar = false,

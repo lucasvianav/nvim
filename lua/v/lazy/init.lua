@@ -2,16 +2,15 @@ local utils = require("v.lazy.utils")
 
 utils.ensure_installed()
 
+---@diagnostic disable-next-line: missing-fields
 require("lazy").setup({
   root = utils.paths.plugins,
-  defaults = {
-    lazy = false, -- lazy load everything by default
-  },
+  defaults = { lazy = false },
   spec = {
     { import = "v.themes.init" },
     { import = "v.plugins" },
   },
-  local_spec = true,
+  local_spec = false,
   lockfile = vim.fs.joinpath(vim.fn.stdpath("config"), "lazy-lock.json"),
   pkg = {
     enabled = true,
@@ -22,14 +21,9 @@ require("lazy").setup({
       "packspec",
     },
   },
-  rocks = {
-    enabled = true,
-    root = utils.paths.rocks,
-  },
+  ---@diagnostic disable-next-line: assign-type-mismatch
   dev = {
     path = "~/github/nvim",
-    ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
-    patterns = {},
     fallback = true,
   },
   install = {
@@ -37,17 +31,9 @@ require("lazy").setup({
     colorscheme = {},
   },
   ui = {
+    ---@type { [string]: { [1]: fun(plugin: LazyPlugin), desc: string } }
     custom_keys = {
-      ["<localleader>l"] = {
-        function(plugin)
-          require("lazy.util").float_term({ "lazygit", "log" }, {
-            cwd = plugin.dir,
-          })
-        end,
-        desc = "Open lazygit log",
-      },
-
-      ["<localleader>i"] = {
+      ["g?"] = {
         function(plugin)
           require("lazy.util").notify(vim.inspect(plugin), {
             title = "Inspect " .. plugin.name,
@@ -56,15 +42,28 @@ require("lazy").setup({
         end,
         desc = "Inspect Plugin",
       },
-
-      ["<localleader>t"] = {
+      ["yp"] = {
         function(plugin)
-          require("lazy.util").float_term(nil, {
-            cwd = plugin.dir,
-          })
+          require("v.utils.clipboard").copy(plugin.dir)
         end,
-        desc = "Open terminal in plugin dir",
+        desc = "Yank plugin path",
       },
+      ["yn"] = {
+        function(plugin)
+          require("v.utils.clipboard").copy(plugin.name)
+        end,
+        desc = "Yank plugin name",
+      },
+
+      -- TODO: open tmux window in plugin dir
+      -- ["<leader>t"] = {
+      --   function(plugin)
+      --     require("lazy.util").float_term(nil, {
+      --       cwd = plugin.dir,
+      --     })
+      --   end,
+      --   desc = "Open terminal in plugin dir",
+      -- },
     },
   },
   diff = {
@@ -78,7 +77,7 @@ require("lazy").setup({
   --- automatically check for config file changes and reload the ui
   change_detection = {
     enabled = true,
-    notify = true,
+    notify = false,
   },
   performance = {
     cache = {
@@ -102,4 +101,5 @@ require("lazy").setup({
     loader = false,
     require = false,
   },
+  debug = false,
 })

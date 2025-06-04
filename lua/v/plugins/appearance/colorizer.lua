@@ -8,7 +8,7 @@ require("colorizer").setup({
   user_commands = false,
   lazy_load = true,
   user_default_options = {
-    names = true,
+    names = false,
     names_opts = {
       lowercase = true,
       camelcase = true,
@@ -17,13 +17,13 @@ require("colorizer").setup({
       strip_digits = false,
     },
     names_custom = false,
-    RGB = true, ---#RGB hex codes
-    RGBA = true, ---#RGBA hex codes
-    RRGGBB = true, ---#RRGGBB hex codes
+    RGB = true,      ---#RGB hex codes
+    RGBA = true,     ---#RGBA hex codes
+    RRGGBB = true,   ---#RRGGBB hex codes
     RRGGBBAA = true, ---#RRGGBBAA hex codes
     AARRGGBB = true, ---0xAARRGGBB hex codes
-    rgb_fn = true, ---CSS rgb() and rgba() functions
-    hsl_fn = true, ---CSS hsl() and hsla() functions
+    rgb_fn = true,   ---CSS rgb() and rgba() functions
+    hsl_fn = true,   ---CSS hsl() and hsla() functions
     css = true,
     css_fn = true,
     tailwind = "both", ---@type boolean|'normal'|'lsp'|'both' Enable tailwind colors
@@ -34,7 +34,7 @@ require("colorizer").setup({
     mode = "virtualtext", ---@type 'background'|'foreground'|'virtualtext'
     virtualtext = "■",
     virtualtext_inline = "after", ---@type boolean|'before'|'after'
-    virtualtext_mode = "background", ---@type 'background'|'foreground'
+    virtualtext_mode = "foreground", ---@type 'background'|'foreground'
     always_update = false,
     hooks = {
       disable_line_highlight = false,

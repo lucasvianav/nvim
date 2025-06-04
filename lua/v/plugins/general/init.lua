@@ -72,12 +72,7 @@ local M = {
   -- pairs of handy bracket maps
   {
     "tpope/vim-unimpaired",
-    keys = {
-      "[",
-      "]",
-      "<Space><Space>",
-      "yo",
-    },
+    event = "VeryLazy",
     commit = "6d44a6dc2ec34607c41ec78acf81657248580bf1",
   },
 

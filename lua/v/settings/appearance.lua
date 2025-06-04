@@ -55,6 +55,14 @@ M.post_colorscheme_hook = function()
         fg = colors.off_white,
       },
     },
+    {
+      "Directory",
+      vim.tbl_extend(
+        "force",
+        vim.api.nvim_get_hl(0, { name = "Directory" }),
+        { bold = true }
+      ),
+    }
   })
 end
 
