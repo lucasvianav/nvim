@@ -1,3 +1,5 @@
+-- TODO: git add (with support for select and batch add)
+
 local actions = require("telescope.actions")
 local state = require("telescope.actions.state")
 local transform_mod = require("telescope.actions.mt").transform_mod
