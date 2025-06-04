@@ -68,7 +68,7 @@ local function setup_autocmds(client, bufnr)
 end
 
 function M.on_attach(client, bufnr)
-  local has_config, config = pcall(require, "v.plugins.lsp.servers." .. client.name)
+  local has_config, config = pcall(require, "v.lsp.servers." .. client.name)
 
   require("v.utils.mappings").set_keybindings(
     require("v.keybindings.lsp").mappings,

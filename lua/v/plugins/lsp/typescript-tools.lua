@@ -1,5 +1,5 @@
 local config = require("v.lsp").make_config()
-local ok, ts_ls = pcall(require, "v.plugins.lsp.servers.ts_ls")
+local ok, ts_ls = pcall(require, "v.lsp.servers.ts_ls")
 
 if ok then
   config = vim.tbl_deep_extend("force", config, ts_ls.config)

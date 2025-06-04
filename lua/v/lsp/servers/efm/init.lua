@@ -27,7 +27,7 @@ local M = {}
 
 v.plug.load("efmls-configs-nvim")
 
-local if_enabled = require("v.plugins.lsp.servers.efm.utils").if_enabled
+local if_enabled = require("v.lsp.servers.efm.utils").if_enabled
 
 -- linting and simple formatting for js/ts
 local eslint_d = {
@@ -188,7 +188,7 @@ local hlint = {
     }
 ]]
 
-local ktlint = if_enabled(require("v.plugins.lsp.servers.efm.ktlint").config)
+local ktlint = if_enabled(require("v.lsp.servers.efm.ktlint").config)
 local vint = if_enabled("vint", ({ pcall(require, "efmls-configs.linters.vint") })[2])
 local biome = if_enabled("biome", ({ pcall(require, "efmls-configs.formatters.biome") })[2])
 
