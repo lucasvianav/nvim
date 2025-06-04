@@ -25,18 +25,23 @@ treesj.setup({ --[[@as TreesjConfig]]
   on_error = nil,
 })
 
+local function get_filetype_under_cursor()
+  local cur_line, cur_col = vim.fn.line("."), vim.fn.col(".")
+  local ok_under_cursor, under_cursor = pcall(function()
+    return vim.treesitter.get_parser():language_for_range({ cur_line, cur_col, cur_line, cur_col }):lang()
+  end)
+  return ok_under_cursor and under_cursor or vim.bo.filetype
+end
+
 require("v.utils.mappings").set_keybindings({
   { "n", "g-", treesj.toggle, desc = "Toggle expression split <-> join" },
   {
     "n",
     "gS",
     function()
-      if langs[vim.bo.filetype] then
+      if langs[get_filetype_under_cursor()] then
         treesj.split()
       else
-        if v.package_manager == "packer" then
-          require("v.utils.packer").load_plugin("splitjoin")
-        end
         vim.api.nvim_exec2("SplitjoinSplit", { output = false })
       end
     end,
@@ -46,12 +51,9 @@ require("v.utils.mappings").set_keybindings({
     "n",
     "gJ",
     function()
-      if langs[vim.bo.filetype] then
+      if langs[get_filetype_under_cursor()] then
         treesj.join()
       else
-        if v.package_manager == "packer" then
-          require("v.utils.packer").load_plugin("splitjoin")
-        end
         vim.api.nvim_exec2("SplitjoinJoin", { output = false })
       end
     end,

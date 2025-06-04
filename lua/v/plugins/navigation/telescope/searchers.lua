@@ -1,5 +1,6 @@
 local M = {}
 local pickers = require("v.plugins.navigation.telescope.pickers")
+local plugins_path = require("v.lazy.utils").paths.plugins
 
 M.find_nvim = function()
   pickers.find_files_fd({
@@ -11,17 +12,17 @@ end
 
 M.find_in_plugins = function()
   pickers.find_files_fd({
-    cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
-    prompt_title = "~ plugins ~",
-    results_title = "Packer Plugins",
+    cwd = plugins_path,
+    prompt_title = "~ nvim plugins ~",
+    results_title = "Neovim Plugins",
   })
 end
 
 M.grep_in_plugins = function()
   pickers.multi_grep({
-    cwd = vim.fn.stdpath("data") .. "/site/pack/packer",
+    cwd = plugins_path,
     prompt_title = "~ grep nvim plugins ~",
-    results_title = "Packer Plugins",
+    results_title = "Neovim Plugins",
   })
 end
 

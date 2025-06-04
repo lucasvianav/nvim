@@ -9,13 +9,10 @@ local hover = require("v.lsp.hover")
 ---@return table
 function M.make_config(config)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-  if v.package_manager == "packer" then
-    require("v.utils.packer").load_plugin("cmp-nvim-lsp")
-  end
   local has_cmp, cmp = pcall(require, "cmp_nvim_lsp")
+
   if has_cmp then
-    capabilities = cmp.default_capabilities()
+    capabilities = vim.tbl_deep_extend("force", capabilities, cmp.default_capabilities())
   end
 
   return vim.tbl_deep_extend("keep", config or {}, {

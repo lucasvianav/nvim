@@ -29,8 +29,6 @@ o.termguicolors = true  -- true color support
 o.wrap = false          -- don't wrap lines by default
 o.cmdwinheight = 1      -- height for cmdline-window
 
--- only the chosen colorscheme
--- will be loaded by packer :)
 M.colorscheme = "tokyonight"
 
 --- function to be ran after a colorscheme is applied

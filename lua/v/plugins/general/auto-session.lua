@@ -43,7 +43,6 @@ require("auto-session").setup({
     "gitcommit",
     "help",
     "lsp-installer",
-    "packer",
     "startify",
     "terminal",
     "text",

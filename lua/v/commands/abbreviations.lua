@@ -26,13 +26,6 @@ require("v.utils.abbreviations").set_abbreviations({
   { "qb",   "BufClose" },
   { "wqb",  "BqWrite" },
 
-  -- Packer
-  { "PI",   "PackerInstall" },
-  { "PS",   "PackerSync" },
-  { "PC",   "PackerCompile" },
-  { "PL",   "PackerClean" },
-  { "PT",   "PackerStatus" },
-
   -- Lazy
   { "LZ",   "Lazy" },
   { "LZI",  "Lazy install" },

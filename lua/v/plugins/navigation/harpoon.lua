@@ -15,13 +15,7 @@ require("harpoon").setup({
   tabline = false,
 })
 
-local telescope_ok, telescope
-
-if v.package_manager == "lazy" then
-  telescope_ok, telescope = pcall(require, "telescope")
-else
-  telescope_ok, telescope = require("v.utils.packer").load_and_require_plugin("telescope.nvim")
-end
+local telescope_ok, telescope = pcall(require, "telescope")
 
 if not telescope_ok or not pcall(telescope.load_extension, "harpoon") then
   vim.notify("Failed to load Telescope extension.", vim.log.levels.ERROR, {

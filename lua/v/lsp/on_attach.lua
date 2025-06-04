@@ -53,12 +53,7 @@ local function setup_autocmds(client, bufnr)
 
   if client.server_capabilities.signatureHelpProvider then
     -- if the plugin is properly loaded it'll take care of it
-    if
-        (v.package_manager == "lazy" and not require("lsp_signature"))
-        or (
-          v.package_manager ~= "lazy" and not require("v.utils.packer").load_plugin("lsp_signature")
-        )
-    then
+    if v.plug.load("lsp_signature") then
       augroup("SignatureHelp", {
         {
           event = "CursorHoldI",

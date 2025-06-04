@@ -57,31 +57,32 @@ end
 ---@param plugin string
 ---@return boolean
 function M.is_installed(plugin)
-  return pcall(
-    function()
-      require("lazy").check({ plugins = { plugin }, show = false })
-    end
-  )
+  local ok, installed = pcall(function()
+    return require("lazy").check({ plugins = { plugin }, show = false })._plugins[plugin]._.installed
+  end)
+  return ok and installed
 end
 
 ---@param plugin string
 ---@return boolean
 function M.is_loaded(plugin)
-  return package.loaded[plugin] or pcall(
-    function()
-      require("lazy").check({ plugins = { plugin }, show = false }):is_running()
-    end
-  )
+  if package.loaded[plugin] then
+    return true
+  end
+  local ok, loaded = pcall(function()
+    return require("lazy").check({ plugins = { plugin }, show = false })._plugins[plugin]._.loaded ~= nil
+  end)
+
+  return ok and loaded
 end
 
 ---@param plugin string
 ---@return boolean
 function M.load(plugin)
-  return pcall(
-    function()
-      require("lazy").load({ plugins = { plugin }, show = false })
-    end
-  ) and M.is_loaded(plugin)
+  local ok, _ = pcall(function()
+    require("lazy").load({ plugins = { plugin }, show = false })
+  end)
+  return ok and M.is_loaded(plugin)
 end
 
 return M

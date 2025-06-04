@@ -90,7 +90,6 @@ local M = {
       "<Leader>fpp",
       "<Leader>f/",
       "<Leader>fb",
-      "<Leader>fs",
       "<Leader>fg",
       "<Leader>fgg",
       "<Leader>fj",

@@ -1,4 +1,3 @@
-require("v.utils.packer").load_plugin("nvim-dap-vscode-js")
 require("dap-vscode-js").setup({ adapters = { "pwa-node" } })
 
 local dap = require("dap")

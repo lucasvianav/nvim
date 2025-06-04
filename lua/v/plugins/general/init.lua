@@ -96,7 +96,6 @@ local M = {
       "SessionRestore",
       "SessionDelete",
     },
-    keys = "<Leader>fs",
     commit = "00334ee24b9a05001ad50221c8daffbeedaa0842",
   },
 

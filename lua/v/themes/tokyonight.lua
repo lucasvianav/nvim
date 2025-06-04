@@ -18,7 +18,6 @@ require("tokyonight").setup({
     "NvimTree",
     "NvimTree_*",
     "terminal",
-    "packer",
     "spectre_panel",
     "DiffviewFiles",
     "lazy",

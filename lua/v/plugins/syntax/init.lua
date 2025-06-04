@@ -1,3 +1,5 @@
+require("lazy.types")
+
 ---@type LazyPluginSpec[]
 local M = {
   -- markdown lists

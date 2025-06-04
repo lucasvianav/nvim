@@ -2,7 +2,7 @@ vim.g.material_style = "deep ocean"
 
 require("material").setup({
   contrast = true, -- contrast for sidebars, floating windows and popup menus like nvim-tree
-  borders = true, -- borders between verticaly split windows
+  borders = true,  -- borders between verticaly split windows
 
   italics = {
     comments = true,
@@ -13,7 +13,15 @@ require("material").setup({
   },
 
   -- specify which windows get the contrasted (darker) background
-  contrast_windows = { "packer" },
+  contrast_windows = {
+    "qf",
+    "NvimTree",
+    "NvimTree_*",
+    "terminal",
+    "spectre_panel",
+    "DiffviewFiles",
+    "lazy",
+  },
 
   text_contrast = { lighter = false, darker = false },
 

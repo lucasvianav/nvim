@@ -1,10 +1,4 @@
-if v.package_manager == "lazy" then
-  return
-end
-
-local installed = require("v.utils.packer").is_plugin_installed
-
-if not (installed("better-escape.vim") or installed("better-escape.nvim")) then
+if not (v.plug.is_installed("better-escape.vim") or v.plug.is_installed("better-escape.nvim")) then
   require("v.utils.mappings").map({
     "i",
     "jk",

@@ -1,6 +1,5 @@
 local M = {}
 
-local packer = require("v.utils.packer")
 local utils = require("v.utils.mappings")
 
 M.config = {
@@ -50,10 +49,7 @@ function M.on_attach(client, bufnr)
     client.server_capabilities.renameProvider = false
   end
 
-  if
-      packer.load_plugin("typescript-tools.nvim", true)
-      or (v.package_manager == "lazy" and pcall(require, "typescript-tools"))
-  then
+  if v.plug.is_loaded("typescript-tools.nvim") then
     require("v.utils.autocmds").augroup("SortImportsTS", {
       { event = "BufWritePre", opts = { command = "TSToolsOrganizeImports", buffer = 0 } },
     })
@@ -71,7 +67,6 @@ function M.on_attach(client, bufnr)
   end
 end
 
-M.skip_lsp_setup = v.package_manager == "lazy"
-    or packer.is_plugin_installed("typescript-tools.nvim")
+M.skip_lsp_setup = v.plug.is_installed("typescript-tools.nvim")
 
 return M

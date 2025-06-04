@@ -1,13 +1,7 @@
 local M = {}
 
 M.on_attach = function(client)
-  local ok, sqls
-
-  if v.package_manager == "lazy" then
-    ok, sqls = pcall(require, "sqls")
-  else
-    ok, sqls = require("v.utils.packer").load_and_require_plugin("sqls")
-  end
+  local ok, sqls = pcall(require, "sqls")
 
   if ok then
     client.commands = sqls.commands

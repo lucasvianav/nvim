@@ -1,6 +1,5 @@
 local fn = vim.fn
 local dashboard = require("v.plugins.navigation.dashboard.utils")
-local packer = require("v.utils.packer")
 
 local function get_cwd_session_path()
   local expanded_dir = vim.fn.stdpath("data") .. "/sessions/"
@@ -12,14 +11,7 @@ end
 
 ---@param session_filepath string
 local function load_session(session_filepath)
-  local auto_session_ok, auto_session
-
-  if v.package_manager == "lazy" then
-    auto_session_ok, auto_session = pcall(require, "auto-session")
-  else
-    auto_session_ok, auto_session = packer.load_and_require_plugin("auto-session")
-  end
-
+  local auto_session_ok, auto_session = pcall(require, "auto-session")
   if auto_session_ok then
     auto_session.RestoreSessionFile(session_filepath, {
       is_startup_autorestore = false,
@@ -41,13 +33,7 @@ end
 
 ---Loads the current dir's session if there is one.
 function M.load_cwd_session()
-  local auto_session_ok, auto_session
-
-  if v.package_manager == "lazy" then
-    auto_session_ok, auto_session = pcall(require, "auto-session")
-  else
-    auto_session_ok, auto_session = packer.load_and_require_plugin("auto-session")
-  end
+  local auto_session_ok, auto_session = pcall(require, "auto-session")
 
   if not auto_session_ok then
     require("v.utils.log").log(auto_session)

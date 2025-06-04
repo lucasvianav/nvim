@@ -26,11 +26,4 @@ require("v.globals")
 require("v.settings")
 require("v.keybindings")
 require("v.commands")
-
------@type "packer"|"lazy"
---_G.v.package_manager = "packer"
---require("v.packer")
-
----@type "packer"|"lazy"
-_G.v.package_manager = "lazy"
 require("v.lazy")

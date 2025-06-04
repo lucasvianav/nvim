@@ -50,7 +50,7 @@ function M.smart_docs()
     end
   end
 
-  vim.lsp.buf.hover({ border = "rounded" })
+  M.hover()
 end
 
 return M

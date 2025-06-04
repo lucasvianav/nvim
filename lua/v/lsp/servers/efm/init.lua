@@ -25,11 +25,7 @@
 
 local M = {}
 
-if v.package_manager == "lazy" then
-  require("efmls-configs")
-else
-  require("v.utils.packer").load_plugin("efmls-configs-nvim")
-end
+v.plug.load("efmls-configs-nvim")
 
 local if_enabled = require("v.plugins.lsp.servers.efm.utils").if_enabled
 

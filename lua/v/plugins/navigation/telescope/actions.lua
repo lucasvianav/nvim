@@ -9,13 +9,7 @@ function M.open_in_diff(bufnr)
   actions.close(bufnr)
 
   local commit_hash = state.get_selected_entry().value
-  local ok, diffview
-
-  if v.package_manager == "lazy" then
-    ok, diffview = pcall(require, "diffview")
-  else
-    ok, diffview = require("v.utils.packer").load_and_require_plugin("diffview.nvim")
-  end
+  local ok, diffview = pcall(require, "diffview")
 
   if ok then
     diffview.open(commit_hash .. "~1.." .. commit_hash)
@@ -23,7 +17,7 @@ function M.open_in_diff(bufnr)
 end
 
 ---@return string?
-local function __get_selected_entry_filename()
+local function get_selected_entry_filename()
   local entry = state.get_selected_entry()
 
   if entry.path or entry.filename then
@@ -45,8 +39,8 @@ local function __get_selected_entry_filename()
 end
 
 ---@param type 'abs'|'rel'|'name'
-local function __copy_path(type)
-  local path = __get_selected_entry_filename()
+local function copy_path(type)
+  local path = get_selected_entry_filename()
 
   if not path then
     return
@@ -61,15 +55,15 @@ local function __copy_path(type)
 end
 
 function M.copy_path_abs()
-  __copy_path("abs")
+  copy_path("abs")
 end
 
 function M.copy_path_rel()
-  __copy_path("rel")
+  copy_path("rel")
 end
 
 function M.copy_file_name()
-  __copy_path("name")
+  copy_path("name")
 end
 
 M = transform_mod(M)
