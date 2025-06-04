@@ -2,6 +2,8 @@
 -- https://github.com/ThePrimeagen/refactoring.nvim
 -- https://github.com/nvim-neotest/neotest
 
+---@module "lazy.types"
+
 ---@type LazyPluginSpec[]
 local M = {
   -- utility lua functions

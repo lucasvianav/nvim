@@ -1,3 +1,5 @@
+---@module "lazy.types"
+
 ---@type LazyPluginSpec[]
 local M = {
   -- config for language servers
@@ -191,9 +193,10 @@ local M = {
 
   {
     "brexhq/kotlin-bazel.nvim",
+    dir = "~/src/kotlin-bazel.nvim",
+    dev = true,
     ft = "kotlin",
     enabled = v.env == "work",
-    pin = true,
   },
 
   {

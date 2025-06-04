@@ -18,7 +18,7 @@ end
 ---@return string? root_dir, string[] relpath_parts, boolean is_dir
 function M.get_path_parts(filepath)
   local is_oil = filepath:starts_with(oil_prefix)
-  local root = vim.uv.cwd()
+  local root = (vim.uv or vim.loop).cwd()
 
   if is_oil then
     filepath = filepath:sub(#oil_prefix + 1)
@@ -26,9 +26,18 @@ function M.get_path_parts(filepath)
   if filepath:ends_with("/") then
     filepath = filepath:sub(1, #filepath - 1)
   end
+  filepath = vim.fs.abspath(filepath)
 
   if not root or not filepath:starts_with(root) then
-    root = vim.fs.root(filepath, { ".git" }) or vim.env.HOME
+    root = vim.fs.root(filepath, {
+      ".git",
+      "_darcs",
+      ".hg",
+      ".bzr",
+      ".svn",
+      "package.json",
+      "Makefile",
+    }) or vim.env.HOME
   end
 
   local root_dir = vim.fs.basename(root or "")

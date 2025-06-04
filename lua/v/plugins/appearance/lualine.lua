@@ -58,10 +58,26 @@ require("lualine").setup({
           if root and parts[1] ~= root then
             table.insert(path, root)
           end
-          if #parts > 3 then
+
+          -- last element is the current file/dir (section c)
+          -- and the previous one is its pwd (section b)
+          local n_leading_dirs = #parts - 2
+
+          if n_leading_dirs > 0 then
+            -- TODO: make this dynamic
+            -- for i = 1, n_leading_dirs do
+            -- end
             table.insert(path, parts[1])
             table.insert(path, parts[2])
-            table.insert(path, "-")
+
+            local include_extra = #root + #parts[1] + #parts[2] <= 27
+            if include_extra then
+              table.insert(path, parts[3])
+            end
+
+            if not include_extra or n_leading_dirs > 5 then
+              table.insert(path, "-")
+            end
           end
 
           return utils.with_prefix_if_dir(vim.fs.joinpath(unpack(path)), is_dir)
@@ -95,8 +111,10 @@ require("lualine").setup({
             table.insert(path, "")
             return vim.fs.joinpath(unpack(path))
           end
-          if #parts == 1 or (root and parts[1] == root) then
+          if not root or parts[1] == root then
             table.insert(path, parts[1])
+          elseif #parts == 1 then
+            table.insert(path, root)
           else
             table.insert(path, parts[#parts - 1])
           end
@@ -158,7 +176,7 @@ require("lualine").setup({
       {
         "branch",
         fmt = function(
-          branch --[[@param branch string]]
+            branch --[[@param branch string]]
         )
           if #branch > 30 then
             local basename = vim.fs.basename(branch)

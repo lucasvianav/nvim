@@ -1,3 +1,5 @@
+---@module "lazy.types"
+
 ---@type LazyPluginSpec[]
 local M = {
   -- start screen

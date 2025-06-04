@@ -1,5 +1,7 @@
 -- TODO: https://github.com/pwntester/octo.nvim
 
+---@module "lazy.types"
+
 ---@type LazyPluginSpec[]
 local M = {
   -- git CLI for command mode
