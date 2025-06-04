@@ -1,3 +1,7 @@
+if v.package_manager == "lazy" then
+  return
+end
+
 require("v.utils.autocmds").augroup("LuarefFiltype", {
   {
     event = "BufRead",

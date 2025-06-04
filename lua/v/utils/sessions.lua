@@ -12,7 +12,13 @@ end
 
 ---@param session_filepath string
 local function load_session(session_filepath)
-  local auto_session_ok, auto_session = packer.load_and_require_plugin("auto-session")
+  local auto_session_ok, auto_session
+
+  if v.package_manager == "lazy" then
+    auto_session_ok, auto_session = pcall(require, "auto-session")
+  else
+    auto_session_ok, auto_session = packer.load_and_require_plugin("auto-session")
+  end
 
   if auto_session_ok then
     auto_session.RestoreSessionFile(session_filepath, {
@@ -35,7 +41,13 @@ end
 
 ---Loads the current dir's session if there is one.
 function M.load_cwd_session()
-  local auto_session_ok, auto_session = packer.load_and_require_plugin("auto-session")
+  local auto_session_ok, auto_session
+
+  if v.package_manager == "lazy" then
+    auto_session_ok, auto_session = pcall(require, "auto-session")
+  else
+    auto_session_ok, auto_session = packer.load_and_require_plugin("auto-session")
+  end
 
   if not auto_session_ok then
     require("v.utils.log").log(auto_session)
@@ -61,10 +73,10 @@ function M.load_session_or_dashboard()
   local command = fn.trim(
     fn.system(
       [[ps aux | grep ]]
-        .. fn.getpid()
-        .. [[ | awk '$2 == "]]
-        .. fn.getpid()
-        .. [[" { col = ""; for (i = 11; i <= NF; i++) col = col $i " "; print col }']]
+      .. fn.getpid()
+      .. [[ | awk '$2 == "]]
+      .. fn.getpid()
+      .. [[" { col = ""; for (i = 11; i <= NF; i++) col = col $i " "; print col }']]
     )
   )
   local opened_nvim_without_file_arg = command:match("nvim$") or command:match("nvim %-%-embed$")

@@ -4,8 +4,8 @@ local set_keybindings = require("v.utils.mappings").set_keybindings
 vim.g.mapleader = " "
 
 set_keybindings({
-  -- substitutes Esc by Ctrl+C in normal mode
-  { "n", "<C-c>", "<Esc>" },
+  -- substitutes Esc by Ctrl+C
+  { { "n", "o", "v", "x", "s", "l" }, "<c-c>", "<esc>" },
 
   -- leave terminal mode with jk
   { "t", "jk", [[<C-\><C-n>]] },
@@ -41,7 +41,7 @@ set_keybindings({
   { "n", "gP", "`[V`]" },
 
   -- hides highlights
-  { "n", "<Leader>n", "<CMD>noh<CR>" },
+  { "n", "<Leader>n", "<CMD>noh<CR>", { nowait = true } },
 
   -- untabs in insert mode
   { "i", "<S-TAB>", "<C-D>" },

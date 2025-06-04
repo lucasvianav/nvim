@@ -9,7 +9,13 @@ function M.open_in_diff(bufnr)
   actions.close(bufnr)
 
   local commit_hash = state.get_selected_entry().value
-  local ok, diffview = require("v.utils.packer").load_and_require_plugin("diffview.nvim")
+  local ok, diffview
+
+  if v.package_manager == "lazy" then
+    ok, diffview = pcall(require, "diffview")
+  else
+    ok, diffview = require("v.utils.packer").load_and_require_plugin("diffview.nvim")
+  end
 
   if ok then
     diffview.open(commit_hash .. "~1.." .. commit_hash)

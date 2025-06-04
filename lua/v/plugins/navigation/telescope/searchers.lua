@@ -11,7 +11,7 @@ end
 
 M.find_in_plugins = function()
   pickers.find_files_fd({
-    cwd = vim.fn.stdpath("data") .. "/site/pack/packer",
+    cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
     prompt_title = "~ plugins ~",
     results_title = "Packer Plugins",
   })

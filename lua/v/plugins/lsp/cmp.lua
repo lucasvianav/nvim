@@ -1,16 +1,19 @@
--- TODO: https://github.com/petertriho/cmp-git
--- https://www.reddit.com/r/neovim/comments/r42njg/here_are_the_vs_code_theme_colors_for_the_new/hme3pb7/
--- https://github.com/hrsh7th/nvim-cmp/issues/465#issuecomment-981159946
-
 local cmp = require("cmp")
+local hover_config = require("v.lsp.hover").hover_config
 
 local ok_lspkind, lspkind = pcall(require, "lspkind")
-if ok_lspkind then
-  lspkind.init()
-else
+if not ok_lspkind then
   require("v.utils.log").log(lspkind)
   vim.notify("Couldn't load `lspkind`.", vim.log.levels.ERROR, {
-    title = "Error - CMP",
+    title = "[nvim-cmp]",
+  })
+end
+
+local ok_colorful_menu, colorful_menu = pcall(require, "colorful-menu")
+if not ok_colorful_menu then
+  require("v.utils.log").log(lspkind)
+  vim.notify("Couldn't load `ok_colorful_menu`.", vim.log.levels.ERROR, {
+    title = "[nvim-cmp]",
   })
 end
 
@@ -22,16 +25,30 @@ if not ok_comparator then
   })
 end
 
--- TODO FIXME ???? fix this pls
-local armengue = 0
-local cmdline_escape = function()
-  cmp.mapping.abort()
-  if armengue > 1 then
-    vim.api.nvim_feedkeys("<ESC>", "c", true)
-  else
-    armengue = armengue + 1
+local custom_kind = {
+  calc = "󰃬",
+}
+
+local close_cmdline = false
+local cmp_abort = cmp.mapping.abort()
+local function cmdline_escape(...)
+  cmp_abort(...)
+  if close_cmdline then
+    vim.api.nvim_feedkeys(t "<ESC>", "c", true)
   end
+  close_cmdline = not close_cmdline
 end
+
+-- TODO: https://github.com/tzachar/cmp-fuzzy-buffer
+-- TODO: https://github.com/tzachar/cmp-fuzzy-path
+-- TODO: https://github.com/quangnguyen30192/cmp-nvim-tags
+-- TODO: https://gist.github.com/jsr-p/93cfeda90588365feefaf4a8c78ff086
+-- TODO: https://github.com/onsails/lspkind.nvim/pull/30
+
+local window_conf = cmp.config.window.bordered({
+  scrollbar = false,
+  bootstrap = "rounded",
+})
 
 cmp.setup({
   snippet = {
@@ -39,18 +56,24 @@ cmp.setup({
       vim.fn["UltiSnips#Anon"](args.body)
     end,
   },
-
+  window = {
+    completion = window_conf,
+    documentation = window_conf,
+  },
+  experimental = {
+    ghost_text = true,
+  },
   mapping = {
-    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
     ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+
     ["<Esc>"] = cmp.mapping({
       i = cmp.mapping.abort(),
-      c = cmdline_escape(),
+      c = cmdline_escape,
     }),
     ["<C-c>"] = cmp.mapping({
       i = cmp.mapping.abort(),
-      c = cmdline_escape(),
     }),
     ["<C-e>"] = cmp.mapping({
       i = cmp.mapping.abort(),
@@ -59,6 +82,7 @@ cmp.setup({
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
     ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
     ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+
     ["<Tab>"] = cmp.mapping({
       i = function(fallback)
         if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
@@ -84,62 +108,78 @@ cmp.setup({
       c = cmp.mapping.select_prev_item(),
     }),
   },
-
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "ultisnips" },
     { name = "path" },
     { name = "spell" },
-    -- { name = 'cmdline' },
-    { name = "buffer", keyword_length = 5 },
+    { name = "buffer",   keyword_length = 5 },
     { name = "calc" },
   }),
-
-  -- completion = {
-  --     autocomplete = false,
-  -- },
-
   formatting = {
-    format = ok_lspkind and lspkind.cmp_format({
-      with_text = true,
-      maxwidth = 50,
-      menu = {
-        buffer = "[Buf]",
-        nvim_lsp = "[LSP]",
-        nvim_lua = "[Lua]",
-        path = "[Path]",
-        cmdline = "[CMD]",
-      },
-    }) or nil,
-  },
+    fields = { "kind", "abbr", "menu" },
+    format = function(entry, vim_item)
+      local kind = ok_lspkind
+          and lspkind.cmp_format({
+            mode = "symbol_text",
+            maxwidth = {
+              menu = hover_config.max_width,
+              abbr = 50,
+            },
+            ellipsis_char = "...",
+            show_labelDetails = true,
+            menu = {
+              buffer = "[Buf]",
+              nvim_lsp = "[LSP]",
+              nvim_lua = "[Lua]",
+              path = "[Path]",
+              cmdline = "[CMD]",
+              ultisnips = "[Snip]",
+            },
+          })(entry, vim.deepcopy(vim_item))
+          or nil
+      local highlights_info = ok_colorful_menu and colorful_menu.cmp_highlights(entry) or nil
 
+      if highlights_info ~= nil then
+        vim_item.abbr_hl_group = highlights_info.highlights
+        vim_item.abbr = highlights_info.text
+      end
+
+      if kind then
+        vim_item.kind = " " .. kind.kind .. " "
+        vim_item.menu = kind.menu
+      end
+
+      if custom_kind[entry.source.name] then
+        vim_item.kind = " " .. custom_kind[entry.source.name] .. " "
+      end
+
+      return vim_item
+    end,
+  },
   sorting = {
-    comparators = {
-      cmp.config.compare.offset,
-      cmp.config.compare.exact,
-      cmp.config.compare.score,
-      ok_comparator and require("cmp-under-comparator").under or nil,
-      cmp.config.compare.kind,
-      cmp.config.compare.sort_text,
-      cmp.config.compare.length,
-      cmp.config.compare.order,
-    },
-  },
-
-  experimental = {
-    ghost_text = true,
-  },
-
-  window = {
-    documentation = {
-      border = "single",
-    },
+    priority_weight = 1,
+    comparators = vim
+        .iter({
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          ok_comparator and require("cmp-under-comparator").under or nil,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          cmp.config.compare.length,
+          cmp.config.compare.order,
+        })
+        :filter(function(it)
+          return it ~= nil
+        end)
+        :totable(),
   },
 })
 
 -- add parenthesis on function/method completion
-require('v.utils.packer').load_plugin("nvim-autopairs")
+-- ALT: https://github.com/hrsh7th/nvim-cmp/issues/465#issuecomment-981159946
 local ok_npairs, npairs_cmp = pcall(require, "nvim-autopairs.completion.cmp")
 if ok_npairs then
   cmp.event:on(
@@ -153,10 +193,11 @@ else
   vim.notify(
     "Couldn't load `nvim-autopairs.completion.cmp`.",
     vim.log.levels.ERROR,
-    { title = "Error - CMP" }
+    { title = "[nvim-cmp]" }
   )
 end
 
+-- use lsp and buffer source for `/` and `?`
 cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
@@ -173,4 +214,12 @@ cmp.setup.cmdline(":", {
   }, {
     { name = "cmdline" },
   }),
+  matching = {
+    disallow_symbol_nonprefix_matching = false,
+    disallow_fullfuzzy_matching = false,
+    disallow_fuzzy_matching = false,
+    disallow_partial_fuzzy_matching = false,
+    disallow_partial_matching = false,
+    disallow_prefix_unmatching = false,
+  },
 })

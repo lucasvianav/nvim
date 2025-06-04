@@ -45,6 +45,7 @@ local M = {
       "CursorHold",
       "CursorMoved",
     },
+    disable = true,
     commit = "370ec46f710e058c9c1646273e6b225acf47cbed",
   },
 

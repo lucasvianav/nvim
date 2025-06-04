@@ -25,8 +25,8 @@ require("bufresize").setup({
 
 local cmd = [[<cmd>lua require('bufresize').register()<cr>]]
 require("v.utils.mappings").set_keybindings({
-  { "n", "<S-M-J>", "2<C-w>-" .. cmd },
-  { "n", "<S-M-K>", "2<C-w>+" .. cmd },
-  { "n", "<S-A-H>", "2<C-w><" .. cmd },
-  { "n", "<S-A-L>", "2<C-w>>" .. cmd },
+  { "n", "<m-s-j>", "2<C-w>-" .. cmd },
+  { "n", "<m-s-k>", "2<C-w>+" .. cmd },
+  { "n", "<m-s-h>", "2<C-w><" .. cmd },
+  { "n", "<m-s-l>", "2<C-w>>" .. cmd },
 })

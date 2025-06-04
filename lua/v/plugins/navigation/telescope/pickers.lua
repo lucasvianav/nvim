@@ -7,6 +7,8 @@ local conf = require("telescope.config").values
 local sorters = require("v.plugins.navigation.telescope.sorters")
 local utils = require("v.plugins.navigation.telescope.utils")
 
+-- TODO: directory fd and rg pickers to be used in oil buffers to open another directory
+
 local ignored = {
   "package-lock.json",
   "yarn.lock",
@@ -24,9 +26,13 @@ local function get_shortcut_table()
   return {
     ["l"] = { extension = "lua" },
     ["v"] = { extension = "vim" },
-    ["n"] = { extensions = { "lua", "vim" } },
-    ["k"] = { glob = "!*Test.kt", fzf_token = "!Test.kt$" },
+    ["k"] = { glob = "!*Test.kt", fzf_token = "!Test.kt$", extension = "kt" },
     ["kt"] = { extension = "kt" },
+    ["h"] = { extension = "html" },
+    ["c"] = { extension = "css" },
+    ["t"] = { extensions = { "ts", "tsx" } },
+    ["j"] = { extensions = { "js", "jsx" } },
+    ["r"] = { extensions = { "tsx", "jsx" } },
     ["x"] = { extension = "ex" },
     ["xs"] = { extensions = { "ex", "exs" } },
     ["p"] = { extensions = { "proto" } },

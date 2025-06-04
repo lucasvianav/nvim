@@ -80,7 +80,7 @@ local function __get_config_filepath(plugin_name, plugin_type, category)
     return
   end
 
-  local path = "v." .. plugin_type .. "s."
+  local path = "v.packer.plugins." .. plugin_type .. "s."
 
   if category then
     path = path .. category .. "."

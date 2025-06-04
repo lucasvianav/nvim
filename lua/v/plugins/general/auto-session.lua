@@ -44,9 +44,10 @@ require("auto-session").setup({
     "help",
     "lsp-installer",
     "packer",
-    "packer",
     "startify",
     "terminal",
     "text",
+    "oil",
+    "DiffviewFiles",
   },
 })

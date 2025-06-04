@@ -21,6 +21,6 @@ vim.diagnostic.config({
 })
 vim.lsp.set_log_level("INFO")
 
-local utils = require("v.utils.lsp")
+local utils = require("v.lsp")
 vim.diagnostic.handlers.signs = utils.diagnostic_signs_handler
 vim.lsp.handlers["textDocument/formatting"] = utils.handle_formatting

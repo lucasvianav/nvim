@@ -34,7 +34,9 @@ require("v.utils.mappings").set_keybindings({
       if langs[vim.bo.filetype] then
         treesj.split()
       else
-        require("v.utils.packer").load_plugin("splitjoin")
+        if v.package_manager == "packer" then
+          require("v.utils.packer").load_plugin("splitjoin")
+        end
         vim.api.nvim_exec2("SplitjoinSplit", { output = false })
       end
     end,
@@ -47,7 +49,9 @@ require("v.utils.mappings").set_keybindings({
       if langs[vim.bo.filetype] then
         treesj.join()
       else
-        require("v.utils.packer").load_plugin("splitjoin")
+        if v.package_manager == "packer" then
+          require("v.utils.packer").load_plugin("splitjoin")
+        end
         vim.api.nvim_exec2("SplitjoinJoin", { output = false })
       end
     end,

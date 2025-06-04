@@ -1,6 +1,10 @@
 local navigator = require("Navigator")
 
-navigator.setup({ disable_on_zoom = true })
+navigator.setup({
+  disable_on_zoom = true,
+  auto_save = nil,
+  mux = "auto",
+})
 
 -- Ctrl + hjkl to navigate between vim windows and tmux planes
 require("v.utils.mappings").set_keybindings({

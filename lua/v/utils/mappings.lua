@@ -1,7 +1,4 @@
--- TODO: setup whichkey registering on the fly
--- https://github.com/folke/which-key.nvim#-setup
--- https://github.com/akinsho/dotfiles/blob/c81dadf0c570ce39543a9b43a75f41256ecd03fc/.config/nvim/lua/as/plugins/lspconfig.lua#L61-L119
--- https://github.com/folke/which-key.nvim/issues/153
+-- TODO: https://github.com/akinsho/dotfiles/blob/c81dadf0c570ce39543a9b43a75f41256ecd03fc/.config/nvim/lua/as/plugins/lspconfig.lua#L61-L119
 
 local M = {}
 

@@ -7,9 +7,6 @@ local M = {}
 vim.api.nvim_exec2("syntax on", { output = false })
 vim.api.nvim_exec2("filetype plugin indent on", { output = false })
 
--- improve startup time
-vim.loader.enable()
-
 -- general settings
 o.autoindent = true -- auto indent
 o.backup = false -- don't backup files before overwriting them

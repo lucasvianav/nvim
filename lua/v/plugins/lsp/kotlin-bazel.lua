@@ -1,4 +1,4 @@
-local config = require("v.utils.lsp").make_config()
+local config = require("v.lsp").make_config()
 local custom_conf_ok, custom_conf = pcall(require, "v.plugins.lsp.servers.kotlin_bazel_lsp")
 
 if custom_conf_ok and custom_conf and custom_conf.config then

@@ -1,3 +1,7 @@
+if v.package_manager == "lazy" then
+  return
+end
+
 local installed = require("v.utils.packer").is_plugin_installed
 
 if not (installed("better-escape.vim") or installed("better-escape.nvim")) then

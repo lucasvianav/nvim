@@ -1,12 +1,12 @@
-local cmd = vim.api.nvim_command
-
 require("v.utils").set_viml_options("Vimux", {
   Orientation = "h", -- open tmux panes as vertical splits
   CloseOnExit = false, -- close pane after exiting vim
 })
 
--- TODO: ??
-cmd("command VimuxClearScreenHistory VimuxClearTerminalScreen | VimuxClearRunnerHistory")
+vim.api.nvim_exec2(
+  "command VimuxClearScreenHistory VimuxClearTerminalScreen | VimuxClearRunnerHistory",
+  { output = false }
+)
 
 require("v.utils.mappings").set_keybindings({
   { "n", "<Leader>tp", "<cmd>VimuxPromptCommand<CR>" },

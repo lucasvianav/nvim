@@ -1,4 +1,4 @@
-local config = require("v.utils.lsp").make_config()
+local config = require("v.lsp").make_config()
 local ok, ts_ls = pcall(require, "v.plugins.lsp.servers.ts_ls")
 
 if ok then
@@ -11,7 +11,7 @@ require("typescript-tools").setup(vim.tbl_deep_extend("keep", config, {
     separate_diagnostic_server = true,
     tsserver_max_memory = 8192,
     publish_diagnostic_on = "insert_leave",
-    expose_as_code_action = "all",
+    expose_as_code_action = {},
     -- described below
     tsserver_format_options = {
       insertSpaceAfterCommaDelimiter = true,

@@ -1,4 +1,5 @@
 require("v.utils.mappings").unset_keybindings({
+  { "n", "-" },
   { "n", "<CR>" },
   { "n", "<Space>" },
   { "n", "ZZ" },
@@ -8,5 +9,5 @@ require("v.utils.mappings").unset_keybindings({
   { { "n", "i" }, "<Right>" },
   { { "n", "i" }, "<Left>" },
 
-  { { "i", "v" }, "<Esc>" },
+  { { "i", "n", "o", "v", "x", "s" }, "<Esc>" },
 })

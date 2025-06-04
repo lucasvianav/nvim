@@ -15,11 +15,20 @@
 -- https://github.com/lewis6991/dotfiles/tree/master/config/nvim
 
 -- TODO: https://github.com/tjdevries/lazy-require.nvim
+-- TODO: https://github.com/echasnovski/mini.nvim
 
-pcall(require, "impatient")
+-- improve startup time
+vim.loader.enable()
 
 require("v.globals")
 require("v.settings")
 require("v.keybindings")
 require("v.commands")
-require("v.packer")
+
+-----@type "packer"|"lazy"
+--_G.v.package_manager = "packer"
+--require("v.packer")
+
+---@type "packer"|"lazy"
+_G.v.package_manager = "lazy"
+require("v.lazy")

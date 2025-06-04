@@ -1,6 +1,6 @@
 local mason_registry = require("mason-registry")
-local packages = require("v.utils.lsp.packages")
-local utils = require("v.utils.lsp")
+local packages = require("v.lsp.packages")
+local utils = require("v.lsp")
 
 local servers = packages.in_env(packages.servers)
 local formatters = packages.in_env(packages.formatters)
@@ -14,7 +14,7 @@ require("mason-lspconfig").setup({
 -- setup lsp servers
 for _, server in ipairs(servers) do
   local config = utils.make_config()
-  local has_custom_config, custom_config = pcall(require, "v.plugins.lsp.servers." .. server)
+  local has_custom_config, custom_config = pcall(require, "v.lsp.servers." .. server)
 
   if custom_config.skip_lsp_setup then
     goto continue
