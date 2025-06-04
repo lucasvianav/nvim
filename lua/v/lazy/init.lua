@@ -3,6 +3,7 @@ local utils = require("v.lazy.utils")
 utils.ensure_installed()
 
 require("lazy").setup({
+  root = utils.paths.plugins,
   defaults = {
     lazy = false, -- lazy load everything by default
   },

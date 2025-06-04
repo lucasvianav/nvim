@@ -1,6 +1,7 @@
 local M = {}
 
 M.paths = {
+  plugins = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
   lazy = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy", "lazy.nvim"),
   cache = vim.fs.joinpath(vim.fn.stdpath("state"), "lazy", "pkg-cache.lua"),
   rocks = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy", "lazy-rocks"),
@@ -51,6 +52,36 @@ function M.download()
   end
 
   vim.notify("Successfully downloaded Lazy", vim.log.levels.INFO, { title = "lazy.nvim" })
+end
+
+---@param plugin string
+---@return boolean
+function M.is_installed(plugin)
+  return pcall(
+    function()
+      require("lazy").check({ plugins = { plugin }, show = false })
+    end
+  )
+end
+
+---@param plugin string
+---@return boolean
+function M.is_loaded(plugin)
+  return package.loaded[plugin] or pcall(
+    function()
+      require("lazy").check({ plugins = { plugin }, show = false }):is_running()
+    end
+  )
+end
+
+---@param plugin string
+---@return boolean
+function M.load(plugin)
+  return pcall(
+    function()
+      require("lazy").load({ plugins = { plugin }, show = false })
+    end
+  ) and M.is_loaded(plugin)
 end
 
 return M
