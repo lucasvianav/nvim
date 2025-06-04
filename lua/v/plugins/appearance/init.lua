@@ -31,6 +31,7 @@ local M = {
     dependencies = "nvim-treesitter",
     main = "rainbow-delimiters.setup",
     opts = {},
+    event = "VeryLazy",
     commit = "55ad4fb76ab68460f700599b7449385f0c4e858e",
   },
 
@@ -46,7 +47,7 @@ local M = {
   -- ALT: brenoprata10/nvim-highlight-colors
   {
     "catgoose/nvim-colorizer.lua",
-    event = "CursorHold",
+    event = "VeryLazy",
     commit = "517df88cf2afb36652830df2c655df2da416a0ae",
   },
 
@@ -54,6 +55,7 @@ local M = {
   {
     "lukas-reineke/indent-blankline.nvim",
     dependencies = "nvim-treesitter",
+    event = "VeryLazy",
     version = "3.*",
   },
 
@@ -61,10 +63,7 @@ local M = {
   {
     "lukas-reineke/virt-column.nvim",
     enabled = vim.fn.has("mac") == 0, -- highlighting issues on mac
-    event = {
-      "CursorHold",
-      "CursorMoved",
-    },
+    event = "VeryLazy",
     version = "2.*",
   },
 
@@ -86,20 +85,14 @@ local M = {
   -- highlight urls
   {
     "itchyny/vim-highlighturl",
-    event = {
-      "CursorHold",
-      "CursorMoved",
-    },
+    event = "VeryLazy",
     commit = "7179156ccc68168e7ef8f1eae28edf36911f5a3c",
   },
 
   -- highlight todo comments
   {
     "folke/todo-comments.nvim",
-    event = {
-      "CursorHold",
-      "CursorMoved",
-    },
+    event = "VeryLazy",
     dependencies = "plenary.nvim",
     commit = "304a8d204ee787d2544d8bc23cd38d2f929e7cc5",
   },

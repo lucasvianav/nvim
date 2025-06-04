@@ -21,6 +21,7 @@ require("tokyonight").setup({
     "packer",
     "spectre_panel",
     "DiffviewFiles",
+    "lazy",
   },
   hide_inactive_statusline = false,
   dim_inactive = false,

@@ -17,7 +17,7 @@ local M = {
   -- autodetect indent
   {
     "tpope/vim-sleuth",
-    event = "InsertEnter",
+    event = "BufEnter",
     commit = "be69bff86754b1aa5adcbb527d7fcd1635a84080",
   },
 
@@ -70,10 +70,9 @@ local M = {
   -- better commentstrings based in treesitter
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
-    dependencies = { "vim-commentary", "nvim-treesitter" },
-    opts = {
-      enable_autocmd = false,
-    },
+    dependencies = "nvim-treesitter",
+    event = "VeryLazy",
+    opts = { enable_autocmd = false },
     commit = "1b212c2eee76d787bbea6aa5e92a2b534e7b4f8f",
   },
 

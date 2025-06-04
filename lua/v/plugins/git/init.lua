@@ -6,7 +6,7 @@ local M = {
   {
     "tpope/vim-fugitive",
     dependencies = "tpope/vim-rhubarb", -- integration with GitHub
-    event = { "CursorHold", "CursorMoved" },
+    event = "VeryLazy",
     commit = "4a745ea72fa93bb15dd077109afbb3d1809383f2",
   },
 
@@ -14,7 +14,7 @@ local M = {
   {
     "lewis6991/gitsigns.nvim",
     dependencies = "plenary.nvim",
-    event = { "CursorHold", "CursorMoved" },
+    event = "VeryLazy",
     commit = "8bdaccdb897945a3c99c1ad8df94db0ddf5c8790",
   },
 

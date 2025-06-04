@@ -1,7 +1,11 @@
 ---@type LazyPluginSpec[]
 local M = {
   -- config for language servers
-  { "neovim/nvim-lspconfig" },
+  {
+    "neovim/nvim-lspconfig",
+    lazy = true,
+    version = "2.*",
+  },
 
   -- TODO: consider swapping for L3MON4D3/LuaSnip
   -- cool snippet engine
@@ -40,7 +44,7 @@ local M = {
   -- ALT: https://github.com/hrsh7th/cmp-nvim-lsp-signature-help
   {
     "ray-x/lsp_signature.nvim",
-    event = { "CursorHoldI", "InsertEnter" },
+    event = "CursorHoldI",
     dependencies = "nvim-lspconfig",
     name = "lsp_signature",
     commit = "d50e40b3bf9324128e71b0b7e589765ce89466d2",
@@ -70,6 +74,7 @@ local M = {
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
+      "ultisnips",
       {
         "f3fora/cmp-spell",
         commit = "694a4e50809d6d645c1ea29015dad0c293f019d6",

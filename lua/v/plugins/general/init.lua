@@ -15,6 +15,7 @@ local M = {
   {
     "editorconfig/editorconfig-vim",
     version = "1.*",
+    event = "VeryLazy",
   },
 
   -- startup profiling
@@ -27,10 +28,7 @@ local M = {
   -- displays a popup with keybindings
   {
     "folke/which-key.nvim",
-    event = {
-      "CursorHold",
-      "CursorMoved",
-    },
+    event = "VeryLazy",
     enabled = false,
     version = "3.*",
   },
@@ -67,20 +65,13 @@ local M = {
   -- provides great new text objects
   {
     "wellle/targets.vim",
-    event = {
-      "CursorHold",
-      "CursorMoved",
-    },
+    event = "VeryLazy",
     commit = "6325416da8f89992b005db3e4517aaef0242602e",
   },
 
   -- pairs of handy bracket maps
   {
     "tpope/vim-unimpaired",
-    event = {
-      "CursorHold",
-      "CursorMoved",
-    },
     keys = {
       "[",
       "]",
@@ -165,7 +156,7 @@ local M = {
   -- better clipboard
   {
     "svermeulen/vim-easyclip",
-    event = { "CursorMoved", "InsertEnter" },
+    event = "VeryLazy",
     dependencies = "vim-repeat",
     commit = "4601faae051bec8ced37b452b32defca62a633f3",
   },
@@ -174,7 +165,7 @@ local M = {
   {
     "kana/vim-textobj-indent",
     dependencies = "kana/vim-textobj-user",
-    event = "CursorMoved",
+    event = "VeryLazy",
     commit = "deb76867c302f933c8f21753806cbf2d8461b548",
   },
 
@@ -216,6 +207,7 @@ local M = {
   -- improve vim.ui
   {
     "folke/snacks.nvim",
+    event = "VeryLazy",
     commit = "bc0630e43be5699bb94dadc302c0d21615421d93",
   },
 }
