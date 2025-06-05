@@ -68,12 +68,12 @@ local function get_plugin_name(spec)
   local res = plugin:lower()
 
   local matchers = {
-    "^.+%/",       -- leading path
-    "%.[^.]+$",    -- trailing extension
+    "^.+%/", -- leading path
+    "%.[^.]+$", -- trailing extension
     "[-_.]n?vim$", -- "-vim", "_vim", ".vim", "-nvim", "_nvim", ".nvim"
     "^n?vim[-_.]", -- "vim-", "vim_", "vim.", "nvim-", "nvim_", "nvim."
-    "[-_.]lua$",   -- "-vim", "_vim", ".vim", "-nvim", "_nvim", ".nvim"
-    "^lua[-_.]",   -- "vim-", "vim_", "vim.", "nvim-", "nvim_", "nvim."
+    "[-_.]lua$", -- "-vim", "_vim", ".vim", "-nvim", "_nvim", ".nvim"
+    "^lua[-_.]", -- "vim-", "vim_", "vim.", "nvim-", "nvim_", "nvim."
   }
 
   for _, pat in ipairs(matchers) do
@@ -113,10 +113,6 @@ function M.process_themes(specs)
     if name and not spec.opts and not spec.config then
       spec.config = get_plugin_config(name, "theme")
     end
-
-    -- if spec.cond == nil then
-    --   spec.cond = is_main_colorscheme
-    -- end
 
     if is_main_colorscheme then
       spec.lazy = false

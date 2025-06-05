@@ -1,7 +1,3 @@
----Heavily inspired by:
----https://github.com/akinsho/dotfiles
----https://github.com/NvChad/NvChad
-
 --TODO: https://github.com/idr4n/nvim-lua/tree/master/lua/config/statusline
 
 local utils = require("v.utils.statusline")
@@ -52,9 +48,11 @@ require("lualine").setup({
           if #parts == 0 then
             return vim.fs.joinpath(unpack(path))
           end
+
           if not root or parts[1] == root or #parts == 1 then
             return vim.fs.joinpath(unpack(path))
           end
+
           if root and parts[1] ~= root then
             table.insert(path, root)
           end
@@ -64,18 +62,19 @@ require("lualine").setup({
           local n_leading_dirs = #parts - 2
 
           if n_leading_dirs > 0 then
-            -- TODO: make this dynamic
-            -- for i = 1, n_leading_dirs do
-            -- end
-            table.insert(path, parts[1])
-            table.insert(path, parts[2])
+            -- TODO: make this dynamically change acceptable
+            -- length depending on window width
 
-            local include_extra = #root + #parts[1] + #parts[2] <= 27
-            if include_extra then
-              table.insert(path, parts[3])
+            local length = #root
+            for i = 1, n_leading_dirs do
+              if length > 25 and n_leading_dirs - i > 1 then
+                break
+              end
+              table.insert(path, parts[i])
+              length = length + #parts[i]
             end
 
-            if not include_extra or n_leading_dirs > 5 then
+            if #path - 2 < n_leading_dirs then
               table.insert(path, "-")
             end
           end
@@ -111,6 +110,7 @@ require("lualine").setup({
             table.insert(path, "")
             return vim.fs.joinpath(unpack(path))
           end
+
           if not root or parts[1] == root then
             table.insert(path, parts[1])
           elseif #parts == 1 then
@@ -176,7 +176,7 @@ require("lualine").setup({
       {
         "branch",
         fmt = function(
-            branch --[[@param branch string]]
+          branch --[[@param branch string]]
         )
           if #branch > 30 then
             local basename = vim.fs.basename(branch)
