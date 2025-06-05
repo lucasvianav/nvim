@@ -5,6 +5,8 @@ local utils = require("v.lsp")
 local servers = packages.in_env(packages.servers)
 local formatters = packages.in_env(packages.formatters)
 
+-- TODO: pass versioned list to `ensure_installed`
+
 require("mason").setup()
 require("v.plugins.lsp.mason.lock").setup()
 require("mason-lspconfig").setup({

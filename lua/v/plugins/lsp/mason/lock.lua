@@ -1,4 +1,4 @@
----@source https://github.com/zapling/mason-lock.nvim/tree/b75e2de585637a61b2fb818dc33dad7863b7b0c4
+---adapted from https://github.com/zapling/mason-lock.nvim/tree/b75e2de585637a61b2fb818dc33dad7863b7b0c4
 
 local M = {}
 
@@ -20,33 +20,60 @@ local function save()
   end
 
   local pkgs = registry.get_installed_packages()
-  ---@type ({ name: string, version: string }?)[]
-  local entries = {}
+  local pkg_utils = require("v.lsp.packages")
 
+  ---Mappings between the LSP servers' names in Mason and in nvim-lspconfig
+  local lsp_name_map = require("mason-lspconfig.mappings").get_mason_map()
+  ---Uses the LSP servers' names in nvim-lspconfig
+  local ensure_installed = table.merge_lists({
+    vim.tbl_keys(pkg_utils.servers),
+    vim.tbl_keys(pkg_utils.formatters),
+  })
+  ---Uses the LSP servers' names in Mason
+  ---@type table<string, string>
+  local lock_data = json.from_file(M.lockfile_path) or {}
+  ---Uses the LSP servers' names in Mason
+  ---@type table<string, string>
+  local in_lockfile_but_not_installed = vim.deepcopy(lock_data, true)
+  ---Uses the LSP servers' names in Mason
+  ---@type ({ name: string, version: string }?)[]
+  local installed_entries = {}
+
+  -- save versions of installed packages
   for _, pkg in pairs(pkgs) do
-    if not pkg:is_installed() or not pkg.name then
-      table.insert(entries, nil)
-    else
-      table.insert(entries, {
-        name = pkg.name,
-        version = pkg:get_installed_version(),
-      })
-    end
+    table.insert(installed_entries, (pkg:is_installed() and pkg.name) and {
+      name = pkg.name,
+      version = pkg:get_installed_version(),
+    } or nil)
   end
 
   vim.wait(5000, function()
-    return #pkgs == #entries
+    return #pkgs == #installed_entries
   end)
 
-  -- remove anything that failed
-  for i, pkg in ipairs(entries) do
-    if pkg == nil then
-      entries[i] = nil
+  -- save versions of intalled pkgs to lockfile data
+  for _, pkg in ipairs(installed_entries) do
+    if pkg ~= nil then
+      lock_data[pkg.name] = pkg.version
+      in_lockfile_but_not_installed[pkg.name] = nil
     end
   end
 
+  -- if pkg is in lockfile but no longer installed and is also not
+  -- in `ensure_installed`, we should remove it from the lockfile
+  for pkg, _ in pairs(in_lockfile_but_not_installed) do
+    if not vim.tbl_contains(ensure_installed, lsp_name_map.package_to_lspconfig[pkg]) then
+      lock_data[pkg] = nil
+    end
+  end
+
+  ---@type { name: string, version: string }[]
+  local res = table.map_items(lock_data, function(k, v)
+    return { name = k, version = v }
+  end)
+
   -- sort alphabetically
-  table.sort(entries, function(a, b)
+  table.sort(res, function(a, b)
     return a.name:lower() < b.name:lower()
   end)
 
@@ -54,10 +81,10 @@ local function save()
 
   file:write("{\n")
 
-  for i, pkg in ipairs(entries) do
-    file:write(([[  %q: %q]]):format(pkg.name, pkg.version))
+  for i, pkg in ipairs(res) do
+    file:write(("    %q: %q"):format(pkg.name, pkg.version))
 
-    if i ~= #entries then
+    if i ~= #res then
       file:write(",\n")
     end
   end
@@ -76,8 +103,18 @@ local function save_catching()
   end
 end
 
+-- TODO: restoring should only install:
+--    - packages that are already installed (restoring them to their locked version if any)
+--    - packages in `ensure_installed` *for the current env*
+-- it should also not uninstall any packages
 local function restore()
   local lock_data = json.from_file(M.lockfile_path)
+
+  -- local pkg_utils = require("v.lsp.packages")
+  -- local ensure_installed = table.merge_lists({
+  --   pkg_utils.in_env(pkg_utils.servers),
+  --   pkg_utils.in_env(pkg_utils.formatters),
+  -- })
 
   if not lock_data then
     notify("Lockfile does not exist.", vim.log.levels.ERROR)
