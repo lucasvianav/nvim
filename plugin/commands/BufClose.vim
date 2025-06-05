@@ -1,3 +1,4 @@
+" https://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window/44950143#44950143
 " TODO: convert to Lua
 
 command! -nargs=? -complete=buffer -bang Bclose
