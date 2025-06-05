@@ -6,6 +6,7 @@ local servers = packages.in_env(packages.servers)
 local formatters = packages.in_env(packages.formatters)
 
 require("mason").setup()
+require("v.plugins.lsp.mason.lock").setup()
 require("mason-lspconfig").setup({
   ensure_installed = servers,
   automatic_enable = false,
