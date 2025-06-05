@@ -1,4 +1,4 @@
-local config = require('v.lsp.hover').hover_config
+local config = require("v.lsp.hover").hover_config
 
 require("lsp_signature").setup({
   bind = true,

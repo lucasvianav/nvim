@@ -21,8 +21,8 @@ local M = {
     "crispgm/nvim-tabline",
     commit = "287cd88157f98da76cb32ac7df7ec5c546414ec0",
     opts = {
-      show_index = true,     -- show tab index
-      show_modify = true,    -- show buffer modification indicator
+      show_index = true, -- show tab index
+      show_modify = true, -- show buffer modification indicator
       no_name = "[no name]", -- no name buffer name
     },
   },

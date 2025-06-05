@@ -5,11 +5,11 @@ local M = {}
 M.mappings = {
   { "n", "grp", utils.peek_definition },
   { "n", "grn", utils.rename_symbol },
-  { "n", "K",   utils.smart_hover_docs },
-  { "n", "gh",  utils.hover },
-  { "n", "gq",  vim.diagnostic.setqflist },
-  { "n", "gs",  utils.signature_help },
-  { "n", "gl",  vim.diagnostic.open_float },
+  { "n", "K", utils.smart_hover_docs },
+  { "n", "gh", utils.hover },
+  { "n", "gq", vim.diagnostic.setqflist },
+  { "n", "gs", utils.signature_help },
+  { "n", "gl", vim.diagnostic.open_float },
   { "n", "yog", utils.toggle_diagnostics_visibility },
   {
     "n",
@@ -22,7 +22,7 @@ M.mappings = {
         vim.lsp.buf.references()
       end
     end,
-    desc = "Goto References"
+    desc = "Goto References",
   },
   {
     "n",

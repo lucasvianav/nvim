@@ -2,7 +2,7 @@ vim.g.material_style = "deep ocean"
 
 require("material").setup({
   contrast = true, -- contrast for sidebars, floating windows and popup menus like nvim-tree
-  borders = true,  -- borders between verticaly split windows
+  borders = true, -- borders between verticaly split windows
 
   italics = {
     comments = true,

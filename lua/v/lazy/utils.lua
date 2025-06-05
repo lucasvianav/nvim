@@ -26,15 +26,15 @@ function M.download()
   end
 
   local res = vim
-      .system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "--branch=stable",
-        "https://github.com/folke/lazy.nvim.git",
-        M.paths.lazy,
-      })
-      :wait()
+    .system({
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "--branch=stable",
+      "https://github.com/folke/lazy.nvim.git",
+      M.paths.lazy,
+    })
+    :wait()
 
   if res.code ~= 0 then
     vim.notify(
@@ -44,7 +44,7 @@ function M.download()
     )
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { res.stderr,                     "WarningMsg" },
+      { res.stderr, "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -70,7 +70,8 @@ function M.is_loaded(plugin)
     return true
   end
   local ok, loaded = pcall(function()
-    return require("lazy").check({ plugins = { plugin }, show = false })._plugins[plugin]._.loaded ~= nil
+    return require("lazy").check({ plugins = { plugin }, show = false })._plugins[plugin]._.loaded
+      ~= nil
   end)
 
   return ok and loaded

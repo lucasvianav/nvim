@@ -1,1 +1,1 @@
-require('v.plugins.navigation.telescope.folding').prevent_folding()
+require("v.plugins.navigation.telescope.folding").prevent_folding()

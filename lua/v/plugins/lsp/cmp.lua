@@ -34,7 +34,7 @@ local cmp_abort = cmp.mapping.abort()
 local function cmdline_escape(...)
   cmp_abort(...)
   if close_cmdline then
-    vim.api.nvim_feedkeys(t "<ESC>", "c", true)
+    vim.api.nvim_feedkeys(t("<ESC>"), "c", true)
   end
   close_cmdline = not close_cmdline
 end
@@ -115,7 +115,7 @@ cmp.setup({
     { name = "ultisnips" },
     { name = "path" },
     { name = "spell" },
-    { name = "buffer",   keyword_length = 5 },
+    { name = "buffer", keyword_length = 5 },
     { name = "calc" },
   }),
   formatting = {
@@ -139,7 +139,7 @@ cmp.setup({
               ultisnips = "[Snip]",
             },
           })(entry, vim.deepcopy(vim_item))
-          or nil
+        or nil
       local highlights_info = ok_colorful_menu and colorful_menu.cmp_highlights(entry) or nil
 
       if highlights_info ~= nil then
@@ -162,20 +162,20 @@ cmp.setup({
   sorting = {
     priority_weight = 1,
     comparators = vim
-        .iter({
-          cmp.config.compare.offset,
-          cmp.config.compare.exact,
-          cmp.config.compare.score,
-          ok_comparator and require("cmp-under-comparator").under or nil,
-          cmp.config.compare.kind,
-          cmp.config.compare.sort_text,
-          cmp.config.compare.length,
-          cmp.config.compare.order,
-        })
-        :filter(function(it)
-          return it ~= nil
-        end)
-        :totable(),
+      .iter({
+        cmp.config.compare.offset,
+        cmp.config.compare.exact,
+        cmp.config.compare.score,
+        ok_comparator and require("cmp-under-comparator").under or nil,
+        cmp.config.compare.kind,
+        cmp.config.compare.sort_text,
+        cmp.config.compare.length,
+        cmp.config.compare.order,
+      })
+      :filter(function(it)
+        return it ~= nil
+      end)
+      :totable(),
   },
 })
 

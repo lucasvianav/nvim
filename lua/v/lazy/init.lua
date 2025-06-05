@@ -85,7 +85,7 @@ require("lazy").setup({
     },
     reset_packpath = true, --- reset the package path to improve startup time
     rtp = {
-      reset = true,        --- reset the runtime path to $VIMRUNTIME and your config directory
+      reset = true, --- reset the runtime path to $VIMRUNTIME and your config directory
       paths = {}, ---@type string[] custom paths to include in the rtp
       disabled_plugins = {}, ---@type string[]
     },

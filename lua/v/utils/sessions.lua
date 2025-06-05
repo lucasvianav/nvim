@@ -59,10 +59,10 @@ function M.load_session_or_dashboard()
   local command = fn.trim(
     fn.system(
       [[ps aux | grep ]]
-      .. fn.getpid()
-      .. [[ | awk '$2 == "]]
-      .. fn.getpid()
-      .. [[" { col = ""; for (i = 11; i <= NF; i++) col = col $i " "; print col }']]
+        .. fn.getpid()
+        .. [[ | awk '$2 == "]]
+        .. fn.getpid()
+        .. [[" { col = ""; for (i = 11; i <= NF; i++) col = col $i " "; print col }']]
     )
   )
   local opened_nvim_without_file_arg = command:match("nvim$") or command:match("nvim %-%-embed$")

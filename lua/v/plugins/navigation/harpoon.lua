@@ -28,8 +28,8 @@ local ui = require("harpoon.ui")
 
 require("v.utils.mappings").set_keybindings({
   { "n", "grh", mark.toggle_file },
-  { "n", "[H",  ui.nav_prev },
-  { "n", "]H",  ui.nav_next },
+  { "n", "[H", ui.nav_prev },
+  { "n", "]H", ui.nav_next },
   {
     "n",
     "<m-h>",

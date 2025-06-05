@@ -17,13 +17,13 @@ require("colorizer").setup({
       strip_digits = false,
     },
     names_custom = false,
-    RGB = true,      ---#RGB hex codes
-    RGBA = true,     ---#RGBA hex codes
-    RRGGBB = true,   ---#RRGGBB hex codes
+    RGB = true, ---#RGB hex codes
+    RGBA = true, ---#RGBA hex codes
+    RRGGBB = true, ---#RRGGBB hex codes
     RRGGBBAA = true, ---#RRGGBBAA hex codes
     AARRGGBB = true, ---0xAARRGGBB hex codes
-    rgb_fn = true,   ---CSS rgb() and rgba() functions
-    hsl_fn = true,   ---CSS hsl() and hsla() functions
+    rgb_fn = true, ---CSS rgb() and rgba() functions
+    hsl_fn = true, ---CSS hsl() and hsla() functions
     css = true,
     css_fn = true,
     tailwind = "both", ---@type boolean|'normal'|'lsp'|'both' Enable tailwind colors

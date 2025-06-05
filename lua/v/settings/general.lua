@@ -130,17 +130,17 @@ o.sessionoptions = {
 -- messages
 o.shortmess = {
   A = false, -- alert for swap files
-  F = true,  -- no file info when editing it (breaks autocmd messages)
-  O = true,  -- file-read message overwrites previous
+  F = true, -- no file info when editing it (breaks autocmd messages)
+  O = true, -- file-read message overwrites previous
   S = false, -- show search count (e.g. [1/5])
-  T = true,  -- truncate messages in middle
-  W = true,  -- no "written" or "[w]" when writing
-  a = true,  -- use abbreviations
-  c = true,  -- no ins-completion-menu messages
-  o = true,  -- file-read message overwrites previous
+  T = true, -- truncate messages in middle
+  W = true, -- no "written" or "[w]" when writing
+  a = true, -- use abbreviations
+  c = true, -- no ins-completion-menu messages
+  o = true, -- file-read message overwrites previous
   q = false, -- use "recording @a" instead of "recording"
-  s = true,  -- :help it
-  t = true,  -- truncate file messages at the start
+  s = true, -- :help it
+  t = true, -- truncate file messages at the start
 }
 
 -- formatting
@@ -148,30 +148,30 @@ o.shortmess = {
 o.formatoptions = {
   ["1"] = true, -- break lines *before* 1-letter words (not afer)
   ["2"] = true, -- use indent from 2nd line of a paragraph
-  a = false,    -- autoformat is bad
-  c = true,     -- auto-wrap comments
-  j = true,     -- remove a comment leader when joining lines.
-  l = true,     -- don't break lines that were already long before insertion
-  n = true,     -- recognize numbered lists
-  o = false,    -- don't continue comments in normal mode
-  p = true,     -- don't break lines at single spaces after periods
-  q = true,     -- format comments with `gq`
-  r = true,     -- continue comments in insert mode
-  t = false,    -- autowrap lines
-  v = true,     -- break lines only on chars added in this insertion
-  w = false,    -- fuck trailing whitespaces
+  a = false, -- autoformat is bad
+  c = true, -- auto-wrap comments
+  j = true, -- remove a comment leader when joining lines.
+  l = true, -- don't break lines that were already long before insertion
+  n = true, -- recognize numbered lists
+  o = false, -- don't continue comments in normal mode
+  p = true, -- don't break lines at single spaces after periods
+  q = true, -- format comments with `gq`
+  r = true, -- continue comments in insert mode
+  t = false, -- autowrap lines
+  v = true, -- break lines only on chars added in this insertion
+  w = false, -- fuck trailing whitespaces
 }
 M.formatoptions = o.formatoptions._value
 
 -- settings for diffs
 o.diffopt = {
-  "closeoff",  -- cancel diff if only one window is remaining
+  "closeoff", -- cancel diff if only one window is remaining
   "context:6", -- context of 6 lines to changes
-  "filler",    -- show filler lines to keep text synchronized
+  "filler", -- show filler lines to keep text synchronized
   "hiddenoff", -- cancel diff for hidden buffers
   "indent-heuristic",
   "internal",
-  "iwhite",   -- ignore trailing whitespaces
+  "iwhite", -- ignore trailing whitespaces
   "vertical", -- use vertical split by default
 }
 

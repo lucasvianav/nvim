@@ -112,7 +112,7 @@ local M = {
       "xSS",
       "xs",
       "xss",
-      { "S",  mode = "x" },
+      { "S", mode = "x" },
       { "gS", mode = "x" },
     },
     version = "3.*",

@@ -17,7 +17,7 @@ local hard_hidden_files = {
 oil.setup({
   default_file_explorer = true,
   columns = {
-    { "icon",  add_padding = true },
+    { "icon", add_padding = true },
     { "mtime", format = "[%b %d %H:%M]" },
     "size",
   },
@@ -85,18 +85,18 @@ oil.setup({
       local dir = vim.api.nvim_buf_get_name(bufnr):gsub("^oil://", "")
       local abspath = vim.fs.abspath(vim.fs.joinpath(dir, name))
       local is_ignored = vim
-          .system({
-            "git",
-            "check-ignore",
-            abspath,
-          }, { timeout = 100 })
-          :wait().code == 0
+        .system({
+          "git",
+          "check-ignore",
+          abspath,
+        }, { timeout = 100 })
+        :wait().code == 0
 
       return is_ignored
     end,
     is_always_hidden = function(
-        name,
-        _ --[[bufnr]]
+      name,
+      _ --[[bufnr]]
     )
       for _, it in ipairs(hard_hidden_files) do
         if name:match(it) then
@@ -113,10 +113,10 @@ oil.setup({
       { "name", "asc" },
     },
     highlight_filename = function(
-        _ --[[entry]],
-        _ --[[is_hidden]],
-        _ --[[is_link_target]],
-        _ --[[is_link_orphan]]
+      _ --[[entry]],
+      _ --[[is_hidden]],
+      _ --[[is_link_target]],
+      _ --[[is_link_orphan]]
     )
       -- TODO: custom highlight for git dirty files
       return nil
@@ -125,18 +125,18 @@ oil.setup({
   extra_scp_args = {},
   git = {
     add = function(
-        _ --[[path]]
+      _ --[[path]]
     )
       return false
     end,
     mv = function(
-        _ --[[src_path]],
-        _ --[[dest_path]]
+      _ --[[src_path]],
+      _ --[[dest_path]]
     )
       return false
     end,
     rm = function(
-        _ --[[path]]
+      _ --[[path]]
     )
       return false
     end,
@@ -159,7 +159,7 @@ oil.setup({
     update_on_cursor_moved = true,
     preview_method = "fast_scratch",
     disable_preview = function(
-        _ --[[filename]]
+      _ --[[filename]]
     )
       return false
     end,

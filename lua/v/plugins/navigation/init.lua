@@ -76,7 +76,7 @@ local M = {
     dependencies = {
       "plenary.nvim",
       -- markdown header picker
-      { "crispgm/telescope-heading.nvim",           ft = "markdown" },
+      { "crispgm/telescope-heading.nvim", ft = "markdown" },
       -- C sorter
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },

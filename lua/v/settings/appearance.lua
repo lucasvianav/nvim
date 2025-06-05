@@ -10,24 +10,24 @@ local o = vim.opt
 
 local M = {}
 
-o.background = "dark"   -- the background color is dark
-o.colorcolumn = "+1"    -- show mark at column 80
-o.cursorline = true     -- highlights current line
-o.laststatus = 2        -- always display the status line
-o.list = true           -- show listchars (below)
-o.number = true         -- line numbers
-o.pumblend = 10         -- pum transparency
-o.pumheight = 10        -- makes pum menu smaller
+o.background = "dark" -- the background color is dark
+o.colorcolumn = "+1" -- show mark at column 80
+o.cursorline = true -- highlights current line
+o.laststatus = 2 -- always display the status line
+o.list = true -- show listchars (below)
+o.number = true -- line numbers
+o.pumblend = 10 -- pum transparency
+o.pumheight = 10 -- makes pum menu smaller
 o.relativenumber = true -- relative line numbers
-o.ruler = true          -- show cursor position
-o.scrolloff = 1         -- number of screen lines around cursor
-o.showmode = false      -- hide --INSERT--, --VISUAL--, etc
-o.showtabline = 1       -- always show tab line (top bar)
-o.sidescrolloff = 5     -- number of screen columns around cursor
-o.signcolumn = "yes:2"  -- always display 2 signcolumns
-o.termguicolors = true  -- true color support
-o.wrap = false          -- don't wrap lines by default
-o.cmdwinheight = 1      -- height for cmdline-window
+o.ruler = true -- show cursor position
+o.scrolloff = 1 -- number of screen lines around cursor
+o.showmode = false -- hide --INSERT--, --VISUAL--, etc
+o.showtabline = 1 -- always show tab line (top bar)
+o.sidescrolloff = 5 -- number of screen columns around cursor
+o.signcolumn = "yes:2" -- always display 2 signcolumns
+o.termguicolors = true -- true color support
+o.wrap = false -- don't wrap lines by default
+o.cmdwinheight = 1 -- height for cmdline-window
 
 M.colorscheme = "tokyonight"
 
@@ -40,12 +40,12 @@ M.post_colorscheme_hook = function()
       "ColorColumn",
       { bg = require("v.utils.highlights").alter_color(colors.cyan_grey_dark, -30) },
     },
-    { "NormalFloat",    { link = "Normal" } },
-    { "FloatBorder",    { transparent = true } },
-    { "Folded",         { transparent = true } },
+    { "NormalFloat", { link = "Normal" } },
+    { "FloatBorder", { transparent = true } },
+    { "Folded", { transparent = true } },
     { "BufferLineFill", { transparent = true } },
-    { "TabLine",        { transparent = true, fg = colors.cyan_grey } },
-    { "TabLineFill",    { transparent = true } },
+    { "TabLine", { transparent = true, fg = colors.cyan_grey } },
+    { "TabLineFill", { transparent = true } },
     {
       "TabLineSel",
       {
@@ -55,12 +55,8 @@ M.post_colorscheme_hook = function()
     },
     {
       "Directory",
-      vim.tbl_extend(
-        "force",
-        vim.api.nvim_get_hl(0, { name = "Directory" }),
-        { bold = true }
-      ),
-    }
+      vim.tbl_extend("force", vim.api.nvim_get_hl(0, { name = "Directory" }), { bold = true }),
+    },
   })
 end
 

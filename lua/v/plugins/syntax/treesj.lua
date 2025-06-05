@@ -28,7 +28,10 @@ treesj.setup({ --[[@as TreesjConfig]]
 local function get_filetype_under_cursor()
   local cur_line, cur_col = vim.fn.line("."), vim.fn.col(".")
   local ok_under_cursor, under_cursor = pcall(function()
-    return vim.treesitter.get_parser():language_for_range({ cur_line, cur_col, cur_line, cur_col }):lang()
+    return vim.treesitter
+      .get_parser()
+      :language_for_range({ cur_line, cur_col, cur_line, cur_col })
+      :lang()
   end)
   return ok_under_cursor and under_cursor or vim.bo.filetype
 end
