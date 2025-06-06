@@ -22,6 +22,9 @@
 ---@field flags? string[]
 ---@field extension? string
 ---@field extensions? string[]
+---@field debug? boolean|PickerDebugTarget true = "parser"
+
+---@alias PickerDebugTarget "parser"|"sorter"|"finder"
 
 ---@alias PickerShortcutDefinition PickerShortcutAction|fun(shortcut: string): PickerShortcutAction?
 
@@ -35,3 +38,4 @@
 ---@field paths string[]
 ---@field extensions string[]
 ---@field fzf_tokens string[]
+---@field debug PickerDebugTarget[]

@@ -1,8 +1,7 @@
 ---If only one param is passed, the lists inside it will be merged.
----@generic T
----@param lists `T`|T[]
----@param ... T
----@return T
+---@param lists any|any[]
+---@param ... any
+---@return any[]
 function table.merge_lists(lists, ...)
   local res = {}
 
@@ -62,4 +61,25 @@ function table.items(tbl)
   return table.map_items(tbl, function(k, v)
     return { k, v }
   end)
+end
+
+---@generic T
+---@param tbl `T`[]
+---@param sep? string
+---@param pred? fun(it: T): string
+---@return string?
+function table.join(tbl, sep, pred)
+  local res = nil ---@type string?
+  sep = sep or ", "
+  pred = pred or tostring
+
+  for _, it in ipairs(tbl) do
+    if not res then
+      res = pred(it)
+    else
+      res = res .. sep .. pred(it)
+    end
+  end
+
+  return res
 end

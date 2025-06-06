@@ -27,6 +27,7 @@ local function save()
   local pkgs = registry.get_installed_packages()
 
   ---Uses the LSP servers' names in nvim-lspconfig
+  ---@type string[]
   local ensure_installed = table.merge_lists({
     vim.tbl_keys(pkg_utils.servers),
     vim.tbl_keys(pkg_utils.formatters),
@@ -125,6 +126,7 @@ local function restore()
   -- restoring should only install packages that are already
   -- installed (restoring them to their locked version if any)
   -- or packages in `ensure_installed` *for the current env*
+  ---@type string[]
   local to_install = table.merge_lists({
     pkg_utils.in_env(pkg_utils.servers),
     pkg_utils.in_env(pkg_utils.formatters),

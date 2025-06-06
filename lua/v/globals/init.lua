@@ -12,6 +12,22 @@ function _G.P(...)
   return wrappers.inspect(...)
 end
 
+---@generic T
+---@param cond boolean|fun(...: T): boolean
+---@param ... `T`
+---@return T
+function _G.PC(cond, ...)
+  if type(cond) == "function" then
+    cond = cond(...)
+  end
+
+  if cond then
+    return wrappers.inspect(...)
+  end
+
+  return ...
+end
+
 function _G.D(...)
   return wrappers.dump_text(...)
 end

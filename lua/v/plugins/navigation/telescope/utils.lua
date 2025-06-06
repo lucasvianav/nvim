@@ -31,6 +31,7 @@ local function process_shortcut_prompt(prompt, shrct_tbl)
     paths = {},
     extensions = {},
     fzf_tokens = {},
+    debug = {},
   }
 
   for _, shortcut in ipairs(prompt:split()) do
@@ -102,11 +103,37 @@ local function process_shortcut_prompt(prompt, shrct_tbl)
           table.insert(output.fzf_tokens, "." .. it .. "$")
         end
       end
+
+      if res.debug then
+        table.insert(output.debug, res.debug == true and "parser" or res.debug)
+      end
     elseif type(res) == "string" then
       table.insert(output.globs, res)
     end
 
     ::continue::
+  end
+
+  -- parse FZF tokens into search syntax
+  -- https://github.com/junegunn/fzf?tab=readme-ov-file#search-syntax
+  if #output.fzf_tokens > 0 then
+    local leading, trailing, match = {}, {}, {}
+
+    for _, token in ipairs(output.fzf_tokens) do
+      if token:starts_with("^") then
+        table.insert(leading, token)
+      elseif token:ends_with("$") and not token:starts_with("!") then
+        table.insert(trailing, token)
+      else
+        table.insert(match, token)
+      end
+    end
+
+    output.fzf_tokens = table.merge_lists({
+      table.join(leading, " | ") or {},
+      match,
+      table.join(trailing, " | ") or {},
+    })
   end
 
   return output
@@ -146,7 +173,7 @@ function M.process_prompt(prompt, shrct_tbl, shrct_sep)
     output.shortcuts = process_shortcut_prompt(shortcut_prompt, shrct_tbl)
   end
 
-  return output
+  return PC(vim.tbl_contains((output.shortcuts or {}).debug or {}, "parser"), output)
 end
 
 ---Traverse the file's path/parent directories

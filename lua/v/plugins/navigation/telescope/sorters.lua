@@ -36,13 +36,11 @@ function M.funky_fzf(opts, process_shortcuts)
     local search = unescape(p.search or prompt)
     local shortcuts = p.shortcuts or {}
 
-    -- TODO: when multiple extensions or multiple paths are present we should
-    -- pipe/OR them https://github.com/junegunn/fzf?tab=readme-ov-file#search-syntax
     if shortcuts.fzf_tokens and #shortcuts.fzf_tokens > 0 then
-      return search .. " " .. vim.iter(shortcuts.fzf_tokens):join(" ")
+      search = search .. " " .. table.join(shortcuts.fzf_tokens, " ")
     end
 
-    return search
+    return PC(vim.tbl_contains(shortcuts.debug or {}, "sorter"), search)
   end
 
   return Sorter:new({
@@ -100,7 +98,7 @@ function M.funky_fzy(opts, match_shortcut)
       search = search .. " " .. vim.iter(shortcuts.extensions):join(" ")
     end
 
-    return search
+    return PC(vim.tbl_contains(shortcuts.debug or {}, "sorter"), search)
   end
 
   return Sorter:new({

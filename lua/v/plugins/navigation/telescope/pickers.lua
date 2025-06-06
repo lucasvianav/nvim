@@ -41,6 +41,11 @@ local function get_shortcut_table()
     [".."] = { path = vim.fs.dirname(cur_buf_dir) }, -- curr buf's parent dir
     ["i"] = { flag = "--no-ignore" }, -- include ignored files
 
+    -- debuggers
+    ["@p"] = { debug = "parser" },
+    ["@s"] = { debug = "sorter" },
+    ["@f"] = { debug = "finder" },
+
     {
       ---Traverse the current buffer's directory (p2-, p-2, 2p-, 2-p, -2p, -p2, 3p, p3)
       [{ "^p[+-]?%d+[+-]?$", "^[+-]?%d+p[+-]?$", "^%d+[+-]?p$", "[+-]?p^%d+$" }] = function(input)
@@ -148,7 +153,7 @@ local function get_rg_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
   local cmd, p = { "rg" }, utils.process_prompt(prompt, shortcut_tbl, shortcut_sep)
 
   if not p.search then
-    return table.merge_lists(cmd, get_rg_exclude_glob_flags())
+    return table.merge_lists(cmd, get_rg_exclude_glob_flags()) --[=[@as string[]]=]
   end
 
   local shortcuts = (p.shortcuts or {})
@@ -161,7 +166,7 @@ local function get_rg_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
     :totable()
   local flags = shortcuts.flags or {}
 
-  local res = table.merge_lists({
+  local res = table.merge_lists({ ---@type string[]
     cmd,
     { "-e", p.search },
     flags,
@@ -169,7 +174,7 @@ local function get_rg_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
     get_rg_exclude_glob_flags(vim.tbl_contains(flags, "--no-ignore")),
   })
 
-  return res
+  return PC(vim.tbl_contains(shortcuts.debug or {}, "finder"), res)
 end
 
 ---@param prompt string
@@ -192,8 +197,7 @@ local function get_fd_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
     end)
     :flatten()
     :totable()
-
-  return table.merge_lists({
+  local res = table.merge_lists({
     cmd,
     p.search,
     shortcuts.paths or {},
@@ -201,6 +205,8 @@ local function get_fd_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
     shortcuts.flags or {},
     get_fd_exclude_flags(),
   })
+
+  return PC(vim.tbl_contains(shortcuts.debug or {}, "finder"), res)
 end
 
 ---@param options? table
