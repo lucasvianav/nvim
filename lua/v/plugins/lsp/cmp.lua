@@ -84,11 +84,36 @@ cmp.setup({
     ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
     ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
 
-    ["<Tab>"] = cmp.mapping({
+    ["<C-Tab>"] = cmp.mapping({
       i = function(fallback)
         if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
           vim.fn["UltiSnips#JumpForwards"]()
-        elseif cmp.visible() then
+        else
+          fallback()
+        end
+      end,
+    }),
+    ["<M-Tab>"] = cmp.mapping({
+      i = function(fallback)
+        if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+          vim.fn["UltiSnips#JumpForwards"]()
+        else
+          fallback()
+        end
+      end,
+    }),
+    ["<M-S-Tab>"] = cmp.mapping({
+      i = function(fallback)
+        if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+          vim.fn["UltiSnips#JumpBackwards"]()
+        else
+          fallback()
+        end
+      end,
+    }),
+    ["<Tab>"] = cmp.mapping({
+      i = function(fallback)
+        if cmp.visible() then
           cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
         else
           fallback()
@@ -98,9 +123,7 @@ cmp.setup({
     }),
     ["<S-Tab>"] = cmp.mapping({
       i = function(fallback)
-        if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-          vim.fn["UltiSnips#JumpBackwards"]()
-        elseif cmp.visible() then
+        if cmp.visible() then
           cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
         else
           fallback()
