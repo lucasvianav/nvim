@@ -112,7 +112,7 @@ local function restore()
   ui.open() -- this will only open after installation
 
   local lock_data = json.from_file(M.lockfile_path)
-  local started, finished_handles = {}, {}
+  local started_pkgs, finished_pkgs = {}, {}
 
   if not lock_data then
     notify("Lockfile does not exist.", vim.log.levels.ERROR)
@@ -146,15 +146,15 @@ local function restore()
   for name, version in pairs(lock_data) do
     local pkg = registry.get_package(name)
     if not pkg:is_installed() or pkg:get_installed_version() ~= version then
-      table.insert(started, name)
+      table.insert(started_pkgs, name)
       pkg:install({ version = version }):once("closed", function()
-        table.insert(finished_handles, name)
+        table.insert(finished_pkgs, name)
       end)
     end
   end
 
   local ok, status = vim.wait(1000 * 60 * 5, function()
-    return #finished_handles == #started
+    return #finished_pkgs == #started_pkgs
   end, 300)
 
   if not ok then
@@ -169,11 +169,8 @@ local function restore()
         vim.log.levels.ERROR
       )
     end
-  elseif #finished_handles > 0 then
-    notify(
-      #finished_handles .. " packages successfully restored from lockfile.",
-      vim.log.levels.INFO
-    )
+  elseif #finished_pkgs > 0 then
+    notify(#finished_pkgs .. " packages successfully restored from lockfile.", vim.log.levels.INFO)
   else
     notify(
       "No packages required restoring, all were already installed in the correct version.",
@@ -217,6 +214,18 @@ end
 function M.setup()
   add_commands()
   add_event_listeners()
+end
+
+---@return table<string, string> { name: version }
+function M.get_lockfile()
+  local lockfile = json.from_file(M.lockfile_path) or {}
+  return vim.tbl_extend(
+    "keep",
+    lockfile,
+    table.map_keys(lockfile, function(pkg)
+      return lsp_name_map.package_to_lspconfig[pkg]
+    end)
+  )
 end
 
 return M

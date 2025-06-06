@@ -25,6 +25,22 @@ function table.merge_lists(lists, ...)
   return res
 end
 
+---Maps keys in a table. Keep values unchanged.
+---@generic X, Y, Z
+---@param tbl table<`X`, `Y`>
+---@param pred fun(key: X, value: Y): `Z`
+---@return table<Z, Y>
+function table.map_keys(tbl, pred)
+  local res = {}
+  for k, v in pairs(tbl) do
+    local new_key = pred(k, v)
+    if new_key ~= nil then
+      res[new_key] = v
+    end
+  end
+  return res
+end
+
 ---Convert table to list of {key, value}
 ---@generic X, Y, Z
 ---@param tbl table<`X`, `Y`>

@@ -4,13 +4,15 @@ local utils = require("v.lsp")
 
 local servers = packages.in_env(packages.servers)
 local formatters = packages.in_env(packages.formatters)
-
--- TODO: pass versioned list to `ensure_installed`
+local lockfile = require("v.plugins.lsp.mason.lock").get_lockfile()
 
 require("mason").setup()
 require("v.plugins.lsp.mason.lock").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = servers,
+  ensure_installed = vim.tbl_map(function(pkg)
+    local version = lockfile[pkg]
+    return version and (pkg .. "@" .. version) or pkg
+  end, servers),
   automatic_enable = false,
 })
 
@@ -47,7 +49,7 @@ for _, it in ipairs(formatters) do
   end
 
   pkg:install(
-    {},
+    { version = lockfile[pkg.name] },
     vim.schedule_wrap(function(success, err)
       if success then
         vim.notify(
