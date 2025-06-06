@@ -51,6 +51,8 @@ require("v.utils.abbreviations").set_abbreviations({
   -- git
   { "GS", "Git status" },
   { "Gs", "Git status" },
+  { "GA", "Git add" },
+  { "Ga", "Git add" },
 
   -- other plugins
   { "DO", "DiffviewOpen" },

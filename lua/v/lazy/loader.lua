@@ -1,3 +1,5 @@
+---@module "lazy.types"
+
 local M = {}
 local log_not_found_configs = true
 
@@ -112,6 +114,10 @@ function M.process_themes(specs)
 
     if name and not spec.opts and not spec.config then
       spec.config = get_plugin_config(name, "theme")
+    end
+
+    if spec.cond == nil then
+      spec.cond = is_main_colorscheme
     end
 
     if is_main_colorscheme then
