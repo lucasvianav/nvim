@@ -5,6 +5,11 @@ local M = {}
 local json = require("v.utils.json")
 local registry = require("mason-registry")
 local restore_in_progress = false
+local pkg_utils = require("v.lsp.packages")
+local ui = require("mason.ui")
+
+---Mappings between the LSP servers' names in Mason and in nvim-lspconfig
+local lsp_name_map = require("mason-lspconfig.mappings").get_mason_map()
 
 M.lockfile_path = vim.fs.joinpath(vim.fn.stdpath("config"), "mason-lock.json")
 
@@ -20,10 +25,7 @@ local function save()
   end
 
   local pkgs = registry.get_installed_packages()
-  local pkg_utils = require("v.lsp.packages")
 
-  ---Mappings between the LSP servers' names in Mason and in nvim-lspconfig
-  local lsp_name_map = require("mason-lspconfig.mappings").get_mason_map()
   ---Uses the LSP servers' names in nvim-lspconfig
   local ensure_installed = table.merge_lists({
     vim.tbl_keys(pkg_utils.servers),
@@ -62,7 +64,10 @@ local function save()
   -- if pkg is in lockfile but no longer installed and is also not
   -- in `ensure_installed`, we should remove it from the lockfile
   for pkg, _ in pairs(in_lockfile_but_not_installed) do
-    if not vim.tbl_contains(ensure_installed, lsp_name_map.package_to_lspconfig[pkg]) then
+    -- for linters/formatters they'll not have a lspconfig name
+    local pkg_name = lsp_name_map.package_to_lspconfig[pkg] or pkg
+
+    if not vim.tbl_contains(ensure_installed, pkg_name) then
       lock_data[pkg] = nil
     end
   end
@@ -82,7 +87,7 @@ local function save()
   file:write("{\n")
 
   for i, pkg in ipairs(res) do
-    file:write(("    %q: %q"):format(pkg.name, pkg.version))
+    file:write(("  %q: %q"):format(pkg.name, pkg.version))
 
     if i ~= #res then
       file:write(",\n")
@@ -103,18 +108,11 @@ local function save_catching()
   end
 end
 
--- TODO: restoring should only install:
---    - packages that are already installed (restoring them to their locked version if any)
---    - packages in `ensure_installed` *for the current env*
--- it should also not uninstall any packages
 local function restore()
-  local lock_data = json.from_file(M.lockfile_path)
+  ui.open() -- this will only open after installation
 
-  -- local pkg_utils = require("v.lsp.packages")
-  -- local ensure_installed = table.merge_lists({
-  --   pkg_utils.in_env(pkg_utils.servers),
-  --   pkg_utils.in_env(pkg_utils.formatters),
-  -- })
+  local lock_data = json.from_file(M.lockfile_path)
+  local started, finished_handles = {}, {}
 
   if not lock_data then
     notify("Lockfile does not exist.", vim.log.levels.ERROR)
@@ -122,27 +120,40 @@ local function restore()
   end
 
   restore_in_progress = true
+  notify("Attempting to restore packages from the lockfile.", vim.log.levels.INFO)
 
-  local ui = require("mason.ui")
-  ui.open()
+  -- restoring should only install packages that are already
+  -- installed (restoring them to their locked version if any)
+  -- or packages in `ensure_installed` *for the current env*
+  local to_install = table.merge_lists({
+    pkg_utils.in_env(pkg_utils.servers),
+    pkg_utils.in_env(pkg_utils.formatters),
+    vim.tbl_map(function(pkg)
+      local pkg_name = lsp_name_map.package_to_lspconfig[pkg.name] or pkg.name
+      return pkg:is_installed() and pkg_name or nil
+    end, registry.get_installed_packages()),
+  })
 
-  local started = {}
-  local finished_handles = {}
-
-  for name, version in pairs(lock_data) do
-    table.insert(started, name)
-
-    local pkg = registry.get_package(name)
-    local handle = pkg:install({
-      version = version,
-    })
-
-    handle:once("closed", function()
-      table.insert(finished_handles, name)
-    end)
+  -- remove unwanted packages
+  for pkg, _ in pairs(lock_data) do
+    local pkg_name = lsp_name_map.package_to_lspconfig[pkg] or pkg
+    if not vim.tbl_contains(to_install, pkg_name) then
+      lock_data[pkg] = nil
+    end
   end
 
-  local ok, status = vim.wait(1000 * 60, function()
+  -- install packages if they're not installed in the right version already
+  for name, version in pairs(lock_data) do
+    local pkg = registry.get_package(name)
+    if not pkg:is_installed() or pkg:get_installed_version() ~= version then
+      table.insert(started, name)
+      pkg:install({ version = version }):once("closed", function()
+        table.insert(finished_handles, name)
+      end)
+    end
+  end
+
+  local ok, status = vim.wait(1000 * 60 * 5, function()
     return #finished_handles == #started
   end, 300)
 
@@ -158,8 +169,16 @@ local function restore()
         vim.log.levels.ERROR
       )
     end
+  elseif #finished_handles > 0 then
+    notify(
+      #finished_handles .. " packages successfully restored from lockfile.",
+      vim.log.levels.INFO
+    )
   else
-    notify("Package versions successfully resotre from lockfile.", vim.log.levels.INFO)
+    notify(
+      "No packages required restoring, all were already installed in the correct version.",
+      vim.log.levels.INFO
+    )
   end
 
   restore_in_progress = false
