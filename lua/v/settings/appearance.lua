@@ -79,8 +79,8 @@ o.fillchars = {
 
 -- change cursor shape depending on mode
 o.guicursor = {
-  "n-v-c-sm:block",
-  "i-ci-ve:ver25",
+  "n-v-sm:block",
+  "i-ci-c-ve:ver25",
   "r-cr-o:hor20",
 }
 

@@ -40,6 +40,7 @@
   "material.nvim": { "branch": "main", "commit": "0004ec60f91d581d47563a39f7dac62cb758f7ea" },
   "no-neck-pain.nvim": { "branch": "main", "commit": "ecdfe60f23134089fac92659e688b65fdd8b5cc0" },
   "nord.nvim": { "branch": "master", "commit": "80c1e5321505aeb22b7a9f23eb82f1e193c12470" },
+  "normal-cmdline.nvim": { "branch": "main", "commit": "efc83f5b1abc1398b8058e563fdd5e34a3652803" },
   "nvim-autopairs": { "branch": "master", "commit": "4d74e75913832866aa7de35e4202463ddf6efd1b" },
   "nvim-cmp": { "branch": "main", "commit": "b5311ab3ed9c846b585c0c15b7559be131ec4be9" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "517df88cf2afb36652830df2c655df2da416a0ae" },

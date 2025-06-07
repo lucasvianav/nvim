@@ -202,6 +202,13 @@ local M = {
     event = "VeryLazy",
     commit = "bc0630e43be5699bb94dadc302c0d21615421d93",
   },
+
+  -- normal mode in cmdline
+  {
+    "jake-stewart/normal-cmdline.nvim",
+    event = "CmdlineEnter",
+    commit = "efc83f5b1abc1398b8058e563fdd5e34a3652803",
+  },
 }
 
 return require("v.lazy.loader").process_plugins(M, "general")
