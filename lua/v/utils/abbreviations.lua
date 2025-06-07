@@ -34,8 +34,9 @@ end
 ---@param mode "i"|"c"|"!" insert, cmdline or both
 ---@param lhs string abbreviation-trigger
 ---@param rhs string abbreviation-result
+---@param opts { buffer: boolean? }?
 ---@return nil
-M.abbreviate = function(mode, lhs, rhs)
+M.abbreviate = function(mode, lhs, rhs, opts)
   if not validate_mode(mode) then
     return
   elseif not type(lhs) == "string" or not type(rhs) == "string" then
@@ -46,14 +47,17 @@ M.abbreviate = function(mode, lhs, rhs)
     return
   end
 
+  opts = opts or {}
+
   if mode == "i" or mode == "!" then
     vim.api.nvim_command(("iabbrev %s %s"):format(lhs, rhs))
   end
 
   if mode == "c" or mode == "!" then
     local path = "v:lua.require(\"v.utils.abbreviations\").evaluate_cabbrev"
-    local cmd = "cabbrev <expr> %s %s(\"%s\", \"%s\")"
-    vim.api.nvim_command(cmd:format(lhs, path, lhs, rhs))
+    local buffer = opts.buffer and "<buffer> " or ""
+    local cmd = "cabbrev %s<expr> %s %s(\"%s\", \"%s\")"
+    vim.api.nvim_command(cmd:format(buffer, lhs, path, lhs, rhs))
   end
 end
 
