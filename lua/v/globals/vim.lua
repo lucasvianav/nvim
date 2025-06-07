@@ -11,3 +11,5 @@ vim.deprecate = function(...) ---@diagnostic disable-line
     return __vim_deprecate(...)
   end
 end
+
+vim.notify = require("v.utils.notifications").notify

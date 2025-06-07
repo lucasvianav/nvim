@@ -21,6 +21,7 @@
   "editorconfig-vim": { "branch": "master", "commit": "3c2813f2566d9392ff3614248c5db43c3fda9d5f" },
   "efmls-configs-nvim": { "branch": "main", "commit": "e071a098ac1e56e349af649c25e982348f5504e5" },
   "eyeliner.nvim": { "branch": "main", "commit": "8f197eb30cecdf4c2cc9988a5eecc6bc34c0c7d6" },
+  "fidget.nvim": { "branch": "main", "commit": "b61e8af9b8b68ee0ec7da5fb7a8c203aae854f2e" },
   "gitsigns.nvim": { "branch": "main", "commit": "8bdaccdb897945a3c99c1ad8df94db0ddf5c8790" },
   "harpoon": { "branch": "master", "commit": "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3" },
   "i3config.vim": { "branch": "master", "commit": "5c753c56c033d3b17e5005a67cdb9653bbb88ba7" },

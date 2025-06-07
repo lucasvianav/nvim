@@ -2,30 +2,14 @@
 -- TODO: https://github.com/rcarriga/nvim-notify?tab=readme-ov-file#usage
 
 local notify = require("notify")
+
 notify.setup({
   stages = "slide",
   merge_duplicates = true,
 })
 
-local banned_messages = {
-  "no manual entry for",
-  "No matching notification found to replace",
-  "method textDocument/codeAction is not supported by any of the servers registered for the current buffer",
-  "No signature help available",
-  "method textDocument/documentHighlight is not supported by any of the servers registered for the current buffer",
-  "[LSP] Format request failed, no matching language servers.",
-  "method textDocument/signatureHelp is not supported by any of the servers registered for the current buffer",
-  "\"\"",
-}
-
----@diagnostic disable-next-line: duplicate-set-field
-vim.notify = function(msg, ...)
-  for _, banned in ipairs(banned_messages) do
-    if msg:contains(banned) or #msg == 0 then
-      return
-    end
-  end
-  notify(msg, ...)
+if not v.plug.is_loaded("fidget.nvim") then
+  v.notify = notify
 end
 
 require("v.utils.commands").command(

@@ -17,3 +17,6 @@ _G.v.plug = {
   is_loaded = require("v.lazy.utils").is_loaded,
   load = require("v.lazy.utils").load,
 }
+
+_G.v.notify = vim.notify
+_G.v.augroup = require("v.utils.autocmds").augroup

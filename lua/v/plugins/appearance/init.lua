@@ -2,10 +2,17 @@
 
 ---@type LazyPluginSpec[]
 local M = {
+  -- low profile notifications (including for LSP progress)
+  {
+    "j-hui/fidget.nvim",
+    version = "1.*",
+  },
+
   -- beautiful notifications
   {
     "rcarriga/nvim-notify",
     version = "3.*",
+    lazy = true, -- will be loaded by fidget.nvim
   },
 
   -- preserve window sizes on terminal resize
