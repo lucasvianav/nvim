@@ -22,3 +22,6 @@ TODO:
 - https://www.reddit.com/r/neovim/comments/qbmbj8/cosmicnvim_a_lightweight_and_opinionated_neovim/
 - https://www.youtube.com/channel/UCXPHFM88IlFn68OmLwtPmZA
 - https://www.youtube.com/watch?v=brtIZxOwDXE
+- https://github.com/ThePrimeagen/refactoring.nvim
+- https://github.com/nvim-neotest/neotest
+- https://github.com/sindrets/dotfiles/blob/master/.config/nvim/lua/user/oop.lua

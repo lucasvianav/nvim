@@ -1,5 +1,3 @@
--- TODO: https://github.com/akinsho/dotfiles/blob/f714d4cdd2de74c7393ca3ae69bdbb3619e06174/.config/nvim/lua/as/globals.lua#L211-L243
-
 local M = {}
 
 local util = require("v.utils.tables")
@@ -9,7 +7,7 @@ local util = require("v.utils.tables")
 ---@param autocmds Autocmd[] will be unpacked and passed to nvim_create_autocmd
 ---@param opts? vim.api.keyset.create_autocmd
 ---@return nil
-M.augroup = function(name, autocmds, opts)
+function M.augroup(name, autocmds, opts)
   if type(name) ~= "string" or type(autocmds) ~= "table" then
     vim.notify("Invalid parameter(s).", vim.log.levels.ERROR, {
       title = "Augroups",

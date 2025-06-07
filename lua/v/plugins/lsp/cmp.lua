@@ -86,7 +86,7 @@ cmp.setup({
     }),
 
     -- select completion
-    ["<C-y>"] = cmp.mapping.confirm({ select = false }),
+    ["<cr>"] = cmp.mapping.confirm({ select = false }),
     ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
     ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
 

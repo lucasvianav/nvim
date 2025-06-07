@@ -61,6 +61,12 @@ set_keybindings({
   -- rerun the last command
   { "n", "<leader><leader>c", ":<up><cr>" },
 
+  -- vim-visual-increment
+  { "n", "<c-a>", "g<c-a>" },
+  { "n", "<c-x>", "g<c-x>" },
+  { "n", "g<c-a>", "<c-a>" },
+  { "n", "g<c-x>", "<c-x>" },
+
   -- FIXME: how to not get delay?
   -- insert escaped '/' while inputting a search pattern (by akisho)
   -- { 'c', '/', [[getcmdtype() == "/" ? "\\/" : "/"]], { expr = true } },

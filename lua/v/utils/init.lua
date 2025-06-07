@@ -133,11 +133,11 @@ M.exec_line_or_make = function()
     command = "lua << EOF\n" .. table.concat(command, "\n") .. "\nEOF"
   end
 
-  local ok, _ = pcall(vim.api.nvim_exec, command, false)
+  local ok, err = pcall(vim.api.nvim_exec2, command, { output = false })
 
   local file = string.gsub(vim.api.nvim_buf_get_name(0), [[^.+/(%w+/%w+)]], "%1")
   vim.notify(
-    ("Executed %s, %s."):format(file, line),
+    ("Executed %s, %s."):format(file, line) .. (ok and "" or ("\n[Error]: %s"):format(err)),
     ok and vim.log.levels.INFO or vim.log.levels.ERROR,
     { title = "Line Execution" }
   )

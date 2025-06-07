@@ -22,11 +22,11 @@ function string:contains(pattern)
   return self:find(pattern, 1, true) ~= nil
 end
 
----@param str string
+---@param self string
 ---@param pattern string
 ---@return boolean
-function string.starts_with(str, pattern)
-  return str:sub(1, #pattern) == pattern
+function string:starts_with(pattern)
+  return self:sub(1, #pattern) == pattern
 end
 
 ---@param self string
@@ -34,4 +34,15 @@ end
 ---@return boolean
 function string:ends_with(pattern)
   return self:sub(-#pattern) == pattern
+end
+
+---@param self string
+---@return boolean?
+function string:to_boolean()
+  if self == "true" then
+    return true
+  elseif self == "false" then
+    return false
+  end
+  return nil
 end

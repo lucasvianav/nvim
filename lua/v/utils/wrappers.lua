@@ -98,9 +98,8 @@ end
 ---@param list string[]
 ---@return string[]
 M.expand_in_list = function(list)
-  local with_symlinks = vim.tbl_map(vim.fn.expand, list)
-  local no_symlink = vim.tbl_map(path.resolve, list)
-
+  local with_symlinks = vim.tbl_map(vim.fs.abspath, list)
+  local no_symlink = vim.tbl_map(vim.fn.resolve, with_symlinks)
   return tbl_utils.list_distinct(tbl_utils.merge_lists({ with_symlinks, no_symlink }))
 end
 

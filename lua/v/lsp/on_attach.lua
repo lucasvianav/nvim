@@ -1,5 +1,3 @@
--- TODO: https://github.com/hrsh7th/nvim-cmp/issues/465#issuecomment-981159946
-
 local M = {}
 
 ---Disable formatting capabilities for a client

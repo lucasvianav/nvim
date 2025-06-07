@@ -1,3 +1,5 @@
+-- TODO: https://github.com/akinsho/dotfiles/blob/main/.config/nvim/lua/as/globals.lua
+
 ---personal namespace
 _G.v = {}
 

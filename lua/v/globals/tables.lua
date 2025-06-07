@@ -83,3 +83,16 @@ function table.join(tbl, sep, pred)
 
   return res
 end
+
+---@param tbl table
+---@return any[]
+function table.distinct(tbl)
+  local hash, res = {}, {}
+  for _, it in ipairs(tbl) do
+    if not hash[it] then
+      table.insert(res, it)
+      hash[it] = true
+    end
+  end
+  return res
+end
