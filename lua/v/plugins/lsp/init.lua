@@ -73,6 +73,7 @@ local M = {
   },
 
   -- code completion
+  -- TODO: https://github.com/saghen/blink.cmp
   {
     "hrsh7th/nvim-cmp",
     dependencies = {

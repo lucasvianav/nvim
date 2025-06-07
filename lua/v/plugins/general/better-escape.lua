@@ -1,16 +1,9 @@
 require("better_escape").setup({
-  default = false,
+  default_mappings = false,
   mappings = {
     i = { -- mode
       j = { -- first key
         k = "<Esc>", -- second key -> action
-        j = nil,
-      },
-    },
-    v = {
-      j = {
-        k = "<Esc>",
-        j = nil,
       },
     },
   },

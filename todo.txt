@@ -1,8 +1,11 @@
 TODO:
 - https://github.com/100lvlmaster/dots/tree/master
+- https://github.com/Hashino/doing.nvim
+- https://github.com/I60R/page
 - https://github.com/LazyVim/LazyVim
 - https://github.com/LunarVim/LunarVim
 - https://github.com/NvChad/NvChad
+- https://github.com/ThePrimeagen/refactoring.nvim
 - https://github.com/akinsho/dotfiles/blob/main/.config/nvim
 - https://github.com/albingroen/nvim-lsp-typescript-config
 - https://github.com/ayamir/nvimdots
@@ -13,15 +16,20 @@ TODO:
 - https://github.com/kabouzeid
 - https://github.com/kyle-mccarthy/nvim-dotfiles
 - https://github.com/lewis6991/dotfiles/tree/master/config/nvim
+- https://github.com/lucc/nvimpager
 - https://github.com/lukas-reineke/dotfiles/tree/master/vim
+- https://github.com/m4xshen/hardtime.nvim
+- https://github.com/nvim-neotest/neotest
+- https://github.com/obsidian-nvim/obsidian.nvim
 - https://github.com/rockerBOO/dotfiles/tree/current/config/nvim
 - https://github.com/shaeinst/roshnivim
+- https://github.com/sindrets/dotfiles/blob/master/.config/nvim/lua/user/oop.lua
 - https://github.com/tjdevries/config_manager/tree/master/xdg_config/nvim
 - https://github.com/tjdevries/lazy-require.nvim
+- https://github.com/yetone/avante.nvim
 - https://spacevim.org/SpaceVim-release-v1.8.0/#.YVsDlG_4ps8.reddit
 - https://www.reddit.com/r/neovim/comments/qbmbj8/cosmicnvim_a_lightweight_and_opinionated_neovim/
+- https://www.youtube.com/@GregHurrell/videos
 - https://www.youtube.com/channel/UCXPHFM88IlFn68OmLwtPmZA
 - https://www.youtube.com/watch?v=brtIZxOwDXE
-- https://github.com/ThePrimeagen/refactoring.nvim
-- https://github.com/nvim-neotest/neotest
-- https://github.com/sindrets/dotfiles/blob/master/.config/nvim/lua/user/oop.lua
+- https://www.youtube.com/watch?v=rerTvidyz-0
