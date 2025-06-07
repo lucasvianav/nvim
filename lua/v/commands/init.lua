@@ -1,6 +1,3 @@
--- TODO: write command to clear swap files
--- TODO: write command to delete current file's swap file
-
 require("v.commands.abbreviations")
 
 require("v.utils.commands").set_commands({

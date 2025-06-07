@@ -65,10 +65,14 @@ cmp.setup({
     ghost_text = true,
   },
   mapping = {
+    -- scroll docs
     ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+
+    -- trigger completion
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 
+    -- abort
     ["<Esc>"] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmdline_escape,
@@ -80,11 +84,14 @@ cmp.setup({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
-    ["<CR>"] = cmp.mapping.confirm({ select = false }),
+
+    -- select completion
+    ["<C-y>"] = cmp.mapping.confirm({ select = false }),
     ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
     ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
 
-    ["<C-Tab>"] = cmp.mapping({
+    -- expand snippets
+    ["<Tab>"] = cmp.mapping({
       i = function(fallback)
         if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
           vim.fn["UltiSnips#JumpForwards"]()
@@ -93,16 +100,7 @@ cmp.setup({
         end
       end,
     }),
-    ["<M-Tab>"] = cmp.mapping({
-      i = function(fallback)
-        if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-          vim.fn["UltiSnips#JumpForwards"]()
-        else
-          fallback()
-        end
-      end,
-    }),
-    ["<M-S-Tab>"] = cmp.mapping({
+    ["<S-Tab>"] = cmp.mapping({
       i = function(fallback)
         if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
           vim.fn["UltiSnips#JumpBackwards"]()
@@ -110,26 +108,6 @@ cmp.setup({
           fallback()
         end
       end,
-    }),
-    ["<Tab>"] = cmp.mapping({
-      i = function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-        else
-          fallback()
-        end
-      end,
-      c = cmp.mapping.select_next_item(),
-    }),
-    ["<S-Tab>"] = cmp.mapping({
-      i = function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-        else
-          fallback()
-        end
-      end,
-      c = cmp.mapping.select_prev_item(),
     }),
   },
   sources = cmp.config.sources({
