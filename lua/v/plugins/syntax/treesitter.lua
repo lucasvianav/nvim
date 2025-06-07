@@ -59,6 +59,14 @@ treesitter.setup({
     enable = true,
     extended_mode = true,
   },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<m-v>",
+      node_incremental = "<tab>",
+      node_decremental = "<s-tab>",
+    },
+  },
 })
 
 local indent_on = function()
