@@ -9,9 +9,8 @@ function M.with_prefix_if_dir(path, is_dir)
   if not is_dir then
     return path
   end
-
-  local prefix = path:starts_with("/") and oil_prefix:sub(1, #oil_prefix - 1) or oil_prefix
-  return prefix .. path
+  local leading_whitespace = path:match("^%s*") ---@type string
+  return leading_whitespace .. oil_prefix .. path:trim():gsub("^/", "")
 end
 
 ---@param filepath string
