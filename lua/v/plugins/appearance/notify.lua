@@ -6,6 +6,9 @@ local notify = require("notify")
 notify.setup({
   stages = "slide",
   merge_duplicates = true,
+  on_open = function(winnr)
+    vim.api.nvim_set_option_value("foldenable", false, { win = winnr })
+  end,
 })
 
 if not v.plug.is_loaded("fidget.nvim") then
