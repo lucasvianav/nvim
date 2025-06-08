@@ -1,4 +1,10 @@
--- TODO: https://github.com/pwntester/octo.nvim
+-- TODO: review PRs in nvim
+-- https://github.com/pwntester/octo.nvim
+-- https://github.com/ldelossa/gh.nvim
+-- https://medium.com/@cristianvg/quick-github-prs-searching-with-neovim-and-octo-18fd898da3dd
+-- https://github.com/natdm/pulls.nvim
+-- https://www.youtube.com/watch?v=hhrWwYfMK1I
+-- https://www.youtube.com/watch?v=VFESU67M4bk
 
 ---@module "lazy.types"
 

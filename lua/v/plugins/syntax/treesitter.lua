@@ -3,6 +3,10 @@
 -- TODO: https://www.reddit.com/r/neovim/comments/v3npcv/highlighting_graphql_template_strings_in_jsts/
 -- TODO: https://github.com/nvim-treesitter/nvim-treesitter-context
 
+-- TODO: how to have embedded languages in custom methods
+-- for example have require("v.utils.autocmds").augroup have the same highlighting
+-- as vim.api.nvim_create_autocmd (maybe https://www.youtube.com/watch?v=v3o9YaHBM4Q)
+
 -- READ: https://www.masteringemacs.org/article/tree-sitter-complications-of-parsing-languages
 
 -- list of desired treesitter parsers

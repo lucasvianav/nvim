@@ -123,19 +123,6 @@ local M = {
     commit = "dcbfe065297d31823561ba787f51056c147aa682",
   },
 
-  -- maps for toggling comments
-  -- TODO: swap for numToStr/Comment.nvim
-  -- TODO: https://www.reddit.com/r/neovim/comments/q6lq5o/commentnvim_features_go_brrrrr/hgcxcok/?utm_source=reddit&utm_medium=web2x&context=3
-  -- https://www.reddit.com/r/neovim/comments/r15nzf/commentnvim_3_treesitter_and_some_new_chef_kiss/
-  -- https://github.com/neovim/neovim/pull/28176
-  {
-    "tpope/vim-commentary",
-    cmd = { "Comment", "Commentary" },
-    keys = { "gc", "gcc", { "gc", mode = "x" } },
-    commit = "64a654ef4a20db1727938338310209b6a63f60c9",
-    enabled = false,
-  },
-
   -- align blocks of code
   -- ALT: echasnovski/mini.align
   {
