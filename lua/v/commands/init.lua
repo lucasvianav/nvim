@@ -18,5 +18,5 @@ require("v.utils.commands").set_commands({
   { "R", "lua require(\"v.utils\").reload_or_source_current()" },
 
   -- get filepath for current buffer
-  { "FP", "echo expand(\"%\")" },
+  { "FP", "= vim.fn.expand(\"%\")" },
 })

@@ -57,7 +57,7 @@ M.abbreviate = function(mode, lhs, rhs, opts)
     local path = "v:lua.require(\"v.utils.abbreviations\").evaluate_cabbrev"
     local buffer = opts.buffer and "<buffer> " or ""
     local cmd = "cabbrev %s<expr> %s %s(\"%s\", \"%s\")"
-    vim.api.nvim_command(cmd:format(buffer, lhs, path, lhs, rhs))
+    vim.api.nvim_command(cmd:format(buffer, lhs, path, vim.pesc(lhs), vim.pesc(rhs)))
   end
 end
 
