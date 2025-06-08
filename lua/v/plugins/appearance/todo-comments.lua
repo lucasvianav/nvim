@@ -21,6 +21,13 @@ require("v.utils.mappings").set_keybindings({
   {
     "n",
     "<leader>to",
-    "<cmd>TodoTelescope<cr>",
+    function()
+      local snacks_picker = require("snacks").picker["todo_comments"]
+      if snacks_picker then
+        snacks_picker({ keywords = { "TODO", "FIX", "FIXME" } })
+      else
+        vim.api.nvim_exec2("TodoTelescope", { output = false })
+      end
+    end,
   },
 })
