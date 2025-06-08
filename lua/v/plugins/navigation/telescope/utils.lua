@@ -32,9 +32,23 @@ local function process_shortcut_prompt(prompt, shrct_tbl)
     extensions = {},
     fzf_tokens = {},
     debug = {},
+    regex = "",
   }
+  local output_regexes, parts = {}, {}
 
-  for _, shortcut in ipairs(prompt:split()) do
+  -- local p = [[r=%< \S+%> @p r=%< \S+%> 2p+ r=%< \S+%>]]
+
+  -- this pattern is a shortcut that can have spaces within it
+  local pat = "%%<[^(%>)]-%%>"
+  local stripped_prompt = table.join(prompt:split("%s?" .. pat .. "%s?"), " ") or ""
+  for it in prompt:gmatch(pat) do
+    table.insert(parts, it)
+  end
+  for _, it in ipairs(stripped_prompt:trim():split()) do
+    table.insert(parts, it)
+  end
+
+  for _, shortcut in ipairs(parts) do
     if not shortcut or #shortcut == 0 then
       goto continue
     end
@@ -43,10 +57,10 @@ local function process_shortcut_prompt(prompt, shrct_tbl)
     local res --- Result of performing the shortcut's action
 
     if action == nil then
-      for regexes, action_it in pairs(shrct_tbl[1]) do
-        regexes = type(regexes) == "string" and { regexes } or regexes --[=[@as string[]]=]
-        for _, regex_it in ipairs(regexes) do
-          if shortcut:match(regex_it) then
+      for pats, action_it in pairs(shrct_tbl[1]) do
+        pats = type(pats) == "string" and { pats } or pats --[=[@as string[]]=]
+        for _, pat_it in ipairs(pats) do
+          if shortcut:match(pat_it) then
             action = action_it
             break
           end
@@ -104,8 +118,14 @@ local function process_shortcut_prompt(prompt, shrct_tbl)
         end
       end
 
+      -- debug
       if res.debug then
         table.insert(output.debug, res.debug == true and "parser" or res.debug)
+      end
+
+      -- regex
+      if res.regex and #res.regex > 0 then
+        table.insert(output_regexes, res.regex)
       end
     elseif type(res) == "string" then
       table.insert(output.globs, res)
@@ -136,6 +156,16 @@ local function process_shortcut_prompt(prompt, shrct_tbl)
     })
   end
 
+  if #output_regexes == 1 then
+    output.regex = output_regexes[1]
+  elseif #output_regexes > 1 then
+    output.regex = ("(%s)"):format(table.join(output_regexes, "|"))
+  end
+
+  if vim.tbl_contains(output.debug, "parser_shortcut_parts") then
+    P(parts)
+  end
+
   return output
 end
 
@@ -162,7 +192,7 @@ function M.process_prompt(prompt, shrct_tbl, shrct_sep)
     :rev()
 
   local shortcut_prompt = nil
-  if n_parts > 1 then
+  if n_parts > 1 or (n_parts == 1 and prompt:starts_with(shrct_sep)) then
     ---@type string
     shortcut_prompt = prompt_parts:pop():trim()
   end

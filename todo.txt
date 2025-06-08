@@ -34,3 +34,4 @@ TODO:
 - https://www.youtube.com/channel/UCXPHFM88IlFn68OmLwtPmZA
 - https://www.youtube.com/watch?v=brtIZxOwDXE
 - https://www.youtube.com/watch?v=rerTvidyz-0
+- https://github.com/polirritmico/neovim.conf

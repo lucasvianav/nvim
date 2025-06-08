@@ -60,6 +60,8 @@ function M.dump_inspection(...)
     end
   end
 
+  -- TODO: add new text to the same buffer instead of creating a new one
+  -- IF called from the same place (IN CODE, not from cmdline)
   local bufnr = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
   local winnr = vim.api.nvim_open_win(bufnr, true, { split = "below", win = 0 })

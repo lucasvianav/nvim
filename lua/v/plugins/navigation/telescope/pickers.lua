@@ -4,8 +4,11 @@ local actions = require("telescope.actions")
 local make_entry = require("telescope.make_entry")
 local pickers = require("telescope.pickers")
 local conf = require("telescope.config").values
-local sorters = require("v.plugins.navigation.telescope.sorters")
-local utils = require("v.plugins.navigation.telescope.utils")
+local v = {
+  actions = require("v.plugins.navigation.telescope.actions"),
+  sorters = require("v.plugins.navigation.telescope.sorters"),
+  utils = require("v.plugins.navigation.telescope.utils"),
+}
 
 -- TODO: directory fd and rg pickers to be used in oil buffers to open another directory
 
@@ -19,7 +22,7 @@ local ignored = {
 
 ---@return PickerShortcutTable
 local function get_shortcut_table()
-  local cur_buf = utils.path_expand_rel_to_cwd("%")
+  local cur_buf = v.utils.path_expand_rel_to_cwd("%")
   local cur_buf_dir = vim.fs.dirname(cur_buf)
 
   ---@type PickerShortcutTable
@@ -40,13 +43,20 @@ local function get_shortcut_table()
     ["."] = { path = cur_buf_dir }, -- curr buf's dir
     [".."] = { path = vim.fs.dirname(cur_buf_dir) }, -- curr buf's parent dir
     ["i"] = { flag = "--no-ignore" }, -- include ignored files
+    ["I"] = { flag = "--case-sensitive" }, -- include ignored files
 
     -- debuggers
+    ["@pp"] = { debug = "parser_shortcut_parts" },
     ["@p"] = { debug = "parser" },
     ["@s"] = { debug = "sorter" },
     ["@f"] = { debug = "finder" },
 
     {
+      ["^%%<[^(%>)]-%%>$"] = function(input)
+        local regex = input:match("^%%<([^(%>)]-)%%>$")
+        return { regex = regex }
+      end,
+
       ---Traverse the current buffer's directory (p2-, p-2, 2p-, 2-p, -2p, -p2, 3p, p3)
       [{ "^p[+-]?%d+[+-]?$", "^[+-]?%d+p[+-]?$", "^%d+[+-]?p$", "[+-]?p^%d+$" }] = function(input)
         local sign_1, count, sign_2 = input:match("^p?([+-]?)(%d+)p?([+-]?)p?$")
@@ -57,7 +67,7 @@ local function get_shortcut_table()
           return nil
         end
 
-        local path = utils.traverse_parents(cur_buf, n_dirs, sign == "-" and "right" or "left")
+        local path = v.utils.traverse_parents(cur_buf, n_dirs, sign == "-" and "right" or "left")
         return { path = path }
       end,
     },
@@ -145,18 +155,17 @@ local function get_additional_flags(opts)
   return flags
 end
 
----@param prompt string
 ---@param shortcut_tbl PickerShortcutTable
 ---@param shortcut_sep string?
----@return string[]
+---@return string[], string[]?
 local function get_rg_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
-  local cmd, p = { "rg" }, utils.process_prompt(prompt, shortcut_tbl, shortcut_sep)
+  local cmd, p = { "rg" }, v.utils.process_prompt(prompt, shortcut_tbl, shortcut_sep)
+  local shortcuts = (p.shortcuts or {})
 
-  if not p.search then
+  if not p.search and not shortcuts.regex then
     return table.merge_lists(cmd, get_rg_exclude_glob_flags()) --[=[@as string[]]=]
   end
 
-  local shortcuts = (p.shortcuts or {})
   local globs = vim
     .iter(shortcuts.globs or {})
     :map(function(it)
@@ -168,28 +177,28 @@ local function get_rg_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
 
   local res = table.merge_lists({ ---@type string[]
     cmd,
-    { "-e", p.search },
-    flags,
+    { "-e", (p.search or "") .. (shortcuts.regex or "") },
     #globs > 0 and globs or { "-g", "**" },
     get_rg_exclude_glob_flags(vim.tbl_contains(flags, "--no-ignore")),
   })
 
-  return PC(vim.tbl_contains(shortcuts.debug or {}, "finder"), res)
+  return PC(vim.tbl_contains(shortcuts.debug or {}, "finder"), res), flags
 end
 
 ---@param prompt string
 ---@param shortcut_tbl PickerShortcutTable
 ---@param shortcut_sep string?
----@return string[]
-local function get_fd_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
-  local cmd = { "fd", "--type", "f", "--full-path" }
-  local p = utils.process_prompt(prompt, shortcut_tbl, shortcut_sep)
+---@param dirs boolean?
+---@return string[], string[]?
+local function get_fd_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep, dirs)
+  local cmd = { "fd", "--type", dirs and "d" or "f", "--full-path" }
+  local p = v.utils.process_prompt(prompt, shortcut_tbl, shortcut_sep)
+  local shortcuts = (p.shortcuts or {})
 
-  if not p.search then
+  if not p.search and not shortcuts.regex then
     return table.merge_lists(cmd, get_fd_exclude_flags())
   end
 
-  local shortcuts = (p.shortcuts or {})
   local extensions = vim
     .iter(shortcuts.extensions or {})
     :map(function(it)
@@ -199,14 +208,13 @@ local function get_fd_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
     :totable()
   local res = table.merge_lists({
     cmd,
-    p.search,
+    (p.search or "") .. (shortcuts.regex or ""),
     shortcuts.paths or {},
     extensions,
-    shortcuts.flags or {},
     get_fd_exclude_flags(),
   })
 
-  return PC(vim.tbl_contains(shortcuts.debug or {}, "finder"), res)
+  return PC(vim.tbl_contains(shortcuts.debug or {}, "finder"), res), shortcuts.flags
 end
 
 ---@param options? table
@@ -219,7 +227,7 @@ local function get_picker_opts(options)
     case_mode = "smart_case",
     fuzzy = true,
   })
-  opts.cwd = utils.path_expand(opts.cwd)
+  opts.cwd = v.utils.path_expand(opts.cwd)
   return opts
 end
 
@@ -228,9 +236,10 @@ function M.multi_grep(options)
   local opts = get_picker_opts(options)
   local custom_grep = require("telescope.finders").new_async_job({
     command_generator = function(prompt)
+      local cmd, flags = get_rg_cmd_from_prompt(prompt, opts.shortcuts, opts.shortcut_sep)
       return vim
         .iter({
-          get_rg_cmd_from_prompt(prompt, opts.shortcuts, opts.shortcut_sep),
+          cmd,
           get_additional_flags(opts),
           {
             "--smart-case",
@@ -239,6 +248,7 @@ function M.multi_grep(options)
             "--line-number",
             "--column",
           },
+          flags,
         })
         :flatten()
         :totable()
@@ -253,7 +263,7 @@ function M.multi_grep(options)
       prompt_title = "~ grep ~",
       finder = custom_grep,
       previewer = conf.grep_previewer(opts),
-      sorter = sorters.funky_fzf(opts) or sorters.funky_fzy(opts),
+      sorter = v.sorters.funky_fzf(opts) or v.sorters.funky_fzy(opts),
       attach_mappings = function(_, map)
         map("i", "<c-space>", actions.to_fuzzy_refine)
         return true
@@ -270,17 +280,19 @@ function M.find_files_rg(options)
 
   if opts.search_dirs then
     for dir, path in pairs(opts.search_dirs) do
-      opts.search_dirs[dir] = utils.path_expand(path)
+      opts.search_dirs[dir] = v.utils.path_expand(path)
     end
   end
 
   local custom_find_files = require("telescope.finders").new_async_job({
     command_generator = function(prompt)
+      local cmd, flags = get_rg_cmd_from_prompt(prompt, opts.shortcuts, opts.shortcut_sep)
       return vim
         .iter({
-          get_rg_cmd_from_prompt(prompt, opts.shortcuts, opts.shortcut_sep),
+          cmd,
           get_additional_flags(opts),
           opts.search_file and { "-g", "*" .. opts.search_file .. "*" } or {},
+          flags,
           { "--files" },
         })
         :flatten()
@@ -297,7 +309,7 @@ function M.find_files_rg(options)
       finder = custom_find_files,
       __locations_input = true,
       previewer = conf.file_previewer(opts),
-      sorter = sorters.funky_fzf(opts) or conf.file_sorter(opts),
+      sorter = v.sorters.funky_fzf(opts) or conf.file_sorter(opts),
     })
     :find()
 end
@@ -306,10 +318,12 @@ end
 ---@param options? table
 function M.find_files_live_fd(options)
   local opts = get_picker_opts(options)
+  local dirs = opts.dirs
+  opts.dirs = nil
 
   if opts.search_dirs then
     for dir, path in pairs(opts.search_dirs) do
-      opts.search_dirs[dir] = utils.path_expand(path)
+      opts.search_dirs[dir] = v.utils.path_expand(path)
     end
   end
 
@@ -317,7 +331,7 @@ function M.find_files_live_fd(options)
     command_generator = function(prompt)
       return vim
         .iter({
-          get_fd_cmd_from_prompt(prompt, opts.shortcuts, opts.shortcut_sep),
+          get_fd_cmd_from_prompt(prompt, opts.shortcuts, opts.shortcut_sep, dirs),
           get_fd_exclude_flags(),
           get_additional_flags(opts),
           opts.search_file and { opts.search_file } or {},
@@ -332,11 +346,11 @@ function M.find_files_live_fd(options)
   pickers
     .new(opts, {
       debounce = 100,
-      prompt_title = "~ find files ~",
+      prompt_title = ("~ (live) find %s ~"):format(dirs and "directories" or "files"),
       finder = custom_find_files,
       __locations_input = true,
       previewer = conf.file_previewer(opts),
-      sorter = sorters.funky_fzf(opts) or sorters.funky_fzy(opts),
+      sorter = v.sorters.funky_fzf(opts) or v.sorters.funky_fzy(opts),
       attach_mappings = function(_, map)
         map("i", "<c-space>", actions.to_fuzzy_refine)
         return true
@@ -350,10 +364,12 @@ end
 ---@param options? table
 function M.find_files_fd(options)
   local opts = get_picker_opts(options)
+  local dirs = opts.dirs
+  opts.dirs = nil
 
   if opts.search_dirs then
     for dir, path in pairs(opts.search_dirs) do
-      opts.search_dirs[dir] = utils.path_expand(path)
+      opts.search_dirs[dir] = v.utils.path_expand(path)
     end
   end
 
@@ -361,7 +377,7 @@ function M.find_files_fd(options)
 
   local cmd = vim
     .iter({
-      get_fd_cmd_from_prompt("", { {} }, ""),
+      get_fd_cmd_from_prompt("", { {} }, "", dirs),
       get_fd_exclude_flags(),
       get_additional_flags(opts),
       opts.search_file and { opts.search_file } or {},
@@ -372,11 +388,23 @@ function M.find_files_fd(options)
   pickers
     .new(opts, {
       debounce = 100,
-      prompt_title = "~ find files ~",
+      prompt_title = ("~ find %s ~"):format(dirs and "directories" or "files"),
       finder = require("telescope.finders").new_oneshot_job(cmd, opts),
       __locations_input = true,
       previewer = conf.file_previewer(opts),
-      sorter = sorters.funky_fzf(opts, true) or sorters.funky_fzy(opts),
+      sorter = v.sorters.funky_fzf(opts, true) or v.sorters.funky_fzy(opts),
+      attach_mappings = function(_, map)
+        if dirs then
+          for _, mode in ipairs({ "n", "i" }) do
+            map(mode, "<cr>", v.actions.open_with_oil)
+            map(mode, "<c-t>", v.actions.open_with_oil("tab"))
+            map(mode, "<c-s>", v.actions.open_with_oil("hor"))
+            map(mode, "<c-h>", v.actions.open_with_oil("hor"))
+            map(mode, "<c-v>", v.actions.open_with_oil("vert"))
+          end
+        end
+        return true
+      end,
     })
     :find()
 end

@@ -1,4 +1,5 @@
---TODO: https://github.com/stevearc/oil.nvim/blob/master/doc/recipes.md#hide-gitignored-files-and-show-git-tracked-hidden-files
+-- TODO: https://github.com/stevearc/oil.nvim/blob/master/doc/recipes.md#hide-gitignored-files-and-show-git-tracked-hidden-files
+-- TODO: find a way to have this be the default file explorer but still keep netrw working for https:// files
 
 local oil = require("oil")
 

@@ -14,9 +14,9 @@ v.augroup("ClearCommandline", {
         timer:stop()
         timer:start(5000, 0, function()
           if vim.api.nvim_get_mode().mode == "n" then
-            vim.schedule(vim.schedule_wrap(function()
+            vim.schedule(function()
               vim.api.nvim_exec2("echon ''", { output = false })
-            end))
+            end)
           end
         end)
       end,

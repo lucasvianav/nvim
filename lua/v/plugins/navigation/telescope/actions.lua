@@ -40,6 +40,22 @@ local function get_selected_entry_filename()
   return sections[1]
 end
 
+---@overload fun(bufnr: integer): nil
+---@overload fun(split?: "tab"|"vert"|"hor"): fun(bufnr: integer): nil
+function M.open_with_oil(arg)
+  local split = type(arg) == "string" and arg or nil
+  local buf = type(arg) == "number" and arg or nil
+  local fn = function(bufnr)
+    local path = get_selected_entry_filename()
+    actions.close(bufnr)
+    if split then
+      vim.api.nvim_exec2(split .. " split", { output = false })
+    end
+    require("oil").open(path)
+  end
+  return buf and fn(buf) or fn
+end
+
 ---@param type 'abs'|'rel'|'name'
 local function copy_path(type)
   local path = get_selected_entry_filename()

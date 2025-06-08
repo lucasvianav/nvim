@@ -23,8 +23,9 @@
 ---@field extension? string
 ---@field extensions? string[]
 ---@field debug? boolean|PickerDebugTarget true = "parser"
+---@field regex? string meant to be passed to the live finder
 
----@alias PickerDebugTarget "parser"|"sorter"|"finder"
+---@alias PickerDebugTarget "parser"|"sorter"|"finder"|"parser_shortcut_parts"
 
 ---@alias PickerShortcutDefinition PickerShortcutAction|fun(shortcut: string): PickerShortcutAction?
 
@@ -39,3 +40,4 @@
 ---@field extensions string[]
 ---@field fzf_tokens string[]
 ---@field debug PickerDebugTarget[]
+---@field regex string meant to be passed to the live finder

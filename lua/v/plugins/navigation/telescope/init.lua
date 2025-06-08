@@ -112,6 +112,16 @@ v.searchers = require("v.plugins.navigation.telescope.searchers")
 require("v.utils.mappings").set_keybindings({
   -- search files and text
   { "n", "<Leader>ff", v.pickers.find_files_fd, desc = "Find Files" },
+  {
+    "n",
+    "<Leader>fy",
+    function(opts)
+      v.pickers.find_files_fd(vim.tbl_extend("force", opts or {}, {
+        dirs = true,
+      }))
+    end,
+    desc = "Find Directories",
+  },
   { "n", "<Leader>fl", v.pickers.find_files_live_fd, desc = "Find Files (live)" },
   { "n", "<Leader>fpp", v.pickers.multi_grep, desc = "Grep" },
 

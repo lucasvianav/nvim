@@ -14,8 +14,15 @@ require("v.utils").set_viml_options("loaded", {
   "matchparen",
   "logiPat",
   "rrhelper",
-  -- 'netrw',
+  -- "netrw",
   -- 'netrwPlugin',
   -- 'netrwSettings',
   -- 'netrwFileHandlers',
+}, 1)
+
+-- config netrw
+require("v.utils").set_viml_options("netrw", {
+  fastbrowse = 2,
+  keepj = "keepj",
+  altfile = true,
 }, 1)

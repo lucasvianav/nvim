@@ -8,9 +8,9 @@ cmd.setup({
     ["<c-c>"] = cmd.cancel,
     ["<c-f>"] = function()
       vim.api.nvim_feedkeys("i", "nt", true)
-      vim.schedule(vim.schedule_wrap(function()
+      vim.schedule(function()
         vim.api.nvim_feedkeys(t("<c-f>"), "n", false)
-      end))
+      end)
     end,
     [":"] = cmd.reset,
   },
