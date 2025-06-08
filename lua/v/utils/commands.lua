@@ -48,27 +48,4 @@ M.set_commands = function(args)
   end
 end
 
----Clear commandline messages after a few seconds.
----@see http://unix.stackexchange.com/a/613645
----@see https://github.com/akinsho/dotfiles/blob/f714d4cdd2de74c7393ca3ae69bdbb3619e06174/.config/nvim/plugin/autocommands.lua#L130-L156
----@return function
-M.clear_cmdline = function()
-  --- Track the timer object and stop any previous timers before setting
-  --- a new one so that each change waits for 10secs and that 10secs is
-  --- deferred each time
-  local timer
-
-  return function()
-    if timer then
-      timer:stop()
-    end
-
-    timer = vim.defer_fn(function()
-      if vim.api.nvim_get_mode().mode == "n" then
-        vim.api.nvim_command([[echon '']])
-      end
-    end, 10000)
-  end
-end
-
 return M

@@ -26,7 +26,8 @@ o.sidescrolloff = 5 -- number of screen columns around cursor
 o.signcolumn = "yes:2" -- always display 2 signcolumns
 o.termguicolors = true -- true color support
 o.wrap = false -- don't wrap lines by default
-o.cmdwinheight = 1 -- height for cmdline-window
+o.cmdheight = 1 -- height for the cmdline
+o.cmdwinheight = 5 -- height for the cmdline window (q:, :<c-f>)
 
 M.colorscheme = "tokyonight"
 

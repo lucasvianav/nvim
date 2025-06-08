@@ -29,4 +29,3 @@ spaces_inside_table_braces:         true
 tab_width:                          4
 table_sep:                          ","
 use_tab:                            false
-
