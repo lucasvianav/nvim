@@ -60,28 +60,28 @@ require("v.utils.mappings").set_keybindings({
   },
   {
     "n",
-    "<c-s-h>",
+    "<c-m-h>",
     function()
       mark.set_current_at(1)
     end,
   },
   {
     "n",
-    "<s-nl>",
+    "<m-nl>",
     function()
       mark.set_current_at(2)
     end,
   },
   {
     "n",
-    "<c-s-k>",
+    "<c-m-k>",
     function()
       mark.set_current_at(3)
     end,
   },
   {
     "n",
-    "<c-s-l>",
+    "<c-m-l>",
     function()
       mark.set_current_at(4)
     end,
