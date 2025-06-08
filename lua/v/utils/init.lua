@@ -10,16 +10,6 @@ M.colors = require("v.utils.colors")
 -- TODO: function to read last 500 lines from lsp log
 -- TODO: https://gitlab.com/yorickpeterse/dotfiles/-/blob/c2fd334e7690b1955a59b9f3f92149dbfb88f9f8/dotfiles/.config/nvim/lua/dotfiles/abbrev.lua
 
----Deletes all trailing whitespaces in a file if it's not binary nor a diff.
-function M.trim_trailing_whitespaces()
-  local o = vim.o
-  if not o.binary and o.filetype ~= "diff" then
-    local current_view = fn.winsaveview()
-    cmd([[keeppatterns %s/\s\+$//e]])
-    fn.winrestview(current_view)
-  end
-end
-
 ---Return the path to the current lua file inside `nvim/lua/` in order to require it.
 local function _get_current_require_path()
   local filepath = vim.api.nvim_buf_get_name(0)
