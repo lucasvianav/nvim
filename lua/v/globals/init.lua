@@ -28,9 +28,7 @@ function _G.PC(cond, ...)
   return ...
 end
 
-function _G.D(...)
-  return wrappers.dump_text(...)
-end
+_G.D = wrappers.dump_inspection
 
 -- load string globals
 require("v.globals.string")

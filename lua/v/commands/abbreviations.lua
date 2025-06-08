@@ -57,4 +57,5 @@ require("v.utils.abbreviations").set_abbreviations({
   -- other plugins
   { "DO", "DiffviewOpen" },
   { "DH", "DiffviewFileHistory" },
+  { "%", "FP" },
 }, "c")

@@ -38,6 +38,9 @@ function M.get_path_parts(filepath)
       "Makefile",
     }) or vim.env.HOME
   end
+  if not root or not filepath:starts_with(root) then
+    root = ""
+  end
 
   local root_dir = vim.fs.basename(root or "")
   local relpath = (root and vim.fs.relpath(root, filepath) or filepath):split("/")

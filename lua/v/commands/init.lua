@@ -1,4 +1,5 @@
 require("v.commands.abbreviations")
+require("v.commands.messages")
 
 require("v.utils.commands").set_commands({
   -- how many times does this pattern appear in the file
@@ -13,7 +14,7 @@ require("v.utils.commands").set_commands({
   { "LQF", "lua vim.diagnostic.setqflist()" },
 
   -- wrappers
-  { "P", "lua require(\"v.utils.wrappers\").inspect(<args>)", { nargs = 1 } },
+  { "P", "lua require(\"v.utils.wrappers\").inspect(<args>)", { nargs = 1, complete = "lua" } },
   { "R", "lua require(\"v.utils\").reload_or_source_current()" },
 
   -- get filepath for current buffer

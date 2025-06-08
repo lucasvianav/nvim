@@ -44,22 +44,32 @@ function M.inspect(...)
   return ...
 end
 
----Dump contents of an object below the cursor. Wraps `print(vim.inspect(args))`.
----@sources:
---- - https://github.com/akinsho/dotfiles/blob/148d1b720b296ad9ef6943da4e7b9d2c4f86c59b/.config/nvim/lua/as/globals.lua#L93-L109
---- - https://www.reddit.com/r/neovim/comments/p84iu2/useful_functions_to_explore_lua_objects/
 ---@vararg any
-function M.dump_text(...)
-  local objects, v = {}, nil
-  for i = 1, select("#", ...) do
-    v = select(i, ...)
-    table.insert(objects, vim.inspect(v))
+function M.dump_inspection(...)
+  local args, lines = { ... }, {}
+
+  for _, it in ipairs(args) do
+    local str = type(it) == "string" and it or M.format_for_inspection(it)
+    local it_lines = str:trim():split("\n")
+    for _, line in ipairs(it_lines) do
+      if line:match("%S") then
+        table.insert(lines, line)
+      end
+    end
   end
 
-  local lines = vim.split(table.concat(objects, "\n"), "\n")
-  local lnum = vim.api.nvim_win_get_cursor(0)[1]
-  vim.fn.append(lnum, lines)
-  return ...
+  local bufnr = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+  local winnr = vim.api.nvim_open_win(bufnr, true, { split = "below", win = 0 })
+  vim.api.nvim_win_set_cursor(winnr, { vim.api.nvim_buf_line_count(bufnr), 0 })
+
+  vim.api.nvim_buf_set_name(bufnr, ("[dump_%d]"):format(bufnr))
+  vim.api.nvim_set_option_value("modified", false, { buf = bufnr })
+  vim.api.nvim_set_option_value("modified", false, { buf = bufnr })
+  vim.api.nvim_set_option_value("wrap", true, { win = winnr })
+  vim.api.nvim_set_option_value("filetype", "v_dump", { buf = bufnr })
+  vim.api.nvim_set_option_value("buftype", "nofile", { buf = bufnr })
+  vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = bufnr })
 end
 
 ---Reload a lua module using Plenary.

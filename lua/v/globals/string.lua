@@ -94,3 +94,11 @@ end
 function string:wrap(width)
   return table.join(self:split(width), "\n") or ""
 end
+
+---@param self string
+function string:take_if_not_blank()
+  if #self:trim() == 0 then
+    return nil
+  end
+  return self
+end
