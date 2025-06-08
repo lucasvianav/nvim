@@ -1,2 +1,1 @@
-vim.opt_local.foldenable = false
-vim.opt_local.foldlevel = 99
+vim.api.nvim_set_option_value("filetype", "markdown", { buf = vim.api.nvim_win_get_buf(0) })

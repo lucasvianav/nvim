@@ -129,16 +129,6 @@ require("v.utils.mappings").set_keybindings({
   { "n", "<Leader>gc", builtin.git_commits, desc = "Git Commits" },
   { "n", "<Leader>gs", builtin.git_status, desc = "Git Status" },
 
-  -- extensions
-  {
-    "n",
-    "<leader>fN",
-    function()
-      telescope.extensions.notify.notify(v.themes.ivy)
-    end,
-    desc = "Notifications",
-  },
-
   -- custom functions
   { "n", "<leader>fn", v.searchers.find_nvim, desc = "Find Neovim Dotfiles" },
   { "n", "<leader>fk", v.searchers.find_in_plugins, desc = "Find Plugins" },

@@ -38,6 +38,7 @@ end
 --- - https://github.com/akinsho/dotfiles/blob/148d1b720b296ad9ef6943da4e7b9d2c4f86c59b/.config/nvim/lua/as/globals.lua#L93-L109
 --- - https://www.reddit.com/r/neovim/comments/p84iu2/useful_functions_to_explore_lua_objects/
 ---@vararg any
+---@return any
 function M.inspect(...)
   local formatted = M.format_for_inspection(...)
   print(formatted)
@@ -45,6 +46,7 @@ function M.inspect(...)
 end
 
 ---@vararg any
+---@return any
 function M.dump_inspection(...)
   local args, lines = { ... }, {}
 
@@ -70,6 +72,8 @@ function M.dump_inspection(...)
   vim.api.nvim_set_option_value("filetype", "v_dump", { buf = bufnr })
   vim.api.nvim_set_option_value("buftype", "nofile", { buf = bufnr })
   vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = bufnr })
+
+  return ...
 end
 
 ---Reload a lua module using Plenary.

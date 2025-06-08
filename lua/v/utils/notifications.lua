@@ -20,9 +20,18 @@ local override_level = {
   ["No results found for `lsp_definitions`"] = vim.log.levels.DEBUG,
 }
 
+local level_description = {
+  [vim.log.levels.TRACE] = "Trace",
+  [vim.log.levels.DEBUG] = "Debug",
+  [vim.log.levels.INFO] = "Information",
+  [vim.log.levels.WARN] = "Warning",
+  [vim.log.levels.ERROR] = "Error",
+  [vim.log.levels.OFF] = "[???] Off",
+}
+
 ---@param msg string
----@param level vim.log.levels
----@param opts notify.Options | Options
+---@param level vim.log.levels?
+---@param opts (notify.Options | Options)?
 function M.notify(msg, level, opts)
   if #msg == 0 then
     return
@@ -40,6 +49,10 @@ function M.notify(msg, level, opts)
       break
     end
   end
+
+  level = level or vim.log.levels.INFO
+  opts = opts or {}
+  opts.title = opts.title or level_description[level]
 
   v.notify(msg, level, opts)
 end

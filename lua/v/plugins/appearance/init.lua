@@ -13,6 +13,8 @@ local M = {
     "rcarriga/nvim-notify",
     version = "3.*",
     lazy = true, -- will be loaded by fidget.nvim
+    keys = "<leader>fN",
+    cmd = "Notifications",
   },
 
   -- preserve window sizes on terminal resize
