@@ -30,6 +30,16 @@ require("lualine").setup({
     component_separators = "",
     section_separators = { left = "", right = "" },
     globalstatus = false,
+    disabled_filetypes = {
+      "DiffviewFiles",
+      "NvimTree",
+      "qf",
+      "terminal",
+      "spectre_panel",
+      "lazy",
+      "dashboard",
+      "gitcommit",
+    },
   },
   sections = {
     lualine_a = {
