@@ -1,22 +1,17 @@
 name: Linting
-
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
-
+    branches: ['main']
 env:
   CARGO_TERM_COLOR: always
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Install stylua
-      run: cargo install stylua
-    - name: Run linter
-      run: stylua -f .stylua.toml -g '*.lua' -- .
+      - uses: actions/checkout@v3
+      - name: Install stylua
+        run: cargo install stylua
+      - name: Run linter
+        run: stylua -f .stylua.toml -g '*.lua' -- .

@@ -5,6 +5,7 @@ TODO:
 - https://github.com/LazyVim/LazyVim
 - https://github.com/LunarVim/LunarVim
 - https://github.com/NvChad/NvChad
+- https://github.com/ThePrimeagen/init.lua/tree/master
 - https://github.com/ThePrimeagen/refactoring.nvim
 - https://github.com/akinsho/dotfiles/blob/main/.config/nvim
 - https://github.com/albingroen/nvim-lsp-typescript-config
