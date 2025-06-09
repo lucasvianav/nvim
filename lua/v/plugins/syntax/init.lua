@@ -140,6 +140,14 @@ local M = {
     dependencies = "nvim-treesitter",
     commit = "56c714495ec7f40cf2c7e92fb124067c7951e650",
   },
+
+  -- highlighting for log files
+  {
+    "MTDL9/vim-log-highlighting",
+    event = { "BufEnter *.log", "BufEnter *_log" },
+    ft = "log",
+    version = "1.*",
+  },
 }
 
 return require("v.lazy.loader").process_plugins(M, "syntax")

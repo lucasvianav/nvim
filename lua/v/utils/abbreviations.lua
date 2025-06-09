@@ -25,7 +25,7 @@ end
 M.evaluate_cabbrev = function(lhs, rhs)
   local is_ex = vim.fn.getcmdtype() == ":"
   local cmd = vim.fn.getcmdline()
-  local should_expand = cmd:match("^" .. lhs) or cmd:match("|%s*" .. lhs)
+  local should_expand = cmd:match("^" .. vim.pesc(lhs)) or cmd:match("|%s*" .. vim.pesc(lhs))
 
   return (is_ex and should_expand) and rhs or lhs
 end
@@ -57,7 +57,7 @@ M.abbreviate = function(mode, lhs, rhs, opts)
     local path = "v:lua.require(\"v.utils.abbreviations\").evaluate_cabbrev"
     local buffer = opts.buffer and "<buffer> " or ""
     local cmd = "cabbrev %s<expr> %s %s(\"%s\", \"%s\")"
-    vim.api.nvim_command(cmd:format(buffer, lhs, path, vim.pesc(lhs), vim.pesc(rhs)))
+    vim.api.nvim_exec2(cmd:format(buffer, lhs, path, lhs, rhs), { output = false })
   end
 end
 

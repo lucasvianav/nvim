@@ -12,7 +12,6 @@ require("typescript-tools").setup(vim.tbl_deep_extend("keep", config, {
     tsserver_max_memory = 8192,
     publish_diagnostic_on = "insert_leave",
     expose_as_code_action = {},
-    -- described below
     tsserver_format_options = {
       insertSpaceAfterCommaDelimiter = true,
       insertSpaceAfterSemicolonInForStatements = true,
@@ -44,7 +43,13 @@ require("typescript-tools").setup(vim.tbl_deep_extend("keep", config, {
       jsxAttributeCompletionStyle = "braces",
       displayPartsForJSDoc = true,
       generateReturnInDocTemplate = true,
-      includeInlayParameterNameHints = "all",
+      includeInlayParameterNameHints = "none",
+      includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+      includeInlayFunctionParameterTypeHints = false,
+      includeInlayVariableTypeHints = false,
+      includeInlayPropertyDeclarationTypeHints = false,
+      includeInlayFunctionLikeReturnTypeHints = false,
+      includeInlayEnumMemberValueHints = false,
     },
     tsserver_locale = "en",
     complete_function_calls = false,

@@ -3,6 +3,7 @@
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/tmux/.tmux.conf
 -- TODO: https://github.com/akinsho/dotfiles/blob/main/tmux/tmux-status.conf
 -- TODO: https://www.reddit.com/r/neovim/comments/r0omlv/start_your_search_from_a_more_comfortable_place/
+-- TODO: script + hooks to change themes on terminal emulator, tmux, nvim and fzf at the same time
 
 local colors = require("v.utils").colors
 local o = vim.opt
