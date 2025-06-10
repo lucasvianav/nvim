@@ -12,6 +12,7 @@ local banned_messages = {
   "method textDocument/codeAction is not supported by any of the servers registered for the current buffer",
   "method textDocument/documentHighlight is not supported by any of the servers registered for the current buffer",
   "method textDocument/signatureHelp is not supported by any of the servers registered for the current buffer",
+  "method textDocument/hover is not supported by any of the servers registered for the current buffer",
   "no manual entry for",
 }
 
