@@ -48,12 +48,6 @@ require("v.utils.abbreviations").set_abbreviations({
   { "tq", "tabclose" },
   { "to", "tabonly" },
 
-  -- git
-  { "GS", "Git status" },
-  { "Gs", "Git status" },
-  { "GA", "Git add" },
-  { "Ga", "Git add" },
-
   -- other plugins
   { "DO", "DiffviewOpen" },
   { "DH", "DiffviewFileHistory" },

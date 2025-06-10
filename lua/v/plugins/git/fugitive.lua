@@ -8,3 +8,13 @@ require("v.utils.mappings").set_keybindings({
   { { "n", "v" }, "<Leader>gg", ":GBrowse<CR>" },
   { { "n", "v" }, "<leader>gy", ":GBrowse!<CR>" },
 })
+
+require("v.utils.abbreviations").set_abbreviations({
+  { "GS", "Git status" },
+  { "Gs", "Git status" },
+
+  { "GA", "Git add" },
+  { "Ga", "Git add" },
+
+  { "gcm", "Git commit -m" },
+}, "c")
