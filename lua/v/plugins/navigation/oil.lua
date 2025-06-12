@@ -50,7 +50,6 @@ oil.setup({
   keymaps = {
     ["g?"] = { "actions.show_help", mode = "n" },
     ["<cr>"] = "actions.select",
-    ["<c-v>"] = { "actions.select", opts = { vertical = true } },
     ["<c-s-v>"] = { "actions.select", opts = { vertical = true } },
     ["<c-s-h>"] = { "actions.select", opts = { horizontal = true } },
     ["<c-t>"] = { "actions.select", opts = { tab = true } },
