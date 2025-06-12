@@ -1,6 +1,5 @@
 local M = {}
 
-local path = require("v.utils.paths")
 local tbl_utils = require("v.utils.tables")
 
 ---Wrapper for `vim.api.nvim_replace_termcodes`. Same as escaping a key code in VimL ('t' for 'termcodes').
@@ -96,17 +95,17 @@ end
 function M.get_require_submodule(dir)
   return function(file)
     local module = dir .. "." .. file
-    local ok, output = pcall(require, module)
+    local ok, out = pcall(require, module)
 
     if not ok then
       vim.notify(
-        "Couldn't load module [" .. module .. "].",
+        "Couldn't load module [" .. module .. "]." .. (ok and "" or ("\n[Error]: %s"):format(out)),
         vim.log.levels.ERROR,
         { title = "Error" }
       )
     end
 
-    return output
+    return out
   end
 end
 

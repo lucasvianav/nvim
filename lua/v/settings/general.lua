@@ -4,8 +4,8 @@ local M = {}
 
 -- enable syntax highlighting, filetype detection and loading
 -- of filetype-specific plugins and indentation configurations
-vim.api.nvim_exec2("syntax on", { output = false })
-vim.api.nvim_exec2("filetype plugin indent on", { output = false })
+pcall(vim.api.nvim_exec2, "syntax on", { output = false })
+pcall(vim.api.nvim_exec2, "filetype plugin indent on", { output = false })
 
 -- general settings
 o.autoindent = true -- auto indent
