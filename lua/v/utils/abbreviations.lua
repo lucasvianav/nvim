@@ -1,5 +1,7 @@
 local M = {}
 
+local util = require("v.utils.tables")
+
 ---@param mode string
 ---@return boolean is_mode_valid
 local function validate_mode(mode)
@@ -75,24 +77,36 @@ M.iabbrev = function(lhs, rhs)
   M.abbreviate("i", lhs, rhs)
 end
 
----Wrapper for setting multiple abbreviations (`:h :ab`) in one function call
----@param args string[][] list of abbreviation arrays: { mode, lhs, rhs }
----@param mode string use the same mode for all abbreviations --- if you use this, provide only `lhs` and `rhs` in the abbreviation arrays
----@return nil
+---@alias AbbreviationMode "i"|"c"|"!"
+
+---@class Abbreviation
+---@field [1|"lhs"] string|string[]
+---@field [2|"rhs"] string
+---@field [3|"mode"]? AbbreviationMode|AbbreviationMode[]
+---@field [4|"opts"]? { buffer: boolean? }?
+
+---@param args Abbreviation[]
+---@param mode AbbreviationMode?
 M.set_abbreviations = function(args, mode)
   if mode and not validate_mode(mode) then
     return
   end
 
   for _, abbrev_table in ipairs(args) do
-    if #abbrev_table == 3 and not mode then
-      M.abbreviate(unpack(abbrev_table))
-    elseif #abbrev_table == 2 and mode then
-      M.abbreviate(mode, unpack(abbrev_table))
-    else
-      vim.notify("Something wrong... See `:messages`", vim.log.levels.ERRORS, {
-        title = "Setting Abbreviations",
-      })
+    local a = util.merge_named_and_pos_fields({
+      "lhs",
+      "rhs",
+      "mode",
+      "opts",
+    }, abbrev_table)
+
+    local modes = (type(a.mode) == "table" and a.mode or (a.mode and { a.mode } or { mode })) --[=[@as AbbreviationMode[]]=]
+    local lhs = (type(a.lhs) == "table" and a.lhs or { a.lhs }) --[=[@as string[]]=]
+
+    for _, l in ipairs(lhs) do
+      for _, m in ipairs(modes or { "!" }) do
+        M.abbreviate(m, l, a.rhs, a.opts)
+      end
     end
   end
 end

@@ -4,17 +4,16 @@ require("v.utils.mappings").set_keybindings({
   { "n", "<Leader>gd", "<cmd>Gvdiffsplit!<CR>" },
   { "n", "<Leader>gh", "<cmd>diffget //2<CR>" },
   { "n", "<Leader>gl", "<cmd>diffget //3<CR>" },
-  { "n", "<Leader>ga", "<cmd>Git add %<CR>" },
   { { "n", "v" }, "<Leader>gg", ":GBrowse<CR>" },
   { { "n", "v" }, "<leader>gy", ":GBrowse!<CR>" },
 })
 
 require("v.utils.abbreviations").set_abbreviations({
-  { "GS", "Git status" },
-  { "Gs", "Git status" },
-
-  { "GA", "Git add" },
-  { "Ga", "Git add" },
-
-  { "gcm", "Git commit -m" },
+  { { "GS", "gs" }, "Git status" },
+  { { "GA", "ga" }, "Git add" },
+  { { "GAA", "ga" }, "Git add --all" },
+  { { "GCM", "gcm" }, "Git commit -m" },
+  { "gcamne", "Git commit --amend --no-edit" },
+  { { "GCK", "gck" }, "Git checkout" },
+  { { "GPL", "gpl" }, "Git pull" },
 }, "c")
