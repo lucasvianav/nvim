@@ -10,6 +10,8 @@ local o = vim.opt
 
 local M = {}
 
+M.cmdheight = 1
+
 o.background = "dark" -- the background color is dark
 o.colorcolumn = "+1" -- show mark at column 80
 o.cursorline = true -- highlights current line
@@ -26,7 +28,7 @@ o.showtabline = 1 -- always show tab line (top bar)
 o.sidescrolloff = 5 -- number of screen columns around cursor
 o.termguicolors = true -- true color support
 o.wrap = false -- don't wrap lines by default
-o.cmdheight = 1 -- height for the cmdline
+o.cmdheight = M.cmdheight -- height for the cmdline
 o.cmdwinheight = 5 -- height for the cmdline window (q:, :<c-f>)
 o.signcolumn = "yes:1" -- always display 2 signcolumns
 o.numberwidth = 2 -- minimal number of columns to use for the line number

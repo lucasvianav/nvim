@@ -68,8 +68,6 @@ require("auto-session").setup({
   purge_after_minutes = 60 * 24 * 15,
   -- close unwanted windows before saving
   pre_save_cmds = { "silent! tabdo NvimTreeClose" },
-  -- fix Neovim height after start (so cmdheight isn't huge) (#64) (#11330)
-  post_restore_cmds = { "silent !kill -s SIGWINCH $PPID" },
   session_lens = {
     load_on_setup = true,
     previewer = false,
