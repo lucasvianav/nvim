@@ -2,19 +2,19 @@ local M = {}
 
 local oil_prefix = "oil://"
 
----@param path string
----@param is_dir boolean
+---@param path string[]
 ---@return string
-function M.with_prefix_if_dir(path, is_dir)
-  if not is_dir then
-    return path
+function M.join(path)
+  local prefix = ""
+  if path[1] == oil_prefix then
+    table.remove(path, 1)
+    prefix = " " .. oil_prefix
   end
-  local leading_whitespace = path:match("^%s*") ---@type string
-  return leading_whitespace .. oil_prefix .. path:trim():gsub("^/", "")
+  return prefix .. vim.fs.joinpath(unpack(path))
 end
 
 ---@param filepath string
----@return string? root_dir, string[] relpath_parts, boolean is_dir
+---@return string? root_dir, string[] relpath_parts, string? dir_prefix
 function M.get_path_parts(filepath)
   local is_oil = filepath:starts_with(oil_prefix)
   local root = (vim.uv or vim.loop).cwd()
@@ -49,7 +49,7 @@ function M.get_path_parts(filepath)
     relpath = {}
   end
 
-  return (#root_dir > 0 and root_dir or nil), relpath, is_oil
+  return (#root_dir > 0 and root_dir or nil), relpath, (is_oil and oil_prefix or nil)
 end
 
 ---@return string percentage including %

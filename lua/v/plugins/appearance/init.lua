@@ -1,5 +1,7 @@
 ---@module "lazy.types"
 
+-- TODO: https://github.com/folke/noice.nvim
+
 ---@type LazyPluginSpec[]
 local M = {
   -- low profile notifications (including for LSP progress)

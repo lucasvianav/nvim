@@ -47,24 +47,28 @@ require("lualine").setup({
         "filename",
         fmt = function(filepath) --[[@param filepath string]]
           filepath = filepath:trim()
-          local path = { " " }
+          local path = {}
 
           if #filepath == 0 then
-            return vim.fs.joinpath(unpack(path))
+            return utils.join(path)
           end
 
-          local root, parts, is_dir = utils.get_path_parts(filepath)
+          local root, parts, dir_prefix = utils.get_path_parts(filepath)
+
+          if dir_prefix then
+            table.insert(path, dir_prefix)
+          end
 
           if #parts == 0 then
-            return vim.fs.joinpath(unpack(path))
+            return utils.join(path)
           end
 
           if not root or parts[1] == root or #parts == 1 then
-            return vim.fs.joinpath(unpack(path))
+            return utils.join(path)
           end
 
           if root and parts[1] ~= root then
-            table.insert(path, root)
+            table.insert(path, dir_prefix and "" or " ")
           end
 
           -- last element is the current file/dir (section c)
@@ -75,7 +79,7 @@ require("lualine").setup({
             -- TODO: make this dynamically change acceptable
             -- length depending on window width
 
-            local length = #root
+            local length = #(dir_prefix or "")
             for i = 1, n_leading_dirs do
               if length > 25 and n_leading_dirs - i > 1 then
                 break
@@ -89,7 +93,7 @@ require("lualine").setup({
             end
           end
 
-          return utils.with_prefix_if_dir(vim.fs.joinpath(unpack(path)), is_dir)
+          return utils.join(path)
         end,
         path = 1,
         file_status = false,
@@ -111,25 +115,25 @@ require("lualine").setup({
           local path = { "" }
 
           if #filepath == 0 then
-            return vim.fs.joinpath(unpack(path))
+            return utils.join(path)
           end
 
-          local root, parts = utils.get_path_parts(filepath)
+          local root, parts, is_dir = utils.get_path_parts(filepath)
 
           if #parts == 0 then
-            table.insert(path, "")
-            return vim.fs.joinpath(unpack(path))
+            return utils.join(path)
           end
 
-          if not root or parts[1] == root then
+          if not root and parts[1] ~= root then
+            table.insert(path, 1, is_dir and "" or " ")
             table.insert(path, parts[1])
           elseif #parts == 1 then
-            table.insert(path, root)
+            table.insert(path, 1, is_dir and "" or " ")
           else
             table.insert(path, parts[#parts - 1])
           end
 
-          return vim.fs.joinpath(unpack(path))
+          return utils.join(path)
         end,
         path = 1,
         file_status = false,
@@ -146,19 +150,22 @@ require("lualine").setup({
         fmt = function(filepath) --[[@param filepath string]]
           ---@diagnostic disable-next-line: redefined-local
           local filepath, tail = filepath:trim():match("^(%S+)(.*)$")
-          local root, parts, is_dir = utils.get_path_parts(filepath)
+          local _, parts, is_dir = utils.get_path_parts(filepath)
+          local path = {}
 
           if #parts == 0 then
-            return root .. tail
+            return utils.join({ is_dir and "" or " ", "" }) .. tail
+          elseif #parts > 1 then
+            table.insert(path, "")
           end
 
-          local path = { "", parts[#parts] }
+          table.insert(path, parts[#parts])
 
           if is_dir then
             table.insert(path, "")
           end
 
-          return vim.fs.joinpath(unpack(path)) .. tail
+          return utils.join(path) .. tail
         end,
         path = 1,
         file_status = true,
@@ -277,9 +284,8 @@ require("lualine").setup({
       {
         "filename",
         fmt = function(filepath)
-          local root, parts, is_dir = utils.get_path_parts(filepath)
-          local path = vim.fs.joinpath(unpack(table.merge_lists("", root or {}, parts)))
-          return utils.with_prefix_if_dir(path, is_dir)
+          local _, parts, prefix = utils.get_path_parts(filepath)
+          return utils.join(table.merge_lists(prefix, "", "", parts))
         end,
         path = 1,
       },
