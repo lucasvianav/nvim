@@ -8,7 +8,7 @@ local function is_work_computer()
     .system({
       "git",
       "config",
-      "get",
+      "--get",
       "user.email",
     }, { text = true, timeout = 100 })
     :wait()
