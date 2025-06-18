@@ -148,6 +148,13 @@ local M = {
     ft = "log",
     version = "1.*",
   },
+
+  -- treesitter grammar for Ghostty config files
+  {
+    "bezhermoso/tree-sitter-ghostty",
+    build = "make nvim_install",
+    commit = "1d5238fc0da5fd5a59130b95c3e1c4948a3f96c1",
+  },
 }
 
 return require("v.lazy.loader").process_plugins(M, "syntax")
