@@ -33,7 +33,7 @@ o.cmdwinheight = 5 -- height for the cmdline window (q:, :<c-f>)
 o.signcolumn = "yes:1" -- always display 2 signcolumns
 o.numberwidth = 2 -- minimal number of columns to use for the line number
 
-M.colorscheme = "tokyonight"
+M.colorscheme = "catppuccin"
 
 --- function to be ran after a colorscheme is applied
 -- TODO: move this to an autocmd :h ColorScheme

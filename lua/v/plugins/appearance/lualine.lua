@@ -8,7 +8,7 @@ local bubbles_theme = {
   normal = {
     a = { fg = colors.grey_light, bg = colors.grey_darker },
     b = { fg = colors.white, bg = colors.grey_darker },
-    c = { fg = colors.black, bg = alter_color(colors.cyan_grey_dark, -25) },
+    c = { fg = colors.black, bg = colors.transparent },
     x = { fg = colors.white, bg = colors.grey_darker },
     y = { fg = colors.black, bg = colors.green },
     z = { fg = colors.white, bg = colors.grey_darker },
@@ -19,8 +19,8 @@ local bubbles_theme = {
   command = { y = { fg = colors.black, bg = colors.pink_light } },
   inactive = {
     a = { fg = colors.cyan_grey, bg = colors.off_black },
-    b = { fg = colors.cyan_grey, bg = colors.off_black },
-    c = { fg = colors.off_black, bg = colors.off_black },
+    b = { fg = colors.cyan_grey, bg = colors.transparent },
+    c = { fg = colors.off_black, bg = colors.transparent },
   },
 }
 

@@ -58,6 +58,7 @@ fidget.setup({
     window = {
       max_width = math.min(math.floor(vim.o.columns * 0.45), 125),
       max_height = math.min(math.floor(vim.o.lines * 0.45), 25),
+      winblend = 0,
     },
   },
   integration = {
