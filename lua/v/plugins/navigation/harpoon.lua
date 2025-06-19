@@ -89,7 +89,7 @@ require("v.utils.mappings").set_keybindings({
   {
     "n",
     "<leader><leader>h",
-    "<cmd>Telescope harpoon marks<cr>",
+    ui.toggle_quick_menu,
   },
 })
 

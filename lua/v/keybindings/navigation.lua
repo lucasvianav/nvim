@@ -1,11 +1,11 @@
 local set_keybindings = require("v.utils.mappings").set_keybindings
 
 set_keybindings({
-  -- toggle buffer last visited buffer
+  -- toggle last visited buffer
   { "n", "<BS>", "<C-^>" },
 
-  -- toggle buffer last visited tab
-  { "n", "<M-C-S-H>", "g<Tab>" },
+  -- toggle last visited tab
+  { "n", "<M-BS>", "g<Tab>" },
 
   -- better window navigation
   { "n", "<C-h>", "<C-w>h" },
