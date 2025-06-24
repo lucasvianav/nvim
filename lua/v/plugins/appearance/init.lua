@@ -75,7 +75,7 @@ local M = {
   -- colorcolumn with virtual text
   {
     "lukas-reineke/virt-column.nvim",
-    enabled = vim.fn.has("mac") == 0, -- highlighting issues on mac
+    enabled = not v.has("mac"), -- avoid highlighting issues on mac
     event = "VeryLazy",
     version = "2.*",
   },
