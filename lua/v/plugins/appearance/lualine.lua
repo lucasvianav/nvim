@@ -88,7 +88,7 @@ require("lualine").setup({
               length = length + #parts[i]
             end
 
-            if #path - 2 < n_leading_dirs then
+            if #path - 1 < n_leading_dirs then
               table.insert(path, "-")
             end
           end
