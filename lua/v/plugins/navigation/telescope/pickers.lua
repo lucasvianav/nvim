@@ -31,6 +31,7 @@ local function get_shortcut_table()
     ["v"] = { extension = "vim" },
     ["k"] = { glob = "!*Test.kt", fzf_token = "!Test.kt$", extension = "kt" },
     ["kt"] = { extension = "kt" },
+    ["kts"] = { glob = "*Test.kt", fzf_token = "Test.kt$", extension = "kt" },
     ["h"] = { extension = "html" },
     ["c"] = { extension = "css" },
     ["t"] = { extensions = { "ts", "tsx" } },
@@ -177,6 +178,7 @@ local function get_rg_cmd_from_prompt(prompt, shortcut_tbl, shortcut_sep)
 
   local res = table.merge_lists({ ---@type string[]
     cmd,
+    -- TODO: these are currently not acting like logical AND. they should.
     { "-e", (p.search or "") .. (shortcuts.regex or "") },
     #globs > 0 and globs or { "-g", "**" },
     get_rg_exclude_glob_flags(vim.tbl_contains(flags, "--no-ignore")),

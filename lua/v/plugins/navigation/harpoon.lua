@@ -13,6 +13,9 @@ require("harpoon").setup({
   mark_branch = false,
   -- enable tabline with harpoon marks
   tabline = false,
+  menu = {
+    width = 150,
+  },
 })
 
 local telescope_ok, telescope = pcall(require, "telescope")

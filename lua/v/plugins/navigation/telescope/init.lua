@@ -71,7 +71,7 @@ telescope.setup({
         },
       },
     }),
-    buffers = vim.tbl_deep_extend("force", v.themes.ivy, {
+    buffers = vim.tbl_deep_extend("force", v.themes.center_dropdown, {
       ignore_current_buffer = true,
       sort_lastused = true,
       show_all_buffers = true,
