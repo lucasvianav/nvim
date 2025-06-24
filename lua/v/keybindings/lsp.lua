@@ -94,14 +94,14 @@ M.mappings = {
     "n",
     "[g",
     function()
-      vim.diagnostic.jump({ count = -1, float = true })
+      vim.diagnostic.jump({ count = -1, float = true, _highest = true })
     end,
   },
   {
     "n",
     "]g",
     function()
-      vim.diagnostic.jump({ count = 1, float = true })
+      vim.diagnostic.jump({ count = 1, float = true, _highest = true })
     end,
   },
   {
