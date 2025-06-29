@@ -1,5 +1,7 @@
 ---@module "lazy.types"
 
+-- TODO: https://github.com/aaronik/treewalker.nvim
+
 ---@type LazyPluginSpec[]
 local M = {
   -- start screen
@@ -14,6 +16,7 @@ local M = {
   },
 
   -- seamless navigation between neovim widows and tmux panes
+  -- TODO: https://github.com/mrjones2014/smart-splits.nvim
   {
     "numToStr/Navigator.nvim",
     keys = {
@@ -103,14 +106,6 @@ local M = {
       "z=",
     },
     commit = "b4da76be54691e854d3e0e02c36b0245f945c2c7",
-  },
-
-  -- picker for emojis and LSP symbols
-  -- TODO: implement this as an fzf picker in tmux
-  {
-    "nvim-telescope/telescope-symbols.nvim",
-    keys = { "<leader>fe" },
-    commit = "a6d0127a53d39b9fc2af75bd169d288166118aec",
   },
 
   {
