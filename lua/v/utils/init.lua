@@ -27,7 +27,7 @@ end
 
 ---Sources the current file if it's VimL and reloads (w/ `require`) if it's Lua.
 function M.reload_or_source_current()
-  local filetype = vim.opt_local.ft._value
+  local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
   local require_path = _get_current_require_path()
   local action
 
@@ -35,8 +35,11 @@ function M.reload_or_source_current()
     require("v.utils.wrappers").reload(require_path)
     action = "Reloaded "
   elseif filetype == "vim" or filetype == "lua" then
-    cmd("source %")
+    vim.api.nvim_exec2("source %", { output = false })
     action = "Sourced "
+  elseif filetype == "sh" or filetype == "zsh" then
+    vim.api.nvim_exec2("silent !%", { output = false })
+    action = "Executed "
   else
     return
   end
