@@ -9,6 +9,22 @@
 
 -- READ: https://www.masteringemacs.org/article/tree-sitter-complications-of-parsing-languages
 
+local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+parser_configs.qf = { ---@diagnostic disable-line: inject-field
+  install_info = {
+    url = "https://github.com/OXY2DEV/tree-sitter-qf",
+    files = { "src/parser.c" },
+    branch = "main",
+  },
+}
+parser_configs.lua_patterns = { ---@diagnostic disable-line: inject-field
+  install_info = {
+    url = "https://github.com/OXY2DEV/tree-sitter-lua_patterns",
+    files = { "src/parser.c" },
+    branch = "main",
+  },
+}
+
 -- list of desired treesitter parsers
 local parsers = {
   "angular",
@@ -30,11 +46,13 @@ local parsers = {
   "kotlin",
   "latex",
   "lua",
+  "lua_patterns",
   "markdown",
   "markdown_inline",
   "prisma",
   "proto",
   "python",
+  "qf",
   "scss",
   "tsx",
   "typescript",
@@ -86,3 +104,5 @@ require("v.utils.autocmds").augroup("ReactIndentTS", {
   { event = "BufEnter", opts = { pattern = { "*.tsx", "*.jsx" }, callback = indent_on } },
   { event = "BufLeave", opts = { pattern = { "*.tsx", "*.jsx" }, callback = indent_off } },
 })
+
+vim.treesitter.language.register("markdown", "vimwiki")

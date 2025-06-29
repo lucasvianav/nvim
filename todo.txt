@@ -21,7 +21,7 @@ TODO:
 - https://github.com/lukas-reineke/dotfiles/tree/master/vim
 - https://github.com/m4xshen/hardtime.nvim
 - https://github.com/nvim-neotest/neotest
-- https://github.com/obsidian-nvim/obsidian.nvim
+- https://github.com/obsidian-nvim/obsidian.nvim + https://github.com/MeanderingProgrammer/render-markdown.nvim?tab=readme-ov-file#obsidiannvim
 - https://github.com/rockerBOO/dotfiles/tree/current/config/nvim
 - https://github.com/shaeinst/roshnivim
 - https://github.com/sindrets/dotfiles/blob/master/.config/nvim/lua/user/oop.lua
@@ -35,3 +35,5 @@ TODO:
 - https://www.youtube.com/watch?v=brtIZxOwDXE
 - https://www.youtube.com/watch?v=rerTvidyz-0
 - https://github.com/polirritmico/neovim.conf
+- https://www.reddit.com/r/neovim/comments/rmwflx/run_eslint_for_whole_project_and_show_results_in/?share_id=rjzoe-yIklyioMeOWsSt_&utm_medium=android_app&utm_name=androidcss&utm_source=share&utm_term=2
+- https://github.com/OXY2DEV/nvim/tree/decd6e3641feef4b2793fa9f531a2cf41b06ee1e
