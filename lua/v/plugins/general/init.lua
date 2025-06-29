@@ -198,6 +198,14 @@ local M = {
     event = "CmdlineEnter",
     commit = "efc83f5b1abc1398b8058e563fdd5e34a3652803",
   },
+
+  -- visualize the tree of undo history
+  {
+    "mbbill/undotree",
+    cmd = { "UndotreeToggle", "UndotreeShow" },
+    keys = "<leader>u",
+    commit = "b951b87b46c34356d44aa71886aecf9dd7f5788a",
+  },
 }
 
 return require("v.lazy.loader").process_plugins(M, "general")
