@@ -16,6 +16,7 @@ M.formatters = {
   mypy = { envs = { "dev", "work" } },
   vint = { envs = { "dev" } },
   stylua = { envs = { "dev", "work" } },
+  systemdlint = { envs = { "dev", "remote" } },
 }
 
 ---LSP Servers to auto-install
@@ -37,6 +38,7 @@ M.servers = {
   pyright = { envs = { "dev", "work" } },
   sqlls = { envs = { "dev", "work" } },
   sqls = { envs = { "dev", "work" } },
+  systemd_ls = { envs = { "dev", "remote" } },
   ts_ls = { envs = { "dev", "work" } },
   vimls = { envs = { "dev" } },
   yamlls = {},

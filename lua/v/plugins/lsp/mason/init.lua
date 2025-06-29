@@ -1,3 +1,5 @@
+-- TODO: https://github.com/Freed-Wu/tmux-language-server
+
 local mason_registry = require("mason-registry")
 local packages = require("v.lsp.packages")
 local utils = require("v.lsp")
