@@ -155,6 +155,30 @@ local M = {
     build = "make nvim_install",
     commit = "1d5238fc0da5fd5a59130b95c3e1c4948a3f96c1",
   },
+
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = {
+      "markdown",
+      "vimwiki",
+    },
+    dependencies = {
+      "nvim-treesitter",
+      "devicons",
+    },
+    opts = {
+      file_types = {
+        "markdown",
+        "vimwiki",
+      },
+      completions = {
+        lsp = {
+          enabled = true,
+        },
+      },
+    },
+    version = "8.*",
+  },
 }
 
 return require("v.lazy.loader").process_plugins(M, "syntax")

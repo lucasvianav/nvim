@@ -74,5 +74,6 @@ require("catppuccin").setup({
     },
     lsp_trouble = true,
     which_key = false,
+    render_markdown = true,
   },
 })
