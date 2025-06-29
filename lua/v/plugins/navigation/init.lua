@@ -105,6 +105,14 @@ local M = {
     commit = "b4da76be54691e854d3e0e02c36b0245f945c2c7",
   },
 
+  -- picker for emojis and LSP symbols
+  -- TODO: implement this as an fzf picker in tmux
+  {
+    "nvim-telescope/telescope-symbols.nvim",
+    keys = { "<leader>fe" },
+    commit = "a6d0127a53d39b9fc2af75bd169d288166118aec",
+  },
+
   {
     "ThePrimeagen/harpoon",
     dependencies = "plenary.nvim",

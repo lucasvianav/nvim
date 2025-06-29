@@ -57,10 +57,18 @@ function M.open_with_oil(arg)
 end
 
 ---@param type 'abs'|'rel'|'name'
-local function copy_path(type)
+---@param bufnr integer?
+local function copy_path(type, bufnr)
   local path = get_selected_entry_filename()
+  local is_symbols = bufnr
+    and (state.get_current_picker(bufnr).prompt_title --[[@as string]]):lower()
 
   if not path then
+    return
+  end
+
+  if is_symbols then
+    require("v.utils.clipboard").copy(path:split()[1])
     return
   end
 
@@ -72,16 +80,16 @@ local function copy_path(type)
   require("v.utils.clipboard").copy(paths[type])
 end
 
-function M.copy_path_abs()
-  copy_path("abs")
+function M.copy_path_abs(bufnr)
+  copy_path("abs", bufnr)
 end
 
-function M.copy_path_rel()
-  copy_path("rel")
+function M.copy_path_rel(bufnr)
+  copy_path("rel", bufnr)
 end
 
-function M.copy_file_name()
-  copy_path("name")
+function M.copy_file_name(bufnr)
+  copy_path("name", bufnr)
 end
 
 M = transform_mod(M)
