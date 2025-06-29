@@ -101,6 +101,7 @@ local M = {
       {
         "hrsh7th/cmp-nvim-lua",
         commit = "f12408bdb54c39c23e67cab726264c10db33ada8",
+        ft = "lua",
       },
       {
         "hrsh7th/cmp-path",
@@ -122,12 +123,19 @@ local M = {
         "xzbdmw/colorful-menu.nvim",
         commit = "bc3e82609f2fcf7dad7ca87c20e65e51d5d9d87c",
       },
+      {
+        "andersevenrud/cmp-tmux",
+        commit = "95b1b921802e6f60627b3e76afb9380fddd87f9a",
+      },
     },
     event = { "InsertEnter", "CmdLineEnter" },
     commit = "b5311ab3ed9c846b585c0c15b7559be131ec4be9",
   },
 
   -- pretty list for lsp
+  -- TODO:
+  -- ALT: https://github.com/OXY2DEV/nvim/blob/main/lua/scripts/quickfix.lua
+  --https://www.reddit.com/r/neovim/comments/1ku2958/syntax_highlighting_in_quickfix_text/#lightbox
   {
     "folke/trouble.nvim",
     dependencies = {
@@ -186,12 +194,14 @@ local M = {
     commit = "8df427aeba0a06c6577dc3ab82de3076964e3b8d",
   },
 
+  -- configs for EFM formatters
   {
     "creativenull/efmls-configs-nvim",
     lazy = true,
     commit = "e071a098ac1e56e349af649c25e982348f5504e5",
   },
 
+  -- Brex's custom kotlin-ls with Bazel support
   {
     "brexhq/kotlin-bazel.nvim",
     dir = "~/src/kotlin-bazel.nvim",
@@ -200,6 +210,7 @@ local M = {
     enabled = v.env == "work",
   },
 
+  -- extension for typescript-ls
   {
     "pmizio/typescript-tools.nvim",
     ft = {

@@ -118,6 +118,7 @@ cmp.setup({
     { name = "path" },
     { name = "spell" },
     { name = "buffer", keyword_length = 5 },
+    { name = "tmux" },
     { name = "calc" },
   }),
   formatting = {
