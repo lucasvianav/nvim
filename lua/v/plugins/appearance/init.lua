@@ -116,6 +116,18 @@ local M = {
     keys = { "/", "?", "n", "N", "*", "#" },
     commit = "006934330dc9eab47a09eeee4c8a50a9b4c065b8",
   },
+
+  -- display images in neovim
+  -- TODO: display it in telescope
+  -- https://github.com/3rd/image.nvim/issues/183#issuecomment-2284979815
+  -- https://github.com/3rd/image.nvim/issues/183#issuecomment-2574767246
+  -- https://github.com/3rd/image.nvim/issues/183#issuecomment-2702160614
+  {
+    "3rd/image.nvim",
+    opts = { processor = "magick_rock" },
+    event = "VeryLazy",
+    commit = "4c51d6202628b3b51e368152c053c3fb5c5f76f2",
+  },
 }
 
 return require("v.lazy.loader").process_plugins(M, "appearance")

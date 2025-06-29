@@ -3,7 +3,16 @@ local todo_comments = require("todo-comments")
 todo_comments.setup({
   signs = false,
   keywords = {
-    ALTERNATIVE = { icon = "⎇ ", color = require("v.utils.colors").purple, alt = { "ALT" } },
+    ALTERNATIVE = {
+      icon = "⎇ ",
+      color = require("v.utils.colors").purple,
+      alt = { "ALT", "alternative", "alt" },
+    },
+    SOURCE = {
+      icon = "󱤀 ",
+      color = require("v.utils.colors").cyan,
+      alt = { "SRC", "source", "src" },
+    },
   },
 })
 

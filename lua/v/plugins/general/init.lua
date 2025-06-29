@@ -1,5 +1,7 @@
 ---@module "lazy.types"
 
+-- TODO: https://github.com/nvimtools/hydra.nvim
+
 ---@type LazyPluginSpec[]
 local M = {
   -- utility lua functions
