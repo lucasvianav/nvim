@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install stylua
-        run: cargo install stylua --features luajit
+        run: cargo install stylua && cargo install stylua --features luajit
       - name: Run linter
         run: stylua -f .stylua.toml -g '*.lua' .
