@@ -11,7 +11,7 @@ todo_comments.setup({
     SOURCE = {
       icon = "󱤀 ",
       color = require("v.utils.colors").cyan,
-      alt = { "SRC", "source", "src" },
+      alt = { "SRC", "source", "src", "INSPO", "inspo" },
     },
   },
 })
