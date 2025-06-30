@@ -14,4 +14,4 @@ jobs:
       - name: Install stylua
         run: cargo install stylua --features luajit
       - name: Run linter
-        run: stylua -f .stylua.toml -g '*.lua' -- .
+        run: stylua -f .stylua.toml -g '*.lua' .
