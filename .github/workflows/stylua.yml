@@ -10,8 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Install stylua
-        run: cargo install stylua && cargo install stylua --features luajit
-      - name: Run linter
-        run: stylua -f .stylua.toml -g '*.lua' .
+      - uses: actions/checkout@v4
+      - uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: -f .stylua.toml -g '*.lua' .
