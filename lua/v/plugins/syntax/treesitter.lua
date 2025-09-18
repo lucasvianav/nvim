@@ -39,6 +39,7 @@ local parsers = {
   "graphql",
   "haskell",
   "html",
+  "hyprlang",
   "javascript",
   "jsdoc",
   "json",

@@ -203,6 +203,7 @@ local languages = {
   graphql = { prettierd },
   html = { prettierd },
   json = { prettierd, biome },
+  jsonc = { prettierd, biome },
   scss = { prettierd },
   yaml = { prettierd },
 

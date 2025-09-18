@@ -31,6 +31,7 @@ M.servers = {
   emmet_ls = { envs = { "dev" } },
   graphql = { envs = { "dev", "work" } },
   html = { envs = { "dev", "work" } },
+  hyprls = { envs = { "dev" } },
   jsonls = {},
   lua_ls = { envs = { "dev", "work" } },
   protols = { envs = { "dev", "work" } },
