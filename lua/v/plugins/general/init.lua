@@ -206,6 +206,12 @@ local M = {
     keys = "<leader>u",
     commit = "b951b87b46c34356d44aa71886aecf9dd7f5788a",
   },
+
+  {
+    "frabjous/knap",
+    ft = { "tex", "plaintex" },
+    commit = "7db44d0bb760120142cc1e8f43e44976de59c2f6",
+  },
 }
 
 return require("v.lazy.loader").process_plugins(M, "general")
