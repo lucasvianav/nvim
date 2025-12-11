@@ -11,6 +11,7 @@ require("v.utils.mappings").set_keybindings({
 require("v.utils.abbreviations").set_abbreviations({
   { { "GS", "gs" }, "Git status" },
   { { "GA", "ga" }, "Git add" },
+  { { "GR", "gr" }, "Git restore" },
   { { "GAA", "gaa" }, "Git add --all" },
   { { "GCM", "gcm" }, "Git commit -m" },
   { "gcamne", "Git commit --amend --no-edit" },

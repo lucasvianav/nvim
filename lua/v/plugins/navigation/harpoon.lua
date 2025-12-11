@@ -63,6 +63,13 @@ require("v.utils.mappings").set_keybindings({
   },
   {
     "n",
+    "<m-;>",
+    function()
+      ui.nav_file(5)
+    end,
+  },
+  {
+    "n",
     "<c-m-h>",
     function()
       mark.set_current_at(1)
@@ -87,6 +94,13 @@ require("v.utils.mappings").set_keybindings({
     "<c-m-l>",
     function()
       mark.set_current_at(4)
+    end,
+  },
+  {
+    "n",
+    "<c-m-;>",
+    function()
+      mark.set_current_at(5)
     end,
   },
   {
