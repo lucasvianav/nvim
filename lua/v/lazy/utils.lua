@@ -6,6 +6,7 @@ M.paths = {
   cache = vim.fs.joinpath(vim.fn.stdpath("state"), "lazy", "pkg-cache.lua"),
   rocks = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy", "lazy-rocks"),
   state = vim.fs.joinpath(vim.fn.stdpath("state"), "lazy", "state.json"),
+  lockfile = vim.fs.joinpath(vim.fn.stdpath("config"), "lazy-lock.json"),
 }
 
 function M.ensure_installed()
@@ -25,12 +26,19 @@ function M.download()
     vim.fn.delete(path, "rf")
   end
 
+  local branch = "stable"
+  local lockfile = require("v.utils.json").from_file(M.paths.lockfile)
+  if lockfile and lockfile["lazy.nvim"] then
+    local locked = lockfile["lazy.nvim"] --[[@as {branch: string, commit: string}]]
+    branch = #(locked.commit:trim()) > 0 and locked.commit:trim() or locked.branch:trim()
+  end
+
   local res = vim
     .system({
       "git",
       "clone",
       "--filter=blob:none",
-      "--branch=stable",
+      "--branch=" .. branch,
       "https://github.com/folke/lazy.nvim.git",
       M.paths.lazy,
     })

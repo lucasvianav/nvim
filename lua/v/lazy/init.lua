@@ -11,7 +11,7 @@ require("lazy").setup({
     { import = "v.plugins" },
   },
   local_spec = false,
-  lockfile = vim.fs.joinpath(vim.fn.stdpath("config"), "lazy-lock.json"),
+  lockfile = utils.paths.lockfile,
   pkg = {
     enabled = true,
     cache = utils.paths.cache,
