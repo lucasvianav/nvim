@@ -189,7 +189,7 @@ local hlint = {
 
 local ktlint = if_enabled(require("v.lsp.servers.efm.ktlint").config)
 local vint = if_enabled("vint", ({ pcall(require, "efmls-configs.linters.vint") })[2])
-local biome = if_enabled("biome", ({ pcall(require, "efmls-configs.formatters.biome") })[2])
+local biome = if_enabled("biome", require("v.lsp.servers.efm.biome").config)
 local systemdlint = if_enabled(require("v.lsp.servers.efm.systemdlint").config)
 
 local languages = {

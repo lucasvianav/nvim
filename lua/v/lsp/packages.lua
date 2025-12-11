@@ -28,6 +28,7 @@ M.servers = {
   cssmodules_ls = { envs = { "dev", "work" } },
   dockerls = { envs = { "dev", "remote" } },
   efm = {},
+  elixirls = { envs = { "dev", "work" } },
   emmet_ls = { envs = { "dev" } },
   graphql = { envs = { "dev", "work" } },
   html = { envs = { "dev", "work" } },
